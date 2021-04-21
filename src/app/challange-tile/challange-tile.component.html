@@ -1,0 +1,34 @@
+<ibm-tile>
+	<div style="display: flex">
+
+		<span>
+			<b> {{ challange?.title}} </b>
+		</span>
+
+		<ibm-tag style="margin-left: 50px" type="cool-gray">Efficiency</ibm-tag>
+	</div>
+	<br />
+
+	<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed"
+		style="margin-left: 1px;">
+		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 5, sm: 12 }">
+			{{challange?.description}}
+		</div>
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
+			5<br />608<br />34
+		</div>
+	</div>
+	<br /><br /><br />
+	<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed"
+		style="margin-right:40px; margin-top:0px">
+		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 6, sm: 12 }">
+			<p class="date">12/04/21</p>
+		</div>
+		<div ibmCol class="custom-class-example" style="margin-bottom: -15px;" [columnNumbers]="{ md: 1, sm: 12 }">
+			<button class="btn" [ibmButton]="primary" [size]="'sm'">
+				View
+			</button>
+		</div>
+	</div>
+</ibm-tile>
