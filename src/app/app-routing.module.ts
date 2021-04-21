@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ChallangePageComponent } from './challange-page/challange-page.component';
 
 const routes: Routes = [
 	{
@@ -12,6 +13,7 @@ const routes: Routes = [
 		loadChildren: () => import('./repositories/repositories.module').then(m => m.RepositoriesModule)
 	},
 	{ path: 'dashboard', component: DashboardComponent },
+	{ path: 'challenge', component: ChallangePageComponent },
 	{
 		path: '',
 		redirectTo: '',

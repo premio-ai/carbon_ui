@@ -7,8 +7,10 @@ import { AppComponent } from './app.component';
 import { AddModule, CopyModule } from "@carbon/icons-angular";
 import { HttpClientModule } from '@angular/common/http';
 
+import { ArrowLeft16Module } from '@carbon/icons-angular/lib/arrow--left/16';
+
 // carbon-components-angular default imports
-import { UIShellModule,ButtonModule,TabsModule,GridModule,TilesModule,TagModule } from 'carbon-components-angular';
+import { UIShellModule,ButtonModule,TabsModule,GridModule,TilesModule,TagModule,ProgressIndicatorModule,BreadcrumbModule,InputModule,ToggleModule,DocumentationModule,DatePickerModule,FileUploaderModule,NumberModule } from 'carbon-components-angular';
 import { Notification20Module } from '@carbon/icons-angular/lib/notification/20';
 import { UserAvatar20Module } from '@carbon/icons-angular/lib/user--avatar/20';
 import { AppSwitcher20Module } from '@carbon/icons-angular/lib/app-switcher/20';
@@ -16,13 +18,15 @@ import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ChallangeTileComponent } from './challange-tile/challange-tile.component';
 import { RequestService } from './request.service';
+import { ChallangePageComponent } from './challange-page/challange-page.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		HeaderComponent,
 		DashboardComponent,
-		ChallangeTileComponent
+		ChallangeTileComponent,
+		ChallangePageComponent
 	],
 	imports: [
 		BrowserModule,
@@ -40,8 +44,14 @@ import { RequestService } from './request.service';
 		GridModule,
 		TilesModule,
 		TagModule,
-		HttpClientModule,
-		
+		HttpClientModule,		
+		ArrowLeft16Module,ProgressIndicatorModule,
+		BreadcrumbModule,InputModule,
+		ToggleModule,
+		DocumentationModule,
+		DatePickerModule,
+		FileUploaderModule,
+		NumberModule
 	],
 	bootstrap: [AppComponent],
 	providers : [RequestService]
