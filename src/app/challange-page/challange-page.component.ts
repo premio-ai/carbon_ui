@@ -11,6 +11,12 @@ export class ChallangePageComponent implements OnInit {
 	current: number;
 	steps: any[];
 
+	challange : {
+		title : string;
+		description : string;
+	}
+
+
 	ngOnInit() {
 		this.steps = [
 			{

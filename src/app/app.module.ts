@@ -21,6 +21,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ChallangeTileComponent } from './challange-tile/challange-tile.component';
 import { RequestService } from './request.service';
 import { ChallangePageComponent } from './challange-page/challange-page.component';
+import { ChallaneThirdStepComponent } from './challane-third-step/challane-third-step.component';
+import { ChallangeSecondStepComponent } from './challange-second-step/challange-second-step.component';
+import { ChallangeFirstStepComponent } from './challange-first-step/challange-first-step.component';
+import { ChallangeFourthStepComponent } from './challange-fourth-step/challange-fourth-step.component';
 
 @NgModule({
 	declarations: [
@@ -28,7 +32,11 @@ import { ChallangePageComponent } from './challange-page/challange-page.componen
 		HeaderComponent,
 		DashboardComponent,
 		ChallangeTileComponent,
-		ChallangePageComponent
+		ChallangePageComponent,
+		ChallaneThirdStepComponent,
+		ChallangeSecondStepComponent,
+		ChallangeFirstStepComponent,
+		ChallangeFourthStepComponent
 	],
 	imports: [
 		BrowserModule,
