@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
   getActiveChallanges(){
     let activeChallanegUrl = 'challenge?isActive=true';
     this.requestService.get(activeChallanegUrl).subscribe(data => {
-      //console.log("active challange ... ",data)
+      console.log("active challange ... ",data)
       this.activeChallenges = data;
     })
   }
