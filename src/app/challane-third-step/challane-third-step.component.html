@@ -46,6 +46,11 @@
 					<div
 						ibmCol
 						class="custom-class-example"
+						[columnNumbers]="{ md: 1, sm: 12 }"
+					></div>
+					<div
+						ibmCol
+						class="custom-class-example"
 						[columnNumbers]="{ md: 2, sm: 12 }"
 					>
 					<ibm-number
@@ -102,6 +107,11 @@
 						class="custom-class-example"
 						[columnNumbers]="{ md: 1, sm: 12 }"
 					></div><p class="to">to</p>
+					<div
+					ibmCol
+					class="custom-class-example"
+					[columnNumbers]="{ md: 1, sm: 12 }"
+				></div>
 					<div
 						ibmCol
 						class="custom-class-example"
@@ -185,11 +195,15 @@
 					[leftGutter]="leftGutter"
 					[rightGutter]="rightGutter"
 					[condensed]="rowCondensed">
+					<div ibmCol class="custom-class-example" [columnNumbers]="{'md': 2, 'sm': 12}">
+
+                       
+                    </div>
               		<div ibmCol class="custom-class-example" style="margin-top: 450px;" [columnNumbers]="{'md': 2, 'sm': 12}">
                         <button [ibmButton]="ibmButton" disabled="true" [size]="size"> Previous&nbsp;</button>
                         
                       </div>
-                      <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 1, 'sm': 12}">
+                      <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 2, 'sm': 12}">
 
                        
                     </div>
