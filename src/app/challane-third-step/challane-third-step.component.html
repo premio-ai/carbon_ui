@@ -9,7 +9,7 @@
 			</p>
 			<br />
 			<p>Points Earned</p>
-			<div ibmGrid [condensed]="gridCondensed">
+			<div ibmGrid [condensed]="gridCondensed" style="padding-left: 15px;">
 			   
 				<div
 					ibmRow
@@ -68,7 +68,7 @@
 
 			<br />
 			<p>Challenges Invloves in</p>
-			<div ibmGrid [condensed]="gridCondensed">
+			<div ibmGrid [condensed]="gridCondensed" style="padding-left: 15px;">
 			   
 				<div
 					ibmRow
@@ -148,7 +148,7 @@
 		</ibm-checkbox>
 		<br />
 	   
-		<div ibmGrid [condensed]="gridCondensed">
+		<div ibmGrid [condensed]="gridCondensed" style="padding-left: 15px;">
 			<div
 				ibmRow
 				[gutter]="gutter"
@@ -185,17 +185,17 @@
 					[leftGutter]="leftGutter"
 					[rightGutter]="rightGutter"
 					[condensed]="rowCondensed">
-              		<div ibmCol class="custom-class-example" [columnNumbers]="{'md': 2, 'sm': 12}">
-                        <button [ibmButton]="ibmButton" [size]="size"> Previous&nbsp;</button>
+              		<div ibmCol class="custom-class-example" style="margin-top: 450px;" [columnNumbers]="{'md': 2, 'sm': 12}">
+                        <button [ibmButton]="ibmButton" disabled="true" [size]="size"> Previous&nbsp;</button>
                         
                       </div>
                       <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 1, 'sm': 12}">
 
                        
                     </div>
-					<div ibmCol class="custom-class-example" [columnNumbers]="{'md': 2, 'sm': 12}">
+					<div ibmCol class="custom-class-example" style="margin-top: 450px;" [columnNumbers]="{'md': 2, 'sm': 12}">
 
-                        <button [ibmButton]="ibmButton" [size]="size" disabled="true">next</button>
+                        <button [ibmButton]="ibmButton" [size]="size" >next</button>
                     </div>
 					
             	</div>
