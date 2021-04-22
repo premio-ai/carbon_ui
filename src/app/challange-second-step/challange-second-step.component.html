@@ -1,0 +1,122 @@
+<div ibmGrid [condensed]="gridCondensed">
+	<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
+			<h3>Illustrative Data: Phase 0</h3>
+
+			<br />
+			<ibm-label
+				[helperText]="helperText"
+				[invalid]="invalid"
+				[invalidText]="invalidText"
+			>
+				Data Discription
+				<textarea
+					style="width: 90%"
+					ibmTextArea
+					[placeholder]="placeholder"
+					[invalid]="invalid"
+					[disabled]="disabled"
+					[theme]="theme"
+					[rows]="5"
+					[cols]="cols"
+					aria-label="textarea"
+				></textarea>
+			</ibm-label>
+			<br />
+			<ibm-label
+				[helperText]="helperText"
+				[invalid]="invalid"
+				[invalidText]="invalidText"
+			>
+				Data Usage Guidence
+				<textarea
+					style="width: 90%"
+					ibmTextArea
+					[placeholder]="placeholder"
+					[invalid]="invalid"
+					[disabled]="disabled"
+					[theme]="theme"
+					[rows]="3"
+					[cols]="cols"
+					aria-label="textarea"
+				></textarea>
+			</ibm-label>
+		
+			<br />
+			<ibm-label
+				[helperText]="helperText"
+				[invalid]="invalid"
+				[invalidText]="invalidText"
+			>
+				Minimum Model score
+				<textarea
+					style="width: 10%"
+					ibmTextArea
+					[placeholder]="placeholder"
+					[invalid]="invalid"
+					[disabled]="disabled"
+					[theme]="theme"
+					[rows]="1"
+					[cols]="1"
+					aria-label="textarea"
+				></textarea>
+			</ibm-label>
+			<br />
+			<p class="link">Set Additional Score Requirement +</p>
+			<br />
+			<button [ibmButton]="ibmButton" [size]="size">
+				Add Phase<svg class="bx--btn__icon" ibmIconAdd size="20"></svg>
+			</button>
+
+		</div>
+		
+		<div ibmCol class="custom-class-example1" [columnNumbers]="{ md: 4, sm: 12 }">
+			<div ibmGrid [condensed]="gridCondensed">
+				<div
+					ibmRow
+					[gutter]="gutter"
+					[leftGutter]="leftGutter"
+					[rightGutter]="rightGutter"
+					[condensed]="rowCondensed"
+				>
+					<div
+						ibmCol
+						class="custom-class-example"
+						[columnNumbers]="{ md: 4, sm: 12 }"
+					>
+						<h5>Data Visualisation</h5>
+						<p class="drag">An image that represnt your Sample data</p>
+		
+						<button
+							class="Step2btn_pre"
+							[ibmButton]="ibmButton"
+							[size]="size"
+							disabled="true"
+						>
+							Previous
+						</button>
+					</div>
+					<div
+						ibmCol
+						class="custom-class-example"
+						[columnNumbers]="{ md: 4, sm: 12 }"
+					>
+						<h5>Sample Data</h5>
+						<p class="drag">Anonymous, available to download for any</p>
+						<button
+							class="Step2btn_next"
+							[ibmButton]="ibmButton"
+							[size]="size"
+							disabled="true"
+						>
+							next
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+

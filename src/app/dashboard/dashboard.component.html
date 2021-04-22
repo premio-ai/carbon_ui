@@ -1,471 +1,53 @@
 <div class="bx--row">
-	<div class="bx--col-lg-2"></div>
+	<div class="bx--col-md-1"></div>
 
-	<div class="bx--col-lg-14">
-		<p class="para">Welcome Back, juned</p>
+	<div class="bx--col-md-7">
+		<p class="para">Welcome Back, Charlie</p>
 		<h1 class="heading">Activity Dashboard</h1>
-		<ibm-tabs
-			[followFocus]="true"
-			[isNavigation]="false"
-			[cacheActive]="true"
-            
-		>
-	
-			<ibm-tab heading="Active" >
+		<ibm-tabs [followFocus]="true" [isNavigation]="false" [cacheActive]="true">
+			<ibm-tab heading="Active">
 				<br />
 				<button class="btn1" [ibmButton]="ibmButton" [size]="size">
-					Create Challenge<svg
-						class="bx--btn__icon"
-						ibmIconAdd
-						size="20"
-					></svg>
+					Create Challenge<svg class="bx--btn__icon" ibmIconAdd size="12"></svg>
 				</button>
-<br /><br />
+				<br /><br />
 				<div ibmGrid [condensed]="false" style="padding-left:0rem">
-					<div
-						ibmRow
-						[gutter]="true"
-						[leftGutter]="true"
-						[rightGutter]="true"
-						[condensed]="false"
-					>
-						<div
-							ibmCol
-							class="custom-class-example"
-							[columnNumbers]="{ md: 2, sm: 12 }"
-						>
-							<ibm-tile>
-								<div style="display: flex">
-									<p class="gridhead">
-										Simplifying the <br />
-										Application process
-									</p>
+					<div ibmRow [gutter]="true" [leftGutter]="true" [rightGutter]="true" [condensed]="false">
 
-									<ibm-tag
-										style="margin-left: 20px"
-										type="cool-gray"
-										>Efficiency</ibm-tag
-									>
-								</div>
-								<br />
-
-								<div
-									ibmRow
-									[gutter]="gutter"
-									[leftGutter]="leftGutter"
-									[rightGutter]="rightGutter"
-									[condensed]="rowCondensed"
-                                    style="margin-left: 1px;"
-								>
-									<div
-										ibmCol
-										class="custom-class-example"
-										[columnNumbers]="{ md: 5, sm: 12 }"
-									>
-										Develop a predictive model that
-										accurately classifies risk using a more
-										automated approach in order to speed up
-										the application process for new
-										customers.
-									</div>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;
-									<div
-										ibmCol
-										class="custom-class-example"
-										[columnNumbers]="{ md: 2, sm: 12 }"
-									>
-										5<br />608<br />34
-									</div>
-								</div>
-								<br /><br /><br />
-								<div
-									ibmRow
-									[gutter]="gutter"
-									[leftGutter]="leftGutter"
-									[rightGutter]="rightGutter"
-									[condensed]="rowCondensed"
-                                    style="margin-right:50px"
-								>
-									<div
-										ibmCol
-										class="custom-class-example"
-										style="margin-top: 10px;"
-										[columnNumbers]="{ md: 6, sm: 12 }"
-									>
-										<p class="date">12/04/21</p>
-									</div>
-									<div
-										ibmCol
-										class="custom-class-example"
-										style="margin-bottom: -16px;"
-										[columnNumbers]="{ md: 2, sm: 12 }"
-									>
-										<button
-											class="btn"
-											[ibmButton]="primary"
-											[size]="sm"
-										>
-											View
-										</button>
-									</div>
-								</div>
-							</ibm-tile>
-						</div>
-						<div
-							ibmCol
-							class="custom-class-example"
-							[columnNumbers]="{ md: 2, sm: 12 }"
-						>
-							<ibm-tile>
-								<div style="display: flex">
-									<p class="gridhead">
-										Simplifying the <br />
-										Application process
-									</p>
-
-									<ibm-tag
-										style="margin-left: 20px"
-										type="cool-gray"
-										>Efficiency</ibm-tag
-									>
-								</div>
-								<br />
-
-								<div
-									ibmRow
-									[gutter]="gutter"
-									[leftGutter]="leftGutter"
-									[rightGutter]="rightGutter"
-									[condensed]="rowCondensed"
-                                    style="margin-left: 1px;"
-								>
-									<div
-										ibmCol
-										class="custom-class-example"
-										[columnNumbers]="{ md: 5, sm: 12 }"
-									>
-										Develop a predictive model that
-										accurately classifies risk using a more
-										automated approach in order to speed up
-										the application process for new
-										customers.
-									</div>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;
-									<div
-										ibmCol
-										class="custom-class-example"
-										[columnNumbers]="{ md: 2, sm: 12 }"
-									>
-										5<br />608<br />34
-									</div>
-								</div>
-								<br /><br /><br />
-								<div
-									ibmRow
-									[gutter]="gutter"
-									[leftGutter]="leftGutter"
-									[rightGutter]="rightGutter"
-									[condensed]="rowCondensed"
-                                    style="margin-right:50px"
-								>
-								<div
-								ibmCol
-								class="custom-class-example"
-								style="margin-top: 10px;"
-								[columnNumbers]="{ md: 6, sm: 12 }"
-							>
-								<p class="date">12/04/21</p>
-							</div>
-							<div
-								ibmCol
-								class="custom-class-example"
-								style="margin-bottom: -16px;"
-								[columnNumbers]="{ md: 2, sm: 12 }"
-							>
-										<button
-											class="btn"
-											[ibmButton]="primary"
-											[size]="sm"
-										>
-											View
-										</button>
-									</div>
-								</div>
-							</ibm-tile>
+						<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 3, sm: 12 }"
+							*ngFor="let activeChallenge of activeChallenges">
+							<app-challange-tile [challange]="activeChallenge"></app-challange-tile>
 						</div>
 
-						<div
-							ibmCol
-							class="custom-class-example"
-							[columnNumbers]="{ md: 2, sm: 12 }"
-						>
-							<ibm-tile>
-								<div style="display: flex">
-									<p class="gridhead">
-										Simplifying the <br />
-										Application process
-									</p>
-
-									<ibm-tag
-										style="margin-left: 20px"
-										type="cool-gray"
-										>Efficiency</ibm-tag
-									>
-								</div>
-								<br />
-
-								<div
-									ibmRow
-									[gutter]="gutter"
-									[leftGutter]="leftGutter"
-									[rightGutter]="rightGutter"
-									[condensed]="rowCondensed"
-                                    style="margin-left: 1px;"
-								>
-									<div
-										ibmCol
-										class="custom-class-example"
-										[columnNumbers]="{ md: 5, sm: 12 }"
-									>
-										Develop a predictive model that
-										accurately classifies risk using a more
-										automated approach in order to speed up
-										the application process for new
-										customers.
-									</div>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;
-									<div
-										ibmCol
-										class="custom-class-example"
-										[columnNumbers]="{ md: 2, sm: 12 }"
-									>
-										5<br />608<br />34
-									</div>
-								</div>
-								<br /><br /><br />
-								<div
-									ibmRow
-									[gutter]="gutter"
-									[leftGutter]="leftGutter"
-									[rightGutter]="rightGutter"
-									[condensed]="rowCondensed"
-                                    style="margin-right:50px"
-								>
-								<div
-								ibmCol
-								class="custom-class-example"
-								style="margin-top: 10px;"
-								[columnNumbers]="{ md: 6, sm: 12 }"
-							>
-								<p class="date">12/04/21</p>
-							</div>
-							<div
-								ibmCol
-								class="custom-class-example"
-								style="margin-bottom: -16px;"
-								[columnNumbers]="{ md: 2, sm: 12 }"
-							>
-										<button
-											class="btn"
-											[ibmButton]="primary"
-											[size]="sm"
-										>
-											View
-										</button>
-									</div>
-								</div>
-							</ibm-tile>
-						</div>
-
-                        
 
 					</div>
 				</div>
-
-                <br />
-                <div ibmGrid [condensed]="false" style="padding-left:0rem">
-					<div
-						ibmRow
-						[gutter]="true"
-						[leftGutter]="true"
-						[rightGutter]="true"
-						[condensed]="false"
-					>
-						<div
-							ibmCol
-							class="custom-class-example"
-							[columnNumbers]="{ md: 2, sm: 12 }"
-						>
-							<ibm-tile>
-								<div style="display: flex">
-									<p class="gridhead">
-										Simplifying the <br />
-										Application process
-									</p>
-
-									<ibm-tag
-										style="margin-left: 20px"
-										type="cool-gray"
-										>Efficiency</ibm-tag
-									>
-								</div>
-								<br />
-
-								<div
-									ibmRow
-									[gutter]="gutter"
-									[leftGutter]="leftGutter"
-									[rightGutter]="rightGutter"
-									[condensed]="rowCondensed"
-                                    style="margin-left: 1px;"
-								>
-									<div
-										ibmCol
-										class="custom-class-example"
-										[columnNumbers]="{ md: 5, sm: 12 }"
-									>
-										Develop a predictive model that
-										accurately classifies risk using a more
-										automated approach in order to speed up
-										the application process for new
-										customers.
-									</div>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;
-									<div
-										ibmCol
-										class="custom-class-example"
-										[columnNumbers]="{ md: 2, sm: 12 }"
-									>
-										5<br />608<br />34
-									</div>
-								</div>
-								<br /><br /><br />
-								<div
-									ibmRow
-									[gutter]="gutter"
-									[leftGutter]="leftGutter"
-									[rightGutter]="rightGutter"
-									[condensed]="rowCondensed"
-                                    style="margin-right:50px"
-								>
-								<div
-								ibmCol
-								class="custom-class-example"
-								style="margin-top: 10px;"
-								[columnNumbers]="{ md: 6, sm: 12 }"
-							>
-								<p class="date">12/04/21</p>
-							</div>
-							<div
-								ibmCol
-								class="custom-class-example"
-								style="margin-bottom: -16px;"
-								[columnNumbers]="{ md: 2, sm: 12 }"
-							>
-										<button
-											class="btn"
-											[ibmButton]="primary"
-											[size]="sm"
-										>
-											View
-										</button>
-									</div>
-								</div>
-							</ibm-tile>
-						</div>
-						<div
-							ibmCol
-							class="custom-class-example"
-							[columnNumbers]="{ md: 2, sm: 12 }"
-						>
-							<ibm-tile>
-								<div style="display: flex">
-									<p class="gridhead">
-										Simplifying the <br />
-										Application process
-									</p>
-
-									<ibm-tag
-										style="margin-left: 20px"
-										type="cool-gray"
-										>Efficiency</ibm-tag
-									>
-								</div>
-								<br />
-
-								<div
-									ibmRow
-									[gutter]="gutter"
-									[leftGutter]="leftGutter"
-									[rightGutter]="rightGutter"
-									[condensed]="rowCondensed"
-                                    style="margin-left: 1px;"
-								>
-									<div
-										ibmCol
-										class="custom-class-example"
-										[columnNumbers]="{ md: 5, sm: 12 }"
-									>
-										Develop a predictive model that
-										accurately classifies risk using a more
-										automated approach in order to speed up
-										the application process for new
-										customers.
-									</div>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;
-									<div
-										ibmCol
-										class="custom-class-example"
-										[columnNumbers]="{ md: 2, sm: 12 }"
-									>
-										5<br />608<br />34
-									</div>
-								</div>
-								<br /><br /><br />
-								<div
-									ibmRow
-									[gutter]="gutter"
-									[leftGutter]="leftGutter"
-									[rightGutter]="rightGutter"
-									[condensed]="rowCondensed"
-                                    style="margin-right:50px"
-								>
-								<div
-								ibmCol
-								class="custom-class-example"
-								style="margin-top: 10px;"
-								[columnNumbers]="{ md: 6, sm: 12 }"
-							>
-								<p class="date">12/04/21</p>
-							</div>
-							<div
-								ibmCol
-								class="custom-class-example"
-								style="margin-bottom: -16px;"
-								[columnNumbers]="{ md: 2, sm: 12 }"
-							>
-										<button
-											class="btn"
-											[ibmButton]="primary"
-											[size]="sm"
-										>
-											View
-										</button>
-									</div>
-								</div>
-							</ibm-tile>
-						</div>
-
-						
-                        
-
-					</div>
-				</div>
+				<br />
 			</ibm-tab>
-			<ibm-tab heading="Past">Tab Content 2</ibm-tab>
+			<ibm-tab heading="Past">
+				
+				<br />
+				<button class="btn1" [ibmButton]="ibmButton" [size]="size">
+					Create Challenge<svg class="bx--btn__icon" ibmIconAdd size="12"></svg>
+				</button>
+				<br /><br />
+				<div ibmGrid [condensed]="false" style="padding-left:0rem">
+					<div ibmRow [gutter]="true" [leftGutter]="true" [rightGutter]="true" [condensed]="false">
+
+						<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 3, sm: 12 }"
+							*ngFor="let pastChallenge of pastChallenges">
+							<app-challange-tile [challange]="pastChallenge"></app-challange-tile>
+						</div>
+
+
+					</div>
+				</div>
+				<br />
+			
+			</ibm-tab>
 		</ibm-tabs>
 	</div>
 
-   
+
 
 </div>

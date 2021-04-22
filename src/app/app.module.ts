@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddModule, CopyModule } from "@carbon/icons-angular";
+import { HttpClientModule } from '@angular/common/http';
 
 import { ArrowLeft16Module } from '@carbon/icons-angular/lib/arrow--left/16';
 
@@ -17,14 +18,25 @@ import { UserAvatar20Module } from '@carbon/icons-angular/lib/user--avatar/20';
 import { AppSwitcher20Module } from '@carbon/icons-angular/lib/app-switcher/20';
 import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ChallangeTileComponent } from './challange-tile/challange-tile.component';
+import { RequestService } from './request.service';
 import { ChallangePageComponent } from './challange-page/challange-page.component';
+import { ChallaneThirdStepComponent } from './challane-third-step/challane-third-step.component';
+import { ChallangeSecondStepComponent } from './challange-second-step/challange-second-step.component';
+import { ChallangeFirstStepComponent } from './challange-first-step/challange-first-step.component';
+import { ChallangeFourthStepComponent } from './challange-fourth-step/challange-fourth-step.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		HeaderComponent,
 		DashboardComponent,
+		ChallangeTileComponent,
 		ChallangePageComponent,
+		ChallaneThirdStepComponent,
+		ChallangeSecondStepComponent,
+		ChallangeFirstStepComponent,
+		ChallangeFourthStepComponent
 	],
 	imports: [
 		BrowserModule,
@@ -42,6 +54,7 @@ import { ChallangePageComponent } from './challange-page/challange-page.componen
 		GridModule,
 		TilesModule,
 		TagModule,
+		HttpClientModule,		
 		ArrowLeft16Module,ProgressIndicatorModule,
 		BreadcrumbModule,InputModule,
 		ToggleModule,
@@ -52,6 +65,7 @@ import { ChallangePageComponent } from './challange-page/challange-page.componen
 		CheckboxModule,
 		DropdownModule
 	],
-	bootstrap: [AppComponent]
+	bootstrap: [AppComponent],
+	providers : [RequestService]
 })
 export class AppModule { }

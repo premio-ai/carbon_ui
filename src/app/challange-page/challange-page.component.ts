@@ -11,32 +11,42 @@ export class ChallangePageComponent implements OnInit {
 	current: number;
 	steps: any[];
 
+	challange : {
+		title : string;
+		description : string;
+	}
+
+
 	ngOnInit() {
 		this.steps = [
 			{
-				text: "First step",
+				text: "Step 1",
 				state: ["complete"],
 			},
 			{
-				text: "Second step",
+				text: "Step 2",
 				state: ["current"],
 			},
 			{
-				text: "Third step",
+				text: "Step 3",
 				state: ["incomplete"],
 			},
 			{
-				text: "Fourth step",
-				state: ["incomplete", "error"],
+				text: "Step 4",
+				state: ["incomplete"],
 			},
 			{
-				text: "Fifth step",
+				text: "Step 5",
 				state: ["incomplete"],
 				disabled: true,
 			},
 		];
-		this.current = 1;
+		this.current = 2;
 	}
 
 	stepSelected() {}
+
+	nextStep(){
+		this.current = 2
+	}
 }
