@@ -4,15 +4,15 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ChallangePageComponent } from './challange-page/challange-page.component';
 
 const routes: Routes = [
-	// {
-	// 	path: '',
-	// 	loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
-	// },
+	{
+		path: '',
+		loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+	},
 	{
 		path: 'repos',
 		loadChildren: () => import('./repositories/repositories.module').then(m => m.RepositoriesModule)
 	},
-	{ path: '', component: DashboardComponent },
+	{ path: 'dashboard', component: DashboardComponent },
 	{ path: 'challenge', component: ChallangePageComponent },
 	{
 		path: '',

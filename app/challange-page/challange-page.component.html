@@ -5,7 +5,7 @@
 		</div>
 		<div class="bx--col-md-7">
 			<ibm-breadcrumb [noTrailingSlash]="noTrailingSlash">
-				<ibm-breadcrumb-item href="#1" class="navigation" (click)="navigateToDashboard()">
+				<ibm-breadcrumb-item href="#1" class="navigation">
 					Activity Dashboard
 				</ibm-breadcrumb-item>
 			</ibm-breadcrumb>
@@ -18,7 +18,6 @@
 			<h1>Create New challange</h1>
 		</div>
 	</div>
-
 	<br />
 	<div ibmGrid [condensed]="gridCondensed">
 		<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
@@ -33,9 +32,9 @@
 				<app-challange-second-step *ngIf="current == 2" (goPrevious)="previousStepTwo()"
 					(goNext)="nextStepTwo($event)"></app-challange-second-step>
 				<app-challane-third-step *ngIf="current == 3" (goPrevious)="previousStepThree()"
-					(goNext)="nextStepThree($event)"></app-challane-third-step>
+				(goNext)="nextStepThree($event)" ></app-challane-third-step>
 				<app-challange-fourth-step *ngIf="current == 4" (goPrevious)="previousStepFour()"
-					(goNext)="nextStepFour($event)"></app-challange-fourth-step>
+				(goNext)="nextStepFour($event)"></app-challange-fourth-step>
 			</div>
 		</div>
 

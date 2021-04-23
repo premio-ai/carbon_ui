@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../request.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,8 +8,7 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private requestService: RequestService,
-    private router: Router) { }
+  constructor(private requestService: RequestService) { }
   activeChallenges: any[];
   pastChallenges: any[];
 
@@ -34,9 +32,5 @@ export class DashboardComponent implements OnInit {
       //console.log("active challange ... ",data)
       this.pastChallenges = data;
     })
-  }
-
-  createChalange() {
-    this.router.navigateByUrl('/challenge');
   }
 }

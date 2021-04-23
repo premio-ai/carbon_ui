@@ -1,6 +1,5 @@
 import { Component, OnInit, } from "@angular/core";
 import { RequestService } from "../request.service";
-import { Router } from '@angular/router';
 
 @Component({
 	selector: "app-challange-page",
@@ -10,8 +9,7 @@ import { Router } from '@angular/router';
 export class ChallangePageComponent implements OnInit {
 
 
-	constructor(private requestService: RequestService,
-		router: Router) { }
+	constructor(private requestService: RequestService) { }
 
 	current: number;
 	steps: any[];
@@ -152,9 +150,6 @@ export class ChallangePageComponent implements OnInit {
 		this.current++;
 	}
 
-	navigateToDashboard() {
-
-	}
 
 
 }
