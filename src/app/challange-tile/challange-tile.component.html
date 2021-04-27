@@ -15,15 +15,55 @@
 			{{challange?.description}}
 		</div>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<div ibmCol class="custom-class-example" style="margin-right: 0px;display: flex;margin: auto;" [columnNumbers]="{ md: 2, sm: 12 }">
-			5<br />608<br />34
+		<div ibmCol class="custom-class-example" style="margin-right: 0px;display: flex;margin: auto;"
+			[columnNumbers]="{ md: 2, sm: 12 }">
+
+			<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
+				[condensed]="rowCondensed">
+				<div ibmCol class="custom-class-example" style="margin-right: 0px;display: flex;margin: auto;"
+					[columnNumbers]="{ md: 8, sm: 12 }">
+					5
+				</div>
+			</div>
+
+
+			<!-- <div ibmCol class="custom-class-example" style="margin-right: 0px;display: flex;margin: auto;"
+				[columnNumbers]="{ md: 8, sm: 12 }">
+				5
+			</div> -->
+			<!-- 
+			<div ibmCol class="custom-class-example" style="margin-right: 0px;display: flex;margin: auto;"
+				[columnNumbers]="{ md: 8, sm: 12 }">10</div>
+
+			<span>
+				<svg icon ibmIconTime16></svg> 5
+			</span>
+			<br /> -->
+
+			<!-- <span>
+				<svg icon ibmIconTime16></svg> 608
+			</span>
+
+			<br />
+			<span>
+				<svg icon ibmIconTime16></svg> 34
+			</span> -->
+
+			<!-- <span ibmCol [columnNumbers]="{ md: 8, sm: 16 }">
+				5
+			</span>
+			<br />
+			<span ibmCol [columnNumbers]="{ md: 8, sm: 16 }">
+				5 
+			</span> -->
+
 		</div>
 	</div>
 	<br /><br /><br />
 	<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed"
 		style="margin-right:40px;">
 		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 6, sm: 12 }">
-			<p class="date">12/04/21</p>
+			<p class="date"> <svg icon ibmIconTime16></svg> <span> {{ getDate(challange?.createdAt)}} </span></p>
 		</div>
 		<div ibmCol class="custom-class-example" style="margin-bottom: -31px;" [columnNumbers]="{ md: 1, sm: 12 }">
 			<button class="btn" [ibmButton]="primary" [size]="'sm'">

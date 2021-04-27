@@ -6,16 +6,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddModule, CopyModule } from "@carbon/icons-angular";
 import { HttpClientModule } from '@angular/common/http';
-
 import { ArrowLeft16Module } from '@carbon/icons-angular/lib/arrow--left/16';
 
 // carbon-components-angular default imports
-import { UIShellModule,ButtonModule,TabsModule,GridModule,TilesModule,TagModule,ProgressIndicatorModule,BreadcrumbModule,InputModule,ToggleModule,DocumentationModule,DatePickerModule,FileUploaderModule,NumberModule,
-	CheckboxModule,DropdownModule
+import {
+	UIShellModule, ButtonModule, TabsModule, GridModule, TilesModule, TagModule, ProgressIndicatorModule, BreadcrumbModule, InputModule, ToggleModule, DocumentationModule, DatePickerModule, FileUploaderModule, NumberModule,
+	CheckboxModule, DropdownModule 
 } from 'carbon-components-angular';
 import { Notification20Module } from '@carbon/icons-angular/lib/notification/20';
 import { UserAvatar20Module } from '@carbon/icons-angular/lib/user--avatar/20';
 import { AppSwitcher20Module } from '@carbon/icons-angular/lib/app-switcher/20';
+import { Time16Module } from '@carbon/icons-angular/lib/time/16';
+import { EdtLoop16Module } from '@carbon/icons-angular/lib/edt-loop/16';
+import { UserMultiple16Module } from '@carbon/icons-angular/lib/user--multiple/16';
+
 import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ChallangeTileComponent } from './challange-tile/challange-tile.component';
@@ -54,18 +58,21 @@ import { ChallangeFourthStepComponent } from './challange-fourth-step/challange-
 		GridModule,
 		TilesModule,
 		TagModule,
-		HttpClientModule,		
-		ArrowLeft16Module,ProgressIndicatorModule,
-		BreadcrumbModule,InputModule,
+		HttpClientModule,
+		ArrowLeft16Module, ProgressIndicatorModule,
+		BreadcrumbModule, InputModule,
 		ToggleModule,
 		DocumentationModule,
 		DatePickerModule,
 		FileUploaderModule,
 		NumberModule,
 		CheckboxModule,
-		DropdownModule
+		DropdownModule,
+		Time16Module,
+		EdtLoop16Module,
+		UserMultiple16Module
 	],
 	bootstrap: [AppComponent],
-	providers : [RequestService]
+	providers: [RequestService]
 })
 export class AppModule { }
