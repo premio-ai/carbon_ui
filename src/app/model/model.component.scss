@@ -1,0 +1,41 @@
+.bx--tile {
+    display: block;
+    min-width: 60rem;
+    min-height: 4rem;
+    background-color: #f4f4f4;
+    position: relative;
+    padding: 1rem;
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+}
+
+.bold{
+    font-weight: 600;
+    font-size: 14px;
+}
+.para{
+    font-size: 12px;
+    text-align:justify;
+}
+.btn{
+    margin: auto;
+    display: flex;
+    
+   margin-right: -15px;
+   margin-bottom: -15px;
+    margin-top:20px !important;
+   }
+
+   .content{
+       margin-left: 50px;
+   }
+
+   .nobold{
+       font-size: 28px;
+       font-weight: 600;
+       color: #3B55EA;
+   }
+   .unbold{
+       font-size: 9px;
+       color: #3B55EA;
+   }

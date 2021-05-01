@@ -1,0 +1,43 @@
+.btn{
+    margin: auto;
+    display: flex;
+    background-color: #383838;
+    margin-right: -15px;
+    margin-bottom: -15px;
+    margin-top:20px !important;
+   }
+
+   .view{
+    margin: auto;
+    display: flex;
+    height: 34px;
+    background-color: #383838;
+   margin-right: 0px;
+  
+    margin-top:20px !important;
+   }
+.model{
+    margin: auto;
+    display: flex;
+    height: 34px;
+    margin-right: 100px;
+   margin-right: -31px;
+    margin-top:20px !important;
+}
+ 
+.bx--tile {
+    display: block;
+    min-width: 16rem;
+    min-height: 4rem;
+    background-color: #f4f4f4;
+    position: relative;
+    padding: 1rem;
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+}
+
+@media (min-width: 42rem){
+.bx--grid {
+    padding-left: 0rem;
+    padding-right: 2rem;
+}}

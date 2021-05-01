@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { AddModule, CopyModule } from "@carbon/icons-angular";
 import { HttpClientModule } from '@angular/common/http';
 
+
 import { ArrowLeft16Module } from '@carbon/icons-angular/lib/arrow--left/16';
 
 // carbon-components-angular default imports
 import { UIShellModule,ButtonModule,TabsModule,GridModule,TilesModule,TagModule,ProgressIndicatorModule,BreadcrumbModule,InputModule,ToggleModule,DocumentationModule,DatePickerModule,FileUploaderModule,NumberModule,
-	CheckboxModule,DropdownModule
+	CheckboxModule,DropdownModule,ListModule,AccordionModule,ContentSwitcherModule,PaginationModule,TableModule,
+
 } from 'carbon-components-angular';
 import { Notification20Module } from '@carbon/icons-angular/lib/notification/20';
 import { UserAvatar20Module } from '@carbon/icons-angular/lib/user--avatar/20';
@@ -25,6 +27,12 @@ import { ChallaneThirdStepComponent } from './challane-third-step/challane-third
 import { ChallangeSecondStepComponent } from './challange-second-step/challange-second-step.component';
 import { ChallangeFirstStepComponent } from './challange-first-step/challange-first-step.component';
 import { ChallangeFourthStepComponent } from './challange-fourth-step/challange-fourth-step.component';
+import { InsurerComponent } from './insurer/insurer.component';
+import { OverviewComponent } from './overview/overview.component';
+import { DataComponent } from './data/data.component';
+import { ActivityComponent } from './activity/activity.component';
+
+import { ModelComponent } from './model/model.component';
 
 @NgModule({
 	declarations: [
@@ -36,7 +44,13 @@ import { ChallangeFourthStepComponent } from './challange-fourth-step/challange-
 		ChallaneThirdStepComponent,
 		ChallangeSecondStepComponent,
 		ChallangeFirstStepComponent,
-		ChallangeFourthStepComponent
+		ChallangeFourthStepComponent,
+		InsurerComponent,
+		OverviewComponent,
+		DataComponent,
+		ActivityComponent,
+	
+		ModelComponent
 	],
 	imports: [
 		BrowserModule,
@@ -63,7 +77,14 @@ import { ChallangeFourthStepComponent } from './challange-fourth-step/challange-
 		FileUploaderModule,
 		NumberModule,
 		CheckboxModule,
-		DropdownModule
+		DropdownModule,
+		ListModule,
+		AccordionModule,
+		ContentSwitcherModule,
+		PaginationModule,
+		TableModule,
+		
+	
 	],
 	bootstrap: [AppComponent],
 	providers : [RequestService]
