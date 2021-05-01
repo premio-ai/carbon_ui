@@ -18,6 +18,10 @@ import { UIShellModule,ButtonModule,TabsModule,GridModule,TilesModule,TagModule,
 import { Notification20Module } from '@carbon/icons-angular/lib/notification/20';
 import { UserAvatar20Module } from '@carbon/icons-angular/lib/user--avatar/20';
 import { AppSwitcher20Module } from '@carbon/icons-angular/lib/app-switcher/20';
+import { Time16Module } from '@carbon/icons-angular/lib/time/16';
+import { EdtLoop16Module } from '@carbon/icons-angular/lib/edt-loop/16';
+import { UserMultiple16Module } from '@carbon/icons-angular/lib/user--multiple/16';
+
 import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ChallangeTileComponent } from './challange-tile/challange-tile.component';
@@ -68,9 +72,9 @@ import { ModelComponent } from './model/model.component';
 		GridModule,
 		TilesModule,
 		TagModule,
-		HttpClientModule,		
-		ArrowLeft16Module,ProgressIndicatorModule,
-		BreadcrumbModule,InputModule,
+		HttpClientModule,
+		ArrowLeft16Module, ProgressIndicatorModule,
+		BreadcrumbModule, InputModule,
 		ToggleModule,
 		DocumentationModule,
 		DatePickerModule,
@@ -85,8 +89,11 @@ import { ModelComponent } from './model/model.component';
 		TableModule,
 		
 	
+		Time16Module,
+		EdtLoop16Module,
+		UserMultiple16Module
 	],
 	bootstrap: [AppComponent],
-	providers : [RequestService]
+	providers: [RequestService]
 })
 export class AppModule { }

@@ -5,28 +5,30 @@
 
             <br />
             <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-                Challange Title
                 <textarea style="width: 90%" ibmTextArea [placeholder]="placeholder" [invalid]="invalid"
-                    [disabled]="disabled" [theme]="theme" [rows]="1" [cols]="cols" aria-label="textarea"></textarea>
+                    [disabled]="disabled" [theme]="theme" [rows]="1" [cols]="cols" aria-label="textarea"
+                    [(ngModel)]="stepOne.title"></textarea>
+                    
             </ibm-label>
             <br />
             <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-                Challange Discription
+                Challange Description
                 <textarea style="width: 90%" ibmTextArea [placeholder]="placeholder" [invalid]="invalid"
-                    [disabled]="disabled" [theme]="theme" [rows]="5" [cols]="cols" aria-label="textarea"></textarea>
+                    [disabled]="disabled" [theme]="theme" [rows]="5" [cols]="cols" aria-label="textarea"
+                    [(ngModel)]="stepOne.description"></textarea>
             </ibm-label>
             <br />
             <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
                 Challange Objective
                 <textarea style="width: 90%" ibmTextArea [placeholder]="placeholder" [invalid]="invalid"
-                    [disabled]="disabled" [theme]="theme" [rows]="3" [cols]="cols" aria-label="textarea"></textarea>
+                [(ngModel)]="stepOne.objective" [disabled]="disabled" [theme]="theme" [rows]="3" [cols]="cols" aria-label="textarea"></textarea>
             </ibm-label>
         
             <br />
             <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
                 Challange End Date
                 <textarea style="width: 10%" ibmTextArea [placeholder]="placeholder" [invalid]="invalid"
-                    [disabled]="disabled" [theme]="theme" [rows]="1" [cols]="1" aria-label="textarea"></textarea>
+                [(ngModel)]="stepOne.endDate" [disabled]="disabled" [theme]="theme" [rows]="1" [cols]="1" aria-label="textarea"></textarea>
             </ibm-label>
         </div>
         
@@ -57,7 +59,7 @@
 
 
 
-            <button [ibmButton]="ibmButton" class="btn" [size]="size" disabled="false" click="nextStep()">  Next</button>
+            <button [ibmButton]="ibmButton" class="btn" [size]="size" (click)="nextStep()">  Next</button>
            
               
             

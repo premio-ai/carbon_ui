@@ -7,11 +7,16 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ChallangeTileComponent implements OnInit {
 
-  @Input() challange:any;
+  @Input() challange: any;
   constructor() { }
 
   ngOnInit() {
     console.log("challange ..... ", this.challange)
   }
 
+  getDate(time) {
+    time = parseInt(time);
+    let dt = new Date(time);
+    return dt.getDate() + "/" + dt.getMonth() + "/" + dt.getFullYear();
+  }
 }

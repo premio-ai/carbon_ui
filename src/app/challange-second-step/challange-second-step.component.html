@@ -1,76 +1,29 @@
 <div ibmGrid [condensed]="gridCondensed">
-	<div
-		ibmRow
-		[gutter]="gutter"
-		[leftGutter]="leftGutter"
-		[rightGutter]="rightGutter"
-		[condensed]="rowCondensed"
-	>
-		<div
-			ibmCol
-			class="custom-class-example"
-			[columnNumbers]="{ md: 4, sm: 12 }"
-		>
+	<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
 			<h3>Illustrative Data: Phase 0</h3>
 
 			<br />
-			<ibm-label
-				[helperText]="helperText"
-				[invalid]="invalid"
-				[invalidText]="invalidText"
-			>
-				Data Discription
-				<textarea
-					style="width: 90%"
-					ibmTextArea
-					[placeholder]="placeholder"
-					[invalid]="invalid"
-					[disabled]="disabled"
-					[theme]="theme"
-					[rows]="5"
-					[cols]="cols"
-					aria-label="textarea"
-				></textarea>
+			<ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
+				Data Description
+				<textarea style="width: 90%" ibmTextArea [placeholder]="placeholder" [invalid]="invalid"
+					[(ngModel)]="stepTwo.description" [theme]="theme" [rows]="5" [cols]="cols"
+					aria-label="textarea"></textarea>
 			</ibm-label>
 			<br />
-			<ibm-label
-				[helperText]="helperText"
-				[invalid]="invalid"
-				[invalidText]="invalidText"
-			>
+			<ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
 				Data Usage Guidence
-				<textarea
-					style="width: 90%"
-					ibmTextArea
-					[placeholder]="placeholder"
-					[invalid]="invalid"
-					[disabled]="disabled"
-					[theme]="theme"
-					[rows]="3"
-					[cols]="cols"
-					aria-label="textarea"
-				></textarea>
+				<textarea style="width: 90%" ibmTextArea [placeholder]="placeholder" [invalid]="invalid"
+					[(ngModel)]="stepTwo.guidence" [theme]="theme" [rows]="3" [cols]="cols"
+					aria-label="textarea"></textarea>
 			</ibm-label>
 
 			<br />
-			<ibm-label
-				[helperText]="helperText"
-				[invalid]="invalid"
-				[invalidText]="invalidText"
-			>
-				Minimum Model score
-				<textarea
-					style="width: 10%"
-					ibmTextArea
-					[placeholder]="placeholder"
-					[invalid]="invalid"
-					[disabled]="disabled"
-					[theme]="theme"
-					[rows]="1"
-					[cols]="1"
-					aria-label="textarea"
-				></textarea>
-			</ibm-label>
+
+			<ibm-number [label]="'Minimum Model score'" [helperText]="''" [min]="0" [(ngModel)]="stepTwo.score">
+			</ibm-number>
+
+
 			<br />
 			<p class="link">Set Additional Score Requirement +</p>
 			<br />
@@ -79,40 +32,19 @@
 			</button>
 		</div>
 
-		<div
-			ibmCol
-			class="custom-class-example1"
-			[columnNumbers]="{ md: 4, sm: 12 }"
-		>
+		<div ibmCol class="custom-class-example1" [columnNumbers]="{ md: 4, sm: 12 }">
 			<div ibmGrid [condensed]="gridCondensed">
-				<div
-					ibmRow
-					[gutter]="gutter"
-					[leftGutter]="leftGutter"
-					[rightGutter]="rightGutter"
-					[condensed]="rowCondensed"
-				>
-					<div
-						ibmCol
-						class="custom-class-example"
-						[columnNumbers]="{ md: 4, sm: 12 }"
-					>
+				<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
+					[condensed]="rowCondensed">
+					<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
 						<h5>Data Visualisation</h5>
 						<p class="drag">
 							An image that represnt your Sample data
 						</p>
-						<!-- <app-drop-file-uploader 
-						[title]="title"
-						 drop="true"
-						 >
-						</app-drop-file-uploader> -->
-						
+
+
 					</div>
-					<div
-						ibmCol
-						class="custom-class-example"
-						[columnNumbers]="{ md: 4, sm: 12 }"
-					>
+					<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
 						<h5>Sample Data</h5>
 						<p class="drag">
 							Anonymous, available to download for any
@@ -122,23 +54,13 @@
 						 drop="true"
 						 >
 						</app-drop-file-uploader> -->
-					
+
 					</div>
 
-					<button
-							class="Step2btn_pre"
-							[ibmButton]="ibmButton"
-							[size]="size"
-							disabled="true"
-						>
-							Previous
-						</button>
-						<button
-						class="Step2btn_next"
-						[ibmButton]="ibmButton"
-						[size]="size"
-						disabled="true"
-					>
+					<button class="Step2btn_pre" [ibmButton]="ibmButton" [size]="size" (click)="previous()">
+						Previous
+					</button>
+					<button class="Step2btn_next" [ibmButton]="ibmButton" [size]="size" (click)="next()">
 						next
 					</button>
 				</div>

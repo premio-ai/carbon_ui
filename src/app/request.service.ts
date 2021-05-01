@@ -14,4 +14,11 @@ export class RequestService {
     return this.http.get(this.baseURL + uri)
 
   }
+
+  post(uri,payload): Observable<any> {
+    //return this.http.get(this.baseURL + uri)
+    return this.http.post(this.baseURL + uri, payload);
+
+
+  }
 }
