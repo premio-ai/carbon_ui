@@ -14,6 +14,7 @@
 				<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
 					[condensed]="rowCondensed">
 					<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
+						<p style="color: gray;font-size: 12px;">Min</p>
 						<ibm-number [label]="Min" [helperText]="[helperText]" [theme]="light" [min]="0" [max]="10"
 						[(ngModel)]="stepThree.minEarnedPoint" [invalid]="false" [invalidText]="invalidText" [disabled]="false">
 						</ibm-number>
@@ -23,6 +24,7 @@
 					<p class="to">to</p>
 					<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }"></div>
 					<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
+						<p style="color: gray;font-size: 12px;">Max</p>
 						<ibm-number [label]="Max" [helperText]="[helperText]" [theme]="light" [min]="0" [max]="10"
 						[(ngModel)]="stepThree.maxEarnedPoint" [invalid]="false" [invalidText]="invalidText" [disabled]="false">
 						</ibm-number>
@@ -38,6 +40,7 @@
 				<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
 					[condensed]="rowCondensed">
 					<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
+						<p style="color: gray;font-size: 12px;">Min</p>
 						<ibm-number [label]="label" [helperText]="[helperText]" [theme]="light" [min]="0" [max]="10"
 						[(ngModel)]="stepThree.minChallangeInvolved" [(ngModel)]="stepThree.minChallangeInvolved" [invalid]="false" [invalidText]="invalidText"
 							[disabled]="false">
@@ -48,6 +51,7 @@
 					<p class="to">to</p>
 					<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }"></div>
 					<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
+						<p style="color: gray;font-size: 12px;">Max</p>
 						<ibm-number [label]="label" [helperText]="[helperText]" [theme]="light" [min]="0" [max]="10"
 						[(ngModel)]="stepThree.maxChallangeInvolved" [(ngModel)]="stepThree.maxChallangeInvolved" [invalid]="false" [invalidText]="invalidText"
 							[disabled]="false">
