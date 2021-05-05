@@ -8,7 +8,7 @@
 				qualifications:
 			</p>
 			<br />
-			<p>Points Earned</p>
+			<h5>Points Earned</h5>
 			<div ibmGrid [condensed]="gridCondensed" style="padding-left: 15px;">
 
 				<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
@@ -34,7 +34,7 @@
 			</div>
 
 			<br />
-			<p>Challenges Invloves in</p>
+			<h5>Challenges Invloves in</h5>
 			<div ibmGrid [condensed]="gridCondensed" style="padding-left: 15px;">
 
 				<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
@@ -63,7 +63,7 @@
 
 			</div>
 			<br />
-			<p>Types of User Account</p>
+			<h5>Types of User Account</h5>
 			<ibm-checkbox checked="true" [hideLabel]="hideLabel" (change)="selectAccountType1($event)">
 				Independent
 			</ibm-checkbox>
@@ -78,7 +78,7 @@
 			<div ibmGrid [condensed]="gridCondensed" style="padding-left: 15px;">
 				<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
 					[condensed]="rowCondensed">
-					<p>Accepted programming Language</p>
+					<h5>Accepted programming Language</h5>
 					<div ibmCol class="custom-class-example" [columnNumbers]="{'md': 6, 'sm': 12}">
 						<ibm-dropdown [label]="Min" [helperText]="helperText" [size]="size" [invalid]="invalid"
 							[invalidText]="invalidText" [theme]="theme" placeholder="Search Language"
