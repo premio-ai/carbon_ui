@@ -1,6 +1,6 @@
 .bx--tile {
     display: block;
-    min-width: 60rem;
+    min-width: 42rem;
     min-height: 4rem;
     background-color: #f4f4f4;
     position: relative;
@@ -29,6 +29,7 @@
 
    .content{
        margin-left: 50px;
+       margin-top: -20px;
    }
 
    .nobold{
