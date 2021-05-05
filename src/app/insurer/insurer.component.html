@@ -1,11 +1,12 @@
-<div class="bx--grid" class="margin">
+<br/><br/>
+<div class="bx--grid" >
 	<div class="bx--row line-padding">
-		<div class="bx--col-md-1" >
-			<svg icon ibmIconArrowLeft16 ></svg>
+		<div class="bx--col-md-1" style="padding-left: 3%;">
+			<svg icon ibmIconArrowLeft16></svg>
 		</div>
 		<div class="bx--col-md-7">
 			<ibm-breadcrumb [noTrailingSlash]="noTrailingSlash">
-				<ibm-breadcrumb-item href="#1" class="navigation">
+				<ibm-breadcrumb-item href="#" class="navigation" (click)="navigateToDashboard()">
 					Activity Dashboard
 				</ibm-breadcrumb-item>
 			</ibm-breadcrumb>

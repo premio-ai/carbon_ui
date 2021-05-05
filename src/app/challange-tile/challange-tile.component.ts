@@ -12,7 +12,7 @@ export class ChallangeTileComponent implements OnInit {
 
   ngOnInit() {
     console.log("challange ..... ", this.challange)
-  
+    
   }
 
   getDate(time) {
