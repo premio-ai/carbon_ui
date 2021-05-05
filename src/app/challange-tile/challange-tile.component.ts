@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { RequestService } from '../request.service';
 
 @Component({
   selector: 'app-challange-tile',
@@ -8,7 +9,13 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ChallangeTileComponent implements OnInit {
 
   @Input() challange: any;
-  constructor() { }
+  // constructor() { }
+
+  constructor(private requestService: RequestService,
+    // private router: Router
+    ) { }
+  activeChallenges: any[];
+  pastChallenges: any[];
 
   ngOnInit() {
     console.log("challange ..... ", this.challange)
@@ -18,5 +25,16 @@ export class ChallangeTileComponent implements OnInit {
     time = parseInt(time);
     let dt = new Date(time);
     return dt.getDate() + "/" + dt.getMonth() + "/" + dt.getFullYear();
+  }
+
+  viewChalange() {
+    console.log("---view challenge btn click---")
+
+    let challengeUrl = '/challenge/:challengeId';
+    this.requestService.get(challengeUrl).subscribe(data => {
+      console.log("active challange ... ", data)
+      this.activeChallenges = data;
+    })
+
   }
 }
