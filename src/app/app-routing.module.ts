@@ -5,7 +5,7 @@ import { ChallangePageComponent } from './challange-page/challange-page.componen
 import { InsurerComponent } from './insurer/insurer.component';
 import { ModelReportComponent } from './model-report/model-report.component';
 import { PreviewComponent } from './preview/preview.component';
-
+import { InvDashboradComponent } from './inv-dashborad/inv-dashborad.component';
 const routes: Routes = [
 	// {
 	// 	path: '',
@@ -16,9 +16,10 @@ const routes: Routes = [
 		loadChildren: () => import('./repositories/repositories.module').then(m => m.RepositoriesModule)
 	},
 	{ path: '', component: DashboardComponent },
+	{ path: 'inv/:dash', component: InvDashboradComponent },
 	{ path: 'challenge', component: ChallangePageComponent },
 	{ path: 'challenge/:id', component: InsurerComponent },
-	// { path: 'Insurer', component: InsurerComponent },
+	//  { path: 'Insurer', component: InsurerComponent },
 	{ path: 'ModelReport', component: ModelReportComponent },
 	{ path: 'Previewpage', component: PreviewComponent },
 	{

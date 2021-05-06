@@ -1,0 +1,54 @@
+.para{
+    margin-top: 40px;
+}
+.heading{
+    margin-top: 10px;
+margin-bottom: 10px;
+}
+
+a.bx--tabs__nav-link {
+    border-bottom: 3px solid #e0e0e0;
+    padding: 0.5rem 1rem;
+    width: 6rem !important;
+    margin: 0;
+    line-height: inherit;
+}
+.bx--tabs__nav--hidden {
+    display: flex;
+    transition: inherit;
+    overflow: visible;
+    width: 6rem !important;
+    max-height: none;
+}
+
+tabs{
+    width: 6rem;
+}
+
+.gridhead{
+    font-size: 13px;
+}
+.custom-class-example{
+    font-size: 10px;
+    padding-bottom : 15px;
+}
+
+.btn{
+    width: 10px;
+ margin: auto;
+ display: flex;
+ margin-left: 30px;
+ margin-top:20px !important;
+}
+.date{
+    font-size: 10px;
+    margin-left: 10px;
+    margin-top: 20px;
+    margin-bottom: -26px;
+}
+
+.tags{
+    margin: auto;
+    display: flex;
+    margin-right: 0px;
+}

@@ -58,6 +58,8 @@ import { ActivityComponent } from "./activity/activity.component";
 import { ModelComponent } from "./model/model.component";
 import { ModelReportComponent } from "./model-report/model-report.component";
 import { PreviewComponent } from './preview/preview.component';
+import { InvDashboradComponent } from './inv-dashborad/inv-dashborad.component';
+import { InvChallengeTileComponent } from './inv-challenge-tile/inv-challenge-tile.component';
 
 @NgModule({
 	declarations: [
@@ -80,6 +82,10 @@ import { PreviewComponent } from './preview/preview.component';
 		ModelReportComponent,
 
 		PreviewComponent,
+
+		InvDashboradComponent,
+
+		InvChallengeTileComponent,
 	],
 	imports: [
 		BrowserModule,
