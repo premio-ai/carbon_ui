@@ -18,7 +18,7 @@
       <h6>Model Comparison</h6>
       <p>(compareModel) models selected</p>
       <br />
-      <button class="btn" [ibmButton]="ibmButton" [size]="size" (click)="compareModels()">Compare</button>
+      <button class="btn-compare" [ibmButton]="ibmButton" [size]="size" (click)="compareModels()">Compare</button>
     </div>
   </div>
 
@@ -51,7 +51,7 @@
                     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
                       <ibm-checkbox [hideLabel]="hideLabel" (change)="onChange($event, data._id)"
                         style="margin-left: 150px; margin-top: -50px;"></ibm-checkbox>
-                      <div class="content" style="margin-left: 140px;">
+                      <div class="content" style="margin-left: 140px; margin-top: 10px;">
                         <p class="unbold">Phase 1</p>
                         <p class="nobold">55</p>
                       </div>
