@@ -51,7 +51,7 @@
                     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
                       <ibm-checkbox [hideLabel]="hideLabel" (change)="onChange($event, data._id)"
                         style="margin-left: 150px; margin-top: -50px;"></ibm-checkbox>
-                      <div class="content" style="margin-left: 140px; margin-top: 10px;">
+                      <div class="content" style="margin-left: 140px; margin-top: 3px;">
                         <p class="unbold">Phase 1</p>
                         <p class="nobold">55</p>
                       </div>
@@ -81,7 +81,7 @@
     </ibm-tabs>
   </div>
 
-  <table *ngIf="modelComparison" class="bx--data-table" style="display: (modelComparison)">
+  <table *ngIf="modelComparison" class="bx--data-table">
     <thead>
       <tr>
         <th>
@@ -99,7 +99,9 @@
       </tr>
       <tr>
         <td>Model discription</td>
-        <td *ngFor="let model of compareModelData">{{model.modelDescription}}</td>
+        <td *ngFor="let model of compareModelData">{{model.modelDescription}}
+          <p (click)="readMore()"><span [ngClass]="readmore ? 'readmore02' : 'readmore01' ">Read More</span></p>
+        </td>
       </tr>
       <tr>
         <td>Model Approach</td>

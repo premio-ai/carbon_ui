@@ -16,6 +16,7 @@ export class ModelComponent {
   phaseId: any
   compareModelData: any[] = []
   modelComparison: boolean
+  readmore: boolean
 
   // ngOnInit() {
   //   this.makeModelData()
@@ -49,16 +50,7 @@ export class ModelComponent {
   }
 
   onChange(e, id) {
-
-    console.log(e, id, "---id----52")
-
     let tempData = [...this.compareModelData]
-    // this.modelData.find( dt => {
-    //   if (dt._id == id) {
-    //     tempData.push(dt)
-    //   }
-    // })
-
     let ids = tempData.map(dt => {
       return dt._id
     })
@@ -76,17 +68,19 @@ export class ModelComponent {
         return false
       }
     })
-
-    console.log(tempData, "---tempData---56")
-
-    // console.log(temp, "---temp---82")
     this.compareModelData = temp
-
-    console.log(this.compareModelData, "---this.compareModelData---60")
   }
 
   compareModels() {
-    this.modelComparison = true
+    if (this.compareModelData.length > 1) {
+      this.modelComparison = true
+    }
+  }
+
+  readMore() {
+    console.log(this.readmore, "---this.readmore---81")
+    this.readmore = true
+    console.log(this.readmore, "---this.readmore---83")
   }
 
 }
