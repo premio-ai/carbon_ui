@@ -5,22 +5,22 @@
 
 			<br />
 			<ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-				Data Description
-				<textarea style="width: 90%" ibmTextArea [placeholder]="placeholder" [invalid]="invalid"
+				Data Description<p style="margin-left: 360px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">0/100</p>
+				<textarea style="width: 90%" ibmTextArea  [invalid]="invalid"
 					[(ngModel)]="stepTwo.description" [theme]="theme" [rows]="5" [cols]="cols"
 					aria-label="textarea"></textarea>
 			</ibm-label>
 			<br />
 			<ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-				Data Usage Guidence
-				<textarea style="width: 90%" ibmTextArea [placeholder]="placeholder" [invalid]="invalid"
+				Data Usage Guidence<p style="margin-left: 360px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">0/100</p>
+				<textarea style="width: 90%" ibmTextArea  [invalid]="invalid"
 					[(ngModel)]="stepTwo.guidence" [theme]="theme" [rows]="3" [cols]="cols"
 					aria-label="textarea"></textarea>
 			</ibm-label>
 
 			<br />
 
-			<ibm-number [label]="'Minimum Model score'" [helperText]="''" [min]="0" [(ngModel)]="stepTwo.score">
+			<ibm-number [label]="'Minimum Model Score'" [helperText]="''" [min]="0" [(ngModel)]="stepTwo.score">
 			</ibm-number>
 
 
@@ -57,7 +57,7 @@
 						Previous
 					</button>
 					<button class="Step2btn_next" [ibmButton]="ibmButton" [size]="size" (click)="next()">
-						next
+						Next
 					</button>
 				</div>
 			</div>

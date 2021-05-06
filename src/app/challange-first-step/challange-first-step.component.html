@@ -1,46 +1,48 @@
 <div ibmGrid [condensed]="gridCondensed">
     <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
         <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
-            <h3>Challange Overview</h3>
+            <h3>Challenge Overview</h3>
 
             <br />
             <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-                <textarea style="width: 90%" ibmTextArea [placeholder]="placeholder" [invalid]="invalid"
+                Challenge Title <p style="margin-left: 360px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">0/50</p>
+                <textarea style="width: 90%" ibmTextArea  [invalid]="invalid"
                     [disabled]="disabled" [theme]="theme" [rows]="1" [cols]="cols" aria-label="textarea"
                     [(ngModel)]="stepOne.title"></textarea>
                     
             </ibm-label>
             <br />
             <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-                Challange Description
-                <textarea style="width: 90%" ibmTextArea [placeholder]="placeholder" [invalid]="invalid"
+                Challenge Description<p style="margin-left: 360px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">0/500</p>
+                <textarea style="width: 90%" ibmTextArea  [invalid]="invalid"
                     [disabled]="disabled" [theme]="theme" [rows]="5" [cols]="cols" aria-label="textarea"
                     [(ngModel)]="stepOne.description"></textarea>
             </ibm-label>
             <br />
             <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-                Challange Objective
-                <textarea style="width: 90%" ibmTextArea [placeholder]="placeholder" [invalid]="invalid"
+                Challenge Objectives<p style="margin-left: 360px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">0/100</p>
+                <textarea style="width: 90%" ibmTextArea  [invalid]="invalid"
                 [(ngModel)]="stepOne.objective" [disabled]="disabled" [theme]="theme" [rows]="3" [cols]="cols" aria-label="textarea"></textarea>
             </ibm-label>
         
             <br />
             <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-                Challange End Date
-                <textarea style="width: 10%" ibmTextArea [placeholder]="placeholder" [invalid]="invalid"
+                Challenge End Date
+                <textarea style="width: 10%" ibmTextArea  [invalid]="invalid"
                 [(ngModel)]="stepOne.endDate" [disabled]="disabled" [theme]="theme" [rows]="1" [cols]="1" aria-label="textarea"></textarea>
             </ibm-label>
         </div>
         
         <div ibmCol class="custom-class-example1" [columnNumbers]="{ md: 4, sm: 12 }">
-            <h3>Company info</h3>
+            <h3>Company Info</h3>
             <br />
-            <h5>Direct line Insaurance</h5>
+            <h5>Direct Line Insaurance</h5>
         
             <p class="praa">
-                since we launched in 1985, our aim at Dircect line's has
+                Since we launched in 1985, our aim at Dircect line's has
                 alwasy been to put the customer first.
             </p>
+            <br/>
             <p class="praa">
                 Lorem Ipsum is simply dummy text of the printing and
                 typesetting industry. Lorem Ipsum has been the industry's

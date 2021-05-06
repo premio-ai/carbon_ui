@@ -7,10 +7,11 @@
 				The challenge will only be visible to innovators with these qualifications:
 			</p>
 			<br />
-			<p>Points Earned</p>
+			<h5>Points Earned</h5>
 			<div ibmGrid [condensed]="gridCondensed" style="padding-left: 15px;">
 				<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
 					<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
+						<p style="color: gray;font-size: 12px;">Min</p>
 						<ibm-number [label]="Min" [helperText]="[helperText]" [theme]="light" [min]="0" [max]="10"
 						[(ngModel)]="stepThree.minEarnedPoint" [invalid]="false" [invalidText]="invalidText" [disabled]="false">
 						</ibm-number>
@@ -19,6 +20,7 @@
 					<p class="to">to</p>
 					<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }"></div>
 					<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
+						<p style="color: gray;font-size: 12px;">Max</p>
 						<ibm-number [label]="Max" [helperText]="[helperText]" [theme]="light" [min]="0" [max]="10"
 						[(ngModel)]="stepThree.maxEarnedPoint" [invalid]="false" [invalidText]="invalidText" [disabled]="false">
 						</ibm-number>
@@ -26,7 +28,7 @@
 				</div>
 			</div>
 			<br />
-			<p>Challenges Invloves in</p>
+			<h5>Challenges Invloves in</h5>
 			<div ibmGrid [condensed]="gridCondensed" style="padding-left: 15px;">
 				<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
 					<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
@@ -38,6 +40,7 @@
 					<p class="to">to</p>
 					<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }"></div>
 					<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
+						<p style="color: gray;font-size: 12px;">Max</p>
 						<ibm-number [label]="label" [helperText]="[helperText]" [theme]="light" [min]="0" [max]="10"
 						[(ngModel)]="stepThree.maxChallangeInvolved" [(ngModel)]="stepThree.maxChallangeInvolved" [invalid]="false" [invalidText]="invalidText"
 							[disabled]="false">
