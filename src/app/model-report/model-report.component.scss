@@ -53,8 +53,8 @@
 
 .toaster{
     display: flex;
-    margin: auto;
-    margin-left: 194px;
+   
+    margin-left: auto;
     margin-top: -28px;
     height: 60px;
 
@@ -62,4 +62,15 @@
 
 .test{
     font-weight: 550;
+}
+
+.bx--tile {
+    display: block;
+    min-width: 19rem;
+    min-height: 4rem;
+    background-color: #f4f4f4;
+    position: relative;
+    padding: 1rem;
+    outline: 2px solid transparent;
+    outline-offset: -2px;
 }

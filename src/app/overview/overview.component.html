@@ -10,6 +10,7 @@
 			ibmCol
 			class="custom-class-example"
 			[columnNumbers]="{ md: 6, sm: 12 }"
+			style="margin-left: 20px;"
 		>
 		<br />
 			<h3>Challenge Info</h3>
@@ -24,8 +25,9 @@
 				Lorem Ipsum is simply dummy text of the printing and typesetting
 				industry. Lorem Ipsum has been the industry's standard dummy
 				text ever since the 1500s, when an unknown printer took a galley
-				of type and scrambled
+				
 			</p>
+			<br />
 		</div>
 		<br />
 
@@ -48,8 +50,8 @@
 			[columnNumbers]="{ md: 8, sm: 12 }"
 		>
 			<ibm-tile>
-				Phase 0
-
+			<p style="font-size: 18px;">	Phase 0</p>
+<br /><br />
 				<div ibmGrid [condensed]="gridCondensed">
 					<div
 						ibmRow
@@ -62,17 +64,26 @@
 							ibmCol
 							class="custom-class-example"
 							[columnNumbers]="{ md: 2, sm: 12 }"
+							style="margin-left: 20px;"
 						>
-							Users accepted <br /><br />
-							430
+						<p class="date" style="display: flex; align-items: center">
+							<svg icon ibmIconTime16></svg>
+							<span>Users accepted  </span>
+						</p>
+							<br />
+							<p style="margin-left: 12px;">430</p>
 						</div>
 						<div
 							ibmCol
 							class="custom-class-example"
 							[columnNumbers]="{ md: 2, sm: 12 }"
 						>
-							Data Set Download <br /><br />
-							350
+						<p class="date" style="display: flex; align-items: center">
+							<svg icon ibmIconTime16></svg>
+							<span>Data Set Download  </span>
+						</p>
+							 <br />
+							 <p style="margin-left: 12px;">350</p>
 						</div>
 					</div>
 				</div>
@@ -105,25 +116,64 @@
 				"
 			>
 				<ibm-tile class="tiles">
-					Phase 1
+					<p style="font-size: 18px;">	Phase 1</p>
 					<br />
-					<p>model Upload</p>
-					<p>300</p>
+					<h6 class="date" style="display: flex; align-items: center">
+						<svg icon ibmIconTime16></svg>
+						<span>Models Uploaded  </span>				
+					</h6>
+					<p style="margin-left: 12px;">300</p>
+					
 					<br />
-					<p>model trained & tested</p>
-					<p>300</p>
+					<h6 class="date" style="display: flex; align-items: center">
+						<svg icon ibmIconTime16></svg>
+						<span>Models trained & tested</span>				
+					</h6>
+					
+					<p style="margin-left: 12px;">280</p>
 					<br />
-					<p>model passed Scoring</p>
-					<p>180</p>
+					<h6 class="date" style="display: flex; align-items: center">
+						<svg icon ibmIconTime16></svg>
+						<span>Models passed Scoring</span>				
+					</h6>
+					
+					<p style="margin-left: 12px;">180</p>
 					<br />
-					<p>Ordered List</p>
-					<ol ibmList>
-						<li ibmListItem>Beian Doe</li>
-						<li ibmListItem>Samuel jackson</li>
-						<li ibmListItem>Maria santa</li>
-						<li ibmListItem>Beian Doe</li>
-						<li ibmListItem>Samuel jackson</li>
-					</ol>
+					<h6 class="date" style="display: flex; align-items: center">
+						<svg icon ibmIconTime16></svg>
+						<span>Top 5 performing models</span>				
+					</h6>
+					<br />
+					<div ibmGrid [condensed]="gridCondensed">
+						<div
+							ibmRow
+							[gutter]="gutter"
+							[leftGutter]="leftGutter"
+							[rightGutter]="rightGutter"
+							[condensed]="rowCondensed"
+							style="margin-left: 25px;"
+							>
+							  <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 6, 'sm': 12}"><ol ibmList >
+								<li ibmListItem style="color: blue;">Beian Doe</li>
+								<li ibmListItem style="color: blue;">Samuel jackson</li>
+								<li ibmListItem style="color: blue;">Maria santa</li>
+								<li ibmListItem style="color: blue;">Beian Doe</li>
+								<li ibmListItem style="color: blue;"> Samuel jackson</li>
+							</ol></div>
+							<div ibmCol class="custom-class-example" [columnNumbers]="{'md': 2, 'sm': 12}">
+								<div>
+									<div><p style="font-size: 13px;">96</p></div>
+									<div><p style="font-size: 13px;">95</p></div>
+									<div><p style="font-size: 13px;">93</p></div>
+									<div><p style="font-size: 13px;">93</p></div>
+									<div><p style="font-size: 13px;">95</p></div>
+								</div>
+							</div>
+							
+						</div>
+					 </div>
+
+					
 
 					<div ibmGrid [condensed]="gridCondensed">
 						<div
@@ -164,25 +214,64 @@
 				</ibm-tile>
 				&nbsp;&nbsp;
 				<ibm-tile class="tiles">
-					Phase 1
+					<p style="font-size: 18px;">	Phase 2</p>
 					<br />
-					<p>model Upload</p>
-					<p>300</p>
+					<h6 class="date" style="display: flex; align-items: center">
+						<svg icon ibmIconTime16></svg>
+						<span>Models Uploaded  </span>				
+					</h6>
+					<p style="margin-left: 12px;">180</p>
+					
 					<br />
-					<p>model trained & tested</p>
-					<p>300</p>
+					<h6 class="date" style="display: flex; align-items: center">
+						<svg icon ibmIconTime16></svg>
+						<span>Models trained & tested</span>				
+					</h6>
+					
+					<p style="margin-left: 12px;">113</p>
 					<br />
-					<p>model passed Scoring</p>
-					<p>180</p>
+					<h6 class="date" style="display: flex; align-items: center">
+						<svg icon ibmIconTime16></svg>
+						<span>Models passed Scoring</span>				
+					</h6>
+					
+					<p style="margin-left: 12px;">31</p>
 					<br />
-					<p>Ordered List</p>
-					<ol ibmList>
-						<li ibmListItem>Beian Doe</li>
-						<li ibmListItem>Samuel jackson</li>
-						<li ibmListItem>Maria santa</li>
-						<li ibmListItem>Beian Doe</li>
-						<li ibmListItem>Samuel jackson</li>
-					</ol>
+					<h6 class="date" style="display: flex; align-items: center">
+						<svg icon ibmIconTime16></svg>
+						<span>Top 5 performing models</span>				
+					</h6>
+					<br />
+					<div ibmGrid [condensed]="gridCondensed">
+						<div
+							ibmRow
+							[gutter]="gutter"
+							[leftGutter]="leftGutter"
+							[rightGutter]="rightGutter"
+							[condensed]="rowCondensed"
+							style="margin-left: 25px;"
+							>
+							  <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 6, 'sm': 12}"><ol ibmList >
+								<li ibmListItem style="color: blue;">Beian Doe</li>
+								<li ibmListItem style="color: blue;">Samuel jackson</li>
+								<li ibmListItem style="color: blue;">Maria santa</li>
+								<li ibmListItem style="color: blue;">Beian Doe</li>
+								<li ibmListItem style="color: blue;"> Samuel jackson</li>
+							</ol></div>
+							<div ibmCol class="custom-class-example" [columnNumbers]="{'md': 2, 'sm': 12}">
+								<div>
+									<div><p style="font-size: 13px;">96</p></div>
+									<div><p style="font-size: 13px;">95</p></div>
+									<div><p style="font-size: 13px;">93</p></div>
+									<div><p style="font-size: 13px;">93</p></div>
+									<div><p style="font-size: 13px;">95</p></div>
+								</div>
+							</div>
+							
+						</div>
+					 </div>
+
+					
 
 					<div ibmGrid [condensed]="gridCondensed">
 						<div
@@ -211,7 +300,7 @@
 								[columnNumbers]="{ md: 4, sm: 12 }"
 							>
 								<button
-								class="model"
+									class="model"
 									[ibmButton]="ibmButton"
 									[size]="size"
 								>
@@ -223,25 +312,64 @@
 				</ibm-tile>
 				&nbsp;&nbsp;
 				<ibm-tile class="tiles">
-					Phase 1
+					<p style="font-size: 18px;">	Phase 3</p>
 					<br />
-					<p>model Upload</p>
-					<p>300</p>
+					<h6 class="date" style="display: flex; align-items: center">
+						<svg icon ibmIconTime16></svg>
+						<span>Models Uploaded  </span>				
+					</h6>
+					<p style="margin-left: 12px;">300</p>
+					
 					<br />
-					<p>model trained & tested</p>
-					<p>300</p>
+					<h6 class="date" style="display: flex; align-items: center">
+						<svg icon ibmIconTime16></svg>
+						<span>Models trained & tested</span>				
+					</h6>
+					
+					<p style="margin-left: 12px;">280</p>
 					<br />
-					<p>model passed Scoring</p>
-					<p>180</p>
+					<h6 class="date" style="display: flex; align-items: center">
+						<svg icon ibmIconTime16></svg>
+						<span>Models passed Scoring</span>				
+					</h6>
+					
+					<p style="margin-left: 12px;">180</p>
 					<br />
-					<p>Ordered List</p>
-					<ol ibmList>
-						<li ibmListItem>Beian Doe</li>
-						<li ibmListItem>Samuel jackson</li>
-						<li ibmListItem>Maria santa</li>
-						<li ibmListItem>Beian Doe</li>
-						<li ibmListItem>Samuel jackson</li>
-					</ol>
+					<h6 class="date" style="display: flex; align-items: center">
+						<svg icon ibmIconTime16></svg>
+						<span>Top 5 performing models</span>				
+					</h6>
+					<br />
+					<div ibmGrid [condensed]="gridCondensed">
+						<div
+							ibmRow
+							[gutter]="gutter"
+							[leftGutter]="leftGutter"
+							[rightGutter]="rightGutter"
+							[condensed]="rowCondensed"
+							style="margin-left: 25px;"
+							>
+							  <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 6, 'sm': 12}"><ol ibmList >
+								<li ibmListItem style="color: blue;">Beian Doe</li>
+								<li ibmListItem style="color: blue;">Samuel jackson</li>
+								<li ibmListItem style="color: blue;">Maria santa</li>
+								<li ibmListItem style="color: blue;">Beian Doe</li>
+								<li ibmListItem style="color: blue;"> Samuel jackson</li>
+							</ol></div>
+							<div ibmCol class="custom-class-example" [columnNumbers]="{'md': 2, 'sm': 12}">
+								<div>
+									<div><p style="font-size: 13px;">96</p></div>
+									<div><p style="font-size: 13px;">95</p></div>
+									<div><p style="font-size: 13px;">93</p></div>
+									<div><p style="font-size: 13px;">93</p></div>
+									<div><p style="font-size: 13px;">95</p></div>
+								</div>
+							</div>
+							
+						</div>
+					 </div>
+
+					
 
 					<div ibmGrid [condensed]="gridCondensed">
 						<div
@@ -260,7 +388,6 @@
 									class="view"
 									[ibmButton]="ibmButton"
 									[size]="size"
-									
 								>
 									View Activity
 								</button>
@@ -271,7 +398,7 @@
 								[columnNumbers]="{ md: 4, sm: 12 }"
 							>
 								<button
-								class="model"
+									class="model"
 									[ibmButton]="ibmButton"
 									[size]="size"
 								>
