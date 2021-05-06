@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-overview',
@@ -7,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OverviewComponent implements OnInit {
 
+  @Input() challengeDetails: any;
   constructor() { }
 
   ngOnInit() {
   }
-
+  
 }

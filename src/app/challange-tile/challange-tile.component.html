@@ -127,13 +127,8 @@
 				<span> {{ getDate(challange?.createdAt) }} </span>
 			</p>
 		</div>
-		<div
-			ibmCol
-			class="custom-class-example"
-			style="margin-bottom: -31px"
-			[columnNumbers]="{ md: 1, sm: 12 }"
-		>
-			<button class="btn" [ibmButton]="primary" [size]="'sm'">
+		<div ibmCol class="custom-class-example" style="margin-bottom: -31px;" [columnNumbers]="{ md: 1, sm: 12 }">
+			<button class="btn" [ibmButton]="primary" [size]="'sm'" (click)="viewChalange( challange?._id )" >
 				View
 			</button>
 		</div>

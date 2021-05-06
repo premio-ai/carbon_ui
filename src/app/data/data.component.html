@@ -12,20 +12,8 @@
     <li ibmListItem>Nullam suscipit magna ac vestibulum sodales</li>
 </ul>
 <br/><br/>
-<h6>Data visuals</h6>
-<br/><br/>
 <ibm-accordion >
-    <ibm-accordion-item title="Phase 1 - Training & Test Data" (selected)="selected($event)">Lorem ipsum dolor sit amet, \
-    consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore \
-    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation \
-    ullamco laboris nisi ut aliquip ex ea commodo consequat.</ibm-accordion-item>
-    <ibm-accordion-item title="Phase 2 - Training & Test Data" (selected)="selected($event)">Lorem ipsum dolor sit amet, \
-    consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore \
-    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation \
-    ullamco laboris nisi ut aliquip ex ea commodo consequat.</ibm-accordion-item>
-   
-    <ibm-accordion-item title="Phase 3 - Training & Test Data" (selected)="selected($event)">Lorem ipsum dolor sit amet, \
-    consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore \
-    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation \
-    ullamco laboris nisi ut aliquip ex ea commodo consequat.</ibm-accordion-item>
+    <div *ngFor="let phase of challengeDetails.phases; index as i">
+        <ibm-accordion-item title="Phase {{i}}" (selected)="selected($event)">{{ phase?.description }}</ibm-accordion-item>
+    </div>
 </ibm-accordion>
