@@ -12,20 +12,20 @@
 </div>
 <br /><br />
 
-<!-- <div ibmGrid [condensed]="gridCondensed">
+<div ibmGrid [condensed]="gridCondensed">
   <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
     <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 2, 'sm': 12}">
       <h6>Model Comparison</h6>
       <p>(compareModel) models selected</p>
-      <br/>
+      <br />
       <button class="btn" [ibmButton]="ibmButton" [size]="size" (click)="compareModels()">Compare</button>
     </div>
-  </div> -->
+  </div>
 
   <br /><br />
-<div style="display: flex;">
-  <ibm-tabs [followFocus]="followFocus" [isNavigation]="isNavigation" [cacheActive]="cacheActive">
-    <ibm-tab heading="All">
+  <div style="display: flex;">
+    <ibm-tabs [followFocus]="followFocus" [isNavigation]="isNavigation" [cacheActive]="cacheActive">
+      <ibm-tab heading="All">
         <div ibmGrid [condensed]="gridCondensed" style="margin-left: -5px;">
           <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
             [condensed]="rowCondensed">
@@ -49,7 +49,7 @@
                       <p class="para">{{data.modelDescription}}</p>
                     </div>
                     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-                      <ibm-checkbox [hideLabel]="hideLabel" (change)="onChange($event)" (click)="selectModel(data._id)"
+                      <ibm-checkbox [hideLabel]="hideLabel" (change)="onChange($event, data._id)"
                         style="margin-left: 150px; margin-top: -50px;"></ibm-checkbox>
                       <div class="content" style="margin-left: 140px;">
                         <p class="unbold">Phase 1</p>
@@ -76,101 +76,58 @@
             </div>
           </div>
         </div>
-    </ibm-tab>
-    <ibm-tab heading="Bookmarked">Bookmarked</ibm-tab>
-  </ibm-tabs>
-</div>
+      </ibm-tab>
+      <ibm-tab heading="Bookmarked">Bookmarked</ibm-tab>
+    </ibm-tabs>
+  </div>
 
-<!-- <div>
-
-  <table class="bx--data-table" *ngFor="let model of compareModelData">
+  <table *ngIf="modelComparison" class="bx--data-table" style="display: (modelComparison)">
     <thead>
       <tr>
         <th>
           <span class="bx--table-header-label"></span>
         </th>
-        <th>
+        <th *ngFor="let model of compareModelData">
           <span class="bx--table-header-label">{{model.mlFlowId}}</span>
         </th>
       </tr>
     </thead>
     <tbody>
-
-      <tr *ngFor="let model of compareModelData; let i = index">
-        <th *ngFor="let objKey of _object.values(model); let j = index">{{ model[objKey] }} </th>
-      </tr>
-
       <tr>
-        <td>
-          Innovator
-        </td>
-        <td>
-          {{model.innovatorId.fullName}}
-        </td>
+        <td>Innovator</td>
+        <td *ngFor="let model of compareModelData">{{model.innovatorId.fullName}}</td>
       </tr>
       <tr>
-        <td>
-          Model discription
-        </td>
-        <td>
-{{model.modelDescription}}
-        </td>
+        <td>Model discription</td>
+        <td *ngFor="let model of compareModelData">{{model.modelDescription}}</td>
       </tr>
       <tr>
-        <td>
-          Model Approach
-        </td>
-        <td>
-{{model.approch}}
-        </td>
+        <td>Model Approach</td>
+        <td *ngFor="let model of compareModelData">{{model.approch}}</td>
       </tr>
       <tr>
-        <td>
-          model language
-        </td>
-        <td>
-          python
-        </td>
+        <td>Model Language</td>
+        <td *ngFor="let model of compareModelData">python</td>
       </tr>
       <tr>
-        <td>
-          model Score
-        </td>
-        <td>
-{{model.score}}
-</td>
+        <td>Model Score</td>
+        <td *ngFor="let model of compareModelData">{{model.score}}</td>
       </tr>
       <tr>
-        <td>
-          Accuracy
-        </td>
-        <td>
-{{model.precisionScore}}
-        </td>
+        <td>Accuracy</td>
+        <td *ngFor="let model of compareModelData">{{model.precisionScore}}</td>
       </tr>
       <tr>
-        <td>
-          Recall
-        </td>
-        <td>
-          {{model.recallScore}}
-        </td>
+        <td>Recall</td>
+        <td *ngFor="let model of compareModelData">{{model.recallScore}}</td>
       </tr>
       <tr>
-        <td>
-          precision
-        </td>
-        <td>
-{{model.precisionScore}}
-        </td>
+        <td>Precision</td>
+        <td *ngFor="let model of compareModelData">{{model.precisionScore}}</td>
       </tr>
       <tr>
-        <td>
-          Test Time
-        </td>
-        <td>
-          90
-        </td>
+        <td>Test Time</td>
+        <td *ngFor="let model of compareModelData">90</td>
       </tr>
     </tbody>
     <tr>
@@ -189,56 +146,32 @@
     </tr>
     <tbody>
       <tr>
-        <td>
-          model language
-        </td>
-        <td>
-          python
-        </td>
+        <td>Model Language</td>
+        <td *ngFor="let model of compareModelData">python</td>
       </tr>
       <tr>
-        <td>
-          model Score
-        </td>
-        <td>
-          {{model.score}}
-        </td>
+        <td>Model Score</td>
+        <td *ngFor="let model of compareModelData">{{model.score}}</td>
       </tr>
       <tr>
-        <td>
-          Accuracy
-        </td>
-        <td>
-80
-        </td>
+        <td>Accuracy</td>
+        <td *ngFor="let model of compareModelData">80</td>
       </tr>
       <tr>
-        <td>
-          Recall
-        </td>
-        <td>
-          {{model.recallScore}}
-        </td>
+        <td>Recall</td>
+        <td *ngFor="let model of compareModelData">{{model.recallScore}}</td>
       </tr>
       <tr>
-        <td>
-          precision
-        </td>
-        <td>
-{{model.precisionScore}}
-        </td>
+        <td>Precision</td>
+        <td *ngFor="let model of compareModelData">{{model.precisionScore}}</td>
       </tr>
       <tr>
-        <td>
-          Test Time
-        </td>
-        <td>
-          90
-        </td>
+        <td>Test Time</td>
+        <td *ngFor="let model of compareModelData">90</td>
       </tr>
     </tbody>
   </table>
 
-</div> -->
+  <!-- <Pagination /> -->
 
-<!-- Pagination -->
+</div>
