@@ -1,31 +1,10 @@
 <div ibmGrid [condensed]="gridCondensed">
-	<div
-		ibmRow
-		[gutter]="gutter"
-		[leftGutter]="leftGutter"
-		[rightGutter]="rightGutter"
-		[condensed]="rowCondensed"
-	>
-		<div
-			ibmCol
-			class="custom-class-example"
-			[columnNumbers]="{ md: 6, sm: 12 }"
-		>
-		<br />
-			<h3>Challenge info</h3>
-			<p>
-				Lorem Ipsum is simply dummy text of the printing and typesetting
-				industry. Lorem Ipsum has been the industry's standard dummy
-				text ever since the 1500s, when an unknown printer took a galley
-				of type and scrambled
-			</p>
+	<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed" >
+		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 6, sm: 12 }" >
 			<br />
-			<p>
-				Lorem Ipsum is simply dummy text of the printing and typesetting
-				industry. Lorem Ipsum has been the industry's standard dummy
-				text ever since the 1500s, when an unknown printer took a galley
-				of type and scrambled
-			</p>
+			<h3>Challenge info</h3>
+			<p> {{ challengeDetails?.description }} </p>
+			<br />
 		</div>
 		<br />
 
@@ -35,86 +14,32 @@
 </div>
 
 <div ibmGrid [condensed]="gridCondensed">
-	<div
-		ibmRow
-		[gutter]="gutter"
-		[leftGutter]="leftGutter"
-		[rightGutter]="rightGutter"
-		[condensed]="rowCondensed"
-	>
-		<div
-			ibmCol
-			class="custom-class-example"
-			[columnNumbers]="{ md: 7, sm: 12 }"
-		>
+	<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed" >
+		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 7, sm: 12 }" >
 			<ibm-tile>
 				Phase 0
-
 				<div ibmGrid [condensed]="gridCondensed">
-					<div
-						ibmRow
-						[gutter]="gutter"
-						[leftGutter]="leftGutter"
-						[rightGutter]="rightGutter"
-						[condensed]="rowCondensed"
-					>
-						<div
-							ibmCol
-							class="custom-class-example"
-							[columnNumbers]="{ md: 2, sm: 12 }"
-						>
-							Users accepted <br /><br />
-							430
-						</div>
-						<div
-							ibmCol
-							class="custom-class-example"
-							[columnNumbers]="{ md: 2, sm: 12 }"
-						>
-							Data Set Download <br /><br />
-							350
-						</div>
+					<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed" >
+						<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }" >Users accepted <br /><br />430</div>
+						<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }" >Data Set Download <br /><br />350</div>
 					</div>
 				</div>
-
-				<button class="btn" [ibmButton]="ibmButton" [size]="size">
-					View Activity
-				</button>
+				<button class="btn" [ibmButton]="ibmButton" [size]="size">View Activity</button>
 			</ibm-tile>
 			<br /><br />
 		</div>
 	</div>
-	<div
-		ibmRow
-		[gutter]="gutter"
-		[leftGutter]="leftGutter"
-		[rightGutter]="rightGutter"
-		[condensed]="rowCondensed"
-	>
-		<div
-			ibmCol
-			class="custom-class-example"
-			[columnNumbers]="{ md: 8, sm: 12 }"
-		>
-			<div
-				style="
-					display: flex;
-					flex-flow: row wrap;
-					justify-content: space-around;
-				"
-			>
-				<ibm-tile class="tiles">
-					Phase 1
-					<br />
+	<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 8, sm: 12 }" >
+			<div style="display: flex; flex-flow: row wrap; justify-content: space-around;"
+			*ngFor="let phase of challengeDetails.phases; index as i" >
+				<ibm-tile class="tiles">Phase {{i+1}}<br />
 					<p>model Upload</p>
-					<p>300</p>
-					<br />
+					<p>300</p><br />
 					<p>model trained & tested</p>
-					<p>300</p>
-					<br />
+					<p>300</p><br />
 					<p>model passed Scoring</p>
-					<p>180</p>
-					<br />
+					<p>{{phase?.minimumModelScore}}</p><br />
 					<p>Ordered List</p>
 					<ol ibmList>
 						<li ibmListItem>Beian Doe</li>
@@ -125,54 +50,24 @@
 					</ol>
 
 					<div ibmGrid [condensed]="gridCondensed">
-						<div
-							ibmRow
-							[gutter]="gutter"
-							[leftGutter]="leftGutter"
-							[rightGutter]="rightGutter"
-							[condensed]="rowCondensed"
-						>
-							<div
-								ibmCol
-								class="custom-class-example"
-								[columnNumbers]="{ md: 4, sm: 12 }"
-							>
-								<button
-									class="view"
-									[ibmButton]="ibmButton"
-									[size]="size"
-								>
-									View Activity
-								</button>
+						<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
+								<button class="view" [ibmButton]="ibmButton" [size]="size" >View Activity</button>
 							</div>
-							<div
-								ibmCol
-								class="custom-class-example"
-								[columnNumbers]="{ md: 4, sm: 12 }"
-							>
-								<button
-									class="model"
-									[ibmButton]="ibmButton"
-									[size]="size"
-								>
-									View Model
-								</button>
+							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
+								<button class="model" [ibmButton]="ibmButton" [size]="size" >View Model</button>
 							</div>
 						</div>
 					</div>
 				</ibm-tile>
-				<ibm-tile class="tiles">
-					Phase 1
-					<br />
+
+				<!-- <ibm-tile class="tiles">Phase 1<br />
 					<p>model Upload</p>
-					<p>300</p>
-					<br />
+					<p>300</p><br />
 					<p>model trained & tested</p>
-					<p>300</p>
-					<br />
+					<p>300</p><br />
 					<p>model passed Scoring</p>
-					<p>180</p>
-					<br />
+					<p>180</p><br />
 					<p>Ordered List</p>
 					<ol ibmList>
 						<li ibmListItem>Beian Doe</li>
@@ -183,54 +78,24 @@
 					</ol>
 
 					<div ibmGrid [condensed]="gridCondensed">
-						<div
-							ibmRow
-							[gutter]="gutter"
-							[leftGutter]="leftGutter"
-							[rightGutter]="rightGutter"
-							[condensed]="rowCondensed"
-						>
-							<div
-								ibmCol
-								class="custom-class-example"
-								[columnNumbers]="{ md: 4, sm: 12 }"
-							>
-								<button
-									class="view"
-									[ibmButton]="ibmButton"
-									[size]="size"
-								>
-									View Activity
-								</button>
+						<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed" >
+							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }" >
+								<button class="view" [ibmButton]="ibmButton" [size]="size" >View Activity</button>
 							</div>
-							<div
-								ibmCol
-								class="custom-class-example"
-								[columnNumbers]="{ md: 4, sm: 12 }"
-							>
-								<button
-								class="model"
-									[ibmButton]="ibmButton"
-									[size]="size"
-								>
-									View Model
-								</button>
+							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }" >
+								<button class="model" [ibmButton]="ibmButton" [size]="size" >View Model</button>
 							</div>
 						</div>
 					</div>
 				</ibm-tile>
-				<ibm-tile class="tiles">
-					Phase 1
-					<br />
+
+				<ibm-tile class="tiles">Phase 1 <br />
 					<p>model Upload</p>
-					<p>300</p>
-					<br />
+					<p>300</p><br />
 					<p>model trained & tested</p>
-					<p>300</p>
-					<br />
+					<p>300</p><br />
 					<p>model passed Scoring</p>
-					<p>180</p>
-					<br />
+					<p>180</p><br />
 					<p>Ordered List</p>
 					<ol ibmList>
 						<li ibmListItem>Beian Doe</li>
@@ -241,42 +106,16 @@
 					</ol>
 
 					<div ibmGrid [condensed]="gridCondensed">
-						<div
-							ibmRow
-							[gutter]="gutter"
-							[leftGutter]="leftGutter"
-							[rightGutter]="rightGutter"
-							[condensed]="rowCondensed"
-						>
-							<div
-								ibmCol
-								class="custom-class-example"
-								[columnNumbers]="{ md: 4, sm: 12 }"
-							>
-								<button
-									class="view"
-									[ibmButton]="ibmButton"
-									[size]="size"
-								>
-									View Activity
-								</button>
+						<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }" >
+								<button class="view" [ibmButton]="ibmButton" [size]="size" >View Activity</button>
 							</div>
-							<div
-								ibmCol
-								class="custom-class-example"
-								[columnNumbers]="{ md: 4, sm: 12 }"
-							>
-								<button
-								class="model"
-									[ibmButton]="ibmButton"
-									[size]="size"
-								>
-									View Model
-								</button>
+							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
+								<button class="model" [ibmButton]="ibmButton" [size]="size">View Model</button>
 							</div>
 						</div>
 					</div>
-				</ibm-tile>
+				</ibm-tile> -->
 			</div>
 		</div>
 	</div>

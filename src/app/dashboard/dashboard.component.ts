@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
   pastChallenges: any[];
 
 
-  ngOnInit() {   //componentDidMount
+  ngOnInit() {
     this.getActiveChallanges();
     this.getpastChallanges();
   }
