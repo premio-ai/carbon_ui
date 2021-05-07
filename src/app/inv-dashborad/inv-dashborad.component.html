@@ -11,7 +11,7 @@
 				[invalid]="invalid"
 				[invalidText]="invalidText"
 				[theme]="theme"
-				placeholder="End Date"
+				placeholder="Most recent update"
 				[disabled]="disabled"
 				(selected)="selected($event)"
 				(onClose)="onClose($event)">
@@ -28,7 +28,8 @@
 					<div style="display: flex;flex-wrap: wrap;justify-content: space-between;" >
 						<div  class="custom-class-example"  style="width: 32%;"
 							*ngFor="let activeChallenge of activeChallenges">
-							<app-challange-tile [challange]="activeChallenge"></app-challange-tile>
+							
+						<app-inv-challenge-tile [challange]="activeChallenge"></app-inv-challenge-tile>
 						</div>
 					</div>
 				<br />
