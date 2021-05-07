@@ -9,9 +9,8 @@ import { Router } from '@angular/router';
 })
 export class ChallangePageComponent implements OnInit {
 
-
 	constructor(private requestService: RequestService,
-		router: Router) { }
+		private router: Router) { }
 
 	current: number;
 	steps: any[];
@@ -32,9 +31,7 @@ export class ChallangePageComponent implements OnInit {
 		submissionsCount: 0,
 		acceptedUsersCount: 0,
 		challengeType: string,
-		phases: [
-			any
-		],
+		phases: any[],
 		visibiltiy: {},
 		insurerId: string,
 		isActive: true
@@ -80,7 +77,7 @@ export class ChallangePageComponent implements OnInit {
 			submissionsCount: 0,
 			acceptedUsersCount: 0,
 			challengeType: "CONTRACT",
-			phases: [{}],
+			phases: [],
 			visibiltiy: {},
 			insurerId: this.insurerId,
 			isActive: true
@@ -94,33 +91,25 @@ export class ChallangePageComponent implements OnInit {
 	}
 
 	nextStepOne(stepOneData) {
-		console.log("stepOne ... ", stepOneData);
-
 		this.challange.title = stepOneData.title;
 		this.challange.description = stepOneData.description;
 		this.challange.Objective = stepOneData.objective;
 		this.challange.expiryDate = new Date(stepOneData.endDate).toDateString();
-
 		this.current++;
 	}
 
 	previousStepTwo() {
-
 		this.current--;
 	}
 
 	nextStepTwo(stepTwoData) {
-		let phase = {
-			description: stepTwoData.description,
-			usageGuidance: stepTwoData.guidence,
-			minimumModelScore: stepTwoData.score,
-		};
-		this.challange.phases = [phase];
-		this.current++
+		let phase = stepTwoData;
+		this.challange.phases = phase;
+		this.current++;
 	}
 
 	previousStepThree() {
-		this.current--
+		this.current--;
 	}
 
 	nextStepThree(stepThreeData) {
@@ -141,20 +130,15 @@ export class ChallangePageComponent implements OnInit {
 	}
 
 	previousStepFour() {
-		this.current--
+		this.current--;
 	}
 
 	nextStepFour() {
-		console.log("challangeData .. ", this.challange)
 		this.requestService.post('challenge', this.challange).subscribe(res => {
 			console.log(res)
+			this.router.navigateByUrl('/')
 		})
 		this.current++;
 	}
-
-	navigateToDashboard() {
-
-	}
-
 
 }

@@ -30,7 +30,7 @@
           <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
             [condensed]="rowCondensed">
             <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 7, sm: 12 }"
-              *ngFor="let data of modelData; index as i">
+              style="display: flex; margin-bottom: 15px;" *ngFor="let data of modelData; index as i">
               <ibm-tile>
                 <h3>{{i+1}}. {{ data.mlFlowId}}</h3>
                 <div ibmGrid [condensed]="gridCondensed">
@@ -73,6 +73,8 @@
                 <button class="btn" [ibmButton]="ibmButton" [size]="size">View Model Report</button>
               </ibm-tile>
               <br /><br />
+              <ibm-checkbox [hideLabel]="hideLabel" (change)="onChange($event, data._id)"
+                style="margin-left: 15px;"></ibm-checkbox>
             </div>
           </div>
         </div>
