@@ -12,3 +12,20 @@
 ::ng-deep .bx--progress--vertical .bx--progress-step {
     min-height: 3rem;
     }
+
+
+    .bx--btn--tertiary {
+        // background-color: transparent;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #0f62fe;
+        color: #0f62fe;
+    }
+
+    
+    .bx--btn--tertiary:hover span {display:none}
+.bx--btn--tertiary:hover:before {content:"Withdraw";
+
+
+color: white;
+}

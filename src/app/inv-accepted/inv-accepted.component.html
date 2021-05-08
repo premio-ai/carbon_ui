@@ -14,8 +14,43 @@
 				</ibm-breadcrumb-item>
 			</ibm-breadcrumb>
 		</div>
-
-		<ibm-toast
+		
+		<div
+			data-notification
+			class="bx--toast-notification bx--toast-notification--success"
+			role="alert"
+		>
+			<!-- <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__icon" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10,1c-4.9,0-9,4.1-9,9s4.1,9,9,9s9-4,9-9S15,1,10,1z M8.7,13.5l-3.2-3.2l1-1l2.2,2.2l4.8-4.8l1,1L8.7,13.5z"></path><path fill="none" d="M8.7,13.5l-3.2-3.2l1-1l2.2,2.2l4.8-4.8l1,1L8.7,13.5z" data-icon-path="inner-path" opacity="0"></path></svg> -->
+			<div class="bx--toast-notification__details">
+				<p class="bx--toast-notification__title">Challenge updated</p>
+				<p class="bx--toast-notification__subtitle">
+					Alert set for modelname.mdk
+				</p>
+			</div>
+			<button
+				data-notification-btn
+				class="bx--toast-notification__close-button"
+				type="button"
+				aria-label="close"
+			>
+				<svg
+					focusable="false"
+					preserveAspectRatio="xMidYMid meet"
+					style="will-change: transform"
+					xmlns="http://www.w3.org/2000/svg"
+					class="bx--toast-notification__close-icon"
+					width="20"
+					height="20"
+					viewBox="0 0 32 32"
+					aria-hidden="true"
+				>
+					<path
+						d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
+					></path>
+				</svg>
+			</button>
+		</div>
+		<!-- <ibm-toast
 			class="toaster"
 			[notificationObj]="{
 				type: 'success',
@@ -25,25 +60,38 @@
 				lowContrast: lowContrast,
 				showClose: showClose
 			}"
-		></ibm-toast>
+		></ibm-toast> -->
 	</div>
 	<br /><br />
-
-
 
 	<div class="bx--row line-padding">
 		<div class="bx--col-md-1"></div>
 		<div class="bx--col-md-6">
-            <div>
-                <p style="font-size: 40px;font-weight: 100;">Challenge title</p>
-                <br />	<br />
-                <button
-  class="bx--btn bx--btn--tertiary"
-   type="button">
-  Accepted
-  <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--btn__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M9 7L9 3 7 3 7 7 3 7 3 9 7 9 7 13 9 13 9 9 13 9 13 7z"></path></svg>
-</button>	<br />
-            </div>
+			<div>
+				<p style="font-size: 40px; font-weight: 100">Challenge title</p>
+				<br />
+				<br />
+				
+				<button class="bx--btn bx--btn--tertiary" type="button">
+					<span>Accepted</span>
+					<svg
+						focusable="false"
+						preserveAspectRatio="xMidYMid meet"
+						style="will-change: transform"
+						xmlns="http://www.w3.org/2000/svg"
+						class="bx--btn__icon"
+						width="16"
+						height="16"
+						viewBox="0 0 16 16"
+						aria-hidden="true"
+					>
+						<path
+							d="M9 7L9 3 7 3 7 7 3 7 3 9 7 9 7 13 9 13 9 9 13 9 13 7z"
+						></path>
+					</svg>
+				</button>
+				<br />
+			</div>
 			<ibm-tabs
 				[followFocus]="true"
 				[isNavigation]="false"
@@ -388,17 +436,34 @@
 					</ibm-table-container>
 				</ibm-tab>
 				<ibm-tab heading="Your Submission">
-                    <br />
+					<br />
 					<div ibmGrid [condensed]="gridCondensed">
-                        <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
-                            
-                            <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }">
-                                <ibm-progress-indicator orientation="vertical" [steps]="steps" [current]="current"
-                                    (stepSelected)="stepSelected($event)">
-                                </ibm-progress-indicator>
-                            </div>
-                            <div ibmCol class="custom-class-example1" [columnNumbers]="{ md: 6, sm: 12 }">
-                                <!-- <app-challange-first-step *ngIf="current == 1" (goNext)=nextStepOne($event)></app-challange-first-step>
+						<div
+							ibmRow
+							[gutter]="gutter"
+							[leftGutter]="leftGutter"
+							[rightGutter]="rightGutter"
+							[condensed]="rowCondensed"
+						>
+							<div
+								ibmCol
+								class="custom-class-example"
+								[columnNumbers]="{ md: 1, sm: 12 }"
+							>
+								<ibm-progress-indicator
+									orientation="vertical"
+									[steps]="steps"
+									[current]="current"
+									(stepSelected)="stepSelected($event)"
+								>
+								</ibm-progress-indicator>
+							</div>
+							<div
+								ibmCol
+								class="custom-class-example1"
+								[columnNumbers]="{ md: 6, sm: 12 }"
+							>
+								<!-- <app-challange-first-step *ngIf="current == 1" (goNext)=nextStepOne($event)></app-challange-first-step>
                                 <app-challange-second-step *ngIf="current == 2" (goPrevious)="previousStepTwo()"
                                     (goNext)="nextStepTwo($event)"></app-challange-second-step>
                                 <app-challane-third-step *ngIf="current == 3" (goPrevious)="previousStepThree()"
@@ -406,16 +471,28 @@
                                 <app-challange-fourth-step *ngIf="current == 4" (goPrevious)="previousStepFour()"
                                     (goNext)="nextStepFour($event)"></app-challange-fourth-step> -->
 
-                                    <app-submission-step-one *ngIf="current == 1" (goNext)=nextStepOne($event)></app-submission-step-one>
-                                    <app-submission-step-two *ngIf="current == 2" (goPrevious)="previousStepTwo()"
-                                    (goNext)="nextStepTwo($event)" ></app-submission-step-two>
-                                    <app-submission-step-three *ngIf="current == 3" (goPrevious)="previousStepThree()"
-                                    (goNext)="nextStepThree($event)"></app-submission-step-three>
-									<app-submission-step-four *ngIf="current == 4" (goPrevious)="previousStepFour()"
-                                    (goNext)="nextStepFour($event)"></app-submission-step-four>
-                            </div>
-                        </div>
-                    </div>
+								<app-submission-step-one
+									*ngIf="current == 1"
+									(goNext)="nextStepOne($event)"
+								></app-submission-step-one>
+								<app-submission-step-two
+									*ngIf="current == 2"
+									(goPrevious)="previousStepTwo()"
+									(goNext)="nextStepTwo($event)"
+								></app-submission-step-two>
+								<app-submission-step-three
+									*ngIf="current == 3"
+									(goPrevious)="previousStepThree()"
+									(goNext)="nextStepThree($event)"
+								></app-submission-step-three>
+								<app-submission-step-four
+									*ngIf="current == 4"
+									(goPrevious)="previousStepFour()"
+									(goNext)="nextStepFour($event)"
+								></app-submission-step-four>
+							</div>
+						</div>
+					</div>
 				</ibm-tab>
 			</ibm-tabs>
 		</div>

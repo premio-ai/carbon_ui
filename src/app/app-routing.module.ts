@@ -8,6 +8,8 @@ import { PreviewComponent } from './preview/preview.component';
 import { InvDashboradComponent } from './inv-dashborad/inv-dashborad.component';
 import { InvAcceptedComponent } from './inv-accepted/inv-accepted.component';
 import { InvChallengeComponent } from './inv-challenge/inv-challenge.component';
+import { InvModelViewComponent } from './inv-model-view/inv-model-view.component';
+import { InvSeePerformanceComponent } from './inv-see-performance/inv-see-performance.component';
 const routes: Routes = [
 	// {
 	// 	path: '',
@@ -26,6 +28,8 @@ const routes: Routes = [
 	{ path: 'Previewpage', component: PreviewComponent },
 	{ path: 'invchallenges', component: InvChallengeComponent },
 	{ path: 'invaccepted', component: InvAcceptedComponent },
+	{ path: 'invmodel-view', component: InvModelViewComponent },
+	{ path: 'see-performance', component: InvSeePerformanceComponent },
 	{
 		path: '',
 		redirectTo: '',
