@@ -16,10 +16,15 @@ export class ChallaneThirdStepComponent implements OnInit {
     maxChallangeInvolved: number,
     typeOfUser: string,
     programmingLanguage: string,
-
   }
 
   constructor() { }
+  pointEarnedError: boolean
+  challengeInvolvedError: boolean
+  typeOfUserError: boolean
+  programmingLanguageError: boolean
+  minPointError: boolean
+  minChallengeError: boolean
 
   ngOnInit() {
     this.language = [
@@ -45,7 +50,31 @@ export class ChallaneThirdStepComponent implements OnInit {
 
   next() {
     console.log(this.stepThree)
-    this.goNext.emit(this.stepThree);
+
+    if (this.stepThree.minEarnedPoint > 0 && this.stepThree.maxEarnedPoint > this.stepThree.minEarnedPoint &&
+      this.stepThree.minChallangeInvolved > 0 && this.stepThree.maxChallangeInvolved >= this.stepThree.minChallangeInvolved && 
+      this.stepThree.typeOfUser.length>0 && this.stepThree.programmingLanguage.length>0) {
+        this.goNext.emit(this.stepThree);
+    } else {
+      if (!this.stepThree.minEarnedPoint || !this.stepThree.maxEarnedPoint) {
+        this.pointEarnedError = true
+      }
+      if (this.stepThree.minEarnedPoint >= this.stepThree.maxEarnedPoint) {
+        this.minPointError = true
+      }
+      if (!this.stepThree.minChallangeInvolved || !this.stepThree.maxChallangeInvolved) {
+        this.challengeInvolvedError = true
+      }
+      if (this.stepThree.minChallangeInvolved > this.stepThree.maxChallangeInvolved) {
+        this.minChallengeError = true
+      }
+      if (this.stepThree.typeOfUser.length == 0) {
+        this.typeOfUserError = true
+      }
+      if (this.stepThree.programmingLanguage.length == 0) {
+        this.programmingLanguageError = true
+      }
+    }
   }
 
   selected(langaugeSelected) {

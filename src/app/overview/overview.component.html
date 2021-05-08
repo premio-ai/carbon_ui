@@ -7,9 +7,6 @@
 			<br />
 		</div>
 		<br />
-
-		<!-- <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 2, 'sm': 12}">Second column</div> -->
-		<!-- <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 2, 'sm': 12}">Third Column</div> -->
 	</div>
 </div>
 
@@ -30,9 +27,9 @@
 		</div>
 	</div>
 	<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
-		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 8, sm: 12 }" >
-			<div style="display: flex; flex-flow: row wrap; justify-content: space-around;"
-			*ngFor="let phase of challengeDetails.phases; index as i" >
+		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 8, sm: 12 }" style="display: flex;" >
+			<div style="display: flex; flex-flow: row wrap; justify-content: space-around; margin-right: 10px;"
+				*ngFor="let phase of challengeDetails.phases; index as i" >
 				<ibm-tile class="tiles">Phase {{i+1}}<br />
 					<p>model Upload</p>
 					<p>300</p><br />
@@ -60,62 +57,6 @@
 						</div>
 					</div>
 				</ibm-tile>
-
-				<!-- <ibm-tile class="tiles">Phase 1<br />
-					<p>model Upload</p>
-					<p>300</p><br />
-					<p>model trained & tested</p>
-					<p>300</p><br />
-					<p>model passed Scoring</p>
-					<p>180</p><br />
-					<p>Ordered List</p>
-					<ol ibmList>
-						<li ibmListItem>Beian Doe</li>
-						<li ibmListItem>Samuel jackson</li>
-						<li ibmListItem>Maria santa</li>
-						<li ibmListItem>Beian Doe</li>
-						<li ibmListItem>Samuel jackson</li>
-					</ol>
-
-					<div ibmGrid [condensed]="gridCondensed">
-						<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed" >
-							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }" >
-								<button class="view" [ibmButton]="ibmButton" [size]="size" >View Activity</button>
-							</div>
-							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }" >
-								<button class="model" [ibmButton]="ibmButton" [size]="size" >View Model</button>
-							</div>
-						</div>
-					</div>
-				</ibm-tile>
-
-				<ibm-tile class="tiles">Phase 1 <br />
-					<p>model Upload</p>
-					<p>300</p><br />
-					<p>model trained & tested</p>
-					<p>300</p><br />
-					<p>model passed Scoring</p>
-					<p>180</p><br />
-					<p>Ordered List</p>
-					<ol ibmList>
-						<li ibmListItem>Beian Doe</li>
-						<li ibmListItem>Samuel jackson</li>
-						<li ibmListItem>Maria santa</li>
-						<li ibmListItem>Beian Doe</li>
-						<li ibmListItem>Samuel jackson</li>
-					</ol>
-
-					<div ibmGrid [condensed]="gridCondensed">
-						<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
-							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }" >
-								<button class="view" [ibmButton]="ibmButton" [size]="size" >View Activity</button>
-							</div>
-							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
-								<button class="model" [ibmButton]="ibmButton" [size]="size">View Model</button>
-							</div>
-						</div>
-					</div>
-				</ibm-tile> -->
 			</div>
 		</div>
 	</div>
