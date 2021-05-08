@@ -25,7 +25,8 @@ const routes: Routes = [
 	{ path: 'ModelReport', component: ModelReportComponent },
 	{ path: 'Previewpage', component: PreviewComponent },
 	{ path: 'invchallenges', component: InvChallengeComponent },
-	{ path: 'invaccepted', component: InvAcceptedComponent },
+	// { path: 'invaccepted', component: InvAcceptedComponent },
+	{ path: 'invaccepted/:id', component: InvAcceptedComponent },
 	{
 		path: '',
 		redirectTo: '',
