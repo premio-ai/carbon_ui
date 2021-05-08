@@ -1,0 +1,58 @@
+
+.bold{
+    font-weight: 600;
+    font-size: 14px;
+}
+.para{
+    font-size: 12px;
+    text-align:justify;
+    line-height: 1.5;
+    margin-left: -16px;
+}
+.btn{
+    margin: auto;
+    display: flex;
+    
+   margin-right: -15px;
+   margin-bottom: -15px;
+    margin-top:-30px !important;
+   }
+   .content{
+       margin-left: 50px;
+       margin-top: -20px;
+   }
+   .nobold{
+       font-size: 28px;
+       font-weight: 600;
+       color: #3B55EA;
+
+   }
+   .unbold{
+       font-size: 9px;
+       color: #3B55EA;
+   
+       white-space: nowrap;
+   }
+   .model_head{
+       font-weight: 200;
+       font-size: 14px;
+   }
+
+   .bx--tile{
+    display: block;
+    min-width: 755px;
+    min-height: 4rem;
+    background-color: #f4f4f4;
+    position: relative;
+    padding: 1rem;
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+}
+
+
+
+@media (min-width: 42rem){
+.bx--tile {
+    min-width: 619px;
+}}
+

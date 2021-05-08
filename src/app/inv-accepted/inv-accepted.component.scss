@@ -1,0 +1,14 @@
+.toaster{
+    display: flex;
+   
+    margin-left: auto;
+    margin-top: -28px;
+    height: 60px;
+
+}
+
+
+
+::ng-deep .bx--progress--vertical .bx--progress-step {
+    min-height: 3rem;
+    }

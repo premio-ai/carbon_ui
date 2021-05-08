@@ -61,6 +61,13 @@ import { PreviewComponent } from './preview/preview.component';
 import { InvDashboradComponent } from './inv-dashborad/inv-dashborad.component';
 import { InvChallengeTileComponent } from './inv-challenge-tile/inv-challenge-tile.component';
 
+import { InvAcceptedComponent } from './inv-accepted/inv-accepted.component';
+import { InvChallengeComponent } from './inv-challenge/inv-challenge.component';
+import { SubmissionStepOneComponent } from './submission-step-one/submission-step-one.component';
+import { SubmissionStepTwoComponent } from './submission-step-two/submission-step-two.component';
+import { SubmissionStepThreeComponent } from './submission-step-three/submission-step-three.component';
+import { SubmissionStepFourComponent } from './submission-step-four/submission-step-four.component';
+
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -86,6 +93,17 @@ import { InvChallengeTileComponent } from './inv-challenge-tile/inv-challenge-ti
 		InvDashboradComponent,
 
 		InvChallengeTileComponent,
+		InvAcceptedComponent,
+
+		InvChallengeComponent,
+
+		SubmissionStepOneComponent,
+
+		SubmissionStepTwoComponent,
+
+		SubmissionStepThreeComponent,
+
+		SubmissionStepFourComponent,
 	],
 	imports: [
 		BrowserModule,

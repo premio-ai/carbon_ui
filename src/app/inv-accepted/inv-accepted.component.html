@@ -1,0 +1,425 @@
+<br /><br />
+<div class="bx--grid">
+	<div class="bx--row line-padding">
+		<div class="bx--col-md-1" style="padding-left: 8%">
+			<svg icon ibmIconArrowLeft16></svg>
+		</div>
+		<div class="bx--col-md-4">
+			<ibm-breadcrumb [noTrailingSlash]="noTrailingSlash">
+				<ibm-breadcrumb-item href="asa" class="navigation">
+					Browse
+				</ibm-breadcrumb-item>
+				<ibm-breadcrumb-item href="asa" class="navigation">
+					Challenge title
+				</ibm-breadcrumb-item>
+			</ibm-breadcrumb>
+		</div>
+
+		<ibm-toast
+			class="toaster"
+			[notificationObj]="{
+				type: 'success',
+				title: 'New notification setting',
+				subtitle: 'Alert set for modelname.mdk',
+
+				lowContrast: lowContrast,
+				showClose: showClose
+			}"
+		></ibm-toast>
+	</div>
+	<br /><br />
+
+
+
+	<div class="bx--row line-padding">
+		<div class="bx--col-md-1"></div>
+		<div class="bx--col-md-6">
+            <div>
+                <p style="font-size: 40px;font-weight: 100;">Challenge title</p>
+                <br />	<br />
+                <button
+  class="bx--btn bx--btn--tertiary"
+   type="button">
+  Accepted
+  <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--btn__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M9 7L9 3 7 3 7 7 3 7 3 9 7 9 7 13 9 13 9 9 13 9 13 7z"></path></svg>
+</button>	<br />
+            </div>
+			<ibm-tabs
+				[followFocus]="true"
+				[isNavigation]="false"
+				[cacheActive]="true"
+			>
+				<ibm-tab heading="Overview">
+					<br />
+					<div ibmGrid [condensed]="gridCondensed">
+						<div
+							ibmRow
+							[gutter]="gutter"
+							[leftGutter]="leftGutter"
+							[rightGutter]="rightGutter"
+							[condensed]="rowCondensed"
+						>
+							<div
+								ibmCol
+								class="custom-class-example"
+								[columnNumbers]="{ md: 4, sm: 12 }"
+								style="margin-right: 37px; margin-left: -14px"
+							>
+								<h3>Challenge Info</h3>
+								<br />
+								<p style="font-size: 14px; line-height: 1.5">
+									Lorem ipsum dolor sit amet, consectetur
+									adipiscing elit, sed do eiusmod tempor
+									incididunt ut labore et dolore magna aliqua.
+								</p>
+								<br />
+								<p style="font-size: 14px; line-height: 1.5">
+									Ut enim ad minim veniam, quis nostrud
+									exercitation ullamco laboris nisi ut aliquip
+									ex ea commodo consequat.
+								</p>
+								<br />
+								<p style="font-size: 14px; line-height: 1.5">
+									Duis aute irure dolor in reprehenderit in
+									voluptate velit esse cillum dolore eu fugiat
+									nulla pariatur.
+								</p>
+								<br />
+								<p>
+									Lorem ipsum dolor sit amet, consectetur
+									adipiscing elit, sed do eiusmod tempor
+									incididunt ut labore et dolore magna aliqua.
+									Ut enim ad minim veniam, quis nostrud
+									exercitation ullamco laboris nisi ut aliquip
+									ex ea commodo consequat.
+								</p>
+							</div>
+
+							<div
+								ibmCol
+								class="custom-class-example"
+								[columnNumbers]="{ md: 3, sm: 12 }"
+							>
+								<h3>Challenge Issuer</h3>
+								<br />
+								<p style="font-weight: 900">
+									Lorem ipsum dolor sit
+								</p>
+								<br />
+								<p style="font-size: 14px; line-height: 1.5">
+									Lorem ipsum dolor sit amet, consectetur
+									adipiscing elit, sed do eiusmod tempor
+									incididunt ut labore et dolore magna aliqua.
+									Ut enim ad minim veniam, quis nostrud
+									exercitation ullamco laboris nisi ut aliquip
+									ex ea commodo consequat.
+								</p>
+								<br /><br />
+								<h3>Reward</h3>
+								<br />
+								<p style="font-size: 16px; line-height: 1.5">
+									Contract
+								</p>
+								<br />
+								<p style="font-size: 14px; line-height: 1.5">
+									Duis aute irure dolor in reprehenderit in
+									voluptate velit esse cillum dolore eu fugiat
+									nulla pariatur.
+								</p>
+								<br />
+								<p style="font-size: 14px; line-height: 1.5">
+									Duis aute irure dolor in reprehenderit in
+									voluptate .
+								</p>
+							</div>
+						</div>
+					</div>
+				</ibm-tab>
+				<ibm-tab heading="Data">
+					<br />
+					<div ibmGrid [condensed]="gridCondensed">
+						<div
+							ibmRow
+							[gutter]="gutter"
+							[leftGutter]="leftGutter"
+							[rightGutter]="rightGutter"
+							[condensed]="rowCondensed"
+						>
+							<div
+								ibmCol
+								class="custom-class-example"
+								[columnNumbers]="{ md: 4, sm: 12 }"
+								style="margin-right: 37px; margin-left: -14px"
+							>
+								<h3>Data Info</h3>
+								<br />
+								<p>
+									Lorem ipsum dolor sit amet, consectetur
+									adipiscing elit, sed do eiusmod tempor
+									incididunt ut labore et dolore magna aliqua.
+								</p>
+								<br />
+								<p>
+									Ut enim ad minim veniam, quis nostrud
+									exercitation ullamco laboris nisi ut aliquip
+									ex ea commodo consequat.
+								</p>
+								<br />
+								<p>
+									Duis aute irure dolor in reprehenderit in
+									voluptate velit esse cillum dolore eu fugiat
+									nulla pariatur.
+								</p>
+							</div>
+
+							<div
+								ibmCol
+								class="custom-class-example"
+								[columnNumbers]="{ md: 3, sm: 12 }"
+							>
+								<h3>Data Visual</h3>
+							</div>
+						</div>
+					</div>
+				</ibm-tab>
+
+				<ibm-tab heading="Discussion"> </ibm-tab>
+
+				<ibm-tab heading="Leaderboard">
+					<ibm-table-container>
+						<br />
+						<ibm-table-header>
+							<h4 ibmTableHeaderTitle>Leaderboard</h4>
+						</ibm-table-header>
+						<table class="bx--data-table">
+							<thead>
+								<tr>
+									<th>
+										<!-- checkbox th -->
+										<!-- sortable th  -->
+										<span class="bx--table-header-label"
+											>Rank</span
+										>
+									</th>
+									<th>
+										<!-- checkbox th -->
+										<!-- sortable th  -->
+										<span class="bx--table-header-label"
+											>Name</span
+										>
+									</th>
+									<th>
+										<!-- checkbox th -->
+										<!-- sortable th  -->
+										<span class="bx--table-header-label"
+											>Phase</span
+										>
+									</th>
+									<th>
+										<!-- checkbox th -->
+										<!-- sortable th  -->
+										<span class="bx--table-header-label"
+											>Score</span
+										>
+									</th>
+
+									<th>
+										<!-- checkbox th -->
+										<!-- sortable th  -->
+										<span class="bx--table-header-label"
+											>Date</span
+										>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										1
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										J**D**
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										1
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										93
+									</td>
+									<!-- expand icon td -->
+
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										26/02/21
+									</td>
+								</tr>
+								<!-- Expandable child row -->
+								<tr>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										2
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										J**D**
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										1
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										93
+									</td>
+									<!-- expand icon td -->
+
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										26/02/21
+									</td>
+								</tr>
+								<!-- Expandable child row -->
+								<tr>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										3
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										J**D**
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										1
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										93
+									</td>
+									<!-- expand icon td -->
+
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										26/02/21
+									</td>
+								</tr>
+								<!-- Expandable child row -->
+								<tr>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										4
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										J**D**
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										1
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										93
+									</td>
+									<!-- expand icon td -->
+
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										26/02/21
+									</td>
+								</tr>
+								<!-- Expandable child row -->
+								<tr>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										5
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										J**D**
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										1
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										93
+									</td>
+									<!-- expand icon td -->
+
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										26/02/21
+									</td>
+								</tr>
+								<!-- Expandable child row -->
+							</tbody>
+						</table>
+					</ibm-table-container>
+				</ibm-tab>
+				<ibm-tab heading="Your Submission">
+                    <br />
+					<div ibmGrid [condensed]="gridCondensed">
+                        <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+                            
+                            <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }">
+                                <ibm-progress-indicator orientation="vertical" [steps]="steps" [current]="current"
+                                    (stepSelected)="stepSelected($event)">
+                                </ibm-progress-indicator>
+                            </div>
+                            <div ibmCol class="custom-class-example1" [columnNumbers]="{ md: 6, sm: 12 }">
+                                <!-- <app-challange-first-step *ngIf="current == 1" (goNext)=nextStepOne($event)></app-challange-first-step>
+                                <app-challange-second-step *ngIf="current == 2" (goPrevious)="previousStepTwo()"
+                                    (goNext)="nextStepTwo($event)"></app-challange-second-step>
+                                <app-challane-third-step *ngIf="current == 3" (goPrevious)="previousStepThree()"
+                                    (goNext)="nextStepThree($event)"></app-challane-third-step>
+                                <app-challange-fourth-step *ngIf="current == 4" (goPrevious)="previousStepFour()"
+                                    (goNext)="nextStepFour($event)"></app-challange-fourth-step> -->
+
+                                    <app-submission-step-one *ngIf="current == 1" (goNext)=nextStepOne($event)></app-submission-step-one>
+                                    <app-submission-step-two *ngIf="current == 2" (goPrevious)="previousStepTwo()"
+                                    (goNext)="nextStepTwo($event)" ></app-submission-step-two>
+                                    <app-submission-step-three *ngIf="current == 3" (goPrevious)="previousStepThree()"
+                                    (goNext)="nextStepThree($event)"></app-submission-step-three>
+									<app-submission-step-four *ngIf="current == 4" (goPrevious)="previousStepFour()"
+                                    (goNext)="nextStepFour($event)"></app-submission-step-four>
+                            </div>
+                        </div>
+                    </div>
+				</ibm-tab>
+			</ibm-tabs>
+		</div>
+
+		<div class="bx--col-md-2"></div>
+	</div>
+</div>
