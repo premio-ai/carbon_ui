@@ -67,6 +67,8 @@ import { SubmissionStepOneComponent } from './submission-step-one/submission-ste
 import { SubmissionStepTwoComponent } from './submission-step-two/submission-step-two.component';
 import { SubmissionStepThreeComponent } from './submission-step-three/submission-step-three.component';
 import { SubmissionStepFourComponent } from './submission-step-four/submission-step-four.component';
+import { InvModelViewComponent } from './inv-model-view/inv-model-view.component';
+import { InvSeePerformanceComponent } from './inv-see-performance/inv-see-performance.component';
 
 @NgModule({
 	declarations: [
@@ -104,6 +106,10 @@ import { SubmissionStepFourComponent } from './submission-step-four/submission-s
 		SubmissionStepThreeComponent,
 
 		SubmissionStepFourComponent,
+
+		InvModelViewComponent,
+
+		InvSeePerformanceComponent,
 	],
 	imports: [
 		BrowserModule,
