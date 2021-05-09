@@ -124,7 +124,7 @@ export class InvAcceptedComponent implements OnInit {
 	}
 
 	getSubmissionByChallengeId(challengeId, innovatorId) {
-		let url = 'submissionAllChallenge/challenge/' + challengeId + innovatorId;
+		let url = 'submissionAllChallenge/challenge/' + challengeId + '/' + innovatorId;
 		this.requestService.get(url).subscribe(data => {
 			this.challengeSubmissionData = data
 		})
