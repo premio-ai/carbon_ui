@@ -19,20 +19,12 @@ export class SubmissionStepFourComponent implements OnInit {
 
 
   ngOnInit() {
-    this.stepFour=  {
-      description: "",
-      guidence: "",
-      score: 0
-    }
   }
 
   previous() {
-    this.goPrevious.emit();
   }
 
   next() {
-    console.log(this.stepFour)
-    this.goNext.emit(this.stepFour);
   }
 
 }

@@ -55,6 +55,8 @@ import { OverviewComponent } from "./overview/overview.component";
 import { DataComponent } from "./data/data.component";
 import { ActivityComponent } from "./activity/activity.component";
 
+import { DragAndDropStory } from './file-uploader/file-uploader';
+
 import { ModelComponent } from "./model/model.component";
 import { ModelReportComponent } from "./model-report/model-report.component";
 import { PreviewComponent } from './preview/preview.component';
@@ -85,6 +87,8 @@ import { InvSeePerformanceComponent } from './inv-see-performance/inv-see-perfor
 		OverviewComponent,
 		DataComponent,
 		ActivityComponent,
+		
+		DragAndDropStory,
 
 		ModelComponent,
 

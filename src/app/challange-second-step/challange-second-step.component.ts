@@ -42,17 +42,52 @@ export class ChallangeSecondStepComponent implements OnInit {
     }
   }
 
+  nextDataSet(file) {
+    console.log(file, "----file----46")
+  }
+
+  onDropped(files) {
+    console.log(files, "---files---46")
+  }
+
+  fileBrowseHandler(files) {
+    console.log(files, "---files---46")
+  }
+
+  upload(files: File[]){
+console.log(files, "---files---50")
+    //pick from one of the 4 styles of file uploads below
+    // this.uploadAndProgress(files);
+  }
+
+  // uploadAndProgress(files: File[]){
+  //   console.log(files)
+  //   var formData = new FormData();
+  //   Array.from(files).forEach(f => formData.append('file',f))
+    
+  //   this.http.post('https://file.io', formData, {reportProgress: true, observe: 'events'})
+  //     .subscribe(event => {
+  //       if (event.type === HttpEventType.UploadProgress) {
+  //         this.percentDone = Math.round(100 * event.loaded / event.total);
+  //       } else if (event instanceof HttpResponse) {
+  //         this.uploadSuccess = true;
+  //       }
+  //   });
+  // }
+
   previous() {
     this.goPrevious.emit();
   }
 
   next() {
+    // TODO: uncomment
+    // this.goNext.emit(this.phases);
 
-    if (this.phases.length>0) {      
-      this.goNext.emit(this.phases);
-    } else  {
-      this.phasesError = true
-    }
+  //   if (this.phases.length>0) {      
+  //     this.goNext.emit(this.phases);
+  //   } else  {
+  //     this.phasesError = true
+  //   }
   }
 
 }

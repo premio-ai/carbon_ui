@@ -15,6 +15,7 @@ export class InvAcceptedComponent implements OnInit {
 		private router: Router,
 		private activatedRoute: ActivatedRoute) { }
 
+	toasterMsg: boolean;
 	challengeId: any;
 	leaderboard: any[];
 	acceptedChallenge: any;
@@ -26,7 +27,7 @@ export class InvAcceptedComponent implements OnInit {
 	innovatorId = "607e856d2d00fd7ed549689e";
 	submissionData: {
 		challengeId: {},
-		phaseId: {},
+		phaseId: any,
 		innovatorId: {},
 		mlFlowId: string,
 		appliedAsCompany: true,
@@ -34,6 +35,7 @@ export class InvAcceptedComponent implements OnInit {
 		modelUploadedPath: string,
 		modelType: string,
 		approch: string,
+		// language: string,
 		score: 0,
 		precisionScore: 0,
 		recallScore: 0,
@@ -41,6 +43,7 @@ export class InvAcceptedComponent implements OnInit {
 		trainedAt: string,
 		testedAt: string
 	}
+	challengeSubmissionData: any
 
 
 	ngOnInit() {
@@ -51,7 +54,8 @@ export class InvAcceptedComponent implements OnInit {
 		});
 
 		this.getChallengeDetails(this.challengeId);
-		this.getChallengeAcception(this.challengeId, this.innovatorId)
+		this.getSubmissionByChallengeId(this.challengeId, this.innovatorId);
+		this.getChallengeAcception(this.challengeId, this.innovatorId);
 		// this.getChallengeAcception("607e856d2d00fd7ed549689d", this.innovatorId);
 		this.getLeaderboard(this.challengeId);
 
@@ -79,15 +83,16 @@ export class InvAcceptedComponent implements OnInit {
 		];
 		this.current = 1;
 		this.submissionData = {
-			challengeId: { },
-			phaseId: { },
-			innovatorId: { },
+			challengeId: {},
+			phaseId: [],
+			innovatorId: {},
 			mlFlowId: "",
 			appliedAsCompany: true,
 			modelDescription: "",
 			modelUploadedPath: "",
 			modelType: "",
 			approch: "",
+			// language: '',
 			score: 0,
 			precisionScore: 0,
 			recallScore: 0,
@@ -118,6 +123,13 @@ export class InvAcceptedComponent implements OnInit {
 		})
 	}
 
+	getSubmissionByChallengeId(challengeId, innovatorId) {
+		let url = 'submissionAllChallenge/challenge/' + challengeId + innovatorId;
+		this.requestService.get(url).subscribe(data => {
+			this.challengeSubmissionData = data
+		})
+	}
+
 	getDate(timeStamp) {
 		let date = moment(moment(+timeStamp)).format("DD/MM/YYYY")
 		return date;
@@ -131,7 +143,19 @@ export class InvAcceptedComponent implements OnInit {
 		let url = 'userChallenge';
 		this.requestService.post(url, data).subscribe(data => {
 			this.getChallengeAcception(challengeId, this.innovatorId)
+			this.showToaster()
 		})
+	}
+
+	showToaster = (() => {
+		this.toasterMsg = true
+		setTimeout(() => {
+			this.toasterMsg = false
+		}, 3000)
+	})
+
+	closeToaster() {
+		this.toasterMsg = false
 	}
 
 	stepSelected() { }
@@ -140,9 +164,11 @@ export class InvAcceptedComponent implements OnInit {
 		this.current = 1
 	}
 
-	nextStepOne(stepOneData) {
+	nextStepOne() {
 		this.submissionData.challengeId = this.challengeId
 		this.submissionData.innovatorId = this.innovatorId
+		this.submissionData.phaseId = this.challengeDetails.phases[0].phaseId
+		this.submissionData.modelType = 'MODIFIED_TRAINED_MODEL'
 
 		this.current++;
 	}
@@ -163,11 +189,16 @@ export class InvAcceptedComponent implements OnInit {
 		this.current--
 	}
 
-	nextStepThree(stepThreeData) {
+	nextStepThree() {
+		console.log(this.submissionData, "---stepThree data")
 		// callSubmitAPI() : submit model details
-
-		// this.current++;
+		let url = 'submissionAllChallenge'
+		
+		this.requestService.post(url, this.submissionData).subscribe( data => {
+			console.log(data, "---data---")
+			this.getSubmissionByChallengeId(this.challengeId, this.innovatorId)
+			this.current++;
+		})
 	}
-
 
 }

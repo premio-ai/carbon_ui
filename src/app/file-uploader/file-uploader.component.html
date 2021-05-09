@@ -1,0 +1,23 @@
+<div ibmGrid [condensed]="gridCondensed">
+	<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
+
+			<!-- (filesChange)="onDropped($event.target.files)" -->
+
+			<ibm-file-uploader [title]="title" [description]="description" [buttonText]="buttonText" [buttonType]="buttonType"
+			[accept]="accept" [multiple]="multiple" 
+			
+			[(files)]="files" [size]="size" drop="true" [dropText]="dropText">
+						<div>
+							<p>Drag & Drop files here</p>
+						</div>
+			</ibm-file-uploader>
+
+			<div [id]="notificationId" style="width: 300px; margin-top: 20px"></div>
+			<button ibmButton *ngIf="files && files.size > 0" (click)="onUpload()">
+				Upload
+			</button>
+
+		</div>
+	</div>
+</div>

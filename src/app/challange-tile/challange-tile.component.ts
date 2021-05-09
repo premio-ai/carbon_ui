@@ -19,7 +19,7 @@ export class ChallangeTileComponent implements OnInit {
   pastChallenges: any[];
 
   ngOnInit() {
-    console.log("challange ..... ", this.challange)
+    // console.log("challange ..... ", this.challange)
     
   }
 
