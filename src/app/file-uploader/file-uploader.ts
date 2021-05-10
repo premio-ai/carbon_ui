@@ -26,6 +26,7 @@ export class DragAndDropStory {
 	@Input() disabled = false;
 
 	@Output() public goNext: EventEmitter<any> = new EventEmitter();
+	@Output() public uploadFile: EventEmitter<any> = new EventEmitter();
 
 	protected maxSize = 500000;
 
@@ -76,6 +77,21 @@ export class DragAndDropStory {
 
 		transferredFiles.map(file => readFileAndCheckType(file));
 
+		// transferredFiles.map(file => makeFile(file));
+
+		// const makeFile = (acceptedFiles) => {
+
+		// 	console.log(acceptedFiles, "----file----46")
+			
+		// 	const file = acceptedFiles.file;
+		// 	let dataSetImg = file;
+		// 	const formData = new FormData();
+		// 	formData.append('files', file);
+		// 	formData.append('name', 'dataSetImage')
+			
+		// 	console.log(formData, "---formData57")
+		// }
+			
 		// const promises = transferredFiles.map(file => readFileAndCheckType(file));
 
 		// Promise.all(promises).then(filePromiseArray =>
@@ -87,6 +103,9 @@ export class DragAndDropStory {
 	}
 
 	onUpload() {
+
+		this.uploadFile.emit()
+
 		// this.files.forEach(fileItem => {
 		// 	if (!fileItem.uploaded) {
 		// 		if (fileItem.file.size < this.maxSize) {

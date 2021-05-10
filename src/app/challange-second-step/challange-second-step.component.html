@@ -31,19 +31,18 @@
 					[condensed]="rowCondensed">
 					<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
 						<h5>Data Visualisation</h5>
-						<p class="drag">An image that represnt your Sample data</p>
+						<p class="drag">An image that represent your Sample data</p>
+						<p>{{phase.dataVisualFile}} </p>
 					</div>
 					<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
 						<h5>Sample Data</h5>
-						<p class="drag">
-							Anonymous, available to download for any
-						</p>
+						<p class="drag">Anonymous, available to download for any</p>
+						<p *ngFor='let data of phase.sampleDataFile; index as j'>{{data[j]}}</p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
 
 	<!-- TODO : adding new phase -->
 	<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
@@ -91,26 +90,19 @@
 					<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
 						<h5>Data Visualisation</h5>
 						<p class="drag">An image that represnt your Sample data</p>
-
-						<app-drop-file-uploader (goNext)="nextDataSet($event)" (filesChange)="onDropped($event.target.files)"></app-drop-file-uploader>
-
+						<app-drop-file-uploader (goNext)="setDataVisual($event)" (uploadFile)="uploadDataVisual()" (filesChange)="onDropped($event.target.files)"></app-drop-file-uploader>
 					</div>
 					<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
 						<h5>Sample Data</h5>
 						<p class="drag">
 							Anonymous, available to download for any
 						</p>
-					
-						<app-drop-file-uploader></app-drop-file-uploader>
-					
+						<app-drop-file-uploader (goNext)="setSampleData($event)" (uploadFile)="uploadSampleData()" (filesChange)="onDropped($event.target.files)"></app-drop-file-uploader>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-
-
 
 
 	<div ibmCol class="custom-class-example1" [columnNumbers]="{ md: 4, sm: 12 }">
