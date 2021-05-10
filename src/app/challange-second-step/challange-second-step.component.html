@@ -7,7 +7,7 @@
 			<ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
 				Data Description<p style="margin-left: 273px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">
 					0/100</p>
-				<textarea style="width: 90%" ibmTextArea [invalid]="invalid" [disabled]="true"
+				<textarea style="width: 90%" ibmTextArea [invalid]="invalid"
 					[(ngModel)]="phase.description" [theme]="theme" [rows]="5" [cols]="cols"
 					aria-label="textarea"></textarea>
 			</ibm-label>
@@ -31,13 +31,11 @@
 					[condensed]="rowCondensed">
 					<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
 						<h5>Data Visualisation</h5>
-						<p class="drag">An image that represent your Sample data</p>
-						<p>{{phase.dataVisualFile}} </p>
+						<p>{{phase.dataVisualFile}}</p>
 					</div>
 					<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
 						<h5>Sample Data</h5>
-						<p class="drag">Anonymous, available to download for any</p>
-						<p *ngFor='let data of phase.sampleDataFile; index as j'>{{data[j]}}</p>
+						<p *ngFor='let data of phase?.sampleDataFile; index as j'>{{data[j]}}</p>
 					</div>
 				</div>
 			</div>
@@ -94,9 +92,7 @@
 					</div>
 					<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
 						<h5>Sample Data</h5>
-						<p class="drag">
-							Anonymous, available to download for any
-						</p>
+						<p class="drag">Anonymous, available to download for any</p>
 						<app-drop-file-uploader (goNext)="setSampleData($event)" (uploadFile)="uploadSampleData()" (filesChange)="onDropped($event.target.files)"></app-drop-file-uploader>
 					</div>
 				</div>

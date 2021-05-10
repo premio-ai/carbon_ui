@@ -2,7 +2,7 @@
     Submit model<svg class="bx--btn__icon" ibmIconAdd size="20"></svg>
 </button>
 <br />
-<div style="display: flex; flex-flow: row wrap; justify-content: space-around;">
+<div style="display: flex; flex-flow: row wrap; justify-content: space-around;" *ngIf="challengeSubmissionData && challengeSubmissionData.length>0">
 
     <!-- <ibm-tile style="width: 293px;">
         <div style="display: flex">
@@ -31,9 +31,9 @@
          <button  class="btn"  [ibmButton]="ibmButton" [size]="size">View model</button>
     </ibm-tile> -->
 
-    <ibm-tile class="tile">
+    <ibm-tile class="tile" *ngFor="let model of challengeSubmissionData">
         <div style="display: flex">
-            <p>{{challengeSubmissionData.mlFlowId}}</p>
+            <p>{{model?.mlFlowId}}</p>
             <p>Results available</p>
         </div>
 
@@ -42,7 +42,7 @@
             <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
                 [condensed]="rowCondensed" style="margin-left: 1px">
                 <div ibmCol class="custom-class-example" style="margin-left: -31px" [columnNumbers]="{ md: 5, sm: 12 }">
-                    {{challengeSubmissionData.modelDescription}}
+                    {{model?.modelDescription}}
                 </div>
                 <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 3, sm: 12 }" style="margin-left: 20px">
                     <div style="display: flex; margin-left: 27px">

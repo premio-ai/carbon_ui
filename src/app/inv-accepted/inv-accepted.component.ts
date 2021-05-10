@@ -62,7 +62,7 @@ export class InvAcceptedComponent implements OnInit {
 		this.steps = [
 			{
 				text: "Step 1 ",
-				state: ["current"],
+				state: ["incomplete"],
 			},
 			{
 				text: "Step 2",
@@ -71,17 +71,9 @@ export class InvAcceptedComponent implements OnInit {
 			{
 				text: "Step 3",
 				state: ["incomplete"],
-			},
-			{
-				text: "Step 4",
-				state: ["incomplete"],
-			},
-			{
-				text: "Step 5",
-				state: ["incomplete"]
-			},
+			}
 		];
-		this.current = 1;
+		this.current = 0;
 		this.submissionData = {
 			challengeId: {},
 			phaseId: [],
@@ -126,7 +118,9 @@ export class InvAcceptedComponent implements OnInit {
 	getSubmissionByChallengeId(challengeId, innovatorId) {
 		let url = 'submissionAllChallenge/challenge/' + challengeId + '/' + innovatorId;
 		this.requestService.get(url).subscribe(data => {
+			console.log(data, "---data---121")
 			this.challengeSubmissionData = data
+console.log(this.challengeSubmissionData, "---this.challengeSubmissionData---123")
 		})
 	}
 
@@ -164,11 +158,12 @@ export class InvAcceptedComponent implements OnInit {
 		this.current = 1
 	}
 
-	nextStepOne() {
+	nextStepOne(stepOne) {
 		this.submissionData.challengeId = this.challengeId
 		this.submissionData.innovatorId = this.innovatorId
 		this.submissionData.phaseId = this.challengeDetails.phases[0].phaseId
 		this.submissionData.modelType = 'MODIFIED_TRAINED_MODEL'
+		this.submissionData.modelUploadedPath = stepOne.modelUploadedPath
 
 		this.current++;
 	}
@@ -190,12 +185,8 @@ export class InvAcceptedComponent implements OnInit {
 	}
 
 	nextStepThree() {
-		console.log(this.submissionData, "---stepThree data")
-		// callSubmitAPI() : submit model details
-		let url = 'submissionAllChallenge'
-		
+		let url = 'submissionAllChallenge';
 		this.requestService.post(url, this.submissionData).subscribe( data => {
-			console.log(data, "---data---")
 			this.getSubmissionByChallengeId(this.challengeId, this.innovatorId)
 			this.current++;
 		})

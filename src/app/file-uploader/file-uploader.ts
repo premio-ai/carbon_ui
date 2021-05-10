@@ -33,10 +33,7 @@ export class DragAndDropStory {
     constructor() {}
 
 	onDropped(event) {
-        console.log(event, "---event---46")
-
 		const transferredFiles = Array.from(event);
-		console.log(transferredFiles, "---transferredFiles---37")
 
 		// Creates a promise which resolves to a file and whether or not the file should be accepted.
 		const readFileAndCheckType = fileObj => {
@@ -57,9 +54,7 @@ export class DragAndDropStory {
 					// 	mime = fileObj.file.type;
 					// }
 
-					console.log(fileObj, "---fileObj---57")
 					this.goNext.emit(fileObj)
-
 
 					resolve({
 						file: fileObj,
@@ -80,16 +75,12 @@ export class DragAndDropStory {
 		// transferredFiles.map(file => makeFile(file));
 
 		// const makeFile = (acceptedFiles) => {
-
-		// 	console.log(acceptedFiles, "----file----46")
 			
 		// 	const file = acceptedFiles.file;
 		// 	let dataSetImg = file;
 		// 	const formData = new FormData();
 		// 	formData.append('files', file);
 		// 	formData.append('name', 'dataSetImage')
-			
-		// 	console.log(formData, "---formData57")
 		// }
 			
 		// const promises = transferredFiles.map(file => readFileAndCheckType(file));
@@ -103,9 +94,7 @@ export class DragAndDropStory {
 	}
 
 	onUpload() {
-
 		this.uploadFile.emit()
-
 		// this.files.forEach(fileItem => {
 		// 	if (!fileItem.uploaded) {
 		// 		if (fileItem.file.size < this.maxSize) {
@@ -113,10 +102,8 @@ export class DragAndDropStory {
 		// 			setTimeout(() => {
 		// 				fileItem.state = "complete";
 		// 				fileItem.uploaded = true;
-		// 				console.log(fileItem);
 		// 			}, 1500);
 		// 		}
-
 		// 		if (fileItem.file.size > this.maxSize) {
 		// 			fileItem.state = "upload";
 		// 			setTimeout(() => {

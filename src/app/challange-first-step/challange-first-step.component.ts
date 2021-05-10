@@ -30,7 +30,6 @@ export class ChallangeFirstStepComponent implements OnInit {
   }
 
   nextStep() {
-    console.log("... ",this.stepOne)
     // TODO : uncomment
     // this.goNext.emit(this.stepOne)
 

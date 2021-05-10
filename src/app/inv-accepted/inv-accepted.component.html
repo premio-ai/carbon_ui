@@ -41,13 +41,13 @@
 	</div>
 	<br /><br />
 
-	<div class="bx--row line-padding">
+	<div class="bx--row line-padding" *ngIf="challengeDetails?._id.length > 0">
 		<div class="bx--col-md-1"></div>
 		<div class="bx--col-md-6">
 			<div>
 				<p style="font-size: 40px;font-weight: 100;">{{challengeDetails.title}}</p>
 				<br /> <br />
-				<div *ngIf="acceptedChallenge._id.length>0">
+				<div *ngIf="acceptedChallenge?._id.length>0">
 					<button class="bx--btn bx--btn--tertiary" type="button">
 						Accepted
 						<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;"
@@ -58,7 +58,7 @@
 					</button>
 				</div>
 
-				<div *ngIf="acceptedChallenge._id.length==0">
+				<div *ngIf="acceptedChallenge?._id.length==0">
 					<button class="bx--btn bx--btn--tertiary" type="button" (click)="acceptChallenge(challengeDetails._id)">
 						Accept
 						<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;"
@@ -111,10 +111,10 @@
 							[condensed]="rowCondensed">
 							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }"
 								style="margin-right: 37px; margin-left: -14px"
-								*ngFor="let phase of challengeDetails.phases; index as i">
+								*ngFor="let phase of challengeDetails?.phases; index as i">
 								<h3>Phase {{i+1}}</h3>
 								<br />
-								<p>{{phase.description}}</p>
+								<p>{{phase?.description}}</p>
 							</div>
 							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 3, sm: 12 }">
 								<h3>Data Visual</h3>
@@ -154,10 +154,10 @@
 							<tbody>
 								<tr *ngFor="let data of leaderboard; index as i">
 									<td>{{i+1}}</td>
-									<td>{{data.innovatorId.fullName}}</td>
+									<td>{{data?.innovatorId?.fullName}}</td>
 									<td>phase_01</td>
 									<td>(score)</td>
-									<td>{{getDate(data.createdAt)}}</td>
+									<td>{{getDate(data?.createdAt)}}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -174,14 +174,14 @@
 								</ibm-progress-indicator>
 							</div>
 							<div ibmCol class="custom-class-example1" [columnNumbers]="{ md: 6, sm: 12 }">
-								<app-submission-step-one *ngIf="current == 1" (goNext)=nextStepOne($event)>
+								<app-submission-step-one *ngIf="current == 0" (goNext)=nextStepOne($event)>
 								</app-submission-step-one>
-								<app-submission-step-two *ngIf="current == 2" (goPrevious)="previousStepTwo()"
+								<app-submission-step-two *ngIf="current == 1" (goPrevious)="previousStepTwo()"
 									(goNext)="nextStepTwo($event)"></app-submission-step-two>
-								<app-submission-step-three *ngIf="current == 3" (goPrevious)="previousStepThree()"
+								<app-submission-step-three *ngIf="current == 2" (goPrevious)="previousStepThree()"
 									(goNext)="nextStepThree($event)"></app-submission-step-three>
-								<app-submission-step-four *ngIf="current == 4" (goPrevious)="previousStepFour()"
-									(goNext)="nextStepFour($event)"></app-submission-step-four>
+								<app-submission-step-four *ngIf="current == 3" (goPrevious)="previousStepFour()"
+									(goNext)="nextStepFour($event)" [challengeSubmissionData]="challengeSubmissionData" ></app-submission-step-four>
 							</div>
 						</div>
 					</div>
