@@ -59,11 +59,12 @@
 						<p>Top 5 performing models</p>
 					</div>
 					<ol ibmList class="list">
-						<li ibmListItem>Beian Doe</li>
+						<li ibmListItem *ngFor="let data of submissionChallengeDetails">{{data?.innovatorId?.fullName}} </li>
+						<!-- <li ibmListItem>Beian Doe</li>
 						<li ibmListItem>Samuel jackson</li>
 						<li ibmListItem>Maria santa</li>
 						<li ibmListItem>Beian Doe</li>
-						<li ibmListItem>Samuel jackson</li>
+						<li ibmListItem>Samuel jackson</li> -->
 					</ol>
 
 					<div ibmGrid [condensed]="gridCondensed">

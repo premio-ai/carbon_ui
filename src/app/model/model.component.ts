@@ -69,6 +69,7 @@ export class ModelComponent {
         return false
       }
     })
+    console.log(this.compareModelData, "---this.compareModelData---72")
     this.compareModelData = temp
   }
 

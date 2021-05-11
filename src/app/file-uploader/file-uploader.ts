@@ -16,7 +16,7 @@ export class DragAndDropStory {
 	@Input() files = new Set();
 	@Input() title;
 	@Input() description;
-	@Input() accept = [".jpg", ".png"];
+	@Input() accept = [".jpg", ".png", ".pdf", ".txt"];
 	@Input() multiple;
 	@Input() dropText = "Drag and drop files here of upload";
 	@Input() disabled = false;

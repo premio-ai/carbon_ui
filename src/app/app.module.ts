@@ -15,6 +15,7 @@ import { Time16Module } from "@carbon/icons-angular/lib/time/16";
 import { UserAvatar20Module } from "@carbon/icons-angular/lib/user--avatar/20";
 import { UserMultiple16Module } from "@carbon/icons-angular/lib/user--multiple/16";
 import { Bookmark16Module } from "@carbon/icons-angular/lib/bookmark/16";
+import { Bookmark20Module } from "@carbon/icons-angular/lib/bookmark/20";
 import {Upload16Module} from "@carbon/icons-angular/lib/upload/16";
 import {Download16Module} from "@carbon/icons-angular/lib/download/16";
 import {Download20Module} from "@carbon/icons-angular/lib/download/20";
@@ -31,6 +32,7 @@ import {CheckmarkOutline20Module} from "@carbon/icons-angular/lib/checkmark--out
 // carbon-components-angular default imports
 import {
 	AccordionModule,
+	LoadingModule,
 	BreadcrumbModule,
 	ButtonModule,
 	CheckboxModule,
@@ -85,7 +87,9 @@ import { SubmissionStepFourComponent } from "./submission-step-four/submission-s
 import { SubmissionStepOneComponent } from "./submission-step-one/submission-step-one.component";
 import { SubmissionStepThreeComponent } from "./submission-step-three/submission-step-three.component";
 import { SubmissionStepTwoComponent } from "./submission-step-two/submission-step-two.component";
-
+import { from } from "rxjs";
+import {CheckmarkFilled16Module} from "@carbon/icons-angular/lib/checkmark--filled/16";
+import {RadioButton20Module} from "@carbon/icons-angular/lib/radio-button/20"
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -133,6 +137,7 @@ import { SubmissionStepTwoComponent } from "./submission-step-two/submission-ste
 		BrowserModule,
 		BrowserAnimationsModule,
 		FormsModule,
+		LoadingModule,
 		AppRoutingModule,
 		UIShellModule,
 		Notification20Module,
@@ -184,7 +189,10 @@ import { SubmissionStepTwoComponent } from "./submission-step-two/submission-ste
 		Chemistry20Module,
 		CheckmarkOutline20Module,
 		Trophy20Module,
-		UserMultiple20Module
+		UserMultiple20Module,
+		Bookmark20Module,
+		CheckmarkFilled16Module,
+		RadioButton20Module,
 	],
 	bootstrap: [AppComponent],
 	providers: [RequestService],
