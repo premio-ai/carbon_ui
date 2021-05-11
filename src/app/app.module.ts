@@ -17,10 +17,17 @@ import { UserMultiple16Module } from "@carbon/icons-angular/lib/user--multiple/1
 import { Bookmark16Module } from "@carbon/icons-angular/lib/bookmark/16";
 import {Upload16Module} from "@carbon/icons-angular/lib/upload/16";
 import {Download16Module} from "@carbon/icons-angular/lib/download/16";
+import {Download20Module} from "@carbon/icons-angular/lib/download/20";
 import {Chemistry32Module} from "@carbon/icons-angular/lib/chemistry/32";
 import { Concept32Module } from "@carbon/icons-angular/lib/concept/32"
 import {CloudUpload32Module} from "@carbon/icons-angular/lib/cloud--upload/32";
-import {Idea32Module} from "@carbon/icons-angular/lib/idea/32"
+import {Idea32Module} from "@carbon/icons-angular/lib/idea/32";
+import {Forum16Module} from "@carbon/icons-angular/lib/forum/16";
+import {Upload20Module} from "@carbon/icons-angular/lib/upload/20";
+import {Chemistry20Module} from "@carbon/icons-angular/lib/chemistry/20";
+import {Trophy20Module} from "@carbon/icons-angular/lib/trophy/20";
+import {UserMultiple20Module} from "@carbon/icons-angular/lib/user--multiple/20";
+import {CheckmarkOutline20Module} from "@carbon/icons-angular/lib/checkmark--outline/20";
 // carbon-components-angular default imports
 import {
 	AccordionModule,
@@ -66,13 +73,13 @@ import { InvChallengeComponent } from "./inv-challenge/inv-challenge.component";
 import { InvDashboradComponent } from "./inv-dashborad/inv-dashborad.component";
 import { InvModelViewComponent } from "./inv-model-view/inv-model-view.component";
 import { InvSeePerformanceComponent } from "./inv-see-performance/inv-see-performance.component";
-import { ActivityComponent } from "./activity/activity.component";
+// import { ActivityComponent } from "./activity/activity.component";
 
 import { DragAndDropStory } from './file-uploader/file-uploader';
 
 import { ModelComponent } from "./model/model.component";
 import { ModelReportComponent } from "./model-report/model-report.component";
-import { ModelComponent } from "./model/model.component";
+// import { ModelComponent } from "./model/model.component";
 import { OverviewComponent } from "./overview/overview.component";
 import { PreviewComponent } from "./preview/preview.component";
 import { RequestService } from "./request.service";
@@ -136,6 +143,7 @@ import { from } from "rxjs";
 		AppSwitcher20Module,
 		Edit20Module,
 		Badge20Module,
+		Download20Module,
 		ButtonModule,
 		TabsModule,
 		AddModule,
@@ -174,6 +182,12 @@ import { from } from "rxjs";
 		Chemistry32Module,
 		Concept32Module,
 		Idea32Module,
+		Forum16Module,
+		Upload20Module,
+		Chemistry20Module,
+		CheckmarkOutline20Module,
+		Trophy20Module,
+		UserMultiple20Module
 	],
 	bootstrap: [AppComponent],
 	providers: [RequestService],

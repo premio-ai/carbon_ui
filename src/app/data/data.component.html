@@ -4,6 +4,8 @@
 <br/>
 <p>Data set include the following feature :</p>
 <br/>
+
+<!-- <img src="assets/visuals.png"> -->
 <ul ibmList>
     <li ibmListItem>Nunc convallis vel justo ut pellentesque.</li>
     <li ibmListItem>Nullam suscipit magna ac vestibulum sodales</li>
@@ -12,6 +14,8 @@
     <li ibmListItem>Nullam suscipit magna ac vestibulum sodales</li>
 </ul>
 <br/><br/>
+<p style="font-size: 18px;">Data visuals</p>
+<img style="margin-left: -10px;" src="assets/datavisuals.png">
 <ibm-accordion >
     <div *ngFor="let phase of challengeDetails.phases; index as i">
         <ibm-accordion-item title="Phase {{i}}" (selected)="selected($event)">{{ phase?.description }}</ibm-accordion-item>
