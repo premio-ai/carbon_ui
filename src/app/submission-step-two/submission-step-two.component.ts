@@ -10,20 +10,34 @@ export class SubmissionStepTwoComponent implements OnInit {
 	@Output() public goNext: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
+  language: any[];
+  descriptionError: boolean;
+  approachError: boolean;
+  languageError: boolean;
 
   stepTwo: {
     description: string,
-    guidence: string,
-    score: number
+    approach: string,
+    language: string
   }
 
   ngOnInit() {
+    this.language = [
+      { content: 'C' },
+      { content: 'C++' },
+      { content: 'Python' },
+      { content: 'Java' },
+    ];
     this.stepTwo=  {
       description: "",
-      guidence: "",
-      score: 0
+      approach: "",
+      language: ""
     }
   
+  }
+
+  selected(langaugeSelected) {
+    this.stepTwo.language = langaugeSelected.item.content;
   }
 
   previous(){
@@ -32,6 +46,21 @@ export class SubmissionStepTwoComponent implements OnInit {
 
   next(){
     console.log(this.stepTwo)
-    this.goNext.emit(this.stepTwo);
+
+    if (this.stepTwo.description.length>0 && this.stepTwo.approach.length>0 && this.stepTwo.language.length>0) {
+      this.goNext.emit(this.stepTwo);
+    } else {
+      if (this.stepTwo.description.length == 0) {
+        this.descriptionError = true
+      }
+      if (this.stepTwo.approach.length == 0) {
+        this.approachError = true
+      }
+      if (this.stepTwo.language.length == 0) {
+        this.languageError = true
+      }
+    }
+
   }
+
 }

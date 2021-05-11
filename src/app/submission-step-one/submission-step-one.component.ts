@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { RequestService } from '../request.service';
 
 @Component({
   selector: 'app-submission-step-one',
@@ -9,28 +10,37 @@ export class SubmissionStepOneComponent implements OnInit {
 
   @Output() public goNext: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  constructor(
+    private requestService: RequestService
+  ) { }
+
   stepOne: {
-    title: string,
-    description: string,
-    objective: string,
-    endDate: String
+    modelUploadedPath: any
   }
 
   ngOnInit() {
     this.stepOne = {
-      title: "",
-      description: "",
-      objective: "",
-      endDate: ""
+      modelUploadedPath: ''
     };
   }
 
-  nextStep() {
-    console.log("... ",this.stepOne)
-    this.goNext.emit(this.stepOne)
+  setModel(acceptedFiles) {
+    const file = acceptedFiles.file;
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('name', 'dataSetImage')
+
+    this.uploadDataVisual(formData)
   }
 
+  uploadDataVisual(formData) {
+    this.requestService.post('upload', formData).subscribe(data => {
+      this.stepOne.modelUploadedPath = data[0].filename
+    })
+  }
 
+  nextStep() {
+    this.goNext.emit(this.stepOne)
+  }
 
 }

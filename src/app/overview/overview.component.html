@@ -29,7 +29,7 @@
 	<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
 		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 8, sm: 12 }" style="display: flex;" >
 			<div style="display: flex; flex-flow: row wrap; justify-content: space-around; margin-right: 10px;"
-				*ngFor="let phase of challengeDetails.phases; index as i" >
+				*ngFor="let phase of challengeDetails?.phases; index as i" >
 				<ibm-tile class="tiles">Phase {{i+1}}<br />
 					<p>model Upload</p>
 					<p>300</p><br />
@@ -60,7 +60,3 @@
 			</div>
 		</div>
 	</div>
-
-
-
-

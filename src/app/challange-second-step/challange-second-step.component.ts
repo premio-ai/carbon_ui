@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { RequestService } from '../request.service';
 
 @Component({
   selector: 'app-challange-second-step',
@@ -9,37 +10,87 @@ export class ChallangeSecondStepComponent implements OnInit {
   @Output() public goPrevious: EventEmitter<any> = new EventEmitter();
   @Output() public goNext: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  constructor(
+    private requestService: RequestService
+  ) { }
   phases: any[] = []
   phasesError: boolean
+  formData: any
 
   stepTwo: {
     description: string,
     guidence: string,
-    score: number
+    score: number,
+    dataVisualFile: string,
+    sampleDataFile: any
   }
 
   ngOnInit() {
     this.stepTwo = {
       description: "",
       guidence: "",
-      score: 0
+      score: 0,
+      dataVisualFile: '',
+      sampleDataFile: []
     }
   }
 
   addPhase() {
-    let tempData = {
-      description: this.stepTwo.description,
-      guidence: this.stepTwo.guidence,
-      score: this.stepTwo.score
-    }
+    if (this.stepTwo.description.length > 0 && this.stepTwo.guidence.length > 0 && this.stepTwo.score && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 0) {
+      let tempData = {
+        description: this.stepTwo.description,
+        guidence: this.stepTwo.guidence,
+        score: this.stepTwo.score,
+        dataVisualFile: this.stepTwo.dataVisualFile,
+        sampleDataFile: this.stepTwo.sampleDataFile
+      }
 
-    this.phases.push(tempData)
-    this.stepTwo = {
-      description: "",
-      guidence: "",
-      score: 0
+      this.phases.push(tempData)
+      this.stepTwo = {
+        description: "",
+        guidence: "",
+        score: 0,
+        dataVisualFile: '',
+        sampleDataFile: []
+      }
     }
+  }
+
+  setDataVisual(acceptedFiles) {
+    const file = acceptedFiles.file;
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('name', 'dataSetImage')
+    this.formData = formData
+
+    this.uploadDataVisual(formData)
+  }
+
+  uploadDataVisual(formData) {
+    this.requestService.post('upload', formData).subscribe(data => {
+      this.stepTwo.dataVisualFile = data[0].filename
+    })
+  }
+
+  setSampleData(acceptedFiles) {
+    const file = acceptedFiles.file;
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('name', 'dataSetImage')
+    this.formData = formData
+
+    this.uploadSampleData(formData)
+  }
+
+  uploadSampleData(formData) {
+    this.requestService.post('upload', formData).subscribe(data => {
+      let tempArr = []
+      data.map(dt => {
+        tempArr.push(dt.filename)
+      })
+
+      this.stepTwo.sampleDataFile = tempArr
+    })
   }
 
   previous() {
@@ -47,11 +98,30 @@ export class ChallangeSecondStepComponent implements OnInit {
   }
 
   next() {
+    // TODO: uncomment
+    this.goNext.emit(this.phases);
+    // if (this.phases.length>0) {      
+    //   this.goNext.emit(this.phases);
+    // } else  {
+    //   this.phasesError = true
+    // }
 
-    if (this.phases.length>0) {      
+    if (this.phases.length > 0) {
       this.goNext.emit(this.phases);
-    } else  {
-      this.phasesError = true
+    } else {
+      if (this.stepTwo.description.length > 0 && this.stepTwo.guidence.length > 0 && this.stepTwo.score && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 0) {
+        let tempData = {
+          description: this.stepTwo.description,
+          guidence: this.stepTwo.guidence,
+          score: this.stepTwo.score,
+          dataVisualFile: this.stepTwo.dataVisualFile,
+          sampleDataFile: this.stepTwo.sampleDataFile
+        }
+        this.phases.push(tempData)
+        this.goNext.emit(this.phases);
+      } else {
+        this.phasesError = true
+      }
     }
   }
 

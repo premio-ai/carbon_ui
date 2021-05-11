@@ -30,7 +30,8 @@ export class ChallangeFirstStepComponent implements OnInit {
   }
 
   nextStep() {
-    console.log("... ",this.stepOne)
+    // TODO : uncomment
+    // this.goNext.emit(this.stepOne)
 
     var date_regex = /^(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$/;
 
@@ -51,4 +52,5 @@ export class ChallangeFirstStepComponent implements OnInit {
       }
     }
   }
+
 }

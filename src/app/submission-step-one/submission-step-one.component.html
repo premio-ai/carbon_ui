@@ -1,6 +1,6 @@
 <p>
-	Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-	Lorem Ipsum has been the industry's standard dummy
+	Don't forget to check out the sample data sets before you submit a model.
+	These data sets will help you get started in creating your models.
 </p>
 <br />
 <p>Download Dataset1 	<svg icon ibmIconDownload16 ></svg></p>
@@ -8,19 +8,16 @@
 <br />
 <br />
 <br />
-<p>
-	Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+<p>Once you've built your model you can <strong>upload it here</strong> to submit it for Phase 1 of training and testing.
 </p>
 <h6>Model</h6>
-<p>
-	Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+<p>Please upload your model in (.format) formats. (fileSize) MB max file size.
 </p>
-<ibm-tag type="cool-gray">Modelname.mdk</ibm-tag>
+
+<app-drop-file-uploader (goNext)="setModel($event)" (filesChange)="onDropped($event.target.files)"></app-drop-file-uploader>
 
 <div style="margin-left: auto; display: flex; justify-content: flex-end">
 	<button class="bx--btn bx--btn--secondary" type="button">Cancel</button>
-
 	&nbsp;
-    <button [ibmButton]="ibmButton" class="btn" [size]="size" (click)="nextStep()">  Next</button>
+	<button [ibmButton]="ibmButton" class="btn" [size]="size" (click)="nextStep()"> Next</button>
 </div>
-

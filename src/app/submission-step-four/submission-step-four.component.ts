@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-submission-step-four',
@@ -6,6 +6,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./submission-step-four.component.scss']
 })
 export class SubmissionStepFourComponent implements OnInit {
+  @Input() challengeSubmissionData: any;
 
   @Output() public goPrevious: EventEmitter<any> = new EventEmitter();
   @Output() public goNext: EventEmitter<any> = new EventEmitter();
@@ -19,20 +20,12 @@ export class SubmissionStepFourComponent implements OnInit {
 
 
   ngOnInit() {
-    this.stepFour=  {
-      description: "",
-      guidence: "",
-      score: 0
-    }
   }
 
   previous() {
-    this.goPrevious.emit();
   }
 
   next() {
-    console.log(this.stepFour)
-    this.goNext.emit(this.stepFour);
   }
 
 }
