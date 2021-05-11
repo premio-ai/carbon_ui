@@ -22,7 +22,15 @@
 	<div class="bx--row line-padding">
 		<div class="bx--col-md-1" style="padding-left: 8%"></div>
 		<div class="bx--col-md-7">
-			<p style="font-size: 40px; font-weight: 100">modelname.mdk</p>
+			<div style="display: flex;">
+				<div>
+					<p style="font-size: 40px; font-weight: 100">
+						modelname.mdk
+					</p>
+				</div>
+				<div style="margin-top: 10px;margin-left: 8px;"><svg icon ibmIconEdit20></svg></div>
+			</div>
+
 			<br /><br />
 			<p style="font-size: 16px; font-weight: 600">
 				Phase1: Current Status
@@ -37,7 +45,7 @@
 				"
 			>
 				<ibm-tile>
-					<p class="head"><svg icon ibmIconTime16></svg></p>
+					<p class="head"><svg icon ibmIconCloudUpload32></svg></p>
 					<p class="head">Upload model <br />to data</p>
 					<p class="discrip">Estimated time remaining <br />5 min</p>
 					<a
@@ -48,7 +56,7 @@
 					>
 				</ibm-tile>
 				<ibm-tile>
-					<p class="head"><svg icon ibmIconTime16></svg></p>
+					<p class="head"><svg icon ibmIconConcept32></svg></p>
 					<p class="head">Train model <br />to data</p>
 					<p class="discrip">Estimated time remaining <br />5 min</p>
 					<a
@@ -59,7 +67,7 @@
 					>
 				</ibm-tile>
 				<ibm-tile>
-					<p class="head"><svg icon ibmIconTime16></svg></p>
+					<p class="head"><svg icon ibmIconChemistry32></svg></p>
 					<p class="head">Test model <br />to data</p>
 					<p class="discrip">Estimated time remaining <br />5 min</p>
 					<a
@@ -70,7 +78,7 @@
 					>
 				</ibm-tile>
 				<ibm-tile>
-					<p class="head"><svg icon ibmIconTime16></svg></p>
+					<p class="head"><svg icon ibmIconIdea32></svg></p>
 					<p class="head">Genrate model <br />performance score</p>
 					<p class="discrip">Estimated time remaining <br />5 min</p>
 					<a
@@ -81,296 +89,366 @@
 					>
 				</ibm-tile>
 			</div>
-<br />
+			<br />
 			<div class="border-div">
-                &nbsp;&nbsp;
-                <h5 style="margin-left: 8px;">Congratuations!</h5>
-                &nbsp;&nbsp;
-                <p style="margin-left: 8px;">your model has met the minimum performance score</p>
-                <br/> &nbsp;
-                <button [ibmButton]="ibmButton" [size]="size">
-                   View model overview<svg class="bx--btn__icon" ibmIconAdd size="20"></svg>
-                </button>
-                <br /> <br />
-                &nbsp;
-                <button [ibmButton]="ibmButton" [size]="size">
-                   Enter phase 2<svg class="bx--btn__icon" ibmIconAdd size="20"></svg>
-                </button>
-            </div>
+				&nbsp;&nbsp;
+				<h5 style="margin-left: 8px">Congratuations!</h5>
+				&nbsp;&nbsp;
+				<p style="margin-left: 8px">
+					your model has met the minimum performance score
+				</p>
+				<br />
+				&nbsp;
+				<button [ibmButton]="ibmButton" [size]="size">
+					View model overview<svg
+						class="bx--btn__icon"
+						ibmIconAdd
+						size="20"
+					></svg>
+				</button>
+				<br />
+				<br />
+				&nbsp;
+				<button [ibmButton]="ibmButton" [size]="size" style="width:217px">
+					Enter phase 2<svg
+						class="bx--btn__icon"
+						ibmIconAdd
+						size="20"
+					></svg>
+				</button>
+			</div>
 
-            <br /><br />
-        <ibm-accordion >
-            <ibm-accordion-item title="Phase 1 Overview" (selected)="selected($event)">
-           <h5>Description</h5>
-           <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.   
-        </p>
-        <br />
-        <h5>Approach taken  </h5>
-        <p>
-         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-         It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.   
-     </p>
+			<br /><br />
+			<ibm-accordion>
+				<ibm-accordion-item
+					title="Phase 1 Overview"
+					(selected)="selected($event)"
+				>
+					<h5>Description</h5>
+					<p>
+						Lorem Ipsum is simply dummy text of the printing and
+						typesetting industry. Lorem Ipsum has been the
+						industry's standard dummy text ever since the 1500s,
+						when an unknown printer took a galley of type and
+						scrambled it to make a type specimen book. It has
+						survived not only five centuries, but also the leap into
+						electronic typesetting, remaining essentially unchanged.
+						It was popularised in the 1960s with the release of
+						Letraset sheets containing Lorem Ipsum passages, and
+						more recently with desktop publishing software like
+						Aldus PageMaker including versions of Lorem Ipsum.
+					</p>
+					<br />
+					<h5>Approach taken</h5>
+					<p>
+						Lorem Ipsum is simply dummy text of the printing and
+						typesetting industry. Lorem Ipsum has been the
+						industry's standard dummy text ever since the 1500s,
+						when an unknown printer took a galley of type and
+						scrambled it to make a type specimen book. It has
+						survived not only five centuries, but also the leap into
+						electronic typesetting, remaining essentially unchanged.
+						It was popularised in the 1960s with the release of
+						Letraset sheets containing Lorem Ipsum passages, and
+						more recently with desktop publishing software like
+						Aldus PageMaker including versions of Lorem Ipsum.
+					</p>
 
-	 <br />
-	 <ibm-table-container>
-		<br />
-		<ibm-table-header>
-			<h4 ibmTableHeaderTitle>Leaderboard</h4>
-		</ibm-table-header>
-		<table class="bx--data-table">
-			<thead>
-				<tr>
-					<th>
-						<!-- checkbox th -->
-						<!-- sortable th  -->
-						<span class="bx--table-header-label"
-							>Rank</span
-						>
-					</th>
-					<th>
-						<!-- checkbox th -->
-						<!-- sortable th  -->
-						<span class="bx--table-header-label"
-							>Name</span
-						>
-					</th>
-					<th>
-						<!-- checkbox th -->
-						<!-- sortable th  -->
-						<span class="bx--table-header-label"
-							>Phase</span
-						>
-					</th>
-					<th>
-						<!-- checkbox th -->
-						<!-- sortable th  -->
-						<span class="bx--table-header-label"
-							>Score</span
-						>
-					</th>
+					<br />
+					<ibm-table-container>
+						<br />
+						<ibm-table-header>
+							<h4 ibmTableHeaderTitle>Leaderboard</h4>
+						</ibm-table-header>
+						<table class="bx--data-table">
+							<thead>
+								<tr>
+									<th>
+										<!-- checkbox th -->
+										<!-- sortable th  -->
+										<span class="bx--table-header-label"
+											>Rank</span
+										>
+									</th>
+									<th>
+										<!-- checkbox th -->
+										<!-- sortable th  -->
+										<span class="bx--table-header-label"
+											>Name</span
+										>
+									</th>
+									<th>
+										<!-- checkbox th -->
+										<!-- sortable th  -->
+										<span class="bx--table-header-label"
+											>Phase</span
+										>
+									</th>
+									<th>
+										<!-- checkbox th -->
+										<!-- sortable th  -->
+										<span class="bx--table-header-label"
+											>Score</span
+										>
+									</th>
 
-					<th>
-						<!-- checkbox th -->
-						<!-- sortable th  -->
-						<span class="bx--table-header-label"
-							>Date</span
-						>
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<!-- expand icon td -->
-					<td>
-						<!-- truncated new markup -->
-						1
-					</td>
-					<!-- expand icon td -->
-					<td>
-						<!-- truncated new markup -->
-						J**D**
-					</td>
-					<!-- expand icon td -->
-					<td>
-						<!-- truncated new markup -->
-						1
-					</td>
-					<!-- expand icon td -->
-					<td>
-						<!-- truncated new markup -->
-						93
-					</td>
-					<!-- expand icon td -->
+									<th>
+										<!-- checkbox th -->
+										<!-- sortable th  -->
+										<span class="bx--table-header-label"
+											>Date</span
+										>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										1
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										J**D**
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										1
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										93
+									</td>
+									<!-- expand icon td -->
 
-					<!-- expand icon td -->
-					<td>
-						<!-- truncated new markup -->
-						26/02/21
-					</td>
-				</tr>
-				<!-- Expandable child row -->
-				<tr>
-					<!-- expand icon td -->
-					<td>
-						<!-- truncated new markup -->
-						2
-					</td>
-					<!-- expand icon td -->
-					<td>
-						<!-- truncated new markup -->
-						J**D**
-					</td>
-					<!-- expand icon td -->
-					<td>
-						<!-- truncated new markup -->
-						1
-					</td>
-					<!-- expand icon td -->
-					<td>
-						<!-- truncated new markup -->
-						93
-					</td>
-					<!-- expand icon td -->
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										26/02/21
+									</td>
+								</tr>
+								<!-- Expandable child row -->
+								<tr>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										2
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										J**D**
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										1
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										93
+									</td>
+									<!-- expand icon td -->
 
-					<!-- expand icon td -->
-					<td>
-						<!-- truncated new markup -->
-						26/02/21
-					</td>
-				</tr>
-				<!-- Expandable child row -->
-				<tr>
-					<!-- expand icon td -->
-					<td>
-						<!-- truncated new markup -->
-						3
-					</td>
-					<!-- expand icon td -->
-					<td>
-						<!-- truncated new markup -->
-						J**D**
-					</td>
-					<!-- expand icon td -->
-					<td>
-						<!-- truncated new markup -->
-						1
-					</td>
-					<!-- expand icon td -->
-					<td>
-						<!-- truncated new markup -->
-						93
-					</td>
-					<!-- expand icon td -->
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										26/02/21
+									</td>
+								</tr>
+								<!-- Expandable child row -->
+								<tr>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										3
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										J**D**
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										1
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										93
+									</td>
+									<!-- expand icon td -->
 
-					<!-- expand icon td -->
-					<td>
-						<!-- truncated new markup -->
-						26/02/21
-					</td>
-				</tr>
-				<!-- Expandable child row -->
-				<tr>
-					<!-- expand icon td -->
-					<td>
-						<!-- truncated new markup -->
-						4
-					</td>
-					<!-- expand icon td -->
-					<td>
-						<!-- truncated new markup -->
-						J**D**
-					</td>
-					<!-- expand icon td -->
-					<td>
-						<!-- truncated new markup -->
-						1
-					</td>
-					<!-- expand icon td -->
-					<td>
-						<!-- truncated new markup -->
-						93
-					</td>
-					<!-- expand icon td -->
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										26/02/21
+									</td>
+								</tr>
+								<!-- Expandable child row -->
+								<tr>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										4
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										J**D**
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										1
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										93
+									</td>
+									<!-- expand icon td -->
 
-					<!-- expand icon td -->
-					<td>
-						<!-- truncated new markup -->
-						26/02/21
-					</td>
-				</tr>
-				<!-- Expandable child row -->
-				<tr>
-					<!-- expand icon td -->
-					<td>
-						<!-- truncated new markup -->
-						5
-					</td>
-					<!-- expand icon td -->
-					<td>
-						<!-- truncated new markup -->
-						J**D**
-					</td>
-					<!-- expand icon td -->
-					<td>
-						<!-- truncated new markup -->
-						1
-					</td>
-					<!-- expand icon td -->
-					<td>
-						<!-- truncated new markup -->
-						93
-					</td>
-					<!-- expand icon td -->
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										26/02/21
+									</td>
+								</tr>
+								<!-- Expandable child row -->
+								<tr>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										5
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										J**D**
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										1
+									</td>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										93
+									</td>
+									<!-- expand icon td -->
 
-					<!-- expand icon td -->
-					<td>
-						<!-- truncated new markup -->
-						26/02/21
-					</td>
-				</tr>
-				<!-- Expandable child row -->
-			</tbody>
-		</table>
-	</ibm-table-container>
-	<p>only model that have overall score of 80% above will be invited to Phase 2.</p>
-            </ibm-accordion-item>
-            <ibm-accordion-item title="Next phase (2 to 3)" (selected)="selected($event)">
-				<h5>Requirment</h5>
-				
-            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore \
-            
-            ullamco laboris nisi ut aliquip ex ea commodo consequat.
-		<br/>
-		<h5>Accuracy:80%</h5>
+									<!-- expand icon td -->
+									<td>
+										<!-- truncated new markup -->
+										26/02/21
+									</td>
+								</tr>
+								<!-- Expandable child row -->
+							</tbody>
+						</table>
+					</ibm-table-container>
+					<p>
+						only model that have overall score of 80% above will be
+						invited to Phase 2.
+					</p>
+				</ibm-accordion-item>
+				<ibm-accordion-item
+					title="Next phase (2 to 3)"
+					(selected)="selected($event)"
+				>
+					<h5>Requirment</h5>
 
-		<h5>Data</h5>
-		Dataset size: 1000 records
+					consectetur adipiscing elit, sed do eiusmod tempor
+					incididunt ut labore \ ullamco laboris nisi ut aliquip ex ea
+					commodo consequat.
+					<br />
+					<h5>Accuracy:80%</h5>
 
-		<br />
-		<h5>Model</h5>
-		<p>
-			consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore \
-            
-            ullamco laboris nisi ut aliquip ex ea commodo consequat.
-		</p>
-		
-<fieldset class="bx--fieldset">
-	
-	<div class="bx--form-item">
-	  <div class="bx--radio-button-group  bx--radio-button-group--vertical ">
-		  <div class="bx--radio-button-wrapper">
-			<input id="radio-button-b4twcexavc-1" class="bx--radio-button" type="radio" value="red" name="radio-button--vertical" tabindex="0" checked>
-			<label for="radio-button-b4twcexavc-1" class="bx--radio-button__label">
-			  <span class="bx--radio-button__appearance"></span>
-			  <span class="bx--radio-button__label-text">Trained model</span>
-			</label>
-		  </div>
-		  <div class="bx--radio-button-wrapper">
-			<input id="radio-button-b4twcexavc-2" class="bx--radio-button" type="radio" value="green" name="radio-button--vertical" tabindex="0">
-			<label for="radio-button-b4twcexavc-2" class="bx--radio-button__label">
-			  <span class="bx--radio-button__appearance"></span>
-			  <span class="bx--radio-button__label-text">Upload Modified trained model</span>
-			</label>
-		  </div>
-		 
-	  </div>
-	</div>
-  </fieldset>
-		<button [ibmButton]="ibmButton" [size]="size" disabled="true">
-			Enter phase 2<svg class="bx--btn__icon" ibmIconAdd size="20"></svg>
-		</button>
-		</ibm-accordion-item>
-           
-        </ibm-accordion>
+					<h5>Data</h5>
+					Dataset size: 1000 records
 
+					<br />
+					<h5>Model</h5>
+					<p>
+						consectetur adipiscing elit, sed do eiusmod tempor
+						incididunt ut labore \ ullamco laboris nisi ut aliquip
+						ex ea commodo consequat.
+					</p>
+
+					<fieldset class="bx--fieldset">
+						<div class="bx--form-item">
+							<div
+								class="bx--radio-button-group bx--radio-button-group--vertical"
+							>
+								<div class="bx--radio-button-wrapper">
+									<input
+										id="radio-button-b4twcexavc-1"
+										class="bx--radio-button"
+										type="radio"
+										value="red"
+										name="radio-button--vertical"
+										tabindex="0"
+										checked
+									/>
+									<label
+										for="radio-button-b4twcexavc-1"
+										class="bx--radio-button__label"
+									>
+										<span
+											class="bx--radio-button__appearance"
+										></span>
+										<span
+											class="bx--radio-button__label-text"
+											>Trained model</span
+										>
+									</label>
+								</div>
+								<div class="bx--radio-button-wrapper">
+									<input
+										id="radio-button-b4twcexavc-2"
+										class="bx--radio-button"
+										type="radio"
+										value="green"
+										name="radio-button--vertical"
+										tabindex="0"
+									/>
+									<label
+										for="radio-button-b4twcexavc-2"
+										class="bx--radio-button__label"
+									>
+										<span
+											class="bx--radio-button__appearance"
+										></span>
+										<span
+											class="bx--radio-button__label-text"
+											>Upload Modified trained model</span
+										>
+									</label>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+					<button
+						[ibmButton]="ibmButton"
+						[size]="size"
+						disabled="true"
+					>
+						Enter phase 2<svg
+							class="bx--btn__icon"
+							ibmIconAdd
+							size="20"
+						></svg>
+					</button>
+				</ibm-accordion-item>
+			</ibm-accordion>
 		</div>
-
-        
-
 	</div>
-
-   
-
 </div>

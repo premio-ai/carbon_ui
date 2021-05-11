@@ -61,11 +61,7 @@ export class InvAcceptedComponent implements OnInit {
 				text: "Step 4",
 				state: ["incomplete"],
 			},
-			{
-				text: "Step 5",
-				state: ["incomplete"],
-				// disabled: true,
-			},
+			
 		];
 		this.current = 1;
 		this.challange = {
