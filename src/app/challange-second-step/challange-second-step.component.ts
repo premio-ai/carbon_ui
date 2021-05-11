@@ -15,7 +15,6 @@ export class ChallangeSecondStepComponent implements OnInit {
   ) { }
   phases: any[] = []
   phasesError: boolean
-  formData: any
 
   stepTwo: {
     description: string,
@@ -60,8 +59,6 @@ export class ChallangeSecondStepComponent implements OnInit {
     const file = acceptedFiles.file;
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('name', 'dataSetImage')
-    this.formData = formData
 
     this.uploadDataVisual(formData)
   }
@@ -76,8 +73,6 @@ export class ChallangeSecondStepComponent implements OnInit {
     const file = acceptedFiles.file;
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('name', 'dataSetImage')
-    this.formData = formData
 
     this.uploadSampleData(formData)
   }

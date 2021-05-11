@@ -1,6 +1,6 @@
 <div ibmGrid [condensed]="gridCondensed">
-	<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed" >
-		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 6, sm: 12 }" >
+	<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 6, sm: 12 }">
 			<br />
 			<h3>Challenge info</h3>
 			<p> {{ challengeDetails?.description }} </p>
@@ -11,14 +11,21 @@
 </div>
 
 <div ibmGrid [condensed]="gridCondensed">
-	<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed" >
-		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 7, sm: 12 }" >
+	<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 7, sm: 12 }">
 			<ibm-tile>
 				<p style="font-size: 20px;">Phase 0</p>
-				<div ibmGrid [condensed]="gridCondensed"><br/>
-					<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed" style="margin-left: 0px;" >
-						<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }" > 	<svg icon ibmIconUserMultiple16></svg>&nbsp;Users accepted <br /><br /><p class="numbers">430</p></div>
-						<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }" ><svg icon ibmIconDownload16></svg>&nbsp;Data Set Download <br /><br /><p class="numbers">350</p></div>
+				<div ibmGrid [condensed]="gridCondensed"><br />
+					<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
+						[condensed]="rowCondensed" style="margin-left: 0px;">
+						<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }"> <svg icon
+								ibmIconUserMultiple16></svg>&nbsp;Users accepted <br /><br />
+							<p class="numbers">430</p>
+						</div>
+						<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }"><svg icon
+								ibmIconDownload16></svg>&nbsp;Data Set Download <br /><br />
+							<p class="numbers">350</p>
+						</div>
 					</div>
 				</div>
 				<button class="btn" [ibmButton]="ibmButton" [size]="size">View Activity</button>
@@ -27,24 +34,30 @@
 		</div>
 	</div>
 	<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
-		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 8, sm: 12 }" style="display: flex;" >
+		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 8, sm: 12 }" style="display: flex;">
 			<div style="display: flex; flex-flow: row wrap; justify-content: space-around; margin-right: 10px;"
-				*ngFor="let phase of challengeDetails?.phases; index as i" >
-				<ibm-tile class="tiles"><p style="font-size: 20px;">Phase {{i+1}} </p><br />
-					<div class="icon_align"><svg icon ibmIconUpload20></svg><p>Models Uploaded</p></div>
-					<p class="numbers">300</p><br />
-					<div class="icon_align">
-						<svg icon ibmIconChemistry20></svg><p>Models trained & tested</p>
+				*ngFor="let phase of challengeDetails?.phases; index as i">
+				<ibm-tile class="tiles">
+					<p style="font-size: 20px;">Phase {{i+1}} </p><br />
+					<div class="icon_align"><svg icon ibmIconUpload20></svg>
+						<p>Models Uploaded</p>
 					</div>
 					<p class="numbers">300</p><br />
 					<div class="icon_align">
-						<svg icon ibmIconCheckmarkOutline20></svg><p>Models passed Scoring</p>
+						<svg icon ibmIconChemistry20></svg>
+						<p>Models trained & tested</p>
 					</div>
-					
+					<p class="numbers">300</p><br />
+					<div class="icon_align">
+						<svg icon ibmIconCheckmarkOutline20></svg>
+						<p>Models passed Scoring</p>
+					</div>
+
 					<p class="numbers">{{phase?.minimumModelScore}}</p><br />
 					<div class="icon_align">
-					<svg icon ibmIconTrophy20></svg><p >Top 5 performing models</p>
-				</div>
+						<svg icon ibmIconTrophy20></svg>
+						<p>Top 5 performing models</p>
+					</div>
 					<ol ibmList class="list">
 						<li ibmListItem>Beian Doe</li>
 						<li ibmListItem>Samuel jackson</li>
@@ -54,16 +67,70 @@
 					</ol>
 
 					<div ibmGrid [condensed]="gridCondensed">
-						<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+						<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
+							[condensed]="rowCondensed">
 							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
-								<button class="view" [ibmButton]="ibmButton" [size]="size" >View Activity</button>
+								<button class="view" [ibmButton]="ibmButton" [size]="size">View Activity</button>
 							</div>
 							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
-								<button class="model" [ibmButton]="ibmButton" [size]="size" >View Model</button>
+								<button class="model" [ibmButton]="ibmButton" [size]="size">View Model</button>
 							</div>
 						</div>
 					</div>
 				</ibm-tile>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<div ibmGrid [condensed]="gridCondensed">
+		<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+			<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 6, sm: 12 }">
+
+				<ibm-table-container>
+					<br />
+					<ibm-table-header>
+						<h4 ibmTableHeaderTitle>Leaderboard</h4>
+					</ibm-table-header>
+					<table class="bx--data-table">
+						<thead>
+							<tr>
+								<th>
+									<span class="bx--table-header-label">Rank</span>
+								</th>
+								<th>
+									<span class="bx--table-header-label">Name</span>
+								</th>
+								<th>
+									<span class="bx--table-header-label">P1 Score</span>
+								</th>
+								<th>
+									<span class="bx--table-header-label">P2 Score</span>
+								</th>
+								<th>
+									<span class="bx--table-header-label">P3 Score</span>
+								</th>
+								<th>
+									<span class="bx--table-header-label"></span>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>i+1</td>
+								<td>data?.innovatorId?.fullName</td>
+								<td>p1_score</td>
+								<td>p2_score</td>
+								<td>p3_score</td>
+								<td>view model</td>
+							</tr>
+						</tbody>
+					</table>
+					<br />
+				</ibm-table-container>
+
 			</div>
 		</div>
 	</div>

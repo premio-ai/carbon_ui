@@ -28,7 +28,6 @@ export class SubmissionStepOneComponent implements OnInit {
     const file = acceptedFiles.file;
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('name', 'dataSetImage')
 
     this.uploadDataVisual(formData)
   }

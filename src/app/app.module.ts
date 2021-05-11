@@ -72,12 +72,12 @@ import { InvChallengeComponent } from "./inv-challenge/inv-challenge.component";
 import { InvDashboradComponent } from "./inv-dashborad/inv-dashborad.component";
 import { InvModelViewComponent } from "./inv-model-view/inv-model-view.component";
 import { InvSeePerformanceComponent } from "./inv-see-performance/inv-see-performance.component";
-// import { ActivityComponent } from "./activity/activity.component";
+import { ActivityComponent } from "./activity/activity.component";
 
 import { DragAndDropStory } from './file-uploader/file-uploader';
 
 import { ModelReportComponent } from "./model-report/model-report.component";
-// import { ModelComponent } from "./model/model.component";
+import { ModelComponent } from "./model/model.component";
 import { OverviewComponent } from "./overview/overview.component";
 import { PreviewComponent } from "./preview/preview.component";
 import { RequestService } from "./request.service";
@@ -85,7 +85,6 @@ import { SubmissionStepFourComponent } from "./submission-step-four/submission-s
 import { SubmissionStepOneComponent } from "./submission-step-one/submission-step-one.component";
 import { SubmissionStepThreeComponent } from "./submission-step-three/submission-step-three.component";
 import { SubmissionStepTwoComponent } from "./submission-step-two/submission-step-two.component";
-import { from } from "rxjs";
 
 @NgModule({
 	declarations: [
