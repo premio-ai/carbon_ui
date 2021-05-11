@@ -121,11 +121,9 @@ export class InvAcceptedComponent implements OnInit {
 	}
 
 	getSubmissionByChallengeId(challengeId, innovatorId) {
-		let url = 'submissionAllChallenge/challenge/' + challengeId + '/' + innovatorId;
+		let url = 'submissionAllChallenge/challenge-innovator/' + challengeId + '/' + innovatorId;
 		this.requestService.get(url).subscribe(data => {
-			console.log(data, "---data---121")
 			this.challengeSubmissionData = data
-console.log(this.challengeSubmissionData, "---this.challengeSubmissionData---123")
 		})
 	}
 

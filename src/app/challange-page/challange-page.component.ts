@@ -42,11 +42,11 @@ export class ChallangePageComponent implements OnInit {
 		this.steps = [
 			{
 				text: "Step 1",
-				state: ["complete"],
+				state: ["current"],
 			},
 			{
 				text: "Step 2",
-				state: ["current"],
+				state: ["incomplete"],
 			},
 			{
 				text: "Step 3",
@@ -62,7 +62,7 @@ export class ChallangePageComponent implements OnInit {
 				disabled: true,
 			},
 		];
-		this.current = 1;
+		this.current = 0;
 		this.challange = {
 			title: "",
 			description: "",
@@ -87,7 +87,7 @@ export class ChallangePageComponent implements OnInit {
 	stepSelected() { }
 
 	nextStep() {
-		this.current = 2
+		this.current++;
 	}
 
 	nextStepOne(stepOneData) {

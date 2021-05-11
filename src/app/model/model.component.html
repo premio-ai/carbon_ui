@@ -4,9 +4,9 @@
 <div ibmGrid [condensed]="gridCondensed">
   <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
     <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 2, 'sm': 12}"
-      *ngFor="let phase of challengeDetails.phases; index as i">
+      *ngFor="let phase of challengeDetails?.phases; index as i">
       <ibm-checkbox checked="true" [hideLabel]="hideLabel" (change)="onChange($event)"
-        (click)="handlePhaseClick(phase.phaseId)">Phase {{i+1}}</ibm-checkbox>
+        (click)="handlePhaseClick(phase?.phaseId)">Phase {{i+1}}</ibm-checkbox>
     </div>
   </div>
 </div>
@@ -37,7 +37,7 @@
                   <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
                     [condensed]="rowCondensed">
                     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }">
-                      <p class="bold">{{data?.innovatorId.fullName}}</p>
+                      <p class="bold">{{data?.innovatorId?.fullName}}</p>
                     </div>
                     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
                       <p class="bold">Submitted: {{getDate(data?.createdAt)}}</p>
@@ -97,7 +97,7 @@
     <tbody>
       <tr>
         <td>Innovator</td>
-        <td *ngFor="let model of compareModelData">{{model?.innovatorId.fullName}}</td>
+        <td *ngFor="let model of compareModelData">{{model?.innovatorId?.fullName}}</td>
       </tr>
       <tr>
         <td>Model discription</td>

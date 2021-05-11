@@ -29,12 +29,12 @@
 				</ibm-progress-indicator>
 			</div>
 			<div ibmCol class="custom-class-example1" [columnNumbers]="{ md: 6, sm: 12 }">
-				<app-challange-first-step *ngIf="current == 1" (goNext)=nextStepOne($event)></app-challange-first-step>
-				<app-challange-second-step *ngIf="current == 2" (goPrevious)="previousStepTwo()"
+				<app-challange-first-step *ngIf="current == 0" (goNext)=nextStepOne($event)></app-challange-first-step>
+				<app-challange-second-step *ngIf="current == 1" (goPrevious)="previousStepTwo()"
 					(goNext)="nextStepTwo($event)"></app-challange-second-step>
-				<app-challane-third-step *ngIf="current == 3" (goPrevious)="previousStepThree()"
+				<app-challane-third-step *ngIf="current == 2" (goPrevious)="previousStepThree()"
 					(goNext)="nextStepThree($event)"></app-challane-third-step>
-				<app-challange-fourth-step *ngIf="current == 4" (goPrevious)="previousStepFour()"
+				<app-challange-fourth-step *ngIf="current == 3" (goPrevious)="previousStepFour()"
 					(goNext)="nextStepFour($event)"></app-challange-fourth-step>
 			</div>
 		</div>

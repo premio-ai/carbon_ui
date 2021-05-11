@@ -3,15 +3,11 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 @Component({
 	selector: "app-drop-file-uploader",
 	template: `<ibm-file-uploader [title]="title" [description]="description" [buttonText]="buttonText"
-    [buttonType]="buttonType" [accept]="accept" [multiple]="multiple" [skeleton]="skeleton"
-    [(files)]="files" [size]="size" drop="true" [dropText]="dropText" (filesChange)="onDropped($event)">
-</ibm-file-uploader>
+    		[buttonType]="buttonType" [accept]="accept" [multiple]="multiple" [skeleton]="skeleton"
+    		[(files)]="files" [size]="size" drop="true" [dropText]="dropText" (filesChange)="onDropped($event)">
+		</ibm-file-uploader>
+		<div [id]="notificationId" style="width: 300px; margin-top: 20px"></div>`
 
-<div [id]="notificationId" style="width: 300px; margin-top: 20px"></div>
-<button ibmButton *ngIf="files && files.size > 0" (click)="onUpload()">
-    Upload
-</button>`
-// template: './file-uploader.component.html'
 })
 
 export class DragAndDropStory {

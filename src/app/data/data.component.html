@@ -13,7 +13,7 @@
 </ul>
 <br/><br/>
 <ibm-accordion >
-    <div *ngFor="let phase of challengeDetails.phases; index as i">
+    <div *ngFor="let phase of challengeDetails?.phases; index as i">
         <ibm-accordion-item title="Phase {{i}}" (selected)="selected($event)">{{ phase?.description }}</ibm-accordion-item>
     </div>
 </ibm-accordion>

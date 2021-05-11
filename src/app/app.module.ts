@@ -47,7 +47,6 @@ import {
 	ToggleModule,
 	UIShellModule,
 } from "carbon-components-angular";
-import { ActivityComponent } from "./activity/activity.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { ChallaneThirdStepComponent } from "./challane-third-step/challane-third-step.component";
@@ -70,7 +69,6 @@ import { ActivityComponent } from "./activity/activity.component";
 
 import { DragAndDropStory } from './file-uploader/file-uploader';
 
-import { ModelComponent } from "./model/model.component";
 import { ModelReportComponent } from "./model-report/model-report.component";
 import { ModelComponent } from "./model/model.component";
 import { OverviewComponent } from "./overview/overview.component";

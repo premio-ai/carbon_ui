@@ -23,7 +23,9 @@ export class ModelComponent {
   // }
 
   ngOnChanges() {
-    this.makeModelData()
+    if (this.challengeDetails && this.submissionChallengeDetails) {
+      this.makeModelData()
+    }
   }
 
   getDate(time) {
@@ -41,7 +43,6 @@ export class ModelComponent {
         }
       })
     })
-
     this.modelData = data
   }
 
