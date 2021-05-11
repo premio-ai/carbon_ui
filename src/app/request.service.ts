@@ -7,8 +7,8 @@ import { map, catchError} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class RequestService {
-  baseURL : string = "http://localhost:3000/";
-  // baseUrl: string = "https://meanapp01.herokuapp.com";
+  // baseURL : string = "http://localhost:3000/";
+  baseUrl: string = "https://meanapp01.herokuapp.com/";
   constructor(private http:HttpClient) { }
 
   get(uri): Observable<any> {
