@@ -50,7 +50,7 @@ this.requestService.get('bc8af0906fb566c23cac8ebfe6480d5c.png').subscribe(respon
   res = response
 })
 
-var newBlob = new Blob([pdfUrl], { type: "application/pdf" })
+var newBlob = new Blob([imgUrl], { type: "image/png" })
 
 
 var a = document.createElement("a");
