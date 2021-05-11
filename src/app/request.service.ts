@@ -12,13 +12,13 @@ export class RequestService {
   constructor(private http:HttpClient) { }
 
   get(uri): Observable<any> {
-    return this.http.get(this.baseURL + uri)
+    return this.http.get(this.baseUrl + uri)
 
   }
 
   post(uri,payload): Observable<any> {
     //return this.http.get(this.baseURL + uri)
-    return this.http.post(this.baseURL + uri, payload);
+    return this.http.post(this.baseUrl + uri, payload);
 
 
   }
