@@ -10,6 +10,7 @@ export class SubmissionStepFourComponent implements OnInit {
 
   @Output() public goPrevious: EventEmitter<any> = new EventEmitter();
   @Output() public goNext: EventEmitter<any> = new EventEmitter();
+  @Output() public goToStepOne: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
   stepFour: {
@@ -25,7 +26,8 @@ export class SubmissionStepFourComponent implements OnInit {
   previous() {
   }
 
-  next() {
-  }
+toStepOne() {
+  this.goToStepOne.emit()
+}
 
 }
