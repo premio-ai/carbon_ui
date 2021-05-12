@@ -24,6 +24,7 @@
 		"@angular/platform-browser": "^8.2.0",
 		"@angular/platform-browser-dynamic": "^8.2.0",
 		"@angular/router": "^8.2.0",
+		"@carbon/charts-angular": "^0.41.64",
 		"@carbon/icons": "^10.30.0",
 		"@carbon/icons-angular": "^10.8.3",
 		"@carbon/icons-react": "^10.30.0",
@@ -34,6 +35,7 @@
 		"carbon-components-angular": "^3.21.2",
 		"carbon-icons": "^7.0.7",
 		"core-js": "^2.5.2",
+		"d3": "^5.14.2",
 		"file-type": "^16.4.0",
 		"font-awesome": "^4.7.0",
 		"fs": "0.0.1-security",
@@ -63,5 +65,23 @@
 		"ts-node": "~8.0.3",
 		"tslint": "^5.15.0",
 		"typescript": "3.5.3"
+	},
+
+	"dependencies": {
+		"@angular/animations": "8.2.14",
+		"@angular/common": "8.2.14",
+		"@angular/compiler": "8.2.14",
+		"@angular/core": "8.2.14",
+		"@angular/forms": "8.2.14",
+		"@angular/platform-browser": "8.2.14",
+		"@angular/platform-browser-dynamic": "8.2.14",
+		"@angular/router": "8.2.14",
+		"@carbon/charts": "0.41.64",
+		"@carbon/charts-angular": "0.41.64",
+		"core-js": "3.6.0",
+		"d3": "5.15.0",
+		"rxjs": "6.5.3",
+		"zone.js": "0.10.2"
 	}
+
 }

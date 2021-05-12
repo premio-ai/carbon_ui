@@ -31,14 +31,17 @@
       <br />
       <ibm-tabs [followFocus]="followFocus" [isNavigation]="isNavigation" [cacheActive]="cacheActive">
         <ibm-tab heading="All">
-          <ibm-tile *ngFor="let challenge of activeChallenges" style="margin-bottom: 15px;">
-            <div style="display: flex;">
-              <p style="font-size: 18px;">{{ challenge?.title }}</p>
-              <div style="margin-left: auto;">
-                <svg icon ibmIconBookmark20></svg>
-                <!-- <svg icon ibmIconBookmarkFilled20></svg> -->
-              </div>
-            </div>
+          <ibm-tile
+            *ngFor="let challenge of activeChallenges"
+            style="margin-bottom: 15px;"
+          >
+		  <div style="display: flex;">
+            <p style="font-size: 18px;">{{ challenge?.title }}</p>
+			<div style="margin-left: auto;">
+				<svg icon ibmIconBookmark20></svg>
+        <!-- <svg icon ibmIconBookmarkFilled20></svg> -->
+			  </div>
+			</div>
             <br />
             <h6>Issued by REDEACTED</h6>
             <p style="font-size: 10px;">on {{ getDate(challenge?.createdAt) }}</p>

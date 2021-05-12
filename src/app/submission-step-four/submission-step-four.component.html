@@ -4,34 +4,8 @@
 <br />
 <div style="display: flex; flex-flow: row wrap; justify-content: space-around;" *ngIf="challengeSubmissionData && challengeSubmissionData.length>0">
 
-    <!-- <ibm-tile style="width: 293px;">
-        <div style="display: flex">
-            <p>
-                modelname.mdk
-            </p>
-    
-            <ibm-tag class="tags" type="cool-gray">Efficiency</ibm-tag>
-        </div>
-        <div ibmGrid [condensed]="gridCondensed" >
-            <div
-                ibmRow
-                [gutter]="gutter"
-                [leftGutter]="leftGutter"
-                [rightGutter]="rightGutter"
-                [condensed]="rowCondensed"
-                style="width: 599px;"
-                >
-                  <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 2, 'sm': 12}">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                  </div>
-                
-            </div>
-           
-         </div>
-         <button  class="btn"  [ibmButton]="ibmButton" [size]="size">View model</button>
-    </ibm-tile> -->
-
-    <ibm-tile class="tile" *ngFor="let model of challengeSubmissionData">
+   
+    <ibm-tile class="tile"  *ngFor="let model of challengeSubmissionData">
         <div style="display: flex">
             <p>{{model?.mlFlowId}}</p>
             <p>Results available</p>
@@ -89,3 +63,18 @@
 
 
 </div>
+
+
+
+<div ibmGrid [condensed]="gridCondensed">
+    <div
+        ibmRow
+        [gutter]="gutter"
+        [leftGutter]="leftGutter"
+        [rightGutter]="rightGutter"
+        [condensed]="rowCondensed">
+          <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 2, 'sm': 12}">First Column</div>
+        <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 2, 'sm': 12}">Second column</div>
+        <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 2, 'sm': 12}">Third Column</div>
+    </div>
+ </div>
