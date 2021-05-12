@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { RequestService } from '../request.service';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-challange-tile',
@@ -23,11 +24,10 @@ export class ChallangeTileComponent implements OnInit {
     
   }
 
-  getDate(time) {
-    time = parseInt(time);
-    let dt = new Date(time);
-    return dt.getDate() + "/" + dt.getMonth() + "/" + dt.getFullYear();
-  }
+  getDate(timeStamp) {
+		let date = moment(moment(+timeStamp)).format("DD/MM/YYYY")
+		return date;
+	}
 
   viewChalange(id) {
     console.log(id, "---view challenge btn click---")
