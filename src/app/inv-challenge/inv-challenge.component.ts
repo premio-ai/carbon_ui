@@ -30,6 +30,11 @@ export class InvChallengeComponent implements OnInit {
     return date;
   }
 
+  getExpiryDate(dt) {
+    let date = moment(dt).format('DD/MM/YYYY')
+    return date;
+  }
+
   getActiveChallanges() {
     let activeChallanegUrl = "challenge?isActive=true";
     this.requestService.get(activeChallanegUrl).subscribe(data => {
@@ -59,14 +64,15 @@ export class InvChallengeComponent implements OnInit {
   }
 
   bookmarkChallenge(challengeId) {
-    let url = 'bookmarkChallenge'
-    let data = {
-      innovatorId: this.innovatorId,
-      challengeId: challengeId
-    }
-    this.requestService.post(url, data).subscribe(data => {
-      this.getBookmarkedChallenges()
-    })
+console.log(challengeId, "---challengeId---67")
+    // let url = 'bookmarkChallenge'
+    // let data = {
+    //   innovatorId: this.innovatorId,
+    //   challengeId: challengeId
+    // }
+    // this.requestService.post(url, data).subscribe(data => {
+    //   this.getBookmarkedChallenges()
+    // })
   }
 
 }

@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class OverviewComponent implements OnInit {
 
   @Input() challengeDetails: any;
+  @Input() submissionChallengeDetails: any
   constructor() { }
 
   ngOnInit() {

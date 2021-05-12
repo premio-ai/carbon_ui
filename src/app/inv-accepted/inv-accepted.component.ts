@@ -24,7 +24,8 @@ export class InvAcceptedComponent implements OnInit {
 	steps: any[];
 	insurerId = "6076c19aad0c92991a8ba0bf";
 	awardedTo = "60767631222df1253206ff74";
-	innovatorId = "607e856d2d00fd7ed549689e";
+	// innovatorId = "607e856d2d00fd7ed549689e";
+	innovatorId = "607d651862c616905655e309";
 	submissionData: {
 		challengeId: {},
 		phaseId: any,
@@ -190,7 +191,9 @@ export class InvAcceptedComponent implements OnInit {
 	nextStepThree() {
 		let url = 'submissionAllChallenge';
 		this.requestService.post(url, this.submissionData).subscribe( data => {
-			this.getSubmissionByChallengeId(this.challengeId, this.innovatorId)
+			this.getSubmissionByChallengeId(this.challengeId, this.innovatorId);
+			// this.getChallengeDetails(this.challengeId)
+			this.getLeaderboard(this.challengeId)
 			this.current++;
 		})
 	}
