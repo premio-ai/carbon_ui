@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-activity',
@@ -12,6 +13,7 @@ export class ActivityComponent implements OnInit {
   constructor() { }
   selectedPhase: any[] = []
   phaseNo: any
+  phaseOneSubmission: any
 
   ngOnInit() {
     this.phaseNo = 1
@@ -20,9 +22,21 @@ export class ActivityComponent implements OnInit {
   ngOnChanges() {
     if (this.challengeDetails && this.submissionChallengeDetails) {
       this.initialPhase()
+
+      this.phaseOneSubmission = this.submissionChallengeDetails.length
     }
   }
 
+  getCreationDate(dt) {
+    let date = moment(dt).format('DD/MM/YYYY')
+    return date;
+  }
+
+  getDate(timeStamp) {
+		let date = moment(moment(+timeStamp)).format("DD/MM/YYYY")
+		return date;
+	}
+  
   initialPhase() {
     let tempData = []
     this.submissionChallengeDetails.filter(dt => {

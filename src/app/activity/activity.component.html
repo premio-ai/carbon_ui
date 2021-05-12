@@ -17,17 +17,15 @@
 				<span>Users Accepted </span>
 			</h6>
 			<br />
-			<p style="margin-left: 15px">200</p>
+			<p style="margin-left: 15px">{{phaseOneSubmission}}</p>
 		</div>
 		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 3, sm: 12 }">
 			<h6 class="date" style="display: flex; align-items: center">
 				<svg icon ibmIconDownload20></svg>
-				<span style="white-space: nowrap"
-					>Models in trainging & Testing
-				</span>
+				<span style="white-space: nowrap">Models in trainging & Testing</span>
 			</h6>
 			<br />
-			<p style="margin-left: 15px">113</p>
+			<p style="margin-left: 15px">{{phaseOneSubmission}}</p>
 		</div>
 		<!-- <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }"></div> -->
 		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
@@ -36,7 +34,7 @@
 				<span>Models passes Scoring</span>
 			</h6>
 			<br />
-			<p style="margin-left: 15px">31</p>
+			<p style="margin-left: 15px">{{challengeDetails?.phases[0].passingScore}}</p>
 		</div>
 	</div>
 </div>
@@ -91,7 +89,7 @@
 		<tr *ngFor="let data of selectedPhase" >
 			<td>{{data.innovatorId.fullName}}
 			</td>
-			<td>{{data.modelUploadPath}}
+			<td>{{getDate(data.createdAt)}}
 			</td>
 			<td>{{data.score}}
 			</td>
@@ -100,6 +98,7 @@
 			<td>{{data.approch}}
 			</td>
 		</tr>
+		<tr *ngIf="submissionChallengeDetails.length==0">No records found</tr>
 	</tbody>
 </table>
 
