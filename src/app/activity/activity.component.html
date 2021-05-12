@@ -6,7 +6,7 @@
 </ibm-content-switcher>
 <br /><br />
 
-<!-- <div *ngIf="phaseNo"> -->
+<div *ngIf="phaseNo">
 	<h3>Phase {{phaseNo}}</h3>
 <br /><br />
 <div ibmGrid [condensed]="gridCondensed">
@@ -43,7 +43,7 @@
 
 <ibm-table-container>
 	<ibm-table-header>
-        <p>Phase 2 Activity</p>
+        <p>Phase {{phaseNo}} Activity</p>
 	</ibm-table-header>
 	<ibm-table-toolbar>
 		<ibm-table-toolbar-content>
@@ -103,4 +103,4 @@
 	</tbody>
 </table>
 
-<!-- </div> -->
+</div>
