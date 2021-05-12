@@ -8,7 +8,7 @@
     <ibm-tile class="tile"  *ngFor="let model of challengeSubmissionData">
         <div style="display: flex">
             <p>{{model?.mlFlowId}}</p>
-            <p>Results available</p>
+            <p>Model Name</p>
         </div>
 
         <br />
@@ -20,7 +20,7 @@
                 </div>
                 <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 3, sm: 12 }" style="margin-left: 20px">
                     <div style="display: flex; margin-left: 27px">
-                        <h3 style="margin-top: -4px">86</h3>
+                        <h3 style="margin-top: -4px">{{model?.score}}</h3>
                     </div>
                     <div style="display: flex; margin-left: 27px">
                         <p style="margin-top: -4px">Score</p>
