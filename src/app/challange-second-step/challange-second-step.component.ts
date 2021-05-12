@@ -94,7 +94,7 @@ export class ChallangeSecondStepComponent implements OnInit {
 
   next() {
     // TODO: uncomment
-    this.goNext.emit(this.phases);
+    // this.goNext.emit(this.phases);
     // if (this.phases.length>0) {      
     //   this.goNext.emit(this.phases);
     // } else  {

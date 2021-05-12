@@ -13,7 +13,7 @@ export class SubmissionStepOneComponent implements OnInit {
   constructor(
     private requestService: RequestService
   ) { }
-
+  docError: boolean
   stepOne: {
     modelUploadedPath: any
   }
@@ -38,33 +38,33 @@ export class SubmissionStepOneComponent implements OnInit {
     })
   }
 
-  downloadFile() {
-    // http://localhost:3000/bc8af0906fb566c23cac8ebfe6480d5c.png
+  async downloadFile() {
 
-    let imgUrl = 'http://localhost:3000/bc8af0906fb566c23cac8ebfe6480d5c.png'
+    if (this.challengeDetails) {
+      let docName = this.challengeDetails.phases[0].sampleDataFile[0] || ''
+      let docUrl = 'http://localhost:3000/' + docName
+      
+      if (docUrl.length) {
+        let imgUrl = 'http://localhost:3000/bc8af0906fb566c23cac8ebfe6480d5c.png'
 
-    let pdfUrl = 'http://localhost:3000/eb99fd7d5386810a6b33363e9da82d73d.pdf'
+        let pdfUrl = 'http://localhost:3000/eb99fd7d5386810a6b33363e9da82d73d.pdf'
 
-let res;
-this.requestService.get('bc8af0906fb566c23cac8ebfe6480d5c.png').subscribe(response => {
-  res = response
-})
+        await fetch(docUrl).then(async res => {
+          return await res.blob()
+        }).then(blob => {
+          var a = document.createElement("a");
+          document.body.appendChild(a);
+          const url = URL.createObjectURL(blob);
 
-var newBlob = new Blob([imgUrl], { type: "image/png" })
-
-
-var a = document.createElement("a");
-    document.body.appendChild(a);
-    // a.style = "display: none";
-    const url = window.URL.createObjectURL( newBlob );
-    console.log(url, "---url---52")
-
-    a.href = url;
-    a.download = "File";
-    a.click();
-    window.URL.revokeObjectURL(url);    
-
-
+          a.href = url;
+          a.download = "File";
+          a.click();
+          window.URL.revokeObjectURL(url);
+        })
+      } else {
+        this.docError = true
+      }
+    }
   }
 
   nextStep() {
