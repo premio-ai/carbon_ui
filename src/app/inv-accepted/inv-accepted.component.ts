@@ -79,7 +79,7 @@ export class InvAcceptedComponent implements OnInit {
 			},
 			
 		];
-		this.current = 0;
+		this.current = 3;
 		this.submissionData = {
 			challengeId: {},
 			phaseId: [],
