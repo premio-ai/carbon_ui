@@ -10,7 +10,6 @@
 <p *ngFor='let data of challengeDetails?.phases[0]?.sampleDataFile; index as i' >Download {{i+1}}
 	<svg icon ibmIconDownload16 (click)="downloadFile(data[i])"></svg>
 </p>
-<button (click)="downloadFile()">download</button>
 <div *ngIf="docError">
 	<p><span style="font-size: x-small; color: red">Document not available for download</span></p>
 </div>
