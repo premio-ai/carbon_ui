@@ -11,7 +11,7 @@
 </div>
 
 <div ibmGrid [condensed]="gridCondensed">
-	<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+	<!-- <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
 		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 7, sm: 12 }">
 			<ibm-tile>
 				<p style="font-size: 20px;">Phase 0</p>
@@ -32,7 +32,7 @@
 			</ibm-tile>
 			<br /><br />
 		</div>
-	</div>
+	</div> -->
 	<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
 		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 8, sm: 12 }" style="display: flex;">
 			<div style="display: flex; flex-flow: row wrap; justify-content: space-around; margin-right: 10px;"
@@ -42,29 +42,26 @@
 					<div class="icon_align"><svg icon ibmIconUpload20></svg>
 						<p>Models Uploaded</p>
 					</div>
-					<p class="numbers">300</p><br />
+					<p class="numbers">{{phaseOneSubmission}}</p><br />
 					<div class="icon_align">
 						<svg icon ibmIconChemistry20></svg>
 						<p>Models trained & tested</p>
 					</div>
-					<p class="numbers">300</p><br />
+					<p class="numbers">{{phaseOneSubmission}}</p><br />
 					<div class="icon_align">
 						<svg icon ibmIconCheckmarkOutline20></svg>
 						<p>Models passed Scoring</p>
 					</div>
+					<p class="numbers">{{phase?.passingScore || '10'}}</p><br />
 
 					<p class="numbers">{{phase?.minimumModelScore}}</p><br />
 					<div class="icon_align">
 						<svg icon ibmIconTrophy20></svg>
 						<p>Top 5 performing models</p>
 					</div>
+					<p *ngIf="submissionChallengeDetails.length==0" >No records found</p>
 					<ol ibmList class="list">
 						<li ibmListItem *ngFor="let data of submissionChallengeDetails">{{data?.innovatorId?.fullName}} </li>
-						<!-- <li ibmListItem>Beian Doe</li>
-						<li ibmListItem>Samuel jackson</li>
-						<li ibmListItem>Maria santa</li>
-						<li ibmListItem>Beian Doe</li>
-						<li ibmListItem>Samuel jackson</li> -->
 					</ol>
 
 					<div ibmGrid [condensed]="gridCondensed" class="button-left">
@@ -81,8 +78,6 @@
 			</div>
 		</div>
 	</div>
-
-
 
 
 	<div ibmGrid [condensed]="gridCondensed">
@@ -118,14 +113,15 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>i+1</td>
-								<td>data?.innovatorId?.fullName</td>
-								<td>p1_score</td>
-								<td>p2_score</td>
-								<td>p3_score</td>
+							<tr *ngFor="let model of submissionChallengeDetails; index as i">
+								<td>{{i+1}}</td>
+								<td>{{model?.innovatorId?.fullName || 'Brian D'}}</td>
+								<td>{{model.score}}</td>
+								<td>{{model.score}}</td>
+								<td>{{model.score}}</td>
 								<td>view model</td>
 							</tr>
+							<tr *ngIf="submissionChallengeDetails.length==0">No records found</tr>
 						</tbody>
 					</table>
 					<br />

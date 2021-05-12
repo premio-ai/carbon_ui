@@ -68,7 +68,7 @@
 				</p>
 			</div>
 			<br />
-			<ibm-number [label]="'Minimum Model Score'" [helperText]="''" [min]="0" [(ngModel)]="stepTwo.score">
+			<ibm-number [label]="'Minimum Model Score'" [helperText]="''" [min]="0" [(ngModel)]="stepTwo.passingScore">
 			</ibm-number>
 			<div *ngIf="phasesError">
 				<p><span style="font-size: x-small; color: red">Score for this phase is required</span></p>

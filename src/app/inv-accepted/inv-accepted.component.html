@@ -161,11 +161,11 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr *ngFor="let data of leaderboard; index as i">
+								<tr *ngFor="let data of challengeSubmissionData; index as i">
 									<td>{{i+1}}</td>
 									<td>{{data?.innovatorId?.fullName}}</td>
-									<td>phase_01</td>
-									<td>(score)</td>
+									<td>Phase 1</td>
+									<td>{{getScore()}}</td>
 									<td>{{getDate(data?.createdAt)}}</td>
 								</tr>
 							</tbody>
@@ -214,7 +214,7 @@
 									(goNext)="nextStepTwo($event)"></app-submission-step-two>
 								<app-submission-step-three *ngIf="current == 2" (goPrevious)="previousStepThree()"
 									(goNext)="nextStepThree($event)"></app-submission-step-three>
-								<app-submission-step-four *ngIf="current == 3" (goPrevious)="previousStepFour()"
+								<app-submission-step-four *ngIf="current == 3" (goPrevious)="previousStepFour()" (goToStepOne)="goToStepOne()"
 									(goNext)="nextStepFour($event)" [challengeSubmissionData]="challengeSubmissionData" ></app-submission-step-four>
 							</div>
 						</div>

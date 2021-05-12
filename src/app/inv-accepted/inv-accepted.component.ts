@@ -128,6 +128,10 @@ export class InvAcceptedComponent implements OnInit {
 		})
 	}
 
+	getScore() {
+		return Math.floor(Math.random() * (100 - 0 + 1) + 0)
+	}
+
 	getDate(timeStamp) {
 		let date = moment(moment(+timeStamp)).format("DD/MM/YYYY")
 		return date;
@@ -224,6 +228,10 @@ export class InvAcceptedComponent implements OnInit {
 			this.getLeaderboard(this.challengeId)
 			this.current++;
 		})
+	}
+
+	goToStepOne() {
+		this.current = 0
 	}
 
 }

@@ -19,7 +19,7 @@ export class ChallangeSecondStepComponent implements OnInit {
   stepTwo: {
     description: string,
     guidence: string,
-    score: number,
+    passingScore: number,
     dataVisualFile: string,
     sampleDataFile: any
   }
@@ -28,18 +28,18 @@ export class ChallangeSecondStepComponent implements OnInit {
     this.stepTwo = {
       description: "",
       guidence: "",
-      score: 0,
+      passingScore: 0,
       dataVisualFile: '',
       sampleDataFile: []
     }
   }
 
   addPhase() {
-    if (this.stepTwo.description.length > 0 && this.stepTwo.guidence.length > 0 && this.stepTwo.score && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 0) {
+    if (this.stepTwo.description.length > 0 && this.stepTwo.guidence.length > 0 && this.stepTwo.passingScore && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 0) {
       let tempData = {
         description: this.stepTwo.description,
         guidence: this.stepTwo.guidence,
-        score: this.stepTwo.score,
+        score: this.stepTwo.passingScore,
         dataVisualFile: this.stepTwo.dataVisualFile,
         sampleDataFile: this.stepTwo.sampleDataFile
       }
@@ -48,7 +48,7 @@ export class ChallangeSecondStepComponent implements OnInit {
       this.stepTwo = {
         description: "",
         guidence: "",
-        score: 0,
+        passingScore: 0,
         dataVisualFile: '',
         sampleDataFile: []
       }
@@ -104,11 +104,11 @@ export class ChallangeSecondStepComponent implements OnInit {
     if (this.phases.length > 0) {
       this.goNext.emit(this.phases);
     } else {
-      if (this.stepTwo.description.length > 0 && this.stepTwo.guidence.length > 0 && this.stepTwo.score && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 0) {
+      if (this.stepTwo.description.length > 0 && this.stepTwo.guidence.length > 0 && this.stepTwo.passingScore && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 0) {
         let tempData = {
           description: this.stepTwo.description,
           guidence: this.stepTwo.guidence,
-          score: this.stepTwo.score,
+          passingScore: this.stepTwo.passingScore,
           dataVisualFile: this.stepTwo.dataVisualFile,
           sampleDataFile: this.stepTwo.sampleDataFile
         }

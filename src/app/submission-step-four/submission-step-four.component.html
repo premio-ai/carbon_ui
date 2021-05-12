@@ -1,7 +1,55 @@
-<button [ibmButton]="ibmButton" [size]="size">
+<button [ibmButton]="ibmButton" [size]="size" (click)="toStepOne()" >
     Submit model<svg class="bx--btn__icon" ibmIconAdd size="20"></svg>
 </button>
 <br />
+<!-- <div style="display: flex; flex-flow: row wrap; justify-content: space-around;" *ngIf="challengeSubmissionData && challengeSubmissionData.length>0">
+
+   
+    <ibm-tile class="tile"  *ngFor="let model of challengeSubmissionData">
+        <div style="display: flex">
+            <p>{{model?.mlFlowId}}</p>
+            <p>Model Name</p>
+        </div>
+
+        <br />
+        <div ibmGrid [condensed]="gridCondensed">
+            <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
+                [condensed]="rowCondensed" style="margin-left: 1px">
+                <div ibmCol class="custom-class-example" style="margin-left: -31px" [columnNumbers]="{ md: 5, sm: 12 }">
+                    {{model?.modelDescription}}
+                </div>
+                <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 3, sm: 12 }" style="margin-left: 20px">
+                    <div style="display: flex; margin-left: 27px">
+                        <h3 style="margin-top: -4px">{{model?.score}}</h3>
+                    </div>
+                    <div style="display: flex; margin-left: 27px">
+                        <p style="margin-top: -4px">Score</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br /><br /><br />
+        <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed"
+            style="margin-right: 40px">
+            <div ibmGrid [condensed]="gridCondensed">
+                <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
+                    [condensed]="rowCondensed">
+                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 3, sm: 12 }">
+                        <button class="view" [ibmButton]="ibmButton" [size]="size">Enter Phase 2</button>
+                    </div>
+                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 3, sm: 12 }">
+                        <button class="model" [ibmButton]="ibmButton" [size]="size">See performance</button>
+                    </div>
+                </div>
+            </div>
+
+           
+        </div>
+    </ibm-tile>
+
+
+</div> -->
+
 
 
 <div ibmGrid [condensed]="gridCondensed">
