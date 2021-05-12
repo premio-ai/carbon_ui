@@ -65,23 +65,8 @@
 		"ts-node": "~8.0.3",
 		"tslint": "^5.15.0",
 		"typescript": "3.5.3"
-	},
-
-	"dependencies": {
-		"@angular/animations": "8.2.14",
-		"@angular/common": "8.2.14",
-		"@angular/compiler": "8.2.14",
-		"@angular/core": "8.2.14",
-		"@angular/forms": "8.2.14",
-		"@angular/platform-browser": "8.2.14",
-		"@angular/platform-browser-dynamic": "8.2.14",
-		"@angular/router": "8.2.14",
-		"@carbon/charts": "0.41.64",
-		"@carbon/charts-angular": "0.41.64",
-		"core-js": "3.6.0",
-		"d3": "5.15.0",
-		"rxjs": "6.5.3",
-		"zone.js": "0.10.2"
 	}
+
+
 
 }
