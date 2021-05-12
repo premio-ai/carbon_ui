@@ -96,14 +96,7 @@
 						<app-drop-file-uploader (goNext)="setSampleData($event)" (uploadFile)="uploadSampleData()" (filesChange)="onDropped($event.target.files)"></app-drop-file-uploader>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<div ibmCol class="custom-class-example1" [columnNumbers]="{ md: 4, sm: 12 }">
-		<div ibmGrid [condensed]="gridCondensed">
-			<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
+				<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
 				[condensed]="rowCondensed">
 				<button class="Step2btn_pre" [ibmButton]="ibmButton" [size]="size" (click)="previous()">
 					Previous
@@ -112,7 +105,11 @@
 					Next
 				</button>
 			</div>
+			</div>
 		</div>
 	</div>
+
+
+	
 
 </div>

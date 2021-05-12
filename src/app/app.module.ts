@@ -27,6 +27,8 @@ import {Forum16Module} from "@carbon/icons-angular/lib/forum/16";
 import {Upload20Module} from "@carbon/icons-angular/lib/upload/20";
 import {Chemistry20Module} from "@carbon/icons-angular/lib/chemistry/20";
 import {Trophy20Module} from "@carbon/icons-angular/lib/trophy/20";
+import {ArrowRight20Module} from "@carbon/icons-angular/lib/arrow--right/20";
+// import {BookmarkFilled20Module} from "@carbon/icons-angular/lib/bookmark--filled/20";
 import {UserMultiple20Module} from "@carbon/icons-angular/lib/user--multiple/20";
 import {CheckmarkOutline20Module} from "@carbon/icons-angular/lib/checkmark--outline/20";
 // carbon-components-angular default imports
@@ -89,7 +91,11 @@ import { SubmissionStepThreeComponent } from "./submission-step-three/submission
 import { SubmissionStepTwoComponent } from "./submission-step-two/submission-step-two.component";
 import { from } from "rxjs";
 import {CheckmarkFilled16Module} from "@carbon/icons-angular/lib/checkmark--filled/16";
-import {RadioButton20Module} from "@carbon/icons-angular/lib/radio-button/20"
+import {RadioButton20Module} from "@carbon/icons-angular/lib/radio-button/20";
+import { ChartsModule } from "@carbon/charts-angular";
+// import { DonutChart } from "@carbon/charts";
+
+
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -142,6 +148,7 @@ import {RadioButton20Module} from "@carbon/icons-angular/lib/radio-button/20"
 		UIShellModule,
 		Notification20Module,
 		UserAvatar20Module,
+		ArrowRight20Module,
 		AppSwitcher20Module,
 		Edit20Module,
 		Badge20Module,
@@ -193,6 +200,8 @@ import {RadioButton20Module} from "@carbon/icons-angular/lib/radio-button/20"
 		Bookmark20Module,
 		CheckmarkFilled16Module,
 		RadioButton20Module,
+		ChartsModule,
+		// BookmarkFilled20Module
 	],
 	bootstrap: [AppComponent],
 	providers: [RequestService],

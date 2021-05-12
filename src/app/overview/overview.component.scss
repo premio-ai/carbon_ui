@@ -38,9 +38,13 @@ white-space: nowrap;
 
 @media (min-width: 42rem){
 .bx--grid {
-    padding-left: 0rem;
+    padding-left: 1rem;
     padding-right: 2rem;
 }}
+
+.button-left{
+    padding-left: 0rem;
+}
 
 .numbers{
     margin-left: 18px;
@@ -54,4 +58,11 @@ white-space: nowrap;
 .icon_align{
     align-items: center;
     display: flex;
+}
+
+.bx--data-table th {
+     padding-left: 0rem !important; 
+ padding-right: 0rem !important; 
+    vertical-align: top;
+    text-align: left;
 }
