@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { RequestService } from '../request.service';
 import "@carbon/charts/styles.css";
 import { DonutChart } from "@carbon/charts";
 
@@ -10,7 +11,13 @@ import { DonutChart } from "@carbon/charts";
 })
 export class InvSeePerformanceComponent implements OnInit {
 
-  constructor() { }
+	@Input() challange: any;
+
+	constructor(private requestService: RequestService,
+		private router: Router
+		) { }
+	  activeChallenges: any[];
+	  pastChallenges: any[];
 
   ngOnInit() {
   }
@@ -153,5 +160,19 @@ options1 = {
 	},
 	"height": "400px"
 };
+
+viewChalange(id) {
+    console.log(id, "---view challenge btn click---")
+
+    let url = 'challenge/' + id
+
+    this.router.navigateByUrl(url);
+    // let challengeUrl = '/challenge/:challengeId';
+    // this.requestService.get(challengeUrl).subscribe(data => {
+    //   console.log("active challange ... ", data)
+    //   this.activeChallenges = data;
+    // })
+
+  }
 
 }
