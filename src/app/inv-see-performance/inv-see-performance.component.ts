@@ -341,4 +341,18 @@ export class InvSeePerformanceComponent implements OnInit {
 		this.router.navigateByUrl('invmodel-view/' + this.modelDetails._id)
 	}
 
+viewChalange(id) {
+    console.log(id, "---view challenge btn click---")
+
+    let url = 'challenge/' + id
+
+    this.router.navigateByUrl(url);
+    // let challengeUrl = '/challenge/:challengeId';
+    // this.requestService.get(challengeUrl).subscribe(data => {
+    //   console.log("active challange ... ", data)
+    //   this.activeChallenges = data;
+    // })
+
+  }
+
 }
