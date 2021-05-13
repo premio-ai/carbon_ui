@@ -36,4 +36,8 @@ export class SubmissionStepFourComponent implements OnInit {
     this.router.navigateByUrl('invmodel-view/' + modelId)
   }
 
+  seePerformance(modelId) {
+    this.router.navigateByUrl('see-performance/' + modelId)
+  }
+
 }

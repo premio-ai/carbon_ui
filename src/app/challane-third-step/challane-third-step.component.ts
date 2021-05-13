@@ -49,8 +49,6 @@ export class ChallaneThirdStepComponent implements OnInit {
   }
 
   next() {
-    console.log(this.stepThree)
-
     if (this.stepThree.minEarnedPoint > 0 && this.stepThree.maxEarnedPoint > this.stepThree.minEarnedPoint &&
       this.stepThree.minChallangeInvolved > 0 && this.stepThree.maxChallangeInvolved >= this.stepThree.minChallangeInvolved && 
       this.stepThree.typeOfUser.length>0 && this.stepThree.programmingLanguage.length>0) {

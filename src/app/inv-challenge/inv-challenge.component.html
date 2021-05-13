@@ -31,17 +31,14 @@
       <br />
       <ibm-tabs [followFocus]="followFocus" [isNavigation]="isNavigation" [cacheActive]="cacheActive">
         <ibm-tab heading="All">
-          <ibm-tile
-            *ngFor="let challenge of activeChallenges"
-            style="margin-bottom: 15px;"
-          >
-		  <div style="display: flex;">
-            <p style="font-size: 18px;">{{ challenge?.title }}</p>
-			<div style="margin-left: auto;">
-				<svg icon ibmIconBookmark20></svg>
-        <!-- <svg icon ibmIconBookmarkFilled20></svg> -->
-			  </div>
-			</div>
+          <ibm-tile *ngFor="let challenge of activeChallenges" style="margin-bottom: 15px;">
+            <div style="display: flex;">
+              <p style="font-size: 18px;">{{ challenge?.title }}</p>
+              <div style="margin-left: auto;">
+                <svg icon ibmIconBookmark20></svg>
+                <!-- <svg icon ibmIconBookmarkFilled20></svg> -->
+              </div>
+            </div>
             <br />
             <h6>Issued by REDEACTED</h6>
             <p style="font-size: 10px;">on {{ getDate(challenge?.createdAt) }}</p>
@@ -67,14 +64,14 @@
                   <div style="display: flex; margin-left: 27px;">
                     <svg icon ibmIconEdtLoop16></svg>
                     &nbsp;&nbsp;
-                    <p style="margin-top: -4px;">5</p>
+                    <p style="margin-top: -4px;">{{challenge?.acceptedUsersCount}}</p>
                   </div>
                 </div>
                 <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }">
                   <div style="display: flex; margin-left: 27px;">
                     <svg icon ibmIconUserMultiple16></svg>
                     &nbsp;&nbsp;
-                    <p style="margin-top: -4px;">600</p>
+                    <p style="margin-top: -4px;">{{challenge?.submissionsCount}}</p>
                   </div>
                 </div>
                 <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
@@ -131,14 +128,14 @@
                   <div style="display: flex; margin-left: 27px;">
                     <svg icon ibmIconTime16></svg>
                     &nbsp;&nbsp;
-                    <p style="margin-top: -4px;">5</p>
+                    <p style="margin-top: -4px;">{{challenge?.acceptedUsersCount}}</p>
                   </div>
                 </div>
                 <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }">
                   <div style="display: flex; margin-left: 27px;">
                     <svg icon ibmIconTime16></svg>
                     &nbsp;&nbsp;
-                    <p style="margin-top: -4px;">600</p>
+                    <p style="margin-top: -4px;">{{challenge?.submissionsCount}}</p>
                   </div>
                 </div>
                 <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }">
@@ -157,7 +154,7 @@
                     <svg icon ibmIconTime16></svg>
                     &nbsp;&nbsp;
                     <p style="margin-top: -4px;">
-                      {{ getDate(challenge?.createdAt) }}
+                      {{ getExpiryDate(challenge?.expiryDate) }}
                     </p>
                   </div>
                 </div>

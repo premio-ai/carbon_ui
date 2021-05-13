@@ -17,10 +17,7 @@ export class InvChallengeTileComponent implements OnInit {
   activeChallenges: any[];
   pastChallenges: any[];
 
-  ngOnInit() {
-    console.log("challange ..... ", this.challange)
-    
-  }
+  ngOnInit() {}
 
   getDate(time) {
     time = parseInt(time);
@@ -29,17 +26,8 @@ export class InvChallengeTileComponent implements OnInit {
   }
 
   viewChalange(id) {
-    console.log(id, "---view challenge btn click---")
-
     let url = 'challenge/' + id
-
     this.router.navigateByUrl(url);
-    // let challengeUrl = '/challenge/:challengeId';
-    // this.requestService.get(challengeUrl).subscribe(data => {
-    //   console.log("active challange ... ", data)
-    //   this.activeChallenges = data;
-    // })
-
   }
 
 }
