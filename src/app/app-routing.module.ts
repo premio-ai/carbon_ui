@@ -29,7 +29,7 @@ const routes: Routes = [
 	{ path: 'invchallenges', component: InvChallengeComponent },
 	// { path: 'invaccepted', component: InvAcceptedComponent },
 	{ path: 'invaccepted/:id', component: InvAcceptedComponent },
-	{ path: 'invmodel-view', component: InvModelViewComponent },
+	{ path: 'invmodel-view/:id', component: InvModelViewComponent },
 	{ path: 'see-performance', component: InvSeePerformanceComponent },
 	{
 		path: '',

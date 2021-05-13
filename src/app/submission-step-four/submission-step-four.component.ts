@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-submission-step-four',
@@ -12,13 +13,14 @@ export class SubmissionStepFourComponent implements OnInit {
   @Output() public goNext: EventEmitter<any> = new EventEmitter();
   @Output() public goToStepOne: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
   stepFour: {
     description: string,
     guidence: string,
     score: number
   }
-
 
   ngOnInit() {
   }
@@ -26,8 +28,12 @@ export class SubmissionStepFourComponent implements OnInit {
   previous() {
   }
 
-toStepOne() {
-  this.goToStepOne.emit()
-}
+  toStepOne() {
+    this.goToStepOne.emit()
+  }
+
+  viewModel(modelId) {
+    this.router.navigateByUrl('invmodel-view/' + modelId)
+  }
 
 }
