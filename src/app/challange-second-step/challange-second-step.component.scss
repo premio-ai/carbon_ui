@@ -25,3 +25,14 @@ background-color: #383838;border: none;
 
 }
 
+
+.bx--number__controls {
+    position: absolute;
+    right: 0;
+    display: flex;
+    flex-direction: column !important;
+    justify-content: center;
+    align-items: center;
+    top: 50%;
+    transform: translateY(-50%);
+}

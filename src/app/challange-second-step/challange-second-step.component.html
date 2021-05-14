@@ -7,7 +7,7 @@
 			<ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
 				Data Description<p style="margin-left: 273px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">
 					0/100</p>
-				<textarea style="width: 90%" ibmTextArea [invalid]="invalid"
+				<textarea style="width: 90%;margin-top: 10px;" ibmTextArea [invalid]="invalid"
 					[(ngModel)]="phase.description" [theme]="theme" [rows]="5" [cols]="cols"
 					aria-label="textarea"></textarea>
 			</ibm-label>
@@ -15,7 +15,7 @@
 			<ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
 				Data Usage Guidence<p style="margin-left: 273px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">
 					0/100</p>
-				<textarea style="width: 90%" ibmTextArea [invalid]="invalid" [disabled]="true"
+				<textarea style="width: 90%;margin-top: 10px;" ibmTextArea [invalid]="invalid" [disabled]="true"
 					[(ngModel)]="phase.guidence" [theme]="theme" [rows]="3" [cols]="cols"
 					aria-label="textarea"></textarea>
 			</ibm-label>
@@ -50,7 +50,7 @@
 			<ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
 				Data Description<p style="margin-left: 273px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">
 					0/100</p>
-				<textarea style="width: 90%" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.description"
+				<textarea style="width: 90%;margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.description"
 					[theme]="theme" [rows]="5" [cols]="cols" aria-label="textarea"></textarea>
 			</ibm-label>
 			<div *ngIf="phasesError">
@@ -60,7 +60,7 @@
 			<ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
 				Data Usage Guidence<p style="margin-left: 273px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">
 					0/100</p>
-				<textarea style="width: 90%" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.guidence"
+				<textarea style="width: 90%;margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.guidence"
 					[theme]="theme" [rows]="3" [cols]="cols" aria-label="textarea"></textarea>
 			</ibm-label>
 			<div *ngIf="phasesError">
@@ -68,8 +68,34 @@
 				</p>
 			</div>
 			<br />
-			<ibm-number [label]="'Minimum Model Score'" [helperText]="''" [min]="0" [(ngModel)]="stepTwo.passingScore">
-			</ibm-number>
+			<!-- <ibm-number [label]="'Minimum Model Score'" [helperText]="''" [min]="0" [(ngModel)]="stepTwo.passingScore">
+			</ibm-number> -->
+			<div ibmGrid [condensed]="gridCondensed">
+				<div
+					ibmRow
+					[gutter]="gutter"
+					[leftGutter]="leftGutter"
+					[rightGutter]="rightGutter"
+					[condensed]="rowCondensed">
+              		<div ibmCol class="custom-class-example" [columnNumbers]="{'md': 4, 'sm': 12}">
+						<div class="bx--form-item">
+							<div data-numberinput class="
+							  bx--number
+							   bx--number--light 
+							">
+							  <label for="number-input0" class="bx--label">Minimum model size</label>
+							  <div class="bx--number__input-wrapper">
+								<input id="number-input0" type="number" min="0" max="100" value="1">
+								
+							  </div>
+							</div>
+						  </div>
+					  </div>
+					<div ibmCol class="custom-class-example" [columnNumbers]="{'md': 2, 'sm': 12}"></div>
+					<div ibmCol class="custom-class-example" [columnNumbers]="{'md': 2, 'sm': 12}"></div>
+            	</div>
+         	</div>
+			
 			<div *ngIf="phasesError">
 				<p><span style="font-size: x-small; color: red">Score for this phase is required</span></p>
 			</div>
