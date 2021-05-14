@@ -135,7 +135,6 @@ export class ChallangePageComponent implements OnInit {
 
 	nextStepFour() {
 		this.requestService.post('challenge', this.challange).subscribe(res => {
-			console.log(res)
 			this.router.navigateByUrl('/')
 		})
 		this.current++;

@@ -95,14 +95,8 @@ export class ChallangeSecondStepComponent implements OnInit {
   next() {
     // TODO: uncomment
     // this.goNext.emit(this.phases);
-    // if (this.phases.length>0) {      
-    //   this.goNext.emit(this.phases);
-    // } else  {
-    //   this.phasesError = true
-    // }
 
     if (this.phases.length > 0) {
-      // this.goNext.emit(this.phases);
       if (this.stepTwo.description.length > 0 && this.stepTwo.guidence.length > 0 && this.stepTwo.passingScore && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 0) {
         let tempData = {
           description: this.stepTwo.description,
@@ -112,7 +106,6 @@ export class ChallangeSecondStepComponent implements OnInit {
           sampleDataFile: this.stepTwo.sampleDataFile
         }
         this.phases.push(tempData)
-
         this.goNext.emit(this.phases);
       } else {
         this.phasesError = true
@@ -127,7 +120,6 @@ export class ChallangeSecondStepComponent implements OnInit {
           sampleDataFile: this.stepTwo.sampleDataFile
         }
         this.phases.push(tempData)
-
         this.goNext.emit(this.phases);
       } else {
         this.phasesError = true
