@@ -30,7 +30,7 @@ const routes: Routes = [
 	// { path: 'invaccepted', component: InvAcceptedComponent },
 	{ path: 'invaccepted/:id', component: InvAcceptedComponent },
 	{ path: 'invmodel-view/:id', component: InvModelViewComponent },
-	{ path: 'see-performance', component: InvSeePerformanceComponent },
+	{ path: 'see-performance/:id', component: InvSeePerformanceComponent },
 	{
 		path: '',
 		redirectTo: '',

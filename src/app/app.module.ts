@@ -202,6 +202,7 @@ import { ChartsModule } from "@carbon/charts-angular";
 		RadioButton20Module,
 		ChartsModule,
 		// BookmarkFilled20Module
+		
 	],
 	bootstrap: [AppComponent],
 	providers: [RequestService],

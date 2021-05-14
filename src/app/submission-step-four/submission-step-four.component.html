@@ -38,7 +38,7 @@
                         <button class="view" [ibmButton]="ibmButton" [size]="size">Enter Phase 2</button>
                     </div>
                     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 3, sm: 12 }">
-                        <button class="model" [ibmButton]="ibmButton" [size]="size">See performance</button>
+                        <button class="model" [ibmButton]="ibmButton" [size]="size" (click)="seePerformance(model._id)" >See performance</button>
                     </div>
                 </div>
             </div>
