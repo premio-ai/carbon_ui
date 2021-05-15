@@ -56,6 +56,7 @@ export class ChallangeSecondStepComponent implements OnInit {
   }
 
   setDataVisual(acceptedFiles) {
+    console.log(acceptedFiles, "---acceptedFiles---59")
     const file = acceptedFiles.file;
     const formData = new FormData();
     formData.append('file', file);

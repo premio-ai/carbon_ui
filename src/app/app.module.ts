@@ -81,6 +81,7 @@ import { InvSeePerformanceComponent } from "./inv-see-performance/inv-see-perfor
 import { ActivityComponent } from "./activity/activity.component";
 
 import { DragAndDropStory } from './file-uploader/file-uploader';
+import { ImageUploader } from './file-uploader/image-uploader';
 
 import { ModelReportComponent } from "./model-report/model-report.component";
 import { ModelComponent } from "./model/model.component";
@@ -118,6 +119,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 		ActivityComponent,
 		
 		DragAndDropStory,
+		ImageUploader,
 
 		ModelComponent,
 

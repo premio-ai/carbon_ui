@@ -12,12 +12,13 @@ export class DashboardComponent implements OnInit {
 		private requestService: RequestService,
 		private router: Router
 	) {}
+	userDetails: any;
 	activeChallenges: any[];
 	pastChallenges: any[];
 
 	ngOnInit() {
-		let userDetails = JSON.parse(localStorage.getItem('userDetails'))
-		if (userDetails && userDetails._id) {			
+		this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
+		if (this.userDetails && this.userDetails._id) {			
 			this.getActiveChallanges();
 			this.getpastChallanges();
 		} else {

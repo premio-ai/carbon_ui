@@ -98,8 +98,8 @@
 					<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
 						<h5>Data Visualisation</h5>
 						<p class="drag">An image that represnt your Sample data</p>
-						<app-drop-file-uploader (goNext)="setDataVisual($event)" (uploadFile)="uploadDataVisual()"
-							(filesChange)="onDropped($event.target.files)"></app-drop-file-uploader>
+						<app-drop-image-uploader (goNext)="setDataVisual($event)" (uploadFile)="uploadDataVisual()"
+							(filesChange)="onImageSelect($event.target.files)"></app-drop-image-uploader>
 					</div>
 					<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
 						<h5>Sample Data</h5>
