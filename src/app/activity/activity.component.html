@@ -13,7 +13,9 @@
 	<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
 		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
 			<h6 class="date" style="display: flex; align-items: center">
-				<svg icon ibmIconUserMultiple20></svg>&nbsp;
+				<svg icon ibmIconUserMultiple20></svg>
+				
+				&nbsp;
 				<span>Users Accepted </span>
 			</h6>
 			<br />
@@ -59,7 +61,7 @@
 			</ibm-dropdown>
         </div>
 			<button ibmButton="primary" size="sm">
-				Export Data<ibm-icon-add size="20" class="bx--btn__icon"></ibm-icon-add>
+				Export Data<svg class="bx--btn__icon" icon ibmIconDocumentExport16></svg>
 			</button>
 		</ibm-table-toolbar-content>
 	</ibm-table-toolbar>

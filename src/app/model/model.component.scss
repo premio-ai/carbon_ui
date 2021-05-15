@@ -1,6 +1,6 @@
 .bx--tile {
     display: block;
-    min-width: 51rem;
+    min-width: 44rem;
     min-height: 6rem;
     background-color: #f4f4f4;
     position: relative;
@@ -68,3 +68,14 @@
 //        border-left: 6px solid #3B55EA;
 //        height: 104px;
 //    }
+
+
+
+@media (min-width: 42rem){
+
+    .bx--grid {
+        padding-right: 2rem;
+        padding-left: 21px;
+    }
+
+}

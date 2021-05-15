@@ -24,13 +24,15 @@ import { Concept32Module } from "@carbon/icons-angular/lib/concept/32"
 import {CloudUpload32Module} from "@carbon/icons-angular/lib/cloud--upload/32";
 import {Idea32Module} from "@carbon/icons-angular/lib/idea/32";
 import {Forum16Module} from "@carbon/icons-angular/lib/forum/16";
+import {DocumentExport16Module} from "@carbon/icons-angular/lib//document--export/16";
 import {Upload20Module} from "@carbon/icons-angular/lib/upload/20";
 import {Chemistry20Module} from "@carbon/icons-angular/lib/chemistry/20";
 import {Trophy20Module} from "@carbon/icons-angular/lib/trophy/20";
 import {ArrowRight20Module} from "@carbon/icons-angular/lib/arrow--right/20";
-// import {BookmarkFilled20Module} from "@carbon/icons-angular/lib/bookmark--filled/20";
+import {BookmarkFilled20Module} from "@carbon/icons-angular/lib/bookmark--filled/20";
 import {UserMultiple20Module} from "@carbon/icons-angular/lib/user--multiple/20";
 import {CheckmarkOutline20Module} from "@carbon/icons-angular/lib/checkmark--outline/20";
+
 // carbon-components-angular default imports
 import {
 	AccordionModule,
@@ -96,6 +98,7 @@ import {RadioButton20Module} from "@carbon/icons-angular/lib/radio-button/20";
 import { ChartsModule } from "@carbon/charts-angular";
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+
 // import { DonutChart } from "@carbon/charts";
 
 
@@ -209,7 +212,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 		CheckmarkFilled16Module,
 		RadioButton20Module,
 		ChartsModule,
-		// BookmarkFilled20Module
+		DocumentExport16Module,
+		BookmarkFilled20Module
 		
 	],
 	bootstrap: [AppComponent],
