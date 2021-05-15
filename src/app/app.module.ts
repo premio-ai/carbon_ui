@@ -94,6 +94,8 @@ import {CheckmarkFilled16Module} from "@carbon/icons-angular/lib/checkmark--fill
 import {DocumentExport16Module} from "@carbon/icons-angular/lib/document--export/16";
 import {RadioButton20Module} from "@carbon/icons-angular/lib/radio-button/20";
 import { ChartsModule } from "@carbon/charts-angular";
+import { LoginComponent } from './login/login.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 // import { DonutChart } from "@carbon/charts";
 
 
@@ -139,6 +141,10 @@ import { ChartsModule } from "@carbon/charts-angular";
 		InvModelViewComponent,
 
 		InvSeePerformanceComponent,
+
+		LoginComponent,
+
+		SignUpComponent,
 	],
 	imports: [
 		BrowserModule,
