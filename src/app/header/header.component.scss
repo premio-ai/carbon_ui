@@ -1,36 +1,39 @@
 .portrait {
-	width: 100px;
-	height: 100px;
-	margin: 0 auto;
-	border-radius: 50%;
-	object-fit: cover;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  border-radius: 50%;
+  object-fit: cover;
 
-	margin-left: 80px;
-	margin-top: 20px;
+  margin-left: 80px;
+  margin-top: 20px;
 }
 .userdetail {
-	white-space: nowrap;
-	margin-left: 50px;
-	font-weight: 500;
-	font-size: 12px;
-	color: white;
+  white-space: nowrap;
+  margin-left: 50px;
+  font-weight: 500;
+  font-size: 12px;
+  color: white;
 }
 .userName {
-	white-space: nowrap;
-	margin-left: 93px;
-	font-weight: 700;
-	font-size: 16px;
-	color: white;
+  white-space: nowrap;
+  margin-left: 93px;
+  font-weight: 700;
+  font-size: 16px;
+  color: white;
 }
 .notify {
-	white-space: nowrap;
-	margin-left: 50px;
+  white-space: nowrap;
+  margin-left: 50px;
 
-	font-size: 14px;
-	color: white;
+  font-size: 14px;
+  color: white;
 }
 
+svg {
+  fill: white;
+}
 
-  svg{
-	  fill: white;
-  }
+.bx--btn {
+  margin-left: 51px;
+}
