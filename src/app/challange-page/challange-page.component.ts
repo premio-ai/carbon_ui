@@ -14,7 +14,6 @@ export class ChallangePageComponent implements OnInit {
 
 	current: number;
 	steps: any[];
-	insurerId = "6076c19aad0c92991a8ba0bf"
 	awardedTo = "60767631222df1253206ff74";
 
 	challange: {
@@ -33,7 +32,6 @@ export class ChallangePageComponent implements OnInit {
 		challengeType: string,
 		phases: any[],
 		visibiltiy: {},
-		insurerId: string,
 		isActive: true
 	}
 
@@ -68,18 +66,13 @@ export class ChallangePageComponent implements OnInit {
 			description: "",
 			Objective: "",
 			expiryDate: "",
-			visulizationImageFilePath: [
-				""
-			],
-			sampleDataFilePath: [
-				""
-			],
+			visulizationImageFilePath: [""],
+			sampleDataFilePath: [""],
 			submissionsCount: 0,
 			acceptedUsersCount: 0,
 			challengeType: "CONTRACT",
 			phases: [],
 			visibiltiy: {},
-			insurerId: this.insurerId,
 			isActive: true
 		}
 	}

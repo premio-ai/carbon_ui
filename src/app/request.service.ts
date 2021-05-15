@@ -12,28 +12,38 @@ export class RequestService {
   constructor(private http:HttpClient) { }
 
   get(uri): Observable<any> {
+    const userDetails = JSON.parse(localStorage.getItem('userDetails'))
     return this.http.get(this.baseUrl + uri, {
-      // headers: {
-      //   token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6Imluc3VyZXIwMSIsImVtYWlsIjoiaW5zdXJlcjAxQGVtYWlsLmNvbSIsImV4cGVyaWVuY2UiOjAsInVwZGF0ZWRBdCI6bnVsbCwiX2lkIjoiNjA5ZTAyZWM2NTU3ZDQwNWEwY2ZiMTdiIiwiYmlvIjoidGVzdF9pbnN1cmVyX3VzZXIiLCJwb2ludHMiOjAsInJvbGUiOiJJbnN1cmVyIiwiaWF0IjoxNjIwOTk3MzEzLCJleHAiOjE2MjEwMDA5MTN9.dxnM-IT185UgoCbt_eiAWH5PZ26eDMqdqEq8r-Z16CA"
-      // }
+      headers: {
+        token: userDetails.access_token
+      }
     })
   }
 
-  post(uri,payload): Observable<any> {
-    //return this.http.get(this.baseURL + uri)
+  signing(uri,payload): Observable<any> {
+    // const userDetails = JSON.parse(localStorage.getItem('userDetails'))
     return this.http.post(this.baseUrl + uri, payload, {
       // headers: {
-      //   token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6Imluc3VyZXIwMSIsImVtYWlsIjoiaW5zdXJlcjAxQGVtYWlsLmNvbSIsImV4cGVyaWVuY2UiOjAsInVwZGF0ZWRBdCI6bnVsbCwiX2lkIjoiNjA5ZTAyZWM2NTU3ZDQwNWEwY2ZiMTdiIiwiYmlvIjoidGVzdF9pbnN1cmVyX3VzZXIiLCJwb2ludHMiOjAsInJvbGUiOiJJbnN1cmVyIiwiaWF0IjoxNjIwOTcyNTI5LCJleHAiOjE2MjA5NzYxMjl9.Cvw2VFVCEPkVpNPsk54b7vv9HNyv9G9SDcovUDnfHr8"
+      //   token: userDetails.access_token
       // }
     });
   }
 
+  post(uri,payload): Observable<any> {
+    const userDetails = JSON.parse(localStorage.getItem('userDetails'))
+    return this.http.post(this.baseUrl + uri, payload, {
+      headers: {
+        token: userDetails.access_token
+      }
+    });
+  }
+
   put(uri,payload): Observable<any> {
-    //return this.http.get(this.baseURL + uri)
+    const userDetails = JSON.parse(localStorage.getItem('userDetails'))
     return this.http.put(this.baseUrl + uri, payload, {
-      // headers: {
-      //   token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6Imluc3VyZXIwMSIsImVtYWlsIjoiaW5zdXJlcjAxQGVtYWlsLmNvbSIsImV4cGVyaWVuY2UiOjAsInVwZGF0ZWRBdCI6bnVsbCwiX2lkIjoiNjA5ZTAyZWM2NTU3ZDQwNWEwY2ZiMTdiIiwiYmlvIjoidGVzdF9pbnN1cmVyX3VzZXIiLCJwb2ludHMiOjAsInJvbGUiOiJJbnN1cmVyIiwiaWF0IjoxNjIwOTcyNTI5LCJleHAiOjE2MjA5NzYxMjl9.Cvw2VFVCEPkVpNPsk54b7vv9HNyv9G9SDcovUDnfHr8"
-      // }
+      headers: {
+        token: userDetails.access_token
+      }
     });
 
 

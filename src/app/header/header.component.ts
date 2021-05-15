@@ -20,21 +20,19 @@ export class HeaderComponent implements OnInit {
 
 	ngOnInit() {
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
-		// setInterval(() => {
+		setInterval(() => {
 			this.getNotifications()
-		// }, 5000)
+		}, 60000)
 	}
 
 	getNotifications() {
 		let url = 'userNotification'
 		this.requestService.get(url).subscribe( data => {
-			console.log(data, "---data---18")
 			this.notifications = data;
 		})
 	}
 
 	viewNotification(notify) {
-		console.log(notify, "---notify---31")
 		if (notify.title == MESSAGES.NEW_CHALLENGE_POST) {
 			this.requestService.put('invaccepted/' + notify._id, {
 				isSeen: true
@@ -49,6 +47,11 @@ export class HeaderComponent implements OnInit {
 				this.router.navigateByUrl('invmodel-view/:id' + notify.elementId)
 			})
 		}
+	}
+
+	logout() {
+		localStorage.clear();
+		this.router.navigateByUrl('login')
 	}
 
 }
