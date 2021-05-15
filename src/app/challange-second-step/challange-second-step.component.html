@@ -50,8 +50,9 @@
 			<ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
 				Data Description<p style="margin-left: 273px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">
 					0/100</p>
-				<textarea style="width: 90%;margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.description"
-					[theme]="theme" [rows]="5" [cols]="cols" aria-label="textarea"></textarea>
+				<textarea style="width: 90%;margin-top: 10px;" ibmTextArea [invalid]="invalid"
+					[(ngModel)]="stepTwo.description" [theme]="theme" [rows]="5" [cols]="cols"
+					aria-label="textarea"></textarea>
 			</ibm-label>
 			<div *ngIf="phasesError">
 				<p><span style="font-size: x-small; color: red">Data Description for this phase is required</span></p>
@@ -60,27 +61,25 @@
 			<ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
 				Data Usage Guidence<p style="margin-left: 273px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">
 					0/100</p>
-				<textarea style="width: 90%;margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.guidence"
-					[theme]="theme" [rows]="3" [cols]="cols" aria-label="textarea"></textarea>
+				<textarea style="width: 90%;margin-top: 10px;" ibmTextArea [invalid]="invalid"
+					[(ngModel)]="stepTwo.guidence" [theme]="theme" [rows]="3" [cols]="cols"
+					aria-label="textarea"></textarea>
 			</ibm-label>
 			<div *ngIf="phasesError">
 				<p><span style="font-size: x-small; color: red">Data Usage Guidance for this phase is required</span>
 				</p>
 			</div>
 			<br />
-		
-<div class="bx--form-item">
-	<div data-numberinput class="
-	  bx--number
-	   bx--number--light 
-	">
-	  <label for="number-input0" class="bx--label">Minimum model size</label>
-	  <div class="bx--number__input-wrapper">
-		<input id="number-input0" type="number" min="0" max="100" value="1" [(ngModel)]="stepTwo.passingScore" >
-		
-	  </div>
-	</div>
-  </div>
+
+			<div class="bx--form-item">
+				<div data-numberinput class="bx--number bx--number--light">
+					<label for="number-input0" class="bx--label">Minimum model size</label>
+					<div class="bx--number__input-wrapper">
+						<input id="number-input0" type="number" min="0" max="100" value="1"
+							[(ngModel)]="stepTwo.passingScore">
+					</div>
+				</div>
+			</div>
 			<div *ngIf="phasesError">
 				<p><span style="font-size: x-small; color: red">Score for this phase is required</span></p>
 			</div>
@@ -99,25 +98,30 @@
 					<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
 						<h5>Data Visualisation</h5>
 						<p class="drag">An image that represnt your Sample data</p>
-						<app-drop-file-uploader (goNext)="setDataVisual($event)" (uploadFile)="uploadDataVisual()" (filesChange)="onDropped($event.target.files)"></app-drop-file-uploader>
+						<app-drop-file-uploader (goNext)="setDataVisual($event)" (uploadFile)="uploadDataVisual()"
+							(filesChange)="onDropped($event.target.files)"></app-drop-file-uploader>
 					</div>
 					<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
 						<h5>Sample Data</h5>
 						<p class="drag">Anonymous, available to download for any</p>
-						<app-drop-file-uploader (goNext)="setSampleData($event)" (uploadFile)="uploadSampleData()" (filesChange)="onDropped($event.target.files)"></app-drop-file-uploader>
+						<app-drop-file-uploader (goNext)="setSampleData($event)" (uploadFile)="uploadSampleData()"
+							(filesChange)="onDropped($event.target.files)"></app-drop-file-uploader>
 					</div>
 				</div>
 				<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
-				[condensed]="rowCondensed">
-				<button class="Step2btn_pre" [ibmButton]="ibmButton" [size]="size" (click)="previous()">
-					Previous
-				</button>
-				<button class="Step2btn_next" [ibmButton]="ibmButton" [size]="size" (click)="next()">
-					Next
-				</button>
-			</div>
+					[condensed]="rowCondensed">
+					<button class="Step2btn_pre" [ibmButton]="ibmButton" [size]="size" (click)="previous()">
+						Previous
+					</button>
+					<button class="Step2btn_next" [ibmButton]="ibmButton" [size]="size" (click)="next()">
+						Next
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>
+
+
+
 
 </div>

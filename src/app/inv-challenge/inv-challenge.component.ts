@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { doesNotThrow } from 'assert';
 import * as moment from 'moment';
 import { RequestService } from "../request.service";
 
@@ -21,8 +20,13 @@ export class InvChallengeComponent implements OnInit {
   innovatorId = "607e856d2d00fd7ed549689e";
 
   ngOnInit() {
-    this.getActiveChallanges();
-    // this.getBookmarkedChallenges();
+    let userDetails = JSON.parse(localStorage.getItem('userDetails'))
+		if (userDetails && userDetails._id) {			
+	    this.getAllActiveChallanges();
+      // this.getBookmarkedChallenges();
+    } else {
+			this.router.navigateByUrl('login')
+		}
   }
 
   getDate(timeStamp) {
@@ -35,16 +39,16 @@ export class InvChallengeComponent implements OnInit {
     return date;
   }
 
-  getActiveChallanges() {
-    let activeChallanegUrl = "challenge?isActive=true";
-    this.requestService.get(activeChallanegUrl).subscribe(data => {
+  getAllActiveChallanges() {
+    let allActiveChallanegUrl = "challenge/all";
+    this.requestService.get(allActiveChallanegUrl).subscribe(data => {
       this.activeChallenges = data;
       this.getBookmarkedChallenges();
     })
   }
 
   getBookmarkedChallenges() {
-    let url = "bookmarkChallenge/" + this.innovatorId;
+    let url = "bookmarkChallenge";
     this.requestService.get(url).subscribe(data => {
 
       let tempData = []
@@ -64,15 +68,13 @@ export class InvChallengeComponent implements OnInit {
   }
 
   bookmarkChallenge(challengeId) {
-console.log(challengeId, "---challengeId---67")
-    // let url = 'bookmarkChallenge'
-    // let data = {
-    //   innovatorId: this.innovatorId,
-    //   challengeId: challengeId
-    // }
-    // this.requestService.post(url, data).subscribe(data => {
-    //   this.getBookmarkedChallenges()
-    // })
+    let url = 'bookmarkChallenge'
+    let data = {
+      challengeId: challengeId
+    }
+    this.requestService.post(url, data).subscribe(data => {
+      this.getBookmarkedChallenges()
+    })
   }
 
 }

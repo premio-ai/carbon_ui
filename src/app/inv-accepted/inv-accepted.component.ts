@@ -25,11 +25,10 @@ export class InvAcceptedComponent implements OnInit {
 	insurerId = "6076c19aad0c92991a8ba0bf";
 	awardedTo = "60767631222df1253206ff74";
 	// innovatorId = "607e856d2d00fd7ed549689e";
-	innovatorId = "607d651862c616905655e309";
+	// innovatorId = "607d651862c616905655e309";
 	submissionData: {
 		challengeId: {},
 		phaseId: any,
-		innovatorId: {},
 		mlFlowId: string,
 		appliedAsCompany: true,
 		modelDescription: string,
@@ -55,8 +54,8 @@ export class InvAcceptedComponent implements OnInit {
 		});
 
 		this.getChallengeDetails(this.challengeId);
-		this.getSubmissionByChallengeId(this.challengeId, this.innovatorId);
-		this.getChallengeAcception(this.challengeId, this.innovatorId);
+		this.getSubmissionByChallengeId(this.challengeId);
+		this.getChallengeAcception(this.challengeId);
 		// this.getChallengeAcception("607e856d2d00fd7ed549689d", this.innovatorId);
 		this.getLeaderboard(this.challengeId);
 
@@ -83,7 +82,6 @@ export class InvAcceptedComponent implements OnInit {
 		this.submissionData = {
 			challengeId: {},
 			phaseId: [],
-			innovatorId: {},
 			mlFlowId: "",
 			appliedAsCompany: true,
 			modelDescription: "",
@@ -107,8 +105,8 @@ export class InvAcceptedComponent implements OnInit {
 		})
 	}
 
-	getChallengeAcception(challengeId, innovatorId) {
-		let url = 'userChallenge/accepted/' + challengeId + '/' + innovatorId;
+	getChallengeAcception(challengeId) {
+		let url = 'userChallenge/accepted/' + challengeId;
 		this.requestService.get(url).subscribe(data => {
 			this.acceptedChallenge = data
 		})
@@ -121,8 +119,8 @@ export class InvAcceptedComponent implements OnInit {
 		})
 	}
 
-	getSubmissionByChallengeId(challengeId, innovatorId) {
-		let url = 'submissionAllChallenge/challenge-innovator/' + challengeId + '/' + innovatorId;
+	getSubmissionByChallengeId(challengeId) {
+		let url = 'submissionAllChallenge/challenge-innovator/' + challengeId;
 		this.requestService.get(url).subscribe(data => {
 			this.challengeSubmissionData = data
 		})
@@ -139,12 +137,11 @@ export class InvAcceptedComponent implements OnInit {
 
 	acceptChallenge(challengeId) {
 		let data = {
-			innovatorId: this.innovatorId,
 			challengesIds: [challengeId]
 		}
 		let url = 'userChallenge';
 		this.requestService.post(url, data).subscribe(data => {
-			this.getChallengeAcception(challengeId, this.innovatorId)
+			this.getChallengeAcception(challengeId)
 			this.showToaster()
 		})
 	}
@@ -196,7 +193,6 @@ export class InvAcceptedComponent implements OnInit {
 
 	nextStepOne(stepOne) {
 		this.submissionData.challengeId = this.challengeId
-		this.submissionData.innovatorId = this.innovatorId
 		this.submissionData.phaseId = this.challengeDetails.phases[0].phaseId
 		this.submissionData.modelType = 'MODIFIED_TRAINED_MODEL'
 		this.submissionData.modelUploadedPath = stepOne.modelUploadedPath
@@ -223,7 +219,7 @@ export class InvAcceptedComponent implements OnInit {
 	nextStepThree() {
 		let url = 'submissionAllChallenge';
 		this.requestService.post(url, this.submissionData).subscribe( data => {
-			this.getSubmissionByChallengeId(this.challengeId, this.innovatorId);
+			this.getSubmissionByChallengeId(this.challengeId);
 			// this.getChallengeDetails(this.challengeId)
 			this.getLeaderboard(this.challengeId)
 			this.current++;

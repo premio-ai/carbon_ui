@@ -26,7 +26,9 @@
 	<ibm-header-navigation>
 		<ibm-header-item [route]="['/dashboard']">Activity</ibm-header-item>
 		<ibm-header-item>Models</ibm-header-item>
-		<ibm-header-item [route]="['/invchallenges']">Challenges</ibm-header-item>
+		<div *ngIf="userDetails.role == 'Innovator'">
+			<ibm-header-item [route]="['/invchallenges']">Challenges</ibm-header-item>
+		</div>
 		<!-- <ibm-header-item>Support</ibm-header-item>
 		<ibm-header-menu title="Manage">
 			<ibm-header-item>Link 1</ibm-header-item>
@@ -39,7 +41,7 @@
 			<ibm-search placeholder="search" size="sm" toolbar="true" style="fill: white !important;"></ibm-search>
 		</div> -->
 		<ibm-header-action #firstAction title="action">
-			<p style="color: white; font-size: 16px; white-space: nowrap; margin-left: -13px;">Charlie R</p>
+			<p style="color: white; font-size: 16px; white-space: nowrap; margin-left: -13px;">{{userDetails.fullName}}</p>
 		</ibm-header-action>
 		<ibm-header-action #firstAction title="action">
 			<svg icon ibmIconUserAvatar20></svg>
@@ -53,7 +55,7 @@
 <ibm-panel [expanded]="firstAction.active">
 	<img class="portrait mr-3" itemprop="image" alt="Avatar"
 		src="https://www.angularjswiki.com/author/admin/avatar_hufa038520d36dafb78f39a62f91de8258_77813_250x250_fill_q90_lanczos_center.jpg"/><svg icon ibmIconEdit20 ></svg>
-	<p class="userName">Charlie R</p>
+	<p class="userName">{{userDetails.fullName}}</p>
 	<br />
 	<p class="userdetail">Active challange: 5</p>
 	<p class="userdetail">Past challange: 8</p>
@@ -67,11 +69,6 @@
 		<p class="notify">{{notify?.body}}</p>
 	</div>
 
-	<!-- <p class="userdetail">yesterday</p>
-	<p class="notify">Results Ready for Challenge 5</p>
-	<p class="notify">Results Ready for Challenge 3</p>
-	<p class="userdetail">7 march</p>
-	<p class="notify">Results Ready for Challenge 1</p> -->
 	<p class="userdetail">----------------------</p>
 	<p class="notify">Message</p>
 
@@ -83,7 +80,9 @@
 	<p class="userdetail">Jane you</p>
 	<p class="notify">Yeah i thought so i Think that i'll.</p>
 	<p class="userdetail">----------------------</p>
-	<p class="userdetail" style="margin-bottom: 30px">Log out</p>
+	<!-- <p class="userdetail" style="margin-bottom: 30px">Log out</p> -->
+
+	<h6 class="bx--btn bx--btn--primary" type="button" (click)="logout()">Logout</h6>
 </ibm-panel>
 <ibm-panel [expanded]="secondAction">
 	<ibm-switcher-list>
