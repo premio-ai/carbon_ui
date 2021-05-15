@@ -9,7 +9,10 @@ import { InvDashboradComponent } from './inv-dashborad/inv-dashborad.component';
 import { InvAcceptedComponent } from './inv-accepted/inv-accepted.component';
 import { InvChallengeComponent } from './inv-challenge/inv-challenge.component';
 import { InvModelViewComponent } from './inv-model-view/inv-model-view.component';
+import { LoginComponent } from './login/login.component';
 import { InvSeePerformanceComponent } from './inv-see-performance/inv-see-performance.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+
 const routes: Routes = [
 	// {
 	// 	path: '',
@@ -31,6 +34,8 @@ const routes: Routes = [
 	{ path: 'invaccepted/:id', component: InvAcceptedComponent },
 	{ path: 'invmodel-view/:id', component: InvModelViewComponent },
 	{ path: 'see-performance', component: InvSeePerformanceComponent },
+	{ path: 'login', component: LoginComponent },
+	{ path: 'signup', component: SignUpComponent },
 	{
 		path: '',
 		redirectTo: '',
