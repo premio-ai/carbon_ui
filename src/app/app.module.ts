@@ -91,6 +91,7 @@ import { SubmissionStepThreeComponent } from "./submission-step-three/submission
 import { SubmissionStepTwoComponent } from "./submission-step-two/submission-step-two.component";
 import { from } from "rxjs";
 import {CheckmarkFilled16Module} from "@carbon/icons-angular/lib/checkmark--filled/16";
+import {DocumentExport16Module} from "@carbon/icons-angular/lib/document--export/16";
 import {RadioButton20Module} from "@carbon/icons-angular/lib/radio-button/20";
 import { ChartsModule } from "@carbon/charts-angular";
 // import { DonutChart } from "@carbon/charts";
@@ -201,6 +202,7 @@ import { ChartsModule } from "@carbon/charts-angular";
 		CheckmarkFilled16Module,
 		RadioButton20Module,
 		ChartsModule,
+		DocumentExport16Module
 		// BookmarkFilled20Module
 		
 	],
