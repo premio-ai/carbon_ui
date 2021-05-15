@@ -32,6 +32,15 @@ export class HeaderComponent implements OnInit {
 		})
 	}
 
+	logoRoute() {
+		if (this.userDetails.role == 'Insurer') {
+			this.router.navigateByUrl('/')
+		}
+		if (this.userDetails.role == 'Innovator') {
+			this.router.navigateByUrl('invchallenges')
+		}
+	}
+
 	viewNotification(notify) {
 		if (notify.title == MESSAGES.NEW_CHALLENGE_POST) {
 			this.requestService.put('invaccepted/' + notify._id, {

@@ -22,7 +22,7 @@ export class InvChallengeComponent implements OnInit {
   ngOnInit() {
     let userDetails = JSON.parse(localStorage.getItem('userDetails'))
 		if (userDetails && userDetails._id) {			
-	    this.getActiveChallanges();
+	    this.getAllActiveChallanges();
       // this.getBookmarkedChallenges();
     } else {
 			this.router.navigateByUrl('login')
@@ -39,9 +39,9 @@ export class InvChallengeComponent implements OnInit {
     return date;
   }
 
-  getActiveChallanges() {
-    let activeChallanegUrl = "challenge?isActive=true";
-    this.requestService.get(activeChallanegUrl).subscribe(data => {
+  getAllActiveChallanges() {
+    let allActiveChallanegUrl = "challenge/all";
+    this.requestService.get(allActiveChallanegUrl).subscribe(data => {
       this.activeChallenges = data;
       this.getBookmarkedChallenges();
     })
