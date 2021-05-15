@@ -11,35 +11,28 @@ import * as moment from 'moment';
 export class ChallangeTileComponent implements OnInit {
 
   @Input() challange: any;
-  // constructor() { }
 
-  constructor(private requestService: RequestService,
+  constructor(
+    private requestService: RequestService,
     private router: Router
     ) { }
   activeChallenges: any[];
   pastChallenges: any[];
 
-  ngOnInit() {
-    // console.log("challange ..... ", this.challange)
-    
-  }
+  ngOnInit() {}
 
   getDate(timeStamp) {
 		let date = moment(moment(+timeStamp)).format("DD/MM/YYYY")
 		return date;
-	}
+  }
+  
+  getExpiryDate(dt) {
+    let date = moment(dt).format('DD/MM/YYYY')
+    return date;
+  }
 
   viewChalange(id) {
-    console.log(id, "---view challenge btn click---")
-
     let url = 'challenge/' + id
-
     this.router.navigateByUrl(url);
-    // let challengeUrl = '/challenge/:challengeId';
-    // this.requestService.get(challengeUrl).subscribe(data => {
-    //   console.log("active challange ... ", data)
-    //   this.activeChallenges = data;
-    // })
-
   }
 }

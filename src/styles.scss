@@ -12,6 +12,7 @@ $feature-flags: (
 
 @import './assets/scss/carbon-overrides.scss';
 
+@import "https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap";
 
 .bx--tabs__nav-item{
 	max-width: 105px;

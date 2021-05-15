@@ -36,6 +36,7 @@ const routes: Routes = [
 	{ path: 'see-performance', component: InvSeePerformanceComponent },
 	{ path: 'login', component: LoginComponent },
 	{ path: 'signup', component: SignUpComponent },
+	{ path: 'see-performance/:id', component: InvSeePerformanceComponent },
 	{
 		path: '',
 		redirectTo: '',

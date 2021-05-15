@@ -208,6 +208,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 		RadioButton20Module,
 		ChartsModule,
 		// BookmarkFilled20Module
+		
 	],
 	bootstrap: [AppComponent],
 	providers: [RequestService],

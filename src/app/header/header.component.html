@@ -39,16 +39,7 @@
 			<ibm-search placeholder="search" size="sm" toolbar="true" style="fill: white !important;"></ibm-search>
 		</div> -->
 		<ibm-header-action #firstAction title="action">
-			<p
-				style="
-					color: white;
-					font-size: 16px;
-					white-space: nowrap;
-					margin-left: -13px;
-				"
-			>
-				Charlie R
-			</p>
+			<p style="color: white; font-size: 16px; white-space: nowrap; margin-left: -13px;">Charlie R</p>
 		</ibm-header-action>
 		<ibm-header-action #firstAction title="action">
 			<svg icon ibmIconUserAvatar20></svg>
@@ -60,12 +51,8 @@
 </ibm-header>
 
 <ibm-panel [expanded]="firstAction.active">
-	<img
-		class="portrait mr-3"
-		src="https://www.angularjswiki.com/author/admin/avatar_hufa038520d36dafb78f39a62f91de8258_77813_250x250_fill_q90_lanczos_center.jpg"
-		itemprop="image"
-		alt="Avatar"
-	/><svg icon ibmIconEdit20 ></svg>
+	<img class="portrait mr-3" itemprop="image" alt="Avatar"
+		src="https://www.angularjswiki.com/author/admin/avatar_hufa038520d36dafb78f39a62f91de8258_77813_250x250_fill_q90_lanczos_center.jpg"/><svg icon ibmIconEdit20 ></svg>
 	<p class="userName">Charlie R</p>
 	<br />
 	<p class="userdetail">Active challange: 5</p>
@@ -75,14 +62,16 @@
 	<p class="userdetail">----------------------</p>
 	<p class="notify">Notifications</p>
 
-	<p class="userdetail">10:30 am</p>
-	<p class="notify">Training started on challenge 1</p>
+	<div *ngFor="let notify of notifications; index as i" (click)="viewNotification(notify)" >
+		<p class="userdetail">{{notify?.title}}</p>
+		<p class="notify">{{notify?.body}}</p>
+	</div>
 
-	<p class="userdetail">yesterday</p>
+	<!-- <p class="userdetail">yesterday</p>
 	<p class="notify">Results Ready for Challenge 5</p>
 	<p class="notify">Results Ready for Challenge 3</p>
 	<p class="userdetail">7 march</p>
-	<p class="notify">Results Ready for Challenge 1</p>
+	<p class="notify">Results Ready for Challenge 1</p> -->
 	<p class="userdetail">----------------------</p>
 	<p class="notify">Message</p>
 

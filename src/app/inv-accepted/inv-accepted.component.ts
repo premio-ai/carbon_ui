@@ -73,10 +73,10 @@ export class InvAcceptedComponent implements OnInit {
 				text: "Step 3",
 				state: ["incomplete"],
 			},
-			{
-				text: "Step 4",
-				state: ["incomplete"],
-			},
+			// {
+			// 	text: "Step 4",
+			// 	state: ["incomplete"],
+			// },
 			
 		];
 		this.current = 3;
