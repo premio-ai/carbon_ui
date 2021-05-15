@@ -1,7 +1,11 @@
-<button [ibmButton]="ibmButton" [size]="size" (click)="toStepOne()">
+<button [ibmButton]="ibmButton" [size]="size" (click)="toStepOne()" [disabled]="!isChallengeAccepted">
   Submit model<svg class="bx--btn__icon" ibmIconAdd size="20"></svg>
 </button>
 <br />
+
+<div *ngIf="!isChallengeAccepted">
+  <h4>First accept this challenge to submit a model</h4>
+</div>
 <!-- <div style="display: flex; flex-flow: row wrap; justify-content: space-around;" *ngIf="challengeSubmissionData && challengeSubmissionData.length>0">
 
    

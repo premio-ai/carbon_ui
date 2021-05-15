@@ -18,6 +18,7 @@ export class InvAcceptedComponent implements OnInit {
 	toasterMsg: boolean;
 	challengeId: any;
 	leaderboard: any[];
+	isChallengeAccepted: boolean=false;
 	acceptedChallenge: any;
 	challengeDetails: any;
 	current: number;
@@ -47,6 +48,7 @@ export class InvAcceptedComponent implements OnInit {
 
 
 	ngOnInit() {
+		// this.isChallengeAccepted = false
 		this.activatedRoute.params.subscribe((params: Params) => {
 			if (params) {
 				this.challengeId = params.id
@@ -108,7 +110,11 @@ export class InvAcceptedComponent implements OnInit {
 	getChallengeAcception(challengeId) {
 		let url = 'userChallenge/accepted/' + challengeId;
 		this.requestService.get(url).subscribe(data => {
-			this.acceptedChallenge = data
+			this.acceptedChallenge = data;
+			if (data._id.length > 0) {
+				this.isChallengeAccepted = true;
+			}
+			console.log(this.acceptedChallenge, "---this.acceptedChallenge---111")
 		})
 	}
 

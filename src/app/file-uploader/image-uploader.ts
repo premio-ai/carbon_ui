@@ -1,23 +1,22 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
-	selector: "app-drop-file-uploader",
+	selector: "app-drop-image-uploader",
 	template: `<ibm-file-uploader [title]="title" [description]="description" [buttonText]="buttonText"
     		[buttonType]="buttonType" [accept]="accept" [multiple]="multiple" [skeleton]="skeleton"
-    		[(files)]="files" [size]="size" drop="true" [dropText]="dropText" (filesChange)="onDropped($event)">
+    		[(files)]="files" [size]="size" drop="true" [dropText]="dropText" (filesChange)="onImageSelect($event)">
 		</ibm-file-uploader>
 		<div [id]="notificationId" style="width: 300px; margin-top: 20px"></div>`
 
 })
 
-export class DragAndDropStory {
+export class ImageUploader {
 	static notificationCount = 0;
 
 	@Input() files = new Set();
 	@Input() title;
 	@Input() description;
-	// @Input() accept = [".jpg", ".png", ".pdf", ".txt"];
-	@Input() accept = [".pdf", ".txt"];
+	@Input() accept = [".jpg", ".png"];
 	@Input() multiple;
 	@Input() dropText = "Drag and drop files here of upload";
 	@Input() disabled = false;
@@ -29,7 +28,7 @@ export class DragAndDropStory {
 
     constructor() {}
 
-	onDropped(event) {
+	onImageSelect(event) {
 		const transferredFiles = Array.from(event);
 
 		// Creates a promise which resolves to a file and whether or not the file should be accepted.
@@ -51,6 +50,7 @@ export class DragAndDropStory {
 					// 	mime = fileObj.file.type;
 					// }
 
+					console.log(fileObj, "---fileObj---53")
 					this.goNext.emit(fileObj)
 
 					resolve({

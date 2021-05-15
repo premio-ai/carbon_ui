@@ -3,9 +3,8 @@
         <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
             <h3>Challenge Overview</h3>
             <br />
-            <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-                Challenge Title <p style="margin-left: 273px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">
-                    0/50</p>
+            <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">Challenge Title
+                <p style="margin-left: 273px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">(max. 50 characters)</p>
                 <textarea style="width: 90%" ibmTextArea [invalid]="invalid" minlength="1" maxlength="50"
                     [disabled]="disabled" [theme]="theme" [rows]="1" [cols]="cols" aria-label="textarea"
                     [(ngModel)]="stepOne.title"></textarea>
@@ -15,8 +14,8 @@
             </div>
             <br />
             <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-                Challenge Description<p
-                    style="margin-left: 273px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">0/500</p>
+                Challenge Description
+                <p style="margin-left: 273px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">(max. 500 characters)</p>
                 <textarea style="width: 90%" ibmTextArea [invalid]="invalid" minlength="1" maxlength="500"
                     [disabled]="disabled" [theme]="theme" [rows]="5" [cols]="cols" aria-label="textarea"
                     [(ngModel)]="stepOne.description"></textarea>
@@ -25,9 +24,8 @@
                 <p><span style="font-size: x-small; color: red">Description is required</span></p>
             </div>
             <br />
-            <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-                Challenge Objectives<p
-                    style="margin-left: 273px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">0/100</p>
+            <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">Challenge Objectives
+                <p style="margin-left: 273px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">(max. 100 characters)</p>
                 <textarea style="width: 90%" ibmTextArea [invalid]="invalid" minlength="1" maxlength="100"
                     [(ngModel)]="stepOne.objective" [disabled]="disabled" [theme]="theme" [rows]="3" [cols]="cols"
                     aria-label="textarea"></textarea>
@@ -36,11 +34,9 @@
                 <p><span style="font-size: x-small; color: red">Objective is required</span></p>
             </div>
             <br />
-            <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-                Challenge End Date
-                <textarea style="width: 10%" ibmTextArea [invalid]="invalid" type="date" [(ngModel)]="stepOne.endDate"
-                    [disabled]="disabled" [theme]="theme" [rows]="1" [cols]="1" aria-label="textarea"></textarea>
-            </ibm-label>
+            <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">Challenge End Date
+                <input type='date' ibmTextArea style="width: 165px" [(ngModel)]="stepOne.endDate" />
+                </ibm-label>
             <div *ngIf="endDateError">
                 <p><span style="font-size: x-small; color: red">Expiration date is required in DD/MM/YYYY format</span></p>
             </div>

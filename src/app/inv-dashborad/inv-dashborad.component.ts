@@ -14,12 +14,13 @@ export class InvDashboradComponent implements OnInit {
     private requestService: RequestService,
 		private router: Router
   ) { }
-
-  activeChallenges: any[];
+	userDetails: any;
+  	activeChallenges: any[];
 	pastChallenges: any[];
 
   ngOnInit() {
-    this.getActiveChallanges();
+	this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
+	this.getActiveChallanges();
 		this.getpastChallanges();
   }
 

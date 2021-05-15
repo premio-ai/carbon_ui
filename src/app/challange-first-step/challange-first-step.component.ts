@@ -29,6 +29,10 @@ export class ChallangeFirstStepComponent implements OnInit {
     };
   }
 
+  minDate() {
+    return new Date();
+  }
+
   nextStep() {
     // TODO : uncomment
     // this.goNext.emit(this.stepOne)

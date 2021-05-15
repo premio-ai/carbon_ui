@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class SubmissionStepFourComponent implements OnInit {
   @Input() challengeSubmissionData: any;
+  @Input() isChallengeAccepted: boolean;
 
   @Output() public goPrevious: EventEmitter<any> = new EventEmitter();
   @Output() public goNext: EventEmitter<any> = new EventEmitter();
@@ -23,6 +24,7 @@ export class SubmissionStepFourComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.isChallengeAccepted, "---this.isChellengeAccepted")
   }
 
   previous() {

@@ -237,7 +237,7 @@
 								<app-submission-step-three *ngIf="current == 2" (goPrevious)="previousStepThree()"
 									(goNext)="nextStepThree($event)"></app-submission-step-three>
 								<app-submission-step-four *ngIf="current == 3" (goPrevious)="previousStepFour()"
-									(goToStepOne)="goToStepOne()" (goNext)="nextStepFour($event)"
+									(goToStepOne)="goToStepOne()" (goNext)="nextStepFour($event)" [isChallengeAccepted]='isChallengeAccepted'
 									[challengeSubmissionData]="challengeSubmissionData"></app-submission-step-four>
 							</div>
 						</div>

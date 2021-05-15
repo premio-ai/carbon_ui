@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
 	ngOnInit() {
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
 		setInterval(() => {
-			this.getNotifications()
+			this.getNotifications()				// TODO: uncomment before push
 		}, 60000)
 	}
 
