@@ -32,6 +32,7 @@ import {ArrowRight20Module} from "@carbon/icons-angular/lib/arrow--right/20";
 // import {BookmarkFilled20Module} from "@carbon/icons-angular/lib/bookmark--filled/20";
 import {UserMultiple20Module} from "@carbon/icons-angular/lib/user--multiple/20";
 import {CheckmarkOutline20Module} from "@carbon/icons-angular/lib/checkmark--outline/20";
+
 // carbon-components-angular default imports
 import {
 	AccordionModule,
@@ -96,6 +97,7 @@ import {RadioButton20Module} from "@carbon/icons-angular/lib/radio-button/20";
 import { ChartsModule } from "@carbon/charts-angular";
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+
 // import { DonutChart } from "@carbon/charts";
 
 
