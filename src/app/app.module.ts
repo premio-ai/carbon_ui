@@ -24,6 +24,7 @@ import { Concept32Module } from "@carbon/icons-angular/lib/concept/32"
 import {CloudUpload32Module} from "@carbon/icons-angular/lib/cloud--upload/32";
 import {Idea32Module} from "@carbon/icons-angular/lib/idea/32";
 import {Forum16Module} from "@carbon/icons-angular/lib/forum/16";
+import {DocumentExport16Module} from "@carbon/icons-angular/lib//document--export/16";
 import {Upload20Module} from "@carbon/icons-angular/lib/upload/20";
 import {Chemistry20Module} from "@carbon/icons-angular/lib/chemistry/20";
 import {Trophy20Module} from "@carbon/icons-angular/lib/trophy/20";
@@ -207,6 +208,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 		CheckmarkFilled16Module,
 		RadioButton20Module,
 		ChartsModule,
+		DocumentExport16Module
 		// BookmarkFilled20Module
 		
 	],
