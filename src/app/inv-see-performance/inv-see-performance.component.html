@@ -92,14 +92,14 @@
   <br/>
   <br/>
 
-  <div style="display: flex; flex-flow: row wrap; justify-content: space-around;">
-    <ibm-tile>
+  <div style="display: flex; flex-flow: row wrap;width: 100%; justify-content: space-around;">
+    <ibm-tile style="width: 33.33%;">
       <ibm-donut-chart [data]="accuracyScoreData" [options]="accuracyOptions" style="background-color:#f4f4f4 !important;"></ibm-donut-chart>
     </ibm-tile>
-    <ibm-tile>
+    <ibm-tile style="width: 33.33%;">
       <ibm-donut-chart [data]="precisionScoreData" [options]="precisionOptions" style="background-color:#f4f4f4 !important;"></ibm-donut-chart>
     </ibm-tile>
-    <ibm-tile>
+    <ibm-tile style="width: 33.33%;">
       <ibm-donut-chart [data]="recallScoreData" [options]="recallOptions" style="background-color:#f4f4f4 !important;"></ibm-donut-chart>
     </ibm-tile>
   </div>
