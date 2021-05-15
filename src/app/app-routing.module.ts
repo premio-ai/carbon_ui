@@ -41,7 +41,12 @@ const routes: Routes = [
 		path: '',
 		redirectTo: '',
 		pathMatch: 'full'
-	}
+	},
+	
+	// { path: 'dashboard', component: DashboardComponent },
+	// { path: '', component: LoginComponent },
+
+	
 ];
 
 @NgModule({

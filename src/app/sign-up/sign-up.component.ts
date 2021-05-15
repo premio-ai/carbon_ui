@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { RequestService } from '../request.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -7,9 +9,55 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignUpComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private requestService: RequestService,
+    private router: Router
+  ) { }
+  registerAs: any;
+  signupDetails: {
+    fullName: String,
+    email: String,
+    password: String,
+    // confirmPassword: String,
+    role: String,
+    bio: String,
+    experience: String
+  }
 
   ngOnInit() {
+    this.registerAs = [
+      { content: 'Insurer' },
+      { content: 'Innovator' }
+    ];
+
+    this.signupDetails = {
+      fullName: '',
+      email: '',
+      password: '',
+      // confirmPassword: '',
+      role: '',
+      bio: '',
+      experience: ''
+    }
+  }
+
+  selected(role) {
+    this.signupDetails.role = role.item.content;
+  }
+
+  signUp() {
+    if (this.signupDetails.fullName && this.signupDetails.email && this.signupDetails.password && this.signupDetails.role && this.signupDetails.experience && this.signupDetails.bio) {
+      console.log(this.signupDetails, "---this.signupDetails---41")
+
+      this.requestService.signing('auth/signup', this.signupDetails).subscribe( data => {
+        console.log(data, "---data---48")
+
+        this.router.navigateByUrl('login')
+      })
+
+    } else {
+      console.log("---else part---43")
+    }
   }
 
 }

@@ -16,8 +16,13 @@ export class DashboardComponent implements OnInit {
 	pastChallenges: any[];
 
 	ngOnInit() {
-		this.getActiveChallanges();
-		this.getpastChallanges();
+		let userDetails = JSON.parse(localStorage.getItem('userDetails'))
+		if (userDetails && userDetails._id) {			
+			this.getActiveChallanges();
+			this.getpastChallanges();
+		} else {
+			this.router.navigateByUrl('login')
+		}
 	}
 
 	getActiveChallanges() {

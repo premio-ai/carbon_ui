@@ -26,15 +26,18 @@ export class InvSeePerformanceComponent implements OnInit {
 	recallScore: any
 	accuracyScoreData: Array<{
 		group: string,
-		value: number }> = []
+		value: number
+	}> = []
 	accuracyOptions: any = {}
 	precisionScoreData: Array<{
 		group: string,
-		value: number }> = []
+		value: number
+	}> = []
 	precisionOptions: any = {}
 	recallScoreData: Array<{
 		group: string,
-		value: number }> = []
+		value: number
+	}> = []
 	recallOptions: any = {}
 
 	ngOnInit() {
@@ -341,18 +344,9 @@ export class InvSeePerformanceComponent implements OnInit {
 		this.router.navigateByUrl('invmodel-view/' + this.modelDetails._id)
 	}
 
-viewChalange(id) {
-    console.log(id, "---view challenge btn click---")
-
-    let url = 'challenge/' + id
-
-    this.router.navigateByUrl(url);
-    // let challengeUrl = '/challenge/:challengeId';
-    // this.requestService.get(challengeUrl).subscribe(data => {
-    //   console.log("active challange ... ", data)
-    //   this.activeChallenges = data;
-    // })
-
-  }
+	viewChalange(id) {
+		let url = 'challenge/' + id
+		this.router.navigateByUrl(url);
+	}
 
 }
