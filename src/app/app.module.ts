@@ -96,6 +96,7 @@ import {RadioButton20Module} from "@carbon/icons-angular/lib/radio-button/20";
 import { ChartsModule } from "@carbon/charts-angular";
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import {BookmarkFilled20Module} from "@carbon/icons-angular/lib/bookmark--filled/20";
 // import { DonutChart } from "@carbon/charts";
 
 
@@ -208,8 +209,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 		CheckmarkFilled16Module,
 		RadioButton20Module,
 		ChartsModule,
-		DocumentExport16Module
-		// BookmarkFilled20Module
+		DocumentExport16Module,
+		BookmarkFilled20Module
 		
 	],
 	bootstrap: [AppComponent],
