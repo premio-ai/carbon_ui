@@ -39,7 +39,7 @@ export class ChallangeSecondStepComponent implements OnInit {
       let tempData = {
         description: this.stepTwo.description,
         guidence: this.stepTwo.guidence,
-        score: this.stepTwo.passingScore,
+        passingScore: this.stepTwo.passingScore,
         dataVisualFile: this.stepTwo.dataVisualFile,
         sampleDataFile: this.stepTwo.sampleDataFile
       }
@@ -56,7 +56,6 @@ export class ChallangeSecondStepComponent implements OnInit {
   }
 
   setDataVisual(acceptedFiles) {
-    console.log(acceptedFiles, "---acceptedFiles---59")
     const file = acceptedFiles.file;
     const formData = new FormData();
     formData.append('file', file);

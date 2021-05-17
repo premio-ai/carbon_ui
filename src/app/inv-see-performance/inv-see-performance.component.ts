@@ -53,7 +53,7 @@ export class InvSeePerformanceComponent implements OnInit {
 
 	getSubmission(id) {
 		let url = 'submissionAllChallenge/' + id;
-		this.requestService.get(url).subscribe(data => {
+		this.requestService.get(url, null).subscribe(data => {
 			this.modelDetails = data[0];
 			this.challengeId = data[0].challengeId;
 			this.phaseId = data[0].phaseId;
@@ -71,7 +71,7 @@ export class InvSeePerformanceComponent implements OnInit {
 
 	getChallengeDetails(id) {
 		let url = 'challenge/' + id;
-		this.requestService.get(url).subscribe(data => {
+		this.requestService.get(url, null).subscribe(data => {
 			this.challengeDetails = data;
 		})
 	}

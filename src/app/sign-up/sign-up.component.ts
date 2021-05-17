@@ -47,17 +47,16 @@ export class SignUpComponent implements OnInit {
 
   signUp() {
     if (this.signupDetails.fullName && this.signupDetails.email && this.signupDetails.password && this.signupDetails.role && this.signupDetails.experience && this.signupDetails.bio) {
-      console.log(this.signupDetails, "---this.signupDetails---41")
-
       this.requestService.signing('auth/signup', this.signupDetails).subscribe( data => {
-        console.log(data, "---data---48")
-
         this.router.navigateByUrl('login')
       })
-
     } else {
       console.log("---else part---43")
     }
+  }
+
+  login() {
+    this.router.navigateByUrl('login')
   }
 
 }

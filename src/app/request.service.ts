@@ -11,12 +11,13 @@ export class RequestService {
   // baseUrl: string = "https://meanapp01.herokuapp.com/api/";
   constructor(private http:HttpClient) { }
 
-  get(uri): Observable<any> {
+  get(uri, params): Observable<any> {
     const userDetails = JSON.parse(localStorage.getItem('userDetails'))
     return this.http.get(this.baseUrl + uri, {
       headers: {
         token: userDetails.access_token
-      }
+      },
+      params: params
     })
   }
 

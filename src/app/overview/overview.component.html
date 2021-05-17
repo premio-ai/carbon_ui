@@ -34,7 +34,7 @@
 		</div>
 	</div> -->
 	<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
-		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 8, sm: 12 }" style="display: flex;">
+		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 8, sm: 12 }" style="display: flex; flex-wrap: wrap;">
 			<div style="display: flex; flex-flow: row wrap; justify-content: space-around; margin-right: 10px;"
 				*ngFor="let phase of challengeDetails?.phases; index as i">
 				<ibm-tile class="tiles">
@@ -59,7 +59,7 @@
 						<svg icon ibmIconTrophy20></svg>
 						<p>Top 5 performing models</p>
 					</div>
-					<p *ngIf="submissionChallengeDetails.length==0" >No records found</p>
+					<p *ngIf="submissionChallengeDetails && submissionChallengeDetails.length==0" >No records found</p>
 					<ol ibmList class="list">
 						<li ibmListItem *ngFor="let data of submissionChallengeDetails">{{data?.innovatorId?.fullName}} </li>
 					</ol>
@@ -121,7 +121,7 @@
 								<td>{{model.score}}</td>
 								<td>view model</td>
 							</tr>
-							<tr *ngIf="submissionChallengeDetails.length==0">No records found</tr>
+							<tr *ngIf="submissionChallengeDetails && submissionChallengeDetails.length==0">No records found</tr>
 						</tbody>
 					</table>
 					<br />
