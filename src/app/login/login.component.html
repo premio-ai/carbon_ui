@@ -1,12 +1,32 @@
 <div ibmGrid [condensed]="gridCondensed">
   <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-      <div class="bx--form-item" style="margin-top: 50%;">
+      <div class="bx--form-item" style="margin-top: 20%;">
         <label for="text-input-3" class="bx--label">Username</label>
 
         <input id="text-input-3" type="text" class="bx--text-input" [(ngModel)]="username" placeholder="username@ibm.com" />
       </div>
-
+     <br/>
+      <div class="bx--form-item">
+        <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
+         Bio
+          <p style="margin-left: 220px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">(max. 500 characters)</p>
+          <textarea style="width: 100%" ibmTextArea [invalid]="invalid" minlength="1" maxlength="500"
+              [disabled]="disabled" [theme]="theme" [rows]="5" [cols]="cols" aria-label="textarea"
+              ></textarea>
+      </ibm-label>
+      </div>
+      <br/>
+<div class="bx--form-item">
+  <div class="bx--dropdown__wrapper ">
+    <span id="example-ap3t91wclrj-label" class="bx--label">User type</span>
+    <ibm-dropdown [label]="Min" [helperText]="helperText" [size]="size" [invalid]="invalid" [invalidText]="invalidText"
+    [theme]="theme" placeholder="User type" [disabled]="disabled" (selected)="selected($event)" (onClose)="onClose($event)">
+    <ibm-dropdown-list [items]="language"></ibm-dropdown-list>
+  </ibm-dropdown>
+  </div>
+</div>
+<br/>
       <div class="bx--form-item">
         <label for="text-input-3" class="bx--label">Password</label>
 
