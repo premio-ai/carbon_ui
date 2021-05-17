@@ -42,3 +42,15 @@ svg {
   .bx--btn{
 	margin-left: 51px;
 }
+
+.bx--navigation-section:not(:last-child)::after {
+  display: block;
+  content: '';
+  height: 1px;
+  background-color: #393939;
+  margin: 10px 2rem;
+}
+
+.bx--btn--ghost{
+  color: white;
+}
