@@ -1,9 +1,9 @@
 <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-	<ibm-label>Discription
+Discription
 		<p style="margin-left: 405px; font-size: 10px; margin-top: -20px; margin-bottom: -8px;">0/1000</p>
-	</ibm-label>
+
 	
-	<textarea style="width: 90%" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.description" [theme]="theme"
+	<textarea style="width: 90%;margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.description" [theme]="theme"
 		[rows]="7" [cols]="cols" aria-label="textarea"></textarea>
 </ibm-label>
 <div *ngIf="descriptionError">
@@ -11,12 +11,12 @@
 </div>
 <br/>
 <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-	<ibm-label>	Approach Taken
+	Approach Taken
 		<p style="margin-left: 405px; font-size: 10px; margin-top: -20px; margin-bottom: -8px;">0/1000</p>
-	</ibm-label>
+	
 
 	
-	<textarea style="width: 90%" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.approach" [theme]="theme"
+	<textarea style="width: 90%;margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.approach" [theme]="theme"
 		[rows]="7" [cols]="cols" aria-label="textarea"></textarea>
 </ibm-label>
 <div *ngIf="approachError">

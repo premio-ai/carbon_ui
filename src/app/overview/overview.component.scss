@@ -66,3 +66,12 @@ white-space: nowrap;
     vertical-align: top;
     text-align: left;
 }
+
+.bx--pagination__left,
+.bx--pagination__right {
+  display: flex;
+  height: 100%;
+  margin-left: auto;
+  align-items: center;
+  background-color: #f4f4f4;
+}
