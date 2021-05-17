@@ -59,6 +59,7 @@ import {
 	TilesModule,
 	ToggleModule,
 	UIShellModule,
+	
 } from "carbon-components-angular";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -82,6 +83,8 @@ import { ActivityComponent } from "./activity/activity.component";
 
 import { DragAndDropStory } from './file-uploader/file-uploader';
 import { ImageUploader } from './file-uploader/image-uploader';
+// import {PaginationNavStory} from './app-pagination/PaginationNavStory';
+// import {PaginationModel} from './app-pagination/pagination-model.class';
 
 import { ModelReportComponent } from "./model-report/model-report.component";
 import { ModelComponent } from "./model/model.component";
@@ -94,10 +97,14 @@ import { SubmissionStepThreeComponent } from "./submission-step-three/submission
 import { SubmissionStepTwoComponent } from "./submission-step-two/submission-step-two.component";
 import { from } from "rxjs";
 import {CheckmarkFilled16Module} from "@carbon/icons-angular/lib/checkmark--filled/16";
+
 import {RadioButton20Module} from "@carbon/icons-angular/lib/radio-button/20";
+import {Send20Module} from "@carbon/icons-angular/lib/send/20";
 import { ChartsModule } from "@carbon/charts-angular";
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import {Chat20Module} from "@carbon/icons-angular/lib/chat/20";
+import {Logout20Module} from "@carbon/icons-angular/lib/logout/20";
 
 // import { DonutChart } from "@carbon/charts";
 
@@ -120,7 +127,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 		
 		DragAndDropStory,
 		ImageUploader,
-
+		// PaginationNavStory,
+		// PaginationModel,
 		ModelComponent,
 
 		ModelReportComponent,
@@ -149,9 +157,13 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 		LoginComponent,
 
 		SignUpComponent,
+
+		
+	
 	],
 	imports: [
 		BrowserModule,
+		Send20Module,
 		BrowserAnimationsModule,
 		FormsModule,
 		LoadingModule,
@@ -213,8 +225,9 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 		RadioButton20Module,
 		ChartsModule,
 		DocumentExport16Module,
-		BookmarkFilled20Module
-		
+		BookmarkFilled20Module,
+		Chat20Module,
+		Logout20Module,
 	],
 	bootstrap: [AppComponent],
 	providers: [RequestService],

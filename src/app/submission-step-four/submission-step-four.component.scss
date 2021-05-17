@@ -19,9 +19,11 @@ white-space: nowrap;
     margin: auto;
     display: flex;
     height: 34px;
-   width: 123px;
+    margin-right: 100px;
+   margin-right: -31px;
    white-space: nowrap;
-    margin-top:20px !important;
+   width: 123px;
+   margin-top:20px !important;
 }
 
 @media (min-width: 42rem){
@@ -29,4 +31,9 @@ white-space: nowrap;
      padding-left: 1rem; 
     padding-right: 2rem;
 }
+}
+
+.gridedit{
+    padding-left: 0rem;
+    padding-right: 2rem;
 }

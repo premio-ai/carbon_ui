@@ -62,7 +62,7 @@
 	<p class="userdetail">Model Watching: 2</p>
 	<p class="userdetail">View profile</p>
 	<p class="userdetail">----------------------</p>
-	<p class="notify">Notifications</p>
+	<p class="notify"><svg icon ibmIconNotification20></svg>&nbsp; Notifications</p>
 
 	<div *ngFor="let notify of notifications; index as i" (click)="viewNotification(notify)" >
 		<p class="userdetail">{{notify?.title}}</p>
@@ -70,7 +70,7 @@
 	</div>
 
 	<p class="userdetail">----------------------</p>
-	<p class="notify">Message</p>
+	<p class="notify"><svg icon ibmIconChat20></svg>&nbsp; Message</p>
 
 	<p class="userdetail">John smith</p>
 	<p class="notify">
@@ -82,7 +82,7 @@
 	<p class="userdetail">----------------------</p>
 	<!-- <p class="userdetail" style="margin-bottom: 30px">Log out</p> -->
 
-	<h6 class="bx--btn bx--btn--primary" type="button" (click)="logout()">Logout</h6>
+	<h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()"><svg icon ibmIconLogout20></svg>&nbsp;Logout</h6>
 </ibm-panel>
 <ibm-panel [expanded]="secondAction">
 	<ibm-switcher-list>

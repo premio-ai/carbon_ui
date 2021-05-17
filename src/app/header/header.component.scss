@@ -25,7 +25,8 @@
 .notify {
   white-space: nowrap;
   margin-left: 50px;
-
+display: flex;
+align-items: center;
   font-size: 14px;
   color: white;
 }
@@ -34,6 +35,10 @@ svg {
   fill: white;
 }
 
-.bx--btn {
-  margin-left: 51px;
+  svg{
+	  fill: white;
+  }
+
+  .bx--btn{
+	margin-left: 51px;
 }
