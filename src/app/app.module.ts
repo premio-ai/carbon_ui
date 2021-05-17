@@ -104,7 +104,7 @@ import { ChartsModule } from "@carbon/charts-angular";
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import {Chat20Module} from "@carbon/icons-angular/lib/chat/20";
-
+import {Logout20Module} from "@carbon/icons-angular/lib/logout/20";
 
 // import { DonutChart } from "@carbon/charts";
 
@@ -227,6 +227,7 @@ import {Chat20Module} from "@carbon/icons-angular/lib/chat/20";
 		DocumentExport16Module,
 		BookmarkFilled20Module,
 		Chat20Module,
+		Logout20Module,
 	],
 	bootstrap: [AppComponent],
 	providers: [RequestService],
