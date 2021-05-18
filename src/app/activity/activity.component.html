@@ -11,7 +11,7 @@
     name="phase{{ i + 1 }}"
     *ngFor="let phase of challengeDetails?.phases; index as i"
     (click)="selectPhase(phase.phaseId, i + 1)"
-    style="width: fit-content;"
+    style="width: 11%;"
   >
     Phase {{ i + 1 }}
   </button>
@@ -43,7 +43,7 @@
           <span>Users Accepted</span>
         </h6>
         <br />
-        <p style="margin-left: 15px;">{{ phaseOneSubmission }}</p>
+        <p style="margin-left: 26px;">{{ phaseOneSubmission }}</p>
       </div>
       <div
         ibmCol
@@ -57,7 +57,7 @@
           </span>
         </h6>
         <br />
-        <p style="margin-left: 15px;">{{ phaseOneSubmission }}</p>
+        <p style="margin-left: 21px;">{{ phaseOneSubmission }}</p>
       </div>
       <!-- <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }"></div> -->
       <div
@@ -71,7 +71,7 @@
           <span>Models passes Scoring</span>
         </h6>
         <br />
-        <p style="margin-left: 15px;">
+        <p style="margin-left: 25px;">
           {{ (challengeDetails?.phases)[0].passingScore }}
         </p>
       </div>
