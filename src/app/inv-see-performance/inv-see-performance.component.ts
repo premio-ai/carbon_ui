@@ -302,6 +302,16 @@ export class InvSeePerformanceComponent implements OnInit {
 	];
 	options1 = {
 		"title": "Loss vs Iteration",
+		"color": {
+			"pairing": {
+					"option": 2
+			},
+			"scale": {
+					"Qty": "#925699",
+					"Misc": "#525669"
+			}
+	},
+		grid: {x:{enabled:false}},
 		"axes": {
 			"bottom": {
 				"title": "Iteration",
@@ -315,28 +325,31 @@ export class InvSeePerformanceComponent implements OnInit {
 			}
 		},
 		"curve": "curveMonotoneX",
-		"height": "400px",
+		"height": "400px",	
+		
 		getFillColor: (group: String) => {
 			if (group == 'Test Loss') {
-				return 'blue';
+				return '#F3A625';
 			}
 			if (group == 'Train Loss') {
-				return 'yellow';
+				return 'green';
 			}
 			if (group == 'Test Accuracy') {
-				return 'red';
+				return 'white';
 			}
+			
 		},
 		getStrokeColor: (group: String) => {
 			if (group == 'Test Loss') {
-				return 'blue';
+				return '#F3A625';
 			}
 			if (group == 'Train Loss') {
-				return 'yellow';
+				return 'green';
 			}
 			if (group == 'Test Accuracy') {
-				return 'red';
+				return 'white';
 			}
+		
 		}
 	};
 
