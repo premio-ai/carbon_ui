@@ -258,4 +258,8 @@ export class InvAcceptedComponent implements OnInit {
 		this.current = 0
 	}
 
+	invChallenges() {
+		this.router.navigateByUrl('invchallenges')
+	}
+
 }
