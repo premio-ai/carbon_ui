@@ -7,7 +7,7 @@
 		</div>
 		<div class="bx--col-md-4">
 			<ibm-breadcrumb [noTrailingSlash]="noTrailingSlash">
-				<ibm-breadcrumb-item href="asa" class="navigation">
+				<ibm-breadcrumb-item (click)="invChallenges()" class="navigation">
 					Browse
 				</ibm-breadcrumb-item>
 				<ibm-breadcrumb-item href="asa" class="navigation">
@@ -92,9 +92,9 @@
 							</div>
 
 							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 3, sm: 12 }">
-								<h3 style="text-transform: capitalize;">{{challengeDetails.insurerId.fullName}}</h3>
+								<h3 style="text-transform: capitalize;">{{challengeDetails?.insurerId?.fullName}}</h3>
 								<br />
-								<p>(challenge insurer data..)</p>
+								<p>{{challengeDetails?.insurerId?.bio}}</p>
 								<br /><br />
 								<h3>Reward</h3>
 								<br />
