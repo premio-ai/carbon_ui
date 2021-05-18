@@ -18,79 +18,110 @@
 </ibm-header> -->
 
 <ibm-header [route]="['/']" brand="" name="Market space">
-	<ibm-hamburger
-		*ngIf="hasHamburger"
-		[active]="active"
-		(selected)="active = !active"
-	></ibm-hamburger>
-	<ibm-header-navigation>
-		<ibm-header-item [route]="['/dashboard']">Activity</ibm-header-item>
-		<ibm-header-item>Models</ibm-header-item>
-		<div *ngIf="userDetails.role == 'Innovator'">
-			<ibm-header-item [route]="['/invchallenges']">Challenges</ibm-header-item>
-		</div>
-		<!-- <ibm-header-item>Support</ibm-header-item>
+  <ibm-hamburger
+    *ngIf="hasHamburger"
+    [active]="active"
+    (selected)="active = !active"
+  ></ibm-hamburger>
+  <ibm-header-navigation>
+    <ibm-header-item [route]="['/dashboard']">Activity</ibm-header-item>
+    <ibm-header-item>Models</ibm-header-item>
+    <div *ngIf="userDetails.role == 'Innovator'">
+      <ibm-header-item [route]="['/invchallenges']">Challenges</ibm-header-item>
+    </div>
+    <!-- <ibm-header-item>Support</ibm-header-item>
 		<ibm-header-menu title="Manage">
 			<ibm-header-item>Link 1</ibm-header-item>
 			<ibm-header-item>Link 2</ibm-header-item>
 			<ibm-header-item>Link 3</ibm-header-item>
 		</ibm-header-menu> -->
-	</ibm-header-navigation>
-	<ibm-header-global>
-		<!-- <div class="bx--toolbar" style="margin-top: -20px;fill: white;">
+  </ibm-header-navigation>
+  <ibm-header-global>
+    <!-- <div class="bx--toolbar" style="margin-top: -20px;fill: white;">
 			<ibm-search placeholder="search" size="sm" toolbar="true" style="fill: white !important;"></ibm-search>
 		</div> -->
-		<ibm-header-action #firstAction title="action">
-			<p style="color: white; font-size: 16px; white-space: nowrap; margin-left: -24px;">{{userDetails.fullName}}</p>
-		</ibm-header-action>
-		<ibm-header-action #firstAction title="action">
-			<svg icon ibmIconUserAvatar20></svg>
-		</ibm-header-action>
-		<ibm-header-action [(active)]="secondAction" title="action">
-			<svg icon ibmIconFade size="20"></svg>
-		</ibm-header-action>
-	</ibm-header-global>
+    <ibm-header-action #firstAction title="action">
+      <p
+        style="
+          color: white;
+          font-size: 16px;
+          white-space: nowrap;
+          margin-left: -24px;
+        "
+      >
+        {{ userDetails.fullName }}
+      </p>
+    </ibm-header-action>
+    <ibm-header-action #firstAction title="action">
+      <svg icon ibmIconUserAvatar20></svg>
+    </ibm-header-action>
+    <ibm-header-action [(active)]="secondAction" title="action">
+      <svg icon ibmIconFade size="20"></svg>
+    </ibm-header-action>
+  </ibm-header-global>
 </ibm-header>
 
 <ibm-panel [expanded]="firstAction.active">
-	<img class="portrait mr-3" itemprop="image" alt="Avatar"
-		src="https://www.angularjswiki.com/author/admin/avatar_hufa038520d36dafb78f39a62f91de8258_77813_250x250_fill_q90_lanczos_center.jpg"/><svg icon ibmIconEdit20 ></svg>
-	<p class="userName">{{userDetails.fullName}}</p>
-	<br />
-	<p class="userdetail">Active challange: {{challengeCounts.activeChallengeCount}}</p>
-	<p class="userdetail">Past challange: {{challengeCounts.pastChallengeCount}}</p>
-	<p class="userdetail">Model Watching: 2</p>
-	<p class="userdetail">View profile</p>
-	<p class="userdetail">----------------------</p>
-	<p class="notify"><svg icon ibmIconNotification20></svg>&nbsp; Notifications</p>
+  <div class="bx--navigation-section">
+    <img
+      class="portrait mr-3"
+      itemprop="image"
+      alt="Avatar"
+      src="https://www.angularjswiki.com/author/admin/avatar_hufa038520d36dafb78f39a62f91de8258_77813_250x250_fill_q90_lanczos_center.jpg"
+    />
+    <svg icon ibmIconEdit20></svg>
+    <p class="userName">{{ userDetails.fullName }}</p>
+    <br />
+    <p class="userdetail">Active challange: 5</p>
+    <p class="userdetail">Past challange: 8</p>
+    <p class="userdetail">Model Watching: 2</p>
+    <p class="userdetail">View profile</p>
+  </div>
+  <div class="bx--navigation-section">
+    <p class="notify">
+      <svg icon ibmIconNotification20></svg>
+      &nbsp; Notifications
+    </p>
 
-	<div *ngFor="let notify of notifications; index as i" (click)="viewNotification(notify)" >
-		<p class="userdetail">{{notify?.title}}</p>
-		<p class="notify">{{notify?.body}}</p>
-	</div>
+    <div
+      *ngFor="let notify of notifications; index as i"
+      (click)="viewNotification(notify)"
+    >
+      <p class="userdetail">{{ notify?.title }}</p>
+      <p class="notify">{{ notify?.body }}</p>
+    </div>
+  </div>
 
-	<p class="userdetail">----------------------</p>
-	<p class="notify"><svg icon ibmIconChat20></svg>&nbsp; Message</p>
+  <div class="bx--navigation-section">
+    <p class="notify">
+      <svg icon ibmIconChat20></svg>
+      &nbsp; Message
+    </p>
 
-	<p class="userdetail">John smith</p>
-	<p class="notify">
-		I'm glad you asked! basically.<br />
-		What we need is to pridect
-	</p>
-	<p class="userdetail">Jane you</p>
-	<p class="notify">Yeah i thought so i Think that i'll.</p>
-	<p class="userdetail">----------------------</p>
-	<!-- <p class="userdetail" style="margin-bottom: 30px">Log out</p> -->
+    <p class="userdetail">John smith</p>
+    <p class="notify">
+      I'm glad you asked! basically.
+      <br />
+      What we need is to pridect
+    </p>
+    <p class="userdetail">Jane you</p>
+    <p class="notify">Yeah i thought so i Think that i'll.</p>
+  </div>
 
-	<h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()"><svg icon ibmIconLogout20></svg>&nbsp;Logout</h6>
+  <!-- <p class="userdetail" style="margin-bottom: 30px">Log out</p> -->
+
+  <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
+    <svg icon ibmIconLogout20></svg>
+    &nbsp;Logout
+  </h6>
 </ibm-panel>
 <ibm-panel [expanded]="secondAction">
-	<ibm-switcher-list>
-		<ibm-switcher-list-item active="true"
-			>Switcher item one</ibm-switcher-list-item
-		>
-		<ibm-switcher-list-item>Switcher item two</ibm-switcher-list-item>
-		<ibm-switcher-list-item>Switcher item three</ibm-switcher-list-item>
-		<ibm-switcher-list-item>Switcher item four</ibm-switcher-list-item>
-	</ibm-switcher-list>
+  <ibm-switcher-list>
+    <ibm-switcher-list-item active="true">
+      Switcher item one
+    </ibm-switcher-list-item>
+    <ibm-switcher-list-item>Switcher item two</ibm-switcher-list-item>
+    <ibm-switcher-list-item>Switcher item three</ibm-switcher-list-item>
+    <ibm-switcher-list-item>Switcher item four</ibm-switcher-list-item>
+  </ibm-switcher-list>
 </ibm-panel>

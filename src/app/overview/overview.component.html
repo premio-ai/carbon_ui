@@ -1,17 +1,27 @@
 <div ibmGrid [condensed]="gridCondensed">
-	<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
-		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 6, sm: 12 }">
-			<br />
-			<h3>Challenge info</h3>
-			<p> {{ challengeDetails?.description }} </p>
-			<br />
-		</div>
-		<br />
-	</div>
+  <div
+    ibmRow
+    [gutter]="gutter"
+    [leftGutter]="leftGutter"
+    [rightGutter]="rightGutter"
+    [condensed]="rowCondensed"
+  >
+    <div
+      ibmCol
+      class="custom-class-example"
+      [columnNumbers]="{ md: 6, sm: 12 }"
+    >
+      <br />
+      <h3>Challenge info</h3>
+      <p>{{ challengeDetails?.description }}</p>
+      <br />
+    </div>
+    <br />
+  </div>
 </div>
 
 <div ibmGrid [condensed]="gridCondensed">
-	<!-- <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+  <!-- <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
 		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 7, sm: 12 }">
 			<ibm-tile>
 				<p style="font-size: 20px;">Phase 0</p>
@@ -33,131 +43,198 @@
 			<br /><br />
 		</div>
 	</div> -->
-	<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
-		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 8, sm: 12 }" style="display: flex; flex-wrap: wrap;">
-			<div style="display: flex; flex-flow: row wrap; justify-content: space-around; margin-right: 10px;"
-				*ngFor="let phase of challengeDetails?.phases; index as i">
-				<ibm-tile class="tiles">
-					<p style="font-size: 20px;">Phase {{i+1}} </p><br />
-					<div class="icon_align"><svg icon ibmIconUpload20></svg>
-						<p>Models Uploaded</p>
-					</div>
-					<p class="numbers">{{phaseOneSubmission}}</p><br />
-					<div class="icon_align">
-						<svg icon ibmIconChemistry20></svg>
-						<p>Models trained & tested</p>
-					</div>
-					<p class="numbers">{{phaseOneSubmission}}</p><br />
-					<div class="icon_align">
-						<svg icon ibmIconCheckmarkOutline20></svg>
-						<p>Models passed Scoring</p>
-					</div>
-					<p class="numbers">{{phase?.passingScore || '10'}}</p><br />
+  <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+    <div
+      class="custom-class-example"
+      style="width: 32%;"
+      *ngFor="let phase of challengeDetails?.phases; index as i"
+    >
+      <div
+        style="
+          display: flex;
+          flex-flow: row wrap;
+          justify-content: space-around;
+          margin-right: 10px;
+        "
+      >
+        <ibm-tile class="tiles">
+          <p style="font-size: 20px;">Phase {{ i + 1 }}</p>
+          <br />
+          <div class="icon_align">
+            <svg icon ibmIconUpload20></svg>
+            <p>Models Uploaded</p>
+          </div>
+          <p class="numbers">{{ phaseOneSubmission }}</p>
+          <br />
+          <div class="icon_align">
+            <svg icon ibmIconChemistry20></svg>
+            <p>Models trained & tested</p>
+          </div>
+          <p class="numbers">{{ phaseOneSubmission }}</p>
+          <br />
+          <div class="icon_align">
+            <svg icon ibmIconCheckmarkOutline20></svg>
+            <p>Models passed Scoring</p>
+          </div>
+          <p class="numbers">{{ phase?.passingScore || '10' }}</p>
+          <br />
 
-					<p class="numbers">{{phase?.minimumModelScore}}</p><br />
-					<div class="icon_align">
-						<svg icon ibmIconTrophy20></svg>
-						<p>Top 5 performing models</p>
-					</div>
-					<p *ngIf="submissionChallengeDetails && submissionChallengeDetails.length==0" >No records found</p>
-					<ol ibmList class="list">
-						<li ibmListItem *ngFor="let data of submissionChallengeDetails">{{data?.innovatorId?.fullName}} </li>
-					</ol>
+          <p class="numbers">{{ phase?.minimumModelScore }}</p>
+          <br />
+          <div class="icon_align">
+            <svg icon ibmIconTrophy20></svg>
+            <p>Top 5 performing models</p>
+          </div>
+          <p *ngIf="submissionChallengeDetails.length == 0">No records found</p>
+          <ol ibmList class="list">
+            <li ibmListItem *ngFor="let data of submissionChallengeDetails">
+              {{ data?.innovatorId?.fullName }}
+            </li>
+          </ol>
 
-					<div ibmGrid [condensed]="gridCondensed" class="button-left">
-						<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
-							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
-								<button class="view" [ibmButton]="ibmButton" [size]="size">View Activity</button>
-							</div>
-							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
-								<button class="model" [ibmButton]="ibmButton" [size]="size">View Model</button>
-							</div>
-						</div>
-					</div>
-				</ibm-tile>
-			</div>
-		</div>
-	</div>
+          <div ibmGrid [condensed]="gridCondensed" class="button-left">
+            <div
+              ibmRow
+              [gutter]="gutter"
+              [leftGutter]="leftGutter"
+              [rightGutter]="rightGutter"
+              [condensed]="rowCondensed"
+            >
+              <div
+                ibmCol
+                class="custom-class-example"
+                [columnNumbers]="{ md: 4, sm: 12 }"
+              >
+                <button class="view" [ibmButton]="ibmButton" [size]="size">
+                  View Activity
+                </button>
+              </div>
+              <div
+                ibmCol
+                class="custom-class-example"
+                [columnNumbers]="{ md: 4, sm: 12 }"
+              >
+                <button class="model" [ibmButton]="ibmButton" [size]="size">
+                  View Model
+                </button>
+              </div>
+            </div>
+          </div>
+        </ibm-tile>
+      </div>
+    </div>
+  </div>
 
+  <div ibmGrid [condensed]="gridCondensed">
+    <div
+      ibmRow
+      [gutter]="gutter"
+      [leftGutter]="leftGutter"
+      [rightGutter]="rightGutter"
+      [condensed]="rowCondensed"
+    >
+      <div
+        ibmCol
+        class="custom-class-example"
+        [columnNumbers]="{ md: 8, sm: 12 }"
+      >
+        <ibm-table-container>
+          <br />
+          <ibm-table-header>
+            <h4 ibmTableHeaderTitle>Leaderboard</h4>
+          </ibm-table-header>
+          <table class="bx--data-table">
+            <thead>
+              <tr>
+                <th>
+                  <span class="bx--table-header-label">Rank</span>
+                </th>
+                <th>
+                  <span class="bx--table-header-label">Name</span>
+                </th>
+                <th>
+                  <span class="bx--table-header-label">P1 Score</span>
+                </th>
+                <th>
+                  <span class="bx--table-header-label">P2 Score</span>
+                </th>
+                <th>
+                  <span class="bx--table-header-label">P3 Score</span>
+                </th>
+                <th>
+                  <span class="bx--table-header-label"></span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let model of submissionChallengeDetails; index as i">
+                <td>{{ i + 1 }}</td>
+                <td>{{ model?.innovatorId?.fullName || 'Brian D' }}</td>
+                <td>{{ model.score }}</td>
+                <td>{{ model.score }}</td>
+                <td>{{ model.score }}</td>
+                <td>view model</td>
+              </tr>
+              <tr *ngIf="submissionChallengeDetails.length == 0">
+                No records found
+              </tr>
+            </tbody>
+          </table>
+          <br />
 
-	<div ibmGrid [condensed]="gridCondensed">
-		<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
-			<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 6, sm: 12 }">
-
-				<ibm-table-container>
-					<br />
-					<ibm-table-header>
-						<h4 ibmTableHeaderTitle>Leaderboard</h4>
-					</ibm-table-header>
-					<table class="bx--data-table">
-						<thead>
-							<tr>
-								<th>
-									<span class="bx--table-header-label">Rank</span>
-								</th>
-								<th>
-									<span class="bx--table-header-label">Name</span>
-								</th>
-								<th>
-									<span class="bx--table-header-label">P1 Score</span>
-								</th>
-								<th>
-									<span class="bx--table-header-label">P2 Score</span>
-								</th>
-								<th>
-									<span class="bx--table-header-label">P3 Score</span>
-								</th>
-								<th>
-									<span class="bx--table-header-label"></span>
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr *ngFor="let model of submissionChallengeDetails; index as i">
-								<td>{{i+1}}</td>
-								<td>{{model?.innovatorId?.fullName || 'Brian D'}}</td>
-								<td>{{model.score}}</td>
-								<td>{{model.score}}</td>
-								<td>{{model.score}}</td>
-								<td>view model</td>
-							</tr>
-							<tr *ngIf="submissionChallengeDetails && submissionChallengeDetails.length==0">No records found</tr>
-						</tbody>
-					</table>
-					<br />
-
-					<div class="bx--pagination" data-pagination>
-
-
-						<div class="bx--pagination__right">
-
-							<label id="select-id-pagination-page-label" class="bx--pagination__text"
-								for="select-id-pagination-page">
-								pages 1
-							</label>
-							<button class="bx--pagination__button bx--pagination__button--backward " tabindex="0"
-								data-page-backward aria-label="previous page">
-								<svg focusable="false" preserveAspectRatio="xMidYMid meet"
-									style="will-change: transform;" xmlns="http://www.w3.org/2000/svg"
-									class="bx--pagination__nav-arrow" width="20" height="20" viewBox="0 0 32 32"
-									aria-hidden="true">
-									<path d="M19 23L11 16 19 9 19 23z"></path>
-								</svg>
-							</button>
-							<button class="bx--pagination__button bx--pagination__button--forward " tabindex="0"
-								data-page-forward aria-label="next page">
-								<svg focusable="false" preserveAspectRatio="xMidYMid meet"
-									style="will-change: transform;" xmlns="http://www.w3.org/2000/svg"
-									class="bx--pagination__nav-arrow" width="20" height="20" viewBox="0 0 32 32"
-									aria-hidden="true">
-									<path d="M13 9L21 16 13 23 13 9z"></path>
-								</svg>
-							</button>
-						</div>
-					</div>
-
-				</ibm-table-container>
-
-			</div>
-		</div>
-	</div>
+          <div class="bx--pagination" data-pagination>
+            <div class="bx--pagination__right">
+              <label
+                id="select-id-pagination-page-label"
+                class="bx--pagination__text"
+                for="select-id-pagination-page"
+              >
+                pages 1
+              </label>
+              <button
+                class="bx--pagination__button bx--pagination__button--backward"
+                tabindex="0"
+                data-page-backward
+                aria-label="previous page"
+              >
+                <svg
+                  focusable="false"
+                  preserveAspectRatio="xMidYMid meet"
+                  style="will-change: transform;"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="bx--pagination__nav-arrow"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 32 32"
+                  aria-hidden="true"
+                >
+                  <path d="M19 23L11 16 19 9 19 23z"></path>
+                </svg>
+              </button>
+              <button
+                class="bx--pagination__button bx--pagination__button--forward"
+                tabindex="0"
+                data-page-forward
+                aria-label="next page"
+              >
+                <svg
+                  focusable="false"
+                  preserveAspectRatio="xMidYMid meet"
+                  style="will-change: transform;"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="bx--pagination__nav-arrow"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 32 32"
+                  aria-hidden="true"
+                >
+                  <path d="M13 9L21 16 13 23 13 9z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </ibm-table-container>
+      </div>
+    </div>
+  </div>
+</div>

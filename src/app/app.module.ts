@@ -59,6 +59,7 @@ import {
 	TilesModule,
 	ToggleModule,
 	UIShellModule,
+	StructuredListModule,
 	
 } from "carbon-components-angular";
 import { AppRoutingModule } from "./app-routing.module";
@@ -228,6 +229,7 @@ import {Logout20Module} from "@carbon/icons-angular/lib/logout/20";
 		BookmarkFilled20Module,
 		Chat20Module,
 		Logout20Module,
+		StructuredListModule,
 	],
 	bootstrap: [AppComponent],
 	providers: [RequestService],
