@@ -18,10 +18,10 @@
 
 <div ibmGrid [condensed]="gridCondensed">
   <div ibmRow [gutter]="gutter" class="left-border" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
-    [condensed]="rowCondensed" *ngIf="compareModelData.length>1">
+    [condensed]="rowCondensed" *ngIf="compareModelData && compareModelData?.length>1">
     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
       <h6>Model Comparison</h6>
-      <p>{{compareModelData.length}} models selected</p>
+      <p>{{compareModelData?.length}} models selected</p>
       <br />
       <button class="btn-compare" [ibmButton]="ibmButton" [size]="size" (click)="compareModels()">
         Compare
@@ -42,26 +42,17 @@
               <ibm-tile>
                 <div style="display: flex;">
                   <div>
-                    <h3>{{ i + 1 }}. {{ data?.mlFlowId }}</h3>
+                    <h3>{{ i + 1 }}. {{ data?.modelName }}</h3>
                   </div>
                   <div style="margin-left: auto;">
-                    <svg icon ibmIconBookmark20></svg>
+                    <svg icon ibmIconBookmark20 (click)="bookmark(data)"></svg>
                     <svg icon ibmIconBookmarkFilled20></svg>
                   </div>
                 </div>
                 <div ibmGrid [condensed]="gridCondensed">
-                  <div
-                    ibmRow
-                    [gutter]="gutter"
-                    [leftGutter]="leftGutter"
-                    [rightGutter]="rightGutter"
-                    [condensed]="rowCondensed"
-                  >
-                    <div
-                      ibmCol
-                      class="custom-class-example"
-                      [columnNumbers]="{ md: 2, sm: 12 }"
-                    >
+                  <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
+                    [condensed]="rowCondensed">
+                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
                       <p class="bold">{{ data?.innovatorId?.fullName }}</p>
                     </div>
                     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
@@ -110,7 +101,74 @@
           </div>
         </div>
       </ibm-tab>
-      <ibm-tab heading="Bookmarked">Bookmarked</ibm-tab>
+      <ibm-tab heading="Bookmarked">
+        <div ibmGrid [condensed]="gridCondensed" style="margin-left: -5px;">
+          <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
+            [condensed]="rowCondensed">
+            <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 7, sm: 12 }"
+              style="display: flex; margin-bottom: 15px;" *ngFor="let data of bookmarkedSubmissions; index as i">
+              <ibm-tile>
+                <div style="display: flex;">
+                  <div>
+                    <h3>{{ i + 1 }}. {{ data?.modelName }}</h3>
+                  </div>
+                  <div style="margin-left: auto;">
+                    <!-- <svg icon ibmIconBookmark20 (click)="bookmark(data)" ></svg>
+                    <svg icon ibmIconBookmarkFilled20></svg> -->
+                  </div>
+                </div>
+                <div ibmGrid [condensed]="gridCondensed">
+                  <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
+                    [condensed]="rowCondensed">
+                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
+                      <p class="bold">{{ data?.innovatorId?.fullName }}</p>
+                    </div>
+                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
+                      <p class="bold">
+                        Submitted: {{ getDate(data?.createdAt) }}
+                      </p>
+                    </div>
+                  </div>
+                  <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
+                    [condensed]="rowCondensed">
+                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 6, sm: 12 }">
+                      <p class="para">{{ data?.modelDescription }}</p>
+                    </div>
+                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
+                      <!-- <ibm-checkbox [hideLabel]="hideLabel" (change)="onChange($event, data._id)"
+                       ></ibm-checkbox> -->
+
+                      <div class="content" style="margin-left: 140px; margin-top: 3px;">
+                        <p class="unbold">Phase 1</p>
+                        <p class="nobold">55</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
+                    [condensed]="rowCondensed">
+                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }">
+                      <p class="bold">Accuracy: {{ data?.score }}</p>
+                    </div>
+                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }">
+                      <p class="bold">Precesion: {{ data?.precisionScore }}</p>
+                    </div>
+                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }">
+                      <p class="bold">Recall:{{ data?.recallScore }}</p>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn" [ibmButton]="ibmButton" [size]="size">
+                  View Model Report
+                </button>
+              </ibm-tile>
+              <br />
+              <br />
+              <ibm-checkbox [hideLabel]="hideLabel" (change)="onChange($event, data._id)" style="margin-left: 15px;">
+              </ibm-checkbox>
+            </div>
+          </div>
+        </div>
+      </ibm-tab>
     </ibm-tabs>
   </div>
 
@@ -125,7 +183,7 @@
           <span class="bx--table-header-label"></span>
         </th>
         <th *ngFor="let model of compareModelData">
-          <span class="bx--table-header-label">{{ model?.mlFlowId }}</span>
+          <span class="bx--table-header-label">{{ model?.modelName }}</span>
         </th>
       </tr>
     </thead>

@@ -1,7 +1,7 @@
 <br />
 <ibm-content-switcher (selected)="selected($event)">
 	<div class="content-switcher" *ngFor="let phase of challengeDetails?.phases; index as i">
-		<button ibmContentOption name="phase{{i+1}}" (click)="selectPhase(phase.phaseId, i+1)">Phase {{i+1}}</button>
+		<button ibmContentOption name="phase{{i+1}}" (click)="selectPhase(phase.phaseId, i+1)" style="width: fit-content;">Phase {{i+1}}</button>
 	</div>
 </ibm-content-switcher>
 <br /><br />
@@ -95,12 +95,12 @@
 			</td>
 			<td>{{data.score}}
 			</td>
-			<td>{{data.mlFlowId}}
+			<td>{{data.modelName}}
 			</td>
 			<td>{{data.approch}}
 			</td>
 		</tr>
-		<tr *ngIf="submissionChallengeDetails.length==0">No records found</tr>
+		<tr *ngIf="submissionChallengeDetails && submissionChallengeDetails.length==0">No records found</tr>
 	</tbody>
 </table>
 

@@ -15,6 +15,7 @@ export class InvAcceptedComponent implements OnInit {
 		private router: Router,
 		private activatedRoute: ActivatedRoute) { }
 
+	pageNo: number;
 	toasterMsg: boolean;
 	challengeId: any;
 	leaderboard: any[];
@@ -31,12 +32,13 @@ export class InvAcceptedComponent implements OnInit {
 		challengeId: {},
 		phaseId: any,
 		mlFlowId: string,
+		modelName: String,
 		appliedAsCompany: true,
 		modelDescription: string,
 		modelUploadedPath: string,
 		modelType: string,
 		approch: string,
-		// language: string,
+		language: string,
 		score: 0,
 		precisionScore: 0,
 		recallScore: 0,
@@ -44,10 +46,15 @@ export class InvAcceptedComponent implements OnInit {
 		trainedAt: string,
 		testedAt: string
 	}
-	challengeSubmissionData: any
+	challengeSubmissionData: any;
+	pageOffset: number;
+	totalPage: number;
 
 
 	ngOnInit() {
+		this.pageOffset = 0;
+		this.totalPage = 0;
+		this.pageNo = 0
 		// this.isChallengeAccepted = false
 		this.activatedRoute.params.subscribe((params: Params) => {
 			if (params) {
@@ -59,7 +66,7 @@ export class InvAcceptedComponent implements OnInit {
 		this.getSubmissionByChallengeId(this.challengeId);
 		this.getChallengeAcception(this.challengeId);
 		// this.getChallengeAcception("607e856d2d00fd7ed549689d", this.innovatorId);
-		this.getLeaderboard(this.challengeId);
+		this.getLeaderboard(this.challengeId, this.pageOffset);
 
 		this.steps = [
 			{
@@ -73,24 +80,20 @@ export class InvAcceptedComponent implements OnInit {
 			{
 				text: "Step 3",
 				state: ["incomplete"],
-			},
-			// {
-			// 	text: "Step 4",
-			// 	state: ["incomplete"],
-			// },
-			
+			}			
 		];
 		this.current = 3;
 		this.submissionData = {
 			challengeId: {},
 			phaseId: [],
 			mlFlowId: "",
+			modelName: '',
 			appliedAsCompany: true,
 			modelDescription: "",
 			modelUploadedPath: "",
 			modelType: "",
 			approch: "",
-			// language: '',
+			language: '',
 			score: 0,
 			precisionScore: 0,
 			recallScore: 0,
@@ -102,32 +105,35 @@ export class InvAcceptedComponent implements OnInit {
 
 	getChallengeDetails(id) {
 		let url = 'challenge/' + id;
-		this.requestService.get(url).subscribe(data => {
+		this.requestService.get(url, null).subscribe(data => {
 			this.challengeDetails = data;
 		})
 	}
 
 	getChallengeAcception(challengeId) {
 		let url = 'userChallenge/accepted/' + challengeId;
-		this.requestService.get(url).subscribe(data => {
+		this.requestService.get(url, null).subscribe(data => {
 			this.acceptedChallenge = data;
 			if (data._id.length > 0) {
 				this.isChallengeAccepted = true;
 			}
-			console.log(this.acceptedChallenge, "---this.acceptedChallenge---111")
 		})
 	}
 
-	getLeaderboard(challengeId) {
+	getLeaderboard(challengeId, pageOffset) {
 		let url = 'leaderboard/' + challengeId;
-		this.requestService.get(url).subscribe(data => {
-			this.leaderboard = data
+		let params = {
+			skip: pageOffset
+		}
+		this.requestService.get(url, params).subscribe(data => {
+			this.totalPage = Math.ceil(data.count/10);
+			this.leaderboard = data.list;
 		})
 	}
 
 	getSubmissionByChallengeId(challengeId) {
 		let url = 'submissionAllChallenge/challenge-innovator/' + challengeId;
-		this.requestService.get(url).subscribe(data => {
+		this.requestService.get(url, null).subscribe(data => {
 			this.challengeSubmissionData = data
 		})
 	}
@@ -161,6 +167,22 @@ export class InvAcceptedComponent implements OnInit {
 
 	closeToaster() {
 		this.toasterMsg = false
+	}
+
+	prevPage() {
+		if (this.pageNo > 1) {
+			this.pageNo--;
+			this.pageOffset = this.pageNo*10;
+			this.getLeaderboard(this.challengeDetails._id, this.pageOffset)
+		}
+	}
+
+	nextPage() {
+		if (this.pageNo < (this.totalPage-1)) {
+			this.pageNo++;
+			this.pageOffset = this.pageNo*10;
+			this.getLeaderboard(this.challengeDetails._id, this.pageOffset)
+		}
 	}
 
 	async downloadFile() {
@@ -213,7 +235,7 @@ export class InvAcceptedComponent implements OnInit {
 	nextStepTwo(stepTwoData) {
 		this.submissionData.modelDescription = stepTwoData.description;
 		this.submissionData.approch = stepTwoData.approach
-		// this.submissionData.language = stepTwoData.language				// language attribute not present
+		this.submissionData.language = stepTwoData.language				// language attribute not present
 
 		this.current++
 	}
@@ -227,7 +249,7 @@ export class InvAcceptedComponent implements OnInit {
 		this.requestService.post(url, this.submissionData).subscribe( data => {
 			this.getSubmissionByChallengeId(this.challengeId);
 			// this.getChallengeDetails(this.challengeId)
-			this.getLeaderboard(this.challengeId)
+			this.getLeaderboard(this.challengeId, this.pageOffset)
 			this.current++;
 		})
 	}

@@ -174,11 +174,13 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr *ngFor="let data of challengeSubmissionData; index as i">
+								<tr *ngFor="let data of leaderboard; index as i">
+									<!-- <tr *ngFor="let data of challengeSubmissionData; index as i"> -->
 									<td>{{i+1}}</td>
 									<td>{{data?.innovatorId?.fullName}}</td>
 									<td>Phase 1</td>
-									<td>{{getScore()}}</td>
+									<!-- <td>{{getScore()}}</td> -->
+									<td>35</td>
 									<td>{{getDate(data?.createdAt)}}</td>
 								</tr>
 							</tbody>
@@ -192,10 +194,10 @@
 
 								<label id="select-id-pagination-page-label" class="bx--pagination__text"
 									for="select-id-pagination-page">
-									pages 1
+									pages {{pageNo+1}} of {{totalPage}}
 								</label>
 								<button class="bx--pagination__button bx--pagination__button--backward " tabindex="0"
-									data-page-backward aria-label="previous page">
+									data-page-backward aria-label="previous page" (click)="prevPage()" >
 									<svg focusable="false" preserveAspectRatio="xMidYMid meet"
 										style="will-change: transform;" xmlns="http://www.w3.org/2000/svg"
 										class="bx--pagination__nav-arrow" width="20" height="20" viewBox="0 0 32 32"
@@ -204,7 +206,7 @@
 									</svg>
 								</button>
 								<button class="bx--pagination__button bx--pagination__button--forward " tabindex="0"
-									data-page-forward aria-label="next page">
+									data-page-forward aria-label="next page" (click)="nextPage()" >
 									<svg focusable="false" preserveAspectRatio="xMidYMid meet"
 										style="will-change: transform;" xmlns="http://www.w3.org/2000/svg"
 										class="bx--pagination__nav-arrow" width="20" height="20" viewBox="0 0 32 32"

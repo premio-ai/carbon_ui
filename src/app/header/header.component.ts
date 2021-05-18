@@ -17,17 +17,26 @@ export class HeaderComponent implements OnInit {
 	) { }
 	userDetails: any;
 	notifications: any;
+	challengeCounts: any;
 
 	ngOnInit() {
+		this.challengeCounts = 0;
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
 		setInterval(() => {
 			this.getNotifications()				// TODO: uncomment before push
 		}, 60000)
+		this.getChallengeCounts();
+	}
+
+	getChallengeCounts() {
+		this.requestService.get('challenge/counts', null).subscribe( data => {
+			this.challengeCounts = data
+		})
 	}
 
 	getNotifications() {
 		let url = 'userNotification'
-		this.requestService.get(url).subscribe( data => {
+		this.requestService.get(url, null).subscribe( data => {
 			this.notifications = data;
 		})
 	}

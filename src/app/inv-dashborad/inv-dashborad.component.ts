@@ -26,7 +26,7 @@ export class InvDashboradComponent implements OnInit {
 
   getActiveChallanges() {
 		let activeChallanegUrl = "challenge?isActive=true";
-		this.requestService.get(activeChallanegUrl).subscribe(data => {
+		this.requestService.get(activeChallanegUrl, null).subscribe(data => {
 		  console.log("active challange ... ", data)
 		  this.activeChallenges = data;
 		})
@@ -34,7 +34,7 @@ export class InvDashboradComponent implements OnInit {
 
 	getpastChallanges() {
 		let pastChallanegUrl = "challenge?isActive=false";
-		this.requestService.get(pastChallanegUrl).subscribe((data) => {
+		this.requestService.get(pastChallanegUrl, null).subscribe((data) => {
 			console.log("active challange ... ",data)
 			this.pastChallenges = data;
 		});
