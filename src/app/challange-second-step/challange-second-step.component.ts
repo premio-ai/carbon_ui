@@ -39,7 +39,7 @@ export class ChallangeSecondStepComponent implements OnInit {
       let tempData = {
         description: this.stepTwo.description,
         guidence: this.stepTwo.guidence,
-        score: this.stepTwo.passingScore,
+        passingScore: this.stepTwo.passingScore,
         dataVisualFile: this.stepTwo.dataVisualFile,
         sampleDataFile: this.stepTwo.sampleDataFile
       }

@@ -12,12 +12,13 @@ export class DashboardComponent implements OnInit {
 		private requestService: RequestService,
 		private router: Router
 	) {}
+	userDetails: any;
 	activeChallenges: any[];
 	pastChallenges: any[];
 
 	ngOnInit() {
-		let userDetails = JSON.parse(localStorage.getItem('userDetails'))
-		if (userDetails && userDetails._id) {			
+		this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
+		if (this.userDetails && this.userDetails._id) {			
 			this.getActiveChallanges();
 			this.getpastChallanges();
 		} else {
@@ -27,14 +28,14 @@ export class DashboardComponent implements OnInit {
 
 	getActiveChallanges() {
 		let activeChallanegUrl = "challenge?isActive=true";
-		this.requestService.get(activeChallanegUrl).subscribe(data => {
+		this.requestService.get(activeChallanegUrl, null).subscribe(data => {
 		  this.activeChallenges = data;
 		})
 	}
 
 	getpastChallanges() {
 		let pastChallanegUrl = "challenge?isActive=false";
-		this.requestService.get(pastChallanegUrl).subscribe((data) => {
+		this.requestService.get(pastChallanegUrl, null).subscribe((data) => {
 			this.pastChallenges = data;
 		});
 	}

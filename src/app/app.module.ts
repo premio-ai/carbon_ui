@@ -24,13 +24,15 @@ import { Concept32Module } from "@carbon/icons-angular/lib/concept/32"
 import {CloudUpload32Module} from "@carbon/icons-angular/lib/cloud--upload/32";
 import {Idea32Module} from "@carbon/icons-angular/lib/idea/32";
 import {Forum16Module} from "@carbon/icons-angular/lib/forum/16";
+import {DocumentExport16Module} from "@carbon/icons-angular/lib//document--export/16";
 import {Upload20Module} from "@carbon/icons-angular/lib/upload/20";
 import {Chemistry20Module} from "@carbon/icons-angular/lib/chemistry/20";
 import {Trophy20Module} from "@carbon/icons-angular/lib/trophy/20";
 import {ArrowRight20Module} from "@carbon/icons-angular/lib/arrow--right/20";
-// import {BookmarkFilled20Module} from "@carbon/icons-angular/lib/bookmark--filled/20";
+import {BookmarkFilled20Module} from "@carbon/icons-angular/lib/bookmark--filled/20";
 import {UserMultiple20Module} from "@carbon/icons-angular/lib/user--multiple/20";
 import {CheckmarkOutline20Module} from "@carbon/icons-angular/lib/checkmark--outline/20";
+
 // carbon-components-angular default imports
 import {
 	AccordionModule,
@@ -57,6 +59,8 @@ import {
 	TilesModule,
 	ToggleModule,
 	UIShellModule,
+	StructuredListModule,
+	
 } from "carbon-components-angular";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -79,6 +83,9 @@ import { InvSeePerformanceComponent } from "./inv-see-performance/inv-see-perfor
 import { ActivityComponent } from "./activity/activity.component";
 
 import { DragAndDropStory } from './file-uploader/file-uploader';
+import { ImageUploader } from './file-uploader/image-uploader';
+// import {PaginationNavStory} from './app-pagination/PaginationNavStory';
+// import {PaginationModel} from './app-pagination/pagination-model.class';
 
 import { ModelReportComponent } from "./model-report/model-report.component";
 import { ModelComponent } from "./model/model.component";
@@ -91,14 +98,14 @@ import { SubmissionStepThreeComponent } from "./submission-step-three/submission
 import { SubmissionStepTwoComponent } from "./submission-step-two/submission-step-two.component";
 import { from } from "rxjs";
 import {CheckmarkFilled16Module} from "@carbon/icons-angular/lib/checkmark--filled/16";
-import {DocumentExport16Module} from "@carbon/icons-angular/lib/document--export/16";
+
 import {RadioButton20Module} from "@carbon/icons-angular/lib/radio-button/20";
+import {Send20Module} from "@carbon/icons-angular/lib/send/20";
 import { ChartsModule } from "@carbon/charts-angular";
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import {Chat20Module} from "@carbon/icons-angular/lib/chat/20";
 import {Logout20Module} from "@carbon/icons-angular/lib/logout/20";
-import {BookmarkFilled20Module} from "@carbon/icons-angular/lib/bookmark--filled/20";
 // import { DonutChart } from "@carbon/charts";
 
 
@@ -119,7 +126,9 @@ import {BookmarkFilled20Module} from "@carbon/icons-angular/lib/bookmark--filled
 		ActivityComponent,
 		
 		DragAndDropStory,
-
+		ImageUploader,
+		// PaginationNavStory,
+		// PaginationModel,
 		ModelComponent,
 
 		ModelReportComponent,
@@ -148,9 +157,13 @@ import {BookmarkFilled20Module} from "@carbon/icons-angular/lib/bookmark--filled
 		LoginComponent,
 
 		SignUpComponent,
+
+		
+	
 	],
 	imports: [
 		BrowserModule,
+		Send20Module,
 		BrowserAnimationsModule,
 		FormsModule,
 		LoadingModule,
@@ -215,6 +228,7 @@ import {BookmarkFilled20Module} from "@carbon/icons-angular/lib/bookmark--filled
 		BookmarkFilled20Module,
 		Chat20Module,
 		Logout20Module,
+		StructuredListModule,
 	],
 	bootstrap: [AppComponent],
 	providers: [RequestService],

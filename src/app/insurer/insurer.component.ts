@@ -30,14 +30,14 @@ export class InsurerComponent implements OnInit {
 
   getChallengeDetails(id) {
     let url = 'challenge/' + id;
-    this.requestService.get(url).subscribe(data => {
+    this.requestService.get(url, null).subscribe(data => {
       this.challengeDetails = data;
     })
   }
 
   getSubmissionChallenge(id) {
     let url = 'submissionAllChallenge/challenge/' + id;
-    this.requestService.get(url).subscribe(data => {
+    this.requestService.get(url, null).subscribe(data => {
       this.submissionChallengeDetails = data;
     })
   }

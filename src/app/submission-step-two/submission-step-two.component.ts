@@ -11,11 +11,13 @@ export class SubmissionStepTwoComponent implements OnInit {
 
   constructor() { }
   language: any[];
+  modelNameError: boolean;
   descriptionError: boolean;
   approachError: boolean;
   languageError: boolean;
 
   stepTwo: {
+    modelName: string,
     description: string,
     approach: string,
     language: string
@@ -29,6 +31,7 @@ export class SubmissionStepTwoComponent implements OnInit {
       { content: 'Java' },
     ];
     this.stepTwo=  {
+      modelName: '',
       description: "",
       approach: "",
       language: ""
@@ -47,9 +50,12 @@ export class SubmissionStepTwoComponent implements OnInit {
   next(){
     console.log(this.stepTwo)
 
-    if (this.stepTwo.description.length>0 && this.stepTwo.approach.length>0 && this.stepTwo.language.length>0) {
+    if (this.stepTwo.modelName.length>0 && this.stepTwo.description.length>0 && this.stepTwo.approach.length>0 && this.stepTwo.language.length>0) {
       this.goNext.emit(this.stepTwo);
     } else {
+      if (this.stepTwo.modelName.length == 0) {
+        this.modelNameError = true
+      }
       if (this.stepTwo.description.length == 0) {
         this.descriptionError = true
       }

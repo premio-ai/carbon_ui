@@ -6,17 +6,19 @@ import { map, catchError} from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
+
 export class RequestService {
-  baseUrl : string = "http://localhost:3000/";
-  // baseUrl: string = "https://meanapp01.herokuapp.com/";
+  baseUrl : string = "http://localhost:3000/api/";
+  // baseUrl: string = "https://meanapp01.herokuapp.com/api/";
   constructor(private http:HttpClient) { }
 
-  get(uri): Observable<any> {
+  get(uri, params): Observable<any> {
     const userDetails = JSON.parse(localStorage.getItem('userDetails'))
     return this.http.get(this.baseUrl + uri, {
       headers: {
         token: userDetails.access_token
-      }
+      },
+      params: params
     })
   }
 

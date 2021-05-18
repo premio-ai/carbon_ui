@@ -18,11 +18,18 @@ export class InvChallengeComponent implements OnInit {
   activeChallenges: any[];
   bookmarkedChallenges: any[] = [];
   innovatorId = "607e856d2d00fd7ed549689e";
+  pageOffset: number;
+  totalPage: number;
+  pageNo: number;
 
   ngOnInit() {
+    this.pageNo = 0;
+    this.pageOffset = 0;
+    this.totalPage = 0;
+
     let userDetails = JSON.parse(localStorage.getItem('userDetails'))
 		if (userDetails && userDetails._id) {			
-	    this.getAllActiveChallanges();
+	    this.getAllActiveChallanges(this.pageOffset);
       // this.getBookmarkedChallenges();
     } else {
 			this.router.navigateByUrl('login')
@@ -39,17 +46,38 @@ export class InvChallengeComponent implements OnInit {
     return date;
   }
 
-  getAllActiveChallanges() {
+  getAllActiveChallanges(pageOffset) {
     let allActiveChallanegUrl = "challenge/all";
-    this.requestService.get(allActiveChallanegUrl).subscribe(data => {
-      this.activeChallenges = data;
+    let params = {
+      skip: pageOffset
+    }
+
+    this.requestService.get(allActiveChallanegUrl, params).subscribe(data => {
+      this.totalPage = Math.ceil(data.count/10);
+      this.activeChallenges = data.list;
       this.getBookmarkedChallenges();
     })
   }
 
+  prevPage() {
+		if (this.pageNo > 1) {
+			this.pageNo--;
+			this.pageOffset = this.pageNo*10;
+			this.getAllActiveChallanges(this.pageOffset)
+		}
+	}
+
+	nextPage() {
+		if (this.pageNo < (this.totalPage-1)) {
+			this.pageNo++;
+			this.pageOffset = this.pageNo*10;
+			this.getAllActiveChallanges(this.pageOffset)
+		}
+	}
+
   getBookmarkedChallenges() {
     let url = "bookmarkChallenge";
-    this.requestService.get(url).subscribe(data => {
+    this.requestService.get(url, null).subscribe(data => {
 
       let tempData = []
       this.activeChallenges.filter( dt => {

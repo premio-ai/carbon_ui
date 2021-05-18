@@ -1,4 +1,6 @@
+import { temporaryDeclaration } from '@angular/compiler/src/compiler_util/expression_converter';
 import { Component, Input, OnInit } from '@angular/core';
+import { RequestService } from '../request.service';
 
 @Component({
   selector: 'app-model',
@@ -11,7 +13,10 @@ export class ModelComponent {
 
   @Input() submissionChallengeDetails: any[];
   @Input() challengeDetails: any;
-  constructor() { }
+  constructor(
+    private requestService: RequestService
+  ) { }
+  bookmarkedSubmissions: any[] = []
   modelData: any[]
   phaseId: any
   compareModelData: any[] = []
@@ -19,12 +24,13 @@ export class ModelComponent {
   readmore: boolean
 
   // ngOnInit() {
-  //   this.makeModelData()
+  //   this.getBookmarkedSubmission()
   // }
 
   ngOnChanges() {
     if (this.challengeDetails && this.submissionChallengeDetails) {
       this.makeModelData()
+      this.getBookmarkedSubmission()
     }
   }
 
@@ -50,6 +56,35 @@ export class ModelComponent {
     this.phaseId = id
   }
 
+  getBookmarkedSubmission() {
+    let url = 'bookmarksubmission'
+    this.requestService.get(url, null).subscribe(data => {
+      let tempData = [];
+      this.submissionChallengeDetails.map(dt => {
+        data.filter(res => {
+          if (dt.challengeId == res.challengeId) {
+            tempData.push(dt)
+          }
+        })
+      })
+      this.bookmarkedSubmissions = tempData
+    })
+  }
+
+  bookmark(model) {
+    let url = 'bookmarksubmission'
+    let data = {
+      challengeId: model.challengeId,
+      phaseId: model.phaseId,
+      innovatorId: model.innovatorId._id,
+      submissionId: model._id,
+      insurerId: ''
+    }
+    this.requestService.post(url, data).subscribe(data => {
+      this.getBookmarkedSubmission()
+    })
+  }
+
   onChange(e, id) {
     let tempData = [...this.compareModelData]
     let ids = tempData.map(dt => {
@@ -69,7 +104,6 @@ export class ModelComponent {
         return false
       }
     })
-    console.log(this.compareModelData, "---this.compareModelData---72")
     this.compareModelData = temp
   }
 

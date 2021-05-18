@@ -20,7 +20,7 @@
 	</div>
   </div>
   
-  <div ibmGrid [condensed]="gridCondensed">
+  <div ibmGrid [condensed]="gridCondensed" class="gridchange">
 	<!-- <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
 		  <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 7, sm: 12 }">
 			  <ibm-tile>
@@ -125,117 +125,118 @@
 	  </div>
 	</div>
   
+
 	<div ibmGrid [condensed]="gridCondensed">
-	  <div
-		ibmRow
-		[gutter]="gutter"
-		[leftGutter]="leftGutter"
-		[rightGutter]="rightGutter"
-		[condensed]="rowCondensed"
-	  >
 		<div
-		  ibmCol
-		  class="custom-class-example"
-		  [columnNumbers]="{ md: 8, sm: 12 }"
+		  ibmRow
+		  [gutter]="gutter"
+		  [leftGutter]="leftGutter"
+		  [rightGutter]="rightGutter"
+		  [condensed]="rowCondensed"
 		>
-		  <ibm-table-container>
-			<br />
-			<ibm-table-header>
-			  <h4 ibmTableHeaderTitle>Leaderboard</h4>
-			</ibm-table-header>
-			<table class="bx--data-table">
-			  <thead>
-				<tr>
-				  <th>
-					<span class="bx--table-header-label">Rank</span>
-				  </th>
-				  <th>
-					<span class="bx--table-header-label">Name</span>
-				  </th>
-				  <th>
-					<span class="bx--table-header-label">P1 Score</span>
-				  </th>
-				  <th>
-					<span class="bx--table-header-label">P2 Score</span>
-				  </th>
-				  <th>
-					<span class="bx--table-header-label">P3 Score</span>
-				  </th>
-				  <th>
-					<span class="bx--table-header-label"></span>
-				  </th>
-				</tr>
-			  </thead>
-			  <tbody>
-				<tr *ngFor="let model of submissionChallengeDetails; index as i">
-				  <td>{{ i + 1 }}</td>
-				  <td>{{ model?.innovatorId?.fullName || 'Brian D' }}</td>
-				  <td>{{ model.score }}</td>
-				  <td>{{ model.score }}</td>
-				  <td>{{ model.score }}</td>
-				  <td>view model</td>
-				</tr>
-				<tr *ngIf="submissionChallengeDetails.length == 0">
-				  No records found
-				</tr>
-			  </tbody>
-			</table>
-			<br />
-  
-			<div class="bx--pagination" data-pagination>
-			  <div class="bx--pagination__right">
-				<label
-				  id="select-id-pagination-page-label"
-				  class="bx--pagination__text"
-				  for="select-id-pagination-page"
-				>
-				  pages 1
-				</label>
-				<button
-				  class="bx--pagination__button bx--pagination__button--backward"
-				  tabindex="0"
-				  data-page-backward
-				  aria-label="previous page"
-				>
-				  <svg
-					focusable="false"
-					preserveAspectRatio="xMidYMid meet"
-					style="will-change: transform;"
-					xmlns="http://www.w3.org/2000/svg"
-					class="bx--pagination__nav-arrow"
-					width="20"
-					height="20"
-					viewBox="0 0 32 32"
-					aria-hidden="true"
+		  <div
+			ibmCol
+			class="custom-class-example"
+			[columnNumbers]="{ md: 8, sm: 12 }"
+		  >
+			<ibm-table-container>
+			  <br />
+			  <ibm-table-header>
+				<h4 ibmTableHeaderTitle>Leaderboard</h4>
+			  </ibm-table-header>
+			  <table class="bx--data-table">
+				<thead>
+				  <tr>
+					<th>
+					  <span class="bx--table-header-label">Rank</span>
+					</th>
+					<th>
+					  <span class="bx--table-header-label">Name</span>
+					</th>
+					<th>
+					  <span class="bx--table-header-label">P1 Score</span>
+					</th>
+					<th>
+					  <span class="bx--table-header-label">P2 Score</span>
+					</th>
+					<th>
+					  <span class="bx--table-header-label">P3 Score</span>
+					</th>
+					<th>
+					  <span class="bx--table-header-label"></span>
+					</th>
+				  </tr>
+				</thead>
+				<tbody>
+				  <tr *ngFor="let model of submissionChallengeDetails; index as i">
+					<td>{{ i + 1 }}</td>
+					<td>{{ model?.innovatorId?.fullName || 'Brian D' }}</td>
+					<td>{{ model.score }}</td>
+					<td>{{ model.score }}</td>
+					<td>{{ model.score }}</td>
+					<td>view model</td>
+				  </tr>
+				  <tr *ngIf="submissionChallengeDetails.length == 0">
+					No records found
+				  </tr>
+				</tbody>
+			  </table>
+			  <br />
+	
+			  <div class="bx--pagination" data-pagination>
+				<div class="bx--pagination__right">
+				  <label
+					id="select-id-pagination-page-label"
+					class="bx--pagination__text"
+					for="select-id-pagination-page"
 				  >
-					<path d="M19 23L11 16 19 9 19 23z"></path>
-				  </svg>
-				</button>
-				<button
-				  class="bx--pagination__button bx--pagination__button--forward"
-				  tabindex="0"
-				  data-page-forward
-				  aria-label="next page"
-				>
-				  <svg
-					focusable="false"
-					preserveAspectRatio="xMidYMid meet"
-					style="will-change: transform;"
-					xmlns="http://www.w3.org/2000/svg"
-					class="bx--pagination__nav-arrow"
-					width="20"
-					height="20"
-					viewBox="0 0 32 32"
-					aria-hidden="true"
+					pages 1
+				  </label>
+				  <button
+					class="bx--pagination__button bx--pagination__button--backward"
+					tabindex="0"
+					data-page-backward
+					aria-label="previous page"
 				  >
-					<path d="M13 9L21 16 13 23 13 9z"></path>
-				  </svg>
-				</button>
+					<svg
+					  focusable="false"
+					  preserveAspectRatio="xMidYMid meet"
+					  style="will-change: transform;"
+					  xmlns="http://www.w3.org/2000/svg"
+					  class="bx--pagination__nav-arrow"
+					  width="20"
+					  height="20"
+					  viewBox="0 0 32 32"
+					  aria-hidden="true"
+					>
+					  <path d="M19 23L11 16 19 9 19 23z"></path>
+					</svg>
+				  </button>
+				  <button
+					class="bx--pagination__button bx--pagination__button--forward"
+					tabindex="0"
+					data-page-forward
+					aria-label="next page"
+				  >
+					<svg
+					  focusable="false"
+					  preserveAspectRatio="xMidYMid meet"
+					  style="will-change: transform;"
+					  xmlns="http://www.w3.org/2000/svg"
+					  class="bx--pagination__nav-arrow"
+					  width="20"
+					  height="20"
+					  viewBox="0 0 32 32"
+					  aria-hidden="true"
+					>
+					  <path d="M13 9L21 16 13 23 13 9z"></path>
+					</svg>
+				  </button>
+				</div>
 			  </div>
-			</div>
-		  </ibm-table-container>
+			</ibm-table-container>
+		  </div>
 		</div>
 	  </div>
 	</div>
-  </div>
-  
+	

@@ -8,17 +8,22 @@ import { RequestService } from '../request.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
+  language: any[];
   constructor(
     private requestService: RequestService,
     private router: Router
   ) { }
   username: String;
   password: String;
-
+  programmingLanguage: string;
   ngOnInit() {
     this.username= '';
     this.password= '';
+    this.language = [
+      { content: 'Innsurer' },
+      { content: 'Innovator' },
+      
+    ];
   }
 
   login() {
@@ -37,9 +42,10 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('invchallenges')
       }
     })
-
   }
 
-
+  signUp() {
+    this.router.navigateByUrl('signup')
+  }
 
 }
