@@ -4,37 +4,53 @@
 	margin: 0 auto;
 	border-radius: 50%;
 	object-fit: cover;
-
+  
 	margin-left: 80px;
 	margin-top: 20px;
-}
-.userdetail {
+  }
+  .userdetail {
 	white-space: nowrap;
 	margin-left: 50px;
 	font-weight: 500;
 	font-size: 12px;
 	color: white;
-}
-.userName {
+  }
+  .userName {
 	white-space: nowrap;
 	margin-left: 93px;
 	font-weight: 700;
 	font-size: 16px;
 	color: white;
-}
-.notify {
+  }
+  .notify {
 	white-space: nowrap;
 	margin-left: 50px;
-
+  display: flex;
+  align-items: center;
 	font-size: 14px;
 	color: white;
-}
-
-
-  svg{
-	  fill: white;
   }
-
-  .bx--btn{
-	margin-left: 51px;
-}
+  
+  svg {
+	fill: white;
+  }
+  
+	svg{
+		fill: white;
+	}
+  
+	.bx--btn{
+	  margin-left: 51px;
+  }
+  
+  .bx--navigation-section:not(:last-child)::after {
+	display: block;
+	content: '';
+	height: 1px;
+	background-color: #393939;
+	margin: 10px 2rem;
+  }
+  
+  .bx--btn--ghost{
+	color: white;
+  }

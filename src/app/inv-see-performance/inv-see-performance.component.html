@@ -1,152 +1,118 @@
 <app-header></app-header>
-<br /><br />
+<br />
+<br />
 <div class="bx--grid">
-	<div class="bx--row line-padding">
-		<div class="bx--col-md-1" style="padding-left: 8%">
-			<svg icon ibmIconArrowLeft16></svg>
-		</div>
-		<div class="bx--col-md-4">
-			<ibm-breadcrumb [noTrailingSlash]="noTrailingSlash">
-				<ibm-breadcrumb-item href="asa" class="navigation">
-					Browse
-				</ibm-breadcrumb-item>
-				<ibm-breadcrumb-item href="asa" class="navigation">
-					Challenge title
-				</ibm-breadcrumb-item>
-				<ibm-breadcrumb-item href="asa" class="navigation">
-					modelname.mdk
-				</ibm-breadcrumb-item>
-			</ibm-breadcrumb>
-		</div>
-	</div>
-<br/><br/>
-    <div class="bx--row line-padding">
-		<div class="bx--col-md-1" style="padding-left: 8%">
-			
-		</div>
-		<div class="bx--col-md-6">
-            <p style="font-size: 40px; font-weight: 100">Performance breakdown</p>
-            <br/><br/>
-            <div class="border-div">
-                &nbsp;&nbsp;
-                <h5 style="margin-left: 8px;">Congratuations!</h5>
-                &nbsp;&nbsp;
-                <p style="margin-left: 8px;">your model has met the minimum performance score</p>
-                <br/> &nbsp;
-                <button [ibmButton]="ibmButton" [size]="size" (click)="viewModel()" >
-                   View model overview<svg class="bx--btn__icon" ibmIconArrowRight20 size="20"></svg>
-                </button>
-                <br /> <br />
-                &nbsp;
-                <button [ibmButton]="ibmButton" [size]="size" style="width:215px;">
-                   Enter phase 2<svg class="bx--btn__icon" ibmIconArrowRight20 size="20"></svg>
-                </button>
-            </div>
-            <br/> <br/>
-            <div class="bx--form-item">
-                <div class="bx--dropdown__wrapper ">
-                 
-                  <div class="bx--form__helper-text">filter</div>
-                  <div data-dropdown data-value
-                    class="bx--dropdown   ">
-                    <button class="bx--dropdown-text" aria-haspopup="true" aria-expanded="false" aria-controls="example-ap3t91wclrj-menu" aria-labelledby="example-ap3t91wclrj-label example-ap3t91wclrj-value" type="button">
-                      <span class="bx--dropdown-text__inner" id="example-ap3t91wclrj-value"> phase 1 </span>
-                      <span class="bx--dropdown__arrow-container">
-                        <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--dropdown__arrow" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"></path></svg>
-                      </span>
-                    </button>
-                    <ul class="bx--dropdown-list" id="example-ap3t91wclrj-menu" role="menu" tabindex="0" id="example-ap3t91wclrj-menu" aria-hidden="true" wh-menu-anchor="left" aria-labelledby="example-ap3t91wclrj-label">
-                      <li data-option data-value="all" class="bx--dropdown-item" title="Option 1">
-                        <a class="bx--dropdown-link" href="javascript:void(0)" tabindex="-1" role="menuitemradio" aria-checked="true" id="example-ap3t91wclrj-item0">Option 1</a>
-                      </li>
-                      <li data-option data-value="cloudFoundry" class="bx--dropdown-item" title="Option 2">
-                        <a class="bx--dropdown-link" href="javascript:void(0)" tabindex="-1" role="menuitemradio" aria-checked="false" id="example-ap3t91wclrj-item1">Option 2</a>
-                      </li>
-                      <li data-option data-value="staging" class="bx--dropdown-item" title="Option 3">
-                        <a class="bx--dropdown-link" href="javascript:void(0)" tabindex="-1" role="menuitemradio" aria-checked="false" id="example-ap3t91wclrj-item2">Option 3</a>
-                      </li>
-                      <li data-option data-value="dea" class="bx--dropdown-item" title="Option 4">
-                        <a class="bx--dropdown-link" href="javascript:void(0)" tabindex="-1" role="menuitemradio" aria-checked="false" id="example-ap3t91wclrj-item3">Option 4</a>
-                      </li>
-                      <li data-option data-value="router" class="bx--dropdown-item" title="Option 5">
-                        <a class="bx--dropdown-link" href="javascript:void(0)" tabindex="-1" role="menuitemradio" aria-checked="false" id="example-ap3t91wclrj-item4">Option 5</a>
-                      </li>
-                      <li data-option data-value="loremipsum" class="bx--dropdown-item" title="An example option that is really long to show what should be done to handle long text">
-                        <a class="bx--dropdown-link" href="javascript:void(0)" tabindex="-1" role="menuitemradio" aria-checked="false" id="example-ap3t91wclrj-item5">An example option that is really long to show what should be done to handle long text</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-		</div>
-  </div>
-  
   <div class="bx--row line-padding">
-		<div class="bx--col-md-1" style="padding-left: 8%">
-    <h6>Sample Data Set</h6>
-          <p *ngFor='let data of challengeDetails?.phases[0]?.sampleDataFile; index as i'>Download Dataset {{i+1}}
+    <div class="bx--col-md-1" style="padding-left: 8%;">
+      <svg icon ibmIconArrowLeft16></svg>
+    </div>
+    <div class="bx--col-md-4">
+      <ibm-breadcrumb [noTrailingSlash]="noTrailingSlash">
+        <ibm-breadcrumb-item href="asa" class="navigation">
+          Browse
+        </ibm-breadcrumb-item>
+        <ibm-breadcrumb-item href="asa" class="navigation">
+          Challenge title
+        </ibm-breadcrumb-item>
+        <ibm-breadcrumb-item href="asa" class="navigation">
+          modelname.mdk
+        </ibm-breadcrumb-item>
+      </ibm-breadcrumb>
+    </div>
+  </div>
+  <br />
+  <br />
+  <div class="bx--row line-padding">
+    <div class="bx--col-md-1" style="padding-left: 8%;"></div>
+    <div class="bx--col-md-6">
+      <p style="font-size: 40px; font-weight: 100;">Performance breakdown</p>
+      <br />
+      <br />
+      <div class="border-div">
+        &nbsp;&nbsp;
+        <h5 style="margin-left: 8px;">Congratuations!</h5>
+        &nbsp;&nbsp;
+        <p style="margin-left: 8px;">
+          your model has met the minimum performance score
+        </p>
+        <br />
+        &nbsp;
+        <button [ibmButton]="ibmButton" [size]="size" (click)="viewModel()">
+          View model overview
+          <svg class="bx--btn__icon" ibmIconArrowRight20 size="20"></svg>
+        </button>
+        <br />
+        <br />
+        &nbsp;
+        <button [ibmButton]="ibmButton" [size]="size" style="width: 215px;">
+          Enter phase 2
+          <svg class="bx--btn__icon" ibmIconArrowRight20 size="20"></svg>
+        </button>
+      </div>
+      <br />
+      <br />
+     
+        <div class="bx--dropdown__wrapper" style="width:33%;">
+          <div class="bx--form__helper-text">filter</div>
+          <ibm-dropdown [label]="Min" [helperText]="helperText" [size]="size" [invalid]="invalid" [invalidText]="invalidText"
+          [theme]="theme" placeholder="Phase 1" [disabled]="disabled" (selected)="selected($event)" (onClose)="onClose($event)">
+          <ibm-dropdown-list [items]="language"></ibm-dropdown-list>
+        </ibm-dropdown>
+        </div>
+    
+
+      <br/>
+
+      <div class="bx--row line-padding">
+       
+          <!-- <h6>Sample Data Set</h6> -->
+         
+          <p
+            *ngFor="
+              let data of (challengeDetails?.phases)[0]?.sampleDataFile;
+              index as i
+            "
+            style="margin-left: 14px;"
+          >
+            Download Dataset {{ i + 1 }}
             <svg icon ibmIconDownload16 (click)="downloadFile(data[i])"></svg>
           </p>
-</div>
-        </div>
-  <br/>
-  <br/>
+       
+      </div>
+      <br />
+      <br />
 
-  <div style="display: flex; flex-flow: row wrap;width: 100%; justify-content: space-around;">
-    <ibm-tile style="width: 33.33%;">
-      <ibm-donut-chart [data]="accuracyScoreData" [options]="accuracyOptions" style="background-color:#f4f4f4 !important;"></ibm-donut-chart>
-    </ibm-tile>
-    <ibm-tile style="width: 33.33%;">
-      <ibm-donut-chart [data]="precisionScoreData" [options]="precisionOptions" style="background-color:#f4f4f4 !important;"></ibm-donut-chart>
-    </ibm-tile>
-    <ibm-tile style="width: 33.33%;">
-      <ibm-donut-chart [data]="recallScoreData" [options]="recallOptions" style="background-color:#f4f4f4 !important;"></ibm-donut-chart>
-    </ibm-tile>
+      <div style="display: flex; gap: 10px;">
+        <ibm-tile style="flex-grow: 1;">
+          <ibm-donut-chart
+            [data]="accuracyScoreData"
+            [options]="accuracyOptions"
+            style="background-color: #f4f4f4 !important;align-items: center;"
+          ></ibm-donut-chart>
+        </ibm-tile>
+        <ibm-tile style="flex-grow: 1;">
+          <ibm-donut-chart
+            [data]="precisionScoreData"
+            [options]="precisionOptions"
+            style="background-color: #f4f4f4 !important;"
+          ></ibm-donut-chart>
+        </ibm-tile>
+        <ibm-tile style="flex-grow: 1;">
+          <ibm-donut-chart
+            [data]="recallScoreData"
+            [options]="recallOptions"
+            style="background-color: #f4f4f4 !important;"
+          ></ibm-donut-chart>
+        </ibm-tile>
+      </div>
+
+      <br />
+      <ibm-line-chart
+        [data]="data1"
+        [options]="options1"
+        style="background-color: #f4f4f4 !important;"
+      ></ibm-line-chart>
+      
+    </div>
   </div>
-  
-<br/>
-<ibm-line-chart [data]="data1" [options]="options1" style="background-color:#f4f4f4 !important;"></ibm-line-chart>
-
 </div>
-
-
-
-
-<div ibmGrid [condensed]="gridCondensed">
-  <div
-    ibmRow
-    [gutter]="gutter"
-    [leftGutter]="leftGutter"
-    [rightGutter]="rightGutter"
-    [condensed]="rowCondensed">
-            <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 2, 'sm': 12}">
-              <ibm-tile>
-                <div style="display: flex;justify-content: center;align-items: center;">
-                  <div >
-                   <p style="font-size: 20px;"> modelname.mdk</p>
-                  </div>
-                  <div style="margin-left: auto;align-items: center;display: flex;">
-                    <svg icon ibmIconEdtLoop16></svg>
-                    <p>result</p>
-                  </div>
-                </div>
-               
-                     <div ibmGrid [condensed]="gridCondensed">
-                      <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed" style="margin-bottom: -13px;">
-                        <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
-                          <button class="view" [ibmButton]="ibmButton" [size]="size" >Enter phase 2</button>
-                        </div>
-                        <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
-                          <button class="model" [ibmButton]="ibmButton" [size]="size" > See performance</button>
-                        </div>
-                      </div>
-                    </div>
-                     
-              </ibm-tile>
-            </div>&nbsp;&nbsp;
-            <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 2, 'sm': 12}"> <ibm-tile>1</ibm-tile></div>
-            <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 2, 'sm': 12}"> <ibm-tile>1</ibm-tile></div>
-
-   
-        </div>
-     </div>

@@ -50,8 +50,8 @@
                   <p class="para">{{ challenge?.description }}</p>
                 </div>
                 <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }">
-                  <ibm-checkbox [hideLabel]="hideLabel" (change)="bookmarkChallenge(challenge._id)"
-                    style="margin-left: 150px; margin-top: -50px;"></ibm-checkbox>
+                  <!-- <ibm-checkbox [hideLabel]="hideLabel" (change)="bookmarkChallenge(challenge._id)"
+                    style="margin-left: 150px; margin-top: -50px;"></ibm-checkbox> -->
                   <div class="content">
                     <p class="unbold">Phase 1</p>
                     <p class="nobold">55</p>
@@ -165,8 +165,17 @@
               View more and apply
             </button>
           </ibm-tile>
+          
         </ibm-tab>
       </ibm-tabs>
+
+      <!-- <div style="width: 800px">
+				<app-pagination
+					[disabled]="disabled"
+					[totalDataLength]="totalDataLength"
+					[numOfItemsToShow]="numOfItemsToShow">
+				</app-pagination>
+			</div> -->
     </div>
 
     <div class="bx--col-md-1">
@@ -181,3 +190,5 @@
     <div class="bx--col-md-1"></div>
   </div>
 </div>
+
+
