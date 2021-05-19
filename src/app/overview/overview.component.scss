@@ -63,7 +63,7 @@ white-space: nowrap;
 .bx--data-table th {
     //  padding-left: 0rem !important; 
  padding-right: 0rem !important; 
-    vertical-align: top;
+    // vertical-align: top;
     text-align: left;
 }
 
@@ -74,4 +74,7 @@ white-space: nowrap;
   margin-left: auto;
   align-items: center;
   background-color: #f4f4f4;
+}
+.gridchange{
+    margin-left: 0px;
 }

@@ -16,7 +16,7 @@
 			[rightGutter]="rightGutter"
 			[condensed]="rowCondensed">
 			  <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 5, 'sm': 12}"> <h5>
-				{{ challange?.title }}
+				{{ challenge?.title }}
 			</h5></div>
 			<div ibmCol class="custom-class-example" [columnNumbers]="{'md': 3, 'sm': 12}"> 
 				<div style="display: flex; ">
@@ -44,7 +44,7 @@
 			style="margin-left: -31px;"
 			[columnNumbers]="{ md: 5, sm: 12 }"
 		>
-			{{ challange?.description }}
+			{{ challenge?.description }}
 		</div>
 	
 		<div ibmCol
@@ -52,11 +52,11 @@
 		[columnNumbers]="{ md: 3, sm: 12 }" style="margin-left: 20px;">
 			<div style="display: flex; ">
 				<svg icon ibmIconEdtLoop16></svg>&nbsp;&nbsp;
-				<p style="margin-top: -4px;font-size: 10px;">{{challange?.acceptedUsersCount}}</p>
+				<p style="margin-top: -4px;font-size: 10px;">{{challenge?.acceptedUsersCount}}</p>
 			</div>
 			<div style="display: flex; ">
 				<svg icon ibmIconUserMultiple16></svg>&nbsp;&nbsp;
-				<p style="margin-top: -4px;font-size: 10px;">{{challange?.submissionsCount}}</p>
+				<p style="margin-top: -4px;font-size: 10px;">{{challenge?.submissionsCount}}</p>
 			</div>
 			<div style="display: flex; ">
 				<svg icon ibmIconPartnership16></svg>&nbsp;&nbsp;

@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class InvChallengeTileComponent implements OnInit {
 
-  @Input() challange: any;
+  @Input() challenge: any;
 
  constructor(private requestService: RequestService,
     private router: Router

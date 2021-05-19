@@ -29,13 +29,13 @@ export class InvChallengeComponent implements OnInit {
     this.totalPage = 0;
 
     let userDetails = JSON.parse(localStorage.getItem('userDetails'))
-		if (userDetails && userDetails._id) {			
-	    this.getAllActiveChallanges(this.pageOffset);
+    if (userDetails && userDetails._id) {
+      this.getAllActiveChallanges(this.pageOffset);
       // this.getBookmarkedChallenges();
     } else {
-			this.router.navigateByUrl('login')
+      this.router.navigateByUrl('login')
     }
-    
+
     this.sorting = [
       { content: 'Most Popular' },
       { content: 'Least Popular' },
@@ -47,7 +47,26 @@ export class InvChallengeComponent implements OnInit {
   }
 
   sortSelect(sort) {
-    console.log(sort.item.content, "---sort---48")
+    let criteria = sort.item.content;
+
+    if (criteria == 'Newest') {
+      this.activeChallenges.sort((a, b) => {
+        return b.createdAt - a.createdAt
+      })
+    }
+
+    if (criteria == 'Oldest') {
+      this.activeChallenges.sort((a, b) => {
+        return a.createdAt - b.createdAt
+      })
+    }
+
+    if (criteria == 'End Date') {
+      this.activeChallenges.sort((a, b) => {
+        return new Date(b.expiryDate).getTime() - new Date(a.expiryDate).getTime()
+      })
+    }
+
   }
 
   getDate(timeStamp) {
@@ -67,35 +86,35 @@ export class InvChallengeComponent implements OnInit {
     }
 
     this.requestService.get(allActiveChallanegUrl, params).subscribe(data => {
-      this.totalPage = Math.ceil(data.count/10);
+      this.totalPage = Math.ceil(data.count / 10);
       this.activeChallenges = data.list;
       this.getBookmarkedChallenges();
     })
   }
 
   prevPage() {
-		if (this.pageNo > 1) {
-			this.pageNo--;
-			this.pageOffset = this.pageNo*10;
-			this.getAllActiveChallanges(this.pageOffset)
-		}
-	}
+    if (this.pageNo > 1) {
+      this.pageNo--;
+      this.pageOffset = this.pageNo * 10;
+      this.getAllActiveChallanges(this.pageOffset)
+    }
+  }
 
-	nextPage() {
-		if (this.pageNo < (this.totalPage-1)) {
-			this.pageNo++;
-			this.pageOffset = this.pageNo*10;
-			this.getAllActiveChallanges(this.pageOffset)
-		}
-	}
+  nextPage() {
+    if (this.pageNo < (this.totalPage - 1)) {
+      this.pageNo++;
+      this.pageOffset = this.pageNo * 10;
+      this.getAllActiveChallanges(this.pageOffset)
+    }
+  }
 
   getBookmarkedChallenges() {
     let url = "bookmarkChallenge";
     this.requestService.get(url, null).subscribe(data => {
 
       let tempData = []
-      this.activeChallenges.filter( dt => {
-        data.map( res => {
+      this.activeChallenges.filter(dt => {
+        data.map(res => {
           if (dt._id == res.challengeId) {
             tempData.push(dt)
           }
