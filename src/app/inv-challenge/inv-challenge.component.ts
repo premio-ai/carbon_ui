@@ -67,6 +67,18 @@ export class InvChallengeComponent implements OnInit {
       })
     }
 
+    if (criteria == 'Most Popular') {
+      this.activeChallenges.sort((a, b) => {
+        return b.acceptedUsersCount - a.acceptedUsersCount
+      })
+    }
+
+    if (criteria == 'Least Popular') {
+      this.activeChallenges.sort((a, b) => {
+        return a.acceptedUsersCount - b.acceptedUsersCount
+      })
+    }
+
   }
 
   getDate(timeStamp) {

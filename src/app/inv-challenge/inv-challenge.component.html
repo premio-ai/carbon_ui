@@ -329,7 +329,7 @@
     <div class="bx--col-md-1">
       <div style="width: 120px;">
         <ibm-dropdown [label]="'Sort by'" [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText"
-          [theme]="theme" placeholder="Most Popular" [disabled]="disabled" (selected)="sortSelect($event)"
+          [theme]="theme" placeholder="select" [disabled]="disabled" (selected)="sortSelect($event)"
           (onClose)="onClose($event)">
           <ibm-dropdown-list [items]="sorting"></ibm-dropdown-list>
         </ibm-dropdown>
