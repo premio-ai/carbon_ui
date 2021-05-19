@@ -15,6 +15,7 @@ export class InvChallengeComponent implements OnInit {
     private requestService: RequestService,
     private router: Router
   ) { }
+  sorting: any[]
   activeChallenges: any[];
   bookmarkedChallenges: any[] = [];
   innovatorId = "607e856d2d00fd7ed549689e";
@@ -33,7 +34,20 @@ export class InvChallengeComponent implements OnInit {
       // this.getBookmarkedChallenges();
     } else {
 			this.router.navigateByUrl('login')
-		}
+    }
+    
+    this.sorting = [
+      { content: 'Most Popular' },
+      { content: 'Least Popular' },
+      { content: 'Newest' },
+      { content: 'Oldest' },
+      { content: 'End Date' }
+    ];
+
+  }
+
+  sortSelect(sort) {
+    console.log(sort.item.content, "---sort---48")
   }
 
   getDate(timeStamp) {
