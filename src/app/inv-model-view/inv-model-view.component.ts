@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RequestService } from '../request.service';
 import * as moment from 'moment';
 
@@ -12,9 +12,11 @@ import * as moment from 'moment';
 export class InvModelViewComponent implements OnInit {
 
   constructor(
+    private router: Router,
     private requestService: RequestService,
     private activatedRoute: ActivatedRoute
   ) { }
+  modelId: any;
   modelDetails: any;
   challengeId: any;
   innovatorId: any;
@@ -22,14 +24,13 @@ export class InvModelViewComponent implements OnInit {
   challengeDetails: any;
 
   ngOnInit() {
-    let modelId = ''
     this.activatedRoute.params.subscribe((params: Params) => {
       if (params) {
-        modelId = params.id
+        this.modelId = params.id
       }
     });
 
-    this.getSubmission(modelId)
+    this.getSubmission(this.modelId)
   }
 
   getDate(timeStamp) {
@@ -83,6 +84,9 @@ export class InvModelViewComponent implements OnInit {
     }
   }
 
+  seePerformance() {
+    this.router.navigateByUrl('see-performance/' + this.modelId)
+  }
 
 
 

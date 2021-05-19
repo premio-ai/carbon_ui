@@ -1,97 +1,113 @@
-<ibm-tile class="tile">
-	<!-- <div style="display: flex">
-		<h5>
-			{{ challange?.title }}
-		</h5>
+<ibm-tile
+  class="tile"
+  style="
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+  "
+>
+<div>
+  <div style="display: flex;">
+    <h5>
+      {{ challange?.title }}
+    </h5>
 
-		<ibm-tag class="tags" type="cool-gray">Efficiency</ibm-tag>
-	</div> -->
-	
-
-	<div ibmGrid [condensed]="gridCondensed">
-		<div
-			ibmRow
-			[gutter]="gutter"
-			[leftGutter]="leftGutter"
-			[rightGutter]="rightGutter"
-			[condensed]="rowCondensed">
-			  <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 5, 'sm': 12}"> <h5>
-				{{ challange?.title }}
-			</h5></div>
-			<div ibmCol class="custom-class-example" [columnNumbers]="{'md': 3, 'sm': 12}"> 
-				<div style="display: flex; ">
-					<svg icon ibmIconBookmark20></svg>
-					<svg icon ibmIconCheckmarkFilled16></svg>&nbsp;&nbsp;
-					<p style="margin-top: -4px;font-size: 10px;">Training</p>
-				</div>
-			</div>
-			
-		</div>
-	 </div>
-	 <br />
-	 <div ibmGrid [condensed]="gridCondensed">
-	<div
-		ibmRow
-		[gutter]="gutter"
-		[leftGutter]="leftGutter"
-		[rightGutter]="rightGutter"
-		[condensed]="rowCondensed"
-		style="margin-left: 17px"
-	>
-		<div
-			ibmCol
-			class="custom-class-example"
-			style="margin-left: -31px;"
-			[columnNumbers]="{ md: 5, sm: 12 }"
-		>
-			{{ challange?.description }}
-		</div>
-	
-		<div ibmCol
-		class="custom-class-example"
-		[columnNumbers]="{ md: 3, sm: 12 }" style="margin-left: 20px;">
-			<div style="display: flex; ">
-				<svg icon ibmIconEdtLoop16></svg>&nbsp;&nbsp;
-				<p style="margin-top: -4px;font-size: 10px;">{{challange?.acceptedUsersCount}}</p>
-			</div>
-			<div style="display: flex; ">
-				<svg icon ibmIconUserMultiple16></svg>&nbsp;&nbsp;
-				<p style="margin-top: -4px;font-size: 10px;">{{challange?.submissionsCount}}</p>
-			</div>
-			<div style="display: flex; ">
-				<svg icon ibmIconPartnership16></svg>&nbsp;&nbsp;
-				<p style="margin-top: -4px;font-size: 10px;">One off</p>
-			</div>
-			<div style="display: flex; ">
-				<svg icon ibmIconTime16></svg>&nbsp;&nbsp;
-				<p style="margin-top: -4px;font-size: 10px;">12/04/21</p>
-			</div>
-		</div>
+    <div class="tags">
+		<svg icon ibmIconCheckmarkFilled16 class="filled"></svg>
+    &nbsp;&nbsp;
+    <p style="margin-top: -4px; font-size: 10px;">Training</p>
 	</div>
+  </div>
+  <br />
+
+  <div ibmGrid [condensed]="gridCondensed">
+    <div
+      ibmRow
+      [gutter]="gutter"
+      [leftGutter]="leftGutter"
+      [rightGutter]="rightGutter"
+      [condensed]="rowCondensed"
+      style="margin-left: 0px;"
+    >
+      <div
+        ibmCol
+        class="custom-class-example"
+        style="margin-left: -34px;"
+        [columnNumbers]="{ md: 5, sm: 12 }"
+      >
+        {{ challenge?.description }}
+      </div>
+
+      <div
+        ibmCol
+        class="custom-class-example"
+        [columnNumbers]="{ md: 3, sm: 12 }"
+        style="margin-left: 33px;"
+      >
+        <div style="display: flex;">
+          <svg icon ibmIconEdtLoop16></svg>
+          &nbsp;&nbsp;
+          <p style="margin-top: -4px; font-size: 10px;">
+            {{ challenge?.acceptedUsersCount }}
+          </p>
+        </div>
+        <div style="display: flex;">
+          <svg icon ibmIconUserMultiple16></svg>
+          &nbsp;&nbsp;
+          <p style="margin-top: -4px; font-size: 10px;">
+            {{ challenge?.submissionsCount }}
+          </p>
+        </div>
+        <div style="display: flex;">
+          <svg icon ibmIconPartnership16></svg>
+          &nbsp;&nbsp;
+          <p style="margin-top: -4px; font-size: 10px;">One off</p>
+        </div>
+        <div style="display: flex;">
+          <svg icon ibmIconTime16></svg>
+          &nbsp;&nbsp;
+          <p style="margin-top: -4px; font-size: 10px;">12/04/21</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-	<br /><br /><br />
-	<div
-		ibmRow
-		[gutter]="gutter"
-		[leftGutter]="leftGutter"
-		[rightGutter]="rightGutter"
-		[condensed]="rowCondensed"
-		style="margin-right: 40px"
-	>
-		<div
-			ibmCol
-			class="custom-class-example"
-			[columnNumbers]="{ md: 6, sm: 12 }"
-		>
-			<p class="date" style="display: flex; align-items: center">
-				<svg icon ibmIconBadge20 ></svg>
-				<span> 1st place </span>
-			</p>
-		</div>
-		<div ibmCol class="custom-class-example" style="margin-bottom: -31px;" [columnNumbers]="{ md: 1, sm: 12 }">
-			<button class="btn" [ibmButton]="primary" [size]="'sm'" (click)="viewChalange( challange?._id )" >
-				View
-			</button>
-		</div>
-	</div>
+  
+  <div
+    ibmRow
+    [gutter]="gutter"
+    [leftGutter]="leftGutter"
+    [rightGutter]="rightGutter"
+    [condensed]="rowCondensed"
+    style="margin-right: 40px;"
+  >
+    <div
+      ibmCol
+      class="custom-class-example"
+      [columnNumbers]="{ md: 6, sm: 12 }"
+    >
+      <p class="date" style="display: flex; align-items: center;">
+        <svg icon ibmIconBadge20></svg>
+        <span>1st place</span>
+      </p>
+    </div>
+    <div
+      ibmCol
+      class="custom-class-example"
+      style="margin-bottom: -31px;"
+      [columnNumbers]="{ md: 1, sm: 12 }"
+    >
+      <button
+        class="btn"
+        [ibmButton]="primary"
+        [size]="'sm'"
+        (click)="viewChalange(challange?._id)"
+		style="position: absolute;bottom: 0px;right: 0px;width: 88px;"
+      >
+        View
+      </button>
+    </div>
+  </div>
 </ibm-tile>

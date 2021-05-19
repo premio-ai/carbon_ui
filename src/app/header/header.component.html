@@ -24,7 +24,8 @@
     (selected)="active = !active"
   ></ibm-hamburger>
   <ibm-header-navigation>
-    <ibm-header-item [route]="['/dashboard']">Activity</ibm-header-item>
+    <ibm-header-item (click)="navigate()" >Activity</ibm-header-item>
+    <!-- <ibm-header-item [route]="['/dashboard']">Activity</ibm-header-item> -->
     <ibm-header-item>Models</ibm-header-item>
     <div *ngIf="userDetails.role == 'Innovator'">
       <ibm-header-item [route]="['/invchallenges']">Challenges</ibm-header-item>
