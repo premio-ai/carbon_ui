@@ -27,7 +27,9 @@
     <div class="bx--col-md-7">
       <div style="display: flex;">
         <div>
-          <p style="font-size: 40px; font-weight: 100;">{{modelDetails?.modelname}}</p>
+          <p style="font-size: 40px; font-weight: 100;">
+            {{ modelDetails?.modelname }}
+          </p>
         </div>
         <div style="margin-top: 10px; margin-left: 8px;">
           <svg icon ibmIconEdit20></svg>
@@ -41,7 +43,7 @@
       </p>
       <br />
 
-      <div style="display: flex; flex-flow: row wrap; justify-content: space-between;">
+      <div style="display: flex; gap: 20px; flex-wrap: wrap;">
         <ibm-tile>
           <p class="head"><svg icon ibmIconCloudUpload32></svg></p>
           <p class="head">
@@ -54,12 +56,12 @@
             <br />
             5 min
           </p>
-          <a href="" title="Button fade blue/green" class="button btnFade btnBlueGreen">
-            <div style="display: flex; justify-content: center; align-items: center;">
-              <svg class="svg" icon ibmIconCheckmarkOutline20></svg>&nbsp;
-              <p>Comlpete</p>
-            </div>
-          </a>
+
+          <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
+            <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
+            &nbsp;
+            <p style="color: black;">Comlpete</p>
+          </h6>
         </ibm-tile>
         <ibm-tile>
           <p class="head"><svg icon ibmIconConcept32></svg></p>
@@ -73,16 +75,11 @@
             <br />
             5 min
           </p>
-          <a href="" title="Button fade blue/green" class="button btnFade btnBlueGreen">
-            <div style="
-                display: flex;
-                justify-content: center;
-                align-items: center;
-              ">
-              <svg class="svg" icon ibmIconCheckmarkOutline20></svg>&nbsp;
-              <p>Comlpete</p>
-            </div>
-          </a>
+          <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
+            <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
+            &nbsp;
+            <p style="color: black;">Comlpete</p>
+          </h6>
         </ibm-tile>
         <ibm-tile>
           <p class="head"><svg icon ibmIconChemistry32></svg></p>
@@ -96,16 +93,15 @@
             <br />
             5 min
           </p>
-          <a href="" title="Button fade blue/green" class="button btnFade btnBlueGreen">
-            <div style="
-                display: flex;
-                justify-content: center;
-                align-items: center;
-              ">
-              <svg class="svg" icon ibmIconCheckmarkOutline20></svg>&nbsp;
-              <p>Comlpete</p>
-            </div>
-          </a>
+          <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
+            <ibm-inline-loading
+              [loadingText]="loadingText"
+              [successText]="successText"
+              (onSuccess)="onSuccess($event)"
+            ></ibm-inline-loading>
+            &nbsp;
+            <p style="color: black;">Comlpete</p>
+          </h6>
         </ibm-tile>
         <ibm-tile>
           <p class="head"><svg icon ibmIconIdea32></svg></p>
@@ -119,16 +115,11 @@
             <br />
             5 min
           </p>
-          <a href="" title="Button fade blue/green" class="button btnFade btnBlueGreen">
-            <div style="
-                display: flex;
-                justify-content: center;
-                align-items: center;
-              ">
-              <svg icon ibmIconRadioButton20></svg>&nbsp;
-              <p>Comlpete</p>
-            </div>
-          </a>
+          <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
+            <svg icon ibmIconRadioButton20></svg>
+            &nbsp;
+            <p style="color: black;">Queued</p>
+          </h6>
         </ibm-tile>
       </div>
       <br />
@@ -141,14 +132,18 @@
         </p>
         <br />
         &nbsp;
-        <button [ibmButton]="ibmButton" [size]="size" (click)="seePerformance()" >
+        <button
+          [ibmButton]="ibmButton"
+          [size]="size"
+          (click)="seePerformance()"
+        >
           View Score Breakdown
           <svg class="bx--btn__icon" ibmIconArrowRight20 size="20"></svg>
         </button>
         <br />
         <br />
         &nbsp;
-        <button [ibmButton]="ibmButton" [size]="size" style="width: 216px;">
+        <button [ibmButton]="ibmButton" [size]="size" style="width: 225px;">
           Enter phase 2
           <svg class="bx--btn__icon" ibmIconArrowRight20 size="20"></svg>
         </button>
@@ -157,12 +152,15 @@
       <br />
       <br />
       <ibm-accordion>
-        <ibm-accordion-item title="Phase 1 Overview" (selected)="selected($event)">
+        <ibm-accordion-item
+          title="Phase 1 Overview"
+          (selected)="selected($event)"
+        >
           <h5>Description</h5>
-          <p>{{modelDetails?.modelDescription}}</p>
+          <p>{{ modelDetails?.modelDescription }}</p>
           <br />
           <h5>Approach taken</h5>
-          <p>{{modelDetails?.approch}}</p>
+          <p>{{ modelDetails?.approch }}</p>
           <br />
           <ibm-table-container>
             <br />
@@ -192,10 +190,10 @@
               <tbody>
                 <tr>
                   <td>rank</td>
-                  <td>{{modelDetails?.innovatorId?.fullName}}</td>
+                  <td>{{ modelDetails?.innovatorId?.fullName }}</td>
                   <td>Phase 1</td>
-                  <td>{{modelDetails?.score}}</td>
-                  <td>{{getDate(modelDetails?.createdAt)}}</td>
+                  <td>{{ modelDetails?.score }}</td>
+                  <td>{{ getDate(modelDetails?.createdAt) }}</td>
                 </tr>
               </tbody>
             </table>
@@ -205,33 +203,58 @@
             Phase 2.
           </p>
         </ibm-accordion-item>
-        <ibm-accordion-item title="Next phase (2 to 3)" (selected)="selected($event)">
+        <ibm-accordion-item
+          title="Next phase (2 to 3)"
+          (selected)="selected($event)"
+        >
           <h5>Requirment</h5>
-          <p>{{challengeDetails?.Objective}}</p>
+          <p>{{ challengeDetails?.Objective }}</p>
           <br />
           <h5>Accuracy:80%</h5>
 
           <h5>Data</h5>
           Dataset size: 1000 records
           <h6>Data Visuals</h6>
-          <img style="margin-left: -10px; height: 125px; width: 300px"
-            src='http://localhost:3000/{{challengeDetails?.phases[0].dataVisualFile}}'>
+          <img
+            style="margin-left: -10px; height: 125px; width: 300px;"
+            src="http://localhost:3000/{{
+              (challengeDetails?.phases)[0].dataVisualFile
+            }}"
+          />
           <br />
           <h6>Sample Data Set</h6>
-          <p *ngFor='let data of challengeDetails?.phases[0]?.sampleDataFile; index as i'>Download Dataset {{i+1}}
+          <p
+            *ngFor="
+              let data of (challengeDetails?.phases)[0]?.sampleDataFile;
+              index as i
+            "
+          >
+            Download Dataset {{ i + 1 }}
             <svg icon ibmIconDownload16 (click)="downloadFile(data[i])"></svg>
           </p>
           <br />
           <h5>Model</h5>
-          <p>{{modelDetails?.modelDescription}}</p>
+          <p>{{ modelDetails?.modelDescription }}</p>
 
           <fieldset class="bx--fieldset">
             <div class="bx--form-item">
-              <div class="bx--radio-button-group bx--radio-button-group--vertical">
+              <div
+                class="bx--radio-button-group bx--radio-button-group--vertical"
+              >
                 <div class="bx--radio-button-wrapper">
-                  <input id="radio-button-b4twcexavc-1" class="bx--radio-button" type="radio" value="red"
-                    name="radio-button--vertical" tabindex="0" checked />
-                  <label for="radio-button-b4twcexavc-1" class="bx--radio-button__label">
+                  <input
+                    id="radio-button-b4twcexavc-1"
+                    class="bx--radio-button"
+                    type="radio"
+                    value="red"
+                    name="radio-button--vertical"
+                    tabindex="0"
+                    checked
+                  />
+                  <label
+                    for="radio-button-b4twcexavc-1"
+                    class="bx--radio-button__label"
+                  >
                     <span class="bx--radio-button__appearance"></span>
                     <span class="bx--radio-button__label-text">
                       Trained model
@@ -239,9 +262,18 @@
                   </label>
                 </div>
                 <div class="bx--radio-button-wrapper">
-                  <input id="radio-button-b4twcexavc-2" class="bx--radio-button" type="radio" value="green"
-                    name="radio-button--vertical" tabindex="0" />
-                  <label for="radio-button-b4twcexavc-2" class="bx--radio-button__label">
+                  <input
+                    id="radio-button-b4twcexavc-2"
+                    class="bx--radio-button"
+                    type="radio"
+                    value="green"
+                    name="radio-button--vertical"
+                    tabindex="0"
+                  />
+                  <label
+                    for="radio-button-b4twcexavc-2"
+                    class="bx--radio-button__label"
+                  >
                     <span class="bx--radio-button__appearance"></span>
                     <span class="bx--radio-button__label-text">
                       Upload Modified trained model
