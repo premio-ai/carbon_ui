@@ -257,7 +257,7 @@ export class ModelReportComponent implements OnInit {
 			"iterationValue": "825",
 			"lossValue": 2,
 			"surplus": 773041874.3261496
-		},
+		},    
 		{
 			"group": "Train Loss",
 			"iterationValue": "250",
