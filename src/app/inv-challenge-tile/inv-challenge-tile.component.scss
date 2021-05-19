@@ -50,5 +50,15 @@ tabs{
 .tags{
     margin: auto;
     display: flex;
-    margin-right: 0px;
+    margin-right: 14px;
 }
+
+svg.filled{
+    fill: green;
+}
+
+@media (min-width: 42rem){
+.bx--grid {
+    padding-left: 2rem;
+    padding-right: 0rem;
+}}

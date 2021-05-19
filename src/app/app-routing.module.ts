@@ -27,7 +27,7 @@ const routes: Routes = [
 	{ path: 'challenge', component: ChallangePageComponent },
 	{ path: 'challenge/:id', component: InsurerComponent },
 	//  { path: 'Insurer', component: InsurerComponent },
-	{ path: 'ModelReport', component: ModelReportComponent },
+	{ path: 'modelReport/:id', component: ModelReportComponent },
 	{ path: 'Previewpage', component: PreviewComponent },
 	{ path: 'invchallenges', component: InvChallengeComponent },
 	// { path: 'invaccepted', component: InvAcceptedComponent },

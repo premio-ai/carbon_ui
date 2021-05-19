@@ -1,127 +1,139 @@
-<!-- <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-	<ibm-label>Model Name
-		<p style="margin-left: 405px; font-size: 10px; margin-top: -20px; margin-bottom: -8px;">0/25</p>
-	</ibm-label>
-	
-	<textarea style="width: 90%" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.modelName" [theme]="theme"
-		[rows]="1" [cols]="cols" aria-label="textarea"></textarea>
+<ibm-label
+  [helperText]="helperText"
+  [invalid]="invalid"
+  [invalidText]="invalidText"
+>
+  Model Name
+  <p
+    style="
+      margin-left: 405px;
+      font-size: 10px;
+      margin-top: -20px;
+      margin-bottom: -8px;
+    "
+  >
+    0/25
+  </p>
+
+  <textarea
+    style="width: 100%; margin-top: 10px;"
+    ibmTextArea
+    [invalid]="invalid"
+    [(ngModel)]="stepTwo.modelName"
+    [theme]="theme"
+    [rows]="1"
+    [cols]="cols"
+    aria-label="textarea"
+  ></textarea>
 </ibm-label>
 <div *ngIf="modelNameError">
-	<p><span style="font-size: x-small; color: red">Model Name is required</span></p>
+  <p>
+    <span style="font-size: x-small; color: red;">Model Name is required</span>
+  </p>
 </div>
-<br/>
-<ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-	<ibm-label>Discription
-		<p style="margin-left: 405px; font-size: 10px; margin-top: -20px; margin-bottom: -8px;">0/1000</p>
+<br />
+<ibm-label
+  [helperText]="helperText"
+  [invalid]="invalid"
+  [invalidText]="invalidText"
+>
+  Discription
+  <p
+    style="
+      margin-left: 405px;
+      font-size: 10px;
+      margin-top: -20px;
+      margin-bottom: -8px;
+    "
+  >
+    0/1000
+  </p>
 
-	
-	<textarea style="width: 90%;margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.description" [theme]="theme"
-		[rows]="7" [cols]="cols" aria-label="textarea"></textarea>
+  <textarea
+    style="width: 100%; margin-top: 10px;"
+    ibmTextArea
+    [invalid]="invalid"
+    [(ngModel)]="stepTwo.description"
+    [theme]="theme"
+    [rows]="7"
+    [cols]="cols"
+    aria-label="textarea"
+  ></textarea>
 </ibm-label>
 <div *ngIf="descriptionError">
-	<p><span style="font-size: x-small; color: red">Data Description for this model is required</span></p>
+  <p>
+    <span style="font-size: x-small; color: red;">
+      Data Description for this model is required
+    </span>
+  </p>
 </div>
-<br/>
-<ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-	Approach Taken
-		<p style="margin-left: 405px; font-size: 10px; margin-top: -20px; margin-bottom: -8px;">0/1000</p>
-	
+<br />
+<ibm-label
+  [helperText]="helperText"
+  [invalid]="invalid"
+  [invalidText]="invalidText"
+>
+  Approach Taken
+  <p
+    style="
+      margin-left: 405px;
+      font-size: 10px;
+      margin-top: -20px;
+      margin-bottom: -8px;
+    "
+  >
+    0/1000
+  </p>
 
-	
-	<textarea style="width: 90%;margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.approach" [theme]="theme"
-		[rows]="7" [cols]="cols" aria-label="textarea"></textarea>
+  <textarea
+    style="width: 100%; margin-top: 10px;"
+    ibmTextArea
+    [invalid]="invalid"
+    [(ngModel)]="stepTwo.approach"
+    [theme]="theme"
+    [rows]="7"
+    [cols]="cols"
+    aria-label="textarea"
+  ></textarea>
 </ibm-label>
 <div *ngIf="approachError">
-	<p><span style="font-size: x-small; color: red">Approach taken for this model is required</span></p>
+  <p>
+    <span style="font-size: x-small; color: red;">
+      Approach taken for this model is required
+    </span>
+  </p>
 </div>
 <br />
 <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-	<ibm-label>Language</ibm-label>
-	<ibm-dropdown [label]="Min" [helperText]="helperText" [size]="size" [invalid]="invalid" [invalidText]="invalidText"
-		[theme]="theme" placeholder="Search Language" [disabled]="disabled" (selected)="selected($event)">
-		<!-- (onClose)="onClose($event)" -->
-		<!-- <ibm-dropdown-list [items]="language"></ibm-dropdown-list>
-	</ibm-dropdown>
+  <ibm-label>Language</ibm-label>
+  <ibm-dropdown
+    [label]="Min"
+    [helperText]="helperText"
+    [size]="size"
+    [invalid]="invalid"
+    [invalidText]="invalidText"
+    [theme]="theme"
+    placeholder="Search Language"
+    [disabled]="disabled"
+    (selected)="selected($event)"
+  >
+    <!-- (onClose)="onClose($event)" -->
+    <ibm-dropdown-list [items]="language"></ibm-dropdown-list>
+  </ibm-dropdown>
 </div>
 <div *ngIf="languageError">
-	<p><span style="font-size: x-small; color: red">Programming language for this model is required</span></p>
-</div>
-
-<div style="margin-left: auto; display: flex; justify-content: flex-end">
-	<button class="bx--btn bx--btn--secondary" type="button" (click)="previous()">Back</button>
-	&nbsp;
-	<button [ibmButton]="ibmButton" [size]="size" (click)="next()">Next</button>
-</div> -->
-
-
-
-<!-- <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-	<ibm-label>Model Name
-		<p style="margin-left: 405px; font-size: 10px; margin-top: -20px; margin-bottom: -8px;">0/25</p>
-	</ibm-label>
-	
-	<textarea style="width: 90%;margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.modelName" [theme]="theme"
-		[rows]="1" [cols]="cols" aria-label="textarea"></textarea>
-</ibm-label>
-<div *ngIf="modelNameError">
-	<p><span style="font-size: x-small; color: red">Model Name is required</span></p>
-</div>
-<br/> -->
-
-
-
-
-<ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-	<ibm-label>Model Name
-		<p style="margin-left: 405px; font-size: 10px; margin-top: -20px; margin-bottom: -8px;">0/25</p>
-
-	
-	<textarea style="width: 100%;margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.modelName" [theme]="theme"
-		[rows]="1" [cols]="cols" aria-label="textarea"></textarea>
-</ibm-label>
-<div *ngIf="modelNameError">
-	<p><span style="font-size: x-small; color: red">Model Name is required</span></p>
-</div>
-<br/>
-<ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-	<ibm-label>Discription
-		<p style="margin-left: 405px; font-size: 10px; margin-top: -20px; margin-bottom: -8px;">0/1000</p>
-
-	
-	<textarea style="width: 100%;margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.description" [theme]="theme"
-		[rows]="7" [cols]="cols" aria-label="textarea"></textarea>
-</ibm-label>
-<div *ngIf="descriptionError">
-	<p><span style="font-size: x-small; color: red">Data Description for this model is required</span></p>
-</div>
-<br/>
-<ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-	Approach Taken
-		<p style="margin-left: 405px; font-size: 10px; margin-top: -20px; margin-bottom: -8px;">0/1000</p>
-	
-
-	
-	<textarea style="width: 100%;margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.approach" [theme]="theme"
-		[rows]="7" [cols]="cols" aria-label="textarea"></textarea>
-</ibm-label>
-<div *ngIf="approachError">
-	<p><span style="font-size: x-small; color: red">Approach taken for this model is required</span></p>
+  <p>
+    <span style="font-size: x-small; color: red;">
+      Programming language for this model is required
+    </span>
+  </p>
 </div>
 <br />
-<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-	<ibm-label>Language</ibm-label>
-	<ibm-dropdown [label]="Min" [helperText]="helperText" [size]="size" [invalid]="invalid" [invalidText]="invalidText"
-		[theme]="theme" placeholder="Search Language" [disabled]="disabled" (selected)="selected($event)">
-		<!-- (onClose)="onClose($event)" -->
-		<ibm-dropdown-list [items]="language"></ibm-dropdown-list>
-	</ibm-dropdown>
-</div>
-<div *ngIf="languageError">
-	<p><span style="font-size: x-small; color: red">Programming language for this model is required</span></p>
-</div>
-
-<div style="margin-left: auto; display: flex; justify-content: flex-end">
-	<button class="bx--btn bx--btn--secondary" type="button" (click)="previous()">Back</button>
-	&nbsp;
-	<button [ibmButton]="ibmButton" [size]="size" (click)="next()">Next</button>
+<br />
+<div style="margin-left: auto; display: flex; justify-content: flex-end;">
+  <button class="bx--btn bx--btn--secondary" type="button" (click)="previous()">
+    Back
+  </button>
+  &nbsp;
+  <button [ibmButton]="ibmButton" [size]="size" (click)="next()">Next</button>
 </div>

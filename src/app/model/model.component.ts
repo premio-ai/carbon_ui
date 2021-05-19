@@ -1,5 +1,6 @@
 import { temporaryDeclaration } from '@angular/compiler/src/compiler_util/expression_converter';
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { RequestService } from '../request.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class ModelComponent {
   @Input() submissionChallengeDetails: any[];
   @Input() challengeDetails: any;
   constructor(
+    private router: Router,
     private requestService: RequestService
   ) { }
   bookmarkedSubmissions: any[] = []
@@ -111,6 +113,10 @@ export class ModelComponent {
     if (this.compareModelData.length > 1) {
       this.modelComparison = true
     }
+  }
+
+  viewModelReport(modelId) {
+    this.router.navigateByUrl('modelReport/' + modelId)
   }
 
   readMore() {
