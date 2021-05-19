@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
 	userDetails: any;
 	activeChallenges: any[];
 	pastChallenges: any[];
+	sorting: any[];
 
 	ngOnInit() {
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
@@ -24,6 +25,15 @@ export class DashboardComponent implements OnInit {
 		} else {
 			this.router.navigateByUrl('login')
 		}
+
+		this.sorting = [
+			{ content: 'Most Popular' },
+			{ content: 'Least Popular' },
+			{ content: 'Newest' },
+			{ content: 'Oldest' },
+			{ content: 'End Date' }
+		];
+
 	}
 
 	getActiveChallanges() {
@@ -42,6 +52,41 @@ export class DashboardComponent implements OnInit {
 
 	createChalange() {
 		this.router.navigateByUrl("/challenge");
+	}
+
+	sortSelect(sort) {
+		let criteria = sort.item.content;
+
+		if (criteria == 'Newest') {
+			this.activeChallenges.sort((a, b) => {
+				return b.createdAt - a.createdAt
+			})
+		}
+
+		if (criteria == 'Oldest') {
+			this.activeChallenges.sort((a, b) => {
+				return a.createdAt - b.createdAt
+			})
+		}
+
+		if (criteria == 'End Date') {
+			this.activeChallenges.sort((a, b) => {
+				return new Date(b.expiryDate).getTime() - new Date(a.expiryDate).getTime()
+			})
+		}
+
+		if (criteria == 'Most Popular') {
+			this.activeChallenges.sort((a, b) => {
+				return b.acceptedUsersCount - a.acceptedUsersCount
+			})
+		}
+
+		if (criteria == 'Least Popular') {
+			this.activeChallenges.sort((a, b) => {
+				return a.acceptedUsersCount - b.acceptedUsersCount
+			})
+		}
+
 	}
 
 }

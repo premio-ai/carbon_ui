@@ -61,13 +61,12 @@ export class ModelReportComponent implements OnInit {
   getModelReport(modelId) {
     let url = 'submissionAllChallenge/modelReport/' + modelId;
     this.requestService.get(url, null).subscribe( data => {
-      console.log(data, "---data---33")
       this.modelReport = data[0];
 
       this.accuracyScore = this.modelReport.score
 			this.precisionScore = this.modelReport.precisionScore
       this.recallScore = this.modelReport.recallScore      
-      this.overallScore = (this.accuracyScore + this.precisionScore + this.recallScore)/3
+      this.overallScore = Math.ceil((this.accuracyScore + this.precisionScore + this.recallScore)/3)
 
       this.overall()
 			this.accuracy();
