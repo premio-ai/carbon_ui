@@ -40,6 +40,21 @@
                 <p><span style="font-size: x-small; color: red">Objective is required</span></p>
             </div>
             <br />
+            <!-- <div ibmGrid [condensed]="gridCondensed" style="padding-left: 15px;">
+				<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+					<h6>Challenge Category</h6>
+					<div ibmCol class="custom-class-example" [columnNumbers]="{'md': 6, 'sm': 12}">
+						<ibm-dropdown [label]="Min" [helperText]="helperText" [size]="size" [invalid]="invalid" [invalidText]="invalidText"
+							[theme]="theme" placeholder="Select Category" [disabled]="disabled" (selected)="selected($event)" (onClose)="onClose($event)">
+							<ibm-dropdown-list [items]="category"></ibm-dropdown-list>
+						</ibm-dropdown>
+						<div *ngIf="challengeCategoryError">
+							<p><span style="font-size: x-small; color: red">Challenge Category is required</span></p>
+						</div>
+					</div>
+				</div>
+			</div> -->
+            <br/>
             <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">Challenge End Date
                 <input type='date' ibmTextArea style="width: 165px" [(ngModel)]="stepOne.endDate" />
                 </ibm-label>
