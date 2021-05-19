@@ -2,20 +2,35 @@
 <br />
 <br />
 <div class="bx--grid" class="margin">
-  <div class="bx--row line-padding">
-    <div class="bx--col-md-1" style="padding-left: 8%;">
-      <svg icon ibmIconArrowLeft16></svg>
-    </div>
-    <div class="bx--col-md-4">
-      <ibm-breadcrumb [noTrailingSlash]="noTrailingSlash">
-        <ibm-breadcrumb-item href="asa" class="navigation">
-          Activity Dashboard
-        </ibm-breadcrumb-item>
-        <ibm-breadcrumb-item href="asa" class="navigation">
-          Using Whether data to...
-        </ibm-breadcrumb-item>
-      </ibm-breadcrumb>
-    </div>
+	<div class="bx--row line-padding" >
+		<div class="bx--col-md-1" style="padding-left: 8%;">
+			<svg icon ibmIconArrowLeft16></svg>
+		</div>
+		<div class="bx--col-md-4">
+			<ibm-breadcrumb [noTrailingSlash]="noTrailingSlash">
+				<ibm-breadcrumb-item href="asa" class="navigation">
+					Activity Dashboard 
+				</ibm-breadcrumb-item>
+                <ibm-breadcrumb-item href="asa" class="navigation">
+					Using Whether data to...
+				</ibm-breadcrumb-item>
+               
+			</ibm-breadcrumb>
+		</div>
+      
+            <ibm-toast class="toaster" [notificationObj]="{
+                type: 'success',
+            title: 'New notification setting',
+                subtitle: 'Alert set for modelname.mdk',
+                
+                lowContrast: lowContrast,
+                showClose: showClose
+            }"></ibm-toast>
+       
+       
+	</div>
+    <div class="bx--row line-padding">
+		<div class="bx--col-md-1">
 
     <ibm-toast
       class="toaster"
@@ -59,34 +74,75 @@
         </div>
       </ibm-content-switcher>
 
-      <br />
-      <br />
-      <br />
-      <h3>Model details</h3>
-      <br />
-      <p>Model Submitted : 00/00/0000</p>
-      <p>Overall Score:89</p>
-      <p>Current Rank:1</p>
-      <br />
-      <br />
-      <br />
-      <h5>Discription</h5>
-      <br />
-      <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s,when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book.
-      </p>
-      <br />
-      <h5>Approach Taken</h5>
-      <br />
-      <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s,when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book.
-      </p>
+
+		</div>
+        <div class="bx--col-md-1">
+
+		</div>
+        <div class="bx--col-md-2">
+            <br /><br />
+            <ibm-tile >
+            <div ibmGrid [condensed]="gridCondensed">
+				<div
+					ibmRow
+					[gutter]="gutter"
+					[leftGutter]="leftGutter"
+					[rightGutter]="rightGutter"
+					[condensed]="rowCondensed">
+              		<div ibmCol class="custom-class-example" [columnNumbers]="{'md': 2, 'sm': 12}">
+                      
+                            <img class="portrait mr-3" src="https://www.angularjswiki.com/author/admin/avatar_hufa038520d36dafb78f39a62f91de8258_77813_250x250_fill_q90_lanczos_center.jpg" itemprop="image" alt="Avatar">
+                        
+                      </div>
+					<div ibmCol class="custom-class-example" style="margin-top: -12px;" [columnNumbers]="{'md': 1, 'sm': 12}">
+                        <h3 class="userName" >Brian Doe</h3>
+                        <p class="userhead" >Data Scientist,</p>
+                        <p class="userhead" >Innovator Gold</p>
+                    </div>
+					
+            	</div>
+                <div
+                ibmRow
+                [gutter]="gutter"
+                [leftGutter]="leftGutter"
+                ibmRow     
+                [gutter]="gutter"
+                [leftGutter]="leftGutter"
+                ibmRow
+                [gutter]="gutter"
+                [leftGutter]="leftGutter"
+					[rightGutter]="rightGutter"
+					[condensed]="rowCondensed">
+              		<div ibmCol class="custom-class-example" [columnNumbers]="{'md': 3, 'sm': 12}">
+                      <p class="userName">Marketspace Statistic</p>
+                      <p  class="userdetail">460 points</p>  
+                      <p  class="userdetail">Active challange:5</p>  
+                      <p  class="userdetail">Past challange:8</p>  
+                      <p  class="userdetail">Challenges Won:2</p>  
+                      
+                      <p class="userName">Bio</p>
+                      <p class="bio">Docs
+                        Lorem ipsum dolor sit amet,tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                      </p>
+                      <br />
+                      <a class="link" href="#" ibmLink  >View full profile</a>
+                      </div>					
+            	</div>
+             
+         	</div>
+        </ibm-tile>
+        <br/>
+        <div class="bio" style="display: flex;align-items: center;">
+           <span>
+              <svg class="svg" icon ibmIconSend20></svg>
+            </span>
+            
+              <p  style="font-weight: 800;">
+               Send Brian a message
+              </p>
+            
+          </div>
+       
     </div>
     <div class="bx--col-md-1"></div>
     <div class="bx--col-md-2">
