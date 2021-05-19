@@ -50,7 +50,6 @@ export class ImageUploader {
 					// 	mime = fileObj.file.type;
 					// }
 
-					console.log(fileObj, "---fileObj---53")
 					this.goNext.emit(fileObj)
 
 					resolve({

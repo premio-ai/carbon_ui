@@ -31,7 +31,6 @@ export class SubmissionStepThreeComponent implements OnInit {
   }
 
   next() {
-    console.log(this.stepThree)
     this.goNext.emit(this.stepThree);
   }
 

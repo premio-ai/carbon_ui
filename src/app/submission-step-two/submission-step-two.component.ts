@@ -48,8 +48,6 @@ export class SubmissionStepTwoComponent implements OnInit {
   }
 
   next(){
-    console.log(this.stepTwo)
-
     if (this.stepTwo.modelName.length>0 && this.stepTwo.description.length>0 && this.stepTwo.approach.length>0 && this.stepTwo.language.length>0) {
       this.goNext.emit(this.stepTwo);
     } else {

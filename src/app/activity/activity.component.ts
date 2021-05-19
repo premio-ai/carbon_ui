@@ -20,7 +20,6 @@ export class ActivityComponent implements OnInit {
   }
 
   ngOnChanges() {
-    console.log(this.challengeDetails, "---this.challengeDetails---23")
     if (this.challengeDetails && this.submissionChallengeDetails) {
       this.initialPhase()
 

@@ -24,7 +24,6 @@ export class SubmissionStepFourComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.isChallengeAccepted, "---this.isChellengeAccepted")
   }
 
   previous() {

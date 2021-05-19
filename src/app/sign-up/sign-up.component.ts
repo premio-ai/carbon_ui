@@ -51,7 +51,7 @@ export class SignUpComponent implements OnInit {
         this.router.navigateByUrl('login')
       })
     } else {
-      console.log("---else part---43")
+      //toaster display
     }
   }
 
