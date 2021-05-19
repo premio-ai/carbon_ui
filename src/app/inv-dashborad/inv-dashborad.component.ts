@@ -17,13 +17,24 @@ export class InvDashboradComponent implements OnInit {
 	userDetails: any;
 	activeChallenges: any[];
 	pastChallenges: any[];
-	submittedActiveChallenges: any[]
+	submittedActiveChallenges: any[] = [];
+	submittedPastChallenges: any[] = [];
+	sorting: any[]
 
 	ngOnInit() {
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
 		this.getAllActiveChallanges();
-		// this.getpastChallanges();
+		this.getAllPastChallanges();
 		// this.getSubmission();
+
+		this.sorting = [
+			{ content: 'Most Popular' },
+			{ content: 'Least Popular' },
+			{ content: 'Newest' },
+			{ content: 'Oldest' },
+			{ content: 'End Date' }
+		];
+
 	}
 
 	getAllActiveChallanges() {
@@ -34,7 +45,6 @@ export class InvDashboradComponent implements OnInit {
 		}
 
 		this.requestService.get(allActiveChallanegUrl, params).subscribe(data => {
-			//   this.totalPage = Math.ceil(data.count / 10);
 			this.activeChallenges = data.list;
 			//   this.getBookmarkedChallenges();
 			this.getSubmission();
@@ -45,8 +55,8 @@ export class InvDashboradComponent implements OnInit {
 		let url = "submissionAllChallenge";
 		this.requestService.get(url, null).subscribe(data => {
 			let tempData = []
-			this.activeChallenges.filter( dt => {
-				data.map( res => {
+			this.activeChallenges.filter(dt => {
+				data.map(res => {
 					if (dt._id == res.challengeId) {
 						tempData.push(dt)
 					}
@@ -56,13 +66,68 @@ export class InvDashboradComponent implements OnInit {
 		})
 	}
 
-	// getpastChallanges() {
-	// 	let pastChallanegUrl = "challenge?isActive=false";
-	// 	this.requestService.get(pastChallanegUrl, null).subscribe((data) => {
-	// 		console.log("active challange ... ", data)
-	// 		this.pastChallenges = data;
-	// 	});
-	// }
+	getAllPastChallanges() {
+		let url = "challenge/allPast";
+		let params = {
+			skip: 0,
+			offset: 0
+		}
 
+		this.requestService.get(url, params).subscribe(data => {
+			this.pastChallenges = data.list;
+			//   this.getBookmarkedChallenges();
+			this.getSubmissionPast();
+		})
+	}
+
+	getSubmissionPast() {
+		let url = "submissionAllChallenge";
+		this.requestService.get(url, null).subscribe(data => {
+			let tempData = []
+			this.pastChallenges.filter(dt => {
+				data.map(res => {
+					if (dt._id == res.challengeId && dt.isActive == false) {
+						tempData.push(dt)
+					}
+				})
+			})
+			this.submittedPastChallenges = tempData
+		})
+	}
+
+	sortSelect(sort) {
+		let criteria = sort.item.content;
+
+		if (criteria == 'Newest') {
+			this.activeChallenges.sort((a, b) => {
+				return b.createdAt - a.createdAt
+			})
+		}
+
+		if (criteria == 'Oldest') {
+			this.activeChallenges.sort((a, b) => {
+				return a.createdAt - b.createdAt
+			})
+		}
+
+		if (criteria == 'End Date') {
+			this.activeChallenges.sort((a, b) => {
+				return new Date(b.expiryDate).getTime() - new Date(a.expiryDate).getTime()
+			})
+		}
+
+		if (criteria == 'Most Popular') {
+			this.activeChallenges.sort((a, b) => {
+				return a.acceptedUsersCount - b.acceptedUsersCount
+			})
+		}
+
+		if (criteria == 'Least Popular') {
+			this.activeChallenges.sort((a, b) => {
+				return b.acceptedUsersCount - a.acceptedUsersCount
+			})
+		}
+
+	}
 
 }

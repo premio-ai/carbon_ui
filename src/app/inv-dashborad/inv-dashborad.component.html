@@ -6,9 +6,9 @@
 		<div style="display: flex;">
 			<h1 class="heading">Activity Dashboard</h1>
 			<ibm-dropdown class="dropdown" [label]="'sort by'" [helperText]="helperText" [size]="size"
-				[invalid]="invalid" [invalidText]="invalidText" [theme]="theme" placeholder="Most recent update"
-				[disabled]="disabled" (selected)="selected($event)" (onClose)="onClose($event)">
-				<ibm-dropdown-list [items]="items"></ibm-dropdown-list>
+				[invalid]="invalid" [invalidText]="invalidText" [theme]="theme" placeholder="select"
+				[disabled]="disabled" (selected)="sortSelect($event)" (onClose)="onClose($event)">
+				<ibm-dropdown-list [items]="sorting"></ibm-dropdown-list>
 			</ibm-dropdown>
 		</div>
 		<ibm-tabs [followFocus]="true" [isNavigation]="false" [cacheActive]="true">
@@ -21,12 +21,12 @@
 				</div>
 			</ibm-tab>
 			<ibm-tab heading="Past">
-				<!-- <div style="display: flex;flex-wrap: wrap;gap: 10px;">
+				<div style="display: flex;flex-wrap: wrap;gap: 10px;">
 					<div class="custom-class-example" style="width: 32%;"
-						*ngFor="let activeChallenge of submittedActiveChallenges">
-						<app-inv-challenge-tile [challenge]="activeChallenge"></app-inv-challenge-tile>
+						*ngFor="let pastChallenge of submittedPastChallenges">
+						<app-inv-challenge-tile [challenge]="pastChallenge"></app-inv-challenge-tile>
 					</div>
-				</div> -->
+				</div>
 			</ibm-tab>
 			<ibm-tab heading="Bookmarked">
 

@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       if (userDetails.role == 'Insurer') {        
         this.router.navigateByUrl('/')
       } else if (userDetails.role == 'Innovator') {
-        this.router.navigateByUrl('invchallenges')
+        this.router.navigateByUrl('invdash')
       }
     })
   }
