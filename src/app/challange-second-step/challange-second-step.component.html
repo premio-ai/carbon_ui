@@ -74,7 +74,7 @@
 				<div data-numberinput class="bx--number bx--number--light">
 					<label for="number-input0" class="bx--label">Minimum model size</label>
 					<div class="bx--number__input-wrapper">
-						<input id="number-input0" type="number" min="0" max="100" value="1"
+						<input id="number-input0" type="number" placeholder="0" min="0" max="100" value="1"
 							[(ngModel)]="stepTwo.passingScore">
 					</div>
 				</div>
@@ -103,7 +103,7 @@
 					<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
 						<h5>Sample Data</h5>
 						<p class="drag">Anonymous, available to download for any</p>
-						<app-drop-file-uploader (goNext)="setSampleData($event)" (uploadFile)="uploadSampleData()"
+						<app-drop-file-uploader (goNext)="setSampleData($event)" (uploadFile)="uploadSampleData($event)"
 							(filesChange)="onDropped($event.target.files)"></app-drop-file-uploader>
 					</div>
 				</div>

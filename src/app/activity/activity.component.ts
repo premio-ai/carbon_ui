@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as moment from 'moment';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-activity',
@@ -62,5 +63,14 @@ export class ActivityComponent implements OnInit {
 
     this.selectedPhase = tempData
   }
+
+  exportexcel() {
+    let element = document.getElementById('excel-table'); 
+    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    XLSX.writeFile(wb, 'ExcelSheet.xlsx');
+	}
 
 }
