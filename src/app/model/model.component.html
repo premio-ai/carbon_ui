@@ -19,7 +19,7 @@
 <div ibmGrid [condensed]="gridCondensed" class="gridchange">
   <div ibmRow [gutter]="gutter" class="left-border" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
     [condensed]="rowCondensed" *ngIf="compareModelData && compareModelData?.length>1">
-    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
+    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }" style="margin-left: 15px;">
       <h6>Model Comparison</h6>
       <p>{{compareModelData?.length}} models selected</p>
       <br />
