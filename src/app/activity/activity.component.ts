@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import * as moment from 'moment';
 import * as XLSX from 'xlsx';
 
@@ -11,7 +12,9 @@ export class ActivityComponent implements OnInit {
 
   @Input() submissionChallengeDetails: any;
   @Input() challengeDetails: any;
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
   selectedPhase: any[] = []
   phaseNo: any
   phaseOneSubmission: any
@@ -62,6 +65,10 @@ export class ActivityComponent implements OnInit {
     })
 
     this.selectedPhase = tempData
+  }
+
+  viewModel(id) {
+    this.router.navigateByUrl('invmodel-view/' + id)
   }
 
   exportexcel() {
