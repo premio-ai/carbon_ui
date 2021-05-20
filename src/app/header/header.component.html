@@ -17,7 +17,8 @@
 	</ibm-header-global>
 </ibm-header> -->
 
-<ibm-header [route]="['/']" brand="" name="Market space">
+<ibm-header [route]="['/']" brand="" >
+  <img src="assets/logoangular.png" style="margin-left: -57px;"  />
   <ibm-hamburger *ngIf="hasHamburger" [active]="active" (selected)="active = !active"></ibm-hamburger>
   <ibm-header-navigation>
     <ibm-header-item (click)="navigate()">Activity</ibm-header-item>
