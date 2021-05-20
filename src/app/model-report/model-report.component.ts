@@ -89,7 +89,7 @@ export class ModelReportComponent implements OnInit {
   overall() {
 		this.overallScoreData = [
 			{
-				group: 'Accuracy',
+				group: 'Overall',
 				value: this.overallScore
 			},
 			{
@@ -102,7 +102,7 @@ export class ModelReportComponent implements OnInit {
 
 	overallOptionFxn() {
 		this.overallOptions = {
-			title: 'Accuracy Score',
+			title: 'Overall Score',
 			animations: true,
 			donut: {
 				center: {
@@ -111,11 +111,11 @@ export class ModelReportComponent implements OnInit {
 			},
 			height: "350px",
 			getFillColor: (group: string) => {
-				if (group == 'Accuracy') {
+				if (group == 'Overall') {
 					return 'blue'
 				}
 				if (group == '') {
-					return 'grey'
+					return 'white'
 				}
 			}
 		};
@@ -150,7 +150,7 @@ export class ModelReportComponent implements OnInit {
 					return 'blue'
 				}
 				if (group == '') {
-					return 'grey'
+					return 'white'
 				}
 			}
 		};
@@ -185,7 +185,7 @@ export class ModelReportComponent implements OnInit {
 					return 'blue'
 				}
 				if (group == '') {
-					return 'grey'
+					return 'white'
 				}
 			}
 		};
@@ -220,7 +220,7 @@ export class ModelReportComponent implements OnInit {
 					return 'blue'
 				}
 				if (group == '') {
-					return 'grey'
+					return 'white'
 				}
 			}
 		};

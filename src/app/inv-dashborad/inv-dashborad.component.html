@@ -29,10 +29,12 @@
 				</div>
 			</ibm-tab>
 			<ibm-tab heading="Bookmarked">
-
-
-
-
+				<div style="display: flex;flex-wrap: wrap;gap: 10px;">
+					<div class="custom-class-example" style="width: 32%;"
+						*ngFor="let bookmarkedChallenge of bookmarkedChallenges">
+						<app-inv-challenge-tile [challenge]="bookmarkedChallenge"></app-inv-challenge-tile>
+					</div>
+				</div>
 			</ibm-tab>
 		</ibm-tabs>
 	</div>

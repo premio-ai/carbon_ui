@@ -67,7 +67,12 @@
     <svg icon ibmIconEdit20></svg>
     <p class="userName">{{ userDetails.fullName }}</p>
     <br />
-    <p class="userdetail">Active challenge: {{challengeCounts.activeChallengeCount}}</p>
+    <div *ngIf="userDetails.role == 'Insurer'" >
+      <p class="userdetail">Active challenge: {{challengeCounts.activeChallengeCount}}</p>
+    </div>
+    <div *ngIf="userDetails.role == 'Innovator'" >
+      <p class="userdetail">Active challenge: {{submittedActiveChallenges.length}}</p>
+    </div>
     <p class="userdetail">Past challenge: {{challengeCounts.pastChallengeCount}}</p>
     <p class="userdetail">Model Watching: 2</p>
     <p class="userdetail">View profile</p>

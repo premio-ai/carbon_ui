@@ -17,6 +17,7 @@ export class InvDashboradComponent implements OnInit {
 	userDetails: any;
 	activeChallenges: any[];
 	pastChallenges: any[];
+	bookmarkedChallenges: any[];
 	submittedActiveChallenges: any[] = [];
 	submittedPastChallenges: any[] = [];
 	sorting: any[]
@@ -34,7 +35,21 @@ export class InvDashboradComponent implements OnInit {
 			{ content: 'Oldest' },
 			{ content: 'End Date' }
 		];
+	}
 
+	getBookmarkedChallenges() {
+		let url = "bookmarkChallenge";
+		this.requestService.get(url, null).subscribe(data => {
+			let tempData = []
+			this.activeChallenges.filter(dt => {
+				data.map(res => {
+					if (dt._id == res.challengeId) {
+						tempData.push(dt)
+					}
+				})
+			})
+			this.bookmarkedChallenges = tempData;
+		})
 	}
 
 	getAllActiveChallanges() {
@@ -46,7 +61,7 @@ export class InvDashboradComponent implements OnInit {
 
 		this.requestService.get(allActiveChallanegUrl, params).subscribe(data => {
 			this.activeChallenges = data.list;
-			//   this.getBookmarkedChallenges();
+			this.getBookmarkedChallenges();
 			this.getSubmission();
 		})
 	}

@@ -11,7 +11,7 @@
 </div>
 
 <div ibmGrid [condensed]="gridCondensed" class="gridchange">
-	<!-- <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+	<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
 		  <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 7, sm: 12 }">
 			  <ibm-tile>
 				  <p style="font-size: 20px;">Phase 0</p>
@@ -20,7 +20,7 @@
 						  [condensed]="rowCondensed" style="margin-left: 0px;">
 						  <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }"> <svg icon
 								  ibmIconUserMultiple16></svg>&nbsp;Users accepted <br /><br />
-							  <p class="numbers">430</p>
+							  <p class="numbers">{{challengeDetails?.acceptedUsersCount}}</p>
 						  </div>
 						  <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }"><svg icon
 								  ibmIconDownload16></svg>&nbsp;Data Set Download <br /><br />
@@ -32,7 +32,7 @@
 			  </ibm-tile>
 			  <br /><br />
 		  </div>
-	  </div> -->
+	  </div>
 	<div style="display: flex; flex-wrap: wrap; gap: 10px;">
 		<div class="custom-class-example" style="width: 32%;"
 			*ngFor="let phase of challengeDetails?.phases; index as i">

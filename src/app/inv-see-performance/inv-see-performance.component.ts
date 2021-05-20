@@ -132,7 +132,7 @@ export class InvSeePerformanceComponent implements OnInit {
 					return 'blue'
 				}
 				if (group == '') {
-					return 'grey'
+					return 'white'
 				}
 			}
 		};
@@ -167,7 +167,7 @@ export class InvSeePerformanceComponent implements OnInit {
 					return 'blue'
 				}
 				if (group == '') {
-					return 'grey'
+					return 'white'
 				}
 			}
 		};
@@ -202,7 +202,7 @@ export class InvSeePerformanceComponent implements OnInit {
 					return 'blue'
 				}
 				if (group == '') {
-					return 'grey'
+					return 'white'
 				}
 			}
 		};
