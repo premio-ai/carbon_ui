@@ -1,5 +1,4 @@
-import { temporaryDeclaration } from '@angular/compiler/src/compiler_util/expression_converter';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { RequestService } from '../request.service';
 
@@ -8,7 +7,6 @@ import { RequestService } from '../request.service';
   templateUrl: './model.component.html',
   styleUrls: ['./model.component.scss']
 })
-// export class ModelComponent implements OnInit {
 
 export class ModelComponent {
 
@@ -24,10 +22,6 @@ export class ModelComponent {
   compareModelData: any[] = []
   modelComparison: boolean
   readmore: boolean
-
-  // ngOnInit() {
-  //   this.getBookmarkedSubmission()
-  // }
 
   ngOnChanges() {
     if (this.challengeDetails && this.submissionChallengeDetails) {
@@ -71,6 +65,19 @@ export class ModelComponent {
       })
       this.bookmarkedSubmissions = tempData
     })
+  }
+
+  isBookmarked(modelId) {
+    if (this.bookmarkedSubmissions.length > 0) {      
+      let result = this.bookmarkedSubmissions.some( dt => {
+        if (dt._id == modelId) {
+          return true;
+        } else {
+          return false;
+        }
+      })
+      return result;
+    }
   }
 
   bookmark(model) {

@@ -44,8 +44,10 @@
                   <div>
                     <h3>{{ i + 1 }}. {{ data?.modelName }}</h3>
                   </div>
-                  <div style="margin-left: auto;">
-                    <svg icon ibmIconBookmark20 (click)="bookmark(data)"></svg>
+                  <div style="margin-left: auto;" *ngIf="isBookmarked(data?._id) == false">
+                    <svg icon ibmIconBookmark20></svg>
+                  </div>
+                  <div style="margin-left: auto;" *ngIf="isBookmarked(data?._id) == true">
                     <svg icon ibmIconBookmarkFilled20></svg>
                   </div>
                 </div>
