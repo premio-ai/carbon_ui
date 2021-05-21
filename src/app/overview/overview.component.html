@@ -12,8 +12,8 @@
 		[columnNumbers]="{ md: 6, sm: 12 }"
 	  >
 		<br />
-		<h3>Challenge info</h3>
-		<p>{{ challengeDetails?.description }}</p>
+		<h3 style="margin-left: 10px;">Challenge Info</h3>
+		<p style="margin-left: 10px;font-size: 13px;">{{ challengeDetails?.description }}</p>
 		<br />
 	  </div>
 	  <br />
@@ -43,7 +43,7 @@
 			  <br /><br />
 		  </div>
 	  </div> -->
-	<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+	<div style="display: flex; flex-wrap: wrap; gap: 15px;">
 	  <div
 		class="custom-class-example"
 		style="width: 32%;"
@@ -88,8 +88,12 @@
 			<p *ngIf="submissionChallengeDetails.length == 0">No records found</p>
 			<ol ibmList class="list">
 			  <li ibmListItem *ngFor="let data of submissionChallengeDetails">
-				{{ data?.innovatorId?.fullName }}
+				<div style="display: flex;">
+				<a href="#" ibmLink  >	{{ data?.innovatorId?.fullName }}</a>
+				<p style="font-size: 14px;margin-top: -2px;margin: auto;">96</p>
+				</div>
 			  </li>
+			 
 			</ol>
   
 			<div ibmGrid [condensed]="gridCondensed" class="button-left">
@@ -141,8 +145,39 @@
 		  >
 			<ibm-table-container>
 			  <br />
+			  <h4 ibmTableHeaderTitle>Leaderboard</h4>
 			  <ibm-table-header>
-				<h4 ibmTableHeaderTitle>Leaderboard</h4>
+				<p >Challenge Leaderboard</p>
+				<fieldset class="bx--fieldset">
+					<legend class="bx--label">Phases</legend>
+					<div class="bx--form-item">
+					  <div class="bx--radio-button-group ">
+						  <div class="bx--radio-button-wrapper">
+							<input id="radio-button-102gt4bgc47-1" class="bx--radio-button" type="radio" value="red" name="radio-button" tabindex="0" checked>
+							<label for="radio-button-102gt4bgc47-1" class="bx--radio-button__label">
+							  <span class="bx--radio-button__appearance"></span>
+							  <span class="bx--radio-button__label-text">Phase 1</span>
+							</label>
+						  </div>
+						  <div class="bx--radio-button-wrapper">
+							<input id="radio-button-102gt4bgc47-2" class="bx--radio-button" type="radio" value="green" name="radio-button" tabindex="0">
+							<label for="radio-button-102gt4bgc47-2" class="bx--radio-button__label">
+							  <span class="bx--radio-button__appearance"></span>
+							  <span class="bx--radio-button__label-text">Phase 2</span>
+							</label>
+						  </div>
+						  <div class="bx--radio-button-wrapper">
+							<input id="radio-button-102gt4bgc47-2" class="bx--radio-button" type="radio" value="green" name="radio-button" tabindex="0">
+							<label for="radio-button-102gt4bgc47-2" class="bx--radio-button__label">
+							  <span class="bx--radio-button__appearance"></span>
+							  <span class="bx--radio-button__label-text">Phase 3</span>
+							</label>
+						  </div>
+					  </div> 
+					</div>
+				  </fieldset>
+			
+		
 			  </ibm-table-header>
 			  <table class="bx--data-table">
 				<thead>
