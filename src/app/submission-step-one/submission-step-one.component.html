@@ -24,7 +24,8 @@
 <p>Please upload your model in (.format) formats. (fileSize) MB max file size.
 </p>
 
-<app-drop-file-uploader (goNext)="setModel($event)" (filesChange)="onDropped($event.target.files)"></app-drop-file-uploader>
+<app-drop-image-uploader (goNext)="setModel($event)" (uploadFile)="uploadDataVisual()"
+	(filesChange)="onImageSelect($event.target.files)"></app-drop-image-uploader>
 
 <div style="margin-left: auto; display: flex; justify-content: flex-end">
 	<button class="bx--btn bx--btn--secondary" type="button">Cancel</button>

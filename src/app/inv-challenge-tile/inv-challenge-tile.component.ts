@@ -32,7 +32,7 @@ export class InvChallengeTileComponent implements OnInit {
 	  }
 
   viewChalange(id) {
-    let url = 'challenge/' + id
+    let url = 'invaccepted/' + id
     this.router.navigateByUrl(url);
   }
 

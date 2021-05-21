@@ -222,11 +222,21 @@ export class InvAcceptedComponent implements OnInit {
 		this.current = 1
 	}
 
+	getPhaseId() {
+		if (this.challengeSubmissionData.length>0) {			
+			let ind = this.challengeSubmissionData.length
+			let phaseId = this.challengeDetails.phases[ind].phaseId
+			return phaseId;
+		} else {
+			return this.challengeDetails.phases[0].phaseId
+		}
+	}
+
 	nextStepOne(stepOne) {
 		this.submissionData.challengeId = this.challengeId
-		this.submissionData.phaseId = this.challengeDetails.phases[0].phaseId
+		this.submissionData.phaseId = this.getPhaseId()
 		this.submissionData.modelType = 'MODIFIED_TRAINED_MODEL'
-		this.submissionData.modelUploadedPath = stepOne.modelUploadedPath
+		this.submissionData.modelUploadedPath = stepOne.modelUploadedPath,
 
 		this.current++;
 	}
@@ -236,6 +246,7 @@ export class InvAcceptedComponent implements OnInit {
 	}
 
 	nextStepTwo(stepTwoData) {
+		this.submissionData.modelName = stepTwoData.modelName
 		this.submissionData.modelDescription = stepTwoData.description;
 		this.submissionData.approch = stepTwoData.approach
 		this.submissionData.language = stepTwoData.language				// language attribute not present
