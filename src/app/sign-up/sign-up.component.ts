@@ -23,8 +23,11 @@ export class SignUpComponent implements OnInit {
     bio: String,
     experience: String
   }
+  toasterMsg: boolean
 
   ngOnInit() {
+    this.toasterMsg = false;
+
     this.registerAs = [
       { content: 'Insurer' },
       { content: 'Innovator' }
@@ -51,9 +54,20 @@ export class SignUpComponent implements OnInit {
         this.router.navigateByUrl('login')
       })
     } else {
-      //toaster display
+      this.showToaster();
     }
   }
+
+  showToaster = (() => {
+		this.toasterMsg = true
+		setTimeout(() => {
+			this.toasterMsg = false
+		}, 3000)
+	})
+
+	closeToaster() {
+		this.toasterMsg = false
+	}
 
   login() {
     this.router.navigateByUrl('login')

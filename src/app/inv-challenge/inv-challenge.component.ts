@@ -104,6 +104,19 @@ export class InvChallengeComponent implements OnInit {
     })
   }
 
+  isBookmarked(challengeId) {
+    if (this.bookmarkedChallenges.length > 0) {      
+      let result = this.bookmarkedChallenges.some( dt => {
+        if (dt._id == challengeId) {
+          return true;
+        } else {
+          return false;
+        }
+      })
+      return result;
+    }
+  }
+
   prevPage() {
     if (this.pageNo > 1) {
       this.pageNo--;

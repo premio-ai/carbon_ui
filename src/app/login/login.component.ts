@@ -15,15 +15,12 @@ export class LoginComponent implements OnInit {
   ) { }
   username: String;
   password: String;
-  programmingLanguage: string;
+  toasterMsg: boolean;
+
   ngOnInit() {
-    this.username= '';
-    this.password= '';
-    this.language = [
-      { content: 'Innsurer' },
-      { content: 'Innovator' },
-      
-    ];
+    this.toasterMsg = false;
+    this.username = '';
+    this.password = '';
   }
 
   login() {
@@ -43,6 +40,17 @@ export class LoginComponent implements OnInit {
       }
     })
   }
+
+  showToaster = (() => {
+		this.toasterMsg = true
+		setTimeout(() => {
+			this.toasterMsg = false
+		}, 3000)
+	})
+
+	closeToaster() {
+		this.toasterMsg = false
+	}
 
   signUp() {
     this.router.navigateByUrl('signup')

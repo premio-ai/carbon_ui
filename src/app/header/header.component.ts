@@ -19,6 +19,9 @@ export class HeaderComponent implements OnInit {
 	notifications: any;
 	challengeCounts: any;
 
+	activeChallenges: any[];
+	submittedActiveChallenges: any[] = [];
+
 	ngOnInit() {
 		this.challengeCounts = 0;
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
@@ -26,6 +29,35 @@ export class HeaderComponent implements OnInit {
 			this.getNotifications()				// TODO: uncomment before push
 		}, 60000)
 		this.getChallengeCounts();
+		this.getInnovatorChallangeCount();
+	}
+
+	getInnovatorChallangeCount() {
+		let allActiveChallanegUrl = "challenge/all";
+		let params = {
+			skip: 0,
+			offset: 0
+		}
+
+		this.requestService.get(allActiveChallanegUrl, params).subscribe(data => {
+			this.activeChallenges = data.list;
+			this.getSubmission();
+		})
+	}
+
+	getSubmission() {
+		let url = "submissionAllChallenge";
+		this.requestService.get(url, null).subscribe(data => {
+			let tempData = []
+			this.activeChallenges.filter(dt => {
+				data.map(res => {
+					if (dt._id == res.challengeId) {
+						tempData.push(dt)
+					}
+				})
+			})
+			this.submittedActiveChallenges = tempData
+		})
 	}
 
 	getChallengeCounts() {

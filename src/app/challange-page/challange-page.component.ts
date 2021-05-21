@@ -1,6 +1,7 @@
 import { Component, OnInit, } from "@angular/core";
 import { RequestService } from "../request.service";
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
 	selector: "app-challange-page",
@@ -10,7 +11,8 @@ import { Router } from '@angular/router';
 export class ChallangePageComponent implements OnInit {
 
 	constructor(private requestService: RequestService,
-		private router: Router) { }
+		private router: Router,
+		private location: Location) { }
 
 	current: number;
 	steps: any[];
@@ -131,6 +133,10 @@ export class ChallangePageComponent implements OnInit {
 			this.router.navigateByUrl('/')
 		})
 		this.current++;
+	}
+
+	navigateBack() {
+		this.location.back()
 	}
 
 }

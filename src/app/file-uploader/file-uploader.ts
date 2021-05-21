@@ -5,8 +5,14 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 	template: `<ibm-file-uploader [title]="title" [description]="description" [buttonText]="buttonText"
     		[buttonType]="buttonType" [accept]="accept" [multiple]="multiple" [skeleton]="skeleton"
     		[(files)]="files" [size]="size" drop="true" [dropText]="dropText" (filesChange)="onDropped($event)">
-		</ibm-file-uploader>
-		<div [id]="notificationId" style="width: 300px; margin-top: 20px"></div>`
+			</ibm-file-uploader>
+			<div [id]="notificationId" style="width: 300px; margin-top: 20px"></div>
+
+			<button ibmButton *ngIf="files && files.size > 0 && files.size <= 3" (click)="onUpload()">Upload</button>
+			<p *ngIf="files && files.size > 3">
+				<span style="font-size: x-small; color: red">Maximum 3 files can be uploaded.</span>
+			</p>
+		`
 
 })
 
@@ -18,7 +24,7 @@ export class DragAndDropStory {
 	@Input() description;
 	// @Input() accept = [".jpg", ".png", ".pdf", ".txt"];
 	@Input() accept = [".pdf", ".txt"];
-	@Input() multiple;
+	@Input() multiple = true;
 	@Input() dropText = "Drag and drop files here of upload";
 	@Input() disabled = false;
 
@@ -30,7 +36,11 @@ export class DragAndDropStory {
     constructor() {}
 
 	onDropped(event) {
+		console.log(event, "---event---39")
+
 		const transferredFiles = Array.from(event);
+
+		// transferredFiles.map(file => readFileAndCheckType(file));
 
 		// Creates a promise which resolves to a file and whether or not the file should be accepted.
 		const readFileAndCheckType = fileObj => {
@@ -67,7 +77,8 @@ export class DragAndDropStory {
 			});
 		};
 
-		transferredFiles.map(file => readFileAndCheckType(file));
+		console.log(transferredFiles, "---transferredFiles---43")
+		readFileAndCheckType(transferredFiles[transferredFiles.length - 1])
 
 		// transferredFiles.map(file => makeFile(file));
 

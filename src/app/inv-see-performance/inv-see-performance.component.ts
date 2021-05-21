@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RequestService } from '../request.service';
+import { Location } from '@angular/common';
 import "@carbon/charts/styles.css";
 
 @Component({
@@ -14,7 +15,8 @@ export class InvSeePerformanceComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private requestService: RequestService,
-		private activatedRoute: ActivatedRoute
+		private activatedRoute: ActivatedRoute,
+		private location: Location
 	) { }
 	modelDetails: any;
 	challengeId: any;
@@ -76,6 +78,10 @@ export class InvSeePerformanceComponent implements OnInit {
 		})
 	}
 
+	navigateBack() {
+		this.location.back();
+	}
+
 	async downloadFile() {
 		if (this.challengeDetails) {
 			let docName = this.challengeDetails.phases[0].sampleDataFile[0] || ''
@@ -132,7 +138,7 @@ export class InvSeePerformanceComponent implements OnInit {
 					return 'blue'
 				}
 				if (group == '') {
-					return 'grey'
+					return 'white'
 				}
 			}
 		};
@@ -167,7 +173,7 @@ export class InvSeePerformanceComponent implements OnInit {
 					return 'blue'
 				}
 				if (group == '') {
-					return 'grey'
+					return 'white'
 				}
 			}
 		};
@@ -202,7 +208,7 @@ export class InvSeePerformanceComponent implements OnInit {
 					return 'blue'
 				}
 				if (group == '') {
-					return 'grey'
+					return 'white'
 				}
 			}
 		};

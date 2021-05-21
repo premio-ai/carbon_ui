@@ -1,6 +1,7 @@
 import { Component, OnInit, } from "@angular/core";
 import { RequestService } from "../request.service";
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
 import * as moment from 'moment';
 
 @Component({
@@ -13,21 +14,20 @@ export class InvAcceptedComponent implements OnInit {
 
 	constructor(private requestService: RequestService,
 		private router: Router,
-		private activatedRoute: ActivatedRoute) { }
+		private activatedRoute: ActivatedRoute,
+		private location: Location) { }
 
 	pageNo: number;
 	toasterMsg: boolean;
 	challengeId: any;
 	leaderboard: any[];
-	isChallengeAccepted: boolean=false;
+	isChallengeAccepted: boolean;
 	acceptedChallenge: any;
 	challengeDetails: any;
 	current: number;
 	steps: any[];
-	insurerId = "6076c19aad0c92991a8ba0bf";
-	awardedTo = "60767631222df1253206ff74";
-	// innovatorId = "607e856d2d00fd7ed549689e";
-	// innovatorId = "607d651862c616905655e309";
+	insurerId: string;
+	awardedTo: string;
 	submissionData: {
 		challengeId: {},
 		phaseId: any,
@@ -54,8 +54,8 @@ export class InvAcceptedComponent implements OnInit {
 	ngOnInit() {
 		this.pageOffset = 0;
 		this.totalPage = 0;
-		this.pageNo = 0
-		// this.isChallengeAccepted = false
+		this.pageNo = 0;
+		this.isChallengeAccepted = false;
 		this.activatedRoute.params.subscribe((params: Params) => {
 			if (params) {
 				this.challengeId = params.id
@@ -64,8 +64,7 @@ export class InvAcceptedComponent implements OnInit {
 
 		this.getChallengeDetails(this.challengeId);
 		this.getSubmissionByChallengeId(this.challengeId);
-		this.getChallengeAcception(this.challengeId);
-		// this.getChallengeAcception("607e856d2d00fd7ed549689d", this.innovatorId);
+		this.getChallengeAcceptance(this.challengeId);
 		this.getLeaderboard(this.challengeId, this.pageOffset);
 
 		this.steps = [
@@ -110,7 +109,7 @@ export class InvAcceptedComponent implements OnInit {
 		})
 	}
 
-	getChallengeAcception(challengeId) {
+	getChallengeAcceptance(challengeId) {
 		let url = 'userChallenge/accepted/' + challengeId;
 		this.requestService.get(url, null).subscribe(data => {
 			this.acceptedChallenge = data;
@@ -153,7 +152,7 @@ export class InvAcceptedComponent implements OnInit {
 		}
 		let url = 'userChallenge';
 		this.requestService.post(url, data).subscribe(data => {
-			this.getChallengeAcception(challengeId)
+			this.getChallengeAcceptance(challengeId)
 			this.showToaster()
 		})
 	}
@@ -167,6 +166,10 @@ export class InvAcceptedComponent implements OnInit {
 
 	closeToaster() {
 		this.toasterMsg = false
+	}
+
+	navigateBack() {
+		this.location.back()
 	}
 
 	prevPage() {

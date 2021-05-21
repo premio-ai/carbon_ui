@@ -15,7 +15,8 @@ export class ChallangeSecondStepComponent implements OnInit {
   ) { }
   phases: any[] = []
   phasesError: boolean
-
+  fileData: any;
+  fileArray: any[] = []
   stepTwo: {
     description: string,
     guidence: string,
@@ -58,7 +59,7 @@ export class ChallangeSecondStepComponent implements OnInit {
   setDataVisual(acceptedFiles) {
     const file = acceptedFiles.file;
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append('files', file);
 
     this.uploadDataVisual(formData)
   }
@@ -71,20 +72,21 @@ export class ChallangeSecondStepComponent implements OnInit {
 
   setSampleData(acceptedFiles) {
     const file = acceptedFiles.file;
-    const formData = new FormData();
-    formData.append('file', file);
 
-    this.uploadSampleData(formData)
+    this.fileArray.push(file)
+    // this.uploadSampleData(formData)
   }
 
-  uploadSampleData(formData) {
+  uploadSampleData() {
+    this.fileData = new FormData();
+    this.fileArray.map( (dt, i) => {
+      this.fileData.append(`files`, dt);
+    })
+    const formData = this.fileData;
     this.requestService.post('upload', formData).subscribe(data => {
-      let tempArr = []
       data.map(dt => {
-        tempArr.push(dt.filename)
+        this.stepTwo.sampleDataFile.push(dt.filename)
       })
-
-      this.stepTwo.sampleDataFile = tempArr
     })
   }
 
