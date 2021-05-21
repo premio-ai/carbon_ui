@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../request.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-insurer',
@@ -11,7 +12,8 @@ export class InsurerComponent implements OnInit {
 
   constructor(private requestService: RequestService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private location: Location
   ) { }
   challengeDetails: any[];
   submissionChallengeDetails: any[];
@@ -40,6 +42,10 @@ export class InsurerComponent implements OnInit {
     this.requestService.get(url, null).subscribe(data => {
       this.submissionChallengeDetails = data;
     })
+  }
+
+  navigateBack() {
+    this.location.back()
   }
 
 }

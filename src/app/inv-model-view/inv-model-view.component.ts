@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RequestService } from '../request.service';
+import { Location } from '@angular/common';
 import * as moment from 'moment';
 
 @Component({
@@ -14,7 +15,8 @@ export class InvModelViewComponent implements OnInit {
   constructor(
     private router: Router,
     private requestService: RequestService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private location: Location
   ) { }
   modelId: any;
   modelDetails: any;
@@ -55,6 +57,10 @@ export class InvModelViewComponent implements OnInit {
     this.requestService.get(url, null).subscribe(data => {
       this.challengeDetails = data;
     })
+  }
+
+  navigateBack() {
+    this.location.back()
   }
 
   async downloadFile() {

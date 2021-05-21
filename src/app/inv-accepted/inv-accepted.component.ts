@@ -1,6 +1,7 @@
 import { Component, OnInit, } from "@angular/core";
 import { RequestService } from "../request.service";
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
 import * as moment from 'moment';
 
 @Component({
@@ -13,7 +14,8 @@ export class InvAcceptedComponent implements OnInit {
 
 	constructor(private requestService: RequestService,
 		private router: Router,
-		private activatedRoute: ActivatedRoute) { }
+		private activatedRoute: ActivatedRoute,
+		private location: Location) { }
 
 	pageNo: number;
 	toasterMsg: boolean;
@@ -164,6 +166,10 @@ export class InvAcceptedComponent implements OnInit {
 
 	closeToaster() {
 		this.toasterMsg = false
+	}
+
+	navigateBack() {
+		this.location.back()
 	}
 
 	prevPage() {

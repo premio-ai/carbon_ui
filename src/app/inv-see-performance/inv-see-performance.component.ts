@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RequestService } from '../request.service';
+import { Location } from '@angular/common';
 import "@carbon/charts/styles.css";
 
 @Component({
@@ -14,7 +15,8 @@ export class InvSeePerformanceComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private requestService: RequestService,
-		private activatedRoute: ActivatedRoute
+		private activatedRoute: ActivatedRoute,
+		private location: Location
 	) { }
 	modelDetails: any;
 	challengeId: any;
@@ -74,6 +76,10 @@ export class InvSeePerformanceComponent implements OnInit {
 		this.requestService.get(url, null).subscribe(data => {
 			this.challengeDetails = data;
 		})
+	}
+
+	navigateBack() {
+		this.location.back();
 	}
 
 	async downloadFile() {

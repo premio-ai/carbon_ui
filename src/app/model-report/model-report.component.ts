@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { RequestService } from '../request.service';
+import { Location } from '@angular/common';
 import * as moment from 'moment';
 import "@carbon/charts/styles.css";
 
@@ -14,7 +15,8 @@ export class ModelReportComponent implements OnInit {
 
   constructor(
     private requestService: RequestService,
-    private activatedRoute: ActivatedRoute
+	private activatedRoute: ActivatedRoute,
+	private location: Location
   ) { }
   modelId: any;
   challengeCounts: any;
@@ -84,6 +86,10 @@ export class ModelReportComponent implements OnInit {
   getDate(timeStamp) {
 		let date = moment(moment(+timeStamp)).format("DD/MM/YYYY")
 		return date;
+  }
+
+  navigateBack() {
+	  this.location.back()
   }
 
   overall() {

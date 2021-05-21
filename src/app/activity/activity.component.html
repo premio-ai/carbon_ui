@@ -60,20 +60,20 @@
     </ibm-table-header>
     <ibm-table-toolbar>
       <ibm-table-toolbar-content>
-        <div style="width: 200px;">
+        <!-- <div style="width: 200px;">
           <ibm-dropdown [label]="label" [helperText]="helperText" [size]="size" [invalid]="invalid"
             [invalidText]="invalidText" [theme]="theme" placeholder="Multi-select label" [disabled]="disabled"
             (selected)="selected($event)" (onClose)="onClose($event)"></ibm-dropdown>
-        </div>
+        </div> -->
         &nbsp;
         <div style="width: 150px;">
           <ibm-dropdown [label]="label" [helperText]="helperText" [size]="size" [invalid]="invalid"
-            [invalidText]="invalidText" [theme]="theme" placeholder="Most recent" [disabled]="disabled"
-            (selected)="selected($event)" (onClose)="onClose($event)">
-            <!-- <ibm-dropdown-list [items]="items"></ibm-dropdown-list> -->
+            [invalidText]="invalidText" [theme]="theme" placeholder="select" [disabled]="disabled"
+            (selected)="sortSelect($event)" (onClose)="onClose($event)">
+            <ibm-dropdown-list [items]="sorting"></ibm-dropdown-list>
           </ibm-dropdown>
         </div>
-        <button ibmButton="primary" size="sm" (click)="exportexcel()" [disabled]="submissionChallengeDetails.length==0" >
+        <button ibmButton="primary" size="sm" (click)="exportexcel()" [disabled]="submissionChallengeDetails.length==0">
           Export Data
           <svg class="bx--btn__icon" icon ibmIconDocumentExport16></svg>
         </button>
