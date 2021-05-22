@@ -1,25 +1,38 @@
-<ul ibmList>
-    <li style="font-size: 13px;">
-        {{challengeDetails?.description}}
-    </li>
-</ul>
-<br/><br/>
-<p style="font-size: 18px;font-weight: 600;">Data visuals</p>
-<br/><br/>
-<img style="margin-left: -10px; height: 125px; width: 300px" src='http://localhost:3000/{{challengeDetails?.phases[0].dataVisualFile}}'>
-<!-- <img style="margin-left: -10px; height: 125px; width: 300px" src='http://localhost:3000/2db658c10d0bf23cb66d16271dd3a25e2.png'> -->
-
-<br/>
-<br/>
-<br/>
-<p *ngFor='let data of challengeDetails?.phases[0]?.sampleDataFile; index as i' >Download Dataset {{i+1}}
-	<svg icon ibmIconDownload16 (click)="downloadFile(data[i])"></svg>
-</p>
-
-<br/>
-<br/>
-<ibm-accordion >
+<ibm-accordion>
     <div *ngFor="let phase of challengeDetails?.phases; index as i">
-        <ibm-accordion-item title="Phase {{i}}" (selected)="selected($event)">{{ phase?.description }}</ibm-accordion-item>
+        <ibm-accordion-item title="Phase {{i}}" (selected)="selected($event)">
+            
+            <div style="display: flex;" *ngIf="!isEdit">
+                <div>
+                    <p>{{ phase.description }}</p>
+                </div>
+                <div style="margin-top: 10px; margin-left: 8px;">
+                  <svg icon ibmIconEdit20 (click)="editPhase(i)"></svg>
+                </div>
+              </div>
+        
+              <div style="display: flex;" *ngIf="isEdit">
+                <div>
+                    <textarea style="width: 90%; margin-top: 10px;" ibmTextArea [invalid]="invalid"
+                    [(ngModel)]="editedPhase" [theme]="theme" [rows]="5" [cols]="cols" aria-label="textarea"></textarea>
+                </div>
+                <div style="margin-top: 10px; margin-left: 8px;">
+                  <button (click)="savePhase(phase.phaseId)">Save</button>
+                </div>
+              </div>
+            
+            <p style="font-size: 18px;font-weight: 600;">Data visuals</p>
+            <br /><br />
+            <img style="margin-left: -10px; height: 125px; width: 300px"
+                src='http://localhost:3000/{{phase.dataVisualFile}}'>
+            <br />
+            <br />
+            <br />
+            <p *ngFor='let data of phase.sampleDataFile; index as j'>Download Dataset {{j+1}}
+                <svg icon ibmIconDownload16 (click)="downloadFile(i, j)"></svg>
+            </p>
+            <br />
+            <br />
+        </ibm-accordion-item>
     </div>
 </ibm-accordion>
