@@ -16,7 +16,25 @@
     </ibm-breadcrumb>
   </div>
 
-  <ibm-toast
+
+  <div  data-notification class="bx--toast-notification bx--toast-notification--success"
+			role="alert" style="margin-top: -28px;margin-left: auto;">
+			<div class="bx--toast-notification__details">
+				<p class="bx--toast-notification__title">New notification setting</p>
+				<p class="bx--toast-notification__subtitle">Alert set for modelname.mdk.</p>
+			</div>
+			<button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button"
+				type="button" aria-label="close">
+				<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform"
+					xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__close-icon" width="20" height="20"
+					viewBox="0 0 32 32" aria-hidden="true">
+					<path
+						d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z">
+					</path>
+				</svg>
+			</button>
+		</div>
+  <!-- <ibm-toast
     class="toaster"
     [notificationObj]="{
       type: 'success',
@@ -25,7 +43,7 @@
       lowContrast: lowContrast,
       showClose: showClose
     }"
-  ></ibm-toast>
+  ></ibm-toast> -->
 </div>
 
 <div class="bx--row line-padding">
@@ -56,6 +74,7 @@
         <button ibmContentOption name="Third">
           Phase 3
           <br />
+          
           Invitation sent
         </button>
       </div>
@@ -63,14 +82,14 @@
 
     <br /> <br />
     <h5>Model Submitted: </h5>
-    <p>{{getDate(modelReport?.createdAt)}}</p>
+    <p class="paragraph">{{getDate(modelReport?.createdAt)}}</p>
     <br /> 
     
     <h5>Description</h5>
-      <p>{{modelReport?.modelDescription}}</p>
+      <p class="paragraph">{{modelReport?.modelDescription}}</p>
       <br />
       <h5>Approach taken</h5>
-      <p>{{modelReport?.approch}}</p>
+      <p class="paragraph">{{modelReport?.approch}}</p>
       <br />
   </div>
   <div class="bx--col-md-2">
@@ -111,7 +130,7 @@
       <span>
         <svg class="svg" icon ibmIconSend20></svg>
       </span>
-      <p style="font-weight: 800;">Send {{modelReport?.innovatorId?.fullName}} a message</p>
+      <p style="font-weight: 800;font-size: 14px;white-space: nowrap;">Send {{modelReport?.innovatorId?.fullName}} a message</p>
     </div>
   </div>
 </div>
