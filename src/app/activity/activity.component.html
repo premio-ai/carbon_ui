@@ -97,7 +97,7 @@
           <span class="bx--table-header-label">Model Name</span>
         </th>
         <th>
-          <span class="bx--table-header-label">Approach</span>
+          <span class="bx--table-header-label"></span>
         </th>
       </tr>
     </thead>
@@ -107,7 +107,7 @@
         <td>{{ getDate(data.createdAt) }}</td>
         <td>{{ data.score }}</td>
         <td>{{ data.modelName }}</td>
-        <td>{{ data.approch }}</td>
+        <!-- <td>{{ data.approch }}</td> -->
         <td><a (click)="viewModel(data._id)" style="cursor: pointer;" >View Model</a></td>
       </tr>
       <tr *ngIf="submissionChallengeDetails && submissionChallengeDetails.length == 0">No records found</tr>
