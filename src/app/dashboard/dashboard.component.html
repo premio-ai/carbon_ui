@@ -8,11 +8,11 @@
 		<div style="display: flex;">
 			<h1 class="heading">Activity Dashboard</h1>
 			<div style="width: 222px;margin-left: auto;position: relative;top: 51px;">
-				<ibm-dropdown class="dropdown" [label]="'sort by'" [helperText]="helperText" [size]="size"
-					[invalid]="invalid" [invalidText]="invalidText" [theme]="theme" placeholder="End date"
-					[disabled]="disabled" (selected)="sortSelect($event)" (onClose)="onClose($event)">
-					<ibm-dropdown-list [items]="sorting"></ibm-dropdown-list>
-				</ibm-dropdown>
+				<ibm-dropdown [label]="label" [helperText]="helperText" [size]="size" [invalid]="invalid"
+            [invalidText]="invalidText" [theme]="theme" placeholder="select" [disabled]="disabled"
+            (selected)="sortSelect($event)" (onClose)="onClose($event)">
+            <ibm-dropdown-list [items]="sorting"></ibm-dropdown-list>
+          </ibm-dropdown>
 			</div>
 		</div>
 		<ibm-tabs [followFocus]="true" [isNavigation]="false" [cacheActive]="true">

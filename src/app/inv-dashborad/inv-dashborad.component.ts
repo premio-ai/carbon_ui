@@ -117,10 +117,22 @@ export class InvDashboradComponent implements OnInit {
 			this.activeChallenges.sort((a, b) => {
 				return b.createdAt - a.createdAt
 			})
+			this.pastChallenges.sort((a, b) => {
+				return b.createdAt - a.createdAt
+			})
+			this.bookmarkedChallenges.sort((a, b) => {
+				return b.createdAt - a.createdAt
+			})
 		}
 
 		if (criteria == 'Oldest') {
 			this.activeChallenges.sort((a, b) => {
+				return a.createdAt - b.createdAt
+			})
+			this.pastChallenges.sort((a, b) => {
+				return a.createdAt - b.createdAt
+			})
+			this.bookmarkedChallenges.sort((a, b) => {
 				return a.createdAt - b.createdAt
 			})
 		}
@@ -129,10 +141,22 @@ export class InvDashboradComponent implements OnInit {
 			this.activeChallenges.sort((a, b) => {
 				return new Date(b.expiryDate).getTime() - new Date(a.expiryDate).getTime()
 			})
+			this.pastChallenges.sort((a, b) => {
+				return new Date(b.expiryDate).getTime() - new Date(a.expiryDate).getTime()
+			})
+			this.bookmarkedChallenges.sort((a, b) => {
+				return new Date(b.expiryDate).getTime() - new Date(a.expiryDate).getTime()
+			})
 		}
 
 		if (criteria == 'Most Popular') {
 			this.activeChallenges.sort((a, b) => {
+				return b.acceptedUsersCount - a.acceptedUsersCount
+			})
+			this.pastChallenges.sort((a, b) => {
+				return b.acceptedUsersCount - a.acceptedUsersCount
+			})
+			this.bookmarkedChallenges.sort((a, b) => {
 				return b.acceptedUsersCount - a.acceptedUsersCount
 			})
 		}
@@ -141,8 +165,13 @@ export class InvDashboradComponent implements OnInit {
 			this.activeChallenges.sort((a, b) => {
 				return a.acceptedUsersCount - b.acceptedUsersCount
 			})
+			this.pastChallenges.sort((a, b) => {
+				return a.acceptedUsersCount - b.acceptedUsersCount
+			})
+			this.bookmarkedChallenges.sort((a, b) => {
+				return a.acceptedUsersCount - b.acceptedUsersCount
+			})
 		}
-
 	}
 
 }

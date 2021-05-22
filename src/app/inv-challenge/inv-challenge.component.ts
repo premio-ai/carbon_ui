@@ -53,10 +53,16 @@ export class InvChallengeComponent implements OnInit {
       this.activeChallenges.sort((a, b) => {
         return b.createdAt - a.createdAt
       })
+      this.bookmarkedChallenges.sort((a, b) => {
+        return b.createdAt - a.createdAt
+      })
     }
 
     if (criteria == 'Oldest') {
       this.activeChallenges.sort((a, b) => {
+        return a.createdAt - b.createdAt
+      })
+      this.bookmarkedChallenges.sort((a, b) => {
         return a.createdAt - b.createdAt
       })
     }
@@ -65,16 +71,25 @@ export class InvChallengeComponent implements OnInit {
       this.activeChallenges.sort((a, b) => {
         return new Date(b.expiryDate).getTime() - new Date(a.expiryDate).getTime()
       })
+      this.bookmarkedChallenges.sort((a, b) => {
+        return new Date(b.expiryDate).getTime() - new Date(a.expiryDate).getTime()
+      })
     }
 
     if (criteria == 'Most Popular') {
       this.activeChallenges.sort((a, b) => {
         return b.acceptedUsersCount - a.acceptedUsersCount
       })
+      this.bookmarkedChallenges.sort((a, b) => {
+        return b.acceptedUsersCount - a.acceptedUsersCount
+      })
     }
 
     if (criteria == 'Least Popular') {
       this.activeChallenges.sort((a, b) => {
+        return a.acceptedUsersCount - b.acceptedUsersCount
+      })
+      this.bookmarkedChallenges.sort((a, b) => {
         return a.acceptedUsersCount - b.acceptedUsersCount
       })
     }

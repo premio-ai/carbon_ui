@@ -86,6 +86,8 @@ export class ChallangeSecondStepComponent implements OnInit {
     this.requestService.post('upload', formData).subscribe(data => {
       data.map(dt => {
         this.stepTwo.sampleDataFile.push(dt.filename)
+        this.fileArray = [];
+        this.fileData = null;
       })
     })
   }

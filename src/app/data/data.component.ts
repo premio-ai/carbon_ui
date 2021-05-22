@@ -44,10 +44,10 @@ export class DataComponent implements OnInit {
           a.click();
           window.URL.revokeObjectURL(url);
 
-          let downloadUrl = 'challenge/downloadsCount/' + this.challengeDetails._id;
-          this.requestService.put(downloadUrl, null).subscribe(data => {
-            // this.getDownloadsCount();
-          })
+          // let downloadUrl = 'challenge/downloadsCount/' + this.challengeDetails._id;
+          // this.requestService.put(downloadUrl, null).subscribe(data => {
+          //   // this.getDownloadsCount();
+          // })
         })
       } else {
         // this.docError = true

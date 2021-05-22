@@ -1,4 +1,4 @@
-<button [ibmButton]="ibmButton" [size]="size" (click)="toStepOne()" [disabled]="!isChallengeAccepted">
+<button [ibmButton]="ibmButton" [size]="size" (click)="toStepOne()" [disabled]="!isChallengeAccepted || phasesSubmissionComplete">
   Submit model<svg class="bx--btn__icon" ibmIconAdd size="20"></svg>
 </button>
 <br />

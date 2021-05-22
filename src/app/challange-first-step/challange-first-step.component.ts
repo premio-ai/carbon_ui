@@ -14,7 +14,9 @@ export class ChallangeFirstStepComponent implements OnInit {
     description: string,
     objective: string,
     // categoryType: string,
-    endDate: string
+    endDate: string,
+    witholdCompanyName: boolean,
+    witholdCompanyDescription: boolean
   }
   titleError: boolean
   descriptionError: boolean
@@ -28,7 +30,9 @@ export class ChallangeFirstStepComponent implements OnInit {
       description: "",
       objective: "",
       // categoryType: "",
-      endDate: ""
+      endDate: "",
+      witholdCompanyName: false,
+      witholdCompanyDescription: false
     };
 
     this.category = [
@@ -38,6 +42,14 @@ export class ChallangeFirstStepComponent implements OnInit {
       { content: 'Bare Bones' },
     ]
 
+  }
+
+  toggle01() {
+    this.stepOne.witholdCompanyName = !this.stepOne.witholdCompanyName
+  }
+
+  toggle02() {
+    this.stepOne.witholdCompanyDescription = !this.stepOne.witholdCompanyDescription
   }
 
   selected(category) {
