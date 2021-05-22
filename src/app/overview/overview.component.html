@@ -36,14 +36,9 @@
 	<div style="display: flex; flex-wrap: wrap; gap: 10px;">
 		<div class="custom-class-example" style="width: 32%;"
 			*ngFor="let phase of challengeDetails?.phases; index as i">
-			<div style="
-			display: flex;
-			flex-flow: row wrap;
-			justify-content: space-around;
-			margin-right: 10px;
-		  ">
+			<div style="display: flex; flex-flow: row wrap; justify-content: space-around; margin-right: 10px;" *ngIf="i>0">
 				<ibm-tile class="tiles">
-					<p style="font-size: 20px;">Phase {{ i + 1 }}</p>
+					<p style="font-size: 20px;">Phase {{ i }}</p>
 					<br />
 					<div class="icon_align">
 						<svg icon ibmIconUpload20></svg>

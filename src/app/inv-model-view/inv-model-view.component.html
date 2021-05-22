@@ -4,18 +4,18 @@
 <div class="bx--grid">
   <div class="bx--row line-padding">
     <div class="bx--col-md-1" style="padding-left: 8%;">
-      <svg icon ibmIconArrowLeft16 (click)="navigateBack()" ></svg>
+      <svg icon ibmIconArrowLeft16 (click)="navigateBack()"></svg>
     </div>
     <div class="bx--col-md-4">
       <ibm-breadcrumb [noTrailingSlash]="noTrailingSlash">
-        <ibm-breadcrumb-item href="asa" class="navigation">
+        <ibm-breadcrumb-item class="navigation">
           Browse
         </ibm-breadcrumb-item>
-        <ibm-breadcrumb-item href="asa" class="navigation">
-          Challenge title
+        <ibm-breadcrumb-item class="navigation">
+          {{challengeDetails?.title}}
         </ibm-breadcrumb-item>
-        <ibm-breadcrumb-item href="asa" class="navigation">
-          modelname.mdk
+        <ibm-breadcrumb-item class="navigation">
+          {{modelDetails?.modelName}}
         </ibm-breadcrumb-item>
       </ibm-breadcrumb>
     </div>
@@ -25,21 +25,31 @@
   <div class="bx--row line-padding">
     <div class="bx--col-md-1" style="padding-left: 8%;"></div>
     <div class="bx--col-md-7">
-      <div style="display: flex;">
+      <div style="display: flex;" *ngIf="!isEdit">
         <div>
           <p style="font-size: 40px; font-weight: 100;">
-            {{ modelDetails?.modelname }}
+            {{ modelDetails?.modelName }}
           </p>
         </div>
         <div style="margin-top: 10px; margin-left: 8px;">
-          <svg icon ibmIconEdit20></svg>
+          <svg icon ibmIconEdit20 (click)="editModelName()"></svg>
+        </div>
+      </div>
+
+      <div style="display: flex;" *ngIf="isEdit">
+        <div>
+          <input style="width: 100%; margin-top: 10px;" ibmTextArea [invalid]="invalid" ng-blur="saveModelName()"
+            [(ngModel)]="set_new_modelName" [theme]="theme" aria-label="textarea" />
+        </div>
+        <div style="margin-top: 10px; margin-left: 8px;">
+          <button (click)="saveModelName()">Save</button>
         </div>
       </div>
 
       <br />
       <br />
       <p style="font-size: 16px; font-weight: 600;">
-        Phase1: Current Status
+        Phase {{submissionIndex}}: Current Status
       </p>
       <br />
 
@@ -94,11 +104,8 @@
             5 min
           </p>
           <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
-            <ibm-inline-loading
-              [loadingText]="loadingText"
-              [successText]="successText"
-              (onSuccess)="onSuccess($event)"
-            ></ibm-inline-loading>
+            <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)">
+            </ibm-inline-loading>
             &nbsp;
             <p style="color: black;">Comlpete</p>
           </h6>
@@ -123,7 +130,7 @@
         </ibm-tile>
       </div>
       <br />
-      <div class="border-div">
+      <div class="border-div" *ngIf="showCongratDiv">
         &nbsp;&nbsp;
         <h5 style="margin-left: 8px;">Congratuations!</h5>
         &nbsp;&nbsp;
@@ -132,30 +139,23 @@
         </p>
         <br />
         &nbsp;
-        <button
-          [ibmButton]="ibmButton"
-          [size]="size"
-          (click)="seePerformance()"
-        >
-          View Score Breakdown
-          <svg class="bx--btn__icon" ibmIconArrowRight20 size="20"></svg>
+        <button [ibmButton]="ibmButton" [size]="size" (click)="seePerformance()">
+          View Score Breakdown<svg class="bx--btn__icon" ibmIconArrowRight20 size="20"></svg>
         </button>
         <br />
         <br />
         &nbsp;
-        <button [ibmButton]="ibmButton" [size]="size" style="width: 225px;">
-          Enter phase 2
-          <svg class="bx--btn__icon" ibmIconArrowRight20 size="20"></svg>
-        </button>
+        <div *ngIf="modelDetails?.score>60 && submissionIndex<allSubmitOfChallenge.length">
+          <button [ibmButton]="ibmButton" [size]="size" style="width: 225px; margin-left: 7px;" (click)="enterNextPhase()">
+            Enter phase {{submissionIndex+1}}<svg class="bx--btn__icon" ibmIconArrowRight20 size="20"></svg>
+          </button>
+        </div>
       </div>
 
       <br />
       <br />
       <ibm-accordion>
-        <ibm-accordion-item
-          title="Phase 1 Overview"
-          (selected)="selected($event)"
-        >
+        <ibm-accordion-item title="Phase {{submissionIndex}} Overview" (selected)="selected($event)">
           <h5>Description</h5>
           <p>{{ modelDetails?.modelDescription }}</p>
           <br />
@@ -191,7 +191,7 @@
                 <tr>
                   <td>rank</td>
                   <td>{{ modelDetails?.innovatorId?.fullName }}</td>
-                  <td>Phase 1</td>
+                  <td>Phase {{submissionIndex}}</td>
                   <td>{{ modelDetails?.score }}</td>
                   <td>{{ getDate(modelDetails?.createdAt) }}</td>
                 </tr>
@@ -200,94 +200,66 @@
           </ibm-table-container>
           <p>
             only model that have overall score of 80% above will be invited to
-            Phase 2.
+            Phase {{submissionIndex+1}}.
           </p>
         </ibm-accordion-item>
-        <ibm-accordion-item
-          title="Next phase (2 to 3)"
-          (selected)="selected($event)"
-        >
-          <h5>Requirment</h5>
-          <p>{{ challengeDetails?.Objective }}</p>
-          <br />
-          <h5>Accuracy:80%</h5>
-
-          <h5>Data</h5>
-          Dataset size: 1000 records
-          <h6>Data Visuals</h6>
-          <img
-            style="margin-left: -10px; height: 125px; width: 300px;"
-            src="http://localhost:3000/{{
-              (challengeDetails?.phases)[0].dataVisualFile
-            }}"
-          />
-          <br />
-          <h6>Sample Data Set</h6>
-          <p
-            *ngFor="
-              let data of (challengeDetails?.phases)[0]?.sampleDataFile;
-              index as i
-            "
-          >
-            Download Dataset {{ i + 1 }}
-            <svg icon ibmIconDownload16 (click)="downloadFile(data[i])"></svg>
-          </p>
-          <br />
-          <h5>Model</h5>
-          <p>{{ modelDetails?.modelDescription }}</p>
-
-          <fieldset class="bx--fieldset">
-            <div class="bx--form-item">
-              <div
-                class="bx--radio-button-group bx--radio-button-group--vertical"
-              >
-                <div class="bx--radio-button-wrapper">
-                  <input
-                    id="radio-button-b4twcexavc-1"
-                    class="bx--radio-button"
-                    type="radio"
-                    value="red"
-                    name="radio-button--vertical"
-                    tabindex="0"
-                    checked
-                  />
-                  <label
-                    for="radio-button-b4twcexavc-1"
-                    class="bx--radio-button__label"
-                  >
-                    <span class="bx--radio-button__appearance"></span>
-                    <span class="bx--radio-button__label-text">
-                      Trained model
-                    </span>
-                  </label>
-                </div>
-                <div class="bx--radio-button-wrapper">
-                  <input
-                    id="radio-button-b4twcexavc-2"
-                    class="bx--radio-button"
-                    type="radio"
-                    value="green"
-                    name="radio-button--vertical"
-                    tabindex="0"
-                  />
-                  <label
-                    for="radio-button-b4twcexavc-2"
-                    class="bx--radio-button__label"
-                  >
-                    <span class="bx--radio-button__appearance"></span>
-                    <span class="bx--radio-button__label-text">
-                      Upload Modified trained model
-                    </span>
-                  </label>
+        <div *ngIf="submissionIndex<allSubmitOfChallenge.length" >
+          <ibm-accordion-item title="Next phase ({{submissionIndex+1}} to {{allSubmitOfChallenge.length}})" (selected)="selected($event)">
+            <h5>Requirment</h5>
+            <p>{{ challengeDetails?.Objective }}</p>
+            <br />
+            <h5>Accuracy:80%</h5>
+  
+            <h5>Data</h5>
+            Dataset size: 1000 records
+            <h6>Data Visuals</h6>
+            <img style="margin-left: -10px; height: 125px; width: 300px;" src="http://localhost:3000/{{
+                (challengeDetails?.phases)[0].dataVisualFile
+              }}" />
+            <br />
+            <h6>Sample Data Set</h6>
+            <p *ngFor="
+                let data of (challengeDetails?.phases)[0]?.sampleDataFile;
+                index as i
+              ">
+              Download Dataset {{ i + 1 }}
+              <svg icon ibmIconDownload16 (click)="downloadFile(data[i])"></svg>
+            </p>
+            <br />
+            <h5>Model</h5>
+            <p>{{ modelDetails?.modelDescription }}</p>
+  
+            <fieldset class="bx--fieldset">
+              <div class="bx--form-item">
+                <div class="bx--radio-button-group bx--radio-button-group--vertical">
+                  <div class="bx--radio-button-wrapper">
+                    <input id="radio-button-b4twcexavc-1" class="bx--radio-button" type="radio" value="red"
+                      name="radio-button--vertical" tabindex="0" checked />
+                    <label for="radio-button-b4twcexavc-1" class="bx--radio-button__label">
+                      <span class="bx--radio-button__appearance"></span>
+                      <span class="bx--radio-button__label-text">
+                        Trained model
+                      </span>
+                    </label>
+                  </div>
+                  <div class="bx--radio-button-wrapper">
+                    <input id="radio-button-b4twcexavc-2" class="bx--radio-button" type="radio" value="green"
+                      name="radio-button--vertical" tabindex="0" />
+                    <label for="radio-button-b4twcexavc-2" class="bx--radio-button__label">
+                      <span class="bx--radio-button__appearance"></span>
+                      <span class="bx--radio-button__label-text">
+                        Upload Modified trained model
+                      </span>
+                    </label>
+                  </div>
                 </div>
               </div>
-            </div>
-          </fieldset>
-          <button [ibmButton]="ibmButton" [size]="size" disabled="true">
-            Enter phase 2
-            <svg class="bx--btn__icon" ibmIconAdd size="20"></svg>
-          </button>
-        </ibm-accordion-item>
+            </fieldset>
+            <button [ibmButton]="ibmButton" [size]="size" (click)="enterNextPhase()" [disabled]="submissionIndex==allSubmitOfChallenge.length-1" >
+              Enter phase {{submissionIndex+1}}<svg class="bx--btn__icon" ibmIconAdd size="20"></svg>
+            </button>
+          </ibm-accordion-item>
+        </div>
       </ibm-accordion>
     </div>
   </div>

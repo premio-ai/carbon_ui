@@ -24,21 +24,61 @@ export class InvModelViewComponent implements OnInit {
   innovatorId: any;
   phaseId: any;
   challengeDetails: any;
+  showCongratDiv: boolean;
+  isEdit: boolean;
+  set_new_modelName: String;
+  allSubmitOfChallenge: any[] = [];
+  submissionIndex: number;
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
       if (params) {
         this.modelId = params.id
+        this.getSubmission(this.modelId)
       }
     });
 
-    this.getSubmission(this.modelId)
+    setTimeout(() => {
+      this.showCongratDiv = true;
+    }, 10000)
+
+    this.isEdit = false;
+    this.set_new_modelName = '';
+
+  }
+
+  getAllSubmitOfChallenge(challengeId) {
+    let url = 'submissionAllChallenge/allSubmitOfChallenge/' + challengeId;
+    this.requestService.get(url, null).subscribe( data => {
+      this.allSubmitOfChallenge = data
+      this.submissionIndex = data.findIndex( dt => dt._id == this.modelId)
+    })
+  }
+
+  editModelName() {
+    this.isEdit = true;
+  }
+
+  saveModelName() {
+    let url = 'submissionAllChallenge/' + this.modelId;
+    let payload = {
+      modelName: this.set_new_modelName
+    }
+    this.requestService.put(url, payload).subscribe(data => {
+      this.isEdit = false;
+      this.getSubmission(this.modelId)
+    })
+  }
+
+  enterNextPhase() {
+    let nextModelId = this.allSubmitOfChallenge[this.submissionIndex+1]._id;
+    this.router.navigateByUrl('invmodel-view/' + nextModelId)
   }
 
   getDate(timeStamp) {
-		let date = moment(moment(+timeStamp)).format("DD/MM/YYYY")
-		return date;
-	}
+    let date = moment(moment(+timeStamp)).format("DD/MM/YYYY")
+    return date;
+  }
 
   getSubmission(id) {
     let url = 'submissionAllChallenge/' + id;
@@ -49,6 +89,7 @@ export class InvModelViewComponent implements OnInit {
       this.innovatorId = data[0].innovatorId._id;
 
       this.getChallengeDetails(this.challengeId);
+      this.getAllSubmitOfChallenge(this.challengeId);
     })
   }
 
@@ -67,7 +108,7 @@ export class InvModelViewComponent implements OnInit {
     if (this.challengeDetails) {
       let docName = this.challengeDetails.phases[0].sampleDataFile[0] || ''
       let docUrl = 'http://localhost:3000/' + docName
-      
+
       if (docUrl.length) {
         let imgUrl = 'http://localhost:3000/bc8af0906fb566c23cac8ebfe6480d5c.png'
         let pdfUrl = 'http://localhost:3000/eb99fd7d5386810a6b33363e9da82d73d.pdf'

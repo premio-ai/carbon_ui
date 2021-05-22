@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
 		this.challengeCounts = 0;
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
 		setInterval(() => {
-			this.getNotifications()				// TODO: uncomment before push
+			// this.getNotifications()				// TODO: uncomment before push
 		}, 60000)
 		this.getChallengeCounts();
 		this.getInnovatorChallangeCount();

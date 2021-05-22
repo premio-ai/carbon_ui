@@ -73,7 +73,7 @@
             <ibm-dropdown-list [items]="sorting"></ibm-dropdown-list>
           </ibm-dropdown>
         </div>
-        <button ibmButton="primary" size="sm" (click)="exportexcel()" [disabled]="submissionChallengeDetails.length==0">
+        <button ibmButton="primary" size="sm" (click)="exportexcel()" [disabled]="submissionChallengeDetails?.length==0">
           Export Data
           <svg class="bx--btn__icon" icon ibmIconDocumentExport16></svg>
         </button>
