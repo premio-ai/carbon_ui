@@ -34,7 +34,9 @@ export class ChallangePageComponent implements OnInit {
 		challengeType: string,
 		phases: any[],
 		visibiltiy: {},
-		isActive: true
+		isActive: true,
+		witholdCompanyName: boolean,
+		witholdCompanyDescription: boolean
 	}
 
 
@@ -75,7 +77,9 @@ export class ChallangePageComponent implements OnInit {
 			challengeType: "CONTRACT",
 			phases: [],
 			visibiltiy: {},
-			isActive: true
+			isActive: true,
+			witholdCompanyName: false,
+			witholdCompanyDescription: false
 		}
 	}
 
@@ -90,6 +94,8 @@ export class ChallangePageComponent implements OnInit {
 		this.challange.description = stepOneData.description;
 		this.challange.Objective = stepOneData.objective;
 		this.challange.expiryDate = new Date(stepOneData.endDate).toDateString();
+		this.challange.witholdCompanyName = stepOneData.witholdCompanyName;
+    	this.challange.witholdCompanyDescription = stepOneData.witholdCompanyDescription;
 		this.current++;
 	}
 

@@ -22,6 +22,7 @@ export class InvAcceptedComponent implements OnInit {
 	challengeId: any;
 	leaderboard: any[];
 	isChallengeAccepted: boolean;
+	phasesSubmissionComplete: boolean;
 	acceptedChallenge: any;
 	challengeDetails: any;
 	current: number;
@@ -56,6 +57,7 @@ export class InvAcceptedComponent implements OnInit {
 		this.totalPage = 0;
 		this.pageNo = 0;
 		this.isChallengeAccepted = false;
+		this.phasesSubmissionComplete = false;
 		this.activatedRoute.params.subscribe((params: Params) => {
 			if (params) {
 				this.challengeId = params.id
@@ -134,6 +136,9 @@ export class InvAcceptedComponent implements OnInit {
 		let url = 'submissionAllChallenge/challenge-innovator/' + challengeId;
 		this.requestService.get(url, null).subscribe(data => {
 			this.challengeSubmissionData = data
+			if (this.challengeSubmissionData.length == this.challengeDetails.phases.length) {
+				this.phasesSubmissionComplete = true
+			}
 		})
 	}
 
@@ -209,6 +214,11 @@ export class InvAcceptedComponent implements OnInit {
 			  a.download = "File";
 			  a.click();
 			  window.URL.revokeObjectURL(url);
+
+			  let downloadUrl = 'challenge/downloadsCount/' + this.challengeDetails._id;
+          this.requestService.put(downloadUrl, null).subscribe(data => {
+            // this.getDownloadsCount();
+          })
 			})
 		  } else {
 			// this.docError = true

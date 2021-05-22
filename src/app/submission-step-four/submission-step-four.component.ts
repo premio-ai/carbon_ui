@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class SubmissionStepFourComponent implements OnInit {
   @Input() challengeSubmissionData: any;
   @Input() isChallengeAccepted: boolean;
+  @Input() phasesSubmissionComplete: boolean;
 
   @Output() public goPrevious: EventEmitter<any> = new EventEmitter();
   @Output() public goNext: EventEmitter<any> = new EventEmitter();
