@@ -75,24 +75,27 @@
     </div>
     <p class="userdetail">Past challenge: {{challengeCounts.pastChallengeCount}}</p>
     <p class="userdetail">Model Watching: 2</p>
+    <br/>
     <p class="userdetail">View profile</p>
   </div>
   <div class="bx--navigation-section">
     <p class="notify">
       <svg icon ibmIconNotification20></svg>
-      &nbsp; Notifications
+      &nbsp; Notifications  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <span><p style="font-size: 12px;" >Clear</p></span>
     </p>
 
     <div *ngFor="let notify of notifications; index as i" (click)="viewNotification(notify)">
       <p class="userdetail">{{ notify?.title }}</p>
       <p class="notify">{{ notify?.body }}</p>
     </div>
+    <br/>
+    <p class="userdetail">View all notifications</p>
   </div>
 
   <div class="bx--navigation-section">
     <p class="notify">
       <svg icon ibmIconChat20></svg>
-      &nbsp; Message
+      &nbsp; Message&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <span><p style="font-size: 12px;" >Mark read</p></span>
     </p>
 
     <p class="userdetail">John smith</p>
