@@ -31,6 +31,7 @@
       <br />
       <br />
       <ibm-tabs [followFocus]="followFocus" [isNavigation]="isNavigation" [cacheActive]="cacheActive">
+        <br/><br/>
         <ibm-tab heading="All">
           <ibm-tile *ngFor="let challenge of activeChallenges" style="margin-bottom: 15px;">
             <div style="display: flex;">
@@ -49,7 +50,7 @@
               </div>
 
             </div>
-            <br />
+            
             <h6>Issued by REDEACTED</h6>
             <p style="font-size: 10px;">on {{ getDate(challenge?.createdAt) }}</p>
             <div ibmGrid [condensed]="gridCondensed">
@@ -335,8 +336,8 @@
 
     </div>
 
-    <div class="bx--col-md-1">
-      <div style="width: 120px;">
+    <div class="bx--col-md-1" style="margin-left: -40px;">
+      <div style="width: 155px;">
         <ibm-dropdown [label]="'Sort by'" [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText"
           [theme]="theme" placeholder="select" [disabled]="disabled" (selected)="sortSelect($event)"
           (onClose)="onClose($event)">
