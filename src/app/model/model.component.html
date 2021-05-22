@@ -12,8 +12,7 @@
     </div>
   </div>
 </div>
-<br />
-<br />
+
 
 <div ibmGrid [condensed]="gridCondensed" class="gridchange">
   <div ibmRow [gutter]="gutter" class="left-border" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
@@ -26,11 +25,18 @@
         Compare
       </button>
     </div>
+   
   </div>
-
+  <div style="width: 215px;margin-left: auto;position: relative;top: 27px;">
+    <ibm-dropdown [label]="label" [helperText]="helperText" [size]="size" [invalid]="invalid"
+        [invalidText]="invalidText" [theme]="theme" placeholder="Newest" [disabled]="disabled"
+        (selected)="sortSelect($event)" (onClose)="onClose($event)">
+        <ibm-dropdown-list [items]="sorting"></ibm-dropdown-list>
+      </ibm-dropdown>
+  </div>
   <br />
   <br />
-  <div style="display: flex;" *ngIf="!modelComparison && modelData.length">
+  <div  *ngIf="!modelComparison && modelData.length" style="margin-top: -40px;">
     <ibm-tabs [followFocus]="followFocus" [isNavigation]="isNavigation" [cacheActive]="cacheActive">
       <ibm-tab heading="All">
         <div ibmGrid [condensed]="gridCondensed" style="margin-left: -5px;">
@@ -79,14 +85,14 @@
                   </div>
                   <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
                     [condensed]="rowCondensed">
-                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }">
+                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
                       <p class="bold">Accuracy: {{ data?.score }}</p>
                     </div>
-                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }">
+                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
                       <p class="bold">Precesion: {{ data?.precisionScore }}</p>
                     </div>
-                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }">
-                      <p class="bold">Recall:<br />{{ data?.recallScore }}</p>
+                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
+                      <p class="bold">Recall:{{ data?.recallScore }}</p>
                     </div>
                   </div>
                 </div>
@@ -147,13 +153,13 @@
                   </div>
                   <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
                     [condensed]="rowCondensed">
-                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }">
+                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
                       <p class="bold">Accuracy: {{ data?.score }}</p>
                     </div>
-                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }">
+                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
                       <p class="bold">Precesion: {{ data?.precisionScore }}</p>
                     </div>
-                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }">
+                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
                       <p class="bold">Recall:{{ data?.recallScore }}</p>
                     </div>
                   </div>
