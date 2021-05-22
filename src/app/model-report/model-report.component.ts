@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { RequestService } from '../request.service';
+import { Location } from '@angular/common';
 import * as moment from 'moment';
 import "@carbon/charts/styles.css";
 
@@ -14,7 +15,8 @@ export class ModelReportComponent implements OnInit {
 
   constructor(
     private requestService: RequestService,
-    private activatedRoute: ActivatedRoute
+	private activatedRoute: ActivatedRoute,
+	private location: Location
   ) { }
   modelId: any;
   challengeCounts: any;
@@ -86,10 +88,14 @@ export class ModelReportComponent implements OnInit {
 		return date;
   }
 
+  navigateBack() {
+	  this.location.back()
+  }
+
   overall() {
 		this.overallScoreData = [
 			{
-				group: 'Accuracy',
+				group: 'Overall',
 				value: this.overallScore
 			},
 			{
@@ -102,7 +108,7 @@ export class ModelReportComponent implements OnInit {
 
 	overallOptionFxn() {
 		this.overallOptions = {
-			title: 'Accuracy Score',
+			title: 'Overall Score',
 			animations: true,
 			donut: {
 				center: {
@@ -111,11 +117,11 @@ export class ModelReportComponent implements OnInit {
 			},
 			height: "350px",
 			getFillColor: (group: string) => {
-				if (group == 'Accuracy') {
+				if (group == 'Overall') {
 					return 'blue'
 				}
 				if (group == '') {
-					return 'grey'
+					return 'white'
 				}
 			}
 		};
@@ -150,7 +156,7 @@ export class ModelReportComponent implements OnInit {
 					return 'blue'
 				}
 				if (group == '') {
-					return 'grey'
+					return 'white'
 				}
 			}
 		};
@@ -185,7 +191,7 @@ export class ModelReportComponent implements OnInit {
 					return 'blue'
 				}
 				if (group == '') {
-					return 'grey'
+					return 'white'
 				}
 			}
 		};
@@ -220,7 +226,7 @@ export class ModelReportComponent implements OnInit {
 					return 'blue'
 				}
 				if (group == '') {
-					return 'grey'
+					return 'white'
 				}
 			}
 		};

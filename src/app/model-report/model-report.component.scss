@@ -33,24 +33,31 @@
 }
 
 .userName{
-    white-space: nowrap;margin-left: 50px;margin-top: 20px;font-weight: 900;
+    white-space: nowrap;
+    // margin-left: 50px;
+    margin-top: 20px;font-weight: 900;
 }
 
 .userhead{
-    white-space: nowrap;margin-left: 50px;font-weight: 500;
+    white-space: nowrap;
+    margin-left: 50px;
+    font-weight: 500;
 }
 
 .userdetail{
-    white-space: nowrap;margin-left: 50px;font-weight: 500;font-size: 14px;
+    white-space: nowrap;
+    // margin-left: 50px;
+    font-weight: 500;font-size: 14px;
 }
 .bio{
     width: 200px;
-    margin-left: 47px;
+    // margin-left: 47px;
+    
 }
 
 .link{
     white-space: nowrap;
-    margin-left: 47px;
+    // margin-left: 47px;
     margin-top: 10px;
     outline: none;
 
@@ -71,7 +78,7 @@
 
 .bx--tile {
     display: block;
-    
+    width: 18rem;
     min-height: 4rem;
     background-color: #f4f4f4;
     position: relative;
@@ -85,4 +92,8 @@
     flex-wrap: wrap;
     margin-right: 0rem;
     margin-left: -1rem;
+}
+
+.paragraph{
+    font-size: 14px;
 }

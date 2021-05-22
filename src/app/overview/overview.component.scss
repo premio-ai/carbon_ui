@@ -47,12 +47,13 @@ white-space: nowrap;
 }
 
 .numbers{
-    margin-left: 18px;
+    margin-left: 22px;
     align-items: center;
+    font-size: 14px;
 }
 
 .list{
-    margin-left: 35px;
+    margin-left: 46px;
 }
 
 .icon_align{
@@ -77,4 +78,7 @@ white-space: nowrap;
 }
 .gridchange{
     margin-left: 0px;
+}
+.bx--fieldset {
+    margin-bottom: 0rem;
 }
