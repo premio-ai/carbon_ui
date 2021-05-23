@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RequestService } from '../request.service';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
@@ -15,6 +15,7 @@ export class ModelReportComponent implements OnInit {
 
 	constructor(
 		private requestService: RequestService,
+		private router: Router,
 		private activatedRoute: ActivatedRoute,
 		private location: Location
 	) { }
@@ -55,10 +56,10 @@ export class ModelReportComponent implements OnInit {
 		this.activatedRoute.params.subscribe((params: Params) => {
 			if (params) {
 				this.modelId = params.id
+				this.getModelReport(this.modelId);
 			}
 		});
 
-		this.getModelReport(this.modelId);
 	}
 
 	bell = (() => {
@@ -87,6 +88,21 @@ export class ModelReportComponent implements OnInit {
 		})
 	}
 
+	switchSubmit(submitId) {
+		console.log(submitId, "---submitId---92")
+		this.router.navigateByUrl('modelReport/'+submitId)
+	}
+
+	checkSelected(phaseId) {
+		console.log(phaseId, "---phaseId---96")
+		this.challengeSubmission.some( dt => {
+			if (dt.phaseId == phaseId) {
+				return true
+			}
+			return false
+		})
+	}
+
 	getChallengeDetails(challengeId) {
 		let url = "challenge/" + challengeId;
 
@@ -97,7 +113,8 @@ export class ModelReportComponent implements OnInit {
 	}
 
 	getChallengeSubmission(challengeId) {
-		let url = "submissionAllChallenge/allSubmitOfChallenge/" + challengeId;
+		let innovatorId = this.modelReport.innovatorId._id
+		let url = "submissionAllChallenge/challenge-innovator/" + challengeId + '/' + innovatorId;
 
 		this.requestService.get(url, null).subscribe( data => {
 			this.challengeSubmission = data

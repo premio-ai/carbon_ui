@@ -65,14 +65,14 @@
 <div class="bx--row line-padding">
   <div class="bx--col-md-1" ></div>
   <div class="bx--col-md-4">
-    <ibm-content-switcher (selected)="selected($event)">
-      <div class="content-switcher">
-        <button ibmContentOption name="First">
-          Phase 1
+    <ibm-content-switcher (selected)="checkSelected(modelReport?.phaseId)">
+    <div class="content-switcher" *ngFor="let submit of challengeSubmission; index as i" >
+        <button ibmContentOption (click)="switchSubmit(submit._id)" style="width: 140px;" >
+          Phase {{i}}
          <br />
          Report available
         </button>
-        <button ibmContentOption name="Second">
+        <!-- <button ibmContentOption name="Second">
           Phase 2
           <br />
           Report available
@@ -82,9 +82,18 @@
           <br />
           
           Invitation sent
-        </button>
+        </button> -->
       </div>
     </ibm-content-switcher>
+
+    <!-- <div *ngFor="let submit of challengeSubmission; index as i" style="display: flex !important;">
+      <div data-content-switcher class="bx--content-switcher" aria-label="Demo switch content">
+        <button class="bx--content-switcher-btn bx--content-switcher--selected" (click)="switchSubmit(submit._id)"
+          data-target=".demo--panel--opt-1" aria-selected="true" style="width: 100px !important;" >
+          <span class=bx--content-switcher__label>Phase {{i}}</span>
+        </button>
+      </div>
+    </div> -->
 
     <br /> <br />
     <h3 style="margin-top:8px;">Model details </h3>
