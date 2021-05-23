@@ -67,21 +67,13 @@
             (selected)="selected($event)" (onClose)="onClose($event)"></ibm-dropdown>
         </div> -->
         &nbsp;
-<<<<<<< HEAD
-        <div style="width: 150px;">
-=======
         <div style="width: 150px;margin-top: -14px;z-index: 9999;">
->>>>>>> 44a6aaa305bdb9fbf9852479452461a1c2c0fa2c
           <ibm-dropdown [label]="'Sort'" [helperText]="helperText" [size]="size" [invalid]="invalid"
             [invalidText]="invalidText" [theme]="theme" placeholder="select" [disabled]="disabled"
             (selected)="sortSelect($event)" (onClose)="onClose($event)">
             <ibm-dropdown-list [items]="sorting"></ibm-dropdown-list>
           </ibm-dropdown>
-<<<<<<< HEAD
-        </div>  &nbsp;
-=======
         </div>  &nbsp;&nbsp;  &nbsp;&nbsp;
->>>>>>> 44a6aaa305bdb9fbf9852479452461a1c2c0fa2c
         <button ibmButton="primary" size="sm" (click)="exportexcel()" [disabled]="submissionChallengeDetails?.length==0">
           Export Data
           <svg class="bx--btn__icon" icon ibmIconDocumentExport16></svg>
