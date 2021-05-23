@@ -124,23 +124,23 @@
 							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }"
 								style="margin-right: 37px; margin-left: -14px"
 								*ngFor="let phase of challengeDetails?.phases; index as i">
-								<h3>Phase {{i+1}}</h3>
+								<h3>Phase {{i}}</h3>
 								<br />
 								<p>{{phase?.description}}</p>
-							</div>
 							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 3, sm: 12 }">
 								<h4 style="margin-left: -12px;">Data Visual</h4>
 								<br/>
 								<img style="margin-left: -10px; height: 125px; width: 300px"
-									src='http://localhost:3000/{{challengeDetails.phases[0].dataVisualFile}}'>
+									src='http://localhost:3000/{{phase.dataVisualFile}}'>
 								<br />
 								<br />
-								<h6 style="margin-left: -8px;">Sample Data set</h6>
-								<p *ngFor='let data of challengeDetails?.phases[0]?.sampleDataFile; index as i' style="margin-left: -8px;">Download
+								<h6>Sample Data set</h6>
+								<p *ngFor='let data of phase.sampleDataFile; index as j'>Download
 									{{i+1}}
 									<svg icon ibmIconDownload16 style="cursor: pointer;"
-										(click)="downloadFile(data[i])"></svg>
+										(click)="downloadFile(i, j)"></svg>
 								</p>
+							</div>
 							</div>
 						</div>
 					</div>

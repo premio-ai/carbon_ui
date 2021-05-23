@@ -31,10 +31,10 @@
 				<br /><br />
 			</div>
 		</div>
-		<div style="display: flex; flex-wrap: wrap; gap: 27px;margin-left: -16px;">
+		<div style="display: flex; flex-wrap: wrap; gap: 15px;">
 			<div class="custom-class-example" style="width: 32%;"
 				*ngFor="let phase of challengeDetails?.phases; index as i">
-				<div style="display: flex; flex-flow: row wrap;  margin-right: 10px;">
+				<div style="display: flex; flex-flow: row wrap; justify-content: space-around; margin-right: 10px;">
 					<ibm-tile class="tiles">
 						<p style="font-size: 20px;">Phase {{ i + 1 }}</p>
 						<br />
@@ -100,7 +100,6 @@
 				  [leftGutter]="leftGutter"
 				  [rightGutter]="rightGutter"
 				  [condensed]="rowCondensed"
-				 
 				>
 				  <div
 					ibmCol

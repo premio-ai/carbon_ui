@@ -81,7 +81,7 @@ export class InvAcceptedComponent implements OnInit {
 			{
 				text: "Step 3",
 				state: ["incomplete"],
-			}			
+			}
 		];
 		this.current = 3;
 		this.submissionData = {
@@ -127,7 +127,7 @@ export class InvAcceptedComponent implements OnInit {
 			skip: pageOffset
 		}
 		this.requestService.get(url, params).subscribe(data => {
-			this.totalPage = Math.ceil(data.count/10);
+			this.totalPage = Math.ceil(data.count / 10);
 			this.leaderboard = data.list;
 		})
 	}
@@ -180,51 +180,56 @@ export class InvAcceptedComponent implements OnInit {
 	prevPage() {
 		if (this.pageNo > 1) {
 			this.pageNo--;
-			this.pageOffset = this.pageNo*10;
+			this.pageOffset = this.pageNo * 10;
 			this.getLeaderboard(this.challengeDetails._id, this.pageOffset)
 		}
 	}
 
 	nextPage() {
-		if (this.pageNo < (this.totalPage-1)) {
+		if (this.pageNo < (this.totalPage - 1)) {
 			this.pageNo++;
-			this.pageOffset = this.pageNo*10;
+			this.pageOffset = this.pageNo * 10;
 			this.getLeaderboard(this.challengeDetails._id, this.pageOffset)
 		}
 	}
 
-	async downloadFile() {
+	async downloadFile(phaseIndex, fileIndex) {
 		if (this.challengeDetails) {
-		  let docName = this.challengeDetails.phases[0].sampleDataFile[0] || ''
-		  let docUrl = 'http://localhost:3000/' + docName
-		  
-		  if (docUrl.length) {
-			let imgUrl = 'http://localhost:3000/bc8af0906fb566c23cac8ebfe6480d5c.png'
-	
-			let pdfUrl = 'http://localhost:3000/eb99fd7d5386810a6b33363e9da82d73d.pdf'
-	
-			await fetch(docUrl).then(async res => {
-			  return await res.blob()
-			}).then(blob => {
-			  var a = document.createElement("a");
-			  document.body.appendChild(a);
-			  const url = URL.createObjectURL(blob);
-	
-			  a.href = url;
-			  a.download = "File";
-			  a.click();
-			  window.URL.revokeObjectURL(url);
 
-			  let downloadUrl = 'challenge/downloadsCount/' + this.challengeDetails._id;
-          this.requestService.put(downloadUrl, null).subscribe(data => {
-            // this.getDownloadsCount();
-          })
-			})
-		  } else {
-			// this.docError = true
-		  }
+			let docName = this.challengeDetails.phases[phaseIndex].sampleDataFile[fileIndex].path || ''
+			let docUrl = 'http://localhost:3000/' + docName
+
+			if (docUrl.length) {
+				let imgUrl = 'http://localhost:3000/bc8af0906fb566c23cac8ebfe6480d5c.png'
+				let pdfUrl = 'http://localhost:3000/eb99fd7d5386810a6b33363e9da82d73d.pdf'
+
+				await fetch(docUrl).then(async res => {
+					return await res.blob()
+				}).then(blob => {
+					var a = document.createElement("a");
+					document.body.appendChild(a);
+					const url = URL.createObjectURL(blob);
+
+					a.href = url;
+					a.download = "File";
+					a.click();
+					window.URL.revokeObjectURL(url);
+
+					let downloadUrl = 'challenge/fileDownloadsCount/' + this.challengeDetails._id;
+					let payload = {
+						challengeId: this.challengeDetails._id,
+						phaseId: this.challengeDetails.phases[phaseIndex].phaseId,
+						fileId: this.challengeDetails.phases[phaseIndex].sampleDataFile[fileIndex]
+					}
+					this.requestService.put(downloadUrl, payload).subscribe(data => {
+						// this.getDownloadsCount();
+					})
+				})
+			} else {
+				// this.docError = true
+			}
 		}
-	  }
+	}
 
 	stepSelected() { }
 
@@ -233,7 +238,7 @@ export class InvAcceptedComponent implements OnInit {
 	}
 
 	getPhaseId() {
-		if (this.challengeSubmissionData.length>0) {			
+		if (this.challengeSubmissionData.length > 0) {
 			let ind = this.challengeSubmissionData.length
 			let phaseId = this.challengeDetails.phases[ind].phaseId
 			return phaseId;
@@ -248,7 +253,7 @@ export class InvAcceptedComponent implements OnInit {
 		this.submissionData.modelType = 'MODIFIED_TRAINED_MODEL'
 		this.submissionData.modelUploadedPath = stepOne.modelUploadedPath,
 
-		this.current++;
+			this.current++;
 	}
 
 	previousStepTwo() {
@@ -270,7 +275,7 @@ export class InvAcceptedComponent implements OnInit {
 
 	nextStepThree() {
 		let url = 'submissionAllChallenge';
-		this.requestService.post(url, this.submissionData).subscribe( data => {
+		this.requestService.post(url, this.submissionData).subscribe(data => {
 			this.getSubmissionByChallengeId(this.challengeId);
 			// this.getChallengeDetails(this.challengeId)
 			this.getLeaderboard(this.challengeId, this.pageOffset)

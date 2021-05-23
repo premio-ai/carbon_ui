@@ -12,8 +12,12 @@ export class DataComponent implements OnInit {
   constructor(
     private requestService: RequestService
   ) { }
+  editedPhase: String
+  isEdit: Boolean;
 
   ngOnInit() {
+    this.isEdit = false
+    this.editedPhase = ''
   }
 
   getDownloadsCount() {
@@ -23,9 +27,33 @@ export class DataComponent implements OnInit {
     })
   }
 
-  async downloadFile() {
+  editPhase(index) {
+    this.isEdit = true
+    this.editedPhase = this.challengeDetails.phases[index].description
+  }
+
+  savePhase(phaseId) {
+    let url = 'challenge/updatePhase/' + this.challengeDetails._id;
+    let payload = {
+      phaseId: phaseId,
+      description: this.editedPhase
+    }
+    this.requestService.put(url, payload).subscribe(data => {
+      this.isEdit = false;
+      this.getChallengeDetails(this.challengeDetails._id)
+    })
+  }
+
+  getChallengeDetails(challengeId) {
+    this.requestService.get("/"+challengeId, null).subscribe( data => {
+      this.challengeDetails = data
+    })
+  }
+
+  async downloadFile(phaseIndex, fileIndex) {
     if (this.challengeDetails) {
-      let docName = this.challengeDetails.phases[0].sampleDataFile[0] || ''
+
+      let docName = this.challengeDetails.phases[phaseIndex].sampleDataFile[fileIndex].path || ''
       let docUrl = 'http://localhost:3000/' + docName
 
       if (docUrl.length) {
@@ -44,10 +72,15 @@ export class DataComponent implements OnInit {
           a.click();
           window.URL.revokeObjectURL(url);
 
-          // let downloadUrl = 'challenge/downloadsCount/' + this.challengeDetails._id;
-          // this.requestService.put(downloadUrl, null).subscribe(data => {
-          //   // this.getDownloadsCount();
-          // })
+          let downloadUrl = 'challenge/fileDownloadsCount/' + this.challengeDetails._id;
+          let payload = {
+            challengeId: this.challengeDetails._id,
+            phaseId: this.challengeDetails.phases[phaseIndex].phaseId,
+            fileId: this.challengeDetails.phases[phaseIndex].sampleDataFile[fileIndex]
+          }
+          this.requestService.put(downloadUrl, payload).subscribe(data => {
+            // this.getDownloadsCount();
+          })
         })
       } else {
         // this.docError = true

@@ -6,9 +6,8 @@
   <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }"
       *ngFor="let phase of challengeDetails?.phases; index as i">
-      <ibm-checkbox checked="true" [hideLabel]="hideLabel" (change)="onChange($event)"
-        (click)="handlePhaseClick(phase?.phaseId)">
-        Phase {{ i + 1 }}
+      <ibm-checkbox [checked]="phase.phaseId==selectedPhaseId" (click)="handlePhaseClick(phase?.phaseId)">
+        Phase {{i}}
       </ibm-checkbox>
     </div>
   </div>
@@ -29,7 +28,7 @@
    
   </div>
   <div style="width: 215px;margin-left: auto;position: relative;top: 27px;">
-    <ibm-dropdown [label]="label" [helperText]="helperText" [size]="size" [invalid]="invalid"
+    <ibm-dropdown [label]="'Sort by'" [helperText]="helperText" [size]="size" [invalid]="invalid"
         [invalidText]="invalidText" [theme]="theme" placeholder="Newest" [disabled]="disabled"
         (selected)="sortSelect($event)" (onClose)="onClose($event)">
         <ibm-dropdown-list [items]="sorting"></ibm-dropdown-list>
@@ -51,10 +50,10 @@
                     <h3>{{ i + 1 }}. {{ data?.modelName }}</h3>
                   </div>
                   <div style="margin-left: auto;" *ngIf="isBookmarked(data?._id) == false">
-                    <svg icon ibmIconBookmark20></svg>
+                    <svg icon ibmIconBookmark20 (click)="bookmark(data._id)" ></svg>
                   </div>
                   <div style="margin-left: auto;" *ngIf="isBookmarked(data?._id) == true">
-                    <svg icon ibmIconBookmarkFilled20></svg>
+                    <svg icon ibmIconBookmarkFilled20 (click)="unBookmark(data._id)" ></svg>
                   </div>
                 </div>
                 <div ibmGrid [condensed]="gridCondensed">

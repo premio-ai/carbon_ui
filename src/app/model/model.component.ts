@@ -18,7 +18,7 @@ export class ModelComponent {
   ) { }
   bookmarkedSubmissions: any[] = []
   modelData: any[]
-  phaseId: any
+  selectedphaseId: any
   compareModelData: any[] = []
   modelComparison: boolean
   readmore: boolean
@@ -48,8 +48,21 @@ export class ModelComponent {
     this.modelData = data
   }
 
+  makeModelDataByPhase() {
+    let data = []
+    this.challengeDetails.phases.map(dt => {
+      this.submissionChallengeDetails.map(res => {
+        if (res.phaseId == dt.phaseId && dt.phaseId == this.selectedphaseId) {
+          data.push(res)
+        }
+      })
+    })
+    this.modelData = data
+  }
+
   handlePhaseClick(id) {
-    this.phaseId = id
+    this.selectedphaseId = id
+    this.makeModelDataByPhase()
   }
 
   getBookmarkedSubmission() {
@@ -77,10 +90,32 @@ export class ModelComponent {
         }
       })
       return result;
+    } else {
+      return false
     }
+    }
+
+  bookmark(modelId) {
+    let payload = {}
+        this.modelData.filter( dt => {
+      if (dt._id == modelId) {
+        payload = {
+          challengeId: dt.challengeId,
+          phaseId: dt.phaseId,
+          innovatorId: dt.innovatorId._id,
+          submissionId: dt._id,
+          insurerId: ''
+        }
+      }
+    })
+
+    let url = 'bookmarksubmission'
+    this.requestService.post(url, payload).subscribe(data => {
+      this.getBookmarkedSubmission()
+    })
   }
 
-  bookmark(model) {
+  unBookmark(model) {
     let url = 'bookmarksubmission'
     let data = {
       challengeId: model.challengeId,

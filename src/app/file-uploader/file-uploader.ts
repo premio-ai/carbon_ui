@@ -8,10 +8,10 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 			</ibm-file-uploader>
 			<div [id]="notificationId" style="width: 300px; margin-top: 20px"></div>
 
-			<button ibmButton *ngIf="files && files.size > 0 && files.size <= 3" (click)="onUpload()">Upload</button>
 			<p *ngIf="files && files.size > 3">
-				<span style="font-size: x-small; color: red">Maximum 3 files can be uploaded.</span>
+			<span style="font-size: x-small; color: red">Maximum 3 files can be uploaded.</span>
 			</p>`
+			// <button ibmButton *ngIf="files && files.size > 0 && files.size <= 3" (click)="onUpload()">Upload</button>
 })
 
 export class DragAndDropStory {
@@ -54,7 +54,11 @@ export class DragAndDropStory {
 			});
 		};
 
-		readFileAndCheckType(transferredFiles[transferredFiles.length - 1])
+		// readFileAndCheckType(transferredFiles[transferredFiles.length - 1])
+
+this.goNext.emit(transferredFiles[transferredFiles.length - 1])
+
+
 	}
 
 	onUpload() {

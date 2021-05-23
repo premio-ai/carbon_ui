@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import * as XLSX from 'xlsx';
+import { RequestService } from '../request.service';
 
 @Component({
   selector: 'app-activity',
@@ -13,7 +14,8 @@ export class ActivityComponent implements OnInit {
   @Input() submissionChallengeDetails: any;
   @Input() challengeDetails: any;
   constructor(
-    private router: Router
+    private router: Router,
+    private requestService: RequestService
   ) { }
   selectedPhase: any[] = [];
   phaseNo: any;
