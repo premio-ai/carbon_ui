@@ -19,7 +19,7 @@
     [condensed]="rowCondensed" *ngIf="compareModelData && compareModelData?.length>1">
     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }" style="margin-left: 15px;">
       <h6>Model Comparison</h6>
-      <p>{{compareModelData?.length}} models selected</p>
+      <p style="color: #161616;">{{compareModelData?.length}} models selected</p>
       <br />
       <button class="btn-compare" [ibmButton]="ibmButton" [size]="size" (click)="compareModels()">
         Compare
@@ -38,6 +38,7 @@
   <br />
   <div  *ngIf="!modelComparison && modelData.length" style="margin-top: -40px;">
     <ibm-tabs [followFocus]="followFocus" [isNavigation]="isNavigation" [cacheActive]="cacheActive">
+      <br/><br/>
       <ibm-tab heading="All">
         <div ibmGrid [condensed]="gridCondensed" style="margin-left: -5px;">
           <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
@@ -63,7 +64,7 @@
                       <p class="bold">{{ data?.innovatorId?.fullName }}</p>
                     </div>
                     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-                      <p class="bold">
+                      <p class="">
                         Submitted: {{ getDate(data?.createdAt) }}
                       </p>
                     </div>
@@ -86,13 +87,13 @@
                   <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
                     [condensed]="rowCondensed">
                     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-                      <p class="bold">Accuracy: {{ data?.score }}</p>
+                      <p class="accu">Accuracy:<span class="score">{{ data?.recallScore }}</span></p>
                     </div>
                     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-                      <p class="bold">Precesion: {{ data?.precisionScore }}</p>
+                      <p class="accu">Precesion:<span class="score">{{ data?.recallScore }}</span></p>
                     </div>
                     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-                      <p class="bold">Recall:{{ data?.recallScore }}</p>
+                      <p class="accu">Recall:<span class="score">{{ data?.recallScore }}</span></p>
                     </div>
                   </div>
                 </div>
@@ -289,8 +290,13 @@
       <tr>
         <td></td>
         <td *ngFor="let model of compareModelData">
-          <button class="btn-compare" [ibmButton]="ibmButton" [size]="size"
-            (click)="viewModelReport(model?._id)">View</button>
+          <!-- <button class="btn-compare" [ibmButton]="ibmButton" [size]="'small'"
+            (click)="viewModelReport(model?._id)">View</button> -->
+            <button
+            class="bx--btn1 bx--btn--primary bx--btn--sm"
+             type="button"  (click)="viewModelReport(model?._id)">
+            View 
+          </button>
         </td>
       </tr>
     </tbody>

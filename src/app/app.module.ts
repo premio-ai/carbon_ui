@@ -112,6 +112,8 @@ import {Logout20Module} from "@carbon/icons-angular/lib/logout/20";
 import {EdtLoop20Module} from "@carbon/icons-angular/lib/edt-loop/20";
 import {Warning20Module } from "@carbon/icons-angular/lib/warning/20";
 import { WarningFilled20Module} from "@carbon/icons-angular/lib/warning--filled/20";
+import {Notification32Module } from "@carbon/icons-angular/lib/notification/32";
+import {Code24Module } from "@carbon/icons-angular/lib/code/24";
 
 @NgModule({
 	declarations: [
@@ -238,7 +240,9 @@ import { WarningFilled20Module} from "@carbon/icons-angular/lib/warning--filled/
 		EdtLoop20Module,
 		Time20Module,
 		Warning20Module,
-		WarningFilled20Module
+		WarningFilled20Module,
+		Notification32Module,
+		Code24Module
 	],
 	bootstrap: [AppComponent],
 	providers: [RequestService],
