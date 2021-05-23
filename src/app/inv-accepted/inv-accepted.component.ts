@@ -65,7 +65,7 @@ export class InvAcceptedComponent implements OnInit {
 		});
 
 		this.getChallengeDetails(this.challengeId);
-		this.getSubmissionByChallengeId(this.challengeId);
+		// this.getSubmissionByChallengeId(this.challengeId);
 		this.getChallengeAcceptance(this.challengeId);
 		this.getLeaderboard(this.challengeId, this.pageOffset);
 
@@ -108,6 +108,8 @@ export class InvAcceptedComponent implements OnInit {
 		let url = 'challenge/' + id;
 		this.requestService.get(url, null).subscribe(data => {
 			this.challengeDetails = data;
+		this.getSubmissionByChallengeId(this.challengeId);
+
 		})
 	}
 

@@ -41,7 +41,7 @@ export class SubmissionStepOneComponent implements OnInit {
   async downloadFile() {
 
     if (this.challengeDetails) {
-      let docName = this.challengeDetails.phases[0].sampleDataFile[0] || ''
+      let docName = this.challengeDetails.phases[0].sampleDataFile[0].path || ''
       let docUrl = 'http://localhost:3000/' + docName
       
       if (docUrl.length) {
