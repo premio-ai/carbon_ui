@@ -56,7 +56,6 @@ export class DashboardComponent implements OnInit {
 	}
 
 	sortSelect(sort) {
-		console.log(sort, "---sort---")
 		let criteria = sort.item.content;
 
 		if (criteria == 'Newest') {
