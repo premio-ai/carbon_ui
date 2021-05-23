@@ -55,6 +55,7 @@
 				</div>
 			</div>
 			<br />
+			<br />
 			<h6>Types of User Account</h6>
 			<ibm-checkbox [hideLabel]="hideLabel" (change)="selectAccountType1($event)">Independent</ibm-checkbox>
 			<ibm-checkbox [hideLabel]="hideLabel" (change)="selectAccountType2($event)">Startup</ibm-checkbox>
@@ -81,7 +82,10 @@
 		</div>
 		<div ibmCol class="custom-class-example" [columnNumbers]="{'md': 4, 'sm': 12}">
             <div ibmGrid [condensed]="gridCondensed">
-                <div ibmRow class="row_button" [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
+				<br/><br/><br/><br/>
+                <div ibmRow class="row_button" style="margin-left: auto;
+				left: 74px;
+				position: relative;" [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
                     [condensed]="rowCondensed">
                     <div ibmCol class="custom-class-example" style="margin-top: 460px;" [columnNumbers]="{'md': 1, 'sm': 12}">
                         <button class="back_btn" [ibmButton]="ibmButton" [size]="size" (click)="previous()" >Previous</button>

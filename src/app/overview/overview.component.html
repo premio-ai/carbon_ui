@@ -13,25 +13,29 @@
 			<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 7, sm: 12 }">
 				<ibm-tile>
 					<p style="font-size: 20px;">Phase 0</p>
-					<div ibmGrid [condensed]="gridCondensed"><br />
+					<div ibmGrid [condensed]="gridCondensed" style="margin-left: -16px;"><br />
 						<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
 							[condensed]="rowCondensed" style="margin-left: 0px;">
 							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }"> <svg icon
-									ibmIconUserMultiple16></svg>&nbsp;Users accepted <br /><br />
+									ibmIconUserMultiple20></svg>&nbsp;Users accepted <br /><br />
 								<p class="numbers">{{challengeDetails?.acceptedUsersCount}}</p>
 							</div>
 							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }"><svg icon
-									ibmIconDownload16></svg>&nbsp;Data Set Download <br /><br />
+									ibmIconDownload20></svg>&nbsp;Data Set Download <br /><br />
 								<p class="numbers">{{challengeDetails?.downloadsCount}}</p>
 							</div>
 						</div>
 					</div>
-					<button class="btn" [ibmButton]="ibmButton" [size]="size">View Activity</button>
+					<button
+  class="bx--btn bx--btn--primary bx--btn--sm"
+   type="button">
+  View Activity
+</button>
 				</ibm-tile>
 				<br /><br />
 			</div>
 		</div>
-		<div style="display: flex; flex-wrap: wrap; gap: 15px;">
+		<div style="display: flex; flex-wrap: wrap; gap: 15px;margin-left: -1px;">
 			<div class="custom-class-example" style="width: 32%;"
 				*ngFor="let phase of challengeDetails?.phases; index as i">
 				<div style="display: flex; flex-flow: row wrap; justify-content: space-around; margin-right: 10px;">
@@ -238,3 +242,4 @@
 				  </div>
 				</div>
 			  </div>
+			</div>

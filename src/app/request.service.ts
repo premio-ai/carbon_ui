@@ -8,8 +8,9 @@ import { map, catchError} from 'rxjs/operators';
 })
 
 export class RequestService {
-  baseUrl : string = "http://localhost:3000/api/";
+  // baseUrl : string = "http://localhost:3000/api/";
   // baseUrl: string = "https://meanapp01.herokuapp.com/api/";
+  baseUrl : string = "http://c3d63729279b.ngrok.io";
   constructor(private http:HttpClient) { }
 
   get(uri, params): Observable<any> {
