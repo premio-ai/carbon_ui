@@ -23,11 +23,11 @@
   </div>
 
 
-  <div  data-notification class="bx--toast-notification bx--toast-notification--success"
+  <div  data-notification class="bx--toast-notification bx--toast-notification--success" *ngIf="toasterMsg"
 			role="alert" style="margin-top: 0px;margin-left: auto;left: 27px;position: relative;">
 			<div class="bx--toast-notification__details">
 				<p class="bx--toast-notification__title">New notification setting</p>
-				<p class="bx--toast-notification__subtitle">Alert set for modelname.mdk.</p>
+				<p class="bx--toast-notification__subtitle">Alert set for {{modelReport?.modelName}} </p>
 			</div>
 			<button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button"
 				type="button" aria-label="close">
@@ -56,7 +56,7 @@
   <div class="bx--col-md-1" ></div>
   <div class="bx--col-md-4">
     <h1>{{modelReport?.modelName}}
-      <span><svg icon ibmIconNotification20></svg></span>
+      <span><svg icon ibmIconNotification20 (click)="bell()" ></svg></span>
     </h1>
   </div>
 </div>

@@ -52,6 +52,25 @@ export class InvChallengeTileComponent implements OnInit {
     return `Phases ${count} of ${numPhases}`
   }
 
+  getStatus(challenge) {
+    let numPhases = challenge.phases.length  
+    
+    let count = 0
+    if (this.submittedChallenges && this.submittedChallenges.length) {      
+      this.submittedChallenges.find( dt => {
+        if (dt.challengeId == challenge._id) {
+          count += 1
+        }
+      })      
+    }
+    if (count < 2) {
+      return 'training'
+    } else if (count >= 2) {
+      return 'uploaded'
+    }
+
+  }
+
   getPlace(challengeId) {
     if (this.submittedChallenges && this.submittedChallenges.length) {
       let temp = this.submittedChallenges.find(dt => dt.challengeId == challengeId)

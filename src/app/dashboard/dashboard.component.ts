@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
 	activeChallenges: any[];
 	pastChallenges: any[];
 	sorting: any[];
-
+	
 	ngOnInit() {
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
 		if (this.userDetails && this.userDetails._id) {			
@@ -25,13 +25,14 @@ export class DashboardComponent implements OnInit {
 		} else {
 			this.router.navigateByUrl('login')
 		}
-
+		
 		this.sorting = [
 			{ content: 'Most Popular' },
 			{ content: 'Least Popular' },
 			{ content: 'Newest' },
 			{ content: 'Oldest' },
-			{ content: 'End Date' }
+			{ content: 'End Date' },
+			
 		];
 
 	}
@@ -55,6 +56,7 @@ export class DashboardComponent implements OnInit {
 	}
 
 	sortSelect(sort) {
+		console.log(sort, "---sort---")
 		let criteria = sort.item.content;
 
 		if (criteria == 'Newest') {

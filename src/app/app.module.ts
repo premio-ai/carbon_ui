@@ -12,6 +12,7 @@ import { EdtLoop16Module } from "@carbon/icons-angular/lib/edt-loop/16";
 import { Notification20Module } from "@carbon/icons-angular/lib/notification/20";
 import { Partnership16Module } from "@carbon/icons-angular/lib/partnership/16";
 import { Time16Module } from "@carbon/icons-angular/lib/time/16";
+import { Time20Module } from "@carbon/icons-angular/lib/time/20";
 import { UserAvatar20Module } from "@carbon/icons-angular/lib/user--avatar/20";
 import { UserMultiple16Module } from "@carbon/icons-angular/lib/user--multiple/16";
 import { Bookmark16Module } from "@carbon/icons-angular/lib/bookmark/16";
@@ -108,7 +109,9 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import {Chat20Module} from "@carbon/icons-angular/lib/chat/20";
 import {Logout20Module} from "@carbon/icons-angular/lib/logout/20";
 // import { DonutChart } from "@carbon/charts";
-
+import {EdtLoop20Module} from "@carbon/icons-angular/lib/edt-loop/20";
+import {Warning20Module } from "@carbon/icons-angular/lib/warning/20";
+import { WarningFilled20Module} from "@carbon/icons-angular/lib/warning--filled/20";
 
 @NgModule({
 	declarations: [
@@ -231,7 +234,11 @@ import {Logout20Module} from "@carbon/icons-angular/lib/logout/20";
 		Logout20Module,
 		StructuredListModule,
 		InlineLoadingModule,
-		RadioModule
+		RadioModule,
+		EdtLoop20Module,
+		Time20Module,
+		Warning20Module,
+		WarningFilled20Module
 	],
 	bootstrap: [AppComponent],
 	providers: [RequestService],

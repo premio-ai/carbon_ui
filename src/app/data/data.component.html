@@ -1,6 +1,6 @@
 <ibm-accordion>
     <div *ngFor="let phase of challengeDetails?.phases; index as i">
-        <ibm-accordion-item title="Phase {{i}}" (selected)="i==0 ? true : selected($event)">
+        <ibm-accordion-item title="Phase {{i}}" (selected)="selected($event)" [expanded]="i==0" >
             
             <div style="display: flex;" *ngIf="!isEdit">
                 <div>
@@ -23,7 +23,7 @@
             
             <p style="font-size: 18px;font-weight: 600;">Data visuals</p>
             <br /><br />
-            <img style="margin-left: -10px; height: 125px; width: 300px"
+            <img style="margin-left: 0px; height: 125px; width: 300px"
                 src='http://localhost:3000/{{phase.dataVisualFile}}'>
             <br />
             <br />
