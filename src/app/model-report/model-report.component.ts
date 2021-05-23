@@ -22,6 +22,8 @@ export class ModelReportComponent implements OnInit {
 	modelId: any;
 	challengeCounts: any;
 	modelReport: any;
+	challengeDetails: any;
+	challengeSubmission: any;
 	overallScore: any;
 	accuracyScore: any;
 	precisionScore: any;
@@ -71,6 +73,8 @@ export class ModelReportComponent implements OnInit {
 		this.requestService.get(url, null).subscribe(data => {
 			this.modelReport = data[0];
 
+			this.getChallengeDetails(this.modelReport.challengeId)
+
 			this.accuracyScore = this.modelReport.score
 			this.precisionScore = this.modelReport.precisionScore
 			this.recallScore = this.modelReport.recallScore
@@ -80,6 +84,23 @@ export class ModelReportComponent implements OnInit {
 			this.accuracy();
 			this.precision();
 			this.recall();
+		})
+	}
+
+	getChallengeDetails(challengeId) {
+		let url = "challenge/" + challengeId;
+
+		this.requestService.get(url, null).subscribe( data => {
+			this.challengeDetails = data
+			this.getChallengeSubmission(this.challengeDetails._id)
+		})
+	}
+
+	getChallengeSubmission(challengeId) {
+		let url = "submissionAllChallenge/allSubmitOfChallenge/" + challengeId;
+
+		this.requestService.get(url, null).subscribe( data => {
+			this.challengeSubmission = data
 		})
 	}
 
