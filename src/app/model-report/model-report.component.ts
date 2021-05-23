@@ -89,12 +89,10 @@ export class ModelReportComponent implements OnInit {
 	}
 
 	switchSubmit(submitId) {
-		console.log(submitId, "---submitId---92")
 		this.router.navigateByUrl('modelReport/'+submitId)
 	}
 
 	checkSelected(phaseId) {
-		console.log(phaseId, "---phaseId---96")
 		this.challengeSubmission.some( dt => {
 			if (dt.phaseId == phaseId) {
 				return true
