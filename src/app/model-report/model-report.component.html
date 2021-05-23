@@ -65,23 +65,12 @@
 <div class="bx--row line-padding">
   <div class="bx--col-md-1" ></div>
   <div class="bx--col-md-4">
-    <ibm-content-switcher (selected)="selected($event)">
-      <div class="content-switcher">
-        <button ibmContentOption name="First">
-          Phase 1
+    <ibm-content-switcher (selected)="checkSelected(modelReport?.phaseId)">
+    <div class="content-switcher" *ngFor="let submit of challengeSubmission; index as i" >
+        <button ibmContentOption (click)="switchSubmit(submit._id)" style="width: 140px;" >
+          Phase {{i}}
          <br />
          Report available
-        </button>
-        <button ibmContentOption name="Second">
-          Phase 2
-          <br />
-          Report available
-        </button>
-        <button ibmContentOption name="Third">
-          Phase 3
-          <br />
-          
-          Invitation sent
         </button>
       </div>
     </ibm-content-switcher>

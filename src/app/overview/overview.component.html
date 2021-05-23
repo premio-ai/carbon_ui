@@ -65,7 +65,7 @@
 							<svg icon ibmIconTrophy20></svg>&nbsp;	
 							<p>Top 5 performing models</p>
 						</div>
-						<p *ngIf="submissionChallengeDetails.length == 0">No records found</p>
+						<p *ngIf="submissionChallengeDetails?.length == 0">No records found</p>
 						<ol ibmList class="list">
 							<li ibmListItem *ngFor="let data of submissionChallengeDetails">
 								<div style="display: flex;">
