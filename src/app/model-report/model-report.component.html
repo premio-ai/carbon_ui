@@ -69,8 +69,8 @@
       <div class="content-switcher">
         <button ibmContentOption name="First">
           Phase 1
-          <br />
-          Report available
+         <br />
+         Report available
         </button>
         <button ibmContentOption name="Second">
           Phase 2
@@ -87,16 +87,18 @@
     </ibm-content-switcher>
 
     <br /> <br />
-    <h5>Model Submitted: </h5>
-    <p class="paragraph">{{getDate(modelReport?.createdAt)}}</p>
-    <br /> 
+    <h3 style="margin-top:8px;">Model details </h3>
+   
+    <p class="paragraph">Model Submitted: {{getDate(modelReport?.createdAt)}}</p>
+    <br />  <br />
     
     <h5>Description</h5>
       <p class="paragraph">{{modelReport?.modelDescription}}</p>
-      <br />
+      <br /> <br /> <br /> <br />
       <h5>Approach taken</h5>
       <p class="paragraph">{{modelReport?.approch}}</p>
-      <br />
+      <br /> <br />
+      <p style="display: flex;"><svg icon ibmIconCode24></svg>&nbsp;&nbsp;Python</p>
   </div>
   <div class="bx--col-md-2">
    
@@ -110,7 +112,7 @@
               itemprop="image" alt="Avatar">
           </div>
           <div ibmCol class="custom-class-example" style="margin-top: -12px;" [columnNumbers]="{'md': 1, 'sm': 12}">
-            <h3 class="userName">{{modelReport?.innovatorId?.full}}</h3>
+            <h4 class="userName" style="margin-left: 50px;">{{modelReport?.innovatorId?.fullName}}</h4>
             <p class="userhead">Data Scientist,</p>
             <p class="userhead">Innovator Gold</p>
           </div>
@@ -169,6 +171,7 @@
    
 </div>
     <br />
+   
     <ibm-line-chart [data]="data1" [options]="options1" style="background-color: #ffffff !important;"
       class="chartline"></ibm-line-chart>
 

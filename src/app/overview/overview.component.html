@@ -18,11 +18,11 @@
 							[condensed]="rowCondensed" style="margin-left: 0px;">
 							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }"> <svg icon
 									ibmIconUserMultiple20></svg>&nbsp;Users accepted <br />
-								<p class="numbers">{{challengeDetails?.acceptedUsersCount}}</p>
+								<p class="numbers" style="margin-top:6px;">{{challengeDetails?.acceptedUsersCount}}</p>
 							</div>
 							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }"><svg icon
-									ibmIconDownload20></svg>&nbsp;Data Set Download <br /><br />
-								<p class="numbers">{{challengeDetails?.downloadsCount}}</p>
+									ibmIconDownload20></svg>&nbsp;Data Set Download <br />
+								<p class="numbers" style="margin-top:6px;">{{challengeDetails?.downloadsCount}}</p>
 							</div>
 						</div>
 					</div>
@@ -42,19 +42,19 @@
 						<p style="font-size: 20px;">Phase {{ i }}</p>
 						<br />
 						<div class="icon_align">
-							<svg icon ibmIconUpload20></svg>
+							<svg icon ibmIconUpload20></svg>&nbsp;
 							<p>Models Uploaded</p>
 						</div>
 						<p class="numbers">{{ phaseOneSubmission }}</p>
 						<br />
 						<div class="icon_align">
-							<svg icon ibmIconChemistry20></svg>
+							<svg icon ibmIconChemistry20></svg>&nbsp;
 							<p>Models trained & tested</p>
 						</div>
 						<p class="numbers">{{ phaseOneSubmission }}</p>
 						<br />
 						<div class="icon_align">
-							<svg icon ibmIconCheckmarkOutline20></svg>
+							<svg icon ibmIconCheckmarkOutline20></svg>&nbsp;
 							<p>Models passed Scoring</p>
 						</div>
 						<p class="numbers">{{ phase?.passingScore || '10' }}</p>
@@ -63,7 +63,7 @@
 						<p class="numbers">{{ phase?.minimumModelScore }}</p>
 						<br />
 						<div class="icon_align">
-							<svg icon ibmIconTrophy20></svg>
+							<svg icon ibmIconTrophy20></svg>&nbsp;	
 							<p>Top 5 performing models</p>
 						</div>
 						<p *ngIf="submissionChallengeDetails.length == 0">No records found</p>
