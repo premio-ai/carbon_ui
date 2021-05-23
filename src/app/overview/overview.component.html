@@ -116,14 +116,14 @@
 			<legend class="bx--label">Phases</legend>
 			<div class="bx--form-item">
 			  <div class="bx--radio-button-group ">
-				  <div class="bx--radio-button-wrapper">
+				  <div class="bx--radio-button-wrapper" *ngFor="let phase of challengeDetails?.phases; index as i">
 					<input id="radio-button-102gt4bgc47-1" class="bx--radio-button" type="radio" value="red" name="radio-button" tabindex="0" checked>
 					<label for="radio-button-102gt4bgc47-1" class="bx--radio-button__label">
 					  <span class="bx--radio-button__appearance"></span>
-					  <span class="bx--radio-button__label-text">Phase 1</span>
+					  <span class="bx--radio-button__label-text">Phase {{i}}</span>
 					</label>
 				  </div>
-				  <div class="bx--radio-button-wrapper">
+				  <!-- <div class="bx--radio-button-wrapper">
 					<input id="radio-button-102gt4bgc47-2" class="bx--radio-button" type="radio" value="green" name="radio-button" tabindex="0">
 					<label for="radio-button-102gt4bgc47-2" class="bx--radio-button__label">
 					  <span class="bx--radio-button__appearance"></span>
@@ -136,7 +136,7 @@
 					  <span class="bx--radio-button__appearance"></span>
 					  <span class="bx--radio-button__label-text">Phase 3</span>
 					</label>
-				  </div>
+				  </div> -->
 			  </div>
 			</div>
 		  </fieldset>

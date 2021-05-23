@@ -104,8 +104,8 @@ export class ChallangePageComponent implements OnInit {
 	}
 
 	nextStepTwo(stepTwoData) {
-		let phase = stepTwoData;
-		this.challange.phases = phase;
+		// let phase = stepTwoData;
+		this.challange.phases = stepTwoData;
 		this.current++;
 	}
 

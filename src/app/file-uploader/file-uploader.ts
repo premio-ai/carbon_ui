@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Subscription } from 'rxjs';
+import { RequestService } from '../request.service';
 
 @Component({
 	selector: "app-drop-file-uploader",
@@ -11,7 +13,6 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 			<p *ngIf="files && files.size > 3">
 			<span style="font-size: x-small; color: red">Maximum 3 files can be uploaded.</span>
 			</p>`
-			// <button ibmButton *ngIf="files && files.size > 0 && files.size <= 3" (click)="onUpload()">Upload</button>
 })
 
 export class DragAndDropStory {
@@ -26,42 +27,56 @@ export class DragAndDropStory {
 	@Input() dropText = "Drag and drop files here of upload";
 	@Input() disabled = false;
 
-	@Output() public goNext: EventEmitter<any> = new EventEmitter();
+	@Output() public getFile: EventEmitter<any> = new EventEmitter();
 	@Output() public uploadFile: EventEmitter<any> = new EventEmitter();
 
 	protected maxSize = 500000;
 
-    constructor() {}
+	constructor(
+		private requestService: RequestService
+	) { }
+	fileArray: any[] = []
+	fileData: any
+	sampleDataFile: any[] = []
+	subject: Subscription
 
 	onDropped(event) {
 		let transferredFiles = Array.from(event);
-		const readFileAndCheckType = fileObj => {
-			return new Promise((resolve, reject) => {
-				let fileExtension, mime;
-				let reader = new FileReader();
-				reader.readAsArrayBuffer(fileObj.file);
-				reader.onload = () => {
-					transferredFiles = []
-					this.goNext.emit(fileObj)
-					resolve({
-						file: fileObj,
-						accept: (this.accept.includes(fileExtension) || this.accept.includes(mime) || !this.accept.length)
-					});
-				};
-				reader.onerror = error => {
-					reject(error);
-				};
-			});
-		};
 
-		// readFileAndCheckType(transferredFiles[transferredFiles.length - 1])
+		if (transferredFiles.length > 0) {
+			this.setSampleData(transferredFiles[transferredFiles.length - 1])
+		}
+	}
 
-this.goNext.emit(transferredFiles[transferredFiles.length - 1])
+	setSampleData(acceptedFiles) {
+		if (acceptedFiles) {
+			const file = acceptedFiles.file;
+			this.uploadSampleData(file)
+		}
+	}
 
+	uploadSampleData(file) {
+		this.fileData = new FormData();
+		this.fileData.append('files', file);
+		const formData = this.fileData;
+		this.fileData.delete('FormData');
+		let tempData = []
+		this.fileArray = []
+		if (formData) {
+			this.subject = this.requestService.post('upload', formData).subscribe(data => {
+					let fileObj = {
+						path: data[0].filename,
+						downloadCount: 0
+					}
+					tempData.push(fileObj)
+				this.getFile.emit(tempData)
+			})
+		}
 
 	}
 
-	onUpload() {
-		this.uploadFile.emit()
+	ngOnDestroy() {
+		this.subject.unsubscribe()
 	}
+
 }

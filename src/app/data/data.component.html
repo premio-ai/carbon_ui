@@ -1,13 +1,13 @@
 <ibm-accordion>
     <div *ngFor="let phase of challengeDetails?.phases; index as i">
-        <ibm-accordion-item title="Phase {{i}}" (selected)="selected($event)">
+        <ibm-accordion-item title="Phase {{i}}" (selected)="i==0 ? true : selected($event)">
             
             <div style="display: flex;" *ngIf="!isEdit">
                 <div>
                     <p>{{ phase.description }}</p>
                 </div>
                 <div style="margin-top: 10px; margin-left: 8px;">
-                  <svg icon ibmIconEdit20 (click)="editPhase(i)"></svg>
+                  <!-- <svg icon ibmIconEdit20 (click)="editPhase(i)"></svg> -->
                 </div>
               </div>
         

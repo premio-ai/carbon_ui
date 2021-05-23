@@ -12,13 +12,24 @@ export class InvChallengeTileComponent implements OnInit {
 
   @Input() challenge: any;
 
- constructor(private requestService: RequestService,
+  constructor(private requestService: RequestService,
     private router: Router
-    ) { }
+  ) { }
   activeChallenges: any[];
   pastChallenges: any[];
+  submittedChallenges: any[] = []
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getSubmittedChallenge()
+  }
+
+  getSubmittedChallenge() {
+    let url = 'submissionAllChallenge'
+
+    this.requestService.get(url, null).subscribe( data => {
+      this.submittedChallenges = data
+    })
+  }
 
   getDate(time) {
     time = parseInt(time);
@@ -26,10 +37,46 @@ export class InvChallengeTileComponent implements OnInit {
     return dt.getDate() + "/" + dt.getMonth() + "/" + dt.getFullYear();
   }
 
+  getPhaseCount(challenge) {
+    
+    let numPhases = challenge.phases.length  
+    
+    let count = 0
+    if (this.submittedChallenges && this.submittedChallenges.length) {      
+      this.submittedChallenges.find( dt => {
+        if (dt.challengeId == challenge._id) {
+          count += 1
+        }
+      })      
+    }
+    return `Phases ${count} of ${numPhases}`
+  }
+
+  getPlace(challengeId) {
+    if (this.submittedChallenges && this.submittedChallenges.length) {
+      let temp = this.submittedChallenges.find(dt => dt.challengeId == challengeId)
+
+      if (temp.score > 90) {
+        return '1st place'
+      } else if (temp.score > 80) {
+        return '2nd place'
+      } else if (temp.score > 70) {
+        return '3rd place'
+      } else if (temp.score > 60) {
+        return '4th place'
+      } else if (temp.score > 50) {
+        return '5th place'
+      } else {
+        return 'NA'
+      }
+    }
+
+  }
+
   getExpiryDate(dt) {
-		let date = moment(dt).format('DD/MM/YYYY')
-		return date;
-	  }
+    let date = moment(dt).format('DD/MM/YYYY')
+    return date;
+  }
 
   viewChalange(id) {
     let url = 'invaccepted/' + id
