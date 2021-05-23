@@ -52,7 +52,7 @@ export class InvChallengeTileComponent implements OnInit {
     return `Phases ${count} of ${numPhases}`
   }
 
-  getStatus(challenge) {
+  getStatus(challenge, status) {
     let numPhases = challenge.phases.length  
     
     let count = 0
@@ -64,9 +64,9 @@ export class InvChallengeTileComponent implements OnInit {
       })      
     }
     if (count < 2) {
-      return 'training'
+      return true
     } else if (count >= 2) {
-      return 'uploaded'
+      return false
     }
 
   }
