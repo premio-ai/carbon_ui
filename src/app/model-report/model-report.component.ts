@@ -97,7 +97,6 @@ export class ModelReportComponent implements OnInit {
 			if (dt.phaseId == phaseId) {
 				return true
 			}
-			return false
 		})
 	}
 
