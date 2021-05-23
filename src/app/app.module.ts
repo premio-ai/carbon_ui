@@ -110,7 +110,8 @@ import {Chat20Module} from "@carbon/icons-angular/lib/chat/20";
 import {Logout20Module} from "@carbon/icons-angular/lib/logout/20";
 // import { DonutChart } from "@carbon/charts";
 import {EdtLoop20Module} from "@carbon/icons-angular/lib/edt-loop/20";
-import {Warning20Module } from "@carbon/icons-angular/lib/warning/20"
+import {Warning20Module } from "@carbon/icons-angular/lib/warning/20";
+import { WarningFilled20Module} from "@carbon/icons-angular/lib/warning--filled/20";
 
 @NgModule({
 	declarations: [
@@ -236,7 +237,8 @@ import {Warning20Module } from "@carbon/icons-angular/lib/warning/20"
 		RadioModule,
 		EdtLoop20Module,
 		Time20Module,
-		Warning20Module
+		Warning20Module,
+		WarningFilled20Module
 	],
 	bootstrap: [AppComponent],
 	providers: [RequestService],
