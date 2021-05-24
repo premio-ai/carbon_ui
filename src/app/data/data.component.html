@@ -1,38 +1,38 @@
 <ibm-accordion>
-    <div *ngFor="let phase of challengeDetails?.phases; index as i">
-        <ibm-accordion-item title="Phase {{i}}" (selected)="selected($event)">
-            
-            <div style="display: flex;" *ngIf="!isEdit">
-                <div>
-                    <p>{{ phase.description }}</p>
-                </div>
-                <div style="margin-top: 10px; margin-left: 8px;">
-                  <svg icon ibmIconEdit20 (click)="editPhase(i)"></svg>
-                </div>
+  <div *ngFor="let phase of challengeDetails?.phases; index as i">
+      <ibm-accordion-item title="Phase {{i}}" (selected)="selected($event)" [expanded]="i==0" >
+          
+          <div style="display: flex;" *ngIf="!isEdit">
+              <div>
+                  <p>{{ phase.description }}</p>
               </div>
-        
-              <div style="display: flex;" *ngIf="isEdit">
-                <div>
-                    <textarea style="width: 90%; margin-top: 10px;" ibmTextArea [invalid]="invalid"
-                    [(ngModel)]="editedPhase" [theme]="theme" [rows]="5" [cols]="cols" aria-label="textarea"></textarea>
-                </div>
-                <div style="margin-top: 10px; margin-left: 8px;">
-                  <button (click)="savePhase(phase.phaseId)">Save</button>
-                </div>
+              <div style="margin-top: 10px; margin-left: 8px;">
+                <!-- <svg icon ibmIconEdit20 (click)="editPhase(i)"></svg> -->
               </div>
-            
-            <p style="font-size: 18px;font-weight: 600;">Data visuals</p>
-            <br /><br />
-            <img style="margin-left: 0px; height: 125px; width: 300px"
-                src='http://localhost:3000/{{phase.dataVisualFile}}'>
-            <br />
-            <br />
-            <br />
-            <p *ngFor='let data of phase.sampleDataFile; index as j'>Download Dataset {{j+1}}
-                <svg icon ibmIconDownload16 (click)="downloadFile(i, j)"></svg>
-            </p>
-            <br />
-            <br />
-        </ibm-accordion-item>
-    </div>
+            </div>
+      
+            <div style="display: flex;" *ngIf="isEdit">
+              <div>
+                  <textarea style="width: 90%; margin-top: 10px;" ibmTextArea [invalid]="invalid"
+                  [(ngModel)]="editedPhase" [theme]="theme" [rows]="5" [cols]="cols" aria-label="textarea"></textarea>
+              </div>
+              <div style="margin-top: 10px; margin-left: 8px;">
+                <button (click)="savePhase(phase.phaseId)">Save</button>
+              </div>
+            </div>
+          
+          <p class="datavisualhead">Data visuals</p>
+          <br /><br />
+          <img class="imgdataTab"
+              src='http://localhost:3000/{{phase.dataVisualFile}}'>
+          <br />
+          <br />
+          <br />
+          <p class="svgdownload" *ngFor='let data of phase.sampleDataFile; index as j'>Download Dataset {{j+1}}
+              <svg icon ibmIconDownload16 (click)="downloadFile(i, j)"></svg>
+          </p>
+          <br />
+          <br />
+      </ibm-accordion-item>
+  </div>
 </ibm-accordion>

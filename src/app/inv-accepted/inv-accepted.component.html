@@ -116,32 +116,35 @@
 						</div>
 					</div>
 				</ibm-tab>
-				<ibm-tab heading="Data" style="max-width: 95px;">
+				<ibm-tab heading="Data">
 					<br />
 					<div ibmGrid [condensed]="gridCondensed">
 						<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
-							[condensed]="rowCondensed">
+							[condensed]="rowCondensed" *ngFor="let phase of challengeDetails?.phases; index as i">
+							
 							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }"
-								style="margin-right: 37px; margin-left: -14px"
-								*ngFor="let phase of challengeDetails?.phases; index as i">
+								style="margin-right: 37px; margin-left: -14px">
 								<h3>Phase {{i}}</h3>
 								<br />
 								<p>{{phase?.description}}</p>
+
+							</div>
+
 							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 3, sm: 12 }">
 								<h4 style="margin-left: -12px;">Data Visual</h4>
-								<br/>
-								<img style="margin-left: -10px; height: 125px; width: 300px"
+								<br />
+								<img class="dataimg"
 									src='http://localhost:3000/{{phase.dataVisualFile}}'>
 								<br />
 								<br />
-								<h6>Sample Data set</h6>
-								<p *ngFor='let data of phase.sampleDataFile; index as j'>Download
+								<h6 class="samplename">Sample Data set</h6>
+								<p *ngFor='let data of phase.sampleDataFile; index as j' class="samplename">Download
 									{{i+1}}
 									<svg icon ibmIconDownload16 style="cursor: pointer;"
 										(click)="downloadFile(i, j)"></svg>
 								</p>
 							</div>
-							</div>
+							<br/><br/>
 						</div>
 					</div>
 				</ibm-tab>

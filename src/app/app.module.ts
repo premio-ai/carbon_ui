@@ -115,6 +115,7 @@ import { WarningFilled20Module} from "@carbon/icons-angular/lib/warning--filled/
 import {Notification32Module } from "@carbon/icons-angular/lib/notification/32";
 import {Code24Module } from "@carbon/icons-angular/lib/code/24";
 
+
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -164,6 +165,7 @@ import {Code24Module } from "@carbon/icons-angular/lib/code/24";
 
 		SignUpComponent,
 
+	
 		
 	
 	],
