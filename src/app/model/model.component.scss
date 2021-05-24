@@ -47,9 +47,8 @@
 .bx--btn1 {
     margin: auto;
     display: flex;
-  margin-left: 0px;
    margin-bottom: -15px;
-    margin-top:0px !important;
+    margin-top:-22px !important;
     position: relative;
     left: 65px;
 }
@@ -97,4 +96,13 @@
 
 .gridchange{
     margin-left: -21px;
+}
+
+.parentdiv{
+    width: 215px;margin-left: auto;position: relative;top: 27px;right: 6px
+}
+
+
+.taggrid{
+  margin-left: -5px;
 }

@@ -39,8 +39,7 @@ export class ActivityComponent implements OnInit {
 			{ content: 'Model Name' },
 			{ content: 'User Invited' },
 			{ content: 'Model Uploaded' },
-			{ content: 'Score' },
-			// { content: 'End Date' }
+			{ content: 'Score' }
 		];
   }
 
@@ -68,6 +67,8 @@ export class ActivityComponent implements OnInit {
 
   selectPhase(phaseId, phaseNo) {
     this.phaseNo = phaseNo
+    this.passedModelsCount = 0
+    this.modelUnderTraining = 0
 
     let tempData = []
     this.submissionChallengeDetails.filter(dt => {
@@ -95,7 +96,7 @@ export class ActivityComponent implements OnInit {
 
   modelPassed() {
     this.selectedPhase.find( dt => {
-      if (dt.score >= this.challengeDetails.phases[this.phaseNo].passingScore) {
+      if ( dt.score >= this.challengeDetails.phases[this.phaseNo].passingScore) {
         this.passedModelsCount += 1
       }
     })
