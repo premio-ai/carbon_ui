@@ -67,10 +67,12 @@
   <div class="bx--col-md-4">
     <ibm-content-switcher (selected)="checkSelected(modelReport?.phaseId)">
     <div class="content-switcher" *ngFor="let submit of challengeSubmission; index as i" >
-        <button ibmContentOption (click)="switchSubmit(submit._id)" style="width: 140px;" >
-          Phase {{i}}
-         <br />
-         Report available
+        <button ibmContentOption (click)="switchSubmit(submit._id)" style="width: 160px;" >
+        <div>
+          <p> Phase {{i}}</p>
+        <p style="display: flex;align-items: center;"><span><svg class="svg" icon ibmIconCheckmarkOutline20></svg></span>
+         Report available</p>
+        </div>
         </button>
       </div>
     </ibm-content-switcher>
