@@ -17,21 +17,21 @@
             <span>Phase {{i+1}} of {{challengeSubmissionData.length}}</span>
           </div>
           <div style="margin-left: auto;align-items: center;display: flex;">
-            <svg icon ibmIconEdtLoop16></svg>
-            <p>result</p>
+            <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
+            <p class="discription">result</p>
           </div>
         </div>
-        <div style="display: grid;grid-template-columns: 70% 30%;padding: 1rem;">
+        <div style="display: grid;grid-template-columns: 80% 20%;padding: 1rem;">
          
             <div  class="custom-class-example" >
-              {{model?.modelDescription}}</div>
+             <p class="discription"> {{model?.modelDescription}}</p></div>
 
             <div  class="custom-class-example" >
-              <div style="display: flex; margin-left: 27px;">
+              <div class="sideicon">
 
                 <p style="margin-top: -4px;">{{model?.score}}</p>
               </div>
-              <div style="display: flex; margin-left: 27px;">
+              <div class="sideicon">
 
                 <p style="margin-top: -4px;">Score</p>
               </div>
