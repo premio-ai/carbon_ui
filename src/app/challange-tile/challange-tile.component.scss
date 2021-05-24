@@ -42,16 +42,14 @@ tabs{
 // }
 .date{
     font-size: 10px;
-    margin-left: 10px;
-    margin-top: 20px;
-    margin-bottom: -23px;
+   
 }
 
 .tags{
-    margin: auto;
+   align-items: center;
+   justify-content: flex-start;
     display: flex;
-    padding-right: 23px;
-    margin-right: -9px;
+   width: 100%;
 }
 
 .tile{
@@ -59,10 +57,18 @@ tabs{
 }
 
 .sideicon{
-    display: flex; margin-left: 27px;
+    display: flex; 
 }
 
 .numsize{
     margin-top: 0px;
     font-size: 10px;
 }
+
+.mostparent{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+

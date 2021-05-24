@@ -106,3 +106,9 @@
 .taggrid{
   margin-left: -5px;
 }
+
+@media screen and (max-width: 1024px) {
+    #read_more {
+      display: none;
+    }
+  }

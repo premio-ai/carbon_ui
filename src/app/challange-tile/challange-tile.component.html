@@ -1,6 +1,6 @@
-<ibm-tile class="tile">
-  <div>
-    <div style="display: flex;">
+<ibm-tile class="tile" style="padding: 0px;">
+  <div class="mostparent">
+    <div style="display: grid;grid-template-columns: 70% 30%;padding: 1rem;">
 
       <p>
         {{ challange?.title }}
@@ -9,14 +9,13 @@
       <ibm-tag class="tags" type="cool-gray">Efficiency</ibm-tag>
     </div>
     <br />
-    <div ibmGrid [condensed]="gridCondensed">
-      <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed"
-        style="margin-left: 1px;">
-        <div ibmCol class="custom-class-example" style="margin-left: -31px;" [columnNumbers]="{ md: 5, sm: 12 }">
+    <div style="display: grid;grid-template-columns: 70% 30%;padding: 1rem;">
+     
+        <div  class="custom-class-example"  >
           {{ challange?.description }}
         </div>
 
-        <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 3, sm: 12 }" style="margin-left: 20px;">
+        <div  class="custom-class-example"  >
           <div class="sideicon">
             <svg icon ibmIconEdtLoop16></svg>
             &nbsp;&nbsp;
@@ -33,21 +32,24 @@
             <p class="numsize">{{challange?.discussions || '0'}}</p>
           </div>
         </div>
+     
+    </div>
+    <div style="display: grid;grid-template-columns: 68% 32%;padding: 0rem;">
+      <div style="padding-left: 1rem;" >
+        <p class="date" style="display: flex; align-items: center;">
+          <svg icon ibmIconTime20></svg>&nbsp;
+          <span>{{ getExpiryDate(challange?.expiryDate) }}</span>
+        </p>
       </div>
-    </div>
-  </div>
-  <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
-    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 6, sm: 12 }">
-      <p class="date" style="display: flex; align-items: center;">
-        <svg icon ibmIconTime20></svg>&nbsp;
-        <span>{{ getExpiryDate(challange?.expiryDate) }}</span>
-      </p>
-    </div>
-    <div ibmCol class="custom-class-example" style="margin-bottom: -31px;" [columnNumbers]="{ md: 1, sm: 12 }">
+     <div>
+
       <button class="btn" [ibmButton]="primary" [size]="'sm'" (click)="viewChalange(challange?._id)"
-        style="position: absolute;bottom: 0px;right: 0px;width: 90px;">
-        View
-      </button>
+      style="width: 100%;">
+      View
+    </button>
+     </div>
+     
     </div>
   </div>
+  
 </ibm-tile>

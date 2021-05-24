@@ -207,7 +207,7 @@
         <td *ngFor="let model of compareModelData">
           {{ model?.modelDescription }}
           <p (click)="readMore()">
-            <span [ngClass]="readmore ? 'readmore02' : 'readmore01'">
+            <span [ngClass]="readmore ? 'readmore02' : 'readmore01'"  id="read_more">
               Read More
             </span>
           </p>
