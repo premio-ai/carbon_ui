@@ -18,8 +18,11 @@ export class InvChallengeTileComponent implements OnInit {
   activeChallenges: any[];
   pastChallenges: any[];
   submittedChallenges: any[] = []
+  userId: String;
 
   ngOnInit() {
+let userDetails = JSON.parse(localStorage.getItem('userDetails'))
+this.userId = userDetails._id
     this.getSubmittedChallenge()
   }
 
@@ -44,7 +47,7 @@ export class InvChallengeTileComponent implements OnInit {
     let count = 0
     if (this.submittedChallenges && this.submittedChallenges.length) {      
       this.submittedChallenges.find( dt => {
-        if (dt.challengeId == challenge._id) {
+        if (dt.challengeId == challenge._id && dt.innovatorId == this.userId) {
           count += 1
         }
       })      

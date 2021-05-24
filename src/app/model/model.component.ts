@@ -25,7 +25,8 @@ export class ModelComponent {
 
   ngOnChanges() {
     if (this.challengeDetails && this.submissionChallengeDetails) {
-      this.makeModelData()
+      // this.makeModelData()
+      this.makeInitialModelData()
       this.getBookmarkedSubmission()
     }
   }
@@ -38,7 +39,7 @@ export class ModelComponent {
 
   makeModelData() {
     let data = []
-    this.challengeDetails.phases.map(dt => {
+    this.challengeDetails.phases.map((dt, i) => {
       this.submissionChallengeDetails.map(res => {
         if (res.phaseId == dt.phaseId) {
           data.push(res)
@@ -46,6 +47,30 @@ export class ModelComponent {
       })
     })
     this.modelData = data
+  }
+
+  makeInitialModelData() {
+
+    this.selectedphaseId = this.challengeDetails.phases[0].phaseId
+
+    this.handlePhaseClick(this.challengeDetails.phases[0].phaseId)
+
+    // this.challengeDetails.phases.map((dt, i) => {
+    //   this.submissionChallengeDetails.map(res => {
+    //     if (res.phaseId == dt.phaseId) {
+    //       data.push(res)
+    //     }
+    //   })
+    // })
+    // this.modelData = data
+  }
+
+  checked(phaseId) {
+    if (phaseId == this.selectedphaseId) {
+      return true
+    } else {
+      return false
+    }
   }
 
   makeModelDataByPhase() {
@@ -124,7 +149,7 @@ export class ModelComponent {
       submissionId: model._id,
       insurerId: ''
     }
-    this.requestService.post(url, data).subscribe(data => {
+    this.requestService.put(url, data).subscribe(data => {
       this.getBookmarkedSubmission()
     })
   }

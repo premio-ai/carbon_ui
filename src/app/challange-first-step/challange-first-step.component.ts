@@ -13,7 +13,8 @@ export class ChallangeFirstStepComponent implements OnInit {
     title: string,
     description: string,
     objective: string,
-    // categoryType: string,
+    categoryType: string,
+    challengeType: string,
     endDate: string,
     witholdCompanyName: boolean,
     witholdCompanyDescription: boolean
@@ -23,13 +24,15 @@ export class ChallangeFirstStepComponent implements OnInit {
   objectiveError: boolean
   endDateError: boolean
   category: any[]
+  contractType: any[]
 
   ngOnInit() {
     this.stepOne = {
       title: "",
       description: "",
       objective: "",
-      // categoryType: "",
+      categoryType: "",
+      challengeType: "",
       endDate: "",
       witholdCompanyName: false,
       witholdCompanyDescription: false
@@ -42,6 +45,12 @@ export class ChallangeFirstStepComponent implements OnInit {
       { content: 'Bare Bones' },
     ]
 
+    this.contractType = [
+      { content: 'CONTRACT' },
+      { content: 'ONE OFF' },
+      { content: 'OTHER' }
+    ]
+
   }
 
   toggle01() {
@@ -52,8 +61,12 @@ export class ChallangeFirstStepComponent implements OnInit {
     this.stepOne.witholdCompanyDescription = !this.stepOne.witholdCompanyDescription
   }
 
-  selected(category) {
-    // this.stepOne.categoryType = category.content.item
+  selectCategory(category) {
+    this.stepOne.categoryType = category.content.item
+  }
+
+  selectContract(type) {
+    this.stepOne.challengeType = type.content.item
   }
 
   minDate() {
