@@ -10,19 +10,34 @@
       <h5>
         {{ challenge?.title }}
       </h5>
-
-      <div class="tags">
+      
+      <!-- <div class="tags">
         <svg icon ibmIconCheckmarkFilled16 class="filled"></svg>
         <svg icon ibmIconWarningFilled20 class="fille"></svg>
         &nbsp;&nbsp;
         <p style="margin-top: -4px; font-size: 10px;">Training</p>
+      </div> -->
+
+      <div class="tags" *ngIf="getStatus(challenge)">
+        <svg icon ibmIconCheckmarkFilled16 class="filled"></svg>
+        &nbsp;&nbsp;
+        <p style="margin-top: -4px; font-size: 10px;">Training</p>
       </div>
+      <div class="tags" *ngIf="!getStatus(challenge)">
+        <svg icon ibmIconWarningFilled20 class="fille"></svg>
+        &nbsp;&nbsp;
+        <p style="margin-top: -4px; font-size: 10px;">Model Uploaded</p>
+      </div>
+
     </div>
     <br />
 
     <div ibmGrid [condensed]="gridCondensed">
       <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed"
-        style="margin-left: 0px;">
+      style="margin-left: 0px;">
+      <div ibmCol class="custom-class-example" style="margin-left: -34px;" [columnNumbers]="{ md: 5, sm: 12 }">
+        <span>{{getPhaseCount(challenge)}}</span>
+      </div>
         <div ibmCol class="custom-class-example" style="margin-left: -34px;" [columnNumbers]="{ md: 5, sm: 12 }">
           {{ challenge?.description }}
         </div>
@@ -60,10 +75,11 @@
   <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed"
     style="margin-right: 40px;">
     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 6, sm: 12 }">
-      <p class="date" style="display: flex; align-items: center;">
+      <div class="date" style="display: flex; align-items: center;">
         <svg icon ibmIconBadge20></svg>
-        <span>1st place</span>
-      </p>
+        <span>{{getPlace(challenge?._id)}}</span>
+        <!-- <p>{{getPlace(challenge?._id)}}</p> -->
+      </div>
     </div>
     <div ibmCol class="custom-class-example" style="margin-bottom: -31px;" [columnNumbers]="{ md: 1, sm: 12 }">
       <button class="btn" [ibmButton]="primary" [size]="'sm'" (click)="viewChalange(challenge?._id)"

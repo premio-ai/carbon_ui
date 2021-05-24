@@ -1,11 +1,10 @@
-<ibm-tile class="tile"
-  style="height: 100%;display: flex;flex-direction: column;justify-content: space-between; position: relative;">
+<ibm-tile class="tile">
   <div>
     <div style="display: flex;">
 
-      <h5>
+      <p>
         {{ challange?.title }}
-      </h5>
+      </p>
 
       <ibm-tag class="tags" type="cool-gray">Efficiency</ibm-tag>
     </div>
@@ -18,20 +17,20 @@
         </div>
 
         <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 3, sm: 12 }" style="margin-left: 20px;">
-          <div style="display: flex; margin-left: 27px;">
+          <div class="sideicon">
             <svg icon ibmIconEdtLoop16></svg>
             &nbsp;&nbsp;
-            <p style="margin-top: -4px;">{{challange?.submissionsCount}}</p>
+            <p class="numsize">{{challange?.submissionsCount}}</p>
           </div>
-          <div style="display: flex; margin-left: 27px;">
+          <div class="sideicon">
             <svg icon ibmIconUserMultiple16></svg>
             &nbsp;&nbsp;
-            <p style="margin-top: -4px;">{{challange?.acceptedUsersCount}}</p>
+            <p class="numsize">{{challange?.acceptedUsersCount}}</p>
           </div>
-          <div style="display: flex; margin-left: 27px;">
+          <div class="sideicon">
             <svg icon ibmIconForum16></svg>
             &nbsp;&nbsp;
-            <p style="margin-top: -4px;">{{challange?.discussions || '0'}}</p>
+            <p class="numsize">{{challange?.discussions || '0'}}</p>
           </div>
         </div>
       </div>

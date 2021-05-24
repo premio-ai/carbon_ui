@@ -7,7 +7,7 @@
       <h1>Open Challenges</h1>
     </div>
     <div class="bx--col-md-1"></div>
-   
+  
   </div>
 
   <div class="bx--row line-padding" style="margin-top: 0px;">
@@ -36,10 +36,10 @@
 
             </div>
             
-            <h6>Issued by REDEACTED</h6>
-            <p style="font-size: 10px;">on {{ getDate(challenge?.createdAt) }}</p>
+            <h6 style="margin-top: 6px;">Issued by REDEACTED</h6>
+            <p style="font-size: 10px;margin-top: 8px;">on {{ getDate(challenge?.createdAt) }}</p>
             <div ibmGrid [condensed]="gridCondensed">
-              <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
+              <div  ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
                 [condensed]="rowCondensed">
                 <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 7, sm: 12 }">
                   <p class="para">{{ challenge?.description }}</p>
@@ -330,7 +330,7 @@
         </ibm-dropdown>
       </div>
     </div>
- 
+    
   </div>
 </div>
 

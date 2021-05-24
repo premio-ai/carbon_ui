@@ -1,35 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RequestService } from '../request.service';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
 import "@carbon/charts/styles.css";
 
 @Component({
-  selector: 'app-model-report',
-  templateUrl: './model-report.component.html',
-  styleUrls: ['./model-report.component.scss']
+	selector: 'app-model-report',
+	templateUrl: './model-report.component.html',
+	styleUrls: ['./model-report.component.scss']
 })
 
 export class ModelReportComponent implements OnInit {
 
-  constructor(
-    private requestService: RequestService,
-	private activatedRoute: ActivatedRoute,
-	private location: Location
-  ) { }
-  modelId: any;
-  challengeCounts: any;
-  modelReport: any;
-  overallScore: any;
-  accuracyScore: any;
+	constructor(
+		private requestService: RequestService,
+		private router: Router,
+		private activatedRoute: ActivatedRoute,
+		private location: Location
+	) { }
+	toasterMsg: boolean;
+	modelId: any;
+	challengeCounts: any;
+	modelReport: any;
+	challengeDetails: any;
+	challengeSubmission: any;
+	overallScore: any;
+	accuracyScore: any;
 	precisionScore: any;
-  recallScore: any;
-  overallScoreData: Array<{
+	recallScore: any;
+	overallScoreData: Array<{
 		group: string,
 		value: number
-  }> = []
-  overallOptions: any = {}
+	}> = []
+	overallOptions: any = {}
 	accuracyScoreData: Array<{
 		group: string,
 		value: number
@@ -46,53 +50,90 @@ export class ModelReportComponent implements OnInit {
 	}> = []
 	recallOptions: any = {}
 
-  ngOnInit() {
-    showClose: true
+	ngOnInit() {
+		showClose: true
+		this.toasterMsg = false
+		this.activatedRoute.params.subscribe((params: Params) => {
+			if (params) {
+				this.modelId = params.id
+				this.getModelReport(this.modelId);
+			}
+		});
 
-    this.activatedRoute.params.subscribe((params: Params) => {
-      if (params) {
-        this.modelId = params.id
-      }
-    });
+	}
 
-    this.getModelReport(this.modelId);
-    // this.getInnovatorChallengeCounts();
+	bell = (() => {
+		this.toasterMsg = true
+		setTimeout(() => {
+			this.toasterMsg = false
+		}, 3000)
+	})
 
-  }
+	getModelReport(modelId) {
+		let url = 'submissionAllChallenge/modelReport/' + modelId;
+		this.requestService.get(url, null).subscribe(data => {
+			this.modelReport = data[0];
 
-  getModelReport(modelId) {
-    let url = 'submissionAllChallenge/modelReport/' + modelId;
-    this.requestService.get(url, null).subscribe( data => {
-      this.modelReport = data[0];
+			this.getChallengeDetails(this.modelReport.challengeId)
 
-      this.accuracyScore = this.modelReport.score
+			this.accuracyScore = this.modelReport.score
 			this.precisionScore = this.modelReport.precisionScore
-      this.recallScore = this.modelReport.recallScore      
-      this.overallScore = Math.ceil((this.accuracyScore + this.precisionScore + this.recallScore)/3)
+			this.recallScore = this.modelReport.recallScore
+			this.overallScore = Math.ceil((this.accuracyScore + this.precisionScore + this.recallScore) / 3)
 
-      this.overall()
+			this.overall()
 			this.accuracy();
 			this.precision();
 			this.recall();
-    })
-  }
+		})
+	}
 
-  getInnovatorChallengeCounts() {
-    this.requestService.get('challenge/innovatorCounts', null).subscribe( data => {
+	switchSubmit(submitId) {
+		this.router.navigateByUrl('modelReport/'+submitId)
+	}
+
+	checkSelected(phaseId) {
+		this.challengeSubmission.some( dt => {
+			if (dt.phaseId == phaseId) {
+				return true
+			}
+		})
+	}
+
+	getChallengeDetails(challengeId) {
+		let url = "challenge/" + challengeId;
+
+		this.requestService.get(url, null).subscribe( data => {
+			this.challengeDetails = data
+			this.getChallengeSubmission(this.challengeDetails._id)
+		})
+	}
+
+	getChallengeSubmission(challengeId) {
+		let innovatorId = this.modelReport.innovatorId._id
+		let url = "submissionAllChallenge/challenge-innovator/" + challengeId + '/' + innovatorId;
+
+		this.requestService.get(url, null).subscribe( data => {
+			this.challengeSubmission = data
+		})
+	}
+
+	getInnovatorChallengeCounts() {
+		this.requestService.get('challenge/innovatorCounts', null).subscribe(data => {
 			this.challengeCounts = data
 		})
-  }
+	}
 
-  getDate(timeStamp) {
+	getDate(timeStamp) {
 		let date = moment(moment(+timeStamp)).format("DD/MM/YYYY")
 		return date;
-  }
+	}
 
-  navigateBack() {
-	  this.location.back()
-  }
+	navigateBack() {
+		this.location.back()
+	}
 
-  overall() {
+	overall() {
 		this.overallScoreData = [
 			{
 				group: 'Overall',
@@ -127,7 +168,7 @@ export class ModelReportComponent implements OnInit {
 		};
 	}
 
-  accuracy() {
+	accuracy() {
 		this.accuracyScoreData = [
 			{
 				group: 'Accuracy',
@@ -262,7 +303,7 @@ export class ModelReportComponent implements OnInit {
 			"iterationValue": "825",
 			"lossValue": 2,
 			"surplus": 773041874.3261496
-		},    
+		},
 		{
 			"group": "Train Loss",
 			"iterationValue": "250",
@@ -328,14 +369,14 @@ export class ModelReportComponent implements OnInit {
 		"title": "Loss vs Iteration",
 		"color": {
 			"pairing": {
-					"option": 2
+				"option": 2
 			},
 			"scale": {
-					"Qty": "#925699",
-					"Misc": "#525669"
+				"Qty": "#925699",
+				"Misc": "#525669"
 			}
-	},
-		grid: {x:{enabled:false}},
+		},
+		grid: { x: { enabled: false } },
 		"axes": {
 			"bottom": {
 				"title": "Iteration",
@@ -349,8 +390,8 @@ export class ModelReportComponent implements OnInit {
 			}
 		},
 		"curve": "curveMonotoneX",
-		"height": "400px",	
-		
+		"height": "400px",
+
 		getFillColor: (group: String) => {
 			if (group == 'Test Loss') {
 				return '#F3A625';
@@ -361,7 +402,7 @@ export class ModelReportComponent implements OnInit {
 			if (group == 'Test Accuracy') {
 				return 'white';
 			}
-			
+
 		},
 		getStrokeColor: (group: String) => {
 			if (group == 'Test Loss') {
@@ -373,7 +414,7 @@ export class ModelReportComponent implements OnInit {
 			if (group == 'Test Accuracy') {
 				return 'white';
 			}
-		
+
 		}
 	};
 

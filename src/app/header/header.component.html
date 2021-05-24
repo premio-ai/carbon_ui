@@ -18,7 +18,7 @@
 </ibm-header> -->
 
 <ibm-header [route]="['/']" brand="" >
-  <img src="assets/logo.png" style="margin-left: -57px;height: 48px;"  />
+  <img src="assets/logo.png" class="imglogo"  />
   <ibm-hamburger *ngIf="hasHamburger" [active]="active" (selected)="active = !active"></ibm-hamburger>
   <ibm-header-navigation>
     <ibm-header-item (click)="navigate()" style="border-bottom: 2px solid white;">Activity</ibm-header-item>
@@ -42,12 +42,7 @@
 			<ibm-search placeholder="search" size="sm" toolbar="true" style="fill: white !important;"></ibm-search>
 		</div> -->
     <ibm-header-action #firstAction title="action">
-      <p style="
-          color: white;
-          font-size: 16px;
-          white-space: nowrap;
-          margin-left: -24px;
-        ">
+      <p class="namefull">
         {{ userDetails.fullName }}
       </p>
     </ibm-header-action>
@@ -98,14 +93,7 @@
       &nbsp; Message&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <span><p style="font-size: 12px;" >Mark read</p></span>
     </p>
 
-    <p class="userdetail">John smith</p>
-    <p class="notify">
-      I'm glad you asked! basically.
-      <br />
-      What we need is to pridect
-    </p>
-    <p class="userdetail">Jane you</p>
-    <p class="notify">Yeah i thought so i Think that i'll.</p>
+    
   </div>
 
   <!-- <p class="userdetail" style="margin-bottom: 30px">Log out</p> -->

@@ -133,8 +133,12 @@
           <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }" style="padding-left: 6px;">
             <h5>Sample Data</h5>
             <p class="drag">Anonymous, available to download for any</p>
-            <app-drop-file-uploader (goNext)="setSampleData($event)" (uploadFile)="uploadSampleData($event)"
-              (filesChange)="onDropped($event.target.files)"></app-drop-file-uploader>
+            <!-- (uploadFile)="uploadSampleData($event)" -->
+            <!-- <app-drop-file-uploader (setFile)="setSampleData($event)" 
+              (filesChange)="onDropped($event.target.files)"></app-drop-file-uploader> -->
+
+              <app-drop-file-uploader (getFile)="setSampleData($event)" ></app-drop-file-uploader>
+
           </div>
         </div>
         <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed" style="margin-left: 82px;margin-top: 322px;">

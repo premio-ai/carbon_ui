@@ -70,44 +70,52 @@ export class ChallangeSecondStepComponent implements OnInit {
     })
   }
 
-  setSampleData(acceptedFiles) {
-    console.log(acceptedFiles, "---acceptedFiles---")
-    const file = acceptedFiles.file;
-
-    this.fileArray.push(file)
-    console.log(this.fileArray, "---this.fileArray---78")
-    if (this.fileArray.length>0) {
-      this.uploadSampleData()
-    }
+  setSampleData(data) {
+    this.stepTwo.sampleDataFile.push(data[0])
   }
 
-  uploadSampleData() {
-    this.fileData = new FormData();
-    this.fileArray.map( (dt, i) => {
-      console.log(i, "---fileIndex---85")
-      this.fileData.append(`files`, dt);
-    })
-    console.log(this.fileData, "---this.fileData---90")
-    const formData = this.fileData;
-    this.fileData.delete();
-    console.log(this.fileData, "---this.fileData()---93")
-    let tempData = []
-    console.log(formData, "---formData---95")
-    this.fileArray = []
-    console.log(this.fileArray, "---this.fileArray---97")
-    // this.requestService.post('upload', formData).subscribe(data => {
-    //   data.map(dt => {
-    //     let data = {
-    //       path: dt.filename,
-    //       downloadCount: 0
-    //     }
-    //     // tempData.push(data)
-    //     this.stepTwo.sampleDataFile.push(data)
-    //   })
-    //   console.log(this.stepTwo.sampleDataFile, "---this.stepTwo.sampleDataFile---107")
-    // })
-    // this.stepTwo.sampleDataFile = tempData
-  }
+  // setSampleData(acceptedFiles) {
+  //   console.log(acceptedFiles, "---acceptedFiles---")
+  //   const file = acceptedFiles.file;
+
+  //   // this.fileArray = acceptedFiles.map( dt => dt.file)
+  //   this.fileArray.push(file)
+  //   console.log(this.fileArray, "---this.fileArray---78")
+  //   if (this.fileArray.length>0) {
+  //     this.uploadSampleData()
+  //   }
+  // }
+
+  // uploadSampleData() {
+  //   this.fileData = new FormData();
+  //   console.log(this.fileArray, "---this.fileArray---87")
+  //   this.fileArray.map( (dt, i) => {
+  //     console.log(i, "---fileIndex---85")
+  //     this.fileData.append('files', dt);
+  //   })
+  //   console.log(this.fileData, "---this.fileData---90")
+  //   const formData = this.fileData;
+  //   this.fileData.delete('FormData');
+  //   console.log(this.fileData, "---this.fileData()---93")
+  //   let tempData = []
+  //   console.log(formData, "---formData---95")
+  //   this.fileArray = []
+  //   console.log(this.fileArray, "---this.fileArray---97")
+  //   console.log(formData.get('files'), "---formData---")
+  //   this.requestService.post('upload', formData).subscribe(data => {
+  //     data.map(dt => {
+  //       let data = {
+  //         path: dt.filename,
+  //         downloadCount: 0
+  //       }
+  //       // tempData.push(data)
+  //       this.stepTwo.sampleDataFile.push(data)
+  //     })
+  //     console.log(this.stepTwo.sampleDataFile, "---this.stepTwo.sampleDataFile---107")
+  //   })
+
+  //   // this.stepTwo.sampleDataFile = tempData
+  // }
 
   previous() {
     this.goPrevious.emit();
@@ -117,35 +125,36 @@ export class ChallangeSecondStepComponent implements OnInit {
     // TODO: uncomment
     this.goNext.emit(this.phases);
 
-    // if (this.phases.length > 0) {
-    //   if (this.stepTwo.description.length > 0 && this.stepTwo.guidence.length > 0 && this.stepTwo.passingScore && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 0) {
-    //     let tempData = {
-    //       description: this.stepTwo.description,
-    //       guidence: this.stepTwo.guidence,
-    //       passingScore: this.stepTwo.passingScore,
-    //       dataVisualFile: this.stepTwo.dataVisualFile,
-    //       sampleDataFile: this.stepTwo.sampleDataFile
-    //     }
-    //     this.phases.push(tempData)
-    //     this.goNext.emit(this.phases);
-    //   } else {
-    //     this.phasesError = true
-    //   }
-    // } else {
-    //   if (this.stepTwo.description.length > 0 && this.stepTwo.guidence.length > 0 && this.stepTwo.passingScore && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 0) {
-    //     let tempData = {
-    //       description: this.stepTwo.description,
-    //       guidence: this.stepTwo.guidence,
-    //       passingScore: this.stepTwo.passingScore,
-    //       dataVisualFile: this.stepTwo.dataVisualFile,
-    //       sampleDataFile: this.stepTwo.sampleDataFile
-    //     }
-    //     this.phases.push(tempData)
-    //     this.goNext.emit(this.phases);
-    //   } else {
-    //     this.phasesError = true
-    //   }
-    // }
+    if (this.phases.length > 0) {
+      if (this.stepTwo.description.length > 0 && this.stepTwo.guidence.length > 0 && this.stepTwo.passingScore && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 0) {
+        let tempData = {
+          description: this.stepTwo.description,
+          guidence: this.stepTwo.guidence,
+          passingScore: this.stepTwo.passingScore,
+          dataVisualFile: this.stepTwo.dataVisualFile,
+          sampleDataFile: this.stepTwo.sampleDataFile
+        }
+        this.phases.push(tempData)
+        this.goNext.emit(this.phases);
+      } else {
+        this.phasesError = true
+      }
+    } else {
+      if (this.stepTwo.description.length > 0 && this.stepTwo.guidence.length > 0 && this.stepTwo.passingScore && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 0) {
+        let tempData = {
+          description: this.stepTwo.description,
+          guidence: this.stepTwo.guidence,
+          passingScore: this.stepTwo.passingScore,
+          dataVisualFile: this.stepTwo.dataVisualFile,
+          sampleDataFile: this.stepTwo.sampleDataFile
+        }
+        this.phases.push(tempData)
+        this.goNext.emit(this.phases);
+      } else {
+        this.phasesError = true
+      }
+    }
+
   }
 
 }

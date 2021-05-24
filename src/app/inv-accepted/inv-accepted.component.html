@@ -3,7 +3,7 @@
 <div class="bx--grid">
 	<div class="bx--row line-padding">
 		<div class="bx--col-md-1" style="padding-left: 8%">
-			<svg icon ibmIconArrowLeft16 (click)="navigateBack()" ></svg>
+			<svg icon ibmIconArrowLeft16 (click)="navigateBack()"></svg>
 		</div>
 		<div class="bx--col-md-4">
 			<ibm-breadcrumb [noTrailingSlash]="noTrailingSlash">
@@ -55,7 +55,7 @@
 				<p style="font-size: 40px;font-weight: 100;">{{challengeDetails.title}}</p>
 				<br /> <br />
 				<div *ngIf="acceptedChallenge?._id.length>0">
-					<button class="bx--btn bx--btn--tertiary" type="button" >
+					<button class="bx--btn bx--btn--tertiary" type="button">
 						<span>Accepted</span>
 						<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;"
 							xmlns="http://www.w3.org/2000/svg" class="bx--btn__icon" width="16" height="16"
@@ -131,21 +131,22 @@
 							</div>
 
 							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 3, sm: 12 }">
-								<h4 style="margin-left: -12px;">Data Visual</h4>
+								<h3 style="margin-left: -12px;">Data Visual</h3>
 								<br />
 								<img class="dataimg"
 									src='http://localhost:3000/{{phase.dataVisualFile}}'>
 								<br />
 								<br />
-								<h6 class="samplename">Sample Data set</h6>
+								<h3 class="samplename">Sample Data set</h3>
 								<p *ngFor='let data of phase.sampleDataFile; index as j' class="samplename">Download
 									{{i+1}}
 									<svg icon ibmIconDownload16 style="cursor: pointer;"
 										(click)="downloadFile(i, j)"></svg>
 								</p>
 							</div>
-							<br/><br/>
+							
 						</div>
+						<br/><br/>
 					</div>
 				</ibm-tab>
 
@@ -179,12 +180,10 @@
 							</thead>
 							<tbody>
 								<tr *ngFor="let data of leaderboard; index as i">
-									<!-- <tr *ngFor="let data of challengeSubmissionData; index as i"> -->
 									<td>{{i+1}}</td>
 									<td>{{data?.innovatorId?.fullName}}</td>
 									<td>Phase 1</td>
-									<!-- <td>{{getScore()}}</td> -->
-									<td>35</td>
+									<td>{{data.score}}</td>
 									<td>{{getDate(data?.createdAt)}}</td>
 								</tr>
 							</tbody>
@@ -201,7 +200,7 @@
 									pages {{pageNo+1}} of {{totalPage}}
 								</label>
 								<button class="bx--pagination__button bx--pagination__button--backward " tabindex="0"
-									data-page-backward aria-label="previous page" (click)="prevPage()" >
+									data-page-backward aria-label="previous page" (click)="prevPage()">
 									<svg focusable="false" preserveAspectRatio="xMidYMid meet"
 										style="will-change: transform;" xmlns="http://www.w3.org/2000/svg"
 										class="bx--pagination__nav-arrow" width="20" height="20" viewBox="0 0 32 32"
@@ -210,7 +209,7 @@
 									</svg>
 								</button>
 								<button class="bx--pagination__button bx--pagination__button--forward " tabindex="0"
-									data-page-forward aria-label="next page" (click)="nextPage()" >
+									data-page-forward aria-label="next page" (click)="nextPage()">
 									<svg focusable="false" preserveAspectRatio="xMidYMid meet"
 										style="will-change: transform;" xmlns="http://www.w3.org/2000/svg"
 										class="bx--pagination__nav-arrow" width="20" height="20" viewBox="0 0 32 32"
@@ -243,8 +242,10 @@
 								<app-submission-step-three *ngIf="current == 2" (goPrevious)="previousStepThree()"
 									(goNext)="nextStepThree($event)"></app-submission-step-three>
 								<app-submission-step-four *ngIf="current == 3" (goPrevious)="previousStepFour()"
-									(goToStepOne)="goToStepOne()" (goNext)="nextStepFour($event)" [isChallengeAccepted]='isChallengeAccepted'
-									[challengeSubmissionData]="challengeSubmissionData" [phasesSubmissionComplete]="phasesSubmissionComplete" ></app-submission-step-four>
+									(goToStepOne)="goToStepOne()" (goNext)="nextStepFour($event)"
+									[isChallengeAccepted]='isChallengeAccepted'
+									[challengeSubmissionData]="challengeSubmissionData"
+									[phasesSubmissionComplete]="phasesSubmissionComplete"></app-submission-step-four>
 							</div>
 						</div>
 					</div>

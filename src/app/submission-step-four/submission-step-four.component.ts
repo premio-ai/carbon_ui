@@ -42,6 +42,11 @@ export class SubmissionStepFourComponent implements OnInit {
     this.router.navigateByUrl('see-performance/' + modelId)
   }
 
+  getPhase(model) {
+    console.log(this.challengeSubmissionData, "---this.challengeSubmissionData---46")
+    
+  }
+
   async downloadFile(modelpath) {
     if (modelpath) {
       // let docName = this.challengeDetails.phases[0].sampleDataFile[0] || ''

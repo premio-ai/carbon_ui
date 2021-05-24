@@ -27,7 +27,7 @@
     </div>
    
   </div>
-  <div style="width: 215px;margin-left: auto;position: relative;top: 27px;">
+  <div class="parentdiv">
     <ibm-dropdown [label]="'Sort by'" [helperText]="helperText" [size]="size" [invalid]="invalid"
         [invalidText]="invalidText" [theme]="theme" placeholder="Newest" [disabled]="disabled"
         (selected)="sortSelect($event)" (onClose)="onClose($event)">
@@ -40,7 +40,7 @@
     <ibm-tabs [followFocus]="followFocus" [isNavigation]="isNavigation" [cacheActive]="cacheActive">
       <br/><br/>
       <ibm-tab heading="All">
-        <div ibmGrid [condensed]="gridCondensed" style="margin-left: -5px;">
+        <div ibmGrid [condensed]="gridCondensed" class="taggrid">
           <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
             [condensed]="rowCondensed">
             <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 8, sm: 12 }"
@@ -256,7 +256,7 @@
       <th>
         <span class="bx--table-header-label"></span>
       </th>
-      
+ 
     </tr>
     <tbody>
       <tr>

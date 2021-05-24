@@ -65,7 +65,7 @@ export class InvAcceptedComponent implements OnInit {
 		});
 
 		this.getChallengeDetails(this.challengeId);
-		this.getSubmissionByChallengeId(this.challengeId);
+		// this.getSubmissionByChallengeId(this.challengeId);
 		this.getChallengeAcceptance(this.challengeId);
 		this.getLeaderboard(this.challengeId, this.pageOffset);
 
@@ -108,6 +108,8 @@ export class InvAcceptedComponent implements OnInit {
 		let url = 'challenge/' + id;
 		this.requestService.get(url, null).subscribe(data => {
 			this.challengeDetails = data;
+		this.getSubmissionByChallengeId(this.challengeId);
+
 		})
 	}
 
@@ -133,7 +135,7 @@ export class InvAcceptedComponent implements OnInit {
 	}
 
 	getSubmissionByChallengeId(challengeId) {
-		let url = 'submissionAllChallenge/challenge-innovator/' + challengeId;
+		let url = 'submissionAllChallenge/allSubmitOfChallenge/' + challengeId;
 		this.requestService.get(url, null).subscribe(data => {
 			this.challengeSubmissionData = data
 			if (this.challengeSubmissionData.length == this.challengeDetails.phases.length) {
