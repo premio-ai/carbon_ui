@@ -21,16 +21,18 @@ export class ActivityComponent implements OnInit {
   phaseNo: any;
   phaseOneSubmission: any;
   sorting: any[];
+  modelUnderTraining: number;
+  passedModelsCount: number;
 
   ngOnInit() {
-    this.phaseNo = 1
+    this.modelUnderTraining = 0
+    this.passedModelsCount = 0
+    this.phaseNo = 0
   }
 
   ngOnChanges() {
     if (this.challengeDetails && this.submissionChallengeDetails) {
       this.initialPhase()
-
-      this.phaseOneSubmission = this.submissionChallengeDetails.length
     }
 
     this.sorting = [
@@ -61,6 +63,7 @@ export class ActivityComponent implements OnInit {
     })
 
     this.selectedPhase = tempData
+    this.trainingModels()
   }
 
   selectPhase(phaseId, phaseNo) {
@@ -76,7 +79,27 @@ export class ActivityComponent implements OnInit {
     })
 
     this.selectedPhase = tempData
+    this.trainingModels()
   }
+
+  trainingModels() {
+    this.submissionChallengeDetails.find( dt => {
+      this.selectedPhase.map( res => {
+        if (dt.phaseId == res.phaseId) {
+          this.modelUnderTraining += 1
+        }
+      })
+    })
+    this.modelPassed()
+  }
+
+  modelPassed() {
+    this.selectedPhase.find( dt => {
+      if (dt.score >= this.challengeDetails.phases[this.phaseNo].passingScore) {
+        this.passedModelsCount += 1
+      }
+    })
+  }  
 
   viewModel(id) {
     this.router.navigateByUrl('invmodel-view/' + id)

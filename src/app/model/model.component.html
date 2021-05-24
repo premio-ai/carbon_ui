@@ -6,7 +6,7 @@
   <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }"
       *ngFor="let phase of challengeDetails?.phases; index as i">
-      <ibm-checkbox [checked]="phase.phaseId==selectedPhaseId" (click)="handlePhaseClick(phase?.phaseId)">
+      <ibm-checkbox [checked]="checked(phaseId)" (click)="handlePhaseClick(phase?.phaseId)">
         Phase {{i}}
       </ibm-checkbox>
     </div>
@@ -54,7 +54,7 @@
                     <svg icon ibmIconBookmark20 (click)="bookmark(data._id)" ></svg>
                   </div>
                   <div style="margin-left: auto;" *ngIf="isBookmarked(data?._id) == true">
-                    <svg icon ibmIconBookmarkFilled20 (click)="unBookmark(data._id)" ></svg>
+                    <svg icon ibmIconBookmarkFilled20 (click)="unBookmark(data)" ></svg>
                   </div>
                 </div>
                 <div ibmGrid [condensed]="gridCondensed">
@@ -74,15 +74,15 @@
                     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 6, sm: 12 }">
                       <p class="para">{{ data?.modelDescription }}</p>
                     </div>
-                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-                      <!-- <ibm-checkbox [hideLabel]="hideLabel" (change)="onChange($event, data._id)"
-                       ></ibm-checkbox> -->
+                    <!-- <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
+                      <ibm-checkbox [hideLabel]="hideLabel" (change)="onChange($event, data._id)"
+                       ></ibm-checkbox>
 
                       <div class="content" style="margin-left: 140px; margin-top: 3px;">
                         <p class="unbold">Phase 1</p>
                         <p class="nobold">55</p>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                   <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
                     [condensed]="rowCondensed">

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ThisSideUpDirective } from '@carbon/icons-angular';
 import * as moment from 'moment';
 import { RequestService } from "../request.service";
 
@@ -174,6 +175,17 @@ export class InvChallengeComponent implements OnInit {
       challengeId: challengeId
     }
     this.requestService.post(url, data).subscribe(data => {
+      this.getBookmarkedChallenges()
+    })
+  }
+
+  unBookmarkChallenge(challengeId) {
+
+    let url = 'bookmarkChallenge'
+let data = {
+  challengeId: challengeId
+}
+    this.requestService.put(url, data).subscribe(data => {
       this.getBookmarkedChallenges()
     })
   }

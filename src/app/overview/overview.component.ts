@@ -14,8 +14,12 @@ export class OverviewComponent implements OnInit {
   phaseNo: number;
   selectedPhase: any
   leaderboardData: any[] = []
+  modelUnderTraining: number;
+  passedModelsCount: number;
 
   ngOnInit() {
+    this.modelUnderTraining = 0
+    this.passedModelsCount = 0
   }
 
   ngOnChanges() {
@@ -53,9 +57,39 @@ export class OverviewComponent implements OnInit {
     this.showLeaderboard()
   }
 
+  modelsUploaded(phaseId) {
+    let count = 0;
+    this.submissionChallengeDetails.find(dt => {
+      if (dt.phaseId == phaseId) {
+        count += 1
+      }
+    })
+    return count;
+  }
+
+  trainingModels(phaseId) {
+    let count = 0;
+    this.submissionChallengeDetails.find(dt => {
+      if (dt.phaseId == phaseId) {
+        count += 1
+      }
+    })
+    return count;
+  }
+
+  modelPassed(phaseId) {
+let count = 0;
+    this.submissionChallengeDetails.find(dt => {
+      if (dt.phaseId == phaseId && dt.score >= this.challengeDetails.phases[this.phaseNo].passingScore) {
+        count += 1
+      }
+    })
+    return count;
+  }
+
   showLeaderboard() {
     let tempData = []
-    this.submissionChallengeDetails.filter( dt => {
+    this.submissionChallengeDetails.filter(dt => {
       if (dt.phaseid == this.selectedPhase.phaseId) {
         tempData.push(dt)
       }
@@ -63,5 +97,5 @@ export class OverviewComponent implements OnInit {
 
     this.leaderboardData = tempData
   }
-  
+
 }
