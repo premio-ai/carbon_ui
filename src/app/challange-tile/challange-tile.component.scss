@@ -53,3 +53,16 @@ tabs{
     padding-right: 23px;
     margin-right: -9px;
 }
+
+.tile{
+    height: 100%;display: flex;flex-direction: column;justify-content: space-between; position: relative;
+}
+
+.sideicon{
+    display: flex; margin-left: 27px;
+}
+
+.numsize{
+    margin-top: 0px;
+    font-size: 10px;
+}

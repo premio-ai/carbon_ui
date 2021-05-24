@@ -18,7 +18,7 @@
 </ibm-header> -->
 
 <ibm-header [route]="['/']" brand="" >
-  <img src="assets/logo.png" style="margin-left: -57px;height: 48px;"  />
+  <img src="assets/logo.png" class="imglogo"  />
   <ibm-hamburger *ngIf="hasHamburger" [active]="active" (selected)="active = !active"></ibm-hamburger>
   <ibm-header-navigation>
     <ibm-header-item (click)="navigate()" style="border-bottom: 2px solid white;">Activity</ibm-header-item>
@@ -42,12 +42,7 @@
 			<ibm-search placeholder="search" size="sm" toolbar="true" style="fill: white !important;"></ibm-search>
 		</div> -->
     <ibm-header-action #firstAction title="action">
-      <p style="
-          color: white;
-          font-size: 16px;
-          white-space: nowrap;
-          margin-left: -24px;
-        ">
+      <p class="namefull">
         {{ userDetails.fullName }}
       </p>
     </ibm-header-action>
