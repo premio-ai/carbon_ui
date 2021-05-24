@@ -33,7 +33,7 @@
         <h5 style="margin-left: 8px;">Congratuations!</h5>
         &nbsp;&nbsp;
         <p style="margin-left: 8px;">
-          your model has met the minimum performance score
+          Your model has met the minimum performance score
         </p>
         <br />
         &nbsp;
@@ -54,7 +54,7 @@
 
       <div class="bx--form-item">
         <div class="bx--dropdown__wrapper" style="width:222px">
-          <div class="bx--form__helper-text">filter</div>
+          <div class="bx--form__helper-text">Filter</div>
           <ibm-dropdown [label]="Min" [helperText]="helperText" [size]="size" [invalid]="invalid" [invalidText]="invalidText"
           [theme]="theme" placeholder="Phase 1 " [disabled]="disabled" (selected)="selected($event)" (onClose)="onClose($event)" >
          
@@ -71,7 +71,7 @@
         <br/>
          
           <p
-            
+             class="para"
           >
             Download Trained Model
             <svg icon ibmIconDownload16 (click)="downloadFile(data[i])"></svg>
