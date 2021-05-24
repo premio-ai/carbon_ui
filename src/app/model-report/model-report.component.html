@@ -21,7 +21,7 @@
       </ibm-breadcrumb-item>
     </ibm-breadcrumb>
   </div>
-
+  
 
   <div  data-notification class="bx--toast-notification bx--toast-notification--success" *ngIf="toasterMsg"
 			role="alert" style="margin-top: 0px;margin-left: auto;left: 27px;position: relative;">
@@ -55,6 +55,8 @@
 <div class="bx--row line-padding">
   <div class="bx--col-md-1" ></div>
   <div class="bx--col-md-4">
+    <br />
+<br />
     <h1>{{modelReport?.modelName}}
       <span><svg icon ibmIconNotification20 (click)="bell()" ></svg></span>
     </h1>
@@ -78,7 +80,7 @@
     </ibm-content-switcher>
 
     <br /> <br />
-    <h3 style="margin-top:8px;">Model details </h3>
+    <h3 style="margin-top:18px;">Model details </h3>
    
     <p class="paragraph">Model Submitted: {{getDate(modelReport?.createdAt)}}</p>
     <br />  <br />
@@ -162,9 +164,13 @@
    
 </div>
     <br />
-   
+    <div style="display: grid;grid-template-columns: 70% 30%;padding: 0rem;gap: 6px;">
     <ibm-line-chart [data]="data1" [options]="options1" style="background-color: #ffffff !important;"
       class="chartline"></ibm-line-chart>
+      <div style="background-color: #ffffff;">
+
+      </div>
+    </div>
 
 </div>
  

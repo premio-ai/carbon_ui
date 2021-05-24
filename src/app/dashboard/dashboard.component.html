@@ -7,7 +7,7 @@
 
 		<div style="display: flex;">
 			<h1 class="heading">Activity Dashboard</h1>
-			<div style="width: 222px;margin-left: 245px;position: relative;top: 51px;">
+			<div style="width: 222px;margin-left: auto;position: relative;top: 51px;">
 				<ibm-dropdown [label]="'Sort by'" [helperText]="helperText" [size]="size" [invalid]="invalid"
             [invalidText]="invalidText" [theme]="theme" placeholder="select" [disabled]="disabled"
             (selected)="sortSelect($event)" (onClose)="onClose($event)">
@@ -24,8 +24,8 @@
 				</button>
 
 				<br /><br />
-				<div style="display: flex;flex-wrap: wrap;gap: 10px;">
-					<div class="custom-class-example" style="width: 32%;"
+				<div style="display: grid;grid-template-columns: repeat(3,minmax(0,1fr)) ;gap: 10px;">
+					<div class="custom-class-example" style="width: 100%;"
 						*ngFor="let activeChallenge of activeChallenges">
 						<app-challange-tile [challange]="activeChallenge"></app-challange-tile>
 					</div>
