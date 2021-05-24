@@ -7,12 +7,11 @@
   <p>Accept this challenge first to submit a model.</p>
 </div>
 
-<div ibmGrid [condensed]="gridCondensed">
-  <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
-    <div ibmCol *ngFor="let model of challengeSubmissionData; index as i" class="custom-class-example"
-      [columnNumbers]="{'md': 4, 'sm': 12}">
-      <ibm-tile style="margin-bottom: 6px; margin: 10px;">
-        <div style="display: flex;justify-content: center;align-items: center;">
+<div  style="display: grid;grid-template-columns: repeat(2,minmax(0,1fr)) ;gap: 10px;" >
+
+    <div  *ngFor="let model of challengeSubmissionData; index as i" class="custom-class-example">
+      <ibm-tile  class="tile" >
+        <div style="display: grid;grid-template-columns: 70% 30%;padding: 1rem;">
           <div>
             <p style="font-size: 20px;">{{model?.modelName}}</p>
             <span>Phase {{i+1}} of {{challengeSubmissionData.length}}</span>
@@ -22,13 +21,12 @@
             <p>result</p>
           </div>
         </div>
-        <div ibmGrid [condensed]="gridCondensed">
-          <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed"
-            style="margin-left: 1px;">
-            <div ibmCol class="custom-class-example" style="margin-left: -31px;" [columnNumbers]="{ md: 7, sm: 12 }">
+        <div style="display: grid;grid-template-columns: 70% 30%;padding: 1rem;">
+         
+            <div  class="custom-class-example" >
               {{model?.modelDescription}}</div>
 
-            <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }">
+            <div  class="custom-class-example" >
               <div style="display: flex; margin-left: 27px;">
 
                 <p style="margin-top: -4px;">{{model?.score}}</p>
@@ -39,24 +37,25 @@
               </div>
 
             </div>
-          </div>
+         
         </div>
-        <div ibmGrid [condensed]="gridCondensed" class="gridedit">
-          <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed"
-            style="margin-bottom: -13px;">
-            <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }" *ngIf="model?.score>80">
-              <button class="view" [ibmButton]="ibmButton" [size]="size">Enter phase 2</button>
+        <div style="display: grid;grid-template-columns: 50% 50%;" >
+        
+            <div  class="custom-class-example"  *ngIf="model?.score>80">
+              <button class="view" [ibmButton]="ibmButton" [size]="'sm'">Enter phase 2</button>
             </div>
-            <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }" *ngIf="model?.score>80">
-              <button class="model" [ibmButton]="ibmButton" [size]="size" (click)="seePerformance(model?._id)">See performance</button>
+            <div  class="custom-class-example"  *ngIf="model?.score>80">
+              <button class="model" [ibmButton]="ibmButton" [size]="'sm'" (click)="seePerformance(model?._id)">See performance</button>
             </div>
-            <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }" *ngIf="model?.score<80">
-              <button class="model" [ibmButton]="ibmButton" [size]="size" (click)="viewModel(model?._id)">View Model</button>
+            <div  class="custom-class-example"  *ngIf="model?.score<80">
+              <button class="model" [ibmButton]="ibmButton" [size]="'sm'" (click)="viewModel(model?._id)">View Model</button>
             </div>
-          </div>
+         
         </div>
       </ibm-tile>
-      <p>Download Trained Model <svg icon ibmIconDownload16 (click)="downloadFile(model.modelUploadedPath)"></svg></p>
+      <!-- <p>Download Trained Model <svg icon ibmIconDownload16 (click)="downloadFile(model.modelUploadedPath)"></svg></p> -->
     </div>&nbsp;&nbsp;
 
-  </div>
+ </div>
+
+

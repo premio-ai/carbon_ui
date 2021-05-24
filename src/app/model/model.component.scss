@@ -1,6 +1,6 @@
 .bx--tile {
     display: block;
-    min-width: 49rem;
+    min-width: 65rem;
     min-height: 6rem;
     background-color: #f4f4f4;
     position: relative;
@@ -111,4 +111,22 @@
     #read_more {
       display: none;
     }
+  }
+
+
+  @media screen and (max-width: 1024px) {
+    #read_more {
+      display: none;
+    }  
+     .bx--tile{
+        display: block;
+        min-width: 800px;
+        min-height: 4rem;
+        background-color: #f4f4f4;
+        position: relative;
+        padding: 1rem;
+        outline: 2px solid transparent;
+        outline-offset: -2px;
+    }
+    
   }

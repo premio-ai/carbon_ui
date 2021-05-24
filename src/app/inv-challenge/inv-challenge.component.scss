@@ -40,7 +40,7 @@
 
    .bx--tile{
     display: block;
-    min-width: 755px;
+    min-width: 844px;
     min-height: 4rem;
     background-color: #f4f4f4;
     position: relative;
@@ -49,10 +49,29 @@
     outline-offset: -2px;
 }
 
-
-
-
+.numbersicon{
+    margin-top: -4px;
+    font-size: 12px;
+}
 
 .iconsvg{
     margin-left: auto;
+  
 }
+
+
+@media screen and (max-width: 1024px) {
+    #read_more {
+      display: none;
+    }   .bx--tile{
+        display: block;
+        min-width: 703px;
+        min-height: 4rem;
+        background-color: #f4f4f4;
+        position: relative;
+        padding: 1rem;
+        outline: 2px solid transparent;
+        outline-offset: -2px;
+    }
+    
+  }

@@ -8,8 +8,6 @@
 			</p>
 			<br />
 			<h6>Points earned</h6>
-		
-			
 					<div style="display: flex;align-items: center;">
 						<div  class="custom-class-example" >
 							<p style="color: gray;font-size: 12px;">Min</p>
@@ -17,9 +15,7 @@
 							[(ngModel)]="stepThree.minEarnedPoint" [invalid]="false" [invalidText]="invalidText" [disabled]="false">
 							</ibm-number>
 						</div>
-						
 						<p class="to">to</p>
-						
 						<div  class="custom-class-example" >
 							<p style="color: gray;font-size: 12px;">Max</p>
 							<ibm-number style="min-width: 10rem;" [label]="Max" [helperText]="[helperText]" [theme]="light" [min]="0" [max]="10"
@@ -27,14 +23,12 @@
 							</ibm-number>
 						</div>
 					</div>
-				
-				<!-- <div *ngIf="pointEarnedError">
+				<div *ngIf="pointEarnedError">
 					<p><span style="font-size: x-small; color: red">Points Earned is required</span></p>
 				</div>
 				<div *ngIf="minPointError">
 					<p><span style="font-size: x-small; color: red">Maximum Point Earned must be greater than Minimum Point Earned</span></p>
-				</div> -->
-			
+				</div>
 			<br />
 			<h6>Challenges Invloved in</h6>
 			<div style="display: flex;align-items: center;">
@@ -44,9 +38,7 @@
 					[(ngModel)]="stepThree.minChallangeInvolved" [invalid]="false" [invalidText]="invalidText" [disabled]="false">
 					</ibm-number>
 				</div>
-				
 				<p class="to">to</p>
-				
 				<div  class="custom-class-example" >
 					<p style="color: gray;font-size: 12px;">Max</p>
 					<ibm-number style="min-width: 10rem;" [label]="Max" [helperText]="[helperText]" [theme]="light" [min]="0" [max]="10"

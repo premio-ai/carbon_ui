@@ -44,22 +44,22 @@
 							<svg icon ibmIconUpload20></svg>&nbsp;
 							<p>Models Uploaded</p>
 						</div>
-						<p class="numbers">{{ phaseOneSubmission }}</p>
+						<p class="numbers">{{ modelsUploaded(phase.phaseId) }}</p>
 						<br />
 						<div class="icon_align">
 							<svg icon ibmIconChemistry20></svg>&nbsp;
 							<p>Models trained & tested</p>
 						</div>
-						<p class="numbers">{{ phaseOneSubmission }}</p>
+						<p class="numbers">{{ trainingModels(phase.phaseId) }}</p>
 						<br />
 						<div class="icon_align">
 							<svg icon ibmIconCheckmarkOutline20></svg>&nbsp;
 							<p>Models passed Scoring</p>
+							<!-- <p class="numbers">{{ modelPassed(phase?.phaseId) }}</p> -->
 						</div>
-						<p class="numbers">{{ phase?.passingScore || '10' }}</p>
 						<br />
 
-						<p class="numbers">{{ phase?.minimumModelScore }}</p>
+						<!-- <p class="numbers">{{ phase?.minimumModelScore }}</p> -->
 						<br />
 						<div class="icon_align">
 							<svg icon ibmIconTrophy20></svg>&nbsp;	

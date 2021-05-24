@@ -27,17 +27,17 @@
               </div> -->
 
               <div style="margin-left: auto;" *ngIf="isBookmarked(challenge?._id) == false">
-                <svg icon ibmIconBookmark20></svg>
+                <svg icon ibmIconBookmark20 (click)="bookmarkChallenge(challenge._id)" ></svg>
               </div>
 
               <div style="margin-left: auto;" *ngIf="isBookmarked(challenge?._id) == true">
-                <svg icon ibmIconBookmarkFilled20></svg>
+                <svg icon ibmIconBookmarkFilled20 (click)="unBookmarkChallenge(challenge._id)" ></svg>
               </div>
 
             </div>
             
-            <h6 style="margin-top: 6px;">Issued by REDEACTED</h6>
-            <p style="font-size: 10px;margin-top: 8px;">on {{ getDate(challenge?.createdAt) }}</p>
+            <h6>Issued by {{challenge?.insurerId.fullName}}</h6>
+            <p style="font-size: 10px; margin-top: 8px;">on {{ getDate(challenge?.createdAt) }}</p>
             <div ibmGrid [condensed]="gridCondensed">
               <div  ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
                 [condensed]="rowCondensed">
@@ -48,8 +48,8 @@
                   <!-- <ibm-checkbox [hideLabel]="hideLabel" (change)="bookmarkChallenge(challenge._id)"
                     style="margin-left: 150px; margin-top: -50px;"></ibm-checkbox> -->
                   <div class="content">
-                    <p class="unbold">Phase 1</p>
-                    <p class="nobold">55</p>
+                    <!-- <p class="unbold">Phase 1</p>
+                    <p class="nobold">55</p> -->
                   </div>
                 </div>
               </div>
@@ -60,14 +60,14 @@
                   <div style="display: flex; margin-left: 27px;">
                     <svg icon ibmIconEdtLoop16></svg>
                     &nbsp;&nbsp;
-                    <p style="margin-top: -4px;">{{challenge?.acceptedUsersCount}}</p>
+                    <p class="numbersicon">{{challenge?.acceptedUsersCount}}</p>
                   </div>
                 </div>
                 <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }">
                   <div style="display: flex; margin-left: 27px;">
                     <svg icon ibmIconUserMultiple16></svg>
                     &nbsp;&nbsp;
-                    <p style="margin-top: -4px;">{{challenge?.submissionsCount}}</p>
+                    <p class="numbersicon">{{challenge?.submissionsCount}}</p>
                   </div>
                 </div>
                 <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
@@ -78,14 +78,14 @@
                     ">
                     <svg icon ibmIconPartnership16></svg>
                     &nbsp;&nbsp;
-                    <p style="margin-top: -4px;">on off</p>
+                    <p class="numbersicon">on off</p>
                   </div>
                 </div>
                 <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
                   <div style="display: flex; margin-left: -33px;">
                     <svg icon ibmIconTime16></svg>
                     &nbsp;&nbsp;
-                    <p style="margin-top: -4px;">{{getExpiryDate(challenge?.expiryDate)}}</p>
+                    <p class="numbersicon">{{getExpiryDate(challenge?.expiryDate)}}</p>
                   </div>
                 </div>
               </div>
@@ -100,7 +100,7 @@
           <ibm-tile *ngFor="let challenge of bookmarkedChallenges" style="margin-bottom: 15px;">
             <p style="font-size: 18px;">{{ challenge?.title }}</p>
             <br />
-            <h6>Issued by REDEACTED</h6>
+            <h6>Issued by {{challenge?.insurerId.fullName}}</h6>
             <p style="font-size: 10px;">
               on {{ getDate(challenge?.createdAt) }}
             </p>
@@ -112,8 +112,8 @@
                 </div>
                 <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }">
                   <div class="content">
-                    <p class="unbold">Phase 1</p>
-                    <p class="nobold">55</p>
+                    <!-- <p class="unbold">Phase 1</p>
+                    <p class="nobold">55</p> -->
                   </div>
                 </div>
               </div>
