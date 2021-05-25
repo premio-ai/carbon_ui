@@ -82,3 +82,14 @@ svg.fille{
 .sideicon{
     display: flex; 
 }
+
+.invphasename{
+    font-weight: 600;margin-left: 1rem;margin-top: -10px;font-size: 13px;
+}
+
+@media screen and (max-width: 1024px) {
+  
+	.invphasename{
+        font-weight: 600;margin-left: 1rem;margin-top: -18px;font-size: 13px;
+    }
+  }
