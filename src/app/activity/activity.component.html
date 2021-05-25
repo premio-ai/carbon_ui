@@ -25,7 +25,7 @@
           &nbsp;
           <span>Users Accepted</span>
         </h6>
-        <p style="margin-left: 26px;margin-top: 4px;">{{challengeDetails?.acceptedUsersCount}}</p>
+        <p class="activitypara">{{challengeDetails?.acceptedUsersCount}}</p>
       </div>
       <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 3, sm: 12 }">
         <h6 class="date" style="display: flex; align-items: center;">
@@ -34,7 +34,7 @@
             Models in training & Testing
           </span>
         </h6>
-        <p style="margin-left: 21px;margin-top: 4px;">{{ modelUnderTraining }}</p>
+        <p class="activitypara">{{ modelUnderTraining }}</p>
       </div>
       <!-- <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }"></div> -->
       <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
@@ -43,7 +43,7 @@
           &nbsp;
           <span>Models passes Scoring</span>
         </h6>
-        <p style="margin-left: 25px;margin-top: 4px;">
+        <p class="activitypara">
           {{passedModelsCount}}
         </p>
       </div>

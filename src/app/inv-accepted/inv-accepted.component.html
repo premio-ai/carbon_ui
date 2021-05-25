@@ -138,9 +138,9 @@
 								<br />
 								<br />
 								<h4 class="sampleheaddata">Sample Data sets</h4>
-								<p  *ngFor='let data of phase.sampleDataFile; index as j' class="samplename">Download
-									{{i+1}}
-									<svg icon ibmIconDownload16 style="cursor: pointer;"
+								<p  *ngFor='let data of phase.sampleDataFile; index as j' class="samplename">Download Dataset
+									{{j+1}}
+									<svg icon ibmIconDownload16 style="cursor: pointer;"  class="svg" height="12" width="12"
 										(click)="downloadFile(i, j)"></svg>
 								</p>
 							</div>

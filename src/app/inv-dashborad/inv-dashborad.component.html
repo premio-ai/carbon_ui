@@ -16,8 +16,8 @@
 		<ibm-tabs [followFocus]="true" [isNavigation]="false" [cacheActive]="true">
 			<br/><br/><br/>
 			<ibm-tab heading="Active">
-				<div style="display: flex;flex-wrap: wrap;gap: 10px;">
-					<div class="custom-class-example" style="width: 32%;"
+				<div style="display: grid;grid-template-columns: repeat(3,minmax(0,1fr)) ;gap: 10px;">
+					<div class="custom-class-example" style="width: 100%;"
 						*ngFor="let activeChallenge of submittedActiveChallenges">
 						<app-inv-challenge-tile [challenge]="activeChallenge"></app-inv-challenge-tile>
 					</div>

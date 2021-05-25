@@ -58,3 +58,26 @@ text.donut-figure{
     position: relative;
     width: 100%;
 }
+
+.datapoint-tooltip {
+	display: none;
+}
+
+ibm-tab > div{
+	border: none;
+	outline: none;
+	}
+
+	.bx--cc--chart-svg{
+		padding: 26px;
+	}
+
+	.slice fill-2-1-1{
+		width: 128px;
+		height: 128px;
+	}
+	
+	.custom-class-example{
+		font-size: 10px;
+		padding-bottom : 0px !important;
+	}

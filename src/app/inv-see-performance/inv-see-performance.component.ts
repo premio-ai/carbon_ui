@@ -132,7 +132,7 @@ export class InvSeePerformanceComponent implements OnInit {
 					label: `${this.accuracyScoreData[0].value}` + '%'
 				}
 			},
-			height: "350px",
+			height: "220px",
 			getFillColor: (group: string) => {
 				if (group == 'Accuracy') {
 					return 'blue'
@@ -167,7 +167,7 @@ export class InvSeePerformanceComponent implements OnInit {
 					label: `${this.precisionScoreData[0].value}` + '%'
 				}
 			},
-			height: "350px",
+			height: "220px",
 			getFillColor: (group: string) => {
 				if (group == 'Precision') {
 					return 'blue'
@@ -202,7 +202,7 @@ export class InvSeePerformanceComponent implements OnInit {
 					label: `${this.recallScoreData[0].value}` + '%'
 				}
 			},
-			height: "350px",
+			height: "220px",
 			getFillColor: (group: string) => {
 				if (group == 'Recall') {
 					return 'blue'
