@@ -115,6 +115,7 @@ export class ModelReportComponent implements OnInit {
 
 		this.requestService.get(url, null).subscribe( data => {
 			this.challengeSubmission = data
+			console.log(this.challengeSubmission,"-----------challange sub");
 		})
 	}
 
