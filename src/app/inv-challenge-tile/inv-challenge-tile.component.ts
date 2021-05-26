@@ -11,25 +11,30 @@ import * as moment from 'moment';
 export class InvChallengeTileComponent implements OnInit {
 
   @Input() challenge: any;
+  @Input() submissionRanking: any;
+  @Input() submittedChallenges: any;
 
   constructor(private requestService: RequestService,
     private router: Router
   ) { }
-  activeChallenges: any[];
-  pastChallenges: any[];
-  submittedChallenges: any[] = []
+  // submittedChallenges: any[] = []
   userId: String;
 
   ngOnInit() {
-let userDetails = JSON.parse(localStorage.getItem('userDetails'))
-this.userId = userDetails._id
-    this.getSubmittedChallenge()
+    let userDetails = JSON.parse(localStorage.getItem('userDetails'))
+    this.userId = userDetails._id
+  }
+
+  ngOnChanges() {
+    if (this.challenge && this.challenge._id) {
+      // this.getSubmittedChallenge()
+    }
   }
 
   getSubmittedChallenge() {
     let url = 'submissionAllChallenge'
 
-    this.requestService.get(url, null).subscribe( data => {
+    this.requestService.get(url, null).subscribe(data => {
       this.submittedChallenges = data
     })
   }
@@ -41,30 +46,27 @@ this.userId = userDetails._id
   }
 
   getPhaseCount(challenge) {
-    
-    let numPhases = challenge.phases.length  
-    
+    let numPhases = challenge.phases.length
+
     let count = 0
-    if (this.submittedChallenges && this.submittedChallenges.length) {      
-      this.submittedChallenges.find( dt => {
+    if (this.submittedChallenges && this.submittedChallenges.length) {
+      this.submittedChallenges.find(dt => {
         if (dt.challengeId == challenge._id && dt.innovatorId == this.userId) {
           count += 1
         }
-      })      
+      })
     }
     return `Phases ${count} of ${numPhases}`
   }
 
-  getStatus(challenge, status) {
-    let numPhases = challenge.phases.length  
-    
+  getStatus(challenge) {
     let count = 0
-    if (this.submittedChallenges && this.submittedChallenges.length) {      
-      this.submittedChallenges.find( dt => {
+    if (this.submittedChallenges && this.submittedChallenges.length) {
+      this.submittedChallenges.find(dt => {
         if (dt.challengeId == challenge._id) {
           count += 1
         }
-      })      
+      })
     }
     if (count < 2) {
       return true
@@ -75,24 +77,23 @@ this.userId = userDetails._id
   }
 
   getPlace(challengeId) {
-    if (this.submittedChallenges && this.submittedChallenges.length) {
-      let temp = this.submittedChallenges.find(dt => dt.challengeId == challengeId)
-
-      if (temp.score > 90) {
-        return '1st place'
-      } else if (temp.score > 80) {
-        return '2nd place'
-      } else if (temp.score > 70) {
-        return '3rd place'
-      } else if (temp.score > 60) {
-        return '4th place'
-      } else if (temp.score > 50) {
-        return '5th place'
+    if (this.submissionRanking) {      
+      let data = this.submissionRanking.find( dt => {
+        if (dt.challengeId == challengeId) {
+          return dt
+        }
+      })
+  
+      if (data.rank == 1) {
+        return '1st place';
+      } else if (data.rank == 2) {
+        return '2nd place';
+      } else if (data.rank == 3) {
+        return '3rd place';
       } else {
-        return 'NA'
+        return '4th place';
       }
     }
-
   }
 
   getExpiryDate(dt) {

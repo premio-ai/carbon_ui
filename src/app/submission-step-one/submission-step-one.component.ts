@@ -26,7 +26,7 @@ export class SubmissionStepOneComponent implements OnInit {
     };
   }
 
-  ngOnChange() {
+  ngOnChanges() {
     if (this.challengeDetails && this.challengeSubmissionData) {
       this.getPhaseIndex();
     }

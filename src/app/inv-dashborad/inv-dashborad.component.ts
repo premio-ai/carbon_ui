@@ -20,13 +20,16 @@ export class InvDashboradComponent implements OnInit {
 	bookmarkedChallenges: any[];
 	submittedActiveChallenges: any[] = [];
 	submittedPastChallenges: any[] = [];
-	sorting: any[]
+	submissionRanking: any[] = [];
+	sorting: any[];
+	submittedChallenges: any[] = [];
 
 	ngOnInit() {
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
 		this.getAllActiveChallanges();
 		this.getAllPastChallanges();
-		// this.getSubmission();
+		this.getChallengeSubmissionRanking();
+		this.getSubmittedChallenge();
 
 		this.sorting = [
 			{ content: 'Most Popular' },
@@ -36,6 +39,21 @@ export class InvDashboradComponent implements OnInit {
 			{ content: 'End Date' }
 		];
 	}
+
+	getChallengeSubmissionRanking() {
+		let url = "submissionAllChallenge/submissions/rank";
+		this.requestService.get(url, null).subscribe(data => {
+			this.submissionRanking = data
+		})
+	}
+
+	getSubmittedChallenge() {
+		let url = 'submissionAllChallenge'
+	
+		this.requestService.get(url, null).subscribe(data => {
+		  this.submittedChallenges = data
+		})
+	  }
 
 	getBookmarkedChallenges() {
 		let url = "bookmarkChallenge";

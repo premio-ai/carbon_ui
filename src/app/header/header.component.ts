@@ -21,12 +21,13 @@ export class HeaderComponent implements OnInit {
 
 	activeChallenges: any[];
 	submittedActiveChallenges: any[] = [];
+	bookmarkedChallenges: any[] = []
 
 	ngOnInit() {
 		this.challengeCounts = 0;
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
 		setInterval(() => {
-			// this.getNotifications()				// TODO: uncomment before push
+			this.getNotifications()
 		}, 60000)
 		this.getChallengeCounts();
 		this.getInnovatorChallangeCount();
@@ -44,6 +45,22 @@ export class HeaderComponent implements OnInit {
 			this.getSubmission();
 		})
 	}
+
+	getBookmarkedChallenges() {
+		let url = "bookmarkChallenge";
+		this.requestService.get(url, null).subscribe(data => {
+	
+		  let tempData = []
+		  this.activeChallenges.filter(dt => {
+			data.map(res => {
+			  if (dt._id == res.challengeId) {
+				tempData.push(dt)
+			  }
+			})
+		  })
+		  this.bookmarkedChallenges = tempData;
+		})
+	  }
 
 	getSubmission() {
 		let url = "submissionAllChallenge";

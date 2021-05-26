@@ -36,7 +36,8 @@ export class ChallangePageComponent implements OnInit {
 		visibiltiy: {},
 		isActive: true,
 		witholdCompanyName: boolean,
-		witholdCompanyDescription: boolean
+		witholdCompanyDescription: boolean,
+		categoryType: string
 	}
 
 
@@ -74,12 +75,13 @@ export class ChallangePageComponent implements OnInit {
 			sampleDataFilePath: [""],
 			submissionsCount: 0,
 			acceptedUsersCount: 0,
-			challengeType: "CONTRACT",
+			challengeType: "",
 			phases: [],
 			visibiltiy: {},
 			isActive: true,
 			witholdCompanyName: false,
-			witholdCompanyDescription: false
+			witholdCompanyDescription: false,
+			categoryType: ''
 		}
 	}
 
@@ -95,7 +97,9 @@ export class ChallangePageComponent implements OnInit {
 		this.challange.Objective = stepOneData.objective;
 		this.challange.expiryDate = new Date(stepOneData.endDate).toDateString();
 		this.challange.witholdCompanyName = stepOneData.witholdCompanyName;
-    	this.challange.witholdCompanyDescription = stepOneData.witholdCompanyDescription;
+		this.challange.witholdCompanyDescription = stepOneData.witholdCompanyDescription;
+		this.challange.challengeType = stepOneData.challengeType
+		this.challange.categoryType = stepOneData.categoryType
 		this.current++;
 	}
 
@@ -104,7 +108,6 @@ export class ChallangePageComponent implements OnInit {
 	}
 
 	nextStepTwo(stepTwoData) {
-		// let phase = stepTwoData;
 		this.challange.phases = stepTwoData;
 		this.current++;
 	}

@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class SubmissionStepFourComponent implements OnInit {
   @Input() challengeSubmissionData: any;
+  @Input() challengeDetails: any;
   @Input() isChallengeAccepted: boolean;
   @Input() phasesSubmissionComplete: boolean;
 
@@ -23,8 +24,10 @@ export class SubmissionStepFourComponent implements OnInit {
     guidence: string,
     score: number
   }
+  totalphases: number
 
   ngOnInit() {
+    this.totalphases = this.challengeDetails.phases.length
   }
 
   previous() {
@@ -43,7 +46,7 @@ export class SubmissionStepFourComponent implements OnInit {
   }
 
   getPhase(model) {
-    console.log(this.challengeSubmissionData, "---this.challengeSubmissionData---46")
+    // console.log(this.challengeSubmissionData, "---this.challengeSubmissionData---46")
     
   }
 
