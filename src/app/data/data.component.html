@@ -28,8 +28,8 @@
       <br />
       <br />
       <div *ngFor='let data of phase.sampleDataFile; index as j' style="display: flex;">
-        <p >Download Dataset {{j+1}} <svg icon ibmIconDownload16 (click)="downloadFile(i, j)"></svg></p>
-        <span style="margin-left: 30px; margin-top: 5px;">Downloaded {{data.downloadCount}} times</span>
+        <p style="font-size:13px">Download Dataset {{j+1}} <svg class="SVG" icon ibmIconDownload16 (click)="downloadFile(i, j)"></svg>
+        <span class="dataspan">Downloaded {{data.downloadCount}} times</span></p>
       </div>
       <br />
       <br />

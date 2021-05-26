@@ -19,6 +19,7 @@ export class InvAcceptedComponent implements OnInit {
 
 	pageNo: number;
 	toasterMsg: boolean;
+	withdrawToasterMsg: boolean;
 	challengeId: any;
 	leaderboard: any[];
 	isChallengeAccepted: boolean;
@@ -164,6 +165,17 @@ export class InvAcceptedComponent implements OnInit {
 		})
 	}
 
+	withdrawChallenge(challengeId) {
+		let data = {
+			challengesIds: [challengeId]
+		}
+		let url = 'userChallenge';
+		this.requestService.put(url, data).subscribe(data => {
+			this.getChallengeAcceptance(challengeId)
+			this.showWithdrawToaster()
+		})
+	}
+
 	showToaster = (() => {
 		this.toasterMsg = true
 		setTimeout(() => {
@@ -171,8 +183,16 @@ export class InvAcceptedComponent implements OnInit {
 		}, 3000)
 	})
 
+	showWithdrawToaster = (() => {
+		this.withdrawToasterMsg = true
+		setTimeout(() => {
+			this.withdrawToasterMsg = false
+		}, 3000)
+	})
+
 	closeToaster() {
 		this.toasterMsg = false
+		this.withdrawToasterMsg = false
 	}
 
 	navigateBack() {
@@ -266,7 +286,7 @@ export class InvAcceptedComponent implements OnInit {
 		this.submissionData.modelName = stepTwoData.modelName
 		this.submissionData.modelDescription = stepTwoData.description;
 		this.submissionData.approch = stepTwoData.approach
-		this.submissionData.language = stepTwoData.language				// language attribute not present
+		this.submissionData.language = stepTwoData.language
 
 		this.current++
 	}
@@ -279,7 +299,6 @@ export class InvAcceptedComponent implements OnInit {
 		let url = 'submissionAllChallenge';
 		this.requestService.post(url, this.submissionData).subscribe(data => {
 			this.getSubmissionByChallengeId(this.challengeId);
-			// this.getChallengeDetails(this.challengeId)
 			this.getLeaderboard(this.challengeId, this.pageOffset)
 			this.current++;
 		})

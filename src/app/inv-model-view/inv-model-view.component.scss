@@ -77,3 +77,14 @@ align-items: center;
 	height: 50px;
 	padding: 17px;
 }
+.editicon{
+	margin-top: 14px; margin-left: 2px;
+}
+
+@media screen and (max-width: 1024px) {
+  
+	.editicon{
+		margin-top: 30px; margin-left: 2px;
+    }
+    
+  }

@@ -11,22 +11,11 @@
       </ibm-checkbox>
     </div>
   </div>
-</div>
+</div>  
 
 
 <div ibmGrid [condensed]="gridCondensed" class="gridchange">
-  <div ibmRow [gutter]="gutter" class="left-border" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
-    [condensed]="rowCondensed" *ngIf="compareModelData && compareModelData?.length>1">
-    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }" style="margin-left: 15px;">
-      <h6>Model Comparison</h6>
-      <p style="color: #161616;">{{compareModelData?.length}} models selected</p>
-      <br />
-      <button class="btn-compare" [ibmButton]="ibmButton" [size]="size" (click)="compareModels()">
-        Compare
-      </button>
-    </div>
-   
-  </div>
+  
   <div class="parentdiv">
     <ibm-dropdown [label]="'Sort by'" [helperText]="helperText" [size]="size" [invalid]="invalid"
         [invalidText]="invalidText" [theme]="theme" placeholder="Newest" [disabled]="disabled"
@@ -41,6 +30,19 @@
       <br/><br/>
       <ibm-tab heading="All">
         <div ibmGrid [condensed]="gridCondensed" class="taggrid">
+          <div ibmRow [gutter]="gutter" class="left-border" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
+    [condensed]="rowCondensed" *ngIf="compareModelData && compareModelData?.length>1">
+    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }" style="margin-left: 15px;">
+      <h6>Model Comparison</h6>
+      <p style="color: #161616;">{{compareModelData?.length}} models selected</p>
+      <br />
+      <button class="btn-compare" [ibmButton]="ibmButton" [size]="size" (click)="compareModels()">
+        Compare
+      </button>
+    </div>
+   
+  </div>
+  <br/>
           <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
             [condensed]="rowCondensed">
             <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 8, sm: 12 }"
