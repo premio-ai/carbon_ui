@@ -121,8 +121,8 @@ export class InvChallengeComponent implements OnInit {
   }
 
   isBookmarked(challengeId) {
-    if (this.bookmarkedChallenges.length > 0) {      
-      let result = this.bookmarkedChallenges.some( dt => {
+    if (this.bookmarkedChallenges.length > 0) {
+      let result = this.bookmarkedChallenges.some(dt => {
         if (dt._id == challengeId) {
           return true;
         } else {
@@ -130,6 +130,8 @@ export class InvChallengeComponent implements OnInit {
         }
       })
       return result;
+    } else {
+      return false;
     }
   }
 
@@ -182,9 +184,9 @@ export class InvChallengeComponent implements OnInit {
   unBookmarkChallenge(challengeId) {
 
     let url = 'bookmarkChallenge'
-let data = {
-  challengeId: challengeId
-}
+    let data = {
+      challengeId: challengeId
+    }
     this.requestService.put(url, data).subscribe(data => {
       this.getBookmarkedChallenges()
     })

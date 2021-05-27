@@ -2,16 +2,17 @@
 <br /><br />
 <div class="bx--grid">
 	<div class="bx--row line-padding">
-		<div class="bx--col-md-1" style="padding-left: 8%">
+		<div class="bx--col-md-1" style="padding-left: 8%; cursor: pointer;">
 			<svg icon ibmIconArrowLeft16 (click)="navigateBack()"></svg>
 		</div>
 		<div class="bx--col-md-4">
 			<ibm-breadcrumb [noTrailingSlash]="noTrailingSlash">
-				<ibm-breadcrumb-item (click)="invChallenges()" class="navigation">
+				<ibm-breadcrumb-item (click)="invChallenges()" class="navigation" style="cursor: pointer; color: blue;" >
 					Browse
 				</ibm-breadcrumb-item>
-				<ibm-breadcrumb-item class="navigation">
-					Challenge title
+				<ibm-breadcrumb-item (click)="viewChallenge(challengeDetails?._id)" class="navigation"
+					style="cursor: pointer; color: blue;">
+					{{challengeDetails?.title}}
 				</ibm-breadcrumb-item>
 			</ibm-breadcrumb>
 		</div>
@@ -107,7 +108,7 @@
 								<h4>Reward</h4>
 								<br />
 								<p style="font-size: 14px; line-height: 1.5">
-									<svg icon ibmIconPartnership16></svg> Contract
+									<svg icon ibmIconPartnership16></svg> {{challengeDetails?.challengeType}}
 								</p>
 								<br />
 								<p class="para">

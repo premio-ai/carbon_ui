@@ -6,17 +6,18 @@
 
   <div class="bx--row line-padding">
 
-    <div class="bx--col-md-1" style="padding-left: 8%;margin-top: 26px;">
+    <div class="bx--col-md-1" style="padding-left: 8%; margin-top: 26px; cursor: pointer;">
       <svg icon ibmIconArrowLeft16 (click)="navigateBack()"></svg>
     </div>
 
     <div class="bx--col-md-4" style="margin-top: 26px;">
 
       <ibm-breadcrumb [noTrailingSlash]="noTrailingSlash">
-        <ibm-breadcrumb-item href="/" class="navigation">
+        <ibm-breadcrumb-item href="/" class="navigation" style="cursor: pointer; color: blue;" >
           Activity Dashboard
         </ibm-breadcrumb-item>
-        <ibm-breadcrumb-item (click)="viewChallenge(challengeDetails?._id)" class="navigation">
+        <ibm-breadcrumb-item (click)="viewChallenge(challengeDetails?._id)" class="navigation"
+          style="cursor: pointer; color: blue;">
           {{challengeDetails?.title}}
         </ibm-breadcrumb-item>
       </ibm-breadcrumb>

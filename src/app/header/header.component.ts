@@ -95,7 +95,7 @@ export class HeaderComponent implements OnInit {
 			this.router.navigateByUrl('/')
 		}
 		if (this.userDetails.role == 'Innovator') {
-			this.router.navigateByUrl('invchallenges')
+			this.router.navigateByUrl('invdash')
 		}
 	}
 

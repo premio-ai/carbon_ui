@@ -46,10 +46,10 @@
                         Challenge Category</ibm-label>
                     <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 6, 'sm': 12}">
 						<ibm-dropdown [label]="Min" [helperText]="helperText" [size]="size" [invalid]="invalid" [invalidText]="invalidText"
-							[theme]="theme" placeholder="Select Category" [disabled]="disabled" (selected)="selectCategory($event)" (onClose)="onClose($event)">
+							[theme]="theme" placeholder="Select Category" (selected)="selectCategory($event)">
 							<ibm-dropdown-list [items]="category"></ibm-dropdown-list>
 						</ibm-dropdown>
-						<div *ngIf="challengeCategoryError">
+						<div *ngIf="categoryTypeError">
 							<p><span style="font-size: x-small; color: red">Challenge Category is required</span></p>
 						</div>
 					</div>
@@ -62,10 +62,10 @@
                         Challenge Contract Type</ibm-label>
 					<div ibmCol class="custom-class-example" [columnNumbers]="{'md': 6, 'sm': 12}">
 						<ibm-dropdown [label]="Min" [helperText]="helperText" [size]="size" [invalid]="invalid" [invalidText]="invalidText"
-							[theme]="theme" placeholder="Select Challenge Type" [disabled]="disabled" (selected)="selectContract($event)" (onClose)="onClose($event)">
+							[theme]="theme" placeholder="Select Challenge Type" (selected)="selectContract($event)">
 							<ibm-dropdown-list [items]="contractType"></ibm-dropdown-list>
 						</ibm-dropdown>
-						<div *ngIf="challengeCategoryError">
+						<div *ngIf="challengeTypeError">
 							<p><span style="font-size: x-small; color: red">Challenge Type is required</span></p>
 						</div>
 					</div>

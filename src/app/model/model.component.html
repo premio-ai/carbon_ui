@@ -11,37 +11,37 @@
       </ibm-checkbox>
     </div>
   </div>
-</div>  
+</div>
 
 
 <div ibmGrid [condensed]="gridCondensed" class="gridchange">
-  
+
   <div class="parentdiv">
     <ibm-dropdown [label]="'Sort by'" [helperText]="helperText" [size]="size" [invalid]="invalid"
-        [invalidText]="invalidText" [theme]="theme" placeholder="Newest" [disabled]="disabled"
-        (selected)="sortSelect($event)" (onClose)="onClose($event)">
-        <ibm-dropdown-list [items]="sorting"></ibm-dropdown-list>
-      </ibm-dropdown>
+      [invalidText]="invalidText" [theme]="theme" placeholder="Newest" [disabled]="disabled"
+      (selected)="sortSelect($event)" (onClose)="onClose($event)">
+      <ibm-dropdown-list [items]="sorting"></ibm-dropdown-list>
+    </ibm-dropdown>
   </div>
   <br />
   <br />
-  <div  *ngIf="!modelComparison && modelData" style="margin-top: -40px;">
+  <div *ngIf="!modelComparison && modelData" style="margin-top: -40px;">
     <ibm-tabs [followFocus]="followFocus" [isNavigation]="isNavigation" [cacheActive]="cacheActive">
-      <br/><br/>
+      <br /><br />
       <ibm-tab heading="All">
         <div ibmGrid [condensed]="gridCondensed" class="taggrid">
           <div ibmRow [gutter]="gutter" class="left-border" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
-    [condensed]="rowCondensed" *ngIf="compareModelData && compareModelData?.length>1">
-    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }" style="margin-left: 15px;">
-      <h6>Model Comparison</h6>
-      <p style="color: #161616;">{{compareModelData?.length}} models selected</p>
-      <br />
-      <button class="btn-compare" [ibmButton]="ibmButton" [size]="size" (click)="compareModels()">
-        Compare
-      </button>
-    </div>
-  </div>
-  <br/>
+            [condensed]="rowCondensed" *ngIf="compareModelData && compareModelData?.length>1">
+            <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }" style="margin-left: 15px;">
+              <h6>Model Comparison</h6>
+              <p style="color: #161616;">{{compareModelData?.length}} models selected</p>
+              <br />
+              <button class="btn-compare" [ibmButton]="ibmButton" [size]="size" (click)="compareModels()">
+                Compare
+              </button>
+            </div>
+          </div>
+          <br />
           <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
             [condensed]="rowCondensed">
             <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 8, sm: 12 }"
@@ -52,10 +52,10 @@
                     <h3>{{ i + 1 }}. {{ data?.modelName }}</h3>
                   </div>
                   <div style="margin-left: auto;" *ngIf="isBookmarked(data?._id) == false">
-                    <svg icon ibmIconBookmark20 (click)="bookmark(data._id)" ></svg>
+                    <svg icon ibmIconBookmark20 (click)="bookmark(data._id)"></svg>
                   </div>
                   <div style="margin-left: auto;" *ngIf="isBookmarked(data?._id) == true">
-                    <svg icon ibmIconBookmarkFilled20 (click)="unBookmark(data)" ></svg>
+                    <svg icon ibmIconBookmarkFilled20 (click)="unBookmark(data)"></svg>
                   </div>
                 </div>
                 <div ibmGrid [condensed]="gridCondensed">
@@ -144,10 +144,10 @@
                       <p class="para">{{ data?.modelDescription }}</p>
                     </div>
                     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-                
+
                       <div class="content" style="margin-left: 140px; margin-top: 3px;">
-                        <p class="unbold">Phase 1</p>
-                        <p class="nobold">55</p>
+                        <!-- <p class="unbold">Phase 1</p>
+                        <p class="nobold">55</p> -->
                       </div>
                     </div>
                   </div>
@@ -204,10 +204,16 @@
       <tr>
         <td>Model discription</td>
         <td *ngFor="let model of compareModelData">
-          {{ model?.modelDescription }}
-          <p (click)="readMore()">
-            <span [ngClass]="readmore ? 'readmore02' : 'readmore01'"  id="read_more">
+          <p *ngIf="showLess">
+            {{ showLessStr(model?.modelDescription) }}...
+            <span (click)="readMore()" style="color: cadetblue; font-size: x-small; cursor: pointer;">
               Read More
+            </span>
+          </p>
+          <p *ngIf="!showLess">
+            {{ model?.modelDescription }}
+            <span (click)="readLess()" style="color: cadetblue; font-size: x-small; cursor: pointer;">
+              Read Less
             </span>
           </p>
         </td>
@@ -255,7 +261,7 @@
       <th>
         <span class="bx--table-header-label"></span>
       </th>
- 
+
     </tr>
     <tbody>
       <tr>
@@ -289,10 +295,8 @@
         <td *ngFor="let model of compareModelData">
           <!-- <button class="btn-compare" [ibmButton]="ibmButton" [size]="'small'"
             (click)="viewModelReport(model?._id)">View</button> -->
-            <button
-            class="bx--btn1 bx--btn--primary bx--btn--sm"
-             type="button"  (click)="viewModelReport(model?._id)">
-            View 
+          <button class="bx--btn1 bx--btn--primary bx--btn--sm" type="button" (click)="viewModelReport(model?._id)">
+            View
           </button>
         </td>
       </tr>

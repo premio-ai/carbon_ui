@@ -3,19 +3,17 @@
 <br />
 <div class="bx--grid">
   <div class="bx--row line-padding">
-    <div class="bx--col-md-1" style="padding-left: 8%;">
-      <svg icon ibmIconArrowLeft16 (click)="navigateBack()" ></svg>
+    <div class="bx--col-md-1" style="padding-left: 8%; cursor: pointer;">
+      <svg icon ibmIconArrowLeft16 (click)="navigateBack()"></svg>
     </div>
     <div class="bx--col-md-4">
       <ibm-breadcrumb [noTrailingSlash]="noTrailingSlash">
-        <ibm-breadcrumb-item (click)="browse()" class="navigation">
+        <ibm-breadcrumb-item (click)="invChallenges()" class="navigation" style="cursor: pointer; color: blue;">
           Browse
         </ibm-breadcrumb-item>
-        <ibm-breadcrumb-item (click)="viewChallenge(challenge._id)" class="navigation">
-          {{challengeDetails.title}}
-        </ibm-breadcrumb-item>
-        <ibm-breadcrumb-item class="navigation">
-          {{modelDetails.modelName}}
+        <ibm-breadcrumb-item (click)="challengeTitle(challengeDetails?._id)" class="navigation"
+          style="cursor: pointer; color: blue;">
+          {{challengeDetails?.title}}
         </ibm-breadcrumb-item>
       </ibm-breadcrumb>
     </div>
@@ -55,25 +53,18 @@
       <div class="bx--form-item">
         <div class="bx--dropdown__wrapper" style="width:222px">
           <div class="bx--form__helper-text">Filter</div>
-          <ibm-dropdown [label]="Min" [helperText]="helperText" [size]="size" [invalid]="invalid" [invalidText]="invalidText"
-          [theme]="theme" placeholder="Phase 1 " [disabled]="disabled" (selected)="selected($event)" (onClose)="onClose($event)" >
-         
-          <ibm-dropdown-list >2</ibm-dropdown-list>
-        </ibm-dropdown>
+          <ibm-dropdown [label]="Min" [helperText]="helperText" [size]="size" [invalid]="invalid"
+            [invalidText]="invalidText" [theme]="theme" placeholder="Phase 1 " [disabled]="disabled"
+            (selected)="selected($event)" (onClose)="onClose($event)">
+            <ibm-dropdown-list>2</ibm-dropdown-list>
+          </ibm-dropdown>
         </div>
       </div>
 
       <div class="bx--row line-padding">
-        <div
-          class="bx--col-md-1"
-          style="padding-left: 2%; white-space: nowrap;"
-        >
-        <br/>
-         
-          <p
-             class="para"
-          >
-            Download Trained Model
+        <div class="bx--col-md-1" style="padding-left: 2%; white-space: nowrap;">
+          <br />
+          <p class="para">Download Trained Model
             <svg icon ibmIconDownload16 (click)="downloadFile(data[i])"></svg>
           </p>
         </div>
@@ -83,36 +74,21 @@
 
       <div style="display: flex; gap: 10px;">
         <ibm-tile style="flex-grow: 1;">
-          <ibm-donut-chart
-            [data]="accuracyScoreData"
-            [options]="accuracyOptions"
-            style="background-color: #f4f4f4 !important;align-items: center;"
-          ></ibm-donut-chart>
+          <ibm-donut-chart [data]="accuracyScoreData" [options]="accuracyOptions"
+            style="background-color: #f4f4f4 !important;align-items: center;"></ibm-donut-chart>
         </ibm-tile>
         <ibm-tile style="flex-grow: 1;">
-          <ibm-donut-chart
-            [data]="precisionScoreData"
-            [options]="precisionOptions"
-            style="background-color: #f4f4f4 !important;"
-          ></ibm-donut-chart>
+          <ibm-donut-chart [data]="precisionScoreData" [options]="precisionOptions"
+            style="background-color: #f4f4f4 !important;"></ibm-donut-chart>
         </ibm-tile>
         <ibm-tile style="flex-grow: 1;">
-          <ibm-donut-chart
-            [data]="recallScoreData"
-            [options]="recallOptions"
-            style="background-color: #f4f4f4 !important;"
-          ></ibm-donut-chart>
+          <ibm-donut-chart [data]="recallScoreData" [options]="recallOptions"
+            style="background-color: #f4f4f4 !important;"></ibm-donut-chart>
         </ibm-tile>
       </div>
-
       <br />
-      <ibm-line-chart
-        [data]="data1"
-        [options]="options1"
-        style="background-color: #f4f4f4 !important;"
-        class="chartline"
-      ></ibm-line-chart>
-      
+      <ibm-line-chart [data]="data1" [options]="options1" style="background-color: #f4f4f4 !important;"
+        class="chartline"></ibm-line-chart>
     </div>
   </div>
 </div>

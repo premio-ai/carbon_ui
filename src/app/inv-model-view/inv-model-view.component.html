@@ -3,18 +3,20 @@
 <br />
 <div class="bx--grid">
   <div class="bx--row line-padding">
-    <div class="bx--col-md-1" style="padding-left: 8%;">
+    <div class="bx--col-md-1" style="padding-left: 8%; cursor: pointer;">
       <svg icon ibmIconArrowLeft16 (click)="navigateBack()"></svg>
     </div>
     <div class="bx--col-md-4">
       <ibm-breadcrumb [noTrailingSlash]="noTrailingSlash">
-        <ibm-breadcrumb-item (click)="invChallenges()" class="navigation">
+        <ibm-breadcrumb-item (click)="invChallenges()" class="navigation" style="cursor: pointer; color: blue;">
           Browse
         </ibm-breadcrumb-item>
-        <ibm-breadcrumb-item class="navigation" (click)="challengeTitle(challengeDetails?._id)" >
+        <ibm-breadcrumb-item class="navigation" (click)="challengeTitle(challengeDetails?._id)"
+          style="cursor: pointer; color: blue;">
           {{challengeDetails?.title}}
         </ibm-breadcrumb-item>
-        <ibm-breadcrumb-item class="navigation">
+        <ibm-breadcrumb-item class="navigation" style="cursor: pointer; color: blue;"
+          (click)="viewModel(modelDetails?._id)">
           {{modelDetails?.modelName}}
         </ibm-breadcrumb-item>
       </ibm-breadcrumb>

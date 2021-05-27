@@ -136,4 +136,12 @@ export class InvModelViewComponent implements OnInit {
     this.router.navigateByUrl('invaccepted/' + challengeId)
   }
 
+  invChallenges() {
+    this.router.navigateByUrl('invchallenges')
+  }
+
+  viewModel(modelId) {
+    this.router.navigateByUrl('invmodel-view/' + modelId)
+  }
+
 }

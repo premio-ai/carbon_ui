@@ -21,10 +21,11 @@ export class ModelComponent {
   selectedphaseId: any
   compareModelData: any[] = []
   modelComparison: boolean
-  readmore: boolean
+  showLess: boolean
   sorting: any[]
 
   ngOnInit() {
+    this.showLess = true;
     this.sorting = [
       { content: 'Most Popular' },
       { content: 'Least Popular' },
@@ -131,7 +132,7 @@ export class ModelComponent {
       let tempData = [];
       this.submissionChallengeDetails.map(dt => {
         data.filter(res => {
-          if (dt.challengeId == res.challengeId) {
+          if (dt.challengeId == res.challengeId && dt._id == res.submissionId) {
             tempData.push(dt)
           }
         })
@@ -141,8 +142,8 @@ export class ModelComponent {
   }
 
   isBookmarked(modelId) {
-    if (this.bookmarkedSubmissions.length > 0) {      
-      let result = this.bookmarkedSubmissions.some( dt => {
+    if (this.bookmarkedSubmissions.length > 0) {
+      let result = this.bookmarkedSubmissions.some(dt => {
         if (dt._id == modelId) {
           return true;
         } else {
@@ -153,11 +154,11 @@ export class ModelComponent {
     } else {
       return false
     }
-    }
+  }
 
   bookmark(modelId) {
     let payload = {}
-        this.modelData.filter( dt => {
+    this.modelData.filter(dt => {
       if (dt._id == modelId) {
         payload = {
           challengeId: dt.challengeId,
@@ -222,9 +223,15 @@ export class ModelComponent {
   }
 
   readMore() {
-    console.log(this.readmore, "---this.readmore---81")
-    this.readmore = true
-    console.log(this.readmore, "---this.readmore---83")
+    this.showLess = false
+  }
+
+  readLess() {
+    this.showLess = true
+  }
+
+  showLessStr(str) {
+    return str.substring(0, 100)
   }
 
 }

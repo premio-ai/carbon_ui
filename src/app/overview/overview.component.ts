@@ -59,32 +59,38 @@ export class OverviewComponent implements OnInit {
 
   modelsUploaded(phaseId) {
     let count = 0;
-    this.submissionChallengeDetails.find(dt => {
-      if (dt.phaseId == phaseId) {
-        count += 1
-      }
-    })
-    return count;
+    if (this.submissionChallengeDetails) {
+      this.submissionChallengeDetails.find(dt => {
+        if (dt.phaseId == phaseId) {
+          count += 1
+        }
+      })
+      return count;
+    }
   }
 
   trainingModels(phaseId) {
     let count = 0;
-    this.submissionChallengeDetails.find(dt => {
-      if (dt.phaseId == phaseId) {
-        count += 1
-      }
-    })
-    return count;
+    if (this.submissionChallengeDetails) {
+      this.submissionChallengeDetails.find(dt => {
+        if (dt.phaseId == phaseId) {
+          count += 1
+        }
+      })
+      return count;
+    }
   }
 
   modelPassed(phaseId) {
-let count = 0;
-    this.submissionChallengeDetails.find(dt => {
-      if (dt.phaseId == phaseId && dt.score >= this.challengeDetails.phases[this.phaseNo].passingScore) {
-        count += 1
-      }
-    })
-    return count;
+    let count = 0;
+    if (this.submissionChallengeDetails) {
+      this.submissionChallengeDetails.find(dt => {
+        if (dt.phaseId == phaseId && dt.score >= this.challengeDetails.phases[this.phaseNo].passingScore) {
+          count += 1
+        }
+      })
+      return count;
+    }
   }
 
   showLeaderboard() {

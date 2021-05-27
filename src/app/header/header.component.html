@@ -17,8 +17,8 @@
 	</ibm-header-global>
 </ibm-header> -->
 
-<ibm-header [route]="['/']" brand="" >
-  <a href="/"> <img src="assets/logo.png" class="imglogo" /></a>
+<ibm-header brand="" >
+  <a (click)="logoRoute()" style="cursor: pointer;" > <img src="assets/logo.png" class="imglogo" /></a>
   <ibm-hamburger *ngIf="hasHamburger" [active]="active" (selected)="active = !active"></ibm-hamburger>
   <ibm-header-navigation>
     <ibm-header-item (click)="navigate()" style="border-bottom: 2px solid white;">Activity</ibm-header-item>

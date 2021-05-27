@@ -92,6 +92,7 @@ export class ChallangePageComponent implements OnInit {
 	}
 
 	nextStepOne(stepOneData) {
+		console.log(stepOneData, "---stepOneData---95")
 		this.challange.title = stepOneData.title;
 		this.challange.description = stepOneData.description;
 		this.challange.Objective = stepOneData.objective;

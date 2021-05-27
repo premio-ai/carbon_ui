@@ -309,4 +309,8 @@ export class InvAcceptedComponent implements OnInit {
 		this.router.navigateByUrl('invchallenges')
 	}
 
+	viewChallenge(challengeId) {
+		this.router.navigateByUrl('invaccepted/' + challengeId)
+	}
+
 }
