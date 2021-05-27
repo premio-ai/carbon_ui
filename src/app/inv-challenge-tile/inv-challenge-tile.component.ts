@@ -17,26 +17,11 @@ export class InvChallengeTileComponent implements OnInit {
   constructor(private requestService: RequestService,
     private router: Router
   ) { }
-  // submittedChallenges: any[] = []
   userId: String;
 
   ngOnInit() {
     let userDetails = JSON.parse(localStorage.getItem('userDetails'))
     this.userId = userDetails._id
-  }
-
-  ngOnChanges() {
-    if (this.challenge && this.challenge._id) {
-      // this.getSubmittedChallenge()
-    }
-  }
-
-  getSubmittedChallenge() {
-    let url = 'submissionAllChallenge'
-
-    this.requestService.get(url, null).subscribe(data => {
-      this.submittedChallenges = data
-    })
   }
 
   getDate(time) {
@@ -73,25 +58,26 @@ export class InvChallengeTileComponent implements OnInit {
     } else if (count >= 2) {
       return false
     }
-
   }
 
   getPlace(challengeId) {
-    if (this.submissionRanking) {      
+    if (this.submissionRanking) {
       let data = this.submissionRanking.find( dt => {
         if (dt.challengeId == challengeId) {
           return dt
         }
       })
   
-      if (data.rank == 1) {
-        return '1st place';
-      } else if (data.rank == 2) {
-        return '2nd place';
-      } else if (data.rank == 3) {
-        return '3rd place';
-      } else {
-        return '4th place';
+      if (data) {
+        if (data.rank == 1) {
+          return '1st place';
+        } else if (data.rank == 2) {
+          return '2nd place';
+        } else if (data.rank == 3) {
+          return '3rd place';
+        } else {
+          return '4th place';
+        }
       }
     }
   }

@@ -108,11 +108,12 @@ export class ActivityComponent implements OnInit {
 
   exportexcel() {
     if (this.submissionChallengeDetails && this.submissionChallengeDetails.length > 0) {      
-      let element = document.getElementById('excel-table'); 
+      let element = document.getElementById('excel-table');
       const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+      delete ws['E1']
+      delete ws['E2']
       const wb: XLSX.WorkBook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-  
       XLSX.writeFile(wb, 'ExcelSheet.xlsx');
     }
   }

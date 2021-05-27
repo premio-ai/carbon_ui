@@ -57,9 +57,6 @@ export class DataComponent implements OnInit {
       let docUrl = 'http://localhost:3000/' + docName
 
       if (docUrl.length) {
-        let imgUrl = 'http://localhost:3000/bc8af0906fb566c23cac8ebfe6480d5c.png'
-        let pdfUrl = 'http://localhost:3000/eb99fd7d5386810a6b33363e9da82d73d.pdf'
-
         await fetch(docUrl).then(async res => {
           return await res.blob()
         }).then(blob => {

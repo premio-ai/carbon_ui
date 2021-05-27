@@ -22,6 +22,17 @@ export class ModelComponent {
   compareModelData: any[] = []
   modelComparison: boolean
   readmore: boolean
+  sorting: any[]
+
+  ngOnInit() {
+    this.sorting = [
+      { content: 'Most Popular' },
+      { content: 'Least Popular' },
+      { content: 'Newest' },
+      { content: 'Oldest' },
+      { content: 'End Date' }
+    ];
+  }
 
   ngOnChanges() {
     if (this.challengeDetails && this.submissionChallengeDetails) {
@@ -50,19 +61,8 @@ export class ModelComponent {
   }
 
   makeInitialModelData() {
-
     this.selectedphaseId = this.challengeDetails.phases[0].phaseId
-
     this.handlePhaseClick(this.challengeDetails.phases[0].phaseId)
-
-    // this.challengeDetails.phases.map((dt, i) => {
-    //   this.submissionChallengeDetails.map(res => {
-    //     if (res.phaseId == dt.phaseId) {
-    //       data.push(res)
-    //     }
-    //   })
-    // })
-    // this.modelData = data
   }
 
   checked(phaseId) {
@@ -88,6 +88,41 @@ export class ModelComponent {
   handlePhaseClick(id) {
     this.selectedphaseId = id
     this.makeModelDataByPhase()
+  }
+
+  sortSelect(sort) {
+    let criteria = sort.item.content;
+
+    if (criteria == 'Newest') {
+      this.modelData.sort((a, b) => {
+        return b.createdAt - a.createdAt
+      })
+    }
+
+    if (criteria == 'Oldest') {
+      this.modelData.sort((a, b) => {
+        return a.createdAt - b.createdAt
+      })
+    }
+
+    if (criteria == 'End Date') {
+      this.modelData.sort((a, b) => {
+        return new Date(b.expiryDate).getTime() - new Date(a.expiryDate).getTime()
+      })
+    }
+
+    if (criteria == 'Most Popular') {
+      this.modelData.sort((a, b) => {
+        return b.acceptedUsersCount - a.acceptedUsersCount
+      })
+    }
+
+    if (criteria == 'Least Popular') {
+      this.modelData.sort((a, b) => {
+        return a.acceptedUsersCount - b.acceptedUsersCount
+      })
+    }
+
   }
 
   getBookmarkedSubmission() {

@@ -115,11 +115,9 @@ export class ModelReportComponent implements OnInit {
 
 		this.requestService.get(url, null).subscribe( data => {
 			this.challengeSubmission = data
-			console.log(this.challengeSubmission,"-----------challange sub");
 		})
 	}
 
-	//TODO: change route for submissionAllChallenge
 	getInnovatorChallengeCounts() {
 		this.requestService.get('submissionAllChallenge/innovatorCounts/innovator', null).subscribe(data => {
 			this.challengeCounts = data
@@ -420,5 +418,8 @@ export class ModelReportComponent implements OnInit {
 		}
 	};
 
+	viewChallenge(challengeId) {
+		this.router.navigateByUrl('challenge/' + challengeId)
+	}
 
 }

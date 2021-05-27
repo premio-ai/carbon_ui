@@ -8,10 +8,10 @@
     </div>
     <div class="bx--col-md-4">
       <ibm-breadcrumb [noTrailingSlash]="noTrailingSlash">
-        <ibm-breadcrumb-item class="navigation">
+        <ibm-breadcrumb-item (click)="invChallenges()" class="navigation">
           Browse
         </ibm-breadcrumb-item>
-        <ibm-breadcrumb-item class="navigation">
+        <ibm-breadcrumb-item class="navigation" (click)="challengeTitle(challengeDetails?._id)" >
           {{challengeDetails?.title}}
         </ibm-breadcrumb-item>
         <ibm-breadcrumb-item class="navigation">

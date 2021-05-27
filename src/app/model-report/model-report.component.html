@@ -2,177 +2,168 @@
 <br />
 <br />
 
-<div style="overflow: hidden;margin-top: -27px;"> 
+<div style="overflow: hidden;margin-top: -27px;">
 
-<div class="bx--row line-padding">
-  
-  <div class="bx--col-md-1" style="padding-left: 8%;margin-top: 26px;">
-    <svg icon ibmIconArrowLeft16 (click)="navigateBack()" ></svg>
-  </div>
+  <div class="bx--row line-padding">
 
-  <div class="bx--col-md-4" style="margin-top: 26px;">
-    
-    <ibm-breadcrumb [noTrailingSlash]="noTrailingSlash">
-      <ibm-breadcrumb-item href="asa" class="navigation">
-        Activity Dashboard
-      </ibm-breadcrumb-item>
-      <ibm-breadcrumb-item href="asa" class="navigation">
-        Using Whether data to...
-      </ibm-breadcrumb-item>
-    </ibm-breadcrumb>
-  </div>
-  
+    <div class="bx--col-md-1" style="padding-left: 8%;margin-top: 26px;">
+      <svg icon ibmIconArrowLeft16 (click)="navigateBack()"></svg>
+    </div>
 
-  <div  data-notification class="bx--toast-notification bx--toast-notification--success" *ngIf="toasterMsg"
-			role="alert" style="margin-top: 0px;margin-left: auto;left: 27px;position: relative;">
-			<div class="bx--toast-notification__details">
-				<p class="bx--toast-notification__title">New notification setting</p>
-				<p class="bx--toast-notification__subtitle">Alert set for {{modelReport?.modelName}} </p>
-			</div>
-			<button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button"
-				type="button" aria-label="close">
-				<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform"
-					xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__close-icon" width="20" height="20"
-					viewBox="0 0 32 32" aria-hidden="true">
-					<path
-						d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z">
-					</path>
-				</svg>
-			</button>
-		</div>
-  <!-- <ibm-toast
-    class="toaster"
-    [notificationObj]="{
-      type: 'success',
-      title: 'New notification setting',
-      subtitle: 'Alert set for modelname.mdk',
-      lowContrast: lowContrast,
-      showClose: showClose
-    }"
-  ></ibm-toast> -->
-</div>
+    <div class="bx--col-md-4" style="margin-top: 26px;">
 
-<div class="bx--row line-padding">
-  <div class="bx--col-md-1" ></div>
-  <div class="bx--col-md-4">
-    <br />
-<br />
-    <h1>{{modelReport?.modelName}}
-      <span><svg icon ibmIconNotification20 (click)="bell()" ></svg></span>
-    </h1>
-  </div>
-</div>
-<br/>
+      <ibm-breadcrumb [noTrailingSlash]="noTrailingSlash">
+        <ibm-breadcrumb-item href="/" class="navigation">
+          Activity Dashboard
+        </ibm-breadcrumb-item>
+        <ibm-breadcrumb-item (click)="viewChallenge(challengeDetails?._id)" class="navigation">
+          {{challengeDetails?.title}}
+        </ibm-breadcrumb-item>
+      </ibm-breadcrumb>
+    </div>
 
-<div class="bx--row line-padding">
-  <div class="bx--col-md-1" ></div>
-  <div class="bx--col-md-4">
-    <ibm-content-switcher (selected)="checkSelected(modelReport?.phaseId)">
-    <div class="content-switcher" *ngFor="let submit of challengeSubmission; index as i" >
-        <button ibmContentOption (click)="switchSubmit(submit._id)" style="width: 160px;" >
-        <div>
-          <p> Phase {{i}}</p>
-        <p class="switchpara"><span style="margin-bottom: -3px;"><svg class="svg" icon ibmIconCheckmarkOutline20></svg></span>
-         <span >Report available</span></p>
-        </div>
-        </button>
+
+    <div data-notification class="bx--toast-notification bx--toast-notification--success" *ngIf="toasterMsg"
+      role="alert" style="margin-top: 0px;margin-left: auto;left: 27px;position: relative;">
+      <div class="bx--toast-notification__details">
+        <p class="bx--toast-notification__title">New notification setting</p>
+        <p class="bx--toast-notification__subtitle">Alert set for {{modelReport?.modelName}} </p>
       </div>
-    </ibm-content-switcher>
+      <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button" type="button"
+        aria-label="close">
+        <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform"
+          xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__close-icon" width="20" height="20"
+          viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z">
+          </path>
+        </svg>
+      </button>
+    </div>
+  </div>
 
-    <br /> <br />
-    <h3 style="margin-top:18px;">Model details </h3>
-   
-    <p class="paragraph">Model Submitted: {{getDate(modelReport?.createdAt)}}</p>
-    <br />  <br />
-    
-    <h5>Description</h5>
+  <div class="bx--row line-padding">
+    <div class="bx--col-md-1"></div>
+    <div class="bx--col-md-4">
+      <br />
+      <br />
+      <h1>{{modelReport?.modelName}}
+        <span><svg icon ibmIconNotification20 (click)="bell()"></svg></span>
+      </h1>
+    </div>
+  </div>
+  <br />
+
+  <div class="bx--row line-padding">
+    <div class="bx--col-md-1"></div>
+    <div class="bx--col-md-4">
+      <ibm-content-switcher (selected)="checkSelected(modelReport?.phaseId)">
+        <div class="content-switcher" *ngFor="let submit of challengeSubmission; index as i">
+          <button ibmContentOption (click)="switchSubmit(submit._id)" style="width: 160px;">
+            <div>
+              <p> Phase {{i}}</p>
+              <p class="switchpara"><span style="margin-bottom: -3px;"><svg class="svg" icon
+                    ibmIconCheckmarkOutline20></svg></span>
+                <span>Report available</span></p>
+            </div>
+          </button>
+        </div>
+      </ibm-content-switcher>
+
+      <br /> <br />
+      <h3 style="margin-top:18px;">Model details </h3>
+
+      <p class="paragraph">Model Submitted: {{getDate(modelReport?.createdAt)}}</p>
+      <br /> <br />
+
+      <h5>Description</h5>
       <p class="paragraph">{{modelReport?.modelDescription}}</p>
       <br /> <br /> <br /> <br />
       <h5>Approach taken</h5>
       <p class="paragraph">{{modelReport?.approch}}</p>
       <br /> <br />
       <p style="display: flex;"><svg icon ibmIconCode24></svg>&nbsp;&nbsp;Python</p>
-  </div>
-  <div class="bx--col-md-2">
-   
-    <ibm-tile>
-      <div ibmGrid [condensed]="gridCondensed">
-        <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
-          [condensed]="rowCondensed">
-          <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 2, 'sm': 12}">
-            <img class="portrait mr-3"
-              src="https://www.angularjswiki.com/author/admin/avatar_hufa038520d36dafb78f39a62f91de8258_77813_250x250_fill_q90_lanczos_center.jpg"
-              itemprop="image" alt="Avatar">
+    </div>
+    <div class="bx--col-md-2">
+
+      <ibm-tile>
+        <div ibmGrid [condensed]="gridCondensed">
+          <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
+            [condensed]="rowCondensed">
+            <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 2, 'sm': 12}">
+              <img class="portrait mr-3"
+                src="https://www.angularjswiki.com/author/admin/avatar_hufa038520d36dafb78f39a62f91de8258_77813_250x250_fill_q90_lanczos_center.jpg"
+                itemprop="image" alt="Avatar">
+            </div>
+            <div ibmCol class="custom-class-example" style="margin-top: -12px;" [columnNumbers]="{'md': 1, 'sm': 12}">
+              <h4 class="userName" style="margin-left: 50px;">{{modelReport?.innovatorId?.fullName}}</h4>
+              <p class="userhead">Data Scientist,</p>
+              <p class="userhead">Innovator Gold</p>
+            </div>
           </div>
-          <div ibmCol class="custom-class-example" style="margin-top: -12px;" [columnNumbers]="{'md': 1, 'sm': 12}">
-            <h4 class="userName" style="margin-left: 50px;">{{modelReport?.innovatorId?.fullName}}</h4>
-            <p class="userhead">Data Scientist,</p>
-            <p class="userhead">Innovator Gold</p>
+          <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" ibmRow [gutter]="gutter" [leftGutter]="leftGutter"
+            ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+            <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 3, 'sm': 12}">
+              <p class="userName">Marketspace Statistic</p>
+              <p class="userdetail">460 points</p>
+              <p class="userdetail">Active challange: {{challengeCounts?.activeChallengeCount}}</p>
+
+              <p class="userdetail">Challenges Won:2</p>
+              <p class="userName">Bio</p>
+              <p class="bio">{{modelReport?.innovatorId?.bio}}</p>
+              <br />
+              <a class="link" href="#" ibmLink>View full profile</a>
+            </div>
           </div>
         </div>
-        <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" ibmRow [gutter]="gutter" [leftGutter]="leftGutter"
-          ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
-          <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 3, 'sm': 12}">
-            <p class="userName">Marketspace Statistic</p>
-            <p class="userdetail">460 points</p>
-            <p class="userdetail">Active challange: {{challengeCounts?.activeChallengeCount}}</p>
-         
-            <p class="userdetail">Challenges Won:2</p>
-            <p class="userName">Bio</p>
-            <p class="bio">{{modelReport?.innovatorId?.bio}}</p>
-            <br />
-            <a class="link" href="#" ibmLink>View full profile</a>
-          </div>
-        </div>
+      </ibm-tile>
+      <br />
+      <div class="bio" style="display: flex;align-items: center;">
+        <span>
+          <svg class="svg" icon ibmIconSend20></svg>
+        </span>
+        <p style="font-weight: 800;font-size: 14px;white-space: nowrap;">Send {{modelReport?.innovatorId?.fullName}} a
+          message</p>
       </div>
-    </ibm-tile>
-    <br />
-    <div class="bio" style="display: flex;align-items: center;">
-      <span>
-        <svg class="svg" icon ibmIconSend20></svg>
-      </span>
-      <p style="font-weight: 800;font-size: 14px;white-space: nowrap;">Send {{modelReport?.innovatorId?.fullName}} a message</p>
     </div>
   </div>
-</div>
-<br/>
-<div class="bx--row line-padding" style="background-color:#F3F3F3;">
-  <div class="bx--col-md-1" ></div>
-  <div class="bx--col-md-6">
-    <h3>Model Performance </h3>
-    <br/>
-    <div style="display: flex; gap: 10px;">
+  <br />
+  <div class="bx--row line-padding" style="background-color:#F3F3F3;">
+    <div class="bx--col-md-1"></div>
+    <div class="bx--col-md-6">
+      <h3>Model Performance </h3>
+      <br />
+      <div style="display: flex; gap: 10px;">
 
 
-<ibm-tile style="flex-grow: 1;background-color: #ffffff !important">
-        <ibm-donut-chart [data]="overallScoreData" [options]="overallOptions"
-          style="align-items: center;"></ibm-donut-chart>
-      </ibm-tile>
+        <ibm-tile style="flex-grow: 1;background-color: #ffffff !important">
+          <ibm-donut-chart [data]="overallScoreData" [options]="overallOptions" style="align-items: center;">
+          </ibm-donut-chart>
+        </ibm-tile>
 
-      <ibm-tile style="flex-grow: 1;background-color: #ffffff !important">
-        <ibm-donut-chart [data]="accuracyScoreData" [options]="accuracyOptions"
-          style="background-color: #ffffff !important;align-items: center;"></ibm-donut-chart>
-      </ibm-tile>
-      <ibm-tile style="flex-grow: 1;background-color: #ffffff !important">
-        <ibm-donut-chart [data]="precisionScoreData" [options]="precisionOptions"
-          style="background-color: #ffffff !important;"></ibm-donut-chart>
-      </ibm-tile>
-      <ibm-tile style="flex-grow: 1;background-color: #ffffff !important">
-        <ibm-donut-chart [data]="recallScoreData" [options]="recallOptions"
-          style="background-color: #ffffff !important;"></ibm-donut-chart>
-      </ibm-tile>
-   
-</div>
-    <br />
-    <div style="display: grid;grid-template-columns: 70% 29.5%;padding: 0rem;gap: 6px;">
-    <ibm-line-chart [data]="data1" [options]="options1" style="background-color: #ffffff !important;"
-      class="chartline"></ibm-line-chart>
-      <div style="background-color: #ffffff;">
-        <p style="padding: 1.3rem;">Logs</p>
+        <ibm-tile style="flex-grow: 1;background-color: #ffffff !important">
+          <ibm-donut-chart [data]="accuracyScoreData" [options]="accuracyOptions"
+            style="background-color: #ffffff !important;align-items: center;"></ibm-donut-chart>
+        </ibm-tile>
+        <ibm-tile style="flex-grow: 1;background-color: #ffffff !important">
+          <ibm-donut-chart [data]="precisionScoreData" [options]="precisionOptions"
+            style="background-color: #ffffff !important;"></ibm-donut-chart>
+        </ibm-tile>
+        <ibm-tile style="flex-grow: 1;background-color: #ffffff !important">
+          <ibm-donut-chart [data]="recallScoreData" [options]="recallOptions"
+            style="background-color: #ffffff !important;"></ibm-donut-chart>
+        </ibm-tile>
+
       </div>
+      <br />
+      <div style="display: grid;grid-template-columns: 70% 29.5%;padding: 0rem;gap: 6px;">
+        <ibm-line-chart [data]="data1" [options]="options1" style="background-color: #ffffff !important;"
+          class="chartline"></ibm-line-chart>
+        <div style="background-color: #ffffff;">
+          <p style="padding: 1.3rem;">Logs</p>
+        </div>
+      </div>
+
     </div>
 
-</div>
- 
-</div>
+  </div>
 </div>
