@@ -16,7 +16,7 @@
 
 <div ibmGrid [condensed]="gridCondensed" class="gridchange">
 
-  <div class="parentdiv">
+  <div class="parentdiv" *ngIf="!modelComparison">
     <ibm-dropdown [label]="'Sort by'" [helperText]="helperText" [size]="size" [invalid]="invalid"
       [invalidText]="invalidText" [theme]="theme" placeholder="Newest" [disabled]="disabled"
       (selected)="sortSelect($event)" (onClose)="onClose($event)">
