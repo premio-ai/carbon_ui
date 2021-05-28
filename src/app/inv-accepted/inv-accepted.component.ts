@@ -66,7 +66,6 @@ export class InvAcceptedComponent implements OnInit {
 		});
 
 		this.getChallengeDetails(this.challengeId);
-		// this.getSubmissionByChallengeId(this.challengeId);
 		this.getChallengeAcceptance(this.challengeId);
 		this.getLeaderboard(this.challengeId, this.pageOffset);
 
@@ -102,14 +101,34 @@ export class InvAcceptedComponent implements OnInit {
 			contractAcceptedAt: "",
 			trainedAt: "",
 			testedAt: ""
-		}
+		};
+
+		setTimeout(() => {
+			(<any>window).disqus_config = this.getConfig();
+
+			var d = document, s: any = d.createElement('script');
+			s.src = 'https://meanapp.disqus.com/embed.js';
+			s.setAttribute('data-timestamp', + new Date());
+			(d.head || d.body).appendChild(s);
+		}, 1000)
+
+	}
+
+	getConfig() {
+		let _self = this;
+		return function () {
+			// this.page.url = window.location.href;
+			this.page.url = 'http://localhost:4200/#/challenge/' + _self.challengeId;
+			this.page.identifier = _self.challengeId;
+			this.language = 'en';
+		};
 	}
 
 	getChallengeDetails(id) {
 		let url = 'challenge/' + id;
 		this.requestService.get(url, null).subscribe(data => {
 			this.challengeDetails = data;
-		this.getSubmissionByChallengeId(this.challengeId);
+			this.getSubmissionByChallengeId(this.challengeId);
 
 		})
 	}

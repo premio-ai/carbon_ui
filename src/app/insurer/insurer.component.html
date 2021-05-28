@@ -1,9 +1,9 @@
 <app-header></app-header>
-<br/><br/>
-<div class="bx--grid" >
+<br /><br />
+<div class="bx--grid">
 	<div class="bx--row line-padding">
 		<div class="bx--col-md-1" style="cursor: pointer;">
-			<svg icon ibmIconArrowLeft16 (click)="navigateBack()" ></svg>
+			<svg icon ibmIconArrowLeft16 (click)="navigateBack()"></svg>
 		</div>
 		<div class="bx--col-md-7">
 			<ibm-breadcrumb [noTrailingSlash]="noTrailingSlash">
@@ -11,25 +11,34 @@
 			</ibm-breadcrumb>
 		</div>
 	</div>
-	<br/>
+	<br />
 	<div class="bx--row line-padding">
 		<div class="bx--col-md-1">
 		</div>
 		<div class="bx--col-md-7">
 			<h1> {{ challengeDetails?.title }} </h1>
 			<ibm-tabs [followFocus]="true" [isNavigation]="false" [cacheActive]="true">
-				<ibm-tab heading="Overview" >
-					<app-overview [submissionChallengeDetails]="submissionChallengeDetails" [challengeDetails]="challengeDetails"></app-overview>
+				<ibm-tab heading="Overview">
+					<app-overview [submissionChallengeDetails]="submissionChallengeDetails"
+						[challengeDetails]="challengeDetails"></app-overview>
 				</ibm-tab>
 				<ibm-tab heading="Data">
 					<app-data [challengeDetails]="challengeDetails"></app-data>
 				</ibm-tab>
 				<ibm-tab heading="Activity">
-					<app-activity [submissionChallengeDetails]="submissionChallengeDetails" [challengeDetails]="challengeDetails" ></app-activity>
+					<app-activity [submissionChallengeDetails]="submissionChallengeDetails"
+						[challengeDetails]="challengeDetails"></app-activity>
 				</ibm-tab>
-				<ibm-tab heading="Discussion"> </ibm-tab>
+				<ibm-tab heading="Discussion">
+					<div id="disqus_thread">
+						<!-- <h1>disqus thread</h1> -->
+					</div>
+					<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments
+							powered by Disqus.</a></noscript>
+				</ibm-tab>
 				<ibm-tab heading="Models">
-					<app-model [challengeDetails]="challengeDetails" [submissionChallengeDetails]="submissionChallengeDetails" ></app-model>
+					<app-model [challengeDetails]="challengeDetails"
+						[submissionChallengeDetails]="submissionChallengeDetails"></app-model>
 				</ibm-tab>
 			</ibm-tabs>
 		</div>

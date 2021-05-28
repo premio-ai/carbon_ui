@@ -83,7 +83,6 @@ import { InvDashboradComponent } from "./inv-dashborad/inv-dashborad.component";
 import { InvModelViewComponent } from "./inv-model-view/inv-model-view.component";
 import { InvSeePerformanceComponent } from "./inv-see-performance/inv-see-performance.component";
 import { ActivityComponent } from "./activity/activity.component";
-
 import { DragAndDropStory } from './file-uploader/file-uploader';
 import { ImageUploader } from './file-uploader/image-uploader';
 // import {PaginationNavStory} from './app-pagination/PaginationNavStory';
@@ -132,7 +131,6 @@ import {Code24Module } from "@carbon/icons-angular/lib/code/24";
 		OverviewComponent,
 		DataComponent,
 		ActivityComponent,
-		
 		DragAndDropStory,
 		ImageUploader,
 		// PaginationNavStory,

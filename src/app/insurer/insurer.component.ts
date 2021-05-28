@@ -15,6 +15,7 @@ export class InsurerComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private location: Location
   ) { }
+  challengeId: string
   challengeDetails: any[];
   submissionChallengeDetails: any[];
 
@@ -23,11 +24,29 @@ export class InsurerComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
       if (params) {
         challengeId = params.id
+        this.challengeId = params.id
       }
     });
 
     this.getChallengeDetails(challengeId);
     this.getSubmissionChallenge(challengeId);
+
+    (<any>window).disqus_config = this.getConfig();
+
+    var d = document, s : any = d.createElement('script');
+    s.src = 'https://meanapp.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', + new Date());
+    (d.head || d.body).appendChild(s);
+
+  }  
+
+  getConfig() {
+    let _self = this;
+    return function () {
+      this.page.url = window.location.href;
+      this.page.identifier = _self.challengeId;
+      this.language = 'en';
+    };
   }
 
   getChallengeDetails(id) {

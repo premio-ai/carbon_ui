@@ -36,11 +36,11 @@ export class ActivityComponent implements OnInit {
     }
 
     this.sorting = [
-			{ content: 'Model Name' },
-			{ content: 'User Invited' },
-			{ content: 'Model Uploaded' },
-			{ content: 'Score' }
-		];
+      { content: 'Model Name' },
+      { content: 'User Invited' },
+      { content: 'Model Uploaded' },
+      { content: 'Score' }
+    ];
   }
 
   getCreationDate(dt) {
@@ -49,10 +49,10 @@ export class ActivityComponent implements OnInit {
   }
 
   getDate(timeStamp) {
-		let date = moment(moment(+timeStamp)).format("DD/MM/YYYY")
-		return date;
-	}
-  
+    let date = moment(moment(+timeStamp)).format("DD/MM/YYYY")
+    return date;
+  }
+
   initialPhase() {
     let tempData = []
     this.submissionChallengeDetails.filter(dt => {
@@ -84,8 +84,8 @@ export class ActivityComponent implements OnInit {
   }
 
   trainingModels() {
-    this.submissionChallengeDetails.find( dt => {
-      this.selectedPhase.map( res => {
+    this.submissionChallengeDetails.find(dt => {
+      this.selectedPhase.map(res => {
         if (dt.phaseId == res.phaseId) {
           this.modelUnderTraining += 1
         }
@@ -95,21 +95,21 @@ export class ActivityComponent implements OnInit {
   }
 
   modelPassed() {
-    this.selectedPhase.find( dt => {
-      if ( dt.score >= this.challengeDetails.phases[this.phaseNo].passingScore) {
+    this.selectedPhase.find(dt => {
+      if (dt.score >= this.challengeDetails.phases[this.phaseNo].passingScore) {
         this.passedModelsCount += 1
       }
     })
-  }  
+  }
 
   viewModel(id) {
     this.router.navigateByUrl('invmodel-view/' + id)
   }
 
   exportexcel() {
-    if (this.submissionChallengeDetails && this.submissionChallengeDetails.length > 0) {      
+    if (this.submissionChallengeDetails && this.submissionChallengeDetails.length > 0) {
       let element = document.getElementById('excel-table');
-      const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+      const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
       delete ws['E1']
       delete ws['E2']
       const wb: XLSX.WorkBook = XLSX.utils.book_new();
@@ -117,29 +117,33 @@ export class ActivityComponent implements OnInit {
       XLSX.writeFile(wb, 'ExcelSheet.xlsx');
     }
   }
-  
+
   sortSelect(sort) {
-		let criteria = sort.item.content;
-		if (criteria == 'Model Name') {
-			this.selectedPhase.sort((a, b) => {
-				return b.modelName - a.modelName
-			})
-		}
-		if (criteria == 'User Invited') {
-			this.selectedPhase.sort((a, b) => {
-				return a.innovatorId.fullName - b.innovatorId.fullName
-			})
-		}
-		if (criteria == 'Model Uploaded') {
-			this.selectedPhase.sort((a, b) => {
-				return b.createdAt - a.createdAt
-			})
+    let criteria = sort.item.content;
+    if (criteria == 'Model Name') {
+      this.selectedPhase.sort((a, b) => {
+        if (a.modelName < b.modelName) { return -1; }
+        if (a.modelName > b.modelName) { return 1; }
+        return 0;
+      })
+    }
+    if (criteria == 'User Invited') {
+      this.selectedPhase.sort((a, b) => {
+        if (a.innovatorId.fullName < b.innovatorId.fullName) { return -1; }
+        if (a.innovatorId.fullName > b.innovatorId.fullName) { return 1; }
+        return 0
+      })
+    }
+    if (criteria == 'Model Uploaded') {
+      this.selectedPhase.sort((a, b) => {
+        return b.createdAt - a.createdAt
+      })
     }
     if (criteria == 'Score') {
-			this.selectedPhase.sort((a, b) => {
-				return b.score - a.score
-			})
-		}
-	}
+      this.selectedPhase.sort((a, b) => {
+        return b.score - a.score
+      })
+    }
+  }
 
 }

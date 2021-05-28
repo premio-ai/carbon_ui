@@ -8,9 +8,8 @@
 		<div style="display: flex;">
 			<h1 class="heading">Activity Dashboard</h1>
 			<div style="width: 222px;margin-left: auto;position: relative;top: 51px;">
-				<ibm-dropdown [helperText]="helperText" [size]="size" [invalid]="invalid"
-					[invalidText]="invalidText" [theme]="theme" placeholder="select" 
-					(selected)="sortSelect($event)">
+				<ibm-dropdown [helperText]="helperText" [size]="size" [invalid]="invalid" [invalidText]="invalidText"
+					[theme]="theme" placeholder="select" (selected)="sortSelect($event)">
 					<ibm-dropdown-list [items]="sorting"></ibm-dropdown-list>
 				</ibm-dropdown>
 			</div>
