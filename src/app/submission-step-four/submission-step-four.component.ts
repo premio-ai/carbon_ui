@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { APP_URL } from '../../config/config';
 
 @Component({
   selector: 'app-submission-step-four',
@@ -52,7 +53,7 @@ export class SubmissionStepFourComponent implements OnInit {
 
   async downloadFile(modelpath) {
     if (modelpath) {
-      let docUrl = 'http://localhost:3000/' + modelpath
+      let docUrl = APP_URL + modelpath
 
       if (docUrl.length) {
         await fetch(docUrl).then(async res => {

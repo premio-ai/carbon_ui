@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../request.service';
 import { Router } from '@angular/router';
-import { MESSAGES } from '../../config/message';
+import { MESSAGES } from '../../config/config';
 
 @Component({
 	selector: 'app-header',
