@@ -1,46 +1,21 @@
-<!-- <ibm-header [route]="['/']" brand="" name="Market space">
-	<ibm-header-navigation ariaLabel="Carbon Tutorial">
-		<ibm-header-item [route]="['/dashboard']">Activity</ibm-header-item>
-	</ibm-header-navigation>
-	
-	<ibm-header-global>
-		<ibm-header-action title="action">
-			<svg icon ibmIconNotification20></svg>
-		</ibm-header-action>
-		<ibm-header-action title="action">
-			<svg icon ibmIconUserAvatar20></svg>
-			
-		</ibm-header-action>
-		<ibm-header-action title="action">
-			<svg icon ibmIconAppSwitcher20></svg>
-		</ibm-header-action>
-	</ibm-header-global>
-</ibm-header> -->
+
 
 <ibm-header brand="" >
   <a (click)="logoRoute()" style="cursor: pointer;" > <img src="assets/logo.png" class="imglogo" /></a>
   <ibm-hamburger *ngIf="hasHamburger" [active]="active" (selected)="active = !active"></ibm-hamburger>
   <ibm-header-navigation>
-    <ibm-header-item (click)="navigate()" style="border-bottom: 2px solid white;">Activity</ibm-header-item>
-    <!-- <ibm-header-item [route]="['/dashboard']">Activity</ibm-header-item> -->
-    <!-- <ibm-header-item>Models</ibm-header-item> -->
+    <ibm-header-item (click)="navigate()" [routerLink]="['/']" [routerLinkActive]="['is-active']">Activity</ibm-header-item>
+   
     <div *ngIf="userDetails.role == 'Insurer'">
-      <ibm-header-item>Browse</ibm-header-item>
+      <ibm-header-item [routerLink]="['/asas']" [routerLinkActive]="['is-active']">Browse</ibm-header-item>
     </div>
     <div *ngIf="userDetails.role == 'Innovator'">
       <ibm-header-item [route]="['/invchallenges']">Challenges</ibm-header-item>
     </div>
-    <!-- <ibm-header-item>Support</ibm-header-item>
-		<ibm-header-menu title="Manage">
-			<ibm-header-item>Link 1</ibm-header-item>
-			<ibm-header-item>Link 2</ibm-header-item>
-			<ibm-header-item>Link 3</ibm-header-item>
-		</ibm-header-menu> -->
+  
   </ibm-header-navigation>
   <ibm-header-global>
-    <!-- <div class="bx--toolbar" style="margin-top: -20px;fill: white;">
-			<ibm-search placeholder="search" size="sm" toolbar="true" style="fill: white !important;"></ibm-search>
-		</div> -->
+   
     <ibm-header-action #firstAction title="action">
       <p class="namefull">
         {{ userDetails.fullName }}
