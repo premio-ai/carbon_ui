@@ -1,3 +1,5 @@
+@import "../../styles.scss";
+
 .praa{
     font-size:14px;
 }
@@ -12,3 +14,21 @@
     display: flex;
     margin-top: 132px;
 }
+
+
+.challTitle{
+    margin-left: 365px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;
+    @include aboveWidth(1440px){
+       
+        margin-left: 401px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;
+   
+}
+}
+
+@media screen and (max-width: 1024px) {
+  
+	.challTitle{
+        margin-left: 273px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;
+    }
+    
+  }

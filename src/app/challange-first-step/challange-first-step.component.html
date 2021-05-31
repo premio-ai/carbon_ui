@@ -5,7 +5,7 @@
             <br />
             <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
                 <ibm-label>
-                    Challenge Title <p style="margin-left: 273px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">
+                    Challenge Title <p class="challTitle">
                         0/50</p>
                 </ibm-label>
                
@@ -20,7 +20,7 @@
             <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
                 
                 Challenge Description<p
-                    style="margin-left: 273px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">0/500</p>
+                class="challTitle">0/500</p>
                 <textarea style="width: 90%;margin-top: 10px;" ibmTextArea [invalid]="invalid" minlength="1" maxlength="500"
                     [disabled]="disabled" [theme]="theme" [rows]="5" [cols]="cols" aria-label="textarea"
                     [(ngModel)]="stepOne.description"></textarea>
@@ -31,7 +31,7 @@
             <br />
             <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
                 Challenge Objectives<p
-                    style="margin-left: 273px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">0/100</p>
+                class="challTitle">0/100</p>
                 <textarea style="width: 90%;margin-top: 10px;" ibmTextArea [invalid]="invalid" minlength="1" maxlength="100"
                     [(ngModel)]="stepOne.objective" [disabled]="disabled" [theme]="theme" [rows]="3" [cols]="cols"
                     aria-label="textarea"></textarea>
@@ -96,12 +96,12 @@
             </p>
             <br />
             <p class="toggle_head">Withold Company Name</p>
-            <ibm-toggle [label]="label" [onText]="Off" [offText]="Off" [disabled]="disabled" [checked]="toggle01()"
+            <ibm-toggle [label]="label" [onText]="'On'" [offText]="'Off'" [disabled]="disabled" [checked]="toggle01()"
                 [size]="size">
             </ibm-toggle>
             <br />
             <p class="toggle_head">Withold Company Discription</p>
-            <ibm-toggle [label]="label" [onText]="Off" [offText]="Off" [disabled]="disabled" [checked]="checked"
+            <ibm-toggle [label]="label" [onText]="'On'" [offText]="'Off'" [disabled]="disabled" [checked]="checked"
                 [size]="size">
             </ibm-toggle>
             <button [ibmButton]="ibmButton" class="btn" [size]="size" (click)="nextStep()"> Next</button>
