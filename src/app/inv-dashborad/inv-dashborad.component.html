@@ -2,11 +2,11 @@
 
 <div style="margin-top: 80px;">
 	<div style="margin-left: 90px;margin-right: 90px;">
-		<p class="para">Welcome Back, {{userDetails.fullName}}</p>
+		<p class="para">Welcome back, {{userDetails.fullName}}</p>
 		<div style="display: flex;">
 			<h1 class="heading">Activity Dashboard</h1>
 			<div style="width: 222px;margin-left: auto;position: relative;top: 45px;left: -14px;">
-				<ibm-dropdown [label]="Min" [helperText]="helperText" [size]="size" [invalid]="invalid"
+				<ibm-dropdown [label]="'Sort by'" [helperText]="helperText" [size]="size" [invalid]="invalid"
 					[invalidText]="invalidText" [theme]="theme" placeholder="select" [disabled]="false"
 					(selected)="sortSelect($event)">
 					<ibm-dropdown-list [items]="sorting"></ibm-dropdown-list>

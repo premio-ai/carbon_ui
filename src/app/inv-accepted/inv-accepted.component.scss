@@ -15,11 +15,12 @@
   border-width: 1px;
   border-style: solid;
   border-color: #0f62fe;
-  color: #0f62fe;
+  color: black;
 }
 
 .bx--btn--tertiary:hover span {
   display: none;
+  color: black;
 }
 .bx--btn--tertiary:hover:before {
   content: 'Withdraw';
@@ -84,8 +85,17 @@
   
 }
 
+.backarrow{
+  width: 23px;
+  height: 23px;
+}
+
+.accept{
+  width: 167px;
+}
+
 .para{
-  font-size: 12px;
+  font-size: 13px;
   text-align:left;
   line-height: 1.5;
 
@@ -93,4 +103,8 @@
 
 .rowdiv{
   margin-bottom: 15px;
+}
+
+.challengeTitle{
+  font-size: 40px;font-weight: 100;text-transform: capitalize;
 }
