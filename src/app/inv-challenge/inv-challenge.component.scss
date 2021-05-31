@@ -1,3 +1,5 @@
+@import "../../styles.scss";
+
 
 .bold{
     font-weight: 600;
@@ -47,10 +49,35 @@
     padding: 1rem;
     outline: 2px solid transparent;
     outline-offset: -2px;
+
+    @include aboveWidth(1300px){
+       
+            display: block;
+            min-width: 844px;
+            min-height: 4rem;
+            background-color: #f4f4f4;
+            position: relative;
+            padding: 1rem;
+            outline: 2px solid transparent;
+            outline-offset: -2px;
+       
+    }
+    @include aboveWidth(1440px){
+       
+        display: block;
+        min-width: 911px;
+        min-height: 4rem;
+        background-color: #f4f4f4;
+        position: relative;
+        padding: 1rem;
+        outline: 2px solid transparent;
+        outline-offset: -2px;
+   
+}
 }
 
 .numbersicon{
-    margin-top: -4px;
+   
     font-size: 12px;
 }
 
@@ -60,7 +87,7 @@
 }
 
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1024px)  {
     #read_more {
       display: none;
     }   .bx--tile{
@@ -75,3 +102,8 @@
     }
     
   }
+
+
+.ins-name{
+    font-size: 0.775rem !important;
+}

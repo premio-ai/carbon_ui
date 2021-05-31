@@ -2,10 +2,10 @@
 <br /><br />
 <div class="bx--grid">
 	<div class="bx--row line-padding">
-		<div class="bx--col-md-1" style="padding-left: 8%; cursor: pointer;">
-			<svg icon ibmIconArrowLeft16 (click)="navigateBack()"></svg>
+		<div class="bx--col-md-1" style="padding-left: -8%; cursor: pointer;">
+			<svg class="backarrow" icon ibmIconArrowLeft16 (click)="navigateBack()"></svg>
 		</div>
-		<div class="bx--col-md-4">
+		<div class="bx--col-md-4" style="margin-left: -8%;">
 			<ibm-breadcrumb [noTrailingSlash]="noTrailingSlash">
 				<ibm-breadcrumb-item (click)="invChallenges()" class="navigation" style="cursor: pointer; color: blue;" >
 					Browse
@@ -21,8 +21,7 @@
 			role="alert">
 			<div class="bx--toast-notification__details">
 				<p class="bx--toast-notification__title">Challenge Accepted</p>
-				<p class="bx--toast-notification__subtitle">Selected challenge is in accepted state, Please submit
-					required challenge information.</p>
+				<p class="bx--toast-notification__subtitle">New challenge accepted!</p>
 			</div>
 			<button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button"
 				type="button" aria-label="close">
@@ -59,9 +58,9 @@
 
 	<div class="bx--row line-padding" *ngIf="challengeDetails?._id.length > 0">
 		<div class="bx--col-md-1"></div>
-		<div class="bx--col-md-6">
+		<div class="bx--col-md-6" style="margin-left: -8%;">
 			<div>
-				<p style="font-size: 40px;font-weight: 100;">{{challengeDetails.title}}</p>
+				<p class="challengeTitle">{{challengeDetails.title}}</p>
 				<br /> <br />
 				<div *ngIf="acceptedChallenge?._id.length>0">
 					<button class="bx--btn bx--btn--tertiary" type="button" (click)="withdrawChallenge(challengeDetails._id)" >
@@ -75,7 +74,7 @@
 				</div>
 
 				<div *ngIf="acceptedChallenge?._id.length==0">
-					<button class="bx--btn bx--btn--primary" type="button"
+					<button class="bx--btn bx--btn--primary accept" type="button"
 						(click)="acceptChallenge(challengeDetails._id)">
 						Accept
 						<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;"
@@ -103,13 +102,13 @@
 							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 3, sm: 12 }">
 								<h4 style="text-transform: capitalize;">{{challengeDetails?.insurerId?.fullName}}</h4>
 								<br />
-								<p >{{challengeDetails?.insurerId?.bio}}</p>
+								<p class="para">{{challengeDetails?.insurerId?.bio}}</p>
 								<br /><br />
 								<h4>Reward</h4>
 								<br />
-								<p style="font-size: 14px; line-height: 1.5">
-									<svg icon ibmIconPartnership16></svg> {{challengeDetails?.challengeType}}
-								</p>
+								<div style="font-size: 14px; line-height: 1.5;align-items: center;display: flex;">
+									<svg icon ibmIconPartnership16></svg>&nbsp; <p>{{challengeDetails?.challengeType}}</p>
+								</div>
 								<br />
 								<p class="para">
 									This challenge is issued with the aim of finding and building long lasting
@@ -146,7 +145,7 @@
 									src='http://localhost:3000/{{phase.dataVisualFile}}'>
 								<br />
 								<br />
-								<h4 class="sampleheaddata">Sample Data sets</h4>
+								<h4 class="sampleheaddata">Sample Data Sets</h4>
 								<p  *ngFor='let data of phase.sampleDataFile; index as j' class="samplename">Download Dataset
 									{{j+1}}
 									<svg icon ibmIconDownload16 style="cursor: pointer;"  class="svg" height="12" width="12"
