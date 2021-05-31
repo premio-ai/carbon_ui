@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { APP_URL } from '../../config/config';
 
 @Component({
   selector: 'app-submission-step-four',
@@ -24,13 +25,12 @@ export class SubmissionStepFourComponent implements OnInit {
     guidence: string,
     score: number
   }
-  totalphases: number
+  totalPhases: number
+  showLess: boolean
 
   ngOnInit() {
-    this.totalphases = this.challengeDetails.phases.length
-  }
-
-  previous() {
+    this.showLess = true
+    this.totalPhases = this.challengeDetails.phases.length
   }
 
   toStepOne() {
@@ -45,14 +45,9 @@ export class SubmissionStepFourComponent implements OnInit {
     this.router.navigateByUrl('see-performance/' + modelId)
   }
 
-  getPhase(model) {
-    // console.log(this.challengeSubmissionData, "---this.challengeSubmissionData---46")
-    
-  }
-
   async downloadFile(modelpath) {
     if (modelpath) {
-      let docUrl = 'http://localhost:3000/' + modelpath
+      let docUrl = APP_URL + modelpath
 
       if (docUrl.length) {
         await fetch(docUrl).then(async res => {
@@ -72,6 +67,18 @@ export class SubmissionStepFourComponent implements OnInit {
         // this.docError = true
       }
     }
+  }
+
+  readMore() {
+    this.showLess = false
+  }
+
+  readLess() {
+    this.showLess = true
+  }
+
+  showLessStr(str) {
+    return str.substring(0, 100)
   }
 
 }

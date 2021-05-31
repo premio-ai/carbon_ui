@@ -38,26 +38,11 @@ export class ImageUploader {
 				let reader = new FileReader();
 				reader.readAsArrayBuffer(fileObj.file);
 				reader.onload = () => {
-					// Checks the type of file based on magic numbers.
-					// const type = fileType(reader.result);
-					// if (type) {
-					// 	fileExtension = type.ext.replace(/^/, ".");
-					// 	mime = type.mime;
-					// } else {
-					// 	// If a file type can not be determined using magic numbers
-					// 	// then use file extension or mime type.
-					// 	fileExtension = fileObj.file.name.split(".").pop().replace(/^/, ".");
-					// 	mime = fileObj.file.type;
-					// }
-
 					this.goNext.emit(fileObj)
-
 					resolve({
 						file: fileObj,
 						accept: (this.accept.includes(fileExtension) || this.accept.includes(mime) || !this.accept.length)
 					});
-
-
 				};
 
 				reader.onerror = error => {
@@ -68,47 +53,9 @@ export class ImageUploader {
 
 		transferredFiles.map(file => readFileAndCheckType(file));
 
-		// transferredFiles.map(file => makeFile(file));
-
-		// const makeFile = (acceptedFiles) => {
-			
-		// 	const file = acceptedFiles.file;
-		// 	let dataSetImg = file;
-		// 	const formData = new FormData();
-		// 	formData.append('files', file);
-		// 	formData.append('name', 'dataSetImage')
-		// }
-			
-		// const promises = transferredFiles.map(file => readFileAndCheckType(file));
-
-		// Promise.all(promises).then(filePromiseArray =>
-		// 	filePromiseArray.filter(filePromise => filePromise.accept)
-		// 		.map(acceptedFile => acceptedFile.file))
-		// 		.then(acceptedFiles => this.files = new Set(acceptedFiles))
-		// 		.catch(error => console.log(error));
-
 	}
 
 	onUpload() {
 		this.uploadFile.emit()
-		// this.files.forEach(fileItem => {
-		// 	if (!fileItem.uploaded) {
-		// 		if (fileItem.file.size < this.maxSize) {
-		// 			fileItem.state = "upload";
-		// 			setTimeout(() => {
-		// 				fileItem.state = "complete";
-		// 				fileItem.uploaded = true;
-		// 			}, 1500);
-		// 		}
-		// 		if (fileItem.file.size > this.maxSize) {
-		// 			fileItem.state = "upload";
-		// 			setTimeout(() => {
-		// 				fileItem.state = "edit";
-		// 				fileItem.invalid = true;
-		// 				fileItem.invalidText = "File size exceeds limit";
-		// 			}, 1500);
-		// 		}
-		// 	}
-		// });
 	}
 }

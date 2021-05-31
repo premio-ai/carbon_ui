@@ -24,7 +24,22 @@
         <div style="display: grid;grid-template-columns: 80% 20%;padding: 1rem;margin-top: -32px;">
          
             <div  class="custom-class-example" >
-             <p class="discription"> {{model?.modelDescription}}</p></div>
+             <!-- <p class="discription"> {{model?.modelDescription}}</p> -->
+            
+             <p *ngIf="showLess" class="discription">
+              {{ showLessStr(model?.modelDescription) }}...
+              <span (click)="readMore()" style="color: cadetblue; font-size: x-small; cursor: pointer;">
+                Read More
+              </span>
+            </p>
+            <p *ngIf="!showLess" class="discription">
+              {{ model?.modelDescription }}
+              <span (click)="readLess()" style="color: cadetblue; font-size: x-small; cursor: pointer;">
+                Read Less
+              </span>
+            </p>
+
+            </div>
 
             <div  class="custom-class-example" >
               <div class="sideicon">

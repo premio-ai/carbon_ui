@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { APP_URL } from '../../config/config';
 import { RequestService } from '../request.service';
 
 @Component({
@@ -12,10 +13,12 @@ export class DataComponent implements OnInit {
   constructor(
     private requestService: RequestService
   ) { }
-  editedPhase: String
+  editedPhase: String;
   isEdit: Boolean;
+  appUrl: String;
 
   ngOnInit() {
+    this.appUrl = APP_URL
     this.isEdit = false
     this.editedPhase = ''
   }
@@ -54,7 +57,7 @@ export class DataComponent implements OnInit {
     if (this.challengeDetails) {
 
       let docName = this.challengeDetails.phases[phaseIndex].sampleDataFile[fileIndex].path || ''
-      let docUrl = 'http://localhost:3000/' + docName
+      let docUrl = APP_URL + docName
 
       if (docUrl.length) {
         await fetch(docUrl).then(async res => {

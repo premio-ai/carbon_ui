@@ -3,6 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RequestService } from '../request.service';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
+import { APP_URL } from '../../config/config';
 
 @Component({
   selector: 'app-inv-model-view',
@@ -29,8 +30,10 @@ export class InvModelViewComponent implements OnInit {
   set_new_modelName: String;
   allSubmitOfChallenge: any[] = [];
   submissionIndex: number;
+  appUrl: String;
 
   ngOnInit() {
+    this.appUrl = APP_URL
     this.activatedRoute.params.subscribe((params: Params) => {
       if (params) {
         this.modelId = params.id
@@ -107,7 +110,7 @@ export class InvModelViewComponent implements OnInit {
   async downloadFile() {
     if (this.challengeDetails) {
       let docName = this.challengeDetails.phases[0].sampleDataFile[0].path || ''
-      let docUrl = 'http://localhost:3000/' + docName
+      let docUrl = APP_URL + docName
 
       if (docUrl.length) {
         await fetch(docUrl).then(async res => {

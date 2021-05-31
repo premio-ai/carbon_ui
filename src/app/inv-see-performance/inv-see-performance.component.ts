@@ -3,6 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RequestService } from '../request.service';
 import { Location } from '@angular/common';
 import "@carbon/charts/styles.css";
+import { APP_URL } from '../../config/config';
 
 @Component({
 	selector: 'app-inv-see-performance',
@@ -85,7 +86,7 @@ export class InvSeePerformanceComponent implements OnInit {
 	async downloadFile() {
 		if (this.challengeDetails) {
 			let docName = this.challengeDetails.phases[0].sampleDataFile[0].path || ''
-			let docUrl = 'http://localhost:3000/' + docName
+			let docUrl = APP_URL + docName
 
 			if (docUrl.length) {
 				await fetch(docUrl).then(async res => {

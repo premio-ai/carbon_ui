@@ -3,6 +3,7 @@ import { RequestService } from "../request.service";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
+import { APP_URL } from '../../config/config';
 
 @Component({
 	selector: 'app-inv-accepted',
@@ -51,9 +52,11 @@ export class InvAcceptedComponent implements OnInit {
 	challengeSubmissionData: any;
 	pageOffset: number;
 	totalPage: number;
+	appUrl: String;
 
 
 	ngOnInit() {
+		this.appUrl = APP_URL
 		this.pageOffset = 0;
 		this.totalPage = 0;
 		this.pageNo = 0;
@@ -238,7 +241,7 @@ export class InvAcceptedComponent implements OnInit {
 		if (this.challengeDetails) {
 
 			let docName = this.challengeDetails.phases[phaseIndex].sampleDataFile[fileIndex].path || ''
-			let docUrl = 'http://localhost:3000/' + docName
+			let docUrl = APP_URL + docName
 
 			if (docUrl.length) {
 				await fetch(docUrl).then(async res => {

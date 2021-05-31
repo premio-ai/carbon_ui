@@ -45,8 +45,7 @@
       <div class="bx--form-item">
         <label for="text-input-3" class="bx--label">Register As</label>
         <ibm-dropdown [label]="Min" [helperText]="helperText" [size]="size" [invalid]="invalid"
-          [invalidText]="invalidText" [theme]="theme" placeholder="Search User Role" (selected)="selected($event)"
-          (onClose)="onClose($event)">
+          [invalidText]="invalidText" [theme]="theme" placeholder="Search User Role" (selected)="selected($event)">
           <ibm-dropdown-list [items]="registerAs"></ibm-dropdown-list>
         </ibm-dropdown>
         <div *ngIf="programmingLanguageError">

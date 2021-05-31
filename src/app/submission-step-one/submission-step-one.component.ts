@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { APP_URL } from '../../config/config';
 import { RequestService } from '../request.service';
 
 @Component({
@@ -58,7 +59,7 @@ export class SubmissionStepOneComponent implements OnInit {
 		if (this.challengeDetails) {
 
 			let docName = this.challengeDetails.phases[phaseIndex].sampleDataFile[fileIndex].path || ''
-			let docUrl = 'http://localhost:3000/' + docName
+			let docUrl = APP_URL + docName
 
 			if (docUrl.length) {
 				await fetch(docUrl).then(async res => {
