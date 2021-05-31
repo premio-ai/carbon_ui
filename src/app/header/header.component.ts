@@ -26,13 +26,13 @@ export class HeaderComponent implements OnInit {
 	ngOnInit() {
 		this.challengeCounts = 0;
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
-if (this.userDetails) {	
-	setInterval(() => {
-		this.getNotifications()
-	}, 30000)
-	this.getChallengeCounts();
-	this.getInnovatorChallangeCount();
-}
+		if (this.userDetails) {
+			setInterval(() => {
+				this.getNotifications()
+			}, 10000)
+			this.getChallengeCounts();
+			this.getInnovatorChallangeCount();
+		}
 	}
 
 	getInnovatorChallangeCount() {
@@ -52,18 +52,18 @@ if (this.userDetails) {
 	getBookmarkedChallenges() {
 		let url = "bookmarkChallenge";
 		this.requestService.get(url, null).subscribe(data => {
-	
-		  let tempData = []
-		  this.activeChallenges.filter(dt => {
-			data.map(res => {
-			  if (dt._id == res.challengeId) {
-				tempData.push(dt)
-			  }
+
+			let tempData = []
+			this.activeChallenges.filter(dt => {
+				data.map(res => {
+					if (dt._id == res.challengeId) {
+						tempData.push(dt)
+					}
+				})
 			})
-		  })
-		  this.bookmarkedChallenges = tempData;
+			this.bookmarkedChallenges = tempData;
 		})
-	  }
+	}
 
 	getSubmission() {
 		let url = "submissionAllChallenge";
@@ -81,14 +81,14 @@ if (this.userDetails) {
 	}
 
 	getChallengeCounts() {
-		this.requestService.get('challenge/counts', null).subscribe( data => {
+		this.requestService.get('challenge/counts', null).subscribe(data => {
 			this.challengeCounts = data
 		})
 	}
 
 	getNotifications() {
 		let url = 'userNotification'
-		this.requestService.get(url, null).subscribe( data => {
+		this.requestService.get(url, null).subscribe(data => {
 			this.notifications = data;
 		})
 	}
@@ -115,15 +115,15 @@ if (this.userDetails) {
 		if (notify.title == MESSAGES.NEW_CHALLENGE_POST) {
 			this.requestService.put('userNotification/' + notify._id, {
 				isSeen: true
-			}).subscribe( data => {
+			}).subscribe(data => {
 				this.router.navigateByUrl('challenge/' + notify.elementId)
 			})
 		}
 		if (notify.title == MESSAGES.NEW_MODEL_SUBMITTED) {
 			this.requestService.put('userNotification/' + notify._id, {
 				isSeen: true
-			}).subscribe( data => {
-				this.router.navigateByUrl('invmodel-view/:id' + notify.elementId)
+			}).subscribe(data => {
+				this.router.navigateByUrl('invmodel-view/' + notify.elementId)
 			})
 		}
 	}
