@@ -86,12 +86,9 @@ export class ChallaneThirdStepComponent implements OnInit {
   }
   selectAccountType2(evt) {
     if (evt.checked) { this.stepThree.typeOfUser = "STARTUP"; }
-    console.log(evt)
-
   }
   selectAccountType3(evt) {
     if (evt.checked) { this.stepThree.typeOfUser = "BIG_FIRM"; }
-    console.log(evt)
   }
 
   checkUserType(type){

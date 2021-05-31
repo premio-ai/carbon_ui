@@ -3,38 +3,30 @@
         <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
             <h3>Challenge Overview</h3>
             <br />
-            <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
+            <ibm-label>
                 <ibm-label>
-                    Challenge Title <p style="margin-left: 273px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">
-                        0/50</p>
+                    Challenge Title <p style="margin-left: 273px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">0/50</p>
                 </ibm-label>
-               
-                <textarea style="width: 90%" ibmTextArea [invalid]="invalid" minlength="1" maxlength="50"
-                    [disabled]="disabled" [theme]="theme" [rows]="1" [cols]="cols" aria-label="textarea"
-                    [(ngModel)]="stepOne.title"></textarea>
+                <textarea style="width: 90%" ibmTextArea minlength="1" maxlength="50" [rows]="1" [cols]="cols"
+                    aria-label="textarea" [(ngModel)]="stepOne.title"></textarea>
             </ibm-label>
             <div *ngIf="titleError">
                 <p><span style="font-size: x-small; color: red">Challenge Title is required</span></p>
             </div>
             <br />
-            <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-                
-                Challenge Description<p
-                    style="margin-left: 273px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">0/500</p>
-                <textarea style="width: 90%;margin-top: 10px;" ibmTextArea [invalid]="invalid" minlength="1" maxlength="500"
-                    [disabled]="disabled" [theme]="theme" [rows]="5" [cols]="cols" aria-label="textarea"
-                    [(ngModel)]="stepOne.description"></textarea>
+            <ibm-label>
+                Challenge Description<p style="margin-left: 273px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">0/500</p>
+                <textarea style="width: 90%; margin-top: 10px;" ibmTextArea minlength="1" maxlength="500"
+                    [rows]="5" [cols]="cols" aria-label="textarea" [(ngModel)]="stepOne.description"></textarea>
             </ibm-label>
             <div *ngIf="descriptionError">
                 <p><span style="font-size: x-small; color: red">Description is required</span></p>
             </div>
             <br />
-            <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-                Challenge Objectives<p
-                    style="margin-left: 273px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">0/100</p>
-                <textarea style="width: 90%;margin-top: 10px;" ibmTextArea [invalid]="invalid" minlength="1" maxlength="100"
-                    [(ngModel)]="stepOne.objective" [disabled]="disabled" [theme]="theme" [rows]="3" [cols]="cols"
-                    aria-label="textarea"></textarea>
+            <ibm-label>
+                Challenge Objectives<p style="margin-left: 273px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;">0/100</p>
+                <textarea style="width: 90%;margin-top: 10px;" ibmTextArea minlength="1" maxlength="100"
+                    [(ngModel)]="stepOne.objective" [rows]="3" [cols]="cols" aria-label="textarea"></textarea>
             </ibm-label>
             <div *ngIf="objectiveError">
                 <p><span style="font-size: x-small; color: red">Objective is required</span></p>
@@ -42,11 +34,11 @@
             <br />
             <div ibmGrid [condensed]="gridCondensed" style="padding-left: 15px;">
 				<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
-					<ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
+					<ibm-label>
                         Challenge Category</ibm-label>
                     <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 6, 'sm': 12}">
-						<ibm-dropdown [label]="Min" [helperText]="helperText" [size]="size" [invalid]="invalid" [invalidText]="invalidText"
-							[theme]="theme" placeholder="Select Category" (selected)="selectCategory($event)">
+						<ibm-dropdown [label]="Min" [size]="size"
+							placeholder="Select Category" (selected)="selectCategory($event)">
 							<ibm-dropdown-list [items]="category"></ibm-dropdown-list>
 						</ibm-dropdown>
 						<div *ngIf="categoryTypeError">
@@ -58,11 +50,11 @@
             <br/>
             <div ibmGrid [condensed]="gridCondensed" style="padding-left: 15px;">
 				<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
-					<ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
+					<ibm-label>
                         Challenge Contract Type</ibm-label>
 					<div ibmCol class="custom-class-example" [columnNumbers]="{'md': 6, 'sm': 12}">
-						<ibm-dropdown [label]="Min" [helperText]="helperText" [size]="size" [invalid]="invalid" [invalidText]="invalidText"
-							[theme]="theme" placeholder="Select Challenge Type" (selected)="selectContract($event)">
+						<ibm-dropdown [label]="Min" [size]="size"
+							placeholder="Select Challenge Type" (selected)="selectContract($event)">
 							<ibm-dropdown-list [items]="contractType"></ibm-dropdown-list>
 						</ibm-dropdown>
 						<div *ngIf="challengeTypeError">
@@ -72,7 +64,7 @@
 				</div>
 			</div>
             <br />
-            <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">Challenge End Date
+            <ibm-label>Challenge End Date
                 <input type='date' ibmTextArea style="width: 165px" [(ngModel)]="stepOne.endDate" />
                 </ibm-label>
             <div *ngIf="endDateError">

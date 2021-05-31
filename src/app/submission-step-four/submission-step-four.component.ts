@@ -25,13 +25,12 @@ export class SubmissionStepFourComponent implements OnInit {
     guidence: string,
     score: number
   }
-  totalphases: number
+  totalPhases: number
+  showLess: boolean
 
   ngOnInit() {
-    this.totalphases = this.challengeDetails.phases.length
-  }
-
-  previous() {
+    this.showLess = true
+    this.totalPhases = this.challengeDetails.phases.length
   }
 
   toStepOne() {
@@ -44,11 +43,6 @@ export class SubmissionStepFourComponent implements OnInit {
 
   seePerformance(modelId) {
     this.router.navigateByUrl('see-performance/' + modelId)
-  }
-
-  getPhase(model) {
-    // console.log(this.challengeSubmissionData, "---this.challengeSubmissionData---46")
-    
   }
 
   async downloadFile(modelpath) {
@@ -73,6 +67,18 @@ export class SubmissionStepFourComponent implements OnInit {
         // this.docError = true
       }
     }
+  }
+
+  readMore() {
+    this.showLess = false
+  }
+
+  readLess() {
+    this.showLess = true
+  }
+
+  showLessStr(str) {
+    return str.substring(0, 100)
   }
 
 }

@@ -37,7 +37,8 @@
 				<div style="display: flex;flex-wrap: wrap;gap: 10px;">
 					<div class="custom-class-example" style="width: 32%;"
 						*ngFor="let bookmarkedChallenge of bookmarkedChallenges">
-						<app-inv-challenge-tile [challenge]="bookmarkedChallenge" [submissionRanking]="submissionRanking" ></app-inv-challenge-tile>
+						<app-inv-challenge-tile [challenge]="bookmarkedChallenge" [submissionRanking]="submissionRanking"
+						[submittedChallenges]="submittedChallenges" ></app-inv-challenge-tile>
 					</div>
 				</div>
 			</ibm-tab>

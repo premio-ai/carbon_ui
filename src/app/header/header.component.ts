@@ -26,11 +26,13 @@ export class HeaderComponent implements OnInit {
 	ngOnInit() {
 		this.challengeCounts = 0;
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
-		setInterval(() => {
-			this.getNotifications()
-		}, 60000)
-		this.getChallengeCounts();
-		this.getInnovatorChallangeCount();
+if (this.userDetails) {	
+	setInterval(() => {
+		this.getNotifications()
+	}, 30000)
+	this.getChallengeCounts();
+	this.getInnovatorChallangeCount();
+}
 	}
 
 	getInnovatorChallangeCount() {
@@ -43,6 +45,7 @@ export class HeaderComponent implements OnInit {
 		this.requestService.get(allActiveChallanegUrl, params).subscribe(data => {
 			this.activeChallenges = data.list;
 			this.getSubmission();
+			this.getBookmarkedChallenges();
 		})
 	}
 
@@ -110,7 +113,7 @@ export class HeaderComponent implements OnInit {
 
 	viewNotification(notify) {
 		if (notify.title == MESSAGES.NEW_CHALLENGE_POST) {
-			this.requestService.put('invaccepted/' + notify._id, {
+			this.requestService.put('userNotification/' + notify._id, {
 				isSeen: true
 			}).subscribe( data => {
 				this.router.navigateByUrl('challenge/' + notify.elementId)

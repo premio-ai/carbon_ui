@@ -89,7 +89,7 @@
 
     <div *ngFor="let notify of notifications; index as i" (click)="viewNotification(notify)">
       <p class="userdetail">{{ notify?.title }}</p>
-      <p class="notify">{{ notify?.body }}</p>
+      <p class="notify" style="cursor: pointer;" >{{ notify?.body }}</p>
     </div>
     <br/>
     <!-- <p class="userdetail">View all notifications</p> -->
