@@ -1,3 +1,5 @@
+@import "../../styles.scss";
+
 .discrip {
 	color: gray;
 	font-size: 10px;
@@ -16,7 +18,7 @@
 	background-color: #f4f4f4;
 	position: relative;
 	border-top: 4px solid #40ba61;
-	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 8px;
 
 	padding: 1rem;
 	outline: 2px solid transparent;
@@ -76,15 +78,23 @@ align-items: center;
 	width: 138px;
 	height: 50px;
 	padding: 17px;
+	position: relative;
+    bottom: -14px;
 }
 .editicon{
 	margin-top: 14px; margin-left: 2px;
+	@include aboveWidth(1440px){
+       
+		 margin-left: 2px;
+   
+}
 }
 
 @media screen and (max-width: 1024px) {
   
 	.editicon{
-		margin-top: 30px; margin-left: 2px;
+margin-left: 2px;
     }
     
   }
+

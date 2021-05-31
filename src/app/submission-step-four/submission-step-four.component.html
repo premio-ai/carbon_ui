@@ -14,14 +14,14 @@
         <div style="display: grid;grid-template-columns: 68% 28%;padding: 1rem;">
           <div>
             <p style="font-size: 20px;">{{model?.modelName}}</p>
-            <span>Phase {{i+1}} of {{totalPhases}}</span>
+            <span class="phase2">Phase {{i+1}} of {{totalPhases}}</span>
           </div>
           <div style="margin-left: auto;align-items: center;display: flex;">
             <svg class="svg" icon ibmIconCheckmarkFilled16></svg>&nbsp;
             <p class="discription">result</p>
           </div>
         </div>
-        <div style="display: grid;grid-template-columns: 80% 20%;padding: 1rem;">
+        <div style="display: grid;grid-template-columns: 80% 20%;padding: 1rem;margin-top: -32px;">
          
             <div  class="custom-class-example" >
              <!-- <p class="discription"> {{model?.modelDescription}}</p> -->
@@ -62,7 +62,7 @@
             <div  class="custom-class-example"  *ngIf="model?.score>80">
               <button class="model" [ibmButton]="ibmButton" [size]="'sm'" (click)="seePerformance(model?._id)">See performance</button>
             </div>
-            <div  class="custom-class-example"  *ngIf="model?.score<80">
+            <div  class="viewmodel"  *ngIf="model?.score<80">
               <button class="model" [ibmButton]="ibmButton" [size]="'sm'" (click)="viewModel(model?._id)">View Model</button>
             </div>
          

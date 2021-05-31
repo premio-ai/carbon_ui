@@ -1,3 +1,6 @@
+@import "../../styles.scss";
+
+
 .Step2btn_next{
    
     margin: auto;
@@ -70,3 +73,28 @@ background-color: #383838;border: none;
     padding-right: 1rem;
 }
 }
+
+.challTitle{
+    margin-left: 381px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;
+    @include aboveWidth(1440px){
+       
+        margin-left: 428px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;
+   
+}
+}
+
+@media screen and (max-width: 1024px) {
+  
+	.challTitle{
+        margin-left: 273px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;
+    }
+    
+  }
+
+  .alignment{
+      margin-top: 51px;
+  }
+
+  .addphase{
+      font-size: 10px;
+  }
