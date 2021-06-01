@@ -108,3 +108,12 @@
 .challengeTitle{
   font-size: 40px;font-weight: 100;text-transform: capitalize;
 }
+
+.bx--toast-notification--success {
+  border-left: 3px solid #42be65;
+  background: #393939;
+  margin-left: auto;
+  position: relative;
+  top: -36px;
+  left: 32px;
+}
