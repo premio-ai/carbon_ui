@@ -3,10 +3,10 @@
 <div class="bx--grid">
 	<div class="bx--row line-padding">
 		<div class="bx--col-md-1" style="cursor: pointer;">
-			<svg icon ibmIconArrowLeft16 (click)="navigateBack()"></svg>
+			<svg class="svg" icon ibmIconArrowLeft16 (click)="navigateBack()"></svg>
 		</div>
-		<div class="bx--col-md-7">
-			<ibm-breadcrumb [noTrailingSlash]="noTrailingSlash">
+		<div class="bx--col-md-7" style="margin-left: -8%;">
+			<ibm-breadcrumb [noTrailingSlash]="'noTrailingSlash'">
 				<ibm-breadcrumb-item href="/" class="navigation">Activity Dashboard</ibm-breadcrumb-item>
 			</ibm-breadcrumb>
 		</div>
@@ -15,7 +15,7 @@
 	<div class="bx--row line-padding">
 		<div class="bx--col-md-1">
 		</div>
-		<div class="bx--col-md-7">
+		<div class="bx--col-md-7" style="margin-left: -8%;">
 			<h1> {{ challengeDetails?.title }} </h1>
 			<ibm-tabs [followFocus]="true" [isNavigation]="false" [cacheActive]="true">
 				<ibm-tab heading="Overview">

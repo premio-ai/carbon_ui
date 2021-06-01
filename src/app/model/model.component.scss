@@ -1,3 +1,5 @@
+@import "../../styles.scss";
+
 .bx--tile {
     display: block;
     min-width: 65rem;
@@ -7,6 +9,19 @@
     padding: 1rem;
     outline: 2px solid transparent;
     outline-offset: -2px;
+    @include aboveWidth(1440px){
+       
+        display: block;
+        min-width: 72.6rem;
+        min-height: 4rem;
+        background-color: #f4f4f4;
+        position: relative;
+        padding: 1rem;
+        outline: 2px solid transparent;
+        outline-offset: -2px;
+   
+}
+
 }
 
 .bold{
@@ -51,14 +66,20 @@
 
 
    .content{
-       margin-left: 50px;
+       margin-left: 223px;
        margin-top: -20px;
        margin-bottom: 6px;
+       @include aboveWidth(1024){
+        margin-left: 165px;
+     }
+       @include aboveWidth(1440px){
+       margin-left: 251px;
+    }
    }
 
    .nobold{
        font-size: 28px;
-       font-weight: 600;
+       font-weight: 900;
        color: #3B55EA;
        
    }
@@ -72,6 +93,9 @@
       
    }
 
+   .submitteddate{
+       font-size: 0.9rem;
+   }
 
 @media (min-width: 42rem){
 
@@ -117,4 +141,19 @@
         outline-offset: -2px;
     }
     
+  }
+
+.gridmodel{
+      margin-left: 30px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .content{
+        margin-left: 165px;
+    }
+  }
+
+  .model-selected{
+      color: black;
+      font-size: 13px;
   }

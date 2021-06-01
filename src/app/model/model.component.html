@@ -7,7 +7,7 @@
     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }"
       *ngFor="let phase of challengeDetails?.phases; index as i">
       <ibm-checkbox [checked]="checked(phaseId)" (click)="handlePhaseClick(phase?.phaseId)">
-        Phase {{i}}
+       &nbsp; Phase {{i}}
       </ibm-checkbox>
     </div>
   </div>
@@ -34,7 +34,7 @@
             [condensed]="rowCondensed" *ngIf="compareModelData && compareModelData?.length>1">
             <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }" style="margin-left: 15px;">
               <h6>Model Comparison</h6>
-              <p style="color: #161616;">{{compareModelData?.length}} models selected</p>
+              <p class="model-selected">{{compareModelData?.length}} models selected</p>
               <br />
               <button class="btn-compare" [ibmButton]="ibmButton" [size]="size" (click)="compareModels()">
                 Compare
@@ -58,14 +58,14 @@
                     <svg icon ibmIconBookmarkFilled20 (click)="unBookmark(data)"></svg>
                   </div>
                 </div>
-                <div ibmGrid [condensed]="gridCondensed">
+                <div ibmGrid [condensed]="gridCondensed" class="gridmodel">
                   <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
                     [condensed]="rowCondensed">
                     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
                       <p class="bold">{{ data?.innovatorId?.fullName }}</p>
                     </div>
                     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-                      <p class="">
+                      <p class="submitteddate">
                         Submitted: {{ getDate(data?.createdAt) }}
                       </p>
                     </div>
@@ -75,26 +75,25 @@
                     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 6, sm: 12 }">
                       <p class="para">{{ data?.modelDescription }}</p>
                     </div>
-                    <!-- <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-                      <ibm-checkbox [hideLabel]="hideLabel" (change)="onChange($event, data._id)"
-                       ></ibm-checkbox>
-
-                      <div class="content" style="margin-left: 140px; margin-top: 3px;">
+                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
+                     
+                      <div class="content" >
                         <p class="unbold">Phase 1</p>
                         <p class="nobold">55</p>
                       </div>
-                    </div> -->
+                      <br/>
+                    </div>
                   </div>
                   <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
                     [condensed]="rowCondensed">
                     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-                      <p class="accu">Accuracy:<span class="score">{{ data?.recallScore }}</span></p>
+                      <p class="accu">Accuracy:<span class="score">&nbsp;{{ data?.recallScore }}</span></p>
                     </div>
                     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-                      <p class="accu">Precesion:<span class="score">{{ data?.recallScore }}</span></p>
+                      <p class="accu">Precesion:<span class="score">&nbsp;{{ data?.recallScore }}</span></p>
                     </div>
                     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-                      <p class="accu">Recall:<span class="score">{{ data?.recallScore }}</span></p>
+                      <p class="accu">Recall:<span class="score">&nbsp;{{ data?.recallScore }}</span></p>
                     </div>
                   </div>
                 </div>

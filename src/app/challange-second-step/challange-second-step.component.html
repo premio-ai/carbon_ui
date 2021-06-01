@@ -14,7 +14,7 @@
       </ibm-label>
       <br />
       <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-        <p class="headingtop">Data Usage Guidence</p>
+        <p class="headingtop">Data Usage Guidance</p>
         <p class="challTitle">
           0/100
         </p>
@@ -94,7 +94,7 @@
         <p><span style="font-size: x-small; color: red">Score for this phase is required</span></p>
       </div>
       <br />
-      <p class="link">Set Additional Score Requirement +</p>
+      <p class="link">Set Additional Scoring Requirements +</p>
       <br />
       <button [ibmButton]="ibmButton" [size]="'sm'" class="addphase" (click)="addPhase()">
         Add Phase<svg class="bx--btn__icon" ibmIconAdd size="20"></svg>
@@ -106,13 +106,13 @@
         <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed" >
           <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
             <h5>Data Visualisation</h5>
-            <p class="drag">An image that represnt your Sample data</p>
+            <p class="drag">An image that represents your Sample data</p>
             <app-drop-image-uploader (goNext)="setDataVisual($event)" (uploadFile)="uploadDataVisual()"
               (filesChange)="onImageSelect($event.target.files)"></app-drop-image-uploader>
           </div>
           <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }" style="padding-left: 10px;">
             <h5>Sample Data</h5>
-            <p class="drag">Anonymous, available to download for any innovator</p>
+            <p class="drag">Anonymous, available to download for any innovators</p>
             <!-- (uploadFile)="uploadSampleData($event)" -->
             <!-- <app-drop-file-uploader (setFile)="setSampleData($event)" 
               (filesChange)="onDropped($event.target.files)"></app-drop-file-uploader> -->

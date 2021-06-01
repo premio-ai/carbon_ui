@@ -12,7 +12,7 @@
 
     <div class="bx--col-md-4" style="margin-top: 26px;">
 
-      <ibm-breadcrumb [noTrailingSlash]="noTrailingSlash">
+      <ibm-breadcrumb [noTrailingSlash]="'noTrailingSlash'">
         <ibm-breadcrumb-item href="/" class="navigation" style="cursor: pointer; color: blue;" >
           Activity Dashboard
         </ibm-breadcrumb-item>
@@ -71,7 +71,7 @@
       </ibm-content-switcher>
 
       <br /> <br />
-      <h3 style="margin-top:18px;">Model details </h3>
+      <h3 style="margin-top:12px;">Model details </h3>
 
       <p class="paragraph">Model Submitted: {{getDate(modelReport?.createdAt)}}</p>
       <br /> <br />
@@ -131,7 +131,7 @@
   <div class="bx--row line-padding" style="background-color:#F3F3F3;">
     <div class="bx--col-md-1"></div>
     <div class="bx--col-md-6">
-      <h3>Model Performance </h3>
+      <h3>Model performance </h3>
       <br />
       <div style="display: flex; gap: 10px;">
 

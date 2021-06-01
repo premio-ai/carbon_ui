@@ -49,6 +49,14 @@ text.donut-figure{
 	display: none;
 }
 
+.bx--content-switcher {
+    display: flex;
+    justify-content: end !important;
+    width: 38%;
+    height: 2.5rem;
+   
+}
+
 
 .bx--table-toolbar {
     background: #f4f4f4;
@@ -82,7 +90,12 @@ ibm-tab > div{
 		padding-bottom : 0px !important;
 	}
 
-
+    .bx--content-switcher {
+        display: flex;
+        width: 100%;
+        height: 2.5rem;
+        justify-content: flex-start;
+    }
 
 	@media screen and (max-width: 1440px)  {
 		.bx--tabs__nav-item{
