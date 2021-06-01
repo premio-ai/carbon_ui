@@ -68,7 +68,7 @@
         </ibm-inline-loading>
       </h6>
     </div>
-    <div *ngIf="notifications.length==0">
+    <div *ngIf="notifications?.length==0">
       <p class="notifyItems">No New Notifications</p>
     </div>
     <div *ngFor="let notify of notifications; index as i" (click)="viewNotification(notify)">
