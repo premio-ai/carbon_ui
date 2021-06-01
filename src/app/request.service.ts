@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 
 export class RequestService {
   // baseUrl: string = "http://localhost:3000/api/";
-  baseUrl: string = "https://meanapp01.herokuapp.com/api/";
-  // baseUrl: string = "https://meanapp-comedic-kangaroo-ha.eu-gb.mybluemix.net/api/";
+  // baseUrl: string = "https://meanapp01.herokuapp.com/api/";
+  baseUrl: string = "https://meanapp-comedic-kangaroo-ha.eu-gb.mybluemix.net/api/";
   constructor(private http: HttpClient) { }
 
   get(uri, params): Observable<any> {
