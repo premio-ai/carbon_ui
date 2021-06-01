@@ -14,7 +14,6 @@ export class ChallangeSecondStepComponent implements OnInit {
     private requestService: RequestService
   ) { }
   phases: any[] = []
-  phasesError: boolean
   fileData: any;
   fileArray: any[] = []
   stepTwo: {
@@ -24,6 +23,11 @@ export class ChallangeSecondStepComponent implements OnInit {
     dataVisualFile: string,
     sampleDataFile: any
   }
+  descriptionError: boolean;
+  guidanceError: boolean;
+  passingScoreError: boolean;
+  dataVisualFileError: boolean;
+  sampleDataFileError: boolean;
 
   ngOnInit() {
     this.stepTwo = {
@@ -53,6 +57,36 @@ export class ChallangeSecondStepComponent implements OnInit {
         dataVisualFile: '',
         sampleDataFile: []
       }
+    } else {
+      this.validateData()
+    }
+  }
+
+  validateData() {
+    if (this.stepTwo.description.length == 0) {
+      this.descriptionError = true
+    } else {
+      this.descriptionError = false
+    }
+    if (this.stepTwo.guidence.length == 0) {
+      this.guidanceError = true
+    } else {
+      this.guidanceError = false
+    }
+    if (!this.stepTwo.passingScore) {
+      this.passingScoreError = true
+    } else {
+      this.passingScoreError = false
+    }
+    if (this.stepTwo.dataVisualFile.length == 0) {
+      this.dataVisualFileError = true
+    } else {
+      this.dataVisualFileError = false
+    }
+    if (this.stepTwo.sampleDataFile.length == 0) {
+      this.sampleDataFileError = true
+    } else {
+      this.sampleDataFileError = false
     }
   }
 
@@ -91,7 +125,7 @@ export class ChallangeSecondStepComponent implements OnInit {
         this.phases.push(tempData)
         this.goNext.emit(this.phases);
       } else {
-        this.phasesError = true
+        this.validateData();
       }
     } else {
       if (this.stepTwo.description.length > 0 && this.stepTwo.guidence.length > 0 && this.stepTwo.passingScore && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 0) {
@@ -105,7 +139,7 @@ export class ChallangeSecondStepComponent implements OnInit {
         this.phases.push(tempData)
         this.goNext.emit(this.phases);
       } else {
-        this.phasesError = true
+        this.validateData();
       }
     }
   }

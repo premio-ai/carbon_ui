@@ -366,7 +366,7 @@ export class ModelReportComponent implements OnInit {
 		}
 	];
 	options1 = {
-		"title": "`<b>${Loss vs Iteration}</b>`",
+		"title": "Loss vs Iteration",
 		"color": {
 			"pairing": {
 				"option": 2

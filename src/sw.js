@@ -1,5 +1,5 @@
-let log = console.log.bind(console);
-let err = console.error.bind(console);
+// let log = console.log.bind(console);
+// let err = console.error.bind(console);
 
 let version = '1';
 let cacheName = 'pwa-client-v' + version;
@@ -51,7 +51,7 @@ self.addEventListener('fetch', (e) => {
 		caches.match(e.request.clone()).then((response) => {
 			return response || fetch(e.request.clone()).then((r2) => {
 				return caches.open(dataCacheName).then((cache) => {
-					console.log('Service Worker: Fetched & Cached URL ', e.request.url);
+					// console.log('Service Worker: Fetched & Cached URL ', e.request.url);
 					cache.put(e.request.url, r2.clone());
 					return r2.clone();
 				});

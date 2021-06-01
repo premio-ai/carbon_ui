@@ -62,22 +62,29 @@
       &nbsp; Notifications  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <span><p style="font-size: 12px;" >Clear</p></span>
     </p>
 
+    <div *ngIf="notificationLoading">
+      <h6  >
+        <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)">
+        </ibm-inline-loading>
+      </h6>
+    </div>
+    <div *ngIf="notifications.length==0">
+      <p class="notifyItems">No New Notifications</p>
+    </div>
     <div *ngFor="let notify of notifications; index as i" (click)="viewNotification(notify)">
-      <p class="userdetail">{{ notify?.title }}</p>
-      <p class="notify" style="cursor: pointer;" >{{ notify?.body }}</p>
+      <!-- <p class="userdetail">{{ notify?.title }}</p> -->
+      <p class="notifyItems" style="cursor: pointer;" >{{ notify?.body }}</p>
     </div>
     <br/>
     <!-- <p class="userdetail">View all notifications</p> -->
   </div>
 
-  <div class="bx--navigation-section">
+  <!-- <div class="bx--navigation-section">
     <p class="notify">
       <svg icon ibmIconChat20></svg>
       &nbsp; Message&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <span><p style="font-size: 12px;" >Mark read</p></span>
     </p>
-
-    
-  </div>
+  </div> -->
 
   <!-- <p class="userdetail" style="margin-bottom: 30px">Log out</p> -->
 

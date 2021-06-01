@@ -61,8 +61,7 @@
 					[condensed]="rowCondensed">
 					<h6>Accepted Programming languages</h6>
 					<div ibmCol class="custom-class-example" [columnNumbers]="{'md': 6, 'sm': 12}">
-						<ibm-dropdown [label]="Min" [helperText]="helperText" [size]="size" [invalid]="invalid" [invalidText]="invalidText"
-							[theme]="theme" placeholder="Search Language" [disabled]="disabled" (selected)="selected($event)">
+						<ibm-dropdown placeholder="Search Language" (selected)="selected($event)">
 							<ibm-dropdown-list [items]="language"></ibm-dropdown-list>
 						</ibm-dropdown>
 						<div *ngIf="programmingLanguageError">
