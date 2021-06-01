@@ -6,7 +6,7 @@
             <ibm-label>
                 <ibm-label>
                     Challenge Title <p class="challTitle">
-                        0/50</p>
+                        {{stepOne.title.length || 0}}/50</p>
                 </ibm-label>
                 <textarea style="width: 90%" ibmTextArea minlength="1" maxlength="50" [rows]="1" [cols]="cols"
                     aria-label="textarea" [(ngModel)]="stepOne.title"></textarea>
@@ -16,9 +16,8 @@
             </div>
             <br />
             <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-                
                 Challenge Description<p
-                class="challTitle">0/500</p>
+                class="challTitle">{{stepOne.description.length || 0}}/500</p>
                 <textarea style="width: 90%;margin-top: 10px;" ibmTextArea [invalid]="invalid" minlength="1" maxlength="500"
                     [disabled]="disabled" [theme]="theme" [rows]="5" [cols]="cols" aria-label="textarea"
                     [(ngModel)]="stepOne.description"></textarea>
@@ -29,7 +28,7 @@
             <br />
             <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
                 Challenge Objectives<p
-                class="challTitle">0/100</p>
+                class="challTitle">{{stepOne.objective.length || 0}}/100</p>
                 <textarea style="width: 90%;margin-top: 10px;" ibmTextArea [invalid]="invalid" minlength="1" maxlength="100"
                     [(ngModel)]="stepOne.objective" [disabled]="disabled" [theme]="theme" [rows]="3" [cols]="cols"
                     aria-label="textarea"></textarea>

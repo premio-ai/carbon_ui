@@ -76,32 +76,45 @@ export class ChallangeFirstStepComponent implements OnInit {
   }
 
   nextStep() {
-    // TODO : uncomment
-    // this.goNext.emit(this.stepOne)
-
-    var date_regex = /^(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$/;
-
     if (this.stepOne.title.length>0 && this.stepOne.description.length>0 && this.stepOne.objective.length>0 && this.stepOne.categoryType.length>0 && this.stepOne.challengeType.length>0 && this.stepOne.endDate.length>0) {
       this.goNext.emit(this.stepOne)
     } else {
-      if (this.stepOne.title.length == 0) {
-        this.titleError = true
-      }
-      if (this.stepOne.description.length == 0) {
-        this.descriptionError = true
-      }
-      if (this.stepOne.objective.length == 0) {
-        this.objectiveError = true
-      }
-      if (this.stepOne.challengeType.length == 0) {
-        this.challengeTypeError = true
-      }
-      if (this.stepOne.categoryType.length == 0) {
-        this.categoryTypeError = true
-      }
-      if (this.stepOne.endDate.length == 0 && !(date_regex.test(this.stepOne.endDate))) {
-        this.endDateError = true
-      }
+      this.validateData();
+    }
+  }
+
+  validateData() {
+    var date_regex = /^(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$/;
+
+    if (this.stepOne.title.length == 0) {
+      this.titleError = true
+    } else {
+      this.titleError = false
+    }
+    if (this.stepOne.description.length == 0) {
+      this.descriptionError = true
+    } else {
+      this.descriptionError = false
+    }
+    if (this.stepOne.objective.length == 0) {
+      this.objectiveError = true
+    } else {
+      this.objectiveError = false
+    }
+    if (this.stepOne.challengeType.length == 0) {
+      this.challengeTypeError = true
+    } else {
+      this.challengeTypeError = false
+    }
+    if (this.stepOne.categoryType.length == 0) {
+      this.categoryTypeError = true
+    } else {
+      this.categoryTypeError = false
+    }
+    if (this.stepOne.endDate.length == 0 && !(date_regex.test(this.stepOne.endDate))) {
+      this.endDateError = true
+    } else {
+      this.endDateError = false
     }
   }
 

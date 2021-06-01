@@ -25,10 +25,11 @@ export class SubmissionStepTwoComponent implements OnInit {
 
   ngOnInit() {
     this.language = [
-      { content: 'C' },
-      { content: 'C++' },
       { content: 'Python' },
-      { content: 'Java' },
+      { content: 'R     - coming soon', disabled: true },
+      { content: 'C     - coming soon', disabled: true },
+      { content: 'C++     - coming soon', disabled: true },
+      { content: 'Java     - coming soon', disabled: true },
     ];
     this.stepTwo=  {
       modelName: '',
@@ -51,20 +52,31 @@ export class SubmissionStepTwoComponent implements OnInit {
     if (this.stepTwo.modelName.length>0 && this.stepTwo.description.length>0 && this.stepTwo.approach.length>0 && this.stepTwo.language.length>0) {
       this.goNext.emit(this.stepTwo);
     } else {
-      if (this.stepTwo.modelName.length == 0) {
-        this.modelNameError = true
-      }
-      if (this.stepTwo.description.length == 0) {
-        this.descriptionError = true
-      }
-      if (this.stepTwo.approach.length == 0) {
-        this.approachError = true
-      }
-      if (this.stepTwo.language.length == 0) {
-        this.languageError = true
-      }
+      this.validateData();
     }
+  }
 
+  validateData() {
+    if (this.stepTwo.modelName.length == 0) {
+      this.modelNameError = true
+    } else {
+      this.modelNameError = false
+    }
+    if (this.stepTwo.description.length == 0) {
+      this.descriptionError = true
+    } else {
+      this.descriptionError = false
+    }
+    if (this.stepTwo.approach.length == 0) {
+      this.approachError = true
+    } else {
+      this.approachError = false
+    }
+    if (this.stepTwo.language.length == 0) {
+      this.languageError = true
+    } else {
+      this.languageError = false
+    }
   }
 
 }

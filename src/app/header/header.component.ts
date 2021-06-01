@@ -18,22 +18,26 @@ export class HeaderComponent implements OnInit {
 	userDetails: any;
 	notifications: any;
 	challengeCounts: any;
-
+	notificationLoading: boolean;
 	activeChallenges: any[];
 	submittedActiveChallenges: any[] = [];
 	bookmarkedChallenges: any[] = []
 
 	ngOnInit() {
+		this.notificationLoading = true;
 		this.challengeCounts = 0;
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
 		if (this.userDetails) {
-			setInterval(() => {
-				this.getNotifications()
-			}, 10000)
+			this.getNotifications();
 			this.getChallengeCounts();
 			this.getInnovatorChallangeCount();
+
+			// setInterval(() => {
+			// 	this.getNotifications()
+			// }, 60000)
 		}
 	}
+
 
 	getInnovatorChallangeCount() {
 		let allActiveChallanegUrl = "challenge/all";
@@ -90,7 +94,11 @@ export class HeaderComponent implements OnInit {
 		let url = 'userNotification'
 		this.requestService.get(url, null).subscribe(data => {
 			this.notifications = data;
+			this.notificationLoading = false
 		})
+		setTimeout(() => {
+			this.getNotifications();
+		}, Number((60 + Math.random()*10).toFixed(0)) *1000 );
 	}
 
 	logoRoute() {
@@ -116,7 +124,7 @@ export class HeaderComponent implements OnInit {
 			this.requestService.put('userNotification/' + notify._id, {
 				isSeen: true
 			}).subscribe(data => {
-				this.router.navigateByUrl('challenge/' + notify.elementId)
+				this.router.navigateByUrl('invaccepted/' + notify.elementId)
 			})
 		}
 		if (notify.title == MESSAGES.NEW_MODEL_SUBMITTED) {

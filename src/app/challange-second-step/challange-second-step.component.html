@@ -7,7 +7,7 @@
       <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
         <p class="headingtop">Data Description</p>
         <p class="challTitle">
-          0/100
+          {{phases[i].description.length || 0}}/100
         </p>
         <textarea style="width: 90%; margin-top: 10px;" ibmTextArea [invalid]="invalid"
           [(ngModel)]="phases[i].description" [theme]="theme" [rows]="5" [cols]="cols" aria-label="textarea"></textarea>
@@ -16,7 +16,7 @@
       <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
         <p class="headingtop">Data Usage Guidence</p>
         <p class="challTitle">
-          0/100
+          {{phases[i].guidence.length || 0}}/100
         </p>
         <textarea style="width: 90%; margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="phases[i].guidence"
           [theme]="theme" [rows]="3" [cols]="cols" aria-label="textarea"></textarea>
@@ -51,12 +51,12 @@
       <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
         <p class="headingtop">Data Description</p>
         <p class="challTitle">
-          0/100
+          {{stepTwo.description.length || 0}}/100
         </p>
         <textarea style="width: 90%; margin-top: 10px;" ibmTextArea [invalid]="invalid"
           [(ngModel)]="stepTwo.description" [theme]="theme" [rows]="5" [cols]="cols" aria-label="textarea"></textarea>
       </ibm-label>
-      <div *ngIf="phasesError">
+      <div *ngIf="descriptionError">
         <p>
           <span style="font-size: x-small; color: red;">
             Data Description for this phase is required
@@ -67,12 +67,12 @@
       <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
         <p class="headingtop">Data Usage Guidence</p>
         <p class="challTitle">
-          0/100
+          {{stepTwo.guidence.length || 0}}/100
         </p>
         <textarea style="width: 90%; margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.guidence"
           [theme]="theme" [rows]="3" [cols]="cols" aria-label="textarea"></textarea>
       </ibm-label>
-      <div *ngIf="phasesError">
+      <div *ngIf="guidanceError">
         <p>
           <span style="font-size: x-small; color: red;">
             Data Usage Guidance for this phase is required
@@ -90,11 +90,9 @@
           </div>
         </div>
       </div>
-      <div *ngIf="phasesError">
+      <div *ngIf="passingScoreError">
         <p><span style="font-size: x-small; color: red">Score for this phase is required</span></p>
       </div>
-      <br />
-      <p class="link">Set Additional Score Requirement +</p>
       <br />
       <button [ibmButton]="ibmButton" [size]="'sm'" class="addphase" (click)="addPhase()">
         Add Phase<svg class="bx--btn__icon" ibmIconAdd size="20"></svg>
@@ -103,25 +101,29 @@
 
     <div ibmCol class="custom-class-example1" [columnNumbers]="{ md: 4, sm: 12 }">
       <div ibmGrid [condensed]="gridCondensed" class="alignment">
-        <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed" >
+        <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
           <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
             <h5>Data Visualisation</h5>
             <p class="drag">An image that represnt your Sample data</p>
             <app-drop-image-uploader (goNext)="setDataVisual($event)" (uploadFile)="uploadDataVisual()"
               (filesChange)="onImageSelect($event.target.files)"></app-drop-image-uploader>
+            <br />
+            <div *ngIf="dataVisualFileError">
+              <p><span style="font-size: x-small; color: red">Data visual file required</span></p>
+            </div>
           </div>
           <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }" style="padding-left: 10px;">
             <h5>Sample Data</h5>
             <p class="drag">Anonymous, available to download for any innovator</p>
-            <!-- (uploadFile)="uploadSampleData($event)" -->
-            <!-- <app-drop-file-uploader (setFile)="setSampleData($event)" 
-              (filesChange)="onDropped($event.target.files)"></app-drop-file-uploader> -->
-
-              <app-drop-file-uploader (getFile)="setSampleData($event)" ></app-drop-file-uploader>
-
+            <app-drop-file-uploader (getFile)="setSampleData($event)"></app-drop-file-uploader>
+            <br />
+            <div *ngIf="sampleDataFileError">
+              <p><span style="font-size: x-small; color: red">At least 1 sample data file required</span></p>
+            </div>
           </div>
         </div>
-        <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed" style="margin-left: 82px;margin-top: 222px;">
+        <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed"
+          style="margin-left: 82px;margin-top: 222px;">
           <button class="Step2btn_pre" [ibmButton]="ibmButton" [size]="size" (click)="previous()">
             Previous
           </button>

@@ -1,30 +1,16 @@
-<ibm-label
-  [helperText]="helperText"
-  [invalid]="invalid"
-  [invalidText]="invalidText"
->
+<ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
   Model Name
-  <p
-    style="
+  <p style="
       margin-left: 405px;
       font-size: 10px;
       margin-top: -20px;
       margin-bottom: -8px;
-    "
-  >
-    0/25
+    ">
+    {{stepTwo.modelName.length || 0}}/25
   </p>
 
-  <textarea
-    style="width: 100%; margin-top: 10px;"
-    ibmTextArea
-    [invalid]="invalid"
-    [(ngModel)]="stepTwo.modelName"
-    [theme]="theme"
-    [rows]="1"
-    [cols]="cols"
-    aria-label="textarea"
-  ></textarea>
+  <textarea style="width: 100%; margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.modelName"
+    [theme]="theme" [rows]="1" [cols]="cols" maxlength="25" aria-label="textarea"></textarea>
 </ibm-label>
 <div *ngIf="modelNameError">
   <p>
@@ -32,33 +18,19 @@
   </p>
 </div>
 <br />
-<ibm-label
-  [helperText]="helperText"
-  [invalid]="invalid"
-  [invalidText]="invalidText"
->
+<ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
   Discription
-  <p
-    style="
+  <p style="
       margin-left: 405px;
       font-size: 10px;
       margin-top: -20px;
       margin-bottom: -8px;
-    "
-  >
-    0/1000
+    ">
+    {{stepTwo.description.length || 0}}/1000
   </p>
 
-  <textarea
-    style="width: 100%; margin-top: 10px;"
-    ibmTextArea
-    [invalid]="invalid"
-    [(ngModel)]="stepTwo.description"
-    [theme]="theme"
-    [rows]="7"
-    [cols]="cols"
-    aria-label="textarea"
-  ></textarea>
+  <textarea style="width: 100%; margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.description"
+    [theme]="theme" [rows]="7" [cols]="cols" maxlength="1000" aria-label="textarea"></textarea>
 </ibm-label>
 <div *ngIf="descriptionError">
   <p>
@@ -68,33 +40,19 @@
   </p>
 </div>
 <br />
-<ibm-label
-  [helperText]="helperText"
-  [invalid]="invalid"
-  [invalidText]="invalidText"
->
+<ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
   Approach Taken
-  <p
-    style="
+  <p style="
       margin-left: 405px;
       font-size: 10px;
       margin-top: -20px;
       margin-bottom: -8px;
-    "
-  >
-    0/1000
+    ">
+    {{stepTwo.approach.length || 0}}/1000
   </p>
 
-  <textarea
-    style="width: 100%; margin-top: 10px;"
-    ibmTextArea
-    [invalid]="invalid"
-    [(ngModel)]="stepTwo.approach"
-    [theme]="theme"
-    [rows]="7"
-    [cols]="cols"
-    aria-label="textarea"
-  ></textarea>
+  <textarea style="width: 100%; margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.approach"
+    [theme]="theme" [rows]="7" [cols]="cols" maxlength="1000" aria-label="textarea"></textarea>
 </ibm-label>
 <div *ngIf="approachError">
   <p>
@@ -106,17 +64,8 @@
 <br />
 <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
   <ibm-label>Language</ibm-label>
-  <ibm-dropdown
-    [label]="Min"
-    [helperText]="helperText"
-    [size]="size"
-    [invalid]="invalid"
-    [invalidText]="invalidText"
-    [theme]="theme"
-    placeholder="Search Language"
-    [disabled]="disabled"
-    (selected)="selected($event)"
-  >
+  <ibm-dropdown [label]="Min" [helperText]="helperText" [size]="size" [invalid]="invalid" [invalidText]="invalidText"
+    [theme]="theme" placeholder="Search Language" [disabled]="disabled" (selected)="selected($event)">
     <ibm-dropdown-list [items]="language"></ibm-dropdown-list>
   </ibm-dropdown>
 </div>

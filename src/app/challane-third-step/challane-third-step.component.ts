@@ -28,10 +28,11 @@ export class ChallaneThirdStepComponent implements OnInit {
 
   ngOnInit() {
     this.language = [
-      { content: 'C' },
-      { content: 'C++' },
       { content: 'Python' },
-      { content: 'Java' },
+      { content: 'R     - coming soon', disabled: true },
+      { content: 'C     - coming soon', disabled: true },
+      { content: 'C++     - coming soon', disabled: true },
+      { content: 'Java     - coming soon', disabled: true },
     ];
     this.stepThree = {
       minEarnedPoint: 0,
@@ -39,7 +40,7 @@ export class ChallaneThirdStepComponent implements OnInit {
       minChallangeInvolved: 0,
       maxChallangeInvolved: 0,
       typeOfUser: "",
-      programmingLanguage: "",
+      programmingLanguage: "Python",
 
     }
   }
@@ -49,7 +50,6 @@ export class ChallaneThirdStepComponent implements OnInit {
   }
 
   next() {
-    // this.goNext.emit(this.stepThree);
     if (this.stepThree.minEarnedPoint > 0 && this.stepThree.maxEarnedPoint > this.stepThree.minEarnedPoint &&
       this.stepThree.minChallangeInvolved > 0 && this.stepThree.maxChallangeInvolved >= this.stepThree.minChallangeInvolved && 
       this.stepThree.typeOfUser.length>0 && this.stepThree.programmingLanguage.length>0) {
@@ -79,11 +79,11 @@ export class ChallaneThirdStepComponent implements OnInit {
   selected(langaugeSelected) {
     this.stepThree.programmingLanguage = langaugeSelected.item.content;
   }
+
   selectAccountType1(evt) {
-    if (evt.checked) {
-      this.stepThree.typeOfUser = "INDEPENDENT";
-    }
+    if (evt.checked) { this.stepThree.typeOfUser = "INDEPENDENT"; }
   }
+
   selectAccountType2(evt) {
     if (evt.checked) { this.stepThree.typeOfUser = "STARTUP"; }
   }
@@ -94,4 +94,5 @@ export class ChallaneThirdStepComponent implements OnInit {
   checkUserType(type){
     return false;
   }
+
 }
