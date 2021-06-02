@@ -76,14 +76,17 @@ export class InvAcceptedComponent implements OnInit {
 			{
 				text: "Step 1 ",
 				state: ["incomplete"],
+				optionalText: 'Upload'
 			},
 			{
 				text: "Step 2",
 				state: ["incomplete"],
+				optionalText: 'Details'
 			},
 			{
 				text: "Step 3",
 				state: ["incomplete"],
+				optionalText: 'Confirm'
 			}
 		];
 		this.current = 3;
@@ -121,7 +124,7 @@ export class InvAcceptedComponent implements OnInit {
 		let _self = this;
 		return function () {
 			// this.page.url = window.location.href;
-			this.page.url = 'http://localhost:4200/#/challenge/' + _self.challengeId;
+			this.page.url = APP_URL + 'challenge/' + _self.challengeId;
 			this.page.identifier = _self.challengeId;
 			this.language = 'en';
 		};

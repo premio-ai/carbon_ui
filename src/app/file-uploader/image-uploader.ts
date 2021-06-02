@@ -18,7 +18,7 @@ export class ImageUploader {
 	@Input() description;
 	@Input() accept = [".jpg", ".png"];
 	@Input() multiple;
-	@Input() dropText = "Drag and drop files here of upload";
+	@Input() dropText = "Drag and drop files here";
 	@Input() disabled = false;
 
 	@Output() public goNext: EventEmitter<any> = new EventEmitter();

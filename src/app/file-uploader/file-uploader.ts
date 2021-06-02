@@ -24,7 +24,7 @@ export class DragAndDropStory {
 	// @Input() accept = [".jpg", ".png", ".pdf", ".txt"];
 	@Input() accept = [".pdf", ".txt"];
 	@Input() multiple = true;
-	@Input() dropText = "Drag and drop files here of upload";
+	@Input() dropText = "Drag and drop files here or upload";
 	@Input() disabled = false;
 
 	@Output() public getFile: EventEmitter<any> = new EventEmitter();

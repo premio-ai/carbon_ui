@@ -16,9 +16,9 @@
       <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
         <p class="headingtop">Data Usage Guidance</p>
         <p class="challTitle">
-          {{phases[i].guidence.length || 0}}/100
+          {{phases[i].guidance.length || 0}}/100
         </p>
-        <textarea style="width: 90%; margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="phases[i].guidence"
+        <textarea style="width: 90%; margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="phases[i].guidance"
           [theme]="theme" [rows]="3" [cols]="cols" aria-label="textarea"></textarea>
       </ibm-label>
       <br />
@@ -65,11 +65,11 @@
       </div>
       <br />
       <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-        <p class="headingtop">Data Usage Guidence</p>
+        <p class="headingtop">Data Usage Guidance</p>
         <p class="challTitle">
-          {{stepTwo.guidence.length || 0}}/100
+          {{stepTwo.guidance.length || 0}}/100
         </p>
-        <textarea style="width: 90%; margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.guidence"
+        <textarea style="width: 90%; margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.guidance"
           [theme]="theme" [rows]="3" [cols]="cols" aria-label="textarea"></textarea>
       </ibm-label>
       <div *ngIf="guidanceError">
@@ -85,16 +85,13 @@
         <div data-numberinput class="bx--number bx--number--light">
           <label for="number-input0" class="bx--label">Minimum Model Score</label>
           <div class="bx--number__input-wrapper">
-            <input id="number-input0" type="number" placeholder="0" min="0" max="100" value="1"
-              [(ngModel)]="stepTwo.passingScore">
+            <input id="number-input0" type="number" placeholder="0" min="0" max="100" [(ngModel)]="stepTwo.passingScore">
           </div>
         </div>
       </div>
       <div *ngIf="passingScoreError">
         <p><span style="font-size: x-small; color: red">Score for this phase is required</span></p>
       </div>
-      <br />
-      <p class="link">Set Additional Scoring Requirements +</p>
       <br />
       <button [ibmButton]="ibmButton" [size]="'sm'" class="addphase" (click)="addPhase()">
         Add Phase<svg class="bx--btn__icon" ibmIconAdd size="20"></svg>

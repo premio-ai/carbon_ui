@@ -140,6 +140,7 @@ export class InvModelViewComponent implements OnInit {
   }
 
   invChallenges() {
+    console.log("---browse clicked---143")
     this.router.navigateByUrl('invchallenges')
   }
 

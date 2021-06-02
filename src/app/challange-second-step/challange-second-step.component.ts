@@ -18,7 +18,7 @@ export class ChallangeSecondStepComponent implements OnInit {
   fileArray: any[] = []
   stepTwo: {
     description: string,
-    guidence: string,
+    guidance: string,
     passingScore: number,
     dataVisualFile: string,
     sampleDataFile: any
@@ -32,7 +32,7 @@ export class ChallangeSecondStepComponent implements OnInit {
   ngOnInit() {
     this.stepTwo = {
       description: "",
-      guidence: "",
+      guidance: "",
       passingScore: 0,
       dataVisualFile: '',
       sampleDataFile: []
@@ -40,10 +40,10 @@ export class ChallangeSecondStepComponent implements OnInit {
   }
 
   addPhase() {
-    if (this.stepTwo.description.length > 0 && this.stepTwo.guidence.length > 0 && this.stepTwo.passingScore && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 0) {
+    if (this.stepTwo.description.length > 0 && this.stepTwo.guidance.length > 0 && this.stepTwo.passingScore && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 0) {
       let tempData = {
         description: this.stepTwo.description,
-        guidence: this.stepTwo.guidence,
+        guidance: this.stepTwo.guidance,
         passingScore: this.stepTwo.passingScore,
         dataVisualFile: this.stepTwo.dataVisualFile,
         sampleDataFile: this.stepTwo.sampleDataFile
@@ -52,7 +52,7 @@ export class ChallangeSecondStepComponent implements OnInit {
       this.phases.push(tempData)
       this.stepTwo = {
         description: "",
-        guidence: "",
+        guidance: "",
         passingScore: 0,
         dataVisualFile: '',
         sampleDataFile: []
@@ -68,7 +68,7 @@ export class ChallangeSecondStepComponent implements OnInit {
     } else {
       this.descriptionError = false
     }
-    if (this.stepTwo.guidence.length == 0) {
+    if (this.stepTwo.guidance.length == 0) {
       this.guidanceError = true
     } else {
       this.guidanceError = false
@@ -114,10 +114,10 @@ export class ChallangeSecondStepComponent implements OnInit {
 
   next() {
     if (this.phases.length > 0) {
-      if (this.stepTwo.description.length > 0 && this.stepTwo.guidence.length > 0 && this.stepTwo.passingScore && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 0) {
+      if (this.stepTwo.description.length > 0 && this.stepTwo.guidance.length > 0 && this.stepTwo.passingScore && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 0) {
         let tempData = {
           description: this.stepTwo.description,
-          guidence: this.stepTwo.guidence,
+          guidance: this.stepTwo.guidance,
           passingScore: this.stepTwo.passingScore,
           dataVisualFile: this.stepTwo.dataVisualFile,
           sampleDataFile: this.stepTwo.sampleDataFile
@@ -128,10 +128,10 @@ export class ChallangeSecondStepComponent implements OnInit {
         this.validateData();
       }
     } else {
-      if (this.stepTwo.description.length > 0 && this.stepTwo.guidence.length > 0 && this.stepTwo.passingScore && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 0) {
+      if (this.stepTwo.description.length > 0 && this.stepTwo.guidance.length > 0 && this.stepTwo.passingScore && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 0) {
         let tempData = {
           description: this.stepTwo.description,
-          guidence: this.stepTwo.guidence,
+          guidance: this.stepTwo.guidance,
           passingScore: this.stepTwo.passingScore,
           dataVisualFile: this.stepTwo.dataVisualFile,
           sampleDataFile: this.stepTwo.sampleDataFile
