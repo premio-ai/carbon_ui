@@ -370,4 +370,8 @@ export class InvSeePerformanceComponent implements OnInit {
 		this.router.navigateByUrl('invchallenges')
 	}
 
+	challengeTitle(challengeId) {
+		this.router.navigateByUrl('invaccepted/' + challengeId)
+	  }
+
 }
