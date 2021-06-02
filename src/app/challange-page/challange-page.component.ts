@@ -46,23 +46,28 @@ export class ChallangePageComponent implements OnInit {
 			{
 				text: "Step 1",
 				state: ["current"],
+				optionalText: 'Overview'
 			},
 			{
 				text: "Step 2",
 				state: ["incomplete"],
+				optionalText: 'Data & Testing'
 			},
 			{
 				text: "Step 3",
 				state: ["incomplete"],
+				optionalText: 'Visibility'
 			},
 			{
 				text: "Step 4",
 				state: ["incomplete"],
+				optionalText: 'Preview'
 			},
 			{
 				text: "Step 5",
 				state: ["incomplete"],
 				disabled: true,
+				optionalText: 'Confirm'
 			},
 		];
 		this.current = 0;

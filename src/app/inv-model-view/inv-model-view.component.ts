@@ -63,14 +63,15 @@ export class InvModelViewComponent implements OnInit {
   }
 
   saveModelName() {
-    let url = 'submissionAllChallenge/' + this.modelId;
-    let payload = {
-      modelName: this.set_new_modelName
-    }
-    this.requestService.put(url, payload).subscribe(data => {
-      this.isEdit = false;
-      this.getSubmission(this.modelId)
-    })
+    console.log(this.set_new_modelName, "---this.set_new_modelName---66")
+    // let url = 'submissionAllChallenge/' + this.modelId;
+    // let payload = {
+    //   modelName: this.set_new_modelName
+    // }
+    // this.requestService.put(url, payload).subscribe(data => {
+    //   this.isEdit = false;
+    //   this.getSubmission(this.modelId)
+    // })
   }
 
   enterNextPhase() {

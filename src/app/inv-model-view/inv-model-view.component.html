@@ -40,7 +40,7 @@
 
       <div style="display: flex;" *ngIf="isEdit">
         <div>
-          <input style="width: 100%; margin-top: 10px;" ibmTextArea [invalid]="invalid" ng-blur="saveModelName()"
+          <input style="width: 100%; margin-top: 10px;" ibmTextArea [invalid]="invalid" [onblur]="saveModelName()"
             [(ngModel)]="set_new_modelName" [theme]="theme" aria-label="textarea" />
         </div>
         <div style="margin-top: 10px; margin-left: 8px;">

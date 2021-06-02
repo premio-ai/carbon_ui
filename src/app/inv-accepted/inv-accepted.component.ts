@@ -76,14 +76,17 @@ export class InvAcceptedComponent implements OnInit {
 			{
 				text: "Step 1 ",
 				state: ["incomplete"],
+				optionalText: 'Upload'
 			},
 			{
 				text: "Step 2",
 				state: ["incomplete"],
+				optionalText: 'Details'
 			},
 			{
 				text: "Step 3",
 				state: ["incomplete"],
+				optionalText: 'Confirm'
 			}
 		];
 		this.current = 3;

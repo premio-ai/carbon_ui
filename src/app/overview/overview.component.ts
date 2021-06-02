@@ -25,6 +25,7 @@ export class OverviewComponent implements OnInit {
   ngOnChanges() {
     if (this.challengeDetails && this.submissionChallengeDetails) {
       this.phaseOneSubmission = this.submissionChallengeDetails.length
+      this.initialPhase();
     }
   }
 

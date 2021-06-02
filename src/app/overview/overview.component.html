@@ -117,7 +117,7 @@
 											<div class="bx--radio-button-wrapper"
 												*ngFor="let phase of challengeDetails?.phases; index as i">
 												<input id="radio-button-102gt4bgc47-{{i}}" class="bx--radio-button"
-													(checked)="selectedPhase.phaseId == phase.phaseId" type="radio"
+													(checked)="selectedPhase?.phaseId == phase?.phaseId" type="radio"
 													(click)="selectPhase(phase.phaseId, i)" />
 												<label for="radio-button-102gt4bgc47-{{i}}"
 													class="bx--radio-button__label">

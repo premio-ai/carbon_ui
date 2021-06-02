@@ -96,6 +96,7 @@ export class InvDashboradComponent implements OnInit {
 				})
 			})
 			this.submittedActiveChallenges = tempData
+			console.log(this.submittedActiveChallenges, "---this.submittedActiveChallenges---100")
 		})
 	}
 
