@@ -7,9 +7,10 @@ import { Observable } from 'rxjs';
 })
 
 export class RequestService {
-  baseUrl: string = "http://localhost:3000/api/";
+  // baseUrl: string = "http://localhost:3000/api/";
   // baseUrl: string = "https://meanapp01.herokuapp.com/api/";
-  // baseUrl: string = "https://meanapp-comedic-kangaroo-ha.eu-gb.mybluemix.net/api/";
+  // baseUrl: string = "https://meanapp-comedic-kangaroo-ha.eu-gb.mybluemix.net/api/";          //MeanApp IBM
+  baseUrl: string = "https://challengeapp.eu-gb.cf.appdomain.cloud/api/"                  //ChallengeApp IBM
   constructor(private http: HttpClient) { }
 
   get(uri, params): Observable<any> {
@@ -25,12 +26,7 @@ export class RequestService {
   }
 
   signing(uri, payload): Observable<any> {
-    // const userDetails = JSON.parse(localStorage.getItem('userDetails'))
-    return this.http.post(this.baseUrl + uri, payload, {
-      // headers: {
-      //   token: userDetails.access_token
-      // }
-    });
+    return this.http.post(this.baseUrl + uri, payload);
   }
 
   post(uri, payload): Observable<any> {
