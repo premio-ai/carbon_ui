@@ -83,9 +83,9 @@ export class InvSeePerformanceComponent implements OnInit {
 		this.location.back();
 	}
 
-	async downloadFile() {
+	async downloadFile(filePath) {
 		if (this.challengeDetails) {
-			let docName = this.challengeDetails.phases[0].sampleDataFile[0].path || ''
+			let docName = filePath
 			let docUrl = APP_URL + docName
 
 			if (docUrl.length) {

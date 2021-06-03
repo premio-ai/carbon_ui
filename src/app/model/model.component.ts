@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { RequestService } from '../request.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-model',
@@ -37,16 +38,14 @@ export class ModelComponent {
 
   ngOnChanges() {
     if (this.challengeDetails && this.submissionChallengeDetails) {
-      // this.makeModelData()
       this.makeInitialModelData()
       this.getBookmarkedSubmission()
     }
   }
 
-  getDate(time) {
-    time = parseInt(time);
-    let dt = new Date(time);
-    return dt.getDate() + "/" + dt.getMonth() + "/" + dt.getFullYear();
+  getDate(timeStamp) {
+    let date = moment(moment(+timeStamp)).format("DD/MM/YYYY")
+    return date;
   }
 
   makeModelData() {
