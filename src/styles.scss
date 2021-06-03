@@ -53,6 +53,18 @@ text.title{
 font-weight: 600;
 }
 
+p.bx--accordion__title {
+    font-size: 1.175rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    letter-spacing: 0.16px;
+    margin: 0 0 0 1rem;
+    width: 100%;
+    color: black;
+    text-align: left;
+    z-index: 0;
+}
+
 .bx--content-switcher {
     display: flex;
     justify-content: end !important;

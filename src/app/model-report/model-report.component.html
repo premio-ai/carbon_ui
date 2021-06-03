@@ -61,10 +61,10 @@
         <div class="content-switcher" *ngFor="let submit of challengeSubmission; index as i">
           <button ibmContentOption (click)="switchSubmit(submit._id)" style="width: 160px;">
             <div>
-              <p> Phase {{i}}</p>
+              <p class="phase0"> Phase {{i}}</p>
               <p class="switchpara"><span style="margin-bottom: -3px;"><svg class="svg" icon
                     ibmIconCheckmarkOutline20></svg></span>
-                <span>Report available</span></p>
+                <span style="font-size: 12px;">Report available</span></p>
             </div>
           </button>
         </div>

@@ -10,7 +10,7 @@
       <ibm-header-item [routerLink]="['/asas']" [routerLinkActive]="['is-active']">Browse</ibm-header-item>
     </div>
     <div *ngIf="userDetails.role == 'Innovator'">
-      <ibm-header-item [route]="['/invchallenges']">Challenges</ibm-header-item>
+      <ibm-header-item [route]="['/invchallenges']" isCurrentPage="'true'"  [routerLinkActive]="['is-active']">Challenges</ibm-header-item>
     </div>
   
   </ibm-header-navigation>

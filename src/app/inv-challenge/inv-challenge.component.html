@@ -45,21 +45,21 @@
               <br />
               <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
                 [condensed]="rowCondensed" style="margin-left: -59px;">
-                <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }">
+                <!-- <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }"> -->
                   <div style="display: flex; margin-left: 27px;align-items: center;">
                     <svg icon ibmIconEdtLoop16></svg>
                     &nbsp;&nbsp;
                     <p class="numbersicon">{{challenge?.acceptedUsersCount}}</p>
                   </div>
-                </div>
-                <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }">
+                <!-- </div> -->
+                <!-- <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }"> -->
                   <div style="display: flex; margin-left: 27px;align-items: center;">
                     <svg icon ibmIconUserMultiple16></svg>
                     &nbsp;&nbsp;
                     <p class="numbersicon">{{challenge?.submissionsCount}}</p>
                   </div>
-                </div>
-                <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
+                <!-- </div> -->
+                <!-- <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }"> -->
                   <div style="
                       display: flex;
                       margin-left: 27px;align-items: center;
@@ -68,15 +68,15 @@
                     <svg icon ibmIconPartnership16></svg>
                     &nbsp;&nbsp;
                     <p class="numbersicon">{{challenge?.challengeType}}</p>
-                  </div>
-                </div>
-                <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-                  <div style="display: flex; margin-left: -33px;align-items: center;">
+                  </div> 
+                <!-- </div> -->
+                <!-- <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }"> -->
+                  <div style="display: flex; margin-left: 25px;align-items: center;">
                     <svg icon ibmIconTime16></svg>
                     &nbsp;&nbsp;
                     <p class="numbersicon">{{getExpiryDate(challenge?.expiryDate)}}</p>
                   </div>
-                </div>
+                <!-- </div> -->
               </div>
             </div>
             <button class="btn" [ibmButton]="ibmButton" [size]="size" (click)="viewChallenge(challenge._id)">
@@ -88,8 +88,8 @@
         <ibm-tab heading="Bookmarked">
           <ibm-tile *ngFor="let challenge of bookmarkedChallenges" style="margin-bottom: 15px;">
             <p style="font-size: 18px;">{{ challenge?.title }}</p>
-            <br />
-            <h6>Issued by {{challenge?.insurerId.fullName}}</h6>
+            
+            <h6 class="ins-name">Issued by {{challenge?.insurerId.fullName}}</h6>
             <p style="font-size: 10px;">
               on {{ getDate(challenge?.createdAt) }}
             </p>
@@ -109,40 +109,38 @@
               <br />
               <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
                 [condensed]="rowCondensed" style="margin-left: -59px;">
-                <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }">
-                  <div style="display: flex; margin-left: 27px;">
-                    <svg icon ibmIconTime16></svg>
+                <!-- <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }"> -->
+                  <div style="display: flex; margin-left: 27px;align-items: center;">
+                    <svg icon ibmIconEdtLoop16></svg>
                     &nbsp;&nbsp;
-                    <p style="margin-top: -4px;">{{challenge?.acceptedUsersCount}}</p>
+                    <p class="numbersicon">{{challenge?.acceptedUsersCount}}</p>
                   </div>
-                </div>
-                <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }">
-                  <div style="display: flex; margin-left: 27px;">
-                    <svg icon ibmIconTime16></svg>
+                <!-- </div> -->
+                <!-- <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }"> -->
+                  <div style="display: flex; margin-left: 27px;align-items: center;">
+                    <svg icon ibmIconUserMultiple16></svg>
                     &nbsp;&nbsp;
-                    <p style="margin-top: -4px;">{{challenge?.submissionsCount}}</p>
+                    <p class="numbersicon">{{challenge?.submissionsCount}}</p>
                   </div>
-                </div>
-                <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }">
+                <!-- </div> -->
+                <!-- <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }"> -->
                   <div style="
-                      display: flex;
-                      margin-left: 27px;
-                      white-space: nowrap;
-                    ">
+                  display: flex;
+                  margin-left: 27px;align-items: center;
+                  white-space: nowrap;
+                ">
+                <svg icon ibmIconPartnership16></svg>
+                    &nbsp;&nbsp;
+                    <p class="numbersicon">{{challenge?.challengeType}}</p>
+                  </div>
+                <!-- </div> -->
+                <!-- <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }"> -->
+                   <div style="display: flex; margin-left: 25px;align-items: center;">
                     <svg icon ibmIconTime16></svg>
                     &nbsp;&nbsp;
-                    <p style="margin-top: -4px;">{{challenge?.challengeType}}</p>
+                    <p class="numbersicon">{{getExpiryDate(challenge?.expiryDate)}}</p>
                   </div>
-                </div>
-                <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }">
-                  <div style="display: flex; margin-left: 27px;">
-                    <svg icon ibmIconTime16></svg>
-                    &nbsp;&nbsp;
-                    <p style="margin-top: -4px;">
-                      {{ getExpiryDate(challenge?.expiryDate) }}
-                    </p>
-                  </div>
-                </div>
+                <!-- </div> -->
               </div>
             </div>
             <button class="btn" [ibmButton]="ibmButton" [size]="size" (click)="viewChallenge(challenge._id)">

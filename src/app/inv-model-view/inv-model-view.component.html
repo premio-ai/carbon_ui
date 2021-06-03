@@ -4,7 +4,7 @@
 <div class="bx--grid">
   <div class="bx--row line-padding">
     <div class="bx--col-md-1" style="padding-left: 8%; cursor: pointer;">
-      <svg icon ibmIconArrowLeft16 (click)="navigateBack()"></svg>
+      <svg class="backicon" icon ibmIconArrowLeft16 (click)="navigateBack()"></svg>
     </div>
     <div class="bx--col-md-4">
       <ibm-breadcrumb [noTrailingSlash]="'noTrailingSlash'">
@@ -77,7 +77,7 @@
           <p class="head">
             Train model
             <br />
-            to data
+            on data
           </p>
           <p class="discrip">
             Estimated time remaining
@@ -95,7 +95,7 @@
           <p class="head">
             Test model
             <br />
-            to data
+            on data
           </p>
           <p class="discrip">
             Estimated time remaining
@@ -112,7 +112,7 @@
         <ibm-tile>
           <p class="head"><svg icon ibmIconIdea32></svg></p>
           <p class="head">
-            Genrate model
+            Generate model
             <br />
             performance score
           </p>
@@ -128,7 +128,7 @@
           </h6>
         </ibm-tile>
       </div>
-      <br />
+      <br /> <br />
       <div class="border-div" *ngIf="showCongratDiv">
         &nbsp;&nbsp;
         <h5 style="margin-left: 8px;">Congratuations!</h5>
@@ -139,7 +139,7 @@
         <br />
         &nbsp;
         <button [ibmButton]="ibmButton" [size]="size" (click)="seePerformance()">
-          View Score Breakdown<svg class="bx--btn__icon" ibmIconArrowRight20 size="20"></svg>
+          View score breakdown<svg class="bx--btn__icon" ibmIconArrowRight20 size="20"></svg>
         </button>
         <br />
         <br />
