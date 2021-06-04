@@ -22,7 +22,7 @@ export class DragAndDropStory {
 	@Input() title;
 	@Input() description;
 	// @Input() accept = [".jpg", ".png", ".pdf", ".txt"];
-	@Input() accept = [".pdf", ".txt"];
+	@Input() accept = [".csv"];
 	@Input() multiple = true;
 	@Input() dropText = "Drag and drop files here or upload";
 	@Input() disabled = false;

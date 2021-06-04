@@ -28,6 +28,7 @@ export class ChallangeSecondStepComponent implements OnInit {
   passingScoreError: boolean;
   dataVisualFileError: boolean;
   sampleDataFileError: boolean;
+  bucketName: string;
 
   ngOnInit() {
     this.stepTwo = {
@@ -37,6 +38,18 @@ export class ChallangeSecondStepComponent implements OnInit {
       dataVisualFile: '',
       sampleDataFile: []
     }
+
+    this.createTempBucket();
+  }
+
+  createTempBucket() {
+    let url = 'upload/createTempBucket'
+    this.requestService.post(url, null).subscribe( data => {
+      console.log(data, "---data---47")
+    
+      this.bucketName = data.bucketName
+console.log(this.bucketName, "---this.bucketName---51")
+    }) 
   }
 
   addPhase() {
@@ -99,8 +112,29 @@ export class ChallangeSecondStepComponent implements OnInit {
   }
 
   uploadDataVisual(formData) {
-    this.requestService.post('upload', formData).subscribe(data => {
-      this.stepTwo.dataVisualFile = data[0].filename
+    let payload = {
+      formData: formData,
+      tempBucketName: this.bucketName 
+    }
+    console.log(payload, "---payload---119")
+    this.requestService.post('upload', payload).toPromise().then(data => {
+      console.log(data, "---data---104")
+
+    //   data.blob()
+    // })
+    //   .then(blob => {
+    //     var a = document.createElement("a");
+    //     document.body.appendChild(a);
+    //     const url = URL.createObjectURL(blob);
+
+    //     a.href = url;
+    //     a.download = "File";
+    //     a.click();
+    //     window.URL.revokeObjectURL(url);
+    //   })
+
+
+    this.stepTwo.dataVisualFile = data[0].filename
     })
   }
 

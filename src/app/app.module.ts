@@ -85,6 +85,7 @@ import { InvSeePerformanceComponent } from "./inv-see-performance/inv-see-perfor
 import { ActivityComponent } from "./activity/activity.component";
 import { DragAndDropStory } from './file-uploader/file-uploader';
 import { ImageUploader } from './file-uploader/image-uploader';
+import { ZipUploader } from './file-uploader/zip-uploader';
 // import {PaginationNavStory} from './app-pagination/PaginationNavStory';
 // import {PaginationModel} from './app-pagination/pagination-model.class';
 
@@ -133,6 +134,7 @@ import {Code24Module } from "@carbon/icons-angular/lib/code/24";
 		ActivityComponent,
 		DragAndDropStory,
 		ImageUploader,
+		ZipUploader,
 		// PaginationNavStory,
 		// PaginationModel,
 		ModelComponent,

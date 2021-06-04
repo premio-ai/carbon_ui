@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
-	selector: "app-drop-image-uploader",
+	selector: "app-drop-zip-uploader",
 	template: `<ibm-file-uploader [title]="title" [description]="description" [buttonText]="buttonText"
     		[buttonType]="buttonType" [accept]="accept" [multiple]="multiple" [skeleton]="skeleton"
     		[(files)]="files" [size]="size" drop="true" [dropText]="dropText" (filesChange)="onImageSelect($event)">
@@ -10,13 +10,13 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 })
 
-export class ImageUploader {
+export class ZipUploader {
 	static notificationCount = 0;
 
 	@Input() files = new Set();
 	@Input() title;
 	@Input() description;
-	@Input() accept = [".jpg", '.pdf'];
+	@Input() accept = ['.zip'];
 	@Input() multiple;
 	@Input() dropText = "Drag and drop files here";
 	@Input() disabled = false;
