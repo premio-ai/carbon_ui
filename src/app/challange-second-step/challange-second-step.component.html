@@ -53,7 +53,7 @@
         <p class="challTitle">
           {{stepTwo.description.length || 0}}/100
         </p>
-        <textarea style="width: 90%; margin-top: 10px;" ibmTextArea [invalid]="invalid"
+        <textarea style="width: 90%; margin-top: 10px;" ibmTextArea [invalid]="invalid" maxlength="100"
           [(ngModel)]="stepTwo.description" [theme]="theme" [rows]="5" [cols]="cols" aria-label="textarea"></textarea>
       </ibm-label>
       <div *ngIf="descriptionError">
@@ -70,7 +70,7 @@
           {{stepTwo.guidance.length || 0}}/100
         </p>
         <textarea style="width: 90%; margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.guidance"
-          [theme]="theme" [rows]="3" [cols]="cols" aria-label="textarea"></textarea>
+          [theme]="theme" [rows]="3" [cols]="cols" aria-label="textarea" maxlength="100"></textarea>
       </ibm-label>
       <div *ngIf="guidanceError">
         <p>
