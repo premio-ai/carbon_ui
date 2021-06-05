@@ -51,32 +51,34 @@ export class DragAndDropStory {
 	setSampleData(acceptedFiles) {
 		if (acceptedFiles) {
 			const file = acceptedFiles.file;
-			this.uploadSampleData(file)
+			// this.uploadSampleData(file)
+			console.log(file, "---file---55")
+			this.uploadFile.emit(file)
 		}
 	}
 
-	uploadSampleData(file) {
-		this.fileData = new FormData();
-		this.fileData.append('files', file);
-		const formData = this.fileData;
-		this.fileData.delete('FormData');
-		let tempData = []
-		this.fileArray = []
-		if (formData) {
-			this.subject = this.requestService.post('upload', formData).subscribe(data => {
-					let fileObj = {
-						path: data[0].filename,
-						downloadCount: 0
-					}
-					tempData.push(fileObj)
-				this.getFile.emit(tempData)
-			})
-		}
+	// uploadSampleData(file) {
+	// 	this.fileData = new FormData();
+	// 	this.fileData.append('files', file);
+	// 	const formData = this.fileData;
+	// 	this.fileData.delete('FormData');
+	// 	let tempData = []
+	// 	this.fileArray = []
+	// 	if (formData) {
+	// 		this.subject = this.requestService.post('upload', formData).subscribe(data => {
+	// 				let fileObj = {
+	// 					path: data[0].filename,
+	// 					downloadCount: 0
+	// 				}
+	// 				tempData.push(fileObj)
+	// 			this.getFile.emit(tempData)
+	// 		})
+	// 	}
 
-	}
+	// }
 
-	ngOnDestroy() {
-		this.subject.unsubscribe()
-	}
+	// ngOnDestroy() {
+	// 	this.subject.unsubscribe()
+	// }
 
 }

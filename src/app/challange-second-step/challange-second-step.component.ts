@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { RequestService } from '../request.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-challange-second-step',
@@ -29,6 +30,7 @@ export class ChallangeSecondStepComponent implements OnInit {
   dataVisualFileError: boolean;
   sampleDataFileError: boolean;
   bucketName: string;
+  subject: Subscription
 
   ngOnInit() {
     this.stepTwo = {
@@ -44,12 +46,9 @@ export class ChallangeSecondStepComponent implements OnInit {
 
   createTempBucket() {
     let url = 'upload/createTempBucket'
-    this.requestService.post(url, null).subscribe( data => {
-      console.log(data, "---data---47")
-    
+    this.requestService.post(url, null).subscribe(data => {
       this.bucketName = data.bucketName
-console.log(this.bucketName, "---this.bucketName---51")
-    }) 
+    })
   }
 
   addPhase() {
@@ -107,35 +106,45 @@ console.log(this.bucketName, "---this.bucketName---51")
     const file = acceptedFiles.file;
     const formData = new FormData();
     formData.append('files', file);
+    let payload = {
+      tempBucketName: this.bucketName,
+      phaseNo: this.phases.length,
+      fileType: 'dataVisual'
+    }
+    formData.append('uploadInfo', JSON.stringify(payload))
 
     this.uploadDataVisual(formData)
   }
 
   uploadDataVisual(formData) {
-    let payload = {
-      formData: formData,
-      tempBucketName: this.bucketName 
-    }
-    console.log(payload, "---payload---119")
-    this.requestService.post('upload', payload).toPromise().then(data => {
-      console.log(data, "---data---104")
-
-    //   data.blob()
-    // })
-    //   .then(blob => {
-    //     var a = document.createElement("a");
-    //     document.body.appendChild(a);
-    //     const url = URL.createObjectURL(blob);
-
-    //     a.href = url;
-    //     a.download = "File";
-    //     a.click();
-    //     window.URL.revokeObjectURL(url);
-    //   })
-
-
-    this.stepTwo.dataVisualFile = data[0].filename
+    this.requestService.post('upload', formData).subscribe(data => {
+      this.stepTwo.dataVisualFile = data.filePath
     })
+  }
+
+  uploadSampleData(file) {
+    this.fileData = new FormData();
+    this.fileData.append('files', file);
+
+    let payload = {
+      tempBucketName: this.bucketName,
+      phaseNo: this.phases.length,
+      fileType: 'sampleDataFile'
+    }
+    this.fileData.append('uploadInfo', JSON.stringify(payload))
+    const formData = this.fileData;
+    this.fileData.delete('FormData');
+    this.fileArray = []
+    if (formData) {
+      this.requestService.post('upload', formData).subscribe(data => {
+        let fileObj = {
+          path: data.filePath,
+          downloadCount: 0
+        }
+        this.stepTwo.sampleDataFile.push(fileObj)
+      })
+    }
+
   }
 
   setSampleData(data) {

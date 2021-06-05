@@ -33,21 +33,25 @@ export class InvModelViewComponent implements OnInit {
   appUrl: String;
 
   ngOnInit() {
-    this.appUrl = APP_URL
-    this.activatedRoute.params.subscribe((params: Params) => {
-      if (params) {
-        this.modelId = params.id
-        this.getSubmission(this.modelId)
-      }
-    });
-
-    setTimeout(() => {
-      this.showCongratDiv = true;
-    }, 10000)
-
-    this.isEdit = false;
-    this.set_new_modelName = '';
-
+    let userDetails = JSON.parse(localStorage.getItem('userDetails'))
+    if (userDetails && userDetails._id) {      
+      this.appUrl = APP_URL
+      this.activatedRoute.params.subscribe((params: Params) => {
+        if (params) {
+          this.modelId = params.id
+          this.getSubmission(this.modelId)
+        }
+      });
+  
+      setTimeout(() => {
+        this.showCongratDiv = true;
+      }, 10000)
+  
+      this.isEdit = false;
+      this.set_new_modelName = '';
+    } else {
+			this.router.navigateByUrl('login')
+		}
   }
 
   getAllSubmitOfChallenge(challengeId) {

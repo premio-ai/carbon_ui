@@ -51,15 +51,19 @@ export class ModelReportComponent implements OnInit {
 	recallOptions: any = {}
 
 	ngOnInit() {
-		showClose: true
-		this.toasterMsg = false
-		this.activatedRoute.params.subscribe((params: Params) => {
-			if (params) {
-				this.modelId = params.id
-				this.getModelReport(this.modelId);
-			}
-		});
-
+		let userDetails = JSON.parse(localStorage.getItem('userDetails'))
+		if (userDetails && userDetails._id) {
+			showClose: true
+			this.toasterMsg = false
+			this.activatedRoute.params.subscribe((params: Params) => {
+				if (params) {
+					this.modelId = params.id
+					this.getModelReport(this.modelId);
+				}
+			});
+		} else {
+			this.router.navigateByUrl('login')
+		}
 	}
 
 	bell = (() => {
@@ -89,11 +93,11 @@ export class ModelReportComponent implements OnInit {
 	}
 
 	switchSubmit(submitId) {
-		this.router.navigateByUrl('modelReport/'+submitId)
+		this.router.navigateByUrl('modelReport/' + submitId)
 	}
 
 	checkSelected(phaseId) {
-		this.challengeSubmission.some( dt => {
+		this.challengeSubmission.some(dt => {
 			if (dt.phaseId == phaseId) {
 				return true
 			}
@@ -103,7 +107,7 @@ export class ModelReportComponent implements OnInit {
 	getChallengeDetails(challengeId) {
 		let url = "challenge/" + challengeId;
 
-		this.requestService.get(url, null).subscribe( data => {
+		this.requestService.get(url, null).subscribe(data => {
 			this.challengeDetails = data
 			this.getChallengeSubmission(this.challengeDetails._id)
 		})
@@ -113,7 +117,7 @@ export class ModelReportComponent implements OnInit {
 		let innovatorId = this.modelReport.innovatorId._id
 		let url = "submissionAllChallenge/challenge-innovator/" + challengeId + '/' + innovatorId;
 
-		this.requestService.get(url, null).subscribe( data => {
+		this.requestService.get(url, null).subscribe(data => {
 			this.challengeSubmission = data
 		})
 	}

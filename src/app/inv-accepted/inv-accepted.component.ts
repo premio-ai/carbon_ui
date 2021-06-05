@@ -53,70 +53,76 @@ export class InvAcceptedComponent implements OnInit {
 	pageOffset: number;
 	totalPage: number;
 	appUrl: String;
+	imageUrl: string;
 
 
 	ngOnInit() {
-		this.appUrl = APP_URL
-		this.pageOffset = 0;
-		this.totalPage = 0;
-		this.pageNo = 0;
-		this.isChallengeAccepted = false;
-		this.phasesSubmissionComplete = false;
-		this.activatedRoute.params.subscribe((params: Params) => {
-			if (params) {
-				this.challengeId = params.id
-			}
-		});
+		let userDetails = JSON.parse(localStorage.getItem('userDetails'))
+		if (userDetails && userDetails._id) {
+			this.appUrl = APP_URL
+			this.pageOffset = 0;
+			this.totalPage = 0;
+			this.pageNo = 0;
+			this.isChallengeAccepted = false;
+			this.phasesSubmissionComplete = false;
+			this.activatedRoute.params.subscribe((params: Params) => {
+				if (params) {
+					this.challengeId = params.id
+				}
+			});
 
-		this.getChallengeDetails(this.challengeId);
-		this.getChallengeAcceptance(this.challengeId);
-		this.getLeaderboard(this.challengeId, this.pageOffset);
+			this.getChallengeDetails(this.challengeId);
+			this.getChallengeAcceptance(this.challengeId);
+			this.getLeaderboard(this.challengeId, this.pageOffset);
 
-		this.steps = [
-			{
-				text: "Step 1 ",
-				state: ["incomplete"],
-				optionalText: 'Upload'
-			},
-			{
-				text: "Step 2",
-				state: ["incomplete"],
-				optionalText: 'Details'
-			},
-			{
-				text: "Step 3",
-				state: ["incomplete"],
-				optionalText: 'Confirm'
-			}
-		];
-		this.current = 3;
-		this.submissionData = {
-			challengeId: {},
-			phaseId: [],
-			mlFlowId: "",
-			modelName: '',
-			appliedAsCompany: true,
-			modelDescription: "",
-			modelUploadedPath: "",
-			modelType: "",
-			approch: "",
-			language: '',
-			score: 0,
-			precisionScore: 0,
-			recallScore: 0,
-			contractAcceptedAt: "",
-			trainedAt: "",
-			testedAt: ""
-		};
+			this.steps = [
+				{
+					text: "Step 1 ",
+					state: ["incomplete"],
+					optionalText: 'Upload'
+				},
+				{
+					text: "Step 2",
+					state: ["incomplete"],
+					optionalText: 'Details'
+				},
+				{
+					text: "Step 3",
+					state: ["incomplete"],
+					optionalText: 'Confirm'
+				}
+			];
+			this.current = 3;
+			this.submissionData = {
+				challengeId: {},
+				phaseId: [],
+				mlFlowId: "",
+				modelName: '',
+				appliedAsCompany: true,
+				modelDescription: "",
+				modelUploadedPath: "",
+				modelType: "",
+				approch: "",
+				language: '',
+				score: 0,
+				precisionScore: 0,
+				recallScore: 0,
+				contractAcceptedAt: "",
+				trainedAt: "",
+				testedAt: ""
+			};
 
-		setTimeout(() => {
-			(<any>window).disqus_config = this.getConfig();
+			setTimeout(() => {
+				(<any>window).disqus_config = this.getConfig();
 
-			var d = document, s: any = d.createElement('script');
-			s.src = 'https://meanapp.disqus.com/embed.js';
-			s.setAttribute('data-timestamp', + new Date());
-			(d.head || d.body).appendChild(s);
-		}, 1000)
+				var d = document, s: any = d.createElement('script');
+				s.src = 'https://meanapp.disqus.com/embed.js';
+				s.setAttribute('data-timestamp', + new Date());
+				(d.head || d.body).appendChild(s);
+			}, 1000)
+		} else {
+			this.router.navigateByUrl('login')
+		}
 
 	}
 
@@ -135,7 +141,7 @@ export class InvAcceptedComponent implements OnInit {
 		this.requestService.get(url, null).subscribe(data => {
 			this.challengeDetails = data;
 			this.getSubmissionByChallengeId(this.challengeId);
-
+			this.displayImage()
 		})
 	}
 
@@ -240,38 +246,46 @@ export class InvAcceptedComponent implements OnInit {
 		}
 	}
 
+	async displayImage() {
+		let docName = this.challengeDetails.phases[0].dataVisualFile
+		let payload = {
+			filePath: docName
+		}
+		this.requestService.post('upload/getImage', payload).subscribe(data => {
+			var a = document.createElement("a");
+			document.body.appendChild(a);
+			this.imageUrl = data.blob
+		})
+	}
+
 	async downloadFile(phaseIndex, fileIndex) {
 		if (this.challengeDetails) {
 
 			let docName = this.challengeDetails.phases[phaseIndex].sampleDataFile[fileIndex].path || ''
 			let docUrl = APP_URL + docName
 
-			if (docUrl.length) {
-				await fetch(docUrl).then(async res => {
-					return await res.blob()
-				}).then(blob => {
-					var a = document.createElement("a");
-					document.body.appendChild(a);
-					const url = URL.createObjectURL(blob);
-
-					a.href = url;
-					a.download = "File";
-					a.click();
-					window.URL.revokeObjectURL(url);
-
-					let downloadUrl = 'challenge/fileDownloadsCount/' + this.challengeDetails._id;
-					let payload = {
-						challengeId: this.challengeDetails._id,
-						phaseId: this.challengeDetails.phases[phaseIndex].phaseId,
-						fileId: this.challengeDetails.phases[phaseIndex].sampleDataFile[fileIndex]
-					}
-					this.requestService.put(downloadUrl, payload).subscribe(data => {
-						// this.getDownloadsCount();
-					})
-				})
-			} else {
-				// this.docError = true
+			let payload = {
+				filePath: docName
 			}
+			this.requestService.post('upload/downloadObject', payload).subscribe(data => {
+				var a = document.createElement("a");
+				document.body.appendChild(a);
+				const url = URL.createObjectURL(new Blob([data.blob], { type: 'text/plain' }));
+
+				a.href = url;
+				a.download = "File";
+				a.click();
+				window.URL.revokeObjectURL(url);
+			})
+
+			let downloadUrl = 'challenge/fileDownloadsCount/' + this.challengeDetails._id;
+			let payloadData = {
+				challengeId: this.challengeDetails._id,
+				phaseId: this.challengeDetails.phases[phaseIndex].phaseId,
+				fileId: this.challengeDetails.phases[phaseIndex].sampleDataFile[fileIndex]
+			}
+			this.requestService.put(downloadUrl, payloadData).subscribe(data => {})
+
 		}
 	}
 

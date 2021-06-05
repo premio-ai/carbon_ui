@@ -44,14 +44,19 @@ export class InvSeePerformanceComponent implements OnInit {
 	recallOptions: any = {}
 
 	ngOnInit() {
-		let modelId = ''
-		this.activatedRoute.params.subscribe((params: Params) => {
-			if (params) {
-				modelId = params.id
-			}
-		});
-
-		this.getSubmission(modelId)
+		let userDetails = JSON.parse(localStorage.getItem('userDetails'))
+		if (userDetails && userDetails._id) {			
+			let modelId = ''
+			this.activatedRoute.params.subscribe((params: Params) => {
+				if (params) {
+					modelId = params.id
+				}
+			});
+	
+			this.getSubmission(modelId)
+		} else {
+			this.router.navigateByUrl('login')
+		}
 	}
 
 	getSubmission(id) {

@@ -26,18 +26,22 @@ export class InvDashboradComponent implements OnInit {
 
 	ngOnInit() {
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
-		this.getAllActiveChallanges();
-		this.getAllPastChallanges();
-		this.getChallengeSubmissionRanking();
-		this.getSubmittedChallenge();
+		if (this.userDetails && this.userDetails._id) {			
+			this.getAllActiveChallanges();
+			this.getAllPastChallanges();
+			this.getChallengeSubmissionRanking();
+			this.getSubmittedChallenge();
 
-		this.sorting = [
-			{ content: 'Most Popular' },
-			{ content: 'Least Popular' },
-			{ content: 'Newest' },
-			{ content: 'Oldest' },
-			{ content: 'End Date' }
-		];
+			this.sorting = [
+				{ content: 'Most Popular' },
+				{ content: 'Least Popular' },
+				{ content: 'Newest' },
+				{ content: 'Oldest' },
+				{ content: 'End Date' }
+			];
+		} else {
+			this.router.navigateByUrl('login')
+		}
 	}
 
 	getChallengeSubmissionRanking() {

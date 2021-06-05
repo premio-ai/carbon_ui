@@ -42,51 +42,57 @@ export class ChallangePageComponent implements OnInit {
 
 
 	ngOnInit() {
-		this.steps = [
-			{
-				text: "Step 1",
-				state: ["current"],
-				optionalText: 'Overview'
-			},
-			{
-				text: "Step 2",
-				state: ["incomplete"],
-				optionalText: 'Data & Testing'
-			},
-			{
-				text: "Step 3",
-				state: ["incomplete"],
-				optionalText: 'Visibility'
-			},
-			{
-				text: "Step 4",
-				state: ["incomplete"],
-				optionalText: 'Preview'
-			},
-			{
-				text: "Step 5",
-				state: ["incomplete"],
-				disabled: true,
-				optionalText: 'Confirm'
-			},
-		];
-		this.current = 0;
-		this.challange = {
-			title: "",
-			description: "",
-			Objective: "",
-			expiryDate: "",
-			visulizationImageFilePath: [""],
-			sampleDataFilePath: [""],
-			submissionsCount: 0,
-			acceptedUsersCount: 0,
-			challengeType: "",
-			phases: [],
-			visibiltiy: {},
-			isActive: true,
-			witholdCompanyName: false,
-			witholdCompanyDescription: false,
-			categoryType: ''
+		let userDetails = JSON.parse(localStorage.getItem('userDetails'))
+		if (userDetails && userDetails._id) {
+
+			this.steps = [
+				{
+					text: "Step 1",
+					state: ["current"],
+					optionalText: 'Overview'
+				},
+				{
+					text: "Step 2",
+					state: ["incomplete"],
+					optionalText: 'Data & Testing'
+				},
+				{
+					text: "Step 3",
+					state: ["incomplete"],
+					optionalText: 'Visibility'
+				},
+				{
+					text: "Step 4",
+					state: ["incomplete"],
+					optionalText: 'Preview'
+				},
+				{
+					text: "Step 5",
+					state: ["incomplete"],
+					disabled: true,
+					optionalText: 'Confirm'
+				},
+			];
+			this.current = 0;
+			this.challange = {
+				title: "",
+				description: "",
+				Objective: "",
+				expiryDate: "",
+				visulizationImageFilePath: [""],
+				sampleDataFilePath: [""],
+				submissionsCount: 0,
+				acceptedUsersCount: 0,
+				challengeType: "",
+				phases: [],
+				visibiltiy: {},
+				isActive: true,
+				witholdCompanyName: false,
+				witholdCompanyDescription: false,
+				categoryType: ''
+			}
+		} else {
+			this.router.navigateByUrl('login')
 		}
 	}
 

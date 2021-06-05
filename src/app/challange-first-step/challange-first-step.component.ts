@@ -76,12 +76,11 @@ export class ChallangeFirstStepComponent implements OnInit {
   }
 
   nextStep() {
-    this.goNext.emit(this.stepOne)
-    // if (this.stepOne.title.length>0 && this.stepOne.description.length>0 && this.stepOne.objective.length>0 && this.stepOne.categoryType.length>0 && this.stepOne.challengeType.length>0 && this.stepOne.endDate.length>0) {
-    //   this.goNext.emit(this.stepOne)
-    // } else {
-    //   this.validateData();
-    // }
+    if (this.stepOne.title.length>0 && this.stepOne.description.length>0 && this.stepOne.objective.length>0 && this.stepOne.categoryType.length>0 && this.stepOne.challengeType.length>0 && this.stepOne.endDate.length>0) {
+      this.goNext.emit(this.stepOne)
+    } else {
+      this.validateData();
+    }
   }
 
   validateData() {

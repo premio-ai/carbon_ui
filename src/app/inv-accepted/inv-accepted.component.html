@@ -141,9 +141,10 @@
 							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 3, sm: 12 }">
 								<h4 style="margin-left: -12px;">Data Visual</h4>
 								<br />
-								<img class="dataimg"
-									src='{{appUrl}}{{phase.dataVisualFile}}'>
-								<br />
+								<!-- <img class="dataimg"
+									src='http://s3.eu-gb.cloud-object-storage.appdomain.cloud/code-bucket/{{phase.dataVisualFile}}'> -->
+									<img class="dataimg" src='{{imageUrl}}'>
+									<br />
 								<br />
 								<h4 class="sampleheaddata">Sample Data Sets</h4>
 								<p  *ngFor='let data of phase.sampleDataFile; index as j' class="samplename">Download Dataset

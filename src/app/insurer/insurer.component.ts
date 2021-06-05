@@ -20,25 +20,29 @@ export class InsurerComponent implements OnInit {
   submissionChallengeDetails: any[];
 
   ngOnInit() {
-    let challengeId = ''
-    this.activatedRoute.params.subscribe((params: Params) => {
-      if (params) {
-        challengeId = params.id
-        this.challengeId = params.id
-      }
-    });
+    let userDetails = JSON.parse(localStorage.getItem('userDetails'))
+    if (userDetails && userDetails._id) {
+      let challengeId = ''
+      this.activatedRoute.params.subscribe((params: Params) => {
+        if (params) {
+          challengeId = params.id
+          this.challengeId = params.id
+        }
+      });
 
-    this.getChallengeDetails(challengeId);
-    this.getSubmissionChallenge(challengeId);
+      this.getChallengeDetails(challengeId);
+      this.getSubmissionChallenge(challengeId);
 
-    (<any>window).disqus_config = this.getConfig();
+      (<any>window).disqus_config = this.getConfig();
 
-    var d = document, s : any = d.createElement('script');
-    s.src = 'https://meanapp.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', + new Date());
-    (d.head || d.body).appendChild(s);
-
-  }  
+      var d = document, s: any = d.createElement('script');
+      s.src = 'https://meanapp.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', + new Date());
+      (d.head || d.body).appendChild(s);
+    } else {
+      this.router.navigateByUrl('login')
+    }
+  }
 
   getConfig() {
     let _self = this;

@@ -16,7 +16,7 @@ export class ImageUploader {
 	@Input() files = new Set();
 	@Input() title;
 	@Input() description;
-	@Input() accept = [".jpg", '.pdf'];
+	@Input() accept = [".jpg"];
 	@Input() multiple;
 	@Input() dropText = "Drag and drop files here";
 	@Input() disabled = false;
