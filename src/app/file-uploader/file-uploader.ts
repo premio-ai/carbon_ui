@@ -52,7 +52,6 @@ export class DragAndDropStory {
 		if (acceptedFiles) {
 			const file = acceptedFiles.file;
 			// this.uploadSampleData(file)
-			console.log(file, "---file---55")
 			this.uploadFile.emit(file)
 		}
 	}
