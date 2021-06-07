@@ -79,38 +79,19 @@ export class SubmissionStepOneComponent implements OnInit {
       let docUrl = 'http://s3.eu-gb.cloud-object-storage.appdomain.cloud/code-bucket/' + docName
 
       let payload = {
-        filePath : docName
-      }
-      this.requestService.post('upload/downloadObject', payload).subscribe( data => {
-        console.log(data, "---data---85")
-      })
+				filePath: docName
+			}
+			this.requestService.post('upload/downloadObject', payload).subscribe(data => {
+				var a = document.createElement("a");
+				document.body.appendChild(a);
+				const url = URL.createObjectURL(new Blob([data.blob], { type: 'text/plain' }));
 
-			// if (docUrl.length) {
-			// 	await fetch(docUrl).then(async res => {
-			// 		return await res.blob()
-			// 	}).then(blob => {
-			// 		var a = document.createElement("a");
-			// 		document.body.appendChild(a);
-			// 		const url = URL.createObjectURL(blob);
+				a.href = url;
+				a.download = "File";
+				a.click();
+				window.URL.revokeObjectURL(url);
+			})
 
-			// 		a.href = url;
-			// 		a.download = "File";
-			// 		a.click();
-			// 		window.URL.revokeObjectURL(url);
-
-			// 		let downloadUrl = 'challenge/fileDownloadsCount/' + this.challengeDetails._id;
-			// 		let payload = {
-			// 			challengeId: this.challengeDetails._id,
-			// 			phaseId: this.challengeDetails.phases[phaseIndex].phaseId,
-			// 			fileId: this.challengeDetails.phases[phaseIndex].sampleDataFile[fileIndex]
-			// 		}
-			// 		this.requestService.put(downloadUrl, payload).subscribe(data => {
-			// 			// this.getDownloadsCount();
-			// 		})
-			// 	})
-			// } else {
-			// 	// this.docError = true
-			// }
 		}
 	}
 

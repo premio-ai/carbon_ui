@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { APP_URL } from '../../config/config';
+import { RequestService } from '../request.service';
 
 @Component({
   selector: 'app-submission-step-four',
@@ -18,7 +18,8 @@ export class SubmissionStepFourComponent implements OnInit {
   @Output() public goToStepOne: EventEmitter<any> = new EventEmitter();
 
   constructor(
-    private router: Router
+    private router: Router,
+    private requestService: RequestService
   ) { }
   stepFour: {
     description: string,
@@ -47,26 +48,36 @@ export class SubmissionStepFourComponent implements OnInit {
 
   async downloadFile(modelpath) {
     if (modelpath) {
-      let docUrl = APP_URL + modelpath
-
-      if (docUrl.length) {
-        await fetch(docUrl).then(async res => {
-          return await res.blob()
-        }).then(blob => {
-          var a = document.createElement("a");
-          document.body.appendChild(a);
-          const url = URL.createObjectURL(blob);
-
-          a.href = url;
-          a.download = "File";
-          a.click();
-          window.URL.revokeObjectURL(url);
-
-        })
-      } else {
-        // this.docError = true
+      let payload = {
+        filePath: modelpath
       }
+      this.requestService.post('upload/downloadZip', payload).subscribe(data => {
+        var fileName = "submission-model.zip";
+        var blob =this.dataURItoBlob(data.blob)
+        
+        var a = document.createElement("a");
+        document.body.appendChild(a);
+        var url = window.URL.createObjectURL(blob);
+        
+        a.href = url;
+        a.download = fileName;
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      })
     }
+  }
+
+  dataURItoBlob(dataURI) {
+    var byteString = atob(dataURI.split(',')[1]);
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+    var ab = new ArrayBuffer(byteString.length);
+    var ia = new Uint8Array(ab);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+    var blob = new Blob([ab], {type: mimeString});
+    return blob;
   }
 
   readMore() {

@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
 		if (this.userDetails) {
 			//TODO: check notifications API before deployment
-			this.getNotifications();
+			// this.getNotifications();
 			this.getChallengeCounts();
 			this.getInnovatorChallangeCount();
 
