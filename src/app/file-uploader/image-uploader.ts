@@ -4,7 +4,7 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 	selector: "app-drop-image-uploader",
 	template: `<ibm-file-uploader [title]="title" [description]="description" [buttonText]="buttonText"
     		[buttonType]="buttonType" [accept]="accept" [multiple]="multiple" [skeleton]="skeleton"
-    		[(files)]="files" [size]="size" drop="true" [dropText]="dropText" (filesChange)="onImageSelect($event)">
+			[(files)]="files" drop="true" [dropText]="dropText" (filesChange)="onImageSelect($event)">
 		</ibm-file-uploader>
 		<div [id]="notificationId" style="width: 300px; margin-top: 20px"></div>`
 

@@ -28,7 +28,7 @@
 
     <div ibmCol class="custom-class-example1" [columnNumbers]="{ md: 4, sm: 12 }">
       <div ibmGrid [condensed]="gridCondensed">
-        <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+        <!-- <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
           <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
             <h5>Data Visualisation</h5>
             <p>{{ phases[i].dataVisualFile }}</p>
@@ -39,7 +39,30 @@
               {{ data[j] }}
             </p>
           </div>
+        </div> -->
+
+        <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+          <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
+            <h5>Data Visualisation</h5>
+            <p class="drag">An image that represents your Sample data</p>
+            <app-drop-image-uploader (goNext)="setDataVisual($event, i)" (uploadFile)="uploadDataVisual()"
+              (filesChange)="onImageSelect($event.target.files)" (onDrop)="onImageSelect($event.target.files)"></app-drop-image-uploader>
+            <br />
+            <div *ngIf="dataVisualFileError">
+              <p><span style="font-size: x-small; color: red">Data visual file required</span></p>
+            </div>
+          </div>
+          <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }" style="padding-left: 10px;">
+            <h5>Sample Data</h5>
+            <p class="drag">Anonymous, available to download for any innovator</p>
+            <app-drop-file-uploader (uploadFile)="uploadSampleData($event)" (getFile)="setSampleData($event)"></app-drop-file-uploader>
+            <br />
+            <div *ngIf="sampleDataFileError">
+              <p><span style="font-size: x-small; color: red">At least 1 sample data file required</span></p>
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -104,8 +127,8 @@
           <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
             <h5>Data Visualisation</h5>
             <p class="drag">An image that represents your Sample data</p>
-            <app-drop-image-uploader (goNext)="setDataVisual($event)" (uploadFile)="uploadDataVisual()"
-              (filesChange)="onImageSelect($event.target.files)"></app-drop-image-uploader>
+            <app-drop-image-uploader (goNext)="setDataVisual($event, i)" (uploadFile)="uploadDataVisual()"
+              (filesChange)="onImageSelect($event.target.files)" (onDrop)="onImageSelect($event.target.files)"></app-drop-image-uploader>
             <br />
             <div *ngIf="dataVisualFileError">
               <p><span style="font-size: x-small; color: red">Data visual file required</span></p>

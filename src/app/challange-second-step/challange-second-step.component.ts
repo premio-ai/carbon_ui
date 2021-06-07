@@ -107,13 +107,24 @@ export class ChallangeSecondStepComponent implements OnInit {
     }
   }
 
-  setDataVisual(acceptedFiles) {
+  setDataVisual(acceptedFiles, index) {
+    let ind;
+    if (index>=0) {
+      ind = index
+    } else {
+      if (this.phases.length>0) {
+        ind = this.phases.length + 1
+      } else {
+        ind = 0
+      }
+    }
     const file = acceptedFiles.file;
     const formData = new FormData();
     formData.append('files', file);
     let payload = {
       tempBucketName: this.bucketName,
-      phaseNo: this.phases.length,
+      // phaseNo: this.phases.length,
+      phaseNo: ind,
       fileType: 'dataVisual'
     }
     formData.append('uploadInfo', JSON.stringify(payload))

@@ -70,7 +70,7 @@
 			</div>
             <br />
             <ibm-label>Challenge End Date
-                <input type='date' ibmTextArea style="width: 165px" [(ngModel)]="stepOne.endDate" />
+                <input type='date' min="{{minDate()}}" ibmTextArea style="width: 165px" [(ngModel)]="stepOne.endDate" />
                 </ibm-label>
             <div *ngIf="endDateError">
                 <p><span style="font-size: x-small; color: red">Expiration date is required in DD/MM/YYYY format</span></p>
@@ -93,14 +93,16 @@
             </p>
             <br />
             <p class="toggle_head">Withold Company Name</p>
-            <ibm-toggle [label]="label" [onText]="'On'" [offText]="'Off'" [disabled]="disabled" [checked]="toggle01()"
-                [size]="size">
-            </ibm-toggle>
+            <ibm-toggle [onText]="'On'" [checked]="stepOne.witholdCompanyName" (change)="toggle01()" ></ibm-toggle>
+            <div *ngIf="companyNameError">
+                <p><span style="font-size: x-small; color: red">This is required to be selected</span></p>
+            </div>
             <br />
-            <p class="toggle_head">Withold Company Discription</p>
-            <ibm-toggle [label]="label" [onText]="'On'" [offText]="'Off'" [disabled]="disabled" [checked]="checked"
-                [size]="size">
-            </ibm-toggle>
-            <button [ibmButton]="ibmButton" class="btn" [size]="size" (click)="nextStep()"> Next</button>
+            <p class="toggle_head">Withold Company Description</p>
+            <ibm-toggle [onText]="'On'" [checked]="stepOne.witholdCompanyDescription" (change)="toggle02()"></ibm-toggle>
+            <div *ngIf="companyDescriptionError">
+                <p><span style="font-size: x-small; color: red">This is required to be selected</span></p>
+            </div>
+            <button [ibmButton]="ibmButton" class="btn" (click)="nextStep()"> Next</button>
         </div>
     </div>

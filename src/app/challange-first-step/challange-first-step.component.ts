@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-challange-first-step',
@@ -25,6 +26,8 @@ export class ChallangeFirstStepComponent implements OnInit {
   challengeTypeError: boolean
   categoryTypeError: boolean
   endDateError: boolean
+  companyNameError: boolean
+  companyDescriptionError: boolean
   category: any[]
   contractType: any[]
 
@@ -52,7 +55,6 @@ export class ChallangeFirstStepComponent implements OnInit {
       { content: 'One Off' },
       { content: 'Other' }
     ]
-
   }
 
   toggle01() {
@@ -72,11 +74,11 @@ export class ChallangeFirstStepComponent implements OnInit {
   }
 
   minDate() {
-    return new Date();
+    return moment(new Date()).format('YYYY-MM-DD');
   }
 
   nextStep() {
-    if (this.stepOne.title.length>0 && this.stepOne.description.length>0 && this.stepOne.objective.length>0 && this.stepOne.categoryType.length>0 && this.stepOne.challengeType.length>0 && this.stepOne.endDate.length>0) {
+    if (this.stepOne.title.length>0 && this.stepOne.description.length>0 && this.stepOne.objective.length>0 && this.stepOne.categoryType.length>0 && this.stepOne.challengeType.length>0 && this.stepOne.endDate.length>0 && this.stepOne.witholdCompanyName && this.stepOne.witholdCompanyDescription) {
       this.goNext.emit(this.stepOne)
     } else {
       this.validateData();
@@ -115,6 +117,16 @@ export class ChallangeFirstStepComponent implements OnInit {
       this.endDateError = true
     } else {
       this.endDateError = false
+    }
+    if (this.stepOne.witholdCompanyName) {
+      this.companyNameError = false
+    } else {
+      this.companyNameError = true
+    }
+    if (this.stepOne.witholdCompanyDescription) {
+      this.companyDescriptionError = false
+    } else {
+      this.companyDescriptionError = true
     }
   }
 
