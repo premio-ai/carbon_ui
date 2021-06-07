@@ -45,14 +45,14 @@ export class InvSeePerformanceComponent implements OnInit {
 
 	ngOnInit() {
 		let userDetails = JSON.parse(localStorage.getItem('userDetails'))
-		if (userDetails && userDetails._id) {			
+		if (userDetails && userDetails._id) {
 			let modelId = ''
 			this.activatedRoute.params.subscribe((params: Params) => {
 				if (params) {
 					modelId = params.id
 				}
 			});
-	
+
 			this.getSubmission(modelId)
 		} else {
 			this.router.navigateByUrl('login')
@@ -61,7 +61,7 @@ export class InvSeePerformanceComponent implements OnInit {
 
 	getSubmission(id) {
 		let url = 'submissionAllChallenge/' + id;
-		this.requestService.get(url, null).subscribe(data => {
+		this.requestService.get(url, null).toPromise().then(data => {
 			this.modelDetails = data[0];
 			this.challengeId = data[0].challengeId;
 			this.phaseId = data[0].phaseId;
@@ -74,13 +74,19 @@ export class InvSeePerformanceComponent implements OnInit {
 			this.accuracy();
 			this.precision();
 			this.recall();
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
 		})
 	}
 
 	getChallengeDetails(id) {
 		let url = 'challenge/' + id;
-		this.requestService.get(url, null).subscribe(data => {
+		this.requestService.get(url, null).toPromise().then(data => {
 			this.challengeDetails = data;
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
 		})
 	}
 
@@ -88,28 +94,41 @@ export class InvSeePerformanceComponent implements OnInit {
 		this.location.back();
 	}
 
-	async downloadFile(filePath) {
-		if (this.challengeDetails) {
-			let docName = filePath
-			let docUrl = APP_URL + docName
-
-			if (docUrl.length) {
-				await fetch(docUrl).then(async res => {
-					return await res.blob()
-				}).then(blob => {
-					var a = document.createElement("a");
-					document.body.appendChild(a);
-					const url = URL.createObjectURL(blob);
-
-					a.href = url;
-					a.download = "File";
-					a.click();
-					window.URL.revokeObjectURL(url);
-				})
-			} else {
-				// this.docError = true
+	async downloadFile(modelpath) {
+		if (modelpath) {
+			let payload = {
+				filePath: modelpath
 			}
+			this.requestService.post('upload/downloadZip', payload).toPromise().then(data => {
+				var fileName = "submission-model.zip";
+				var blob = this.dataURItoBlob(data.blob)
+
+				var a = document.createElement("a");
+				document.body.appendChild(a);
+				var url = window.URL.createObjectURL(blob);
+
+				a.href = url;
+				a.download = fileName;
+				a.click();
+				window.URL.revokeObjectURL(url);
+				a.remove();
+			}).catch(err => {
+				localStorage.clear();
+				this.router.navigateByUrl('login')
+			})
 		}
+	}
+
+	dataURItoBlob(dataURI) {
+		var byteString = atob(dataURI.split(',')[1]);
+		var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+		var ab = new ArrayBuffer(byteString.length);
+		var ia = new Uint8Array(ab);
+		for (var i = 0; i < byteString.length; i++) {
+			ia[i] = byteString.charCodeAt(i);
+		}
+		var blob = new Blob([ab], { type: mimeString });
+		return blob;
 	}
 
 	accuracy() {
@@ -313,14 +332,14 @@ export class InvSeePerformanceComponent implements OnInit {
 		"title": "Loss vs Iteration",
 		"color": {
 			"pairing": {
-					"option": 2
+				"option": 2
 			},
 			"scale": {
-					"Qty": "#925699",
-					"Misc": "#525669"
+				"Qty": "#925699",
+				"Misc": "#525669"
 			}
-	},
-		grid: {x:{enabled:false}},
+		},
+		grid: { x: { enabled: false } },
 		"axes": {
 			"bottom": {
 				"title": "Iteration",
@@ -334,8 +353,8 @@ export class InvSeePerformanceComponent implements OnInit {
 			}
 		},
 		"curve": "curveMonotoneX",
-		"height": "400px",	
-		
+		"height": "400px",
+
 		getFillColor: (group: String) => {
 			if (group == 'Test Loss') {
 				return '#F3A625';
@@ -346,7 +365,7 @@ export class InvSeePerformanceComponent implements OnInit {
 			if (group == 'Test Accuracy') {
 				return 'white';
 			}
-			
+
 		},
 		getStrokeColor: (group: String) => {
 			if (group == 'Test Loss') {
@@ -358,7 +377,7 @@ export class InvSeePerformanceComponent implements OnInit {
 			if (group == 'Test Accuracy') {
 				return 'white';
 			}
-		
+
 		}
 	};
 
@@ -377,6 +396,6 @@ export class InvSeePerformanceComponent implements OnInit {
 
 	challengeTitle(challengeId) {
 		this.router.navigateByUrl('invaccepted/' + challengeId)
-	  }
+	}
 
 }

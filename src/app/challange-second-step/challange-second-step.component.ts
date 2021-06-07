@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { RequestService } from '../request.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-challange-second-step',
@@ -12,7 +13,8 @@ export class ChallangeSecondStepComponent implements OnInit {
   @Output() public goNext: EventEmitter<any> = new EventEmitter();
 
   constructor(
-    private requestService: RequestService
+    private requestService: RequestService,
+    private router: Router
   ) { }
   phases: any[] = []
   fileData: any;
@@ -46,8 +48,11 @@ export class ChallangeSecondStepComponent implements OnInit {
 
   createTempBucket() {
     let url = 'upload/createTempBucket'
-    this.requestService.post(url, null).subscribe(data => {
+    this.requestService.post(url, null).toPromise().then(data => {
       this.bucketName = data.bucketName
+    }).catch(err => {
+      localStorage.clear();
+      this.router.navigateByUrl('login')
     })
   }
 
@@ -117,8 +122,11 @@ export class ChallangeSecondStepComponent implements OnInit {
   }
 
   uploadDataVisual(formData) {
-    this.requestService.post('upload', formData).subscribe(data => {
+    this.requestService.post('upload', formData).toPromise().then(data => {
       this.stepTwo.dataVisualFile = data.filePath
+    }).catch(err => {
+      localStorage.clear();
+      this.router.navigateByUrl('login')
     })
   }
 
@@ -136,12 +144,15 @@ export class ChallangeSecondStepComponent implements OnInit {
     this.fileData.delete('FormData');
     this.fileArray = []
     if (formData) {
-      this.requestService.post('upload', formData).subscribe(data => {
+      this.requestService.post('upload', formData).toPromise().then(data => {
         let fileObj = {
           path: data.filePath,
           downloadCount: 0
         }
         this.stepTwo.sampleDataFile.push(fileObj)
+      }).catch(err => {
+        localStorage.clear();
+        this.router.navigateByUrl('login')
       })
     }
 

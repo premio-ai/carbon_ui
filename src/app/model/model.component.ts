@@ -127,7 +127,7 @@ export class ModelComponent {
 
   getBookmarkedSubmission() {
     let url = 'bookmarksubmission'
-    this.requestService.get(url, null).subscribe(data => {
+    this.requestService.get(url, null).toPromise().then(data => {
       let tempData = [];
       this.submissionChallengeDetails.map(dt => {
         data.filter(res => {
@@ -137,7 +137,10 @@ export class ModelComponent {
         })
       })
       this.bookmarkedSubmissions = tempData
-    })
+    }).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
+		})
   }
 
   isBookmarked(modelId) {
@@ -170,9 +173,12 @@ export class ModelComponent {
     })
 
     let url = 'bookmarksubmission'
-    this.requestService.post(url, payload).subscribe(data => {
+    this.requestService.post(url, payload).toPromise().then(data => {
       this.getBookmarkedSubmission()
-    })
+    }).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
+		})
   }
 
   unBookmark(model) {
@@ -184,9 +190,12 @@ export class ModelComponent {
       submissionId: model._id,
       insurerId: ''
     }
-    this.requestService.put(url, data).subscribe(data => {
+    this.requestService.put(url, data).toPromise().then(data => {
       this.getBookmarkedSubmission()
-    })
+    }).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
+		})
   }
 
   onChange(e, id) {

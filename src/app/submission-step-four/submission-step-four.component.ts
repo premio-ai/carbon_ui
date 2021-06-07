@@ -51,7 +51,7 @@ export class SubmissionStepFourComponent implements OnInit {
       let payload = {
         filePath: modelpath
       }
-      this.requestService.post('upload/downloadZip', payload).subscribe(data => {
+      this.requestService.post('upload/downloadZip', payload).toPromise().then(data => {
         var fileName = "submission-model.zip";
         var blob =this.dataURItoBlob(data.blob)
         
@@ -64,6 +64,9 @@ export class SubmissionStepFourComponent implements OnInit {
         a.click();
         window.URL.revokeObjectURL(url);
         a.remove();
+      }).catch(err => {
+        localStorage.clear();
+        this.router.navigateByUrl('login')
       })
     }
   }

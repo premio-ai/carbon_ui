@@ -11,44 +11,50 @@ export class DashboardComponent implements OnInit {
 	constructor(
 		private requestService: RequestService,
 		private router: Router
-	) {}
+	) { }
 	userDetails: any;
 	activeChallenges: any[];
 	pastChallenges: any[];
 	sorting: any[];
-	
+
 	ngOnInit() {
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
-		if (this.userDetails && this.userDetails._id) {			
+		if (this.userDetails && this.userDetails._id) {
 			this.getActiveChallanges();
 			this.getpastChallanges();
 		} else {
 			this.router.navigateByUrl('login')
 		}
-		
+
 		this.sorting = [
 			{ content: 'Most Popular' },
 			{ content: 'Least Popular' },
 			{ content: 'Newest' },
 			{ content: 'Oldest' },
 			{ content: 'End Date' },
-			
+
 		];
 
 	}
 
 	getActiveChallanges() {
 		let activeChallanegUrl = "challenge?isActive=true";
-		this.requestService.get(activeChallanegUrl, null).subscribe(data => {
-		  this.activeChallenges = data;
+		this.requestService.get(activeChallanegUrl, null).toPromise().then(data => {
+			this.activeChallenges = data;
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
 		})
 	}
 
 	getpastChallanges() {
 		let pastChallanegUrl = "challenge?isActive=false";
-		this.requestService.get(pastChallanegUrl, null).subscribe((data) => {
+		this.requestService.get(pastChallanegUrl, null).toPromise().then((data) => {
 			this.pastChallenges = data;
-		});
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
+		})
 	}
 
 	createChalange() {

@@ -28,17 +28,11 @@ export class HeaderComponent implements OnInit {
 		this.challengeCounts = 0;
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
 		if (this.userDetails) {
-			//TODO: check notifications API before deployment
-			// this.getNotifications();
+			this.getNotifications();
 			this.getChallengeCounts();
 			this.getInnovatorChallangeCount();
-
-			// setInterval(() => {
-			// 	this.getNotifications()
-			// }, 60000)
 		}
 	}
-
 
 	getInnovatorChallangeCount() {
 		let allActiveChallanegUrl = "challenge/all";
@@ -47,17 +41,19 @@ export class HeaderComponent implements OnInit {
 			offset: 0
 		}
 
-		this.requestService.get(allActiveChallanegUrl, params).subscribe(data => {
+		this.requestService.get(allActiveChallanegUrl, params).toPromise().then(data => {
 			this.activeChallenges = data.list;
 			this.getSubmission();
 			this.getBookmarkedChallenges();
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
 		})
 	}
 
 	getBookmarkedChallenges() {
 		let url = "bookmarkChallenge";
-		this.requestService.get(url, null).subscribe(data => {
-
+		this.requestService.get(url, null).toPromise().then(data => {
 			let tempData = []
 			this.activeChallenges.filter(dt => {
 				data.map(res => {
@@ -67,12 +63,15 @@ export class HeaderComponent implements OnInit {
 				})
 			})
 			this.bookmarkedChallenges = tempData;
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
 		})
 	}
 
 	getSubmission() {
 		let url = "submissionAllChallenge";
-		this.requestService.get(url, null).subscribe(data => {
+		this.requestService.get(url, null).toPromise().then(data => {
 			let tempData = []
 			this.activeChallenges.filter(dt => {
 				data.map(res => {
@@ -82,20 +81,29 @@ export class HeaderComponent implements OnInit {
 				})
 			})
 			this.submittedActiveChallenges = tempData
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
 		})
 	}
 
 	getChallengeCounts() {
-		this.requestService.get('challenge/counts', null).subscribe(data => {
+		this.requestService.get('challenge/counts', null).toPromise().then(data => {
 			this.challengeCounts = data
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
 		})
 	}
 
 	getNotifications() {
 		let url = 'userNotification'
-		this.requestService.get(url, null).subscribe(data => {
+		this.requestService.get(url, null).toPromise().then(data => {
 			this.notifications = data;
 			this.notificationLoading = false
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
 		})
 		setTimeout(() => {
 			this.getNotifications();
@@ -124,15 +132,21 @@ export class HeaderComponent implements OnInit {
 		if (notify.title == MESSAGES.NEW_CHALLENGE_POST) {
 			this.requestService.put('userNotification/' + notify._id, {
 				isSeen: true
-			}).subscribe(data => {
+			}).toPromise().then(data => {
 				this.router.navigateByUrl('invaccepted/' + notify.elementId)
+			}).catch(err => {
+				localStorage.clear();
+				this.router.navigateByUrl('login')
 			})
 		}
 		if (notify.title == MESSAGES.NEW_MODEL_SUBMITTED) {
 			this.requestService.put('userNotification/' + notify._id, {
 				isSeen: true
-			}).subscribe(data => {
+			}).toPromise().then(data => {
 				this.router.navigateByUrl('invmodel-view/' + notify.elementId)
+			}).catch(err => {
+				localStorage.clear();
+				this.router.navigateByUrl('login')
 			})
 		}
 	}
