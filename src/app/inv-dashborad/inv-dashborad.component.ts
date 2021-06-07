@@ -46,22 +46,27 @@ export class InvDashboradComponent implements OnInit {
 
 	getChallengeSubmissionRanking() {
 		let url = "submissionAllChallenge/submissions/rank";
-		this.requestService.get(url, null).subscribe(data => {
+		this.requestService.get(url, null).toPromise().then(data => {
 			this.submissionRanking = data
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
 		})
 	}
 
 	getSubmittedChallenge() {
 		let url = 'submissionAllChallenge'
-	
-		this.requestService.get(url, null).subscribe(data => {
+		this.requestService.get(url, null).toPromise().then(data => {
 		  this.submittedChallenges = data
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
 		})
 	  }
 
 	getBookmarkedChallenges() {
 		let url = "bookmarkChallenge";
-		this.requestService.get(url, null).subscribe(data => {
+		this.requestService.get(url, null).toPromise().then(data => {
 			let tempData = []
 			this.activeChallenges.filter(dt => {
 				data.map(res => {
@@ -71,6 +76,9 @@ export class InvDashboradComponent implements OnInit {
 				})
 			})
 			this.bookmarkedChallenges = tempData;
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
 		})
 	}
 
@@ -81,16 +89,19 @@ export class InvDashboradComponent implements OnInit {
 			offset: 0
 		}
 
-		this.requestService.get(allActiveChallanegUrl, params).subscribe(data => {
+		this.requestService.get(allActiveChallanegUrl, params).toPromise().then(data => {
 			this.activeChallenges = data.list;
 			this.getBookmarkedChallenges();
 			this.getSubmission();
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
 		})
 	}
 
 	getSubmission() {
 		let url = "submissionAllChallenge";
-		this.requestService.get(url, null).subscribe(data => {
+		this.requestService.get(url, null).toPromise().then(data => {
 			let tempData = []
 			this.activeChallenges.filter(dt => {
 				data.map(res => {
@@ -100,6 +111,9 @@ export class InvDashboradComponent implements OnInit {
 				})
 			})
 			this.submittedActiveChallenges = tempData
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
 		})
 	}
 
@@ -110,16 +124,19 @@ export class InvDashboradComponent implements OnInit {
 			offset: 0
 		}
 
-		this.requestService.get(url, params).subscribe(data => {
+		this.requestService.get(url, params).toPromise().then(data => {
 			this.pastChallenges = data.list;
 			//   this.getBookmarkedChallenges();
 			this.getSubmissionPast();
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
 		})
 	}
 
 	getSubmissionPast() {
 		let url = "submissionAllChallenge";
-		this.requestService.get(url, null).subscribe(data => {
+		this.requestService.get(url, null).toPromise().then(data => {
 			let tempData = []
 			this.pastChallenges.filter(dt => {
 				data.map(res => {
@@ -129,12 +146,14 @@ export class InvDashboradComponent implements OnInit {
 				})
 			})
 			this.submittedPastChallenges = tempData
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
 		})
 	}
 
 	sortSelect(sort) {
 		let criteria = sort.item.content;
-
 		if (criteria == 'Newest') {
 			this.activeChallenges.sort((a, b) => {
 				return b.createdAt - a.createdAt
@@ -146,7 +165,6 @@ export class InvDashboradComponent implements OnInit {
 				return b.createdAt - a.createdAt
 			})
 		}
-
 		if (criteria == 'Oldest') {
 			this.activeChallenges.sort((a, b) => {
 				return a.createdAt - b.createdAt
@@ -158,7 +176,6 @@ export class InvDashboradComponent implements OnInit {
 				return a.createdAt - b.createdAt
 			})
 		}
-
 		if (criteria == 'End Date') {
 			this.activeChallenges.sort((a, b) => {
 				return new Date(b.expiryDate).getTime() - new Date(a.expiryDate).getTime()
@@ -170,7 +187,6 @@ export class InvDashboradComponent implements OnInit {
 				return new Date(b.expiryDate).getTime() - new Date(a.expiryDate).getTime()
 			})
 		}
-
 		if (criteria == 'Most Popular') {
 			this.activeChallenges.sort((a, b) => {
 				return b.acceptedUsersCount - a.acceptedUsersCount
@@ -182,7 +198,6 @@ export class InvDashboradComponent implements OnInit {
 				return b.acceptedUsersCount - a.acceptedUsersCount
 			})
 		}
-
 		if (criteria == 'Least Popular') {
 			this.activeChallenges.sort((a, b) => {
 				return a.acceptedUsersCount - b.acceptedUsersCount

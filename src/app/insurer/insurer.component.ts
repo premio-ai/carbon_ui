@@ -55,16 +55,22 @@ export class InsurerComponent implements OnInit {
 
   getChallengeDetails(id) {
     let url = 'challenge/' + id;
-    this.requestService.get(url, null).subscribe(data => {
+    this.requestService.get(url, null).toPromise().then(data => {
       this.challengeDetails = data;
-    })
+    }).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
+		})
   }
 
   getSubmissionChallenge(id) {
     let url = 'submissionAllChallenge/challenge/' + id;
-    this.requestService.get(url, null).subscribe(data => {
+    this.requestService.get(url, null).toPromise().then(data => {
       this.submissionChallengeDetails = data;
-    })
+    }).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
+		})
   }
 
   navigateBack() {

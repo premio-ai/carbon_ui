@@ -75,7 +75,7 @@ export class ModelReportComponent implements OnInit {
 
 	getModelReport(modelId) {
 		let url = 'submissionAllChallenge/modelReport/' + modelId;
-		this.requestService.get(url, null).subscribe(data => {
+		this.requestService.get(url, null).toPromise().then(data => {
 			this.modelReport = data[0];
 
 			this.getChallengeDetails(this.modelReport.challengeId)
@@ -89,6 +89,9 @@ export class ModelReportComponent implements OnInit {
 			this.accuracy();
 			this.precision();
 			this.recall();
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
 		})
 	}
 
@@ -107,9 +110,12 @@ export class ModelReportComponent implements OnInit {
 	getChallengeDetails(challengeId) {
 		let url = "challenge/" + challengeId;
 
-		this.requestService.get(url, null).subscribe(data => {
+		this.requestService.get(url, null).toPromise().then(data => {
 			this.challengeDetails = data
 			this.getChallengeSubmission(this.challengeDetails._id)
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
 		})
 	}
 
@@ -117,14 +123,20 @@ export class ModelReportComponent implements OnInit {
 		let innovatorId = this.modelReport.innovatorId._id
 		let url = "submissionAllChallenge/challenge-innovator/" + challengeId + '/' + innovatorId;
 
-		this.requestService.get(url, null).subscribe(data => {
+		this.requestService.get(url, null).toPromise().then(data => {
 			this.challengeSubmission = data
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
 		})
 	}
 
 	getInnovatorChallengeCounts() {
-		this.requestService.get('submissionAllChallenge/innovatorCounts/innovator', null).subscribe(data => {
+		this.requestService.get('submissionAllChallenge/innovatorCounts/innovator', null).toPromise().then(data => {
 			this.challengeCounts = data
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
 		})
 	}
 

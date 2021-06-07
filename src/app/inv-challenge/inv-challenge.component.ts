@@ -113,11 +113,14 @@ export class InvChallengeComponent implements OnInit {
       skip: pageOffset
     }
 
-    this.requestService.get(allActiveChallanegUrl, params).subscribe(data => {
+    this.requestService.get(allActiveChallanegUrl, params).toPromise().then(data => {
       this.totalPage = Math.ceil(data.count / 10);
       this.activeChallenges = data.list;
       this.getBookmarkedChallenges();
-    })
+    }).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
+		})
   }
 
   isBookmarked(challengeId) {
@@ -153,8 +156,7 @@ export class InvChallengeComponent implements OnInit {
 
   getBookmarkedChallenges() {
     let url = "bookmarkChallenge";
-    this.requestService.get(url, null).subscribe(data => {
-
+    this.requestService.get(url, null).toPromise().then(data => {
       let tempData = []
       this.activeChallenges.filter(dt => {
         data.map(res => {
@@ -164,7 +166,10 @@ export class InvChallengeComponent implements OnInit {
         })
       })
       this.bookmarkedChallenges = tempData;
-    })
+    }).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
+		})
   }
 
   viewChallenge(challengeId) {
@@ -176,9 +181,12 @@ export class InvChallengeComponent implements OnInit {
     let data = {
       challengeId: challengeId
     }
-    this.requestService.post(url, data).subscribe(data => {
+    this.requestService.post(url, data).toPromise().then(data => {
       this.getBookmarkedChallenges()
-    })
+    }).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
+		})
   }
 
   unBookmarkChallenge(challengeId) {
@@ -187,9 +195,12 @@ export class InvChallengeComponent implements OnInit {
     let data = {
       challengeId: challengeId
     }
-    this.requestService.put(url, data).subscribe(data => {
+    this.requestService.put(url, data).toPromise().then(data => {
       this.getBookmarkedChallenges()
-    })
+    }).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
+		})
   }
 
 }

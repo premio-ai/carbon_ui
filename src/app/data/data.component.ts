@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { APP_URL } from '../../config/config';
 import { RequestService } from '../request.service';
 
@@ -11,16 +12,25 @@ export class DataComponent implements OnInit {
 
   @Input() challengeDetails: any;
   constructor(
-    private requestService: RequestService
+    private requestService: RequestService,
+    private router: Router
   ) { }
   editedPhase: String;
   isEdit: Boolean;
   appUrl: String;
+  imageUrl: String;
+  imageUrlArr: any[] = []
 
   ngOnInit() {
     this.appUrl = APP_URL
     this.isEdit = false
     this.editedPhase = ''
+  }
+
+  ngOnChanges() {
+    if (this.challengeDetails) {
+      this.displayImage()
+    }
   }
 
   getDownloadsCount() {
@@ -41,51 +51,82 @@ export class DataComponent implements OnInit {
       phaseId: phaseId,
       description: this.editedPhase
     }
-    this.requestService.put(url, payload).subscribe(data => {
+    this.requestService.put(url, payload).toPromise().then(data => {
       this.isEdit = false;
       this.getChallengeDetails(this.challengeDetails._id)
+    }).catch(err => {
+      localStorage.clear();
+      this.router.navigateByUrl('login')
     })
   }
 
   getChallengeDetails(challengeId) {
-    this.requestService.get("/"+challengeId, null).subscribe( data => {
+    this.requestService.get("/" + challengeId, null).toPromise().then(data => {
       this.challengeDetails = data
+    }).catch(err => {
+      localStorage.clear();
+      this.router.navigateByUrl('login')
+    })
+  }
+
+  async displayImage() {
+    this.challengeDetails.phases.map(dt => {
+      let payload = {
+        filePath: dt.dataVisualFile
+      }
+      this.requestService.post('upload/getImage', payload).toPromise().then(data => {
+        var a = document.createElement("a");
+        document.body.appendChild(a);
+        this.imageUrlArr.push(data.blob)
+      }).catch(err => {
+        localStorage.clear();
+        this.router.navigateByUrl('login')
+      })
     })
   }
 
   async downloadFile(phaseIndex, fileIndex) {
     if (this.challengeDetails) {
-
       let docName = this.challengeDetails.phases[phaseIndex].sampleDataFile[fileIndex].path || ''
-      let docUrl = APP_URL + docName
 
-      if (docUrl.length) {
-        await fetch(docUrl).then(async res => {
-          return await res.blob()
-        }).then(blob => {
-          var a = document.createElement("a");
-          document.body.appendChild(a);
-          const url = URL.createObjectURL(blob);
-
-          a.href = url;
-          a.download = "File";
-          a.click();
-          window.URL.revokeObjectURL(url);
-
-          let downloadUrl = 'challenge/fileDownloadsCount/' + this.challengeDetails._id;
-          let payload = {
-            challengeId: this.challengeDetails._id,
-            phaseId: this.challengeDetails.phases[phaseIndex].phaseId,
-            fileId: this.challengeDetails.phases[phaseIndex].sampleDataFile[fileIndex]
-          }
-          this.requestService.put(downloadUrl, payload).subscribe(data => {
-            // this.getDownloadsCount();
-          })
-        })
-      } else {
-        // this.docError = true
+      let payload = {
+        filePath: docName
       }
+      this.requestService.post('upload/downloadObject', payload).toPromise().then(data => {
+        var blob = this.dataURItoBlob(data.blob)
+        var a = document.createElement("a");
+        document.body.appendChild(a);
+        var url = window.URL.createObjectURL(blob);
+
+        a.href = url;
+        a.download = "File.csv";
+        a.click();
+        window.URL.revokeObjectURL(url);
+      }).catch(err => {
+        localStorage.clear();
+        this.router.navigateByUrl('login')
+      })
+
+      let downloadUrl = 'challenge/fileDownloadsCount/' + this.challengeDetails._id;
+      let payloadData = {
+        challengeId: this.challengeDetails._id,
+        phaseId: this.challengeDetails.phases[phaseIndex].phaseId,
+        fileId: this.challengeDetails.phases[phaseIndex].sampleDataFile[fileIndex]
+      }
+      this.requestService.put(downloadUrl, payloadData).subscribe(data => { })
     }
+  }
+
+  dataURItoBlob(dataURI) {
+    var byteString = atob(dataURI.split(',')[1]);
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+    var ab = new ArrayBuffer(byteString.length);
+    var ia = new Uint8Array(ab);
+    for (var i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    var blob = new Blob([ab], { type: mimeString });
+    return blob;
   }
 
 }

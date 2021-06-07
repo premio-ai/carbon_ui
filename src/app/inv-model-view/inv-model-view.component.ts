@@ -56,10 +56,13 @@ export class InvModelViewComponent implements OnInit {
 
   getAllSubmitOfChallenge(challengeId) {
     let url = 'submissionAllChallenge/allSubmitOfChallenge/' + challengeId;
-    this.requestService.get(url, null).subscribe( data => {
+    this.requestService.get(url, null).toPromise().then( data => {
       this.allSubmitOfChallenge = data
       this.submissionIndex = data.findIndex( dt => dt._id == this.modelId)
-    })
+    }).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
+		})
   }
 
   editModelName() {
@@ -71,10 +74,13 @@ export class InvModelViewComponent implements OnInit {
     let payload = {
       modelName: this.set_new_modelName
     }
-    this.requestService.put(url, payload).subscribe(data => {
+    this.requestService.put(url, payload).toPromise().then(data => {
       this.isEdit = false;
       this.getSubmission(this.modelId)
-    })
+    }).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
+		})
   }
 
   enterNextPhase() {
@@ -89,7 +95,7 @@ export class InvModelViewComponent implements OnInit {
 
   getSubmission(id) {
     let url = 'submissionAllChallenge/' + id;
-    this.requestService.get(url, null).subscribe(data => {
+    this.requestService.get(url, null).toPromise().then(data => {
       this.modelDetails = data[0];
       this.challengeId = data[0].challengeId;
       this.phaseId = data[0].phaseId;
@@ -97,41 +103,46 @@ export class InvModelViewComponent implements OnInit {
 
       this.getChallengeDetails(this.challengeId);
       this.getAllSubmitOfChallenge(this.challengeId);
-    })
+    }).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
+		})
   }
 
   getChallengeDetails(id) {
     let url = 'challenge/' + id;
-    this.requestService.get(url, null).subscribe(data => {
+    this.requestService.get(url, null).toPromise().then(data => {
       this.challengeDetails = data;
-    })
+    }).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
+		})
   }
 
   navigateBack() {
     this.location.back()
   }
 
-  async downloadFile() {
+  async downloadFile(filePath) {
     if (this.challengeDetails) {
-      let docName = this.challengeDetails.phases[0].sampleDataFile[0].path || ''
-      let docUrl = APP_URL + docName
+      let docName = filePath
 
-      if (docUrl.length) {
-        await fetch(docUrl).then(async res => {
-          return await res.blob()
-        }).then(blob => {
-          var a = document.createElement("a");
-          document.body.appendChild(a);
-          const url = URL.createObjectURL(blob);
+      let payload = {
+				filePath: docName
+			}
+			this.requestService.post('upload/downloadObject', payload).toPromise().then(data => {
+				var a = document.createElement("a");
+				document.body.appendChild(a);
+				const url = URL.createObjectURL(new Blob([data.blob], { type: 'text/plain' }));
 
-          a.href = url;
-          a.download = "File";
-          a.click();
-          window.URL.revokeObjectURL(url);
-        })
-      } else {
-        // this.docError = true
-      }
+				a.href = url;
+				a.download = "File";
+				a.click();
+				window.URL.revokeObjectURL(url);
+			}).catch(err => {
+        localStorage.clear();
+        this.router.navigateByUrl('login')
+      })
     }
   }
 
@@ -144,7 +155,6 @@ export class InvModelViewComponent implements OnInit {
   }
 
   invChallenges() {
-    console.log("---browse clicked---143")
     this.router.navigateByUrl('invchallenges')
   }
 

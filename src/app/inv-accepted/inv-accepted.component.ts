@@ -53,8 +53,7 @@ export class InvAcceptedComponent implements OnInit {
 	pageOffset: number;
 	totalPage: number;
 	appUrl: String;
-	imageUrl: string;
-
+	imageUrlArr: any[] = [];
 
 	ngOnInit() {
 		let userDetails = JSON.parse(localStorage.getItem('userDetails'))
@@ -138,20 +137,26 @@ export class InvAcceptedComponent implements OnInit {
 
 	getChallengeDetails(id) {
 		let url = 'challenge/' + id;
-		this.requestService.get(url, null).subscribe(data => {
+		this.requestService.get(url, null).toPromise().then(data => {
 			this.challengeDetails = data;
 			this.getSubmissionByChallengeId(this.challengeId);
 			this.displayImage()
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
 		})
 	}
 
 	getChallengeAcceptance(challengeId) {
 		let url = 'userChallenge/accepted/' + challengeId;
-		this.requestService.get(url, null).subscribe(data => {
+		this.requestService.get(url, null).toPromise().then(data => {
 			this.acceptedChallenge = data;
 			if (data._id.length > 0) {
 				this.isChallengeAccepted = true;
 			}
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
 		})
 	}
 
@@ -160,19 +165,25 @@ export class InvAcceptedComponent implements OnInit {
 		let params = {
 			skip: pageOffset
 		}
-		this.requestService.get(url, params).subscribe(data => {
+		this.requestService.get(url, params).toPromise().then(data => {
 			this.totalPage = Math.ceil(data.count / 10);
 			this.leaderboard = data.list;
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
 		})
 	}
 
 	getSubmissionByChallengeId(challengeId) {
 		let url = 'submissionAllChallenge/allSubmitOfChallenge/' + challengeId;
-		this.requestService.get(url, null).subscribe(data => {
+		this.requestService.get(url, null).toPromise().then(data => {
 			this.challengeSubmissionData = data
 			if (this.challengeSubmissionData.length == this.challengeDetails.phases.length) {
 				this.phasesSubmissionComplete = true
 			}
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
 		})
 	}
 
@@ -190,9 +201,12 @@ export class InvAcceptedComponent implements OnInit {
 			challengesIds: [challengeId]
 		}
 		let url = 'userChallenge';
-		this.requestService.post(url, data).subscribe(data => {
+		this.requestService.post(url, data).toPromise().then(data => {
 			this.getChallengeAcceptance(challengeId)
 			this.showToaster()
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
 		})
 	}
 
@@ -201,9 +215,12 @@ export class InvAcceptedComponent implements OnInit {
 			challengesIds: [challengeId]
 		}
 		let url = 'userChallenge';
-		this.requestService.put(url, data).subscribe(data => {
+		this.requestService.put(url, data).toPromise().then(data => {
 			this.getChallengeAcceptance(challengeId)
 			this.showWithdrawToaster()
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
 		})
 	}
 
@@ -247,35 +264,41 @@ export class InvAcceptedComponent implements OnInit {
 	}
 
 	async displayImage() {
-		let docName = this.challengeDetails.phases[0].dataVisualFile
-		let payload = {
-			filePath: docName
-		}
-		this.requestService.post('upload/getImage', payload).subscribe(data => {
-			var a = document.createElement("a");
-			document.body.appendChild(a);
-			this.imageUrl = data.blob
+		this.challengeDetails.phases.map(dt => {
+			let payload = {
+				filePath: dt.dataVisualFile
+			}
+			this.requestService.post('upload/getImage', payload).toPromise().then(data => {
+				var a = document.createElement("a");
+				document.body.appendChild(a);
+				this.imageUrlArr.push(data.blob)
+			}).catch(err => {
+				localStorage.clear();
+				this.router.navigateByUrl('login')
+			})
 		})
 	}
 
 	async downloadFile(phaseIndex, fileIndex) {
 		if (this.challengeDetails) {
-
 			let docName = this.challengeDetails.phases[phaseIndex].sampleDataFile[fileIndex].path || ''
-			let docUrl = APP_URL + docName
 
 			let payload = {
 				filePath: docName
 			}
-			this.requestService.post('upload/downloadObject', payload).subscribe(data => {
+			this.requestService.post('upload/downloadObject', payload).toPromise().then(data => {
+				var blob = this.dataURItoBlob(data.blob)
 				var a = document.createElement("a");
 				document.body.appendChild(a);
-				const url = URL.createObjectURL(new Blob([data.blob], { type: 'text/plain' }));
+				var url = window.URL.createObjectURL(blob);
 
 				a.href = url;
-				a.download = "File";
+				a.download = "File.csv";
 				a.click();
 				window.URL.revokeObjectURL(url);
+			}).catch(err => {
+				localStorage.clear();
+				this.router.navigateByUrl('login')
 			})
 
 			let downloadUrl = 'challenge/fileDownloadsCount/' + this.challengeDetails._id;
@@ -284,9 +307,20 @@ export class InvAcceptedComponent implements OnInit {
 				phaseId: this.challengeDetails.phases[phaseIndex].phaseId,
 				fileId: this.challengeDetails.phases[phaseIndex].sampleDataFile[fileIndex]
 			}
-			this.requestService.put(downloadUrl, payloadData).subscribe(data => {})
-
+			this.requestService.put(downloadUrl, payloadData).subscribe(data => { })
 		}
+	}
+
+	dataURItoBlob(dataURI) {
+		var byteString = atob(dataURI.split(',')[1]);
+		var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+		var ab = new ArrayBuffer(byteString.length);
+		var ia = new Uint8Array(ab);
+		for (var i = 0; i < byteString.length; i++) {
+			ia[i] = byteString.charCodeAt(i);
+		}
+		var blob = new Blob([ab], { type: mimeString });
+		return blob;
 	}
 
 	stepSelected() { }
@@ -333,10 +367,13 @@ export class InvAcceptedComponent implements OnInit {
 
 	nextStepThree() {
 		let url = 'submissionAllChallenge';
-		this.requestService.post(url, this.submissionData).subscribe(data => {
+		this.requestService.post(url, this.submissionData).toPromise().then(data => {
 			this.getSubmissionByChallengeId(this.challengeId);
 			this.getLeaderboard(this.challengeId, this.pageOffset)
 			this.current++;
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
 		})
 	}
 
