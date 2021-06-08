@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-overview',
@@ -9,13 +10,16 @@ export class OverviewComponent implements OnInit {
 
   @Input() challengeDetails: any;
   @Input() submissionChallengeDetails: any
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
   phaseOneSubmission: any
   phaseNo: number;
   selectedPhase: any
   leaderboardData: any[] = []
   modelUnderTraining: number;
   passedModelsCount: number;
+  selectedPhaseId: string
 
   ngOnInit() {
     this.modelUnderTraining = 0
@@ -30,32 +34,24 @@ export class OverviewComponent implements OnInit {
   }
 
   initialPhase() {
-    let tempData = []
-    this.submissionChallengeDetails.filter(dt => {
-      if (dt.phaseId == this.challengeDetails.phases[0].phaseId) {
-        tempData.push(dt)
-      }
-    })
-
-    this.selectedPhase = tempData
+    this.selectedPhaseId = this.challengeDetails.phases[0].phaseId
     this.showLeaderboard()
   }
 
   selectPhase(phaseId, phaseNo) {
     this.phaseNo = phaseNo
-
-    this.selectedPhase = []
-    let tempData = []
-    this.submissionChallengeDetails.filter(dt => {
-      this.challengeDetails.phases.map(res => {
-        if (dt.phaseId == phaseId && res.phaseId == phaseId) {
-          tempData.push(dt)
-        }
-      })
-    })
-
-    this.selectedPhase = tempData
+    this.selectedPhaseId = phaseId
     this.showLeaderboard()
+  }
+
+  checkSelected(phaseId) {
+    let checked = false
+    if (this.selectedPhaseId == phaseId) {
+      checked = true
+    } else {
+      checked = false
+    }
+    return checked
   }
 
   modelsUploaded(phaseId) {
@@ -97,12 +93,16 @@ export class OverviewComponent implements OnInit {
   showLeaderboard() {
     let tempData = []
     this.submissionChallengeDetails.filter(dt => {
-      if (dt.phaseid == this.selectedPhase.phaseId) {
+      if (dt.phaseId == this.selectedPhaseId) {
         tempData.push(dt)
       }
     })
 
     this.leaderboardData = tempData
+  }
+
+  viewModel(id) {
+    this.router.navigateByUrl('invmodel-view/' + id)
   }
 
 }

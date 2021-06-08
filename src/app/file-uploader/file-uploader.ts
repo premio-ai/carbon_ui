@@ -8,12 +8,12 @@ import { RequestService } from '../request.service';
     		[buttonType]="buttonType" [accept]="accept" [multiple]="multiple" [skeleton]="skeleton"
     		[(files)]="files" [size]="size" drop="true" [dropText]="dropText" (filesChange)="onDropped($event)">
 			</ibm-file-uploader>
-			<div [id]="notificationId" style="width: 300px; margin-top: 20px"></div>
 
 			<p *ngIf="files && files.size > 3">
 			<span style="font-size: x-small; color: red">Maximum 3 files can be uploaded.</span>
 			</p>`
-})
+			// <div [id]="notificationId" style="width: 300px; margin-top: 20px"></div>
+		})
 
 export class DragAndDropStory {
 	static notificationCount = 0;

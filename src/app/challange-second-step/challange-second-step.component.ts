@@ -107,13 +107,47 @@ export class ChallangeSecondStepComponent implements OnInit {
     }
   }
 
+  getFileName(filePath) {
+    let pathArr = filePath.split('/')
+    if (pathArr[2].length>22) {
+      return pathArr[2].substring(0, 22) + '...'
+    } else {
+      return pathArr[2]
+    }
+  }
+
+  getSampleFileName(filePath) {
+    let pathArr = filePath.split('/')
+    if (pathArr[2].length>22) {
+      return pathArr[2].substring(0, 22) + '...'
+    } else {
+      return pathArr[2]
+    }
+  }
+
+  removeDataVisual(i) {
+    this.phases[i].dataVisualFile = '';
+  }
+
+  removeSampleDataFile(phaseIndex, fileIndex) {
+    this.phases[phaseIndex].sampleDataFile.splice(fileIndex, 1)
+  }
+
+  removeStepTwoDataVisual() {
+    this.stepTwo.dataVisualFile = ''
+  }
+
+  removeStepTwoSampleDataFile(index) {
+    this.stepTwo.sampleDataFile.splice(index, 1)
+  }
+
   setDataVisual(acceptedFiles, index) {
     let ind;
     if (index>=0) {
       ind = index
     } else {
       if (this.phases.length>0) {
-        ind = this.phases.length + 1
+        ind = this.phases.length
       } else {
         ind = 0
       }
@@ -129,25 +163,40 @@ export class ChallangeSecondStepComponent implements OnInit {
     }
     formData.append('uploadInfo', JSON.stringify(payload))
 
-    this.uploadDataVisual(formData)
+    this.uploadDataVisual(formData, index)
   }
 
-  uploadDataVisual(formData) {
-    this.requestService.post('upload', formData).toPromise().then(data => {
-      this.stepTwo.dataVisualFile = data.filePath
-    }).catch(err => {
-      localStorage.clear();
-      this.router.navigateByUrl('login')
+  uploadDataVisual(formData, index) {
+    this.subject = this.requestService.post('upload', formData).subscribe(data => {
+      if (index>=0) {
+        this.phases[index].dataVisualFile = data.filePath
+      } else {
+        this.stepTwo.dataVisualFile = data.filePath
+      }
+    // }).catch(err => {
+    //   localStorage.clear();
+    //   this.router.navigateByUrl('login')
     })
   }
 
-  uploadSampleData(file) {
+  uploadSampleData(file, index) {
+    let ind;
+    if (index>=0) {
+      ind = index
+    } else {
+      if (this.phases.length>0) {
+        ind = this.phases.length
+      } else {
+        ind = 0
+      }
+    }
     this.fileData = new FormData();
     this.fileData.append('files', file);
 
     let payload = {
       tempBucketName: this.bucketName,
-      phaseNo: this.phases.length,
+      // phaseNo: this.phases.length,
+      phaseNo: ind,
       fileType: 'sampleDataFile'
     }
     this.fileData.append('uploadInfo', JSON.stringify(payload))
@@ -155,18 +204,27 @@ export class ChallangeSecondStepComponent implements OnInit {
     this.fileData.delete('FormData');
     this.fileArray = []
     if (formData) {
-      this.requestService.post('upload', formData).toPromise().then(data => {
+      this.subject = this.requestService.post('upload', formData).subscribe(data => {
         let fileObj = {
           path: data.filePath,
           downloadCount: 0
         }
-        this.stepTwo.sampleDataFile.push(fileObj)
-      }).catch(err => {
-        localStorage.clear();
-        this.router.navigateByUrl('login')
+        if (index>=0) {
+          this.phases[ind].sampleDataFile.push(fileObj)
+        } else {
+          this.stepTwo.sampleDataFile.push(fileObj)
+        }
+        // this.stepTwo.sampleDataFile.push(fileObj)
+      // }).catch(err => {
+      //   localStorage.clear();
+      //   this.router.navigateByUrl('login')
       })
     }
 
+  }
+
+  ngOnDestroy() {
+    this.subject.unsubscribe()
   }
 
   setSampleData(data) {

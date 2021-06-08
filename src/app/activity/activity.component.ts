@@ -23,6 +23,7 @@ export class ActivityComponent implements OnInit {
   sorting: any[];
   modelUnderTraining: number;
   passedModelsCount: number;
+  selectedPhaseId: String;
 
   ngOnInit() {
     this.modelUnderTraining = 0
@@ -54,14 +55,7 @@ export class ActivityComponent implements OnInit {
   }
 
   initialPhase() {
-    let tempData = []
-    this.submissionChallengeDetails.filter(dt => {
-      if (dt.phaseId == this.challengeDetails.phases[0].phaseId) {
-        tempData.push(dt)
-      }
-    })
-
-    this.selectedPhase = tempData
+    this.selectedPhaseId = this.challengeDetails.phases[0].phaseId
     this.trainingModels()
   }
 
@@ -70,16 +64,7 @@ export class ActivityComponent implements OnInit {
     this.passedModelsCount = 0
     this.modelUnderTraining = 0
 
-    let tempData = []
-    this.submissionChallengeDetails.filter(dt => {
-      this.challengeDetails.phases.map(res => {
-        if (dt.phaseId == phaseId && res.phaseId == phaseId) {
-          tempData.push(dt)
-        }
-      })
-    })
-
-    this.selectedPhase = tempData
+    this.selectedPhaseId = phaseId
     this.trainingModels()
   }
 

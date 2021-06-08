@@ -114,7 +114,7 @@
 									<legend class="bx--label">Phases</legend>
 									<div class="bx--form-item">
 										<div class="bx--radio-button-group ">
-											<div class="bx--radio-button-wrapper"
+											<!-- <div class="bx--radio-button-wrapper"
 												*ngFor="let phase of challengeDetails?.phases; index as i">
 												<input id="radio-button-102gt4bgc47-{{i}}" class="bx--radio-button"
 													(checked)="selectedPhase?.phaseId == phase?.phaseId" type="radio"
@@ -124,7 +124,18 @@
 													<span class="bx--radio-button__appearance"></span>
 													<span class="bx--radio-button__label-text">Phase {{i}}</span>
 												</label>
+											</div> -->
+
+											<div class="bx--radio-button-wrapper"
+												*ngFor="let phase of challengeDetails?.phases; index as i">
+											<ibm-radio-group>
+												<ibm-radio [checked]="checkSelected(phase.phaseId)"
+												(change)="selectPhase(phase.phaseId, i)">
+													Phase {{i}}
+												</ibm-radio>
+											</ibm-radio-group>
 											</div>
+
 										</div>
 									</div>
 								</fieldset>
@@ -162,7 +173,7 @@
 										<td>{{ model.score }}</td>
 										<td>{{ model.score }}</td>
 										<td>{{ model.score }}</td>
-										<td>view model</td>
+										<td><a (click)="viewModel(data._id)" style="cursor: pointer;" >View Model</a></td>
 									</tr>
 									<tr *ngIf="leaderboardData?.length == 0">
 										<p >No records found</p>

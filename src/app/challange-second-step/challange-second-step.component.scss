@@ -16,6 +16,13 @@
 background-color: #383838;border: none;
 }
 
+.fileBox {
+    display: flex;
+    /* border: 1px solid black; */
+    height: 40px;
+    background-color: #84828214;
+}
+
 .drag{
     font-size: 14px;
     color: gray;

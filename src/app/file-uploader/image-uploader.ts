@@ -6,9 +6,10 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
     		[buttonType]="buttonType" [accept]="accept" [multiple]="multiple" [skeleton]="skeleton"
 			[(files)]="files" drop="true" [dropText]="dropText" (filesChange)="onImageSelect($event)">
 		</ibm-file-uploader>
-		<div [id]="notificationId" style="width: 300px; margin-top: 20px"></div>`
+		`
 
 })
+// <div [id]="notificationId" style="width: 300px; margin-top: 20px"></div>
 
 export class ImageUploader {
 	static notificationCount = 0;

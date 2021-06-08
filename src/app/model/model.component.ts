@@ -19,7 +19,7 @@ export class ModelComponent {
   ) { }
   bookmarkedSubmissions: any[] = []
   modelData: any[]
-  selectedphaseId: any
+  selectedPhaseId: any
   compareModelData: any[] = []
   modelComparison: boolean
   showLess: boolean
@@ -61,23 +61,24 @@ export class ModelComponent {
   }
 
   makeInitialModelData() {
-    this.selectedphaseId = this.challengeDetails.phases[0].phaseId
     this.handlePhaseClick(this.challengeDetails.phases[0].phaseId)
   }
 
   checked(phaseId) {
-    if (phaseId == this.selectedphaseId) {
-      return true
+    let checked = false;
+    if (phaseId == this.selectedPhaseId) {
+      checked = true
     } else {
-      return false
+      checked = false
     }
+    return checked
   }
 
   makeModelDataByPhase() {
     let data = []
     this.challengeDetails.phases.map(dt => {
       this.submissionChallengeDetails.map(res => {
-        if (res.phaseId == dt.phaseId && dt.phaseId == this.selectedphaseId) {
+        if (res.phaseId == dt.phaseId && dt.phaseId == this.selectedPhaseId) {
           data.push(res)
         }
       })
@@ -86,7 +87,7 @@ export class ModelComponent {
   }
 
   handlePhaseClick(id) {
-    this.selectedphaseId = id
+    this.selectedPhaseId = id
     this.makeModelDataByPhase()
   }
 
@@ -98,31 +99,26 @@ export class ModelComponent {
         return b.createdAt - a.createdAt
       })
     }
-
     if (criteria == 'Oldest') {
       this.modelData.sort((a, b) => {
         return a.createdAt - b.createdAt
       })
     }
-
     if (criteria == 'End Date') {
       this.modelData.sort((a, b) => {
         return new Date(b.expiryDate).getTime() - new Date(a.expiryDate).getTime()
       })
     }
-
     if (criteria == 'Most Popular') {
       this.modelData.sort((a, b) => {
         return b.acceptedUsersCount - a.acceptedUsersCount
       })
     }
-
     if (criteria == 'Least Popular') {
       this.modelData.sort((a, b) => {
         return a.acceptedUsersCount - b.acceptedUsersCount
       })
     }
-
   }
 
   getBookmarkedSubmission() {

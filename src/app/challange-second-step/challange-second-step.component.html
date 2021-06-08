@@ -22,7 +22,16 @@
           [theme]="theme" [rows]="3" [cols]="cols" aria-label="textarea"></textarea>
       </ibm-label>
       <br />
-      <ibm-number [label]="'Minimum Model Score'" [helperText]="''" [(ngModel)]="phases[i].passingScore"></ibm-number>
+      <!-- <ibm-number [label]="'Minimum Model Score'" [helperText]="''" [(ngModel)]="phases[i].passingScore"></ibm-number> -->
+      <div class="bx--form-item">
+        <div data-numberinput class="bx--number bx--number--light">
+          <label for="number-input0" class="bx--label">Minimum Model Score</label>
+          <div class="bx--number__input-wrapper">
+            <input id="number-input0" type="number" placeholder="0" min="0" max="100"
+              [(ngModel)]="stepTwo.passingScore">
+          </div>
+        </div>
+      </div>
       <br />
     </div>
 
@@ -46,8 +55,13 @@
             <h5>Data Visualisation</h5>
             <p class="drag">An image that represents your Sample data</p>
             <app-drop-image-uploader (goNext)="setDataVisual($event, i)" (uploadFile)="uploadDataVisual()"
-              (filesChange)="onImageSelect($event.target.files)" (onDrop)="onImageSelect($event.target.files)"></app-drop-image-uploader>
+              (filesChange)="onImageSelect($event.target.files)" (onDrop)="onImageSelect($event.target.files)">
+            </app-drop-image-uploader>
             <br />
+            <div class="fileBox">
+              <p style="margin: 5px; font-size: small;">{{getFileName(phases[i].dataVisualFile)}}</p>
+              <p style="margin-top: 5px; margin-left: 50px; cursor: pointer;" (click)="removeDataVisual(i)">x</p>
+            </div>
             <div *ngIf="dataVisualFileError">
               <p><span style="font-size: x-small; color: red">Data visual file required</span></p>
             </div>
@@ -55,8 +69,16 @@
           <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }" style="padding-left: 10px;">
             <h5>Sample Data</h5>
             <p class="drag">Anonymous, available to download for any innovator</p>
-            <app-drop-file-uploader (uploadFile)="uploadSampleData($event)" (getFile)="setSampleData($event)"></app-drop-file-uploader>
+            <app-drop-file-uploader (uploadFile)="uploadSampleData($event, i)" (getFile)="setSampleData($event)">
+            </app-drop-file-uploader>
             <br />
+            <div *ngFor="let sampleFile of phases[i].sampleDataFile; index as j">
+              <div class="fileBox">
+                <p style="margin: 5px; font-size: small;">{{getSampleFileName(sampleFile.path)}}</p>
+                <p style="margin-top: 5px; margin-left: 35px; cursor: pointer;" (click)="removeSampleDataFile(i, j)">x
+                </p>
+              </div>
+            </div>
             <div *ngIf="sampleDataFileError">
               <p><span style="font-size: x-small; color: red">At least 1 sample data file required</span></p>
             </div>
@@ -108,7 +130,8 @@
         <div data-numberinput class="bx--number bx--number--light">
           <label for="number-input0" class="bx--label">Minimum Model Score</label>
           <div class="bx--number__input-wrapper">
-            <input id="number-input0" type="number" placeholder="0" min="0" max="100" [(ngModel)]="stepTwo.passingScore">
+            <input id="number-input0" type="number" placeholder="0" min="0" max="100"
+              [(ngModel)]="stepTwo.passingScore">
           </div>
         </div>
       </div>
@@ -128,8 +151,15 @@
             <h5>Data Visualisation</h5>
             <p class="drag">An image that represents your Sample data</p>
             <app-drop-image-uploader (goNext)="setDataVisual($event, i)" (uploadFile)="uploadDataVisual()"
-              (filesChange)="onImageSelect($event.target.files)" (onDrop)="onImageSelect($event.target.files)"></app-drop-image-uploader>
+              (filesChange)="onImageSelect($event.target.files)" (onDrop)="onImageSelect($event.target.files)">
+            </app-drop-image-uploader>
             <br />
+            <div *ngIf="stepTwo.dataVisualFile.length>0">
+              <div class="fileBox">
+                <p style="margin: 5px; font-size: small;">{{getFileName(stepTwo.dataVisualFile)}}</p>
+                <p style="margin-top: 5px; margin-left: 50px; cursor: pointer;" (click)="removeStepTwoDataVisual()">x</p>
+              </div>
+            </div>
             <div *ngIf="dataVisualFileError">
               <p><span style="font-size: x-small; color: red">Data visual file required</span></p>
             </div>
@@ -137,8 +167,18 @@
           <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }" style="padding-left: 10px;">
             <h5>Sample Data</h5>
             <p class="drag">Anonymous, available to download for any innovator</p>
-            <app-drop-file-uploader (uploadFile)="uploadSampleData($event)" (getFile)="setSampleData($event)"></app-drop-file-uploader>
+            <app-drop-file-uploader (uploadFile)="uploadSampleData($event, i)" (getFile)="setSampleData($event)">
+            </app-drop-file-uploader>
             <br />
+            <div *ngIf="stepTwo.sampleDataFile.length>0">
+              <div *ngFor="let sampleFile of stepTwo.sampleDataFile; index as j">
+                <div class="fileBox">
+                  <p style="margin: 5px; font-size: small;">{{getSampleFileName(sampleFile.path)}}</p>
+                  <p style="margin-top: 5px; margin-left: 35px; cursor: pointer;" (click)="removeStepTwoSampleDataFile(j)">x
+                  </p>
+                </div>
+              </div>
+            </div>
             <div *ngIf="sampleDataFileError">
               <p><span style="font-size: x-small; color: red">At least 1 sample data file required</span></p>
             </div>
