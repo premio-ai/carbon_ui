@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2, Inject, ViewChild, ElementRef } from '@angular/core';
 import { RequestService } from '../request.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Location } from '@angular/common';
+import { Location, DOCUMENT } from '@angular/common';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-insurer',
@@ -9,15 +10,19 @@ import { Location } from '@angular/common';
   styleUrls: ['./insurer.component.scss']
 })
 export class InsurerComponent implements OnInit {
+  @ViewChild("app-insurer", null) divView: ElementRef;
 
   constructor(private requestService: RequestService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private renderer: Renderer2,
+    @Inject(DOCUMENT) document
   ) { }
   challengeId: string
   challengeDetails: any[];
   submissionChallengeDetails: any[];
+
 
   ngOnInit() {
     let userDetails = JSON.parse(localStorage.getItem('userDetails'))
@@ -53,14 +58,46 @@ export class InsurerComponent implements OnInit {
     };
   }
 
+  ngAfterViewInit() {
+    this.activatedRoute.queryParams.subscribe((params) => {
+      // console.log(params, "---params---63")
+      if (params.activeTab && params.activeTab == 'Activity') {
+        // active
+        document.getElementById('n-tab-2').getElementsByTagName('div')[0].style.display = '';
+
+        document.getElementsByClassName('bx--tabs__nav-item')[0].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[2].classList.add('bx--tabs__nav-item--selected')
+
+        //Inactive
+        document.getElementById('n-tab-0').setAttribute('style', `display:none;`);
+        // document.getElementById('n-tab-1').setAttribute('style', `display:none;`);
+        // document.getElementById('n-tab-3').setAttribute('style', `display:none;`);
+        // document.getElementById('n-tab-4').setAttribute('style', `display:none;`);
+      }
+      if (params.activeTab && params.activeTab == 'Model') {
+        // active
+        document.getElementById('n-tab-4').getElementsByTagName('div')[0].style.display = '';
+
+        document.getElementsByClassName('bx--tabs__nav-item')[0].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[4].classList.add('bx--tabs__nav-item--selected')
+
+        //Inactive
+        document.getElementById('n-tab-0').setAttribute('style', `display:none;`);
+        document.getElementById('n-tab-1').setAttribute('style', `display:none;`);
+        document.getElementById('n-tab-2').setAttribute('style', `display:none;`);
+        document.getElementById('n-tab-3').setAttribute('style', `display:none;`);
+      }
+    });
+  }
+
   getChallengeDetails(id) {
     let url = 'challenge/' + id;
     this.requestService.get(url, null).toPromise().then(data => {
       this.challengeDetails = data;
     }).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+      localStorage.clear();
+      this.router.navigateByUrl('login')
+    })
   }
 
   getSubmissionChallenge(id) {
@@ -68,9 +105,9 @@ export class InsurerComponent implements OnInit {
     this.requestService.get(url, null).toPromise().then(data => {
       this.submissionChallengeDetails = data;
     }).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+      localStorage.clear();
+      this.router.navigateByUrl('login')
+    })
   }
 
   navigateBack() {

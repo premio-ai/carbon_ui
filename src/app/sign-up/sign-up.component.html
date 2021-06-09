@@ -24,17 +24,26 @@
         <input id="text-input-3" type="text" class="bx--text-input" [(ngModel)]="signupDetails.fullName"
           placeholder="e.g. John Doe" />
       </div>
+      <div *ngIf="fullNameError">
+        <p><span style="font-size: x-small; color: red">Please enter your full name</span></p>
+      </div>
 
       <div class="bx--form-item">
         <label for="text-input-3" class="bx--label">Email</label>
         <input id="text-input-3" type="text" class="bx--text-input" [(ngModel)]="signupDetails.email"
           placeholder="e.g. username@ibm.com" />
       </div>
+      <div *ngIf="emailError">
+        <p><span style="font-size: x-small; color: red">Please enter a valid email</span></p>
+      </div>
 
       <div class="bx--form-item">
         <label for="text-input-3" class="bx--label">Password</label>
         <input id="text-input-3" type="password" class="bx--text-input" [(ngModel)]="signupDetails.password"
           placeholder="********" />
+      </div>
+      <div *ngIf="passwordError">
+        <p><span style="font-size: x-small; color: red">Please enter a valid password</span></p>
       </div>
 
       <!-- <div class="bx--form-item">
@@ -45,11 +54,11 @@
       <div class="bx--form-item">
         <label for="text-input-3" class="bx--label">Register As</label>
         <ibm-dropdown [label]="Min" [helperText]="helperText" [size]="size" [invalid]="invalid"
-          [invalidText]="invalidText" [theme]="theme" placeholder="Search User Role" (selected)="selected($event)">
+          [invalidText]="invalidText" [theme]="theme" placeholder="Select User Role" (selected)="selected($event)">
           <ibm-dropdown-list [items]="registerAs"></ibm-dropdown-list>
         </ibm-dropdown>
-        <div *ngIf="programmingLanguageError">
-          <p><span style="font-size: x-small; color: red">Programming language is required</span></p>
+        <div *ngIf="roleError">
+          <p><span style="font-size: x-small; color: red">Please select a user role</span></p>
         </div>
       </div>
 
@@ -58,15 +67,21 @@
         <input id="text-input-3" type="text" class="bx--text-input" [(ngModel)]="signupDetails.bio"
           placeholder="I am a..." />
       </div>
+      <div *ngIf="bioError">
+        <p><span style="font-size: x-small; color: red">Please enter your bio</span></p>
+      </div>
 
       <div class="bx--form-item">
         <label for="text-input-3" class="bx--label">Experience</label>
         <input id="text-input-3" type="text" class="bx--text-input" [(ngModel)]="signupDetails.experience"
           placeholder="in years" />
       </div>
+      <div *ngIf="experienceError">
+        <p><span style="font-size: x-small; color: red">Please enter a valid experience</span></p>
+      </div>
       <br />
       <div class="bx--form-item">
-        <button class="bx--btn bx--btn--primary" type="button" (click)="signUp()">Sign Up</button>
+        <button class="bx--btn bx--btn--primary" type="button" (click)="validate()">Sign Up</button>
       </div>
       <div class="bx--form-item">
         <p>Already have an account. <a style="cursor: pointer;" (click)="login()">Sign-In</a> instead</p>

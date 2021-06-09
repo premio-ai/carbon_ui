@@ -82,12 +82,12 @@
 								<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
 									[condensed]="rowCondensed">
 									<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
-										<button class="view" [ibmButton]="ibmButton" [size]="size">
+										<button class="view" [ibmButton]="ibmButton" [size]="size" (click)="switchToActivity($event)" >
 											View Activity
 										</button>
 									</div>
 									<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
-										<button class="model" [ibmButton]="ibmButton" [size]="size">
+										<button class="model" [ibmButton]="ibmButton" [size]="size" (click)="switchToModel($event)">
 											View Model
 										</button>
 									</div>

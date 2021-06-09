@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -103,6 +103,14 @@ export class OverviewComponent implements OnInit {
 
   viewModel(id) {
     this.router.navigateByUrl('invmodel-view/' + id)
+  }
+
+  switchToActivity() {
+    this.router.navigateByUrl('challenge/' + this.challengeDetails._id + '?activeTab="Activity"')
+  }
+
+  switchToModel() {
+    this.router.navigateByUrl('challenge/' + this.challengeDetails._id + '?activeTab="Activity"')
   }
 
 }

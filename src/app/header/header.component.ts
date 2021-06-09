@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
 		this.challengeCounts = 0;
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
 		if (this.userDetails) {
-			this.getNotifications();
+			// this.getNotifications();
 			this.getChallengeCounts();
 			this.getInnovatorChallangeCount();
 		}

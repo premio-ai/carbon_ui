@@ -1,3 +1,4 @@
+import { temporaryDeclaration } from '@angular/compiler/src/compiler_util/expression_converter';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
@@ -56,6 +57,14 @@ export class ActivityComponent implements OnInit {
 
   initialPhase() {
     this.selectedPhaseId = this.challengeDetails.phases[0].phaseId
+
+    let tempData = []
+    this.submissionChallengeDetails.map( dt => {
+      if (dt.phaseId == this.selectedPhaseId) {
+        tempData.push(dt)
+      }
+    })
+    this.selectedPhase = tempData
     this.trainingModels()
   }
 
@@ -65,6 +74,14 @@ export class ActivityComponent implements OnInit {
     this.modelUnderTraining = 0
 
     this.selectedPhaseId = phaseId
+
+    let tempData = []
+    this.submissionChallengeDetails.map( dt => {
+      if (dt.phaseId == this.selectedPhaseId) {
+        tempData.push(dt)
+      }
+    })
+    this.selectedPhase = tempData
     this.trainingModels()
   }
 
@@ -133,5 +150,76 @@ export class ActivityComponent implements OnInit {
       })
     }
   }
+
+  data1 = [
+		{
+			"group": "Train Loss",
+			"iterationValue": "250",
+			"lossValue": 2,
+			"surplus": 1823.656992324374
+		},
+		{
+			"group": "Train Loss",
+			"iterationValue": "380",
+			"lossValue": 3,
+			"surplus": 600510781.1304932
+		},
+		{
+			"group": "Train Loss",
+			"iterationValue": "550",
+			"lossValue": 4,
+			"surplus": 540820524.4244617
+		},
+		{
+			"group": "Train Loss",
+			"iterationValue": "590",
+			"lossValue": 5.5,
+			"surplus": 815336175.5584991
+		},
+		{
+			"group": "Train Loss",
+			"iterationValue": "640",
+			"lossValue": 5,
+			"surplus": 430635742.9919021
+		}
+	];
+	options1 = {
+		"title": "Model Submissions Over Time",
+		"color": {
+			"pairing": {
+				"option": 2
+			},
+			"scale": {
+				"Qty": "#925699",
+				"Misc": "#525669"
+			}
+		},
+		grid: { x: { enabled: false } },
+		"axes": {
+			"bottom": {
+				// "title": "Iteration",
+				"mapsTo": "iterationValue",
+				"scaleType": "linear"
+			},
+			"left": {
+				// "title": "Loss",
+				"mapsTo": "lossValue",
+				"scaleType": "linear"
+			}
+		},
+		"curve": "curveMonotoneX",
+		"height": "400px",
+
+		getFillColor: (group: String) => {
+			if (group == 'Train Loss') {
+				return 'green';
+			}
+		},
+		getStrokeColor: (group: String) => {
+			if (group == 'Train Loss') {
+				return 'green';
+			}
+		}
+	};
 
 }

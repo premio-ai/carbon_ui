@@ -23,16 +23,22 @@
         <label for="text-input-3" class="bx--label">Username</label>
         <input id="text-input-3" type="text" class="bx--text-input" [(ngModel)]="username" placeholder="username@ibm.com" />
       </div>
+      <div *ngIf="emailError">
+        <p><span style="font-size: x-small; color: red">Please enter a valid registered email</span></p>
+    </div>
       <br />
       <br />
       <div class="bx--form-item">
         <label for="text-input-3" class="bx--label">Password</label>
         <input id="text-input-3" type="password" class="bx--text-input" [(ngModel)]="password" placeholder="password" />
       </div>
+      <div *ngIf="passwordError">
+        <p><span style="font-size: x-small; color: red">Please enter a valid password</span></p>
+      </div>
 
       <br />
       <div class="bx--form-item">
-        <button class="bx--btn bx--btn--primary" type="button" (click)="login()">Sign In</button>
+        <button class="bx--btn bx--btn--primary" type="button" (click)="validate()">Sign In</button>
       </div>
       <div class="bx--form-item">
         <p>Do not have an account. <a style="cursor: pointer;" (click)="signUp()">Sign Up</a></p>

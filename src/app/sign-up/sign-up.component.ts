@@ -24,6 +24,13 @@ export class SignUpComponent implements OnInit {
     experience: String
   }
   toasterMsg: boolean
+  fullNameError: boolean
+  emailError: boolean
+  passwordError: boolean
+  roleError: boolean
+  bioError: boolean
+  experienceError: boolean
+
 
   ngOnInit() {
     this.toasterMsg = false;
@@ -55,6 +62,45 @@ export class SignUpComponent implements OnInit {
       })
     } else {
       this.showToaster();
+    }
+  }
+
+  validate() {
+    let emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    if (this.signupDetails.fullName.length > 3 && this.signupDetails.email.match(emailReg) && this.signupDetails.password.length > 0
+      && this.signupDetails.role.length>0 && this.signupDetails.bio.length>0 && this.signupDetails.experience.length>0) {
+        this.signUp();
+    } else {
+      if (this.signupDetails.fullName.length > 3) {
+        this.fullNameError = false
+      } else {
+        this.fullNameError = true
+      }
+      if (!this.signupDetails.email.match(emailReg) || this.signupDetails.email.length == 0) {
+        this.emailError = true
+      } else {
+        this.emailError = false
+      }
+      if (this.signupDetails.password.length > 0) {
+        this.passwordError = false
+      } else {
+        this.passwordError = true
+      }
+      if (this.signupDetails.role.length > 0) {
+        this.roleError = false
+      } else {
+        this.roleError = true
+      }
+      if (this.signupDetails.bio.length > 0) {
+        this.bioError = false
+      } else {
+        this.bioError = true
+      }
+      if (this.signupDetails.experience.length > 0) {
+        this.experienceError = false
+      } else {
+        this.experienceError = true
+      }
     }
   }
 
