@@ -1,8 +1,7 @@
-import { Component, OnInit, Renderer2, Inject, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../request.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Location, DOCUMENT } from '@angular/common';
-import { element } from 'protractor';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-insurer',
@@ -10,14 +9,11 @@ import { element } from 'protractor';
   styleUrls: ['./insurer.component.scss']
 })
 export class InsurerComponent implements OnInit {
-  @ViewChild("app-insurer", null) divView: ElementRef;
 
   constructor(private requestService: RequestService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private location: Location,
-    private renderer: Renderer2,
-    @Inject(DOCUMENT) document
   ) { }
   challengeId: string
   challengeDetails: any[];
@@ -58,36 +54,141 @@ export class InsurerComponent implements OnInit {
     };
   }
 
-  ngAfterViewInit() {
-    this.activatedRoute.queryParams.subscribe((params) => {
-      // console.log(params, "---params---63")
-      if (params.activeTab && params.activeTab == 'Activity') {
-        // active
-        document.getElementById('n-tab-2').getElementsByTagName('div')[0].style.display = '';
+  // ngAfterViewInit() {
+  //   this.activatedRoute.queryParams.subscribe((params) => {
+  //     // console.log(params, "---params---63")
+  //     if (params.activeTab && params.activeTab == 'Activity') {
+  //       // active
+  //       document.getElementById('n-tab-2').getElementsByTagName('div')[0].style.display = '';
 
-        document.getElementsByClassName('bx--tabs__nav-item')[0].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[2].classList.add('bx--tabs__nav-item--selected')
+  //       document.getElementsByClassName('bx--tabs__nav-item')[0].classList.remove('bx--tabs__nav-item--selected')
+  //       document.getElementsByClassName('bx--tabs__nav-item')[2].classList.add('bx--tabs__nav-item--selected')
 
-        //Inactive
-        document.getElementById('n-tab-0').setAttribute('style', `display:none;`);
-        // document.getElementById('n-tab-1').setAttribute('style', `display:none;`);
-        // document.getElementById('n-tab-3').setAttribute('style', `display:none;`);
-        // document.getElementById('n-tab-4').setAttribute('style', `display:none;`);
-      }
-      if (params.activeTab && params.activeTab == 'Model') {
-        // active
-        document.getElementById('n-tab-4').getElementsByTagName('div')[0].style.display = '';
+  //       //Inactive
+  //       document.getElementById('n-tab-0').setAttribute('style', `display:none;`);
+  //       // document.getElementById('n-tab-1').setAttribute('style', `display:none;`);
+  //       // document.getElementById('n-tab-3').setAttribute('style', `display:none;`);
+  //       // document.getElementById('n-tab-4').setAttribute('style', `display:none;`);
+  //     }
+  //     if (params.activeTab && params.activeTab == 'Model') {
+  //       // active
+  //       document.getElementById('n-tab-4').getElementsByTagName('div')[0].style.display = '';
 
-        document.getElementsByClassName('bx--tabs__nav-item')[0].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[4].classList.add('bx--tabs__nav-item--selected')
+  //       document.getElementsByClassName('bx--tabs__nav-item')[0].classList.remove('bx--tabs__nav-item--selected')
+  //       document.getElementsByClassName('bx--tabs__nav-item')[4].classList.add('bx--tabs__nav-item--selected')
 
-        //Inactive
-        document.getElementById('n-tab-0').setAttribute('style', `display:none;`);
+  //       //Inactive
+  //       document.getElementById('n-tab-0').setAttribute('style', `display:none;`);
+  //       document.getElementById('n-tab-1').setAttribute('style', `display:none;`);
+  //       document.getElementById('n-tab-2').setAttribute('style', `display:none;`);
+  //       document.getElementById('n-tab-3').setAttribute('style', `display:none;`);
+  //     }
+  //   });
+  // }
+
+  checkClick(e) {
+    switch (e.target.outerText) {
+      case 'Overview':
+        //Heading
+        document.getElementsByClassName('bx--tabs__nav-item')[0].classList.add('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[1].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[2].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[3].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[4].classList.remove('bx--tabs__nav-item--selected')
+        //Content
+        document.getElementById('n-tab-0').setAttribute('style', '');
         document.getElementById('n-tab-1').setAttribute('style', `display:none;`);
         document.getElementById('n-tab-2').setAttribute('style', `display:none;`);
         document.getElementById('n-tab-3').setAttribute('style', `display:none;`);
-      }
-    });
+        document.getElementById('n-tab-4').setAttribute('style', `display:none;`);
+        break;
+      case 'Data':
+        //Heading
+        document.getElementsByClassName('bx--tabs__nav-item')[0].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[1].classList.add('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[2].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[3].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[4].classList.remove('bx--tabs__nav-item--selected')
+        //Content
+        document.getElementById('n-tab-0').setAttribute('style', `display:none;`);
+        document.getElementById('n-tab-1').setAttribute('style', '');
+        document.getElementById('n-tab-2').setAttribute('style', `display:none;`);
+        document.getElementById('n-tab-3').setAttribute('style', `display:none;`);
+        document.getElementById('n-tab-4').setAttribute('style', `display:none;`);
+        break;
+      case 'Activity':
+        //Heading
+        document.getElementsByClassName('bx--tabs__nav-item')[0].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[1].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[2].classList.add('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[3].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[4].classList.remove('bx--tabs__nav-item--selected')
+        //Content
+        document.getElementById('n-tab-0').setAttribute('style', `display:none;`);
+        document.getElementById('n-tab-1').setAttribute('style', `display:none;`);
+        document.getElementById('n-tab-2').setAttribute('style', '');
+        document.getElementById('n-tab-3').setAttribute('style', `display:none;`);
+        document.getElementById('n-tab-4').setAttribute('style', `display:none;`);
+        break;
+      case 'View Activity':
+        //Heading
+        document.getElementsByClassName('bx--tabs__nav-item')[0].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[1].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[2].classList.add('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[3].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[4].classList.remove('bx--tabs__nav-item--selected')
+        //Content
+        document.getElementById('n-tab-0').setAttribute('style', `display:none;`);
+        document.getElementById('n-tab-1').setAttribute('style', `display:none;`);
+        document.getElementById('n-tab-2').setAttribute('style', '');
+        document.getElementById('n-tab-3').setAttribute('style', `display:none;`);
+        document.getElementById('n-tab-4').setAttribute('style', `display:none;`);
+        break;
+      case 'Discussion':
+        //Heading
+        document.getElementsByClassName('bx--tabs__nav-item')[0].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[1].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[2].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[3].classList.add('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[4].classList.remove('bx--tabs__nav-item--selected')
+        //Content
+        document.getElementById('n-tab-0').setAttribute('style', `display:none;`);
+        document.getElementById('n-tab-1').setAttribute('style', `display:none;`);
+        document.getElementById('n-tab-2').setAttribute('style', `display:none;`);
+        document.getElementById('n-tab-3').setAttribute('style', '');
+        document.getElementById('n-tab-4').setAttribute('style', `display:none;`);
+        break;
+        case 'View Model':
+          //Heading
+          document.getElementsByClassName('bx--tabs__nav-item')[0].classList.remove('bx--tabs__nav-item--selected')
+          document.getElementsByClassName('bx--tabs__nav-item')[1].classList.remove('bx--tabs__nav-item--selected')
+          document.getElementsByClassName('bx--tabs__nav-item')[2].classList.remove('bx--tabs__nav-item--selected')
+          document.getElementsByClassName('bx--tabs__nav-item')[3].classList.remove('bx--tabs__nav-item--selected')
+          document.getElementsByClassName('bx--tabs__nav-item')[4].classList.add('bx--tabs__nav-item--selected')
+          //Content
+          document.getElementById('n-tab-0').setAttribute('style', `display:none;`);
+          document.getElementById('n-tab-1').setAttribute('style', `display:none;`);
+          document.getElementById('n-tab-2').setAttribute('style', `display:none;`);
+          document.getElementById('n-tab-3').setAttribute('style', `display:none;`);
+          document.getElementById('n-tab-4').setAttribute('style', '');
+          break;
+                                  // case 'Models':
+                                  //   //Heading
+                                  //   document.getElementsByClassName('bx--tabs__nav-item')[0].classList.remove('bx--tabs__nav-item--selected')
+                                  //   document.getElementsByClassName('bx--tabs__nav-item')[1].classList.remove('bx--tabs__nav-item--selected')
+                                  //   document.getElementsByClassName('bx--tabs__nav-item')[2].classList.remove('bx--tabs__nav-item--selected')
+                                  //   document.getElementsByClassName('bx--tabs__nav-item')[3].classList.remove('bx--tabs__nav-item--selected')
+                                  //   document.getElementsByClassName('bx--tabs__nav-item')[4].classList.add('bx--tabs__nav-item--selected')
+                                  //   //Content
+                                  //   document.getElementById('n-tab-0').setAttribute('style', `display:none;`);
+                                  //   document.getElementById('n-tab-1').setAttribute('style', `display:none;`);
+                                  //   document.getElementById('n-tab-2').setAttribute('style', `display:none;`);
+                                  //   document.getElementById('n-tab-3').setAttribute('style', `display:none;`);
+                                  //   document.getElementById('n-tab-4').setAttribute('style', '');
+                                  //   break;
+      default:
+        break;
+    }
   }
 
   getChallengeDetails(id) {
