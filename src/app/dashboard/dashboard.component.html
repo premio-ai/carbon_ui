@@ -7,11 +7,10 @@
 
 		<div style="display: flex;">
 			<h1 class="heading">Activity Dashboard</h1>
-			<div style="width: 222px;margin-left: auto;position: relative;top: 51px;">
-				<ibm-dropdown [label]="'Sort by'" placeholder="select" (selected)="sortSelect($event)">
-					<ibm-dropdown-list [items]="sorting"></ibm-dropdown-list>
-				</ibm-dropdown>
-			</div>
+			<ibm-dropdown [label]="'Sort by'" placeholder="select" (selected)="sortSelect($event)"
+				style="width: 222px;margin-left: auto;position: relative;top: 51px; z-index: 99;">
+				<ibm-dropdown-list [items]="sorting"></ibm-dropdown-list>
+			</ibm-dropdown>
 		</div>
 		<ibm-tabs [followFocus]="true" [isNavigation]="false" [cacheActive]="true">
 			<ibm-tab heading="Active">

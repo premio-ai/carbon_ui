@@ -1,9 +1,7 @@
-import { temporaryDeclaration } from '@angular/compiler/src/compiler_util/expression_converter';
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import * as XLSX from 'xlsx';
-import { RequestService } from '../request.service';
 
 @Component({
   selector: 'app-activity',
@@ -16,20 +14,21 @@ export class ActivityComponent implements OnInit {
   @Input() challengeDetails: any;
   constructor(
     private router: Router,
-    private requestService: RequestService
+    private activatedRoute: ActivatedRoute
   ) { }
   selectedPhase: any[] = [];
-  phaseNo: any;
+  prevPhaseNo: number;
+  currentPhaseNo: number;
   phaseOneSubmission: any;
   sorting: any[];
   modelUnderTraining: number;
   passedModelsCount: number;
   selectedPhaseId: String;
 
-  ngOnInit() {
+  async ngOnInit() {
     this.modelUnderTraining = 0
     this.passedModelsCount = 0
-    this.phaseNo = 0
+    this.currentPhaseNo = 0
   }
 
   ngOnChanges() {
@@ -57,9 +56,9 @@ export class ActivityComponent implements OnInit {
 
   initialPhase() {
     this.selectedPhaseId = this.challengeDetails.phases[0].phaseId
-
+    document.getElementsByClassName('bx--content-switcher-btn')[this.currentPhaseNo].classList.add('bx--content-switcher--selected')
     let tempData = []
-    this.submissionChallengeDetails.map( dt => {
+    this.submissionChallengeDetails.map(dt => {
       if (dt.phaseId == this.selectedPhaseId) {
         tempData.push(dt)
       }
@@ -69,14 +68,17 @@ export class ActivityComponent implements OnInit {
   }
 
   selectPhase(phaseId, phaseNo) {
-    this.phaseNo = phaseNo
+    this.prevPhaseNo = this.currentPhaseNo
+    this.currentPhaseNo = phaseNo
     this.passedModelsCount = 0
     this.modelUnderTraining = 0
 
     this.selectedPhaseId = phaseId
+    document.getElementsByClassName('bx--content-switcher-btn')[this.prevPhaseNo].classList.remove('bx--content-switcher--selected')
+    document.getElementsByClassName('bx--content-switcher-btn')[this.currentPhaseNo].classList.add('bx--content-switcher--selected')
 
     let tempData = []
-    this.submissionChallengeDetails.map( dt => {
+    this.submissionChallengeDetails.map(dt => {
       if (dt.phaseId == this.selectedPhaseId) {
         tempData.push(dt)
       }
@@ -98,7 +100,7 @@ export class ActivityComponent implements OnInit {
 
   modelPassed() {
     this.selectedPhase.find(dt => {
-      if (dt.score >= this.challengeDetails.phases[this.phaseNo].passingScore) {
+      if (dt.score >= this.challengeDetails.phases[this.currentPhaseNo].passingScore) {
         this.passedModelsCount += 1
       }
     })
@@ -152,74 +154,74 @@ export class ActivityComponent implements OnInit {
   }
 
   data1 = [
-		{
-			"group": "Train Loss",
-			"iterationValue": "250",
-			"lossValue": 2,
-			"surplus": 1823.656992324374
-		},
-		{
-			"group": "Train Loss",
-			"iterationValue": "380",
-			"lossValue": 3,
-			"surplus": 600510781.1304932
-		},
-		{
-			"group": "Train Loss",
-			"iterationValue": "550",
-			"lossValue": 4,
-			"surplus": 540820524.4244617
-		},
-		{
-			"group": "Train Loss",
-			"iterationValue": "590",
-			"lossValue": 5.5,
-			"surplus": 815336175.5584991
-		},
-		{
-			"group": "Train Loss",
-			"iterationValue": "640",
-			"lossValue": 5,
-			"surplus": 430635742.9919021
-		}
-	];
-	options1 = {
-		"title": "Model Submissions Over Time",
-		"color": {
-			"pairing": {
-				"option": 2
-			},
-			"scale": {
-				"Qty": "#925699",
-				"Misc": "#525669"
-			}
-		},
-		grid: { x: { enabled: false } },
-		"axes": {
-			"bottom": {
-				// "title": "Iteration",
-				"mapsTo": "iterationValue",
-				"scaleType": "linear"
-			},
-			"left": {
-				// "title": "Loss",
-				"mapsTo": "lossValue",
-				"scaleType": "linear"
-			}
-		},
-		"curve": "curveMonotoneX",
-		"height": "400px",
+    {
+      "group": "Train Loss",
+      "iterationValue": "250",
+      "lossValue": 2,
+      "surplus": 1823.656992324374
+    },
+    {
+      "group": "Train Loss",
+      "iterationValue": "380",
+      "lossValue": 3,
+      "surplus": 600510781.1304932
+    },
+    {
+      "group": "Train Loss",
+      "iterationValue": "550",
+      "lossValue": 4,
+      "surplus": 540820524.4244617
+    },
+    {
+      "group": "Train Loss",
+      "iterationValue": "590",
+      "lossValue": 5.5,
+      "surplus": 815336175.5584991
+    },
+    {
+      "group": "Train Loss",
+      "iterationValue": "640",
+      "lossValue": 5,
+      "surplus": 430635742.9919021
+    }
+  ];
+  options1 = {
+    "title": "Model Submissions Over Time",
+    "color": {
+      "pairing": {
+        "option": 2
+      },
+      "scale": {
+        "Qty": "#925699",
+        "Misc": "#525669"
+      }
+    },
+    grid: { x: { enabled: false } },
+    "axes": {
+      "bottom": {
+        // "title": "Iteration",
+        "mapsTo": "iterationValue",
+        "scaleType": "linear"
+      },
+      "left": {
+        // "title": "Loss",
+        "mapsTo": "lossValue",
+        "scaleType": "linear"
+      }
+    },
+    "curve": "curveMonotoneX",
+    "height": "400px",
 
-		getFillColor: (group: String) => {
-			if (group == 'Train Loss') {
-				return 'green';
-			}
-		},
-		getStrokeColor: (group: String) => {
-			if (group == 'Train Loss') {
-				return 'green';
-			}
-		}
-	};
+    getFillColor: (group: String) => {
+      if (group == 'Train Loss') {
+        return 'green';
+      }
+    },
+    getStrokeColor: (group: String) => {
+      if (group == 'Train Loss') {
+        return 'green';
+      }
+    }
+  };
 
 }

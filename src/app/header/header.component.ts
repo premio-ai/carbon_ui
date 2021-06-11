@@ -22,13 +22,15 @@ export class HeaderComponent implements OnInit {
 	activeChallenges: any[];
 	submittedActiveChallenges: any[] = [];
 	bookmarkedChallenges: any[] = []
+	showNotification: boolean;
 
 	ngOnInit() {
 		this.notificationLoading = true;
+		this.showNotification = true;
 		this.challengeCounts = 0;
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
 		if (this.userDetails) {
-			// this.getNotifications();
+			this.getNotifications();
 			this.getChallengeCounts();
 			this.getInnovatorChallangeCount();
 		}
@@ -108,6 +110,10 @@ export class HeaderComponent implements OnInit {
 		setTimeout(() => {
 			this.getNotifications();
 		}, Number((60 + Math.random()*10).toFixed(0)) *1000 );
+	}
+
+	clearNotification() {
+		this.showNotification = false
 	}
 
 	logoRoute() {

@@ -1,9 +1,4 @@
 <br />
-<!-- <ibm-content-switcher (selected)="selected($event)">
-	<div class="content-switcher" *ngFor="let phase of challengeDetails?.phases; index as i">
-		<button ibmContentOption name="phase{{i+1}}" (click)="selectPhase(phase.phaseId, i+1)" style="width: fit-content;">Phase {{i+1}}</button>
-	</div>
-</ibm-content-switcher> -->
 <ibm-content-switcher (selected)="selected($event)">
   <button ibmContentOption name="phase{{ i }}" *ngFor="let phase of challengeDetails?.phases; index as i"
     (click)="selectPhase(phase.phaseId, i)" style="width: 11%;">
@@ -13,8 +8,7 @@
 <br />
 <br />
 
-<!-- <div *ngIf="phaseNo"> -->
-  <h3>Phase {{ phaseNo }}</h3>
+  <h3>Phase {{ currentPhaseNo }}</h3>
   <br />
   <br />
   <div ibmGrid [condensed]="gridCondensed">
@@ -54,7 +48,7 @@
 
   <ibm-table-container>
     <ibm-table-header>
-      <p>Phase {{ phaseNo }} Activity</p>
+      <p>Phase {{ currentPhaseNo }} Activity</p>
     </ibm-table-header>
     <ibm-table-toolbar >
       <ibm-table-toolbar-content >

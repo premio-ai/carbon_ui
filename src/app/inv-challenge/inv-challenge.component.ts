@@ -25,9 +25,9 @@ export class InvChallengeComponent implements OnInit {
   pageNo: number;
 
   ngOnInit() {
-    this.pageNo = 0;
+    this.pageNo = 1;
     this.pageOffset = 0;
-    this.totalPage = 0;
+    this.totalPage = 1;
 
     let userDetails = JSON.parse(localStorage.getItem('userDetails'))
     if (userDetails && userDetails._id) {
@@ -141,15 +141,15 @@ export class InvChallengeComponent implements OnInit {
   prevPage() {
     if (this.pageNo > 1) {
       this.pageNo--;
-      this.pageOffset = this.pageNo * 10;
+      this.pageOffset = (this.pageNo-1) * 10;
       this.getAllActiveChallanges(this.pageOffset)
     }
   }
 
   nextPage() {
-    if (this.pageNo < (this.totalPage - 1)) {
+    if (this.pageNo < (this.totalPage)) {
       this.pageNo++;
-      this.pageOffset = this.pageNo * 10;
+      this.pageOffset = (this.pageNo-1) * 10;
       this.getAllActiveChallanges(this.pageOffset)
     }
   }

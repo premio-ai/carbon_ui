@@ -5,22 +5,19 @@
 		<p class="para">Welcome back, {{userDetails.fullName}}</p>
 		<div style="display: flex;">
 			<h1 class="heading">Activity Dashboard</h1>
-			<div style="width: 222px;margin-left: auto;position: relative;top: 45px;left: -14px;">
-				<ibm-dropdown [label]="'Sort by'" [helperText]="helperText" [size]="size" [invalid]="invalid"
-					[invalidText]="invalidText" [theme]="theme" placeholder="select" [disabled]="false"
-					(selected)="sortSelect($event)">
-					<ibm-dropdown-list [items]="sorting"></ibm-dropdown-list>
-				</ibm-dropdown>
-			</div>
+			<ibm-dropdown [label]="'Sort by'" placeholder="select" [disabled]="false" (selected)="sortSelect($event)"
+				style="width: 222px;margin-left: auto;position: relative;top: 45px;left: -14px; z-index: 99;">
+				<ibm-dropdown-list [items]="sorting"></ibm-dropdown-list>
+			</ibm-dropdown>
 		</div>
 		<ibm-tabs [followFocus]="true" [isNavigation]="false" [cacheActive]="true">
-			<br/><br/><br/>
+			<br /><br /><br />
 			<ibm-tab heading="Active">
 				<div style="display: grid;grid-template-columns: repeat(3,minmax(0,1fr)) ;gap: 10px;">
 					<div class="custom-class-example" style="width: 100%;"
 						*ngFor="let activeChallenge of submittedActiveChallenges">
 						<app-inv-challenge-tile [challenge]="activeChallenge" [submissionRanking]="submissionRanking"
-						[submittedChallenges]="submittedChallenges" ></app-inv-challenge-tile>
+							[submittedChallenges]="submittedChallenges"></app-inv-challenge-tile>
 					</div>
 				</div>
 			</ibm-tab>
@@ -29,7 +26,7 @@
 					<div class="custom-class-example" style="width: 32%;"
 						*ngFor="let pastChallenge of submittedPastChallenges">
 						<app-inv-challenge-tile [challenge]="pastChallenge" [submissionRanking]="submissionRanking"
-						[submittedChallenges]="submittedChallenges" ></app-inv-challenge-tile>
+							[submittedChallenges]="submittedChallenges"></app-inv-challenge-tile>
 					</div>
 				</div>
 			</ibm-tab>
@@ -37,8 +34,9 @@
 				<div style="display: flex;flex-wrap: wrap;gap: 10px;">
 					<div class="custom-class-example" style="width: 32%;"
 						*ngFor="let bookmarkedChallenge of bookmarkedChallenges">
-						<app-inv-challenge-tile [challenge]="bookmarkedChallenge" [submissionRanking]="submissionRanking"
-						[submittedChallenges]="submittedChallenges" ></app-inv-challenge-tile>
+						<app-inv-challenge-tile [challenge]="bookmarkedChallenge"
+							[submissionRanking]="submissionRanking" [submittedChallenges]="submittedChallenges">
+						</app-inv-challenge-tile>
 					</div>
 				</div>
 			</ibm-tab>

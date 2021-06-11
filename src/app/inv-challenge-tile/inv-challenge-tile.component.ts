@@ -62,12 +62,12 @@ export class InvChallengeTileComponent implements OnInit {
 
   getPlace(challengeId) {
     if (this.submissionRanking) {
-      let data = this.submissionRanking.find( dt => {
+      let data = this.submissionRanking.find(dt => {
         if (dt.challengeId == challengeId) {
           return dt
         }
       })
-  
+
       if (data) {
         if (data.rank == 1) {
           return '1st place';

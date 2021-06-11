@@ -16,7 +16,7 @@ export class InsurerComponent implements OnInit {
     private location: Location,
   ) { }
   challengeId: string
-  challengeDetails: any[];
+  challengeDetails: any;
   submissionChallengeDetails: any[];
 
 
@@ -54,39 +54,26 @@ export class InsurerComponent implements OnInit {
     };
   }
 
-  // ngAfterViewInit() {
-  //   this.activatedRoute.queryParams.subscribe((params) => {
-  //     // console.log(params, "---params---63")
-  //     if (params.activeTab && params.activeTab == 'Activity') {
-  //       // active
-  //       document.getElementById('n-tab-2').getElementsByTagName('div')[0].style.display = '';
-
-  //       document.getElementsByClassName('bx--tabs__nav-item')[0].classList.remove('bx--tabs__nav-item--selected')
-  //       document.getElementsByClassName('bx--tabs__nav-item')[2].classList.add('bx--tabs__nav-item--selected')
-
-  //       //Inactive
-  //       document.getElementById('n-tab-0').setAttribute('style', `display:none;`);
-  //       // document.getElementById('n-tab-1').setAttribute('style', `display:none;`);
-  //       // document.getElementById('n-tab-3').setAttribute('style', `display:none;`);
-  //       // document.getElementById('n-tab-4').setAttribute('style', `display:none;`);
-  //     }
-  //     if (params.activeTab && params.activeTab == 'Model') {
-  //       // active
-  //       document.getElementById('n-tab-4').getElementsByTagName('div')[0].style.display = '';
-
-  //       document.getElementsByClassName('bx--tabs__nav-item')[0].classList.remove('bx--tabs__nav-item--selected')
-  //       document.getElementsByClassName('bx--tabs__nav-item')[4].classList.add('bx--tabs__nav-item--selected')
-
-  //       //Inactive
-  //       document.getElementById('n-tab-0').setAttribute('style', `display:none;`);
-  //       document.getElementById('n-tab-1').setAttribute('style', `display:none;`);
-  //       document.getElementById('n-tab-2').setAttribute('style', `display:none;`);
-  //       document.getElementById('n-tab-3').setAttribute('style', `display:none;`);
-  //     }
-  //   });
-  // }
-
   checkClick(e) {
+    let overviewId = ''
+    let dataId = ''
+    let activityId = ''
+    let discussionId = ''
+    let modelId = ''
+    if (document.getElementById('n-tab-0')) {
+      overviewId = 'n-tab-0'
+      dataId = 'n-tab-1'
+      activityId = 'n-tab-2'
+      discussionId = 'n-tab-3'
+      modelId = 'n-tab-4'
+    } else {
+      overviewId = 'n-tab-2'
+      dataId = 'n-tab-3'
+      activityId = 'n-tab-4'
+      discussionId = 'n-tab-5'
+      modelId = 'n-tab-6'
+    }
+
     switch (e.target.outerText) {
       case 'Overview':
         //Heading
@@ -96,11 +83,11 @@ export class InsurerComponent implements OnInit {
         document.getElementsByClassName('bx--tabs__nav-item')[3].classList.remove('bx--tabs__nav-item--selected')
         document.getElementsByClassName('bx--tabs__nav-item')[4].classList.remove('bx--tabs__nav-item--selected')
         //Content
-        document.getElementById('n-tab-0').setAttribute('style', '');
-        document.getElementById('n-tab-1').setAttribute('style', `display:none;`);
-        document.getElementById('n-tab-2').setAttribute('style', `display:none;`);
-        document.getElementById('n-tab-3').setAttribute('style', `display:none;`);
-        document.getElementById('n-tab-4').setAttribute('style', `display:none;`);
+        document.getElementById(overviewId).setAttribute('style', ``);
+        document.getElementById(dataId).setAttribute('style', `display:none;`);
+        document.getElementById(activityId).setAttribute('style', `display:none;`);
+        document.getElementById(discussionId).setAttribute('style', `display:none;`);
+        document.getElementById(modelId).setAttribute('style', `display:none;`);
         break;
       case 'Data':
         //Heading
@@ -110,25 +97,11 @@ export class InsurerComponent implements OnInit {
         document.getElementsByClassName('bx--tabs__nav-item')[3].classList.remove('bx--tabs__nav-item--selected')
         document.getElementsByClassName('bx--tabs__nav-item')[4].classList.remove('bx--tabs__nav-item--selected')
         //Content
-        document.getElementById('n-tab-0').setAttribute('style', `display:none;`);
-        document.getElementById('n-tab-1').setAttribute('style', '');
-        document.getElementById('n-tab-2').setAttribute('style', `display:none;`);
-        document.getElementById('n-tab-3').setAttribute('style', `display:none;`);
-        document.getElementById('n-tab-4').setAttribute('style', `display:none;`);
-        break;
-      case 'Activity':
-        //Heading
-        document.getElementsByClassName('bx--tabs__nav-item')[0].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[1].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[2].classList.add('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[3].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[4].classList.remove('bx--tabs__nav-item--selected')
-        //Content
-        document.getElementById('n-tab-0').setAttribute('style', `display:none;`);
-        document.getElementById('n-tab-1').setAttribute('style', `display:none;`);
-        document.getElementById('n-tab-2').setAttribute('style', '');
-        document.getElementById('n-tab-3').setAttribute('style', `display:none;`);
-        document.getElementById('n-tab-4').setAttribute('style', `display:none;`);
+        document.getElementById(dataId).setAttribute('style', ``);
+        document.getElementById(overviewId).setAttribute('style', `display:none;`);
+        document.getElementById(activityId).setAttribute('style', `display:none;`);
+        document.getElementById(discussionId).setAttribute('style', `display:none;`);
+        document.getElementById(modelId).setAttribute('style', `display:none;`);
         break;
       case 'View Activity':
         //Heading
@@ -138,11 +111,26 @@ export class InsurerComponent implements OnInit {
         document.getElementsByClassName('bx--tabs__nav-item')[3].classList.remove('bx--tabs__nav-item--selected')
         document.getElementsByClassName('bx--tabs__nav-item')[4].classList.remove('bx--tabs__nav-item--selected')
         //Content
-        document.getElementById('n-tab-0').setAttribute('style', `display:none;`);
-        document.getElementById('n-tab-1').setAttribute('style', `display:none;`);
-        document.getElementById('n-tab-2').setAttribute('style', '');
-        document.getElementById('n-tab-3').setAttribute('style', `display:none;`);
-        document.getElementById('n-tab-4').setAttribute('style', `display:none;`);
+        document.getElementById(activityId).setAttribute('style', ``);
+        document.getElementById(activityId).getElementsByTagName('div')[0].style.display = '';
+        document.getElementById(overviewId).setAttribute('style', `display:none;`);
+        document.getElementById(dataId).setAttribute('style', `display:none;`);
+        document.getElementById(discussionId).setAttribute('style', `display:none;`);
+        document.getElementById(modelId).setAttribute('style', `display:none;`);
+        break;
+      case 'Activity':
+        //Heading
+        document.getElementsByClassName('bx--tabs__nav-item')[0].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[1].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[2].classList.add('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[3].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[4].classList.remove('bx--tabs__nav-item--selected')
+        //Content
+        document.getElementById(activityId).setAttribute('style', ``);
+        document.getElementById(overviewId).setAttribute('style', `display:none;`);
+        document.getElementById(dataId).setAttribute('style', `display:none;`);
+        document.getElementById(discussionId).setAttribute('style', `display:none;`);
+        document.getElementById(modelId).setAttribute('style', `display:none;`);
         break;
       case 'Discussion':
         //Heading
@@ -152,40 +140,41 @@ export class InsurerComponent implements OnInit {
         document.getElementsByClassName('bx--tabs__nav-item')[3].classList.add('bx--tabs__nav-item--selected')
         document.getElementsByClassName('bx--tabs__nav-item')[4].classList.remove('bx--tabs__nav-item--selected')
         //Content
-        document.getElementById('n-tab-0').setAttribute('style', `display:none;`);
-        document.getElementById('n-tab-1').setAttribute('style', `display:none;`);
-        document.getElementById('n-tab-2').setAttribute('style', `display:none;`);
-        document.getElementById('n-tab-3').setAttribute('style', '');
-        document.getElementById('n-tab-4').setAttribute('style', `display:none;`);
+        document.getElementById(discussionId).setAttribute('style', ``);
+        document.getElementById(overviewId).setAttribute('style', `display:none;`);
+        document.getElementById(dataId).setAttribute('style', `display:none;`);
+        document.getElementById(activityId).setAttribute('style', `display:none;`);
+        document.getElementById(modelId).setAttribute('style', `display:none;`);
         break;
-        case 'View Model':
-          //Heading
-          document.getElementsByClassName('bx--tabs__nav-item')[0].classList.remove('bx--tabs__nav-item--selected')
-          document.getElementsByClassName('bx--tabs__nav-item')[1].classList.remove('bx--tabs__nav-item--selected')
-          document.getElementsByClassName('bx--tabs__nav-item')[2].classList.remove('bx--tabs__nav-item--selected')
-          document.getElementsByClassName('bx--tabs__nav-item')[3].classList.remove('bx--tabs__nav-item--selected')
-          document.getElementsByClassName('bx--tabs__nav-item')[4].classList.add('bx--tabs__nav-item--selected')
-          //Content
-          document.getElementById('n-tab-0').setAttribute('style', `display:none;`);
-          document.getElementById('n-tab-1').setAttribute('style', `display:none;`);
-          document.getElementById('n-tab-2').setAttribute('style', `display:none;`);
-          document.getElementById('n-tab-3').setAttribute('style', `display:none;`);
-          document.getElementById('n-tab-4').setAttribute('style', '');
-          break;
-                                  // case 'Models':
-                                  //   //Heading
-                                  //   document.getElementsByClassName('bx--tabs__nav-item')[0].classList.remove('bx--tabs__nav-item--selected')
-                                  //   document.getElementsByClassName('bx--tabs__nav-item')[1].classList.remove('bx--tabs__nav-item--selected')
-                                  //   document.getElementsByClassName('bx--tabs__nav-item')[2].classList.remove('bx--tabs__nav-item--selected')
-                                  //   document.getElementsByClassName('bx--tabs__nav-item')[3].classList.remove('bx--tabs__nav-item--selected')
-                                  //   document.getElementsByClassName('bx--tabs__nav-item')[4].classList.add('bx--tabs__nav-item--selected')
-                                  //   //Content
-                                  //   document.getElementById('n-tab-0').setAttribute('style', `display:none;`);
-                                  //   document.getElementById('n-tab-1').setAttribute('style', `display:none;`);
-                                  //   document.getElementById('n-tab-2').setAttribute('style', `display:none;`);
-                                  //   document.getElementById('n-tab-3').setAttribute('style', `display:none;`);
-                                  //   document.getElementById('n-tab-4').setAttribute('style', '');
-                                  //   break;
+      case 'View Model':
+        //Heading
+        document.getElementsByClassName('bx--tabs__nav-item')[0].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[1].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[2].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[3].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[4].classList.add('bx--tabs__nav-item--selected')
+        //Content
+        document.getElementById(modelId).setAttribute('style', ``);
+        document.getElementById(modelId).getElementsByTagName('div')[0].style.display = '';
+        document.getElementById(overviewId).setAttribute('style', `display:none;`);
+        document.getElementById(dataId).setAttribute('style', `display:none;`);
+        document.getElementById(activityId).setAttribute('style', `display:none;`);
+        document.getElementById(discussionId).setAttribute('style', `display:none;`);
+        break;
+      case 'Models':
+        //Heading
+        document.getElementsByClassName('bx--tabs__nav-item')[0].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[1].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[2].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[3].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs__nav-item')[4].classList.add('bx--tabs__nav-item--selected')
+        //Content
+        document.getElementById(modelId).setAttribute('style', ``);
+        document.getElementById(overviewId).setAttribute('style', `display:none;`);
+        document.getElementById(dataId).setAttribute('style', `display:none;`);
+        document.getElementById(activityId).setAttribute('style', `display:none;`);
+        document.getElementById(discussionId).setAttribute('style', `display:none;`);
+        break;
       default:
         break;
     }

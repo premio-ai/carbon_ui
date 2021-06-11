@@ -82,12 +82,12 @@
 								<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
 									[condensed]="rowCondensed">
 									<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
-										<button class="view" [ibmButton]="ibmButton" [size]="size" (click)="switchToActivity($event)" >
+										<button class="view" [ibmButton]="ibmButton">
 											View Activity
 										</button>
 									</div>
 									<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
-										<button class="model" [ibmButton]="ibmButton" [size]="size" (click)="switchToModel($event)">
+										<button class="model" [ibmButton]="ibmButton">
 											View Model
 										</button>
 									</div>
@@ -96,8 +96,6 @@
 						</ibm-tile>
 					</div>
 				</div>
-
-
 			</div>
 
 			<div style="width: 100%;margin-left:-18px;" ibmGrid [condensed]="gridCondensed" class="gridchange">
@@ -109,23 +107,10 @@
 							<h4 ibmTableHeaderTitle>Leaderboard</h4>
 							<ibm-table-header>
 								<p>Challenge Leaderboard</p>
-
 								<fieldset class="bx--fieldset">
 									<legend class="bx--label">Phases</legend>
 									<div class="bx--form-item">
 										<div class="bx--radio-button-group ">
-											<!-- <div class="bx--radio-button-wrapper"
-												*ngFor="let phase of challengeDetails?.phases; index as i">
-												<input id="radio-button-102gt4bgc47-{{i}}" class="bx--radio-button"
-													(checked)="selectedPhase?.phaseId == phase?.phaseId" type="radio"
-													(click)="selectPhase(phase.phaseId, i)" />
-												<label for="radio-button-102gt4bgc47-{{i}}"
-													class="bx--radio-button__label">
-													<span class="bx--radio-button__appearance"></span>
-													<span class="bx--radio-button__label-text">Phase {{i}}</span>
-												</label>
-											</div> -->
-
 											<div class="bx--radio-button-wrapper"
 												*ngFor="let phase of challengeDetails?.phases; index as i">
 											<ibm-radio-group>
@@ -135,13 +120,9 @@
 												</ibm-radio>
 											</ibm-radio-group>
 											</div>
-
 										</div>
 									</div>
 								</fieldset>
-
-
-
 							</ibm-table-header>
 							<table class="bx--data-table">
 								<thead>

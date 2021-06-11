@@ -20,7 +20,7 @@
   </p>
 
   <textarea style="width: 100%; margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.description"
-    [theme]="theme" [rows]="7" [cols]="cols" maxlength="1000" aria-label="textarea"></textarea>
+    [theme]="theme" [rows]="7" [cols]="cols" maxlength="10000" aria-label="textarea"></textarea>
 </ibm-label>
 <div *ngIf="descriptionError">
   <p>
@@ -37,7 +37,7 @@
   </p>
 
   <textarea style="width: 100%; margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.approach"
-    [theme]="theme" [rows]="7" [cols]="cols" maxlength="1000" aria-label="textarea"></textarea>
+    [theme]="theme" [rows]="7" [cols]="cols" maxlength="10000" aria-label="textarea"></textarea>
 </ibm-label>
 <div *ngIf="approachError">
   <p>

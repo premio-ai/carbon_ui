@@ -60,8 +60,8 @@ export class InvAcceptedComponent implements OnInit {
 		if (userDetails && userDetails._id) {
 			this.appUrl = APP_URL
 			this.pageOffset = 0;
-			this.totalPage = 0;
-			this.pageNo = 0;
+			this.totalPage = 1;
+			this.pageNo = 1;
 			this.isChallengeAccepted = false;
 			this.phasesSubmissionComplete = false;
 			this.activatedRoute.params.subscribe((params: Params) => {
@@ -153,6 +153,8 @@ export class InvAcceptedComponent implements OnInit {
 			this.acceptedChallenge = data;
 			if (data._id.length > 0) {
 				this.isChallengeAccepted = true;
+			} else {
+				this.isChallengeAccepted = false;
 			}
 		}).catch(err => {
 			localStorage.clear();
@@ -250,15 +252,15 @@ export class InvAcceptedComponent implements OnInit {
 	prevPage() {
 		if (this.pageNo > 1) {
 			this.pageNo--;
-			this.pageOffset = this.pageNo * 10;
+			this.pageOffset = (this.pageNo-1) * 10;
 			this.getLeaderboard(this.challengeDetails._id, this.pageOffset)
 		}
 	}
 
 	nextPage() {
-		if (this.pageNo < (this.totalPage - 1)) {
+		if (this.pageNo < (this.totalPage)) {
 			this.pageNo++;
-			this.pageOffset = this.pageNo * 10;
+			this.pageOffset = (this.pageNo-1) * 10;
 			this.getLeaderboard(this.challengeDetails._id, this.pageOffset)
 		}
 	}

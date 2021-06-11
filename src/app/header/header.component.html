@@ -1,21 +1,21 @@
-
-
-<ibm-header brand="" >
-  <a (click)="logoRoute()" style="cursor: pointer;" > <img src="assets/logo.png" class="imglogo" /></a>
+<ibm-header brand="">
+  <a (click)="logoRoute()" style="cursor: pointer;"> <img src="assets/logo.png" class="imglogo" /></a>
   <ibm-hamburger *ngIf="hasHamburger" [active]="active" (selected)="active = !active"></ibm-hamburger>
   <ibm-header-navigation>
-    <ibm-header-item (click)="navigate()" [routerLink]="['/']" [routerLinkActive]="['is-active']">Activity</ibm-header-item>
-   
+    <ibm-header-item (click)="navigate()" [routerLink]="['/']" [routerLinkActive]="['is-active']">Activity
+    </ibm-header-item>
+
     <div *ngIf="userDetails.role == 'Insurer'">
       <ibm-header-item [routerLink]="['/asas']" [routerLinkActive]="['is-active']">Browse</ibm-header-item>
     </div>
     <div *ngIf="userDetails.role == 'Innovator'">
-      <ibm-header-item [route]="['/invchallenges']" isCurrentPage="'true'"  [routerLinkActive]="['is-active']">Challenges</ibm-header-item>
+      <ibm-header-item [route]="['/invchallenges']" isCurrentPage="'true'" [routerLinkActive]="['is-active']">Challenges
+      </ibm-header-item>
     </div>
-  
+
   </ibm-header-navigation>
   <ibm-header-global>
-   
+
     <ibm-header-action #firstAction title="action">
       <p class="namefull">
         {{ userDetails.fullName }}
@@ -37,10 +37,10 @@
     <svg icon ibmIconEdit20></svg>
     <p class="userName">{{ userDetails.fullName }}</p>
     <br />
-    <div *ngIf="userDetails.role == 'Insurer'" >
+    <div *ngIf="userDetails.role == 'Insurer'">
       <p class="userdetail">Active challenge: {{challengeCounts.activeChallengeCount}}</p>
     </div>
-    <div *ngIf="userDetails.role == 'Innovator'" >
+    <div *ngIf="userDetails.role == 'Innovator'">
       <p class="userdetail">Active challenge: {{submittedActiveChallenges.length}}</p>
     </div>
     <p class="userdetail">Past challenge: {{challengeCounts.pastChallengeCount}}</p>
@@ -53,17 +53,19 @@
     <div *ngIf="userDetails.role == 'Innovator'">
       <p class="userdetail">Challenges Won: {{challengesWon || 0}}</p>
     </div>
-    <br/>
+    <br />
     <p class="userdetail">View profile</p>
   </div>
   <div class="bx--navigation-section">
     <p class="notify">
       <svg icon ibmIconNotification20></svg>
-      &nbsp; Notifications  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <span><p style="font-size: 12px;" >Clear</p></span>
+      &nbsp; Notifications &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>
+        <p style="font-size: 12px; cursor: pointer;" (click)="clearNotification()">Clear</p>
+      </span>
     </p>
 
     <div *ngIf="notificationLoading">
-      <h6  >
+      <h6>
         <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)">
         </ibm-inline-loading>
       </h6>
@@ -71,22 +73,13 @@
     <div *ngIf="notifications?.length==0">
       <p class="notifyItems">No New Notifications</p>
     </div>
-    <div *ngFor="let notify of notifications; index as i" (click)="viewNotification(notify)">
-      <!-- <p class="userdetail">{{ notify?.title }}</p> -->
-      <p class="notifyItems" style="cursor: pointer;" >{{ notify?.body }}</p>
+    <div *ngIf="showNotification">
+      <div *ngFor="let notify of notifications; index as i" (click)="viewNotification(notify)">
+        <p class="notifyItems" style="cursor: pointer;">{{ notify?.body }}</p>
+      </div>
     </div>
-    <br/>
-    <!-- <p class="userdetail">View all notifications</p> -->
+    <br />
   </div>
-
-  <!-- <div class="bx--navigation-section">
-    <p class="notify">
-      <svg icon ibmIconChat20></svg>
-      &nbsp; Message&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <span><p style="font-size: 12px;" >Mark read</p></span>
-    </p>
-  </div> -->
-
-  <!-- <p class="userdetail" style="margin-bottom: 30px">Log out</p> -->
 
   <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
     <svg icon ibmIconLogout20></svg>
