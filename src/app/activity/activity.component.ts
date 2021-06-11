@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import * as moment from 'moment';
 import * as XLSX from 'xlsx';
 
@@ -12,6 +12,7 @@ export class ActivityComponent implements OnInit {
 
   @Input() submissionChallengeDetails: any;
   @Input() challengeDetails: any;
+  @Input() routePhase: any;
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute
@@ -33,7 +34,11 @@ export class ActivityComponent implements OnInit {
 
   ngOnChanges() {
     if (this.challengeDetails && this.submissionChallengeDetails) {
-      this.initialPhase()
+      if (this.routePhase) {
+        this.selectPhase(this.routePhase.phaseId, this.routePhase.phaseNo)
+      } else {
+        this.initialPhase()
+      }
     }
 
     this.sorting = [

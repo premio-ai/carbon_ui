@@ -82,12 +82,12 @@
 								<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
 									[condensed]="rowCondensed">
 									<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
-										<button class="view" [ibmButton]="ibmButton">
+										<button class="view" [ibmButton]="ibmButton" (click)="switchWithPhase(phase.phaseId)">
 											View Activity
 										</button>
 									</div>
 									<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
-										<button class="model" [ibmButton]="ibmButton">
+										<button class="model" [ibmButton]="ibmButton" (click)="switchWithPhase(phase.phaseId)">
 											View Model
 										</button>
 									</div>

@@ -18,6 +18,7 @@ export class InsurerComponent implements OnInit {
   challengeId: string
   challengeDetails: any;
   submissionChallengeDetails: any[];
+  routePhase: any;
 
 
   ngOnInit() {
@@ -43,6 +44,25 @@ export class InsurerComponent implements OnInit {
     } else {
       this.router.navigateByUrl('login')
     }
+  }
+
+  ngAfterViewInit() {
+    let activePhaseId = ''
+    this.activatedRoute.queryParams.subscribe(params => {
+      activePhaseId = params.activePhaseId
+    if (activePhaseId) {
+      let phaseNo = this.challengeDetails.phases.findIndex(dt => {
+        if (dt.phaseId == activePhaseId) {
+          return true
+        }
+      })
+
+      this.routePhase = {
+        phaseId: activePhaseId,
+        phaseNo: phaseNo
+      }
+    }
+    })
   }
 
   getConfig() {

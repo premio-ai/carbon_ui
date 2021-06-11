@@ -26,7 +26,7 @@
 					<app-data [challengeDetails]="challengeDetails"></app-data>
 				</ibm-tab>
 				<ibm-tab heading="Activity">
-					<app-activity [submissionChallengeDetails]="submissionChallengeDetails"
+					<app-activity [submissionChallengeDetails]="submissionChallengeDetails" [routePhase]="routePhase"
 						[challengeDetails]="challengeDetails"></app-activity>
 				</ibm-tab>
 				<ibm-tab heading="Discussion">
@@ -35,7 +35,7 @@
 							powered by Disqus.</a></noscript>
 				</ibm-tab>
 				<ibm-tab heading="Models">
-					<app-model [challengeDetails]="challengeDetails"
+					<app-model [challengeDetails]="challengeDetails" [routePhase]="routePhase"
 						[submissionChallengeDetails]="submissionChallengeDetails"></app-model>
 				</ibm-tab>
 			</ibm-tabs>

@@ -13,6 +13,7 @@ export class ModelComponent {
 
   @Input() submissionChallengeDetails: any[];
   @Input() challengeDetails: any;
+  @Input() routePhase: any;
   constructor(
     private router: Router,
     private requestService: RequestService
@@ -38,8 +39,12 @@ export class ModelComponent {
 
   ngOnChanges() {
     if (this.challengeDetails && this.submissionChallengeDetails) {
-      this.makeInitialModelData()
-      this.getBookmarkedSubmission()
+      if (this.routePhase) {
+        this.handlePhaseClick(this.routePhase.phaseId)
+      } else {
+        this.makeInitialModelData()
+        this.getBookmarkedSubmission()
+      }
     }
   }
 

@@ -122,12 +122,8 @@ export class OverviewComponent implements OnInit {
     this.router.navigateByUrl('invmodel-view/' + id)
   }
 
-  // switchToActivity(phaseId) {
-  //   this.router.navigateByUrl('challenge/' + this.challengeDetails._id + '?activePhaseId=' + phaseId)
-  // }
-
-  // switchToModel() {
-  //   this.router.navigateByUrl('challenge/' + this.challengeDetails._id + '?activeTab=Model')
-  // }
+  switchWithPhase(phaseId) {
+    this.router.navigateByUrl('challenge/' + this.challengeDetails._id + '?activePhaseId=' + phaseId)
+  }
 
 }
