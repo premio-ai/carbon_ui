@@ -20,6 +20,7 @@ export class ModelComponent {
   ) { }
   bookmarkedSubmissions: any[] = []
   modelData: any[]
+  bookmarkedSubmissionsByPhase: any[] = []
   selectedPhaseId: any
   compareModelData: any[] = []
   modelComparison: boolean
@@ -94,6 +95,7 @@ export class ModelComponent {
   handlePhaseClick(id) {
     this.selectedPhaseId = id
     this.makeModelDataByPhase()
+    this.getBookmarkedSubmission()
   }
 
   sortSelect(sort) {
@@ -132,12 +134,12 @@ export class ModelComponent {
       let tempData = [];
       this.submissionChallengeDetails.map(dt => {
         data.filter(res => {
-          if (dt.challengeId == res.challengeId && dt._id == res.submissionId) {
+          if (dt.challengeId == res.challengeId && dt._id == res.submissionId && dt.phaseId == this.selectedPhaseId) {
             tempData.push(dt)
           }
         })
       })
-      this.bookmarkedSubmissions = tempData
+      this.bookmarkedSubmissionsByPhase = tempData
     }).catch(err => {
 			localStorage.clear();
 			this.router.navigateByUrl('login')

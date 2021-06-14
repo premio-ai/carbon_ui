@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MESSAGES } from '../../config/config';
 import { RequestService } from '../request.service';
 
 @Component({
@@ -18,7 +19,6 @@ export class SignUpComponent implements OnInit {
     fullName: String,
     email: String,
     password: String,
-    // confirmPassword: String,
     role: String,
     bio: String,
     experience: String
@@ -57,21 +57,22 @@ export class SignUpComponent implements OnInit {
 
   signUp() {
     if (this.signupDetails.fullName && this.signupDetails.email && this.signupDetails.password && this.signupDetails.role && this.signupDetails.experience && this.signupDetails.bio) {
-      this.requestService.signing('auth/signup', this.signupDetails).subscribe( data => {
-        this.router.navigateByUrl('login')
+      this.requestService.signing('auth/signup', this.signupDetails).toPromise().then( data => {
+        if (data.result == MESSAGES.REG_SUCCESS) {
+          this.router.navigateByUrl('login')
+        }
       })
-    } else {
-      this.showToaster();
     }
   }
 
   validate() {
     let emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    let isAlphaNum = /^[a-z0-9]+$/i
     if (this.signupDetails.fullName.length > 3 && this.signupDetails.email.match(emailReg) && this.signupDetails.password.length > 0
       && this.signupDetails.role.length>0 && this.signupDetails.bio.length>0 && this.signupDetails.experience.length>0) {
         this.signUp();
     } else {
-      if (this.signupDetails.fullName.length > 3) {
+      if (this.signupDetails.fullName.length > 3 && this.signupDetails.fullName.match(isAlphaNum)) {
         this.fullNameError = false
       } else {
         this.fullNameError = true

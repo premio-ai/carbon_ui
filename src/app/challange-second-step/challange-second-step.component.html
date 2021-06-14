@@ -22,7 +22,6 @@
           [theme]="theme" [rows]="3" [cols]="cols" aria-label="textarea"></textarea>
       </ibm-label>
       <br />
-      <!-- <ibm-number [label]="'Minimum Model Score'" [helperText]="''" [(ngModel)]="phases[i].passingScore"></ibm-number> -->
       <div class="bx--form-item">
         <div data-numberinput class="bx--number bx--number--light">
           <label for="number-input0" class="bx--label">Minimum Model Score</label>
@@ -37,19 +36,6 @@
 
     <div ibmCol class="custom-class-example1" [columnNumbers]="{ md: 4, sm: 12 }">
       <div ibmGrid [condensed]="gridCondensed">
-        <!-- <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
-          <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
-            <h5>Data Visualisation</h5>
-            <p>{{ phases[i].dataVisualFile }}</p>
-          </div>
-          <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
-            <h5>Sample Data</h5>
-            <p *ngFor="let data of phases[i]?.sampleDataFile; index as j">
-              {{ data[j] }}
-            </p>
-          </div>
-        </div> -->
-
         <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
           <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
             <h5>Data Visualisation</h5>
@@ -59,11 +45,8 @@
             </app-drop-image-uploader>
             <br />
             <div class="fileBox">
-              <p style="margin: 5px; font-size: small;">{{getFileName(phases[i].dataVisualFile)}}</p>
-              <p style="margin-top: 5px; margin-left: 50px; cursor: pointer;" (click)="removeDataVisual(i)">x</p>
-            </div>
-            <div *ngIf="dataVisualFileError">
-              <p><span style="font-size: x-small; color: red">Data visual file required</span></p>
+              <p style="margin: 8px; font-size: small;">{{getFileName(phases[i].dataVisualFile)}}</p>
+              <p style="margin-top: 8px; margin-left: 75px; cursor: pointer;" (click)="removeDataVisual(i)">x</p>
             </div>
           </div>
           <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }" style="padding-left: 10px;">
@@ -74,17 +57,12 @@
             <br />
             <div *ngFor="let sampleFile of phases[i].sampleDataFile; index as j">
               <div class="fileBox">
-                <p style="margin: 5px; font-size: small;">{{getSampleFileName(sampleFile.path)}}</p>
-                <p style="margin-top: 5px; margin-left: 35px; cursor: pointer;" (click)="removeSampleDataFile(i, j)">x
-                </p>
+                <p style="margin: 8px; font-size: small;">{{getSampleFileName(sampleFile.path)}}</p>
+                <p style="margin-top: 8px; margin-left: 50px; cursor: pointer;" (click)="removeSampleDataFile(i, j)">x</p>
               </div>
-            </div>
-            <div *ngIf="sampleDataFileError">
-              <p><span style="font-size: x-small; color: red">At least 1 sample data file required</span></p>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -156,8 +134,8 @@
             <br />
             <div *ngIf="stepTwo.dataVisualFile.length>0">
               <div class="fileBox">
-                <p style="margin: 5px; font-size: small;">{{getFileName(stepTwo.dataVisualFile)}}</p>
-                <p style="margin-top: 5px; margin-left: 50px; cursor: pointer;" (click)="removeStepTwoDataVisual()">x</p>
+                <p style="margin: 8px; font-size: small;">{{getFileName(stepTwo.dataVisualFile)}}</p>
+                <p style="margin-top: 8px; margin-left: 75px; cursor: pointer;" (click)="removeStepTwoDataVisual()">x</p>
               </div>
             </div>
             <div *ngIf="dataVisualFileError">
@@ -173,8 +151,8 @@
             <div *ngIf="stepTwo.sampleDataFile.length>0">
               <div *ngFor="let sampleFile of stepTwo.sampleDataFile; index as j">
                 <div class="fileBox">
-                  <p style="margin: 5px; font-size: small;">{{getSampleFileName(sampleFile.path)}}</p>
-                  <p style="margin-top: 5px; margin-left: 35px; cursor: pointer;" (click)="removeStepTwoSampleDataFile(j)">x
+                  <p style="margin: 8px; font-size: small;">{{getSampleFileName(sampleFile.path)}}</p>
+                  <p style="margin-top: 8px; margin-left: 50px; cursor: pointer;" (click)="removeStepTwoSampleDataFile(j)">x
                   </p>
                 </div>
               </div>

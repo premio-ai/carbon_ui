@@ -157,7 +157,6 @@ export class ChallangeSecondStepComponent implements OnInit {
     formData.append('files', file);
     let payload = {
       tempBucketName: this.bucketName,
-      // phaseNo: this.phases.length,
       phaseNo: ind,
       fileType: 'dataVisual'
     }
@@ -173,9 +172,6 @@ export class ChallangeSecondStepComponent implements OnInit {
       } else {
         this.stepTwo.dataVisualFile = data.filePath
       }
-    // }).catch(err => {
-    //   localStorage.clear();
-    //   this.router.navigateByUrl('login')
     })
   }
 

@@ -2,7 +2,8 @@
 
 export const MESSAGES = {
     NEW_CHALLENGE_POST: 'New Challenge Posted',
-    NEW_MODEL_SUBMITTED: 'New Model Submitted'
+    NEW_MODEL_SUBMITTED: 'New Model Submitted',
+    REG_SUCCESS: 'User added successfully'
 };
 
 // export const APP_URL = 'https://meanapp-comedic-kangaroo-ha.eu-gb.mybluemix.net/'        //MeanApp IBM

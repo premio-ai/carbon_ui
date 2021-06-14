@@ -1,7 +1,6 @@
 <div ibmGrid [condensed]="gridCondensed">
   <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-
       <div *ngIf="toasterMsg" data-notification class="bx--toast-notification bx--toast-notification--success"
         role="alert">
         <div class="bx--toast-notification__details">
@@ -18,7 +17,6 @@
           </svg>
         </button>
       </div>
-
       <div class="bx--form-item" style="margin-top: 10%;">
         <label for="text-input-3" class="bx--label">Username</label>
         <input id="text-input-3" type="text" class="bx--text-input" [(ngModel)]="signupDetails.fullName"
@@ -27,7 +25,6 @@
       <div *ngIf="fullNameError">
         <p><span style="font-size: x-small; color: red">Please enter your full name</span></p>
       </div>
-
       <div class="bx--form-item">
         <label for="text-input-3" class="bx--label">Email</label>
         <input id="text-input-3" type="text" class="bx--text-input" [(ngModel)]="signupDetails.email"
@@ -36,7 +33,6 @@
       <div *ngIf="emailError">
         <p><span style="font-size: x-small; color: red">Please enter a valid email</span></p>
       </div>
-
       <div class="bx--form-item">
         <label for="text-input-3" class="bx--label">Password</label>
         <input id="text-input-3" type="password" class="bx--text-input" [(ngModel)]="signupDetails.password"
@@ -45,12 +41,6 @@
       <div *ngIf="passwordError">
         <p><span style="font-size: x-small; color: red">Please enter a valid password</span></p>
       </div>
-
-      <!-- <div class="bx--form-item">
-        <label for="text-input-3" class="bx--label">Confirm Password</label>
-        <input id="text-input-3" type="password" class="bx--text-input" [(ngModel)]="signupDetails.confirmPassword" placeholder="********" />
-      </div> -->
-
       <div class="bx--form-item">
         <label for="text-input-3" class="bx--label">Register As</label>
         <ibm-dropdown [label]="Min" [helperText]="helperText" [size]="size" [invalid]="invalid"
@@ -61,7 +51,6 @@
           <p><span style="font-size: x-small; color: red">Please select a user role</span></p>
         </div>
       </div>
-
       <div class="bx--form-item">
         <label for="text-input-3" class="bx--label">Bio</label>
         <input id="text-input-3" type="text" class="bx--text-input" [(ngModel)]="signupDetails.bio"
@@ -70,7 +59,6 @@
       <div *ngIf="bioError">
         <p><span style="font-size: x-small; color: red">Please enter your bio</span></p>
       </div>
-
       <div class="bx--form-item">
         <label for="text-input-3" class="bx--label">Experience</label>
         <input id="text-input-3" type="text" class="bx--text-input" [(ngModel)]="signupDetails.experience"
@@ -90,7 +78,5 @@
     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
       <img src="assets/tab.png" height="500px">
     </div>
-
-
   </div>
 </div>
