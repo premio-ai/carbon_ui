@@ -17,12 +17,7 @@
 		</div>
 		<div class="bx--col-md-7" style="margin-left: -8%;">
 			<h1> {{ challengeDetails?.title }} </h1>
-			<ibm-tabs [followFocus]="true" (click)="checkClick($event)" [isNavigation]="false" [cacheActive]="true">
-				<ibm-tab heading="Models">
-					<app-model [challengeDetails]="challengeDetails" [routePhase]="routePhase"
-						[submissionChallengeDetails]="submissionChallengeDetails"></app-model>
-				</ibm-tab>
-				
+			<ibm-tabs [followFocus]="true" (click)="checkClick($event)" [isNavigation]="false" [cacheActive]="true">			
 				<ibm-tab heading="Overview">
 					<app-overview [submissionChallengeDetails]="submissionChallengeDetails"
 						[challengeDetails]="challengeDetails"></app-overview>
