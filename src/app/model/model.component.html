@@ -1,19 +1,16 @@
 <br />
 <br />
 <p>Challenges Phases</p>
-
 <div ibmGrid [condensed]="gridCondensed">
   <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }"
       *ngFor="let phase of challengeDetails?.phases; index as i">
       <ibm-checkbox [checked]="selectedPhaseId == phase.phaseId" (change)="handlePhaseClick(phase?.phaseId)">
-       &nbsp; Phase {{i}}
+        &nbsp; Phase {{i}}
       </ibm-checkbox>
     </div>
   </div>
 </div>
-
-
 <div ibmGrid [condensed]="gridCondensed" class="gridchange">
   <div class="parentdiv" *ngIf="!modelComparison">
     <ibm-dropdown [label]="'Sort by'" placeholder="Newest" (selected)="sortSelect($event)">
@@ -28,14 +25,12 @@
       <ibm-tab heading="All">
         <div ibmGrid [condensed]="gridCondensed" class="taggrid">
           <div ibmRow [gutter]="gutter" class="left-border" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
-            [condensed]="rowCondensed" *ngIf="compareModelData && compareModelData?.length>1">
+            [condensed]="rowCondensed" *ngIf="compareModelData[selectedPhaseNo] && compareModelData[selectedPhaseNo]?.length>1">
             <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }" style="margin-left: 15px;">
               <h6>Model Comparison</h6>
-              <p class="model-selected">{{compareModelData?.length}} models selected</p>
+              <p class="model-selected">{{compareModelData[selectedPhaseNo]?.length}} models selected</p>
               <br />
-              <button class="btn-compare" [ibmButton]="ibmButton" [size]="size" (click)="compareModels()">
-                Compare
-              </button>
+              <button class="btn-compare" [ibmButton]="ibmButton" (click)="compareModels()">Compare</button>
             </div>
           </div>
           <br />
@@ -62,9 +57,7 @@
                       <p class="bold">{{ data?.innovatorId?.fullName }}</p>
                     </div>
                     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-                      <p class="submitteddate">
-                        Submitted: {{ getDate(data?.createdAt) }}
-                      </p>
+                      <p class="submitteddate">Submitted: {{ getDate(data?.createdAt) }}</p>
                     </div>
                   </div>
                   <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
@@ -72,14 +65,6 @@
                     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 6, sm: 12 }">
                       <p class="para">{{ data?.modelDescription }}</p>
                     </div>
-                    <!-- <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-                     
-                      <div class="content" >
-                        <p class="unbold">Phase 1</p>
-                        <p class="nobold">55</p>
-                      </div>
-                      <br/>
-                    </div> -->
                   </div>
                   <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
                     [condensed]="rowCondensed">
@@ -94,9 +79,7 @@
                     </div>
                   </div>
                 </div>
-                <button class="btn" [ibmButton]="ibmButton" [size]="size" (click)="viewModelReport(data._id)">
-                  View Model Report
-                </button>
+                <button class="btn" [ibmButton]="ibmButton" (click)="viewModelReport(data._id)">View Model Report</button>
               </ibm-tile>
               <br />
               <br />
@@ -125,9 +108,7 @@
                       <p class="bold">{{ data?.innovatorId?.fullName }}</p>
                     </div>
                     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-                      <p class="submitteddate">
-                        Submitted: {{ getDate(data?.createdAt) }}
-                      </p>
+                      <p class="submitteddate">Submitted: {{ getDate(data?.createdAt) }}</p>
                     </div>
                   </div>
                   <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
@@ -135,13 +116,6 @@
                     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 6, sm: 12 }">
                       <p class="para">{{ data?.modelDescription }}</p>
                     </div>
-                    <!-- <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-
-                      <div class="content" style="margin-left: 140px; margin-top: 3px;">
-                        <p class="unbold">Phase 1</p>
-                        <p class="nobold">55</p>
-                      </div>
-                    </div> -->
                   </div>
                   <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
                     [condensed]="rowCondensed">
@@ -156,13 +130,11 @@
                     </div>
                   </div>
                 </div>
-                <button class="btn" [ibmButton]="ibmButton" [size]="size">
-                  View Model Report
-                </button>
+                <button class="btn" [ibmButton]="ibmButton">View Model Report</button>
               </ibm-tile>
               <br />
               <br />
-              <ibm-checkbox [hideLabel]="hideLabel" (change)="onChange($event, data._id)" style="margin-left: 15px;">
+              <ibm-checkbox [hideLabel]="hideLabel" (change)="onChange($event,   data._id)" style="margin-left: 15px;">
               </ibm-checkbox>
             </div>
           </div>
@@ -170,130 +142,81 @@
       </ibm-tab>
     </ibm-tabs>
   </div>
-
   <div style="display: flex;" *ngIf="modelData?.length==0">
     <h3>No Models have been submitted for this challenge till now.</h3>
   </div>
 
-  <table *ngIf="modelComparison" class="bx--data-table">
-    <thead>
-      <tr>
-        <th>
-          <span class="bx--table-header-label"></span>
-        </th>
-        <th *ngFor="let model of compareModelData">
-          <span class="bx--table-header-label">{{ model?.modelName }}</span>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Innovator</td>
-        <td *ngFor="let model of compareModelData">
-          {{ model?.innovatorId?.fullName }}
-        </td>
-      </tr>
-      <tr>
-        <td>Model discription</td>
-        <td *ngFor="let model of compareModelData">
-          <p *ngIf="showLess">
-            {{ showLessStr(model?.modelDescription) }}...
-            <span (click)="readMore()" style="color: cadetblue; font-size: x-small; cursor: pointer;">
-              Read More
-            </span>
-          </p>
-          <p *ngIf="!showLess">
-            {{ model?.modelDescription }}
-            <span (click)="readLess()" style="color: cadetblue; font-size: x-small; cursor: pointer;">
-              Read Less
-            </span>
-          </p>
-        </td>
-      </tr>
-      <tr>
-        <td>Model Approach</td>
-        <td *ngFor="let model of compareModelData">{{ model?.approch }}</td>
-      </tr>
-      <tr>
-        <td>Model Language</td>
-        <td *ngFor="let model of compareModelData">python</td>
-      </tr>
-      <tr>
-        <td>Model Score</td>
-        <td *ngFor="let model of compareModelData">{{ model?.score }}</td>
-      </tr>
-      <tr>
-        <td>Accuracy</td>
-        <td *ngFor="let model of compareModelData">
-          {{ model?.precisionScore }}
-        </td>
-      </tr>
-      <tr>
-        <td>Recall</td>
-        <td *ngFor="let model of compareModelData">{{ model?.recallScore }}</td>
-      </tr>
-      <tr>
-        <td>Precision</td>
-        <td *ngFor="let model of compareModelData">
-          {{ model?.precisionScore }}
-        </td>
-      </tr>
-      <tr>
-        <td>Test Time</td>
-        <td *ngFor="let model of compareModelData">90</td>
-      </tr>
-    </tbody>
-    <tr>
-      <th>
-        <span class="bx--table-header-label">Phase 2</span>
-      </th>
-      <th>
-        <span class="bx--table-header-label"></span>
-      </th>
-      <th>
-        <span class="bx--table-header-label"></span>
-      </th>
+  <div *ngFor='let key of objectKeys(compareModelData)' >
+    <table *ngIf="modelComparison" class="bx--data-table">
+      <thead>
+        <tr>
+          <th>
+            <span class="bx--table-header-label">Phase {{key}}</span>
+          </th>
+          <th *ngFor="let model of compareModelData[key]">
+            <span class="bx--table-header-label">{{ model?.modelName }}</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Innovator</td>
+          <td *ngFor="let model of compareModelData[key]">{{ model?.innovatorId?.fullName }}</td>
+        </tr>
+        <tr>
+          <td>Model discription</td>
+          <td *ngFor="let model of compareModelData[key]">
+            <p *ngIf="showLess">
+              {{ showLessStr(model?.modelDescription) }}...
+              <span (click)="readMore()" style="color: cadetblue; font-size: x-small; cursor: pointer;">
+                Read More
+              </span>
+            </p>
+            <p *ngIf="!showLess">
+              {{ model?.modelDescription }}
+              <span (click)="readLess()" style="color: cadetblue; font-size: x-small; cursor: pointer;">
+                Read Less
+              </span>
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>Model Approach</td>
+          <td *ngFor="let model of compareModelData[key]">{{ model?.approch }}</td>
+        </tr>
+        <tr>
+          <td>Model Language</td>
+          <td *ngFor="let model of compareModelData[key]">{{ model?.language }}</td>
+        </tr>
+        <tr>
+          <td>Model Score</td>
+          <td *ngFor="let model of compareModelData[key]">{{ model?.score }}</td>
+        </tr>
+        <tr>
+          <td>Accuracy</td>
+          <td *ngFor="let model of compareModelData[key]">{{ model?.precisionScore }}</td>
+        </tr>
+        <tr>
+          <td>Recall</td>
+          <td *ngFor="let model of compareModelData[key]">{{ model?.recallScore }}</td>
+        </tr>
+        <tr>
+          <td>Precision</td>
+          <td *ngFor="let model of compareModelData[key]">{{ model?.precisionScore }}</td>
+        </tr>
+        <tr>
+          <td>Test Time</td>
+          <td *ngFor="let model of compareModelData[key]">90</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td *ngFor="let model of compareModelData[key]">
+            <button class="bx--btn1 bx--btn--primary bx--btn--sm" type="button"
+              (click)="viewModelReport(model?._id)">View</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-    </tr>
-    <tbody>
-      <tr>
-        <td>Model Language</td>
-        <td *ngFor="let model of compareModelData">python</td>
-      </tr>
-      <tr>
-        <td>Model Score</td>
-        <td *ngFor="let model of compareModelData">{{ model?.score }}</td>
-      </tr>
-      <tr>
-        <td>Accuracy</td>
-        <td *ngFor="let model of compareModelData">80</td>
-      </tr>
-      <tr>
-        <td>Recall</td>
-        <td *ngFor="let model of compareModelData">{{ model?.recallScore }}</td>
-      </tr>
-      <tr>
-        <td>Precision</td>
-        <td *ngFor="let model of compareModelData">
-          {{ model?.precisionScore }}
-        </td>
-      </tr>
-      <tr>
-        <td>Test Time</td>
-        <td *ngFor="let model of compareModelData">90</td>
-      </tr>
-      <tr>
-        <td></td>
-        <td *ngFor="let model of compareModelData">
-          <!-- <button class="btn-compare" [ibmButton]="ibmButton" [size]="'small'"
-            (click)="viewModelReport(model?._id)">View</button> -->
-          <button class="bx--btn1 bx--btn--primary bx--btn--sm" type="button" (click)="viewModelReport(model?._id)">
-            View
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <!-- <Pagination /> -->
 </div>

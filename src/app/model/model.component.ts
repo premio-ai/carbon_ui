@@ -22,10 +22,12 @@ export class ModelComponent {
   modelData: any[]
   bookmarkedSubmissionsByPhase: any[] = []
   selectedPhaseId: any
-  compareModelData: any[] = []
+  compareModelData = {}
   modelComparison: boolean
   showLess: boolean
   sorting: any[]
+  selectedPhaseNo: number
+  objectKeys = Object.keys;
 
   ngOnInit() {
     this.showLess = true;
@@ -94,6 +96,9 @@ export class ModelComponent {
 
   handlePhaseClick(id) {
     this.selectedPhaseId = id
+    this.selectedPhaseNo = this.challengeDetails.phases.findIndex(dt => {
+      return dt.phaseId == id
+    })
     this.makeModelDataByPhase()
     this.getBookmarkedSubmission()
   }
@@ -141,9 +146,9 @@ export class ModelComponent {
       })
       this.bookmarkedSubmissionsByPhase = tempData
     }).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+      localStorage.clear();
+      this.router.navigateByUrl('login')
+    })
   }
 
   isBookmarked(modelId) {
@@ -179,9 +184,9 @@ export class ModelComponent {
     this.requestService.post(url, payload).toPromise().then(data => {
       this.getBookmarkedSubmission()
     }).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+      localStorage.clear();
+      this.router.navigateByUrl('login')
+    })
   }
 
   unBookmark(model) {
@@ -196,18 +201,22 @@ export class ModelComponent {
     this.requestService.put(url, data).toPromise().then(data => {
       this.getBookmarkedSubmission()
     }).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+      localStorage.clear();
+      this.router.navigateByUrl('login')
+    })
   }
 
   onChange(e, id) {
-    let tempData = [...this.compareModelData]
-    let ids = tempData.map(dt => {
-      return dt._id
-    })
+    let tempData = []
+    let ids = []
+    if (this.compareModelData && this.compareModelData[this.selectedPhaseNo]) {
+      tempData = [...this.compareModelData[this.selectedPhaseNo]]
+      ids = tempData.map(dt => {
+        return dt._id
+      })
+    }
 
-    let temp = this.modelData.filter(dt => {
+    this.compareModelData[this.selectedPhaseNo] = this.modelData.filter(dt => {
       if (dt._id == id) {
         if (ids.includes(id)) {
           return false
@@ -220,11 +229,10 @@ export class ModelComponent {
         return false
       }
     })
-    this.compareModelData = temp
   }
 
   compareModels() {
-    if (this.compareModelData.length > 1) {
+    if (this.compareModelData[this.selectedPhaseNo].length > 1) {
       this.modelComparison = true
     }
   }
