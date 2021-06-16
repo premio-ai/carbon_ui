@@ -78,6 +78,19 @@ export class SubmissionStepOneComponent implements OnInit {
 		})
   }
 
+  getFileName(filePath) {
+    let pathArr = filePath.split('/')
+    if (pathArr[2].length>22) {
+      return pathArr[2].substring(0, 22) + '...'
+    } else {
+      return pathArr[2]
+    }
+  }
+
+  removeUploadedFile() {
+    this.stepOne.modelUploadedPath = ''
+  }
+
 	async downloadFile(phaseIndex, fileIndex) {
     if (this.challengeDetails) {
       let docName = this.challengeDetails.phases[phaseIndex].sampleDataFile[fileIndex].path || ''
