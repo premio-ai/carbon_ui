@@ -27,9 +27,8 @@
 							</div>
 						</div>
 					</div>
-					<button class="bx--btn bx--btn--primary bx--btn--sm" type="button">
-						View Activity
-					</button>
+					<button class="bx--btn bx--btn--primary bx--btn--sm" type="button"
+						(click)="switchWithPhase(challengeDetails.phases[0].phaseId)">View Activity</button>
 				</ibm-tile>
 				<br /><br />
 			</div>
@@ -58,11 +57,8 @@
 							<div class="icon_align">
 								<svg icon ibmIconCheckmarkOutline20></svg>&nbsp;
 								<p>Models passed Scoring</p>
-								<!-- <p class="numbers">{{ modelPassed(phase?.phaseId) }}</p> -->
 							</div>
 							<br />
-
-							<!-- <p class="numbers">{{ phase?.minimumModelScore }}</p> -->
 							<br />
 							<div class="icon_align">
 								<svg icon ibmIconTrophy20></svg>&nbsp;

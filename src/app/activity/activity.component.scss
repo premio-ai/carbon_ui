@@ -11,3 +11,34 @@
     margin-top: 4px;
     font-size: 13px;
 }
+
+.btnSelected {
+    z-index: 3;
+    background-color: #161616;
+    color: #ffffff;
+}
+
+.btnNotSelected {
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.29;
+    letter-spacing: 0.16px;
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+    position: relative;
+    display: inline-flex;
+    overflow: hidden;
+    width: 100%;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-top: 0.0625rem solid #161616;
+    border-bottom: 0.0625rem solid #161616;
+    margin: 0;
+    background-color: transparent;
+    color: #525252;
+    text-align: left;
+    text-decoration: none;
+    transition: all 70ms cubic-bezier(0.2, 0, 0.38, 0.9);
+    white-space: nowrap;
+}

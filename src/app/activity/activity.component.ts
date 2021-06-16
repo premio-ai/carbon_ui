@@ -49,6 +49,16 @@ export class ActivityComponent implements OnInit {
     ];
   }
 
+  // ngAfterInitView() {
+  //   if (this.challengeDetails && this.submissionChallengeDetails) {
+  //     if (this.routePhase) {
+  //       this.selectPhase(this.routePhase.phaseId, this.routePhase.phaseNo)
+  //     } else {
+  //       this.initialPhase()
+  //     }
+  //   }
+  // }
+
   getCreationDate(dt) {
     let date = moment(dt).format('DD/MM/YYYY')
     return date;
@@ -61,7 +71,7 @@ export class ActivityComponent implements OnInit {
 
   initialPhase() {
     this.selectedPhaseId = this.challengeDetails.phases[0].phaseId
-    document.getElementsByClassName('bx--content-switcher-btn')[this.currentPhaseNo].classList.add('bx--content-switcher--selected')
+    // document.getElementsByClassName('bx--content-switcher-btn')[this.currentPhaseNo].classList.add('bx--content-switcher--selected')
     let tempData = []
     this.submissionChallengeDetails.map(dt => {
       if (dt.phaseId == this.selectedPhaseId) {
@@ -79,8 +89,8 @@ export class ActivityComponent implements OnInit {
     this.modelUnderTraining = 0
 
     this.selectedPhaseId = phaseId
-    document.getElementsByClassName('bx--content-switcher-btn')[this.prevPhaseNo].classList.remove('bx--content-switcher--selected')
-    document.getElementsByClassName('bx--content-switcher-btn')[this.currentPhaseNo].classList.add('bx--content-switcher--selected')
+    // document.getElementsByClassName('bx--content-switcher-btn')[this.prevPhaseNo].classList.remove('bx--content-switcher--selected')
+    // document.getElementsByClassName('bx--content-switcher-btn')[this.currentPhaseNo].classList.add('bx--content-switcher--selected')
 
     let tempData = []
     this.submissionChallengeDetails.map(dt => {

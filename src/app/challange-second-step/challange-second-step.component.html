@@ -117,7 +117,7 @@
         <p><span style="font-size: x-small; color: red">Score for this phase is required</span></p>
       </div>
       <br />
-      <button [ibmButton]="ibmButton" [size]="'sm'" class="addphase" (click)="addPhase()">
+      <button [ibmButton]="ibmButton" [size]="'sm'" class="addphase" [disabled]="isBtnDisabled" (click)="addPhase()">
         Add Phase<svg class="bx--btn__icon" ibmIconAdd size="20"></svg>
       </button>
     </div>
@@ -132,6 +132,12 @@
               (filesChange)="onImageSelect($event.target.files)" (onDrop)="onImageSelect($event.target.files)">
             </app-drop-image-uploader>
             <br />
+            <div *ngIf="isDataVisualUploading">
+              <h6>
+                <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)">
+                </ibm-inline-loading>
+              </h6>
+            </div>
             <div *ngIf="stepTwo.dataVisualFile.length>0">
               <div class="fileBox">
                 <p style="margin: 8px; font-size: small;">{{getFileName(stepTwo.dataVisualFile)}}</p>
@@ -148,6 +154,12 @@
             <app-drop-file-uploader (uploadFile)="uploadSampleData($event, i)" (getFile)="setSampleData($event)">
             </app-drop-file-uploader>
             <br />
+            <div *ngIf="isSampleFileUploading">
+              <h6>
+                <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)">
+                </ibm-inline-loading>
+              </h6>
+            </div>
             <div *ngIf="stepTwo.sampleDataFile.length>0">
               <div *ngFor="let sampleFile of stepTwo.sampleDataFile; index as j">
                 <div class="fileBox">
@@ -167,7 +179,7 @@
           <button class="Step2btn_pre" [ibmButton]="ibmButton" [size]="size" (click)="previous()">
             Previous
           </button>
-          <button class="Step2btn_next" [ibmButton]="ibmButton" [size]="size" (click)="next()">
+          <button class="Step2btn_next" [ibmButton]="ibmButton" [disabled]="isBtnDisabled" (click)="next()">
             Next
           </button>
         </div>

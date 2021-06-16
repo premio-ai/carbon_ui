@@ -1,7 +1,8 @@
 <br />
 <ibm-content-switcher (selected)="selected($event)">
   <button ibmContentOption name="phase{{ i }}" *ngFor="let phase of challengeDetails?.phases; index as i"
-    (click)="selectPhase(phase.phaseId, i)" style="width: 11%;">
+  [ngClass]="{'btnSelected': selectedPhaseId == phase.phaseId, 'btnNotSelected' : selectedPhaseId != phase.phaseId }"
+  (click)="selectPhase(phase.phaseId, i)" style="width: 11%;">
     Phase {{ i }}
   </button>
 </ibm-content-switcher>
@@ -31,7 +32,6 @@
         </h6>
         <p class="activitypara">{{ modelUnderTraining }}</p>
       </div>
-      <!-- <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }"></div> -->
       <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
         <h6 class="date" style="display: flex; align-items: center;">
           <svg icon ibmIconCheckmarkOutline20></svg>
@@ -52,11 +52,6 @@
     </ibm-table-header>
     <ibm-table-toolbar >
       <ibm-table-toolbar-content >
-        <!-- <div style="width: 200px;">
-          <ibm-dropdown [label]="label" [helperText]="helperText" [size]="size" [invalid]="invalid"
-            [invalidText]="invalidText" [theme]="theme" placeholder="Multi-select label" [disabled]="disabled"
-            (selected)="selected($event)"></ibm-dropdown>
-        </div> -->
         &nbsp;
         <div style="width: 150px;margin-top: -14px;z-index: 9999;">
           <ibm-dropdown [label]="'Sort'" [helperText]="helperText" [size]="size" [invalid]="invalid"

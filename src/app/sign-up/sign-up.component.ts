@@ -23,17 +23,20 @@ export class SignUpComponent implements OnInit {
     bio: String,
     experience: String
   }
-  toasterMsg: boolean
+  showToasterMsg: boolean
+  toasterMsg: String
   fullNameError: boolean
   emailError: boolean
   passwordError: boolean
   roleError: boolean
   bioError: boolean
   experienceError: boolean
+  isApiLoading: boolean
 
 
   ngOnInit() {
-    this.toasterMsg = false;
+    this.showToasterMsg = false;
+    this.isApiLoading = false;
 
     this.registerAs = [
       { content: 'Insurer' },
@@ -44,7 +47,6 @@ export class SignUpComponent implements OnInit {
       fullName: '',
       email: '',
       password: '',
-      // confirmPassword: '',
       role: '',
       bio: '',
       experience: ''
@@ -56,11 +58,20 @@ export class SignUpComponent implements OnInit {
   }
 
   signUp() {
+    this.isApiLoading = true;
     if (this.signupDetails.fullName && this.signupDetails.email && this.signupDetails.password && this.signupDetails.role && this.signupDetails.experience && this.signupDetails.bio) {
       this.requestService.signing('auth/signup', this.signupDetails).toPromise().then( data => {
+        this.isApiLoading = false
         if (data.result == MESSAGES.REG_SUCCESS) {
           this.router.navigateByUrl('login')
+        } else if (data.result == MESSAGES.USER_REGISTERED) {
+          this.toasterMsg = MESSAGES.EMAIL_REG
+          this.showToaster()
         }
+      }).catch( err => {
+        this.isApiLoading = false
+        this.toasterMsg = MESSAGES.WRONG
+        this.showToaster()
       })
     }
   }
@@ -106,14 +117,14 @@ export class SignUpComponent implements OnInit {
   }
 
   showToaster = (() => {
-		this.toasterMsg = true
+		this.showToasterMsg = true
 		setTimeout(() => {
-			this.toasterMsg = false
+			this.showToasterMsg = false
 		}, 3000)
 	})
 
 	closeToaster() {
-		this.toasterMsg = false
+		this.showToasterMsg = false
 	}
 
   login() {

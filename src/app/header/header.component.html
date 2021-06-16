@@ -34,8 +34,16 @@
   <div class="bx--navigation-section">
     <img class="portrait mr-3" itemprop="image" alt="Avatar"
       src="https://www.angularjswiki.com/author/admin/avatar_hufa038520d36dafb78f39a62f91de8258_77813_250x250_fill_q90_lanczos_center.jpg" />
-    <svg icon ibmIconEdit20></svg>
-    <p class="userName">{{ userDetails.fullName }}</p>
+      <svg icon ibmIconEdit20 (click)="editUserName()"></svg>
+    <div *ngIf="!isEdit">
+      <p class="userName">{{ userDetails.fullName }}</p>
+    </div>
+    <div style="display: flex;" *ngIf="isEdit">
+      <div>
+        <input style="width: 100%; margin-top: 10px; margin-left: 15px;" ibmTextArea (blur)="saveUserName()"
+          [(ngModel)]="set_new_userName" aria-label="textarea" />
+      </div>
+    </div>
     <br />
     <div *ngIf="userDetails.role == 'Insurer'">
       <p class="userdetail">Active challenge: {{challengeCounts.activeChallengeCount}}</p>

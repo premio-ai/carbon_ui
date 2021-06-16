@@ -23,6 +23,8 @@ export class HeaderComponent implements OnInit {
 	submittedActiveChallenges: any[] = [];
 	bookmarkedChallenges: any[] = []
 	showNotification: boolean;
+	isEdit: boolean;
+	set_new_userName: string
 
 	ngOnInit() {
 		this.notificationLoading = true;
@@ -30,6 +32,7 @@ export class HeaderComponent implements OnInit {
 		this.challengeCounts = 0;
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
 		if (this.userDetails) {
+			this.set_new_userName = this.userDetails.fullName
 			this.getNotifications();
 			this.getChallengeCounts();
 			this.getInnovatorChallangeCount();
@@ -109,7 +112,7 @@ export class HeaderComponent implements OnInit {
 		})
 		setTimeout(() => {
 			this.getNotifications();
-		}, Number((60 + Math.random()*10).toFixed(0)) *1000 );
+		}, Number((60 + Math.random() * 10).toFixed(0)) * 1000);
 	}
 
 	clearNotification() {
@@ -155,6 +158,29 @@ export class HeaderComponent implements OnInit {
 				this.router.navigateByUrl('login')
 			})
 		}
+	}
+
+	editUserName() {
+		this.isEdit = true;
+	}
+
+	saveUserName() {
+		let url = 'auth/updateUserDetails';
+		let payload = {
+			userName: this.set_new_userName
+		}
+		this.requestService.put(url, payload).toPromise().then(data => {
+			if (data.result == 'Details Updated') {
+				this.isEdit = false;
+				let updateUserDetails = JSON.parse(localStorage.getItem('userDetails'))
+				updateUserDetails.fullName = this.set_new_userName
+				localStorage.setItem('userDetails', JSON.stringify(updateUserDetails))
+				this.userDetails.fullName = this.set_new_userName
+			}
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
+		})
 	}
 
 	logout() {

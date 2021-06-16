@@ -32,7 +32,6 @@ export class InvChallengeComponent implements OnInit {
     let userDetails = JSON.parse(localStorage.getItem('userDetails'))
     if (userDetails && userDetails._id) {
       this.getAllActiveChallanges(this.pageOffset);
-      // this.getBookmarkedChallenges();
     } else {
       this.router.navigateByUrl('login')
     }

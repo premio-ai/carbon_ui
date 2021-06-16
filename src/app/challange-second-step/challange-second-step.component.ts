@@ -32,9 +32,15 @@ export class ChallangeSecondStepComponent implements OnInit {
   dataVisualFileError: boolean;
   sampleDataFileError: boolean;
   bucketName: string;
-  subject: Subscription
+  subject: Subscription;
+  isBtnDisabled: boolean;
+  isSampleFileUploading: boolean;
+  isDataVisualUploading: boolean;
 
   ngOnInit() {
+    this.isBtnDisabled = true;
+    this.isSampleFileUploading = false;
+    this.isDataVisualUploading = false;
     this.stepTwo = {
       description: "",
       guidance: "",
@@ -56,8 +62,15 @@ export class ChallangeSecondStepComponent implements OnInit {
     })
   }
 
+  ngDoCheck() {
+    if (this.stepTwo.description.length > 0 && this.stepTwo.guidance.length > 0 && this.stepTwo.passingScore && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 0) {
+      this.isBtnDisabled = false
+    }
+  }
+
   addPhase() {
     if (this.stepTwo.description.length > 0 && this.stepTwo.guidance.length > 0 && this.stepTwo.passingScore && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 0) {
+      this.isBtnDisabled = true
       let tempData = {
         description: this.stepTwo.description,
         guidance: this.stepTwo.guidance,
@@ -109,7 +122,7 @@ export class ChallangeSecondStepComponent implements OnInit {
 
   getFileName(filePath) {
     let pathArr = filePath.split('/')
-    if (pathArr[2].length>22) {
+    if (pathArr[2].length > 22) {
       return pathArr[2].substring(0, 22) + '...'
     } else {
       return pathArr[2]
@@ -118,7 +131,7 @@ export class ChallangeSecondStepComponent implements OnInit {
 
   getSampleFileName(filePath) {
     let pathArr = filePath.split('/')
-    if (pathArr[2].length>22) {
+    if (pathArr[2].length > 22) {
       return pathArr[2].substring(0, 22) + '...'
     } else {
       return pathArr[2]
@@ -143,10 +156,10 @@ export class ChallangeSecondStepComponent implements OnInit {
 
   setDataVisual(acceptedFiles, index) {
     let ind;
-    if (index>=0) {
+    if (index >= 0) {
       ind = index
     } else {
-      if (this.phases.length>0) {
+      if (this.phases.length > 0) {
         ind = this.phases.length
       } else {
         ind = 0
@@ -162,12 +175,14 @@ export class ChallangeSecondStepComponent implements OnInit {
     }
     formData.append('uploadInfo', JSON.stringify(payload))
 
+    this.isDataVisualUploading = true
     this.uploadDataVisual(formData, index)
   }
 
   uploadDataVisual(formData, index) {
     this.subject = this.requestService.post('upload', formData).subscribe(data => {
-      if (index>=0) {
+      this.isDataVisualUploading = false
+      if (index >= 0) {
         this.phases[index].dataVisualFile = data.filePath
       } else {
         this.stepTwo.dataVisualFile = data.filePath
@@ -176,11 +191,12 @@ export class ChallangeSecondStepComponent implements OnInit {
   }
 
   uploadSampleData(file, index) {
+    this.isSampleFileUploading = true
     let ind;
-    if (index>=0) {
+    if (index >= 0) {
       ind = index
     } else {
-      if (this.phases.length>0) {
+      if (this.phases.length > 0) {
         ind = this.phases.length
       } else {
         ind = 0
@@ -201,19 +217,16 @@ export class ChallangeSecondStepComponent implements OnInit {
     this.fileArray = []
     if (formData) {
       this.subject = this.requestService.post('upload', formData).subscribe(data => {
+        this.isSampleFileUploading = false
         let fileObj = {
           path: data.filePath,
           downloadCount: 0
         }
-        if (index>=0) {
+        if (index >= 0) {
           this.phases[ind].sampleDataFile.push(fileObj)
         } else {
           this.stepTwo.sampleDataFile.push(fileObj)
         }
-        // this.stepTwo.sampleDataFile.push(fileObj)
-      // }).catch(err => {
-      //   localStorage.clear();
-      //   this.router.navigateByUrl('login')
       })
     }
 
