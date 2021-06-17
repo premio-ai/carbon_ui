@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
 		if (this.userDetails) {
 			this.set_new_userName = this.userDetails.fullName
-			this.getNotifications();
+			// this.getNotifications();
 			this.getChallengeCounts();
 			this.getInnovatorChallangeCount();
 		}

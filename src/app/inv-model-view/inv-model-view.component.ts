@@ -31,6 +31,7 @@ export class InvModelViewComponent implements OnInit {
   allSubmitOfChallenge: any[] = [];
   submissionIndex: number;
   appUrl: String;
+  submissionStatus: any
 
   ngOnInit() {
     let userDetails = JSON.parse(localStorage.getItem('userDetails'))
@@ -96,10 +97,12 @@ export class InvModelViewComponent implements OnInit {
   getSubmission(id) {
     let url = 'submissionAllChallenge/' + id;
     this.requestService.get(url, null).toPromise().then(data => {
-      this.modelDetails = data[0];
-      this.challengeId = data[0].challengeId;
-      this.phaseId = data[0].phaseId;
-      this.innovatorId = data[0].innovatorId._id;
+      this.modelDetails = data.submissionData[0];
+      this.challengeId = data.submissionData[0].challengeId;
+      this.phaseId = data.submissionData[0].phaseId;
+      this.innovatorId = data.submissionData[0].innovatorId._id;
+
+      this.submissionStatus = data.submissionStatus[0]
 
       this.getChallengeDetails(this.challengeId);
       this.getAllSubmitOfChallenge(this.challengeId);
@@ -107,6 +110,12 @@ export class InvModelViewComponent implements OnInit {
 			localStorage.clear();
 			this.router.navigateByUrl('login')
 		})
+  }
+
+  getTrainingStatus() {
+    if (this.submissionStatus) {
+      return this.submissionStatus.review_fn_status
+    }
   }
 
   getChallengeDetails(id) {
