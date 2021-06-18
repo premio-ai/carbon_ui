@@ -103,6 +103,7 @@ export class InvDashboradComponent implements OnInit {
 		let url = "submissionAllChallenge";
 		this.requestService.get(url, null).toPromise().then(data => {
 			let tempData = []
+			console.log(data, "---data---106")
 			this.activeChallenges.filter(dt => {
 				data.map(res => {
 					if (dt._id == res.challengeId) {

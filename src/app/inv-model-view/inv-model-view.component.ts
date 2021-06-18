@@ -58,8 +58,12 @@ export class InvModelViewComponent implements OnInit {
   getAllSubmitOfChallenge(challengeId) {
     let url = 'submissionAllChallenge/allSubmitOfChallenge/' + challengeId;
     this.requestService.get(url, null).toPromise().then( data => {
-      this.allSubmitOfChallenge = data
-      this.submissionIndex = data.findIndex( dt => dt._id == this.modelId)
+      let tempData = []
+      data.map( dt => {
+        tempData.push(dt.modelData)
+      })
+      this.allSubmitOfChallenge = tempData
+      this.submissionIndex = tempData.findIndex( dt => dt._id == this.modelId)
     }).catch(err => {
 			localStorage.clear();
 			this.router.navigateByUrl('login')
@@ -101,7 +105,6 @@ export class InvModelViewComponent implements OnInit {
       this.challengeId = data.submissionData[0].challengeId;
       this.phaseId = data.submissionData[0].phaseId;
       this.innovatorId = data.submissionData[0].innovatorId._id;
-
       this.submissionStatus = data.submissionStatus[0]
 
       this.getChallengeDetails(this.challengeId);
@@ -114,7 +117,19 @@ export class InvModelViewComponent implements OnInit {
 
   getTrainingStatus() {
     if (this.submissionStatus) {
+      return this.submissionStatus.enrich_fn_status
+    }
+  }
+
+  getTestingStatus() {
+    if (this.submissionStatus) {
       return this.submissionStatus.review_fn_status
+    }
+  }
+
+  getPerformanceStatus() {
+    if (this.submissionStatus) {
+      return this.submissionStatus.schedule_fn_status
     }
   }
 

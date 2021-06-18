@@ -87,8 +87,8 @@
           <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
             <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
             &nbsp;
-            <p style="color: black;">Comlpete</p>
-            <!-- <p style="color: black;">{{getTrainingStatus()}}</p> -->
+            <!-- <p style="color: black;">Comlpete</p> -->
+            <p style="color: black;">{{getTrainingStatus()}}</p>
           </h6>
         </ibm-tile>
         <ibm-tile>
@@ -104,10 +104,16 @@
             5 min
           </p>
           <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
-            <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)">
-            </ibm-inline-loading>
+            <div *ngIf="getTestingStatus() != 'Success' ">
+              <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)">
+              </ibm-inline-loading>
+            </div>
+            <div *ngIf="getTestingStatus() == 'Success' ">
+              <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
+            </div>
             &nbsp;
-            <p style="color: black;">Comlpete</p>
+            <!-- <p style="color: black;">Comlpete</p> -->
+            <p style="color: black;">{{getTestingStatus()}}</p>
           </h6>
         </ibm-tile>
         <ibm-tile>
@@ -125,7 +131,8 @@
           <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
             <svg icon ibmIconRadioButton20></svg>
             &nbsp;
-            <p style="color: black;">Queued</p>
+            <!-- <p style="color: black;">Queued</p> -->
+            <p style="color: black;">{{getPerformanceStatus()}}</p>
           </h6>
         </ibm-tile>
       </div>
