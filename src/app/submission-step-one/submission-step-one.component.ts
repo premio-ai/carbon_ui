@@ -22,8 +22,12 @@ export class SubmissionStepOneComponent implements OnInit {
     modelUploadedPath: any
   }
   bucketName: String
+  isBtnDisabled: boolean
+  isFileUploading: boolean
 
   ngOnInit() {
+    this.isBtnDisabled = true
+    this.isFileUploading = false
     this.createTempBucket();
     this.stepOne = {
       modelUploadedPath: ''
@@ -66,11 +70,14 @@ export class SubmissionStepOneComponent implements OnInit {
     }
     formData.append('uploadInfo', JSON.stringify(payload))
 
+    this.isFileUploading = true
     this.uploadDataVisual(formData)
   }
 
   uploadDataVisual(formData) {
     this.requestService.post('upload', formData).toPromise().then(data => {
+      this.isFileUploading = false
+      this.isBtnDisabled = false
       this.stepOne.modelUploadedPath = data.filePath
     }).catch(err => {
 			localStorage.clear();
