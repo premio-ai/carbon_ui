@@ -189,6 +189,22 @@ export class InvAcceptedComponent implements OnInit {
 		})
 	}
 
+	// download config.ini file
+	async downloadConfigFile() {
+		let url = APP_URL + '/api/files/config.ini'
+		fetch(url)
+			.then(response => response.blob())
+			.then(blob => URL.createObjectURL(blob))
+			.then(uril => {
+				var link = document.createElement("a");
+				link.href = uril;
+				link.download = 'config.ini';
+				document.body.appendChild(link);
+				link.click();
+				document.body.removeChild(link);
+			});
+	}
+
 	getScore() {
 		return Math.floor(Math.random() * (100 - 0 + 1) + 0)
 	}
@@ -252,7 +268,7 @@ export class InvAcceptedComponent implements OnInit {
 	prevPage() {
 		if (this.pageNo > 1) {
 			this.pageNo--;
-			this.pageOffset = (this.pageNo-1) * 10;
+			this.pageOffset = (this.pageNo - 1) * 10;
 			this.getLeaderboard(this.challengeDetails._id, this.pageOffset)
 		}
 	}
@@ -260,7 +276,7 @@ export class InvAcceptedComponent implements OnInit {
 	nextPage() {
 		if (this.pageNo < (this.totalPage)) {
 			this.pageNo++;
-			this.pageOffset = (this.pageNo-1) * 10;
+			this.pageOffset = (this.pageNo - 1) * 10;
 			this.getLeaderboard(this.challengeDetails._id, this.pageOffset)
 		}
 	}
