@@ -20,6 +20,7 @@ export class InvSeePerformanceComponent implements OnInit {
 		private location: Location
 	) { }
 	modelDetails: any;
+	modelPerformance: any;
 	challengeId: any;
 	innovatorId: any;
 	phaseId: any;
@@ -53,6 +54,7 @@ export class InvSeePerformanceComponent implements OnInit {
 				}
 			});
 			this.getSubmission(modelId)
+			this.getModelPerformance(modelId)
 		} else {
 			this.router.navigateByUrl('login')
 		}
@@ -65,14 +67,54 @@ export class InvSeePerformanceComponent implements OnInit {
 			this.challengeId = data.submissionData[0].challengeId;
 			this.phaseId = data.submissionData[0].phaseId;
 			this.innovatorId = data.submissionData[0].innovatorId._id;
-			this.accuracyScore = this.modelDetails.score
-			this.precisionScore = this.modelDetails.precisionScore
-			this.recallScore = this.modelDetails.recallScore
+			// this.accuracyScore = this.modelDetails.score
+			// this.precisionScore = this.modelDetails.precisionScore
+			// this.recallScore = this.modelDetails.recallScore
 
 			this.getChallengeDetails(this.challengeId);
-			this.accuracy();
-			this.precision();
-			this.recall();
+			// this.accuracy();
+			// this.precision();
+			// this.recall();
+		}).catch(err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
+		})
+	}
+
+	getModelPerformance(id) {
+		let url = 'submissionAllChallenge/modelPerformance/' + id;
+		this.requestService.get(url, null).toPromise().then(data => {
+			this.modelPerformance = data
+
+			this.modelPerformance.map(dt => {
+				if (dt.key.startsWith('test_')) {
+					if (dt.key == "test_accuracy") {
+						this.accuracyScore = (dt.value * 100).toFixed(0)
+					}
+					if (dt.key == "test_macro_avg_precision") {
+						this.precisionScore = (dt.value * 100).toFixed(0)
+					}
+					if (dt.key == "test_macro_avg_recall") {
+						this.recallScore = (dt.value * 100).toFixed(0)
+					}
+					this.accuracy();
+					this.precision();
+					this.recall();
+				} else if (dt.key.startsWith('training_')) {
+					if (dt.key == "training_accuracy_score") {
+						this.accuracyScore = dt.value * 100
+					}
+					if (dt.key == "training_precision_score") {
+						this.precisionScore = dt.value * 100
+					}
+					if (dt.key == "training_recall_score") {
+						this.recallScore = dt.value * 100
+					}
+					this.accuracy();
+					this.precision();
+					this.recall();
+				}
+			})
 		}).catch(err => {
 			localStorage.clear();
 			this.router.navigateByUrl('login')

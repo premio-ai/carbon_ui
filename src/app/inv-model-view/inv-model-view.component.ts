@@ -32,6 +32,7 @@ export class InvModelViewComponent implements OnInit {
   submissionIndex: number;
   appUrl: String;
   submissionStatus: any
+  modelSummary: any
 
   ngOnInit() {
     let userDetails = JSON.parse(localStorage.getItem('userDetails'))
@@ -41,6 +42,7 @@ export class InvModelViewComponent implements OnInit {
         if (params) {
           this.modelId = params.id
           this.getSubmission(this.modelId)
+          this.getModelSummary(this.modelId)
         }
       });
   
@@ -115,21 +117,43 @@ export class InvModelViewComponent implements OnInit {
 		})
   }
 
+  getModelSummary(id) {
+    let url = 'submissionAllChallenge/modelSummary/' + id;
+    this.requestService.get(url, null).toPromise().then( data => {
+      this.modelSummary = data
+    }).catch( err => {
+      localStorage.clear();
+			this.router.navigateByUrl('login')
+    })
+  }
+
+  getUploadStatus() {
+    if (this.modelSummary) {
+      return this.modelSummary.summary.upload_status
+    }
+  }
+
   getTrainingStatus() {
-    if (this.submissionStatus) {
-      return this.submissionStatus.enrich_fn_status
+    if (this.modelSummary) {
+      return this.modelSummary.summary.training_status
     }
   }
 
   getTestingStatus() {
-    if (this.submissionStatus) {
-      return this.submissionStatus.review_fn_status
+    if (this.modelSummary) {
+      return this.modelSummary.summary.test_status
     }
   }
 
   getPerformanceStatus() {
-    if (this.submissionStatus) {
-      return this.submissionStatus.schedule_fn_status
+    if (this.modelSummary) {
+      if (this.modelSummary.metricsStatus == 'RUNNING') {
+        return 'PENDING'
+      } else if (this.modelSummary.metricsStatus.training == 'COMPLETE' && this.modelSummary.metricsStatus.testing == 'COMPLETE') {
+        return 'COMPLETE'
+      } else if (this.modelSummary.metricsStatus.training == 'COMPLETE' && this.modelSummary.metricsStatus.testing == 'INCOMPLETE') {
+        return 'INCOMPLETE'
+      }
     }
   }
 

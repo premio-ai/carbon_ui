@@ -179,12 +179,12 @@ export class InvAcceptedComponent implements OnInit {
 	getSubmissionByChallengeId(challengeId) {
 		let url = 'submissionAllChallenge/allSubmitOfChallenge/' + challengeId;
 		this.requestService.get(url, null).toPromise().then(data => {
-			console.log(data, "---data---182")
+console.log(data, "---data---182")
 			let tempData = []
 			data.map( dt => {
 				tempData.push(dt.modelData)
 			})
-			this.challengeSubmissionData = tempData
+			this.challengeSubmissionData = data
 			if (this.challengeSubmissionData.length == this.challengeDetails.phases.length) {
 				this.phasesSubmissionComplete = true
 			}
