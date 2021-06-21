@@ -67,9 +67,15 @@
           </p>
 
           <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
-            <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
+            <!-- <svg class="svg" icon ibmIconCheckmarkOutline20></svg> -->
+            <div *ngIf="getUploadStatus() == 'PENDING' ">
+              <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)"></ibm-inline-loading>
+            </div>
+            <div *ngIf="getUploadStatus() == 'SUCCESS' ">
+              <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
+            </div>
             &nbsp;
-            <p style="color: black;">Comlpete</p>
+            <p style="color: black;">{{getUploadStatus()}}</p>
           </h6>
         </ibm-tile>
         <ibm-tile>
@@ -85,9 +91,15 @@
             5 min
           </p>
           <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
-            <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
+            <!-- <svg class="svg" icon ibmIconCheckmarkOutline20></svg> -->
+            <div *ngIf="getTrainingStatus() == 'RUNNING' ">
+              <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)"></ibm-inline-loading>
+            </div>
+            <div *ngIf="getTrainingStatus() == 'SUCCESS' ">
+              <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
+            </div>
             &nbsp;
-            <p style="color: black;">Comlpete</p>
+            <p style="color: black;">{{getTrainingStatus()}}</p>
           </h6>
         </ibm-tile>
         <ibm-tile>
@@ -103,10 +115,14 @@
             5 min
           </p>
           <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
-            <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)">
-            </ibm-inline-loading>
+            <div *ngIf="getTestingStatus() == 'RUNNING' ">
+              <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)"></ibm-inline-loading>
+            </div>
+            <div *ngIf="getTestingStatus() == 'SUCCESS' ">
+              <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
+            </div>
             &nbsp;
-            <p style="color: black;">Comlpete</p>
+            <p style="color: black;">{{getTestingStatus()}}</p>
           </h6>
         </ibm-tile>
         <ibm-tile>
@@ -122,9 +138,14 @@
             5 min
           </p>
           <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
-            <svg icon ibmIconRadioButton20></svg>
+            <div *ngIf="getPerformanceStatus() == 'COMPLETE' ">
+              <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
+            </div>
+            <div *ngIf="getPerformanceStatus() != 'COMPLETE' ">
+              <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)"></ibm-inline-loading>
+            </div>
             &nbsp;
-            <p style="color: black;">Queued</p>
+            <p style="color: black;">{{getPerformanceStatus()}}</p>
           </h6>
         </ibm-tile>
       </div>

@@ -23,6 +23,7 @@ export class InvDashboradComponent implements OnInit {
 	submissionRanking: any[] = [];
 	sorting: any[];
 	submittedChallenges: any[] = [];
+	submissionPerformance: any[] = []
 
 	ngOnInit() {
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
@@ -31,6 +32,7 @@ export class InvDashboradComponent implements OnInit {
 			this.getAllPastChallanges();
 			this.getChallengeSubmissionRanking();
 			this.getSubmittedChallenge();
+			this.getModelPerformance();
 
 			this.sorting = [
 				{ content: 'Most Popular' },
@@ -52,6 +54,18 @@ export class InvDashboradComponent implements OnInit {
 			localStorage.clear();
 			this.router.navigateByUrl('login')
 		})
+	}
+
+	getModelPerformance() {
+		let url = "submissionAllChallenge/submissions/modelPerformance"
+
+		this.requestService.get(url, null).toPromise().then( data => {
+			this.submissionPerformance = data
+		}).catch( err => {
+			localStorage.clear();
+			this.router.navigateByUrl('login')
+		})
+
 	}
 
 	getSubmittedChallenge() {

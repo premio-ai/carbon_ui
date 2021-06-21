@@ -9,7 +9,6 @@
 </div>
 
 <div style="display: grid;grid-template-columns: repeat(2,minmax(0,1fr)) ;gap: 10px;">
-
   <div *ngFor="let model of challengeSubmissionData; index as i" class="custom-class-example">
     <ibm-tile class="tile">
       <div style="display: grid;grid-template-columns: 68% 28%;padding: 1rem;">
@@ -17,57 +16,50 @@
           <p style="font-size: 20px;">{{model?.modelName}}</p>
           <span class="phase2">Phase {{i+1}} of {{totalPhases}}</span>
         </div>
-        <div style="margin-left: auto;align-items: center;display: flex;">
-          <svg class="svg" icon ibmIconCheckmarkFilled16></svg>&nbsp;
-          <p class="discription">Results</p>
+        <div *ngIf="model?.modelStatus.status == 'UPLOADING'">
+          <div style="margin-left: auto;align-items: center;display: flex;">
+            <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)"></ibm-inline-loading>&nbsp;
+            <p class="discription">Uploading model to data</p>
+          </div>
+        </div>
+        <div *ngIf="model?.modelStatus.status == 'RESULT' ">
+          <div style="margin-left: auto;align-items: center;display: flex;">
+            <svg class="svg" icon ibmIconCheckmarkFilled16></svg>&nbsp;
+            <p class="discription">Results</p>
+          </div>
         </div>
       </div>
       <div style="display: grid;grid-template-columns: 80% 20%;padding: 1rem;margin-top: -32px;">
-
         <div class="custom-class-example">
           <p *ngIf="showLess" class="discription">
             {{ showLessStr(model?.modelDescription) }}
             <span *ngIf="model?.modelDescription.length>100" (click)="readMore()"
-              style="color: cadetblue; font-size: x-small; cursor: pointer;">
-              ...Read More
-            </span>
+              style="color: cadetblue; font-size: x-small; cursor: pointer;">...Read More</span>
           </p>
           <p *ngIf="!showLess" class="discription">
             {{ model?.modelDescription }}
-            <span (click)="readLess()" style="color: cadetblue; font-size: x-small; cursor: pointer;">
-              Read Less
-            </span>
+            <span (click)="readLess()" style="color: cadetblue; font-size: x-small; cursor: pointer;">Read Less</span>
           </p>
-
         </div>
-
         <div class="custom-class-example">
           <div class="sideicon">
-
-            <p class="modelscrename">{{model?.score}}</p>
+            <p class="modelscrename">{{model?.modelStatus.score}}</p>
           </div>
           <div class="sideicon">
-
             <p class="score">Score</p>
           </div>
-
         </div>
-
       </div>
       <div style="display: grid;grid-template-columns: 50% 50%;">
-
         <div class="custom-class-example" *ngIf="model?.score>80">
           <button class="view" [ibmButton]="ibmButton" [size]="'sm'">Enter phase 2</button>
         </div>
-        <div class="custom-class-example" *ngIf="model?.score>80">
-          <button class="model" [ibmButton]="ibmButton" [size]="'sm'" (click)="seePerformance(model?._id)">See
-            performance</button>
+        <div class="custom-class-example" *ngIf="model?.modelStatus.status == 'RESULT' ">
+          <button class="model" [ibmButton]="ibmButton" [size]="'sm'" (click)="seePerformance(model?._id)">See performance</button>
         </div>
-        <div class="viewmodel" *ngIf="model?.score<80">
-          <button class="model" [ibmButton]="ibmButton" [size]="'sm'" (click)="viewModel(model?._id)">View
-            Model</button>
+        <div class="viewmodel" *ngIf="model?.modelStatus.status == 'UPLOADING' ">
+          <button class="model" [ibmButton]="ibmButton" [size]="'sm'" (click)="viewModel(model?._id)">View Model</button>
         </div>
-
       </div>
     </ibm-tile>
     <p class="downlogo">Download Trained Model <svg icon ibmIconDownload16 (click)="downloadFile(model.modelUploadedPath)"></svg></p>

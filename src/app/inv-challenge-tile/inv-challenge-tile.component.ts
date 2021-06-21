@@ -13,6 +13,7 @@ export class InvChallengeTileComponent implements OnInit {
   @Input() challenge: any;
   @Input() submissionRanking: any;
   @Input() submittedChallenges: any;
+  @Input() submissionPerformance: any;
 
   constructor(private requestService: RequestService,
     private router: Router
