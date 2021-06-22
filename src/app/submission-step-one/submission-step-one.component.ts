@@ -11,6 +11,7 @@ export class SubmissionStepOneComponent implements OnInit {
   @Input() challengeDetails: any;
   @Input() challengeSubmissionData: any;
   @Output() public goNext: EventEmitter<any> = new EventEmitter();
+  @Output() public cancelSubmit: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private requestService: RequestService,
@@ -19,19 +20,42 @@ export class SubmissionStepOneComponent implements OnInit {
   docError: boolean
   phaseIndex: number
   stepOne: {
-    modelUploadedPath: any
+    modelUploadedPath: string,
+    phaseId: string
   }
   bucketName: String
   isBtnDisabled: boolean
   isFileUploading: boolean
+  phasesList: any[] = []
 
   ngOnInit() {
     this.isBtnDisabled = true
     this.isFileUploading = false
     this.createTempBucket();
     this.stepOne = {
-      modelUploadedPath: ''
+      modelUploadedPath: '',
+      phaseId: ''
     };
+  }
+
+  ngOnChanges() {
+    if (this.challengeDetails && this.challengeSubmissionData) {
+      let temp = []
+      this.challengeDetails.phases.map((dt, i) => {
+        temp.push({
+          content: 'Phase' + i,
+          id: dt.phaseId
+        })
+      })
+
+      this.phasesList = temp
+    }
+  }
+
+  ngDoCheck() {
+    if (this.stepOne.modelUploadedPath.length > 0 && this.stepOne.phaseId.length > 0) {
+      this.isBtnDisabled = false
+    }
   }
 
   createTempBucket() {
@@ -39,25 +63,17 @@ export class SubmissionStepOneComponent implements OnInit {
     this.requestService.post(url, null).toPromise().then(data => {
       this.bucketName = data.bucketName
     }).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+      localStorage.clear();
+      this.router.navigateByUrl('login')
+    })
   }
 
-  ngOnChanges() {
-    if (this.challengeDetails && this.challengeSubmissionData) {
-      this.getPhaseIndex();
-    }
+  selectPhase(type) {
+    this.stepOne.phaseId = type.item.id
+
+    this.phaseIndex = this.challengeDetails.phases.findIndex(dt => { return dt.phaseId == type.item.id })
   }
 
-  getPhaseIndex() {
-		if (this.challengeSubmissionData.length > 0) {
-			this.phaseIndex = this.challengeSubmissionData.length
-		} else {
-      this.phaseIndex = 0
-		}
-  }
-  
   setModel(acceptedFiles) {
     const file = acceptedFiles.file;
     const formData = new FormData();
@@ -77,17 +93,16 @@ export class SubmissionStepOneComponent implements OnInit {
   uploadDataVisual(formData) {
     this.requestService.post('upload', formData).toPromise().then(data => {
       this.isFileUploading = false
-      this.isBtnDisabled = false
       this.stepOne.modelUploadedPath = data.filePath
     }).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+      localStorage.clear();
+      this.router.navigateByUrl('login')
+    })
   }
 
   getFileName(filePath) {
     let pathArr = filePath.split('/')
-    if (pathArr[2].length>22) {
+    if (pathArr[2].length > 22) {
       return pathArr[2].substring(0, 22) + '...'
     } else {
       return pathArr[2]
@@ -98,7 +113,7 @@ export class SubmissionStepOneComponent implements OnInit {
     this.stepOne.modelUploadedPath = ''
   }
 
-	async downloadFile(phaseIndex, fileIndex) {
+  async downloadFile(phaseIndex, fileIndex) {
     if (this.challengeDetails) {
       let docName = this.challengeDetails.phases[phaseIndex].sampleDataFile[fileIndex].path || ''
 
@@ -136,6 +151,10 @@ export class SubmissionStepOneComponent implements OnInit {
 
   nextStep() {
     this.goNext.emit(this.stepOne)
+  }
+
+  cancel() {
+    this.cancelSubmit.emit()
   }
 
 }

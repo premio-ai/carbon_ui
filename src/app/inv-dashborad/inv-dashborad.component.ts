@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from "../request.service";
 import { Router } from "@angular/router";
+import { uniqBy } from 'lodash';
+
 
 
 @Component({
@@ -97,7 +99,7 @@ export class InvDashboradComponent implements OnInit {
 	}
 
 	getAllActiveChallanges() {
-		let allActiveChallanegUrl = "challenge/all";
+		let allActiveChallanegUrl = "challenge/inv-dashboard";
 		let params = {
 			skip: 0,
 			offset: 0
@@ -124,7 +126,7 @@ export class InvDashboradComponent implements OnInit {
 					}
 				})
 			})
-			this.submittedActiveChallenges = tempData
+			this.submittedActiveChallenges = uniqBy(tempData)
 		}).catch(err => {
 			localStorage.clear();
 			this.router.navigateByUrl('login')
@@ -140,7 +142,6 @@ export class InvDashboradComponent implements OnInit {
 
 		this.requestService.get(url, params).toPromise().then(data => {
 			this.pastChallenges = data.list;
-			//   this.getBookmarkedChallenges();
 			this.getSubmissionPast();
 		}).catch(err => {
 			localStorage.clear();

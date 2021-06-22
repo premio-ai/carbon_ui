@@ -38,6 +38,29 @@ export class SubmissionStepFourComponent implements OnInit {
     this.goToStepOne.emit()
   }
 
+  getPhasesCount(phaseId) {
+    let index = this.challengeDetails.phases.findIndex( dt => { return dt.phaseId == phaseId})
+    return `Phase ${index+1} of ${this.totalPhases} `
+  }
+
+  showNextBtn(phaseId) {
+    let phasePassing = ''
+    this.challengeDetails.phases.map( dt => {
+      if (dt.phaseId == phaseId) {
+        phasePassing = dt.passingScore
+      }
+    })
+
+    let displayBtn = false
+    this.challengeSubmissionData.map( dt => {
+      if (dt.modelStatus.score > phasePassing) {
+        displayBtn = true
+      }
+    })
+
+    return displayBtn;
+  }
+
   viewModel(modelId) {
     this.router.navigateByUrl('invmodel-view/' + modelId)
   }

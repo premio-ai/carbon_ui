@@ -1,5 +1,5 @@
 <button [ibmButton]="ibmButton" [size]="size" (click)="toStepOne()"
-  [disabled]="!isChallengeAccepted || phasesSubmissionComplete">
+  [disabled]="!isChallengeAccepted">
   Submit model<svg class="bx--btn__icon" ibmIconAdd size="20"></svg>
 </button>
 <br />
@@ -14,12 +14,12 @@
       <div style="display: grid;grid-template-columns: 68% 28%;padding: 1rem;">
         <div>
           <p style="font-size: 20px;">{{model?.modelName}}</p>
-          <span class="phase2">Phase {{i+1}} of {{totalPhases}}</span>
+          <span class="phase2">{{getPhasesCount(model?.phaseId)}}</span>
         </div>
-        <div *ngIf="model?.modelStatus.status == 'UPLOADING'">
-          <div style="margin-left: auto;align-items: center;display: flex;">
+        <div *ngIf="model?.modelStatus.status != 'RESULT'">
+          <div style="margin-left: auto;align-items: center;display: flex; width: 100px;">
             <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)"></ibm-inline-loading>&nbsp;
-            <p class="discription">Uploading model to data</p>
+            <p class="discription" style="width: 165px">Uploading model to data</p>
           </div>
         </div>
         <div *ngIf="model?.modelStatus.status == 'RESULT' ">
@@ -31,17 +31,15 @@
       </div>
       <div style="display: grid;grid-template-columns: 80% 20%;padding: 1rem;margin-top: -32px;">
         <div class="custom-class-example">
-          <p *ngIf="showLess" class="discription">
-            {{ showLessStr(model?.modelDescription) }}
+          <p *ngIf="showLess" class="discription">{{ showLessStr(model?.modelDescription) }}
             <span *ngIf="model?.modelDescription.length>100" (click)="readMore()"
               style="color: cadetblue; font-size: x-small; cursor: pointer;">...Read More</span>
           </p>
-          <p *ngIf="!showLess" class="discription">
-            {{ model?.modelDescription }}
+          <p *ngIf="!showLess" class="discription">{{ model?.modelDescription }}
             <span (click)="readLess()" style="color: cadetblue; font-size: x-small; cursor: pointer;">Read Less</span>
           </p>
         </div>
-        <div class="custom-class-example">
+        <div class="custom-class-example" *ngIf="model?.modelStatus.score > 0">
           <div class="sideicon">
             <p class="modelscrename">{{model?.modelStatus.score}}</p>
           </div>
@@ -51,7 +49,7 @@
         </div>
       </div>
       <div style="display: grid;grid-template-columns: 50% 50%;">
-        <div class="custom-class-example" *ngIf="model?.score>80">
+        <div class="custom-class-example" *ngIf="showNextBtn(model?.phaseId)">
           <button class="view" [ibmButton]="ibmButton" [size]="'sm'">Enter phase 2</button>
         </div>
         <div class="custom-class-example" *ngIf="model?.modelStatus.status == 'RESULT' ">

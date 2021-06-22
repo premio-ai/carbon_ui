@@ -4,19 +4,21 @@
       <p>
         {{ challenge?.title }}
       </p>
-      
-     
-      <div class="tags" *ngIf="getStatus(challenge)">
-        <svg icon ibmIconCheckmarkFilled16 class="filled"></svg>
-        &nbsp;&nbsp;
-        <p style="margin-top: -4px; font-size: 10px;">Training</p>
-      </div>
-      <div class="tags" *ngIf="!getStatus(challenge)">
+      <div class="tags" *ngIf="getStatus(challenge?._id) == 'UPLOADING' ">
         <svg icon ibmIconWarningFilled16 class="fille"></svg>
         &nbsp;&nbsp;
         <p style="margin-top: 0px; font-size: 10px;line-height: 18px;">Upload<br/>Model</p>
       </div>
-
+      <div class="tags" *ngIf="getStatus(challenge?._id) == 'TRAINING' ">
+        <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)"></ibm-inline-loading>
+        &nbsp;&nbsp;
+        <p style="margin-top: -4px; font-size: 10px;">Training</p>
+      </div>
+      <div class="tags" *ngIf="!getStatus(challenge?._id) == 'RESULTS' ">
+        <svg icon ibmIconCheckmarkFilled16 class="filled"></svg>
+        &nbsp;&nbsp;
+        <p style="margin-top: 0px; font-size: 10px;line-height: 18px;">Results</p>
+      </div>
     </div>
    
     <div class="invphasename" >
@@ -52,7 +54,6 @@
             <p style="font-size: 10px;">{{getExpiryDate(challenge.expiryDate)}}</p>
           </div>
         </div>
-     
     </div>
 
     <div style="display: grid;grid-template-columns: 68% 32%;padding: 0rem;">
@@ -69,8 +70,5 @@
         </button>
       </div>
     </div>
-
-  </div>
-
- 
+  </div> 
 </ibm-tile>

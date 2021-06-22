@@ -63,18 +63,12 @@ export class InvSeePerformanceComponent implements OnInit {
 	getSubmission(id) {
 		let url = 'submissionAllChallenge/' + id;
 		this.requestService.get(url, null).toPromise().then(data => {
-			this.modelDetails = data.submissionData[0];
-			this.challengeId = data.submissionData[0].challengeId;
-			this.phaseId = data.submissionData[0].phaseId;
-			this.innovatorId = data.submissionData[0].innovatorId._id;
-			// this.accuracyScore = this.modelDetails.score
-			// this.precisionScore = this.modelDetails.precisionScore
-			// this.recallScore = this.modelDetails.recallScore
+			this.modelDetails = data[0];
+			this.challengeId = data[0].challengeId;
+			this.phaseId = data[0].phaseId;
+			this.innovatorId = data[0].innovatorId._id;
 
 			this.getChallengeDetails(this.challengeId);
-			// this.accuracy();
-			// this.precision();
-			// this.recall();
 		}).catch(err => {
 			localStorage.clear();
 			this.router.navigateByUrl('login')

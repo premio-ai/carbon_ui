@@ -245,7 +245,7 @@
 								</ibm-progress-indicator>
 							</div>
 							<div ibmCol class="custom-class-example1" [columnNumbers]="{ md: 6, sm: 12 }">
-								<app-submission-step-one [challengeDetails]="challengeDetails" *ngIf="current == 0"
+								<app-submission-step-one [challengeDetails]="challengeDetails" *ngIf="current == 0" (cancelSubmit)=cancelSubmit($event)
 									(goNext)=nextStepOne($event) [challengeSubmissionData]="challengeSubmissionData" >
 								</app-submission-step-one>
 								<app-submission-step-two *ngIf="current == 1" (goPrevious)="previousStepTwo()"

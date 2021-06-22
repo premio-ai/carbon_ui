@@ -54,6 +54,7 @@ export class InvAcceptedComponent implements OnInit {
 	totalPage: number;
 	appUrl: String;
 	imageUrlArr: any[] = [];
+	submissionCount: number
 
 	ngOnInit() {
 		let userDetails = JSON.parse(localStorage.getItem('userDetails'))
@@ -64,6 +65,7 @@ export class InvAcceptedComponent implements OnInit {
 			this.pageNo = 1;
 			this.isChallengeAccepted = false;
 			this.phasesSubmissionComplete = false;
+			this.submissionCount = 0;
 			this.activatedRoute.params.subscribe((params: Params) => {
 				if (params) {
 					this.challengeId = params.id
@@ -179,9 +181,8 @@ export class InvAcceptedComponent implements OnInit {
 	getSubmissionByChallengeId(challengeId) {
 		let url = 'submissionAllChallenge/allSubmitOfChallenge/' + challengeId;
 		this.requestService.get(url, null).toPromise().then(data => {
-console.log(data, "---data---182")
 			let tempData = []
-			data.map( dt => {
+			data.map(dt => {
 				tempData.push(dt.modelData)
 			})
 			this.challengeSubmissionData = data
@@ -363,12 +364,29 @@ console.log(data, "---data---182")
 	}
 
 	nextStepOne(stepOne) {
-		this.submissionData.challengeId = this.challengeId
-		this.submissionData.phaseId = this.getPhaseId()
-		this.submissionData.modelType = 'MODIFIED_TRAINED_MODEL'
-		this.submissionData.modelUploadedPath = stepOne.modelUploadedPath,
+		this.submissionData.challengeId = this.challengeId;
+		// this.submissionData.phaseId = this.getPhaseId();
+		this.submissionData.phaseId = stepOne.phaseId
+		this.submissionData.modelType = 'MODIFIED_TRAINED_MODEL';
+		this.submissionData.modelUploadedPath = stepOne.modelUploadedPath;
 
-			this.current++;
+		this.getSubmissionCount(stepOne.phaseId)
+
+		this.current++;
+	}
+
+	getSubmissionCount(phaseId) {
+		let count = 0
+		this.challengeSubmissionData.map( dt => {
+			if (dt.phaseId == phaseId) {
+				count += 1
+			}
+		})
+		this.submissionCount = count + 1
+	}
+
+	cancelSubmit() {
+		this.current = 3
 	}
 
 	previousStepTwo() {
@@ -390,7 +408,11 @@ console.log(data, "---data---182")
 
 	nextStepThree() {
 		let url = 'submissionAllChallenge';
-		this.requestService.post(url, this.submissionData).toPromise().then(data => {
+		let payload = {
+			submissionCount: this.submissionCount,
+			data: this.submissionData
+		}
+		this.requestService.post(url, payload).toPromise().then(data => {
 			this.getSubmissionByChallengeId(this.challengeId);
 			this.getLeaderboard(this.challengeId, this.pageOffset)
 			this.current++;
