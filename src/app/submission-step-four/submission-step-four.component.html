@@ -1,5 +1,4 @@
-<button [ibmButton]="ibmButton" [size]="size" (click)="toStepOne()"
-  [disabled]="!isChallengeAccepted">
+<button [ibmButton]="ibmButton" [size]="size" (click)="toStepOne()" [disabled]="!isChallengeAccepted">
   Submit model<svg class="bx--btn__icon" ibmIconAdd size="20"></svg>
 </button>
 <br />
@@ -18,8 +17,10 @@
         </div>
         <div *ngIf="model?.modelStatus.status != 'RESULT'">
           <div style="margin-left: auto;align-items: center;display: flex; width: 100px;">
-            <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)"></ibm-inline-loading>&nbsp;
-            <p class="discription" style="width: 165px">Uploading model to data</p>
+            <!-- <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)"></ibm-inline-loading>&nbsp;
+            <p class="discription" style="width: 165px">Uploading model to data</p> -->
+            <svg icon ibmIconWarningFilled16 class="fille"></svg>&nbsp;&nbsp;
+            <p style="margin-top: 0px; font-size: 10px;line-height: 18px;">Model Not<br />Uploaded</p>
           </div>
         </div>
         <div *ngIf="model?.modelStatus.status == 'RESULT' ">
@@ -53,14 +54,17 @@
           <button class="view" [ibmButton]="ibmButton" [size]="'sm'">Enter phase 2</button>
         </div>
         <div class="custom-class-example" *ngIf="model?.modelStatus.status == 'RESULT' ">
-          <button class="model" [ibmButton]="ibmButton" [size]="'sm'" (click)="seePerformance(model?._id)">See performance</button>
+          <button class="model" [ibmButton]="ibmButton" [size]="'sm'" (click)="seePerformance(model?._id)">See
+            performance</button>
         </div>
         <div class="viewmodel" *ngIf="model?.modelStatus.status == 'UPLOADING' ">
-          <button class="model" [ibmButton]="ibmButton" [size]="'sm'" (click)="viewModel(model?._id)">View Model</button>
+          <button class="model" [ibmButton]="ibmButton" [size]="'sm'" (click)="viewModel(model?._id)">View
+            Model</button>
         </div>
       </div>
     </ibm-tile>
-    <p class="downlogo">Download Trained Model <svg icon ibmIconDownload16 (click)="downloadFile(model.modelUploadedPath)"></svg></p>
+    <p class="downlogo">Download Trained Model <svg icon ibmIconDownload16
+        (click)="downloadFile(model.modelUploadedPath)"></svg></p>
   </div>&nbsp;&nbsp;
 
 </div>

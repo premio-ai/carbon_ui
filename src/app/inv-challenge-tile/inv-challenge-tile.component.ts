@@ -52,7 +52,12 @@ export class InvChallengeTileComponent implements OnInit {
         status = dt.status
       }
     })
-    return status
+    if (status == 'UPLOADING' || status == '') {
+      status = 'UPLOADING'
+      return status
+    } else {
+      return status
+    }
   }
 
   getPlace(challengeId) {
