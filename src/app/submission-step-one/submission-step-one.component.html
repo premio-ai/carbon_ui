@@ -1,3 +1,12 @@
+<div style="margin-top: 20px; margin-bottom: 15px;">
+	<ibm-label><span style="font-size: medium; color: black;">Select Phase for submission</span></ibm-label>
+	<div ibmCol class="custom-class-example" [columnNumbers]="{'md': 6, 'sm': 12}" style="width: 320px;">
+		<ibm-dropdown [label]="Min" placeholder="Select" (selected)="selectPhase($event)">
+			<ibm-dropdown-list [items]="phasesList"></ibm-dropdown-list>
+		</ibm-dropdown>
+	</div>
+</div>
+
 <p>
 	Don't forget to check out the sample data sets before you submit a model.
 	These data sets will help you get started in creating your models.
@@ -20,15 +29,6 @@
 <h6>Model</h6>
 <p>Please upload your model in (.format) formats. (fileSize) MB max file size.
 </p>
-
-<div style="margin-top: 20px;">
-	<ibm-label><span style="font-size: medium; color: black;">Select Phase for submission</span></ibm-label>
-	<div ibmCol class="custom-class-example" [columnNumbers]="{'md': 6, 'sm': 12}" style="width: 320px;">
-		<ibm-dropdown [label]="Min" placeholder="Select" (selected)="selectPhase($event)">
-			<ibm-dropdown-list [items]="phasesList"></ibm-dropdown-list>
-		</ibm-dropdown>
-	</div>
-</div>
 
 <app-drop-zip-uploader (goNext)="setModel($event)" (uploadFile)="uploadDataVisual()"
 	(filesChange)="onImageSelect($event.target.files)"></app-drop-zip-uploader>

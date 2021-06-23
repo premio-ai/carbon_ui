@@ -40,7 +40,7 @@
           <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
             <h5>Data Visualisation</h5>
             <p class="drag">An image that represents your Sample data</p>
-            <app-drop-image-uploader (goNext)="setDataVisual($event, i)" (uploadFile)="uploadDataVisual()"
+            <app-drop-image-uploader (moveNext)="setDataVisual($event, i)" (uploadFile)="uploadDataVisual()"
               (filesChange)="onImageSelect($event.target.files)" (onDrop)="onImageSelect($event.target.files)">
             </app-drop-image-uploader>
             <br />
@@ -128,7 +128,7 @@
           <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
             <h5>Data Visualisation</h5>
             <p class="drag">An image that represents your Sample data</p>
-            <app-drop-image-uploader (goNext)="setDataVisual($event, i)" (uploadFile)="uploadDataVisual()"
+            <app-drop-image-uploader (moveNext)="setDataVisual($event, i)" (uploadFile)="uploadDataVisual()"
               (filesChange)="onImageSelect($event.target.files)" (onDrop)="onImageSelect($event.target.files)">
             </app-drop-image-uploader>
             <br />
@@ -151,8 +151,9 @@
           <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }" style="padding-left: 10px;">
             <h5>Sample Data</h5>
             <p class="drag">Anonymous, available to download for any innovator</p>
-            <app-drop-file-uploader (uploadFile)="uploadSampleData($event, i)" (getFile)="setSampleData($event)">
+            <app-drop-file-uploader (uploadFile)="uploadSampleData($event, i)" >
             </app-drop-file-uploader>
+            <!-- (getFile)="setSampleData($event)" -->
             <br />
             <div *ngIf="isSampleFileUploading">
               <h6>

@@ -22,7 +22,7 @@ export class ImageUploader {
 	@Input() dropText = "Drag and drop files here";
 	@Input() disabled = false;
 
-	@Output() public goNext: EventEmitter<any> = new EventEmitter();
+	@Output() public moveNext: EventEmitter<any> = new EventEmitter();
 	@Output() public uploadFile: EventEmitter<any> = new EventEmitter();
 
 	protected maxSize = 500000;
@@ -39,7 +39,7 @@ export class ImageUploader {
 				let reader = new FileReader();
 				reader.readAsArrayBuffer(fileObj.file);
 				reader.onload = () => {
-					this.goNext.emit(fileObj)
+					this.moveNext.emit(fileObj)
 					resolve({
 						file: fileObj,
 						accept: (this.accept.includes(fileExtension) || this.accept.includes(mime) || !this.accept.length)

@@ -47,11 +47,13 @@ export class InvChallengeTileComponent implements OnInit {
 
   getStatus(challengeId) {
     let status = ''
-    this.submissionPerformance.filter(dt => {
-      if (dt.challengeId == challengeId) {
-        status = dt.status
-      }
-    })
+    if (this.submissionPerformance) {
+      this.submissionPerformance.filter(dt => {
+        if (dt.challengeId == challengeId) {
+          status = dt.status
+        }
+      })
+    }
     if (status == 'UPLOADING' || status == '') {
       status = 'UPLOADING'
       return status

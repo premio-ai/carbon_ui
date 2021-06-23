@@ -7,11 +7,11 @@ import { RequestService } from '../request.service';
 	template: `<ibm-file-uploader [title]="title" [description]="description" [buttonText]="buttonText"
     		[buttonType]="buttonType" [accept]="accept" [multiple]="multiple" [skeleton]="skeleton"
     		[(files)]="files" [size]="size" drop="true" [dropText]="dropText" (filesChange)="onDropped($event)">
-			</ibm-file-uploader>
+			</ibm-file-uploader>`
 
-			<p *ngIf="files && files.size > 3">
-			<span style="font-size: x-small; color: red">Maximum 3 files can be uploaded.</span>
-			</p>`
+			// <p *ngIf="files && files.size > 3">
+			// <span style="font-size: x-small; color: red">Maximum 3 files can be uploaded.</span>
+			// </p>
 			// <div [id]="notificationId" style="width: 300px; margin-top: 20px"></div>
 		})
 
@@ -21,7 +21,6 @@ export class DragAndDropStory {
 	@Input() files = new Set();
 	@Input() title;
 	@Input() description;
-	// @Input() accept = [".jpg", ".png", ".pdf", ".txt"];
 	@Input() accept = [".csv"];
 	@Input() multiple = true;
 	@Input() dropText = "Drag and drop files here or upload";
@@ -51,33 +50,8 @@ export class DragAndDropStory {
 	setSampleData(acceptedFiles) {
 		if (acceptedFiles) {
 			const file = acceptedFiles.file;
-			// this.uploadSampleData(file)
 			this.uploadFile.emit(file)
 		}
 	}
-
-	// uploadSampleData(file) {
-	// 	this.fileData = new FormData();
-	// 	this.fileData.append('files', file);
-	// 	const formData = this.fileData;
-	// 	this.fileData.delete('FormData');
-	// 	let tempData = []
-	// 	this.fileArray = []
-	// 	if (formData) {
-	// 		this.subject = this.requestService.post('upload', formData).subscribe(data => {
-	// 				let fileObj = {
-	// 					path: data[0].filename,
-	// 					downloadCount: 0
-	// 				}
-	// 				tempData.push(fileObj)
-	// 			this.getFile.emit(tempData)
-	// 		})
-	// 	}
-
-	// }
-
-	// ngOnDestroy() {
-	// 	this.subject.unsubscribe()
-	// }
 
 }

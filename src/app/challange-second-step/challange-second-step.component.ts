@@ -207,7 +207,6 @@ export class ChallangeSecondStepComponent implements OnInit {
 
     let payload = {
       tempBucketName: this.bucketName,
-      // phaseNo: this.phases.length,
       phaseNo: ind,
       fileType: 'sampleDataFile'
     }
@@ -218,14 +217,16 @@ export class ChallangeSecondStepComponent implements OnInit {
     if (formData) {
       this.subject = this.requestService.post('upload', formData).subscribe(data => {
         this.isSampleFileUploading = false
-        let fileObj = {
-          path: data.filePath,
-          downloadCount: 0
-        }
-        if (index >= 0) {
-          this.phases[ind].sampleDataFile.push(fileObj)
-        } else {
-          this.stepTwo.sampleDataFile.push(fileObj)
+        if (data && data.filePath.length>0) {          
+          let fileObj = {
+            path: data.filePath,
+            downloadCount: 0
+          }
+          if (index >= 0) {
+            this.phases[ind].sampleDataFile.push(fileObj)
+          } else {
+            this.stepTwo.sampleDataFile.push(fileObj)
+          }
         }
       })
     }
@@ -245,6 +246,7 @@ export class ChallangeSecondStepComponent implements OnInit {
   }
 
   next() {
+    this.bucketName = '';
     if (this.phases.length > 0) {
       if (this.stepTwo.description.length > 0 && this.stepTwo.guidance.length > 0 && this.stepTwo.passingScore && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 0) {
         let tempData = {
