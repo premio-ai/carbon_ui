@@ -1,0 +1,22 @@
+---
+  applications:
+- name: challengeclient
+  memory: 896M
+  disk_quota: 1G
+  path: dist/index.html
+  command: ng serve
+  timeout: 80
+  env:
+    env_type: production
+  buildpacks : sdk-for-nodejs
+
+
+
+
+#     ---
+# applications :
+# - name: "angular-cloud-deployment"
+#   path : "dist/angular-cloud-deployment"
+#   memory : 256M
+#   buildpack :
+#   - "https://github.com/cloudfoundry/staticfile-buildpack.git"
