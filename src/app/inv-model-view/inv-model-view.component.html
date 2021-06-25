@@ -141,7 +141,7 @@
             <div *ngIf="getPerformanceStatus() == 'COMPLETE' ">
               <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
             </div>
-            <div *ngIf="getPerformanceStatus() != 'COMPLETE' ">
+            <div *ngIf="getPerformanceStatus() == 'PENDING' ">
               <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)"></ibm-inline-loading>
             </div>
             &nbsp;

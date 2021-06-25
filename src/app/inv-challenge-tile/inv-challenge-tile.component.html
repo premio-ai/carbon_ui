@@ -12,12 +12,12 @@
       <div class="tags" *ngIf="getStatus(challenge?._id) == 'TRAINING' ">
         <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)"></ibm-inline-loading>
         &nbsp;&nbsp;
-        <p style="margin-top: -4px; font-size: 10px;">Training</p>
+        <p style="margin-top: -4px; font-size: 12px;">Training</p>
       </div>
-      <div class="tags" *ngIf="!getStatus(challenge?._id) == 'RESULTS' ">
+      <div class="tags" *ngIf="getStatus(challenge?._id) == 'RESULTS' ">
         <svg icon ibmIconCheckmarkFilled16 class="filled"></svg>
         &nbsp;&nbsp;
-        <p style="margin-top: 0px; font-size: 10px;line-height: 18px;">Results</p>
+        <p style="margin-top: 0px; font-size: 12px;line-height: 18px;">Results</p>
       </div>
     </div>
    

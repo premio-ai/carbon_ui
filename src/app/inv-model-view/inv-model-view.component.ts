@@ -149,6 +149,8 @@ export class InvModelViewComponent implements OnInit {
         return 'COMPLETE'
       } else if (this.modelSummary.metricsStatus.training == 'COMPLETE' && this.modelSummary.metricsStatus.testing == 'INCOMPLETE') {
         return 'INCOMPLETE'
+      } else if (this.modelSummary.metricsStatus == 'INCOMPLETE') {
+        return 'INCOMPLETE'
       }
     }
   }
