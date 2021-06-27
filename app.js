@@ -13,5 +13,4 @@ app.get("*", (req, res) => {
 });
 
 const ser = http.listen(port, (req, res) => {
-  console.log(`server listening on port: ${port}`);
 });

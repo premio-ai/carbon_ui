@@ -36,6 +36,7 @@ export class ChallangeSecondStepComponent implements OnInit {
   isBtnDisabled: boolean;
   isSampleFileUploading: boolean;
   isDataVisualUploading: boolean;
+  fileNameError: boolean
 
   ngOnInit() {
     this.isBtnDisabled = true;
@@ -190,9 +191,8 @@ export class ChallangeSecondStepComponent implements OnInit {
     })
   }
 
-  uploadSampleData(file, index) {
-    this.isSampleFileUploading = true
-    let ind;
+  uploadSampleData(file: any, index: number) {
+    let ind: number;
     if (index >= 0) {
       ind = index
     } else {
@@ -202,33 +202,39 @@ export class ChallangeSecondStepComponent implements OnInit {
         ind = 0
       }
     }
-    this.fileData = new FormData();
-    this.fileData.append('files', file);
+    if (file.name == 'test.csv' || file.name == 'train.csv') {
+      this.isSampleFileUploading = true
+      this.fileNameError = false
+      this.fileData = new FormData();
+      this.fileData.append('files', file);
 
-    let payload = {
-      tempBucketName: this.bucketName,
-      phaseNo: ind,
-      fileType: 'sampleDataFile'
-    }
-    this.fileData.append('uploadInfo', JSON.stringify(payload))
-    const formData = this.fileData;
-    this.fileData.delete('FormData');
-    this.fileArray = []
-    if (formData) {
-      this.subject = this.requestService.post('upload', formData).subscribe(data => {
-        this.isSampleFileUploading = false
-        if (data && data.filePath.length>0) {          
-          let fileObj = {
-            path: data.filePath,
-            downloadCount: 0
+      let payload = {
+        tempBucketName: this.bucketName,
+        phaseNo: ind,
+        fileType: 'sampleDataFile'
+      }
+      this.fileData.append('uploadInfo', JSON.stringify(payload))
+      const formData = this.fileData;
+      this.fileData.delete('FormData');
+      this.fileArray = []
+      if (formData) {
+        this.subject = this.requestService.post('upload', formData).subscribe(data => {
+          this.isSampleFileUploading = false
+          if (data && data.filePath.length>0) {          
+            let fileObj = {
+              path: data.filePath,
+              downloadCount: 0
+            }
+            if (index >= 0) {
+              this.phases[ind].sampleDataFile.push(fileObj)
+            } else {
+              this.stepTwo.sampleDataFile.push(fileObj)
+            }
           }
-          if (index >= 0) {
-            this.phases[ind].sampleDataFile.push(fileObj)
-          } else {
-            this.stepTwo.sampleDataFile.push(fileObj)
-          }
-        }
-      })
+        })
+      }
+    } else {
+      this.fileNameError = true
     }
 
   }

@@ -15,12 +15,18 @@
           <p style="font-size: 20px;">{{model?.modelName}}</p>
           <span class="phase2">{{getPhasesCount(model?.phaseId)}}</span>
         </div>
-        <div *ngIf="model?.modelStatus.status != 'RESULT'">
+        <div *ngIf="model?.modelStatus.status == 'UPLOADING' ">
           <div style="margin-left: auto;align-items: center;display: flex; width: 100px;">
             <!-- <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)"></ibm-inline-loading>&nbsp;
             <p class="discription" style="width: 165px">Uploading model to data</p> -->
             <svg icon ibmIconWarningFilled16 class="fille"></svg>&nbsp;&nbsp;
             <p style="margin-top: 0px; font-size: 10px;line-height: 18px;">Model Not<br />Uploaded</p>
+          </div>
+        </div>
+        <div *ngIf="model?.modelStatus.status == 'FAILED' ">
+          <div style="margin-left: auto;align-items: center;display: flex;">
+            <svg class="svgRed" icon ibmIconCloseFilled16></svg>&nbsp;
+            <p class="discription">Results</p>
           </div>
         </div>
         <div *ngIf="model?.modelStatus.status == 'RESULT' ">

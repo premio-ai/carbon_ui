@@ -173,6 +173,9 @@
             <div *ngIf="sampleDataFileError">
               <p><span style="font-size: x-small; color: red">At least 1 sample data file required</span></p>
             </div>
+            <div *ngIf="fileNameError">
+              <p><span style="font-size: x-small; color: red">Only 'test.csv' & 'train.csv' can be uploaded</span></p>
+            </div>
           </div>
         </div>
         <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed"

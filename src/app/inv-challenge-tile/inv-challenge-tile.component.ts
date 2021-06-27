@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { RequestService } from '../request.service';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { uniqBy } from 'lodash';
 
 @Component({
   selector: 'app-inv-challenge-tile',
@@ -34,12 +35,13 @@ export class InvChallengeTileComponent implements OnInit {
   getPhaseCount(challenge) {
     let numPhases = challenge.phases.length
 
+    let tempData = uniqBy(this.submittedChallenges, 'phaseId')
     let count = 0
-    if (this.submittedChallenges && this.submittedChallenges.length) {
-      this.submittedChallenges.find(dt => {
-        if (dt.challengeId == challenge._id && dt.innovatorId == this.userId) {
-          count += 1
-        }
+    if (tempData && tempData.length) {
+        tempData.find(dt => {
+          if (dt.challengeId == challenge._id && dt.innovatorId == this.userId) {
+            count += 1
+          }
       })
     }
     return `Phases ${count} of ${numPhases}`

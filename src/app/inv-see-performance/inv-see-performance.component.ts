@@ -3,7 +3,6 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RequestService } from '../request.service';
 import { Location } from '@angular/common';
 import "@carbon/charts/styles.css";
-import { APP_URL } from '../../config/config';
 
 @Component({
 	selector: 'app-inv-see-performance',
@@ -79,36 +78,44 @@ export class InvSeePerformanceComponent implements OnInit {
 		let url = 'submissionAllChallenge/modelPerformance/' + id;
 		this.requestService.get(url, null).toPromise().then(data => {
 			this.modelPerformance = data
-
-			this.modelPerformance.map(dt => {
-				if (dt.key.startsWith('test_')) {
-					if (dt.key == "test_accuracy") {
-						this.accuracyScore = (dt.value * 100).toFixed(0)
+			if (this.modelPerformance.length > 0) {
+				this.modelPerformance.map(dt => {
+					if (dt.key.startsWith('test_')) {
+						if (dt.key == "test_accuracy") {
+							this.accuracyScore = (dt.value * 100).toFixed(0)
+						}
+						if (dt.key == "test_macro_avg_precision") {
+							this.precisionScore = (dt.value * 100).toFixed(0)
+						}
+						if (dt.key == "test_macro_avg_recall") {
+							this.recallScore = (dt.value * 100).toFixed(0)
+						}
+						this.accuracy();
+						this.precision();
+						this.recall();
+					} else if (dt.key.startsWith('training_')) {
+						if (dt.key == "training_accuracy_score") {
+							this.accuracyScore = (dt.value * 100).toFixed(0)
+						}
+						if (dt.key == "training_precision_score") {
+							this.precisionScore = (dt.value * 100).toFixed(0)
+						}
+						if (dt.key == "training_recall_score") {
+							this.recallScore = (dt.value * 100).toFixed(0)
+						}
+						this.accuracy();
+						this.precision();
+						this.recall();
 					}
-					if (dt.key == "test_macro_avg_precision") {
-						this.precisionScore = (dt.value * 100).toFixed(0)
-					}
-					if (dt.key == "test_macro_avg_recall") {
-						this.recallScore = (dt.value * 100).toFixed(0)
-					}
-					this.accuracy();
-					this.precision();
-					this.recall();
-				} else if (dt.key.startsWith('training_')) {
-					if (dt.key == "training_accuracy_score") {
-						this.accuracyScore = dt.value * 100
-					}
-					if (dt.key == "training_precision_score") {
-						this.precisionScore = dt.value * 100
-					}
-					if (dt.key == "training_recall_score") {
-						this.recallScore = dt.value * 100
-					}
-					this.accuracy();
-					this.precision();
-					this.recall();
-				}
-			})
+				})
+			} else {
+				this.accuracyScore = 0
+				this.precisionScore = 0
+				this.recallScore = 0
+				this.accuracy();
+				this.precision();
+				this.recall();
+			}
 		}).catch(err => {
 			localStorage.clear();
 			this.router.navigateByUrl('login')

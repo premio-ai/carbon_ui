@@ -44,6 +44,7 @@ export class SubmissionStepFourComponent implements OnInit {
   }
 
   showNextBtn(phaseId) {
+    console.log(this.challengeSubmissionData, "---this.challengeSubmissionData---47")
     let phasePassing = ''
     this.challengeDetails.phases.map( dt => {
       if (dt.phaseId == phaseId) {

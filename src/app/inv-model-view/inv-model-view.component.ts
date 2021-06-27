@@ -33,6 +33,7 @@ export class InvModelViewComponent implements OnInit {
   appUrl: String;
   submissionStatus: any
   modelSummary: any
+  imageUrlArr: string
 
   ngOnInit() {
     let userDetails = JSON.parse(localStorage.getItem('userDetails'))
@@ -140,6 +141,27 @@ export class InvModelViewComponent implements OnInit {
       return this.modelSummary.summary.test_status
     }
   }
+  
+  async displayImage() {
+    let payload = {
+      filePath: ''
+    }
+    this.challengeDetails.phases.map( dt => {
+      if (dt.phaseId == this.modelDetails.phaseId) {
+        payload.filePath = dt.dataVisualFile
+      }
+    })
+
+    this.requestService.post('upload/getImage', payload).toPromise().then(data => {
+      var a = document.createElement("a");
+      document.body.appendChild(a);
+      this.imageUrlArr = data.blob
+    }).catch(err => {
+      localStorage.clear();
+      this.router.navigateByUrl('login')
+    })
+    
+  }
 
   getPerformanceStatus() {
     if (this.modelSummary) {
@@ -159,6 +181,7 @@ export class InvModelViewComponent implements OnInit {
     let url = 'challenge/' + id;
     this.requestService.get(url, null).toPromise().then(data => {
       this.challengeDetails = data;
+      this.displayImage();
     }).catch(err => {
 			localStorage.clear();
 			this.router.navigateByUrl('login')

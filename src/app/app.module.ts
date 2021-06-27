@@ -100,6 +100,7 @@ import { SubmissionStepThreeComponent } from "./submission-step-three/submission
 import { SubmissionStepTwoComponent } from "./submission-step-two/submission-step-two.component";
 import { from } from "rxjs";
 import {CheckmarkFilled16Module} from "@carbon/icons-angular/lib/checkmark--filled/16";
+import {CloseFilled16Module} from "@carbon/icons-angular/lib/close--filled/16";
 
 import {RadioButton20Module} from "@carbon/icons-angular/lib/radio-button/20";
 import {Send20Module} from "@carbon/icons-angular/lib/send/20";
@@ -231,6 +232,7 @@ import {Code24Module } from "@carbon/icons-angular/lib/code/24";
 		UserMultiple20Module,
 		Bookmark20Module,
 		CheckmarkFilled16Module,
+		CloseFilled16Module,
 		RadioButton20Module,
 		ChartsModule,
 		DocumentExport16Module,
