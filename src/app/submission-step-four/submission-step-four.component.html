@@ -15,14 +15,28 @@
           <p style="font-size: 20px;">{{model?.modelName}}</p>
           <span class="phase2">{{getPhasesCount(model?.phaseId)}}</span>
         </div>
-        <div *ngIf="model?.modelStatus.status == 'UPLOADING' || model?.modelStatus.status == '' ">
+        <div *ngIf="model?.modelStatus.status == '' ">
           <div style="margin-left: auto;align-items: center;display: flex; width: 100px;">
-            <!-- <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)"></ibm-inline-loading>&nbsp;
-            <p class="discription" style="width: 165px">Uploading model to data</p> -->
             <svg icon ibmIconWarningFilled16 class="fille"></svg>&nbsp;&nbsp;
-            <p style="margin-top: 0px; font-size: 10px;line-height: 18px;">Model Not<br />Uploaded</p>
+            <p style="margin-top: 0px; font-size: 10px;line-height: 18px;">Model Not<br/>Uploaded</p>
           </div>
         </div>
+        <div *ngIf="model?.modelStatus.status == 'UPLOADING' ">
+          <div style="margin-left: auto;align-items: center;display: flex; width: 100px;">
+            <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)"></ibm-inline-loading>
+            &nbsp;&nbsp;
+            <p style="margin-top: 0px; font-size: 10px;line-height: 18px;">Uploading<br/>model to data</p>
+          </div>
+        </div>
+
+        <div *ngIf="model?.modelStatus.status == 'RUNNING' ">
+          <div style="margin-left: auto;align-items: center;display: flex; width: 100px;">
+            <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)"></ibm-inline-loading>
+            &nbsp;&nbsp;
+            <p style="margin-top: 0px; font-size: 10px;line-height: 18px;">In Progress</p>
+          </div>
+        </div>
+
         <div *ngIf="model?.modelStatus.status == 'FAILED' ">
           <div style="margin-left: auto;align-items: center;display: flex;">
             <svg class="svgRed" icon ibmIconCloseFilled16></svg>&nbsp;
@@ -46,7 +60,7 @@
             <span (click)="readLess()" style="color: cadetblue; font-size: x-small; cursor: pointer;">Read Less</span>
           </p>
         </div>
-        <div class="custom-class-example" *ngIf="model?.modelStatus.score != null">
+        <div class="custom-class-example" *ngIf="model?.modelStatus.score > 0">
           <div class="sideicon">
             <p class="modelscrename">{{model?.modelStatus.score}}</p>
           </div>
@@ -59,11 +73,12 @@
         <div class="custom-class-example" *ngIf="showNextBtn(model?.phaseId)">
           <button class="view" [ibmButton]="ibmButton" [size]="'sm'">Enter phase 2</button>
         </div>
-        <div class="custom-class-example" *ngIf="model?.modelStatus.status == 'RESULT' || model?.modelStatus.status == 'FAILED' ">
+        <!-- || model?.modelStatus.status == 'FAILED' -->
+        <div class="custom-class-example" *ngIf="model?.modelStatus.status == 'RESULT' ">
           <button class="model" [ibmButton]="ibmButton" [size]="'sm'" (click)="seePerformance(model?._id)">See
             performance</button>
         </div>
-        <div class="viewmodel" *ngIf="model?.modelStatus.status == 'UPLOADING' || model?.modelStatus.status == '' ">
+        <div class="viewmodel" *ngIf="model?.modelStatus.status != 'RESULT' ">
           <button class="model" [ibmButton]="ibmButton" [size]="'sm'" (click)="viewModel(model?._id)">View
             Model</button>
         </div>

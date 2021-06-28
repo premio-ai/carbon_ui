@@ -94,7 +94,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RepoTableComponent", function() { return RepoTableComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var carbon_components_angular__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! carbon-components-angular */ "./node_modules/carbon-components-angular/index.js");
+/* harmony import */ var carbon_components_angular__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! carbon-components-angular */ "./node_modules/carbon-components-angular/fesm2015/carbon-components-angular.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -213,7 +213,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
 /* harmony import */ var _repositories_routing_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./repositories-routing.module */ "./src/app/repositories/repositories-routing.module.ts");
 /* harmony import */ var _repo_page_repo_page_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./repo-page/repo-page.component */ "./src/app/repositories/repo-page/repo-page.component.ts");
-/* harmony import */ var carbon_components_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! carbon-components-angular */ "./node_modules/carbon-components-angular/index.js");
+/* harmony import */ var carbon_components_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! carbon-components-angular */ "./node_modules/carbon-components-angular/fesm2015/carbon-components-angular.js");
 /* harmony import */ var _repo_table_repo_table_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./repo-table/repo-table.component */ "./src/app/repositories/repo-table/repo-table.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
