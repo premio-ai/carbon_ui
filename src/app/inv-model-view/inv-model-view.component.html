@@ -74,11 +74,14 @@
             <div *ngIf="getUploadStatus() == 'SUCCESS' ">
               <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
             </div>
+            <div *ngIf="getUploadStatus() == 'FAILED' ">
+              <svg class="svgRed" icon ibmIconCloseFilled16></svg>
+            </div>
             &nbsp;
             <p style="color: black;">{{getUploadStatus()}}</p>
           </h6>
         </ibm-tile>
-        <ibm-tile>
+        <ibm-tile [ngClass]="{'bx--tile_fail': getTrainingStatus() == 'FAILED' }" >
           <p class="head"><svg icon ibmIconConcept32></svg></p>
           <p class="head">
             Train model
@@ -98,11 +101,14 @@
             <div *ngIf="getTrainingStatus() == 'SUCCESS' ">
               <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
             </div>
+            <div *ngIf="getTrainingStatus() == 'FAILED' ">
+              <svg class="svgRed" icon ibmIconCloseFilled16></svg>
+            </div>
             &nbsp;
             <p style="color: black;">{{getTrainingStatus()}}</p>
           </h6>
         </ibm-tile>
-        <ibm-tile>
+        <ibm-tile [ngClass]="{'bx--tile_fail': getTestingStatus() == 'FAILED' }">
           <p class="head"><svg icon ibmIconChemistry32></svg></p>
           <p class="head">
             Test model
@@ -121,11 +127,14 @@
             <div *ngIf="getTestingStatus() == 'SUCCESS' ">
               <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
             </div>
+            <div *ngIf="getTestingStatus() == 'FAILED' ">
+              <svg class="svgRed" icon ibmIconCloseFilled16></svg>
+            </div>
             &nbsp;
             <p style="color: black;">{{getTestingStatus()}}</p>
           </h6>
         </ibm-tile>
-        <ibm-tile>
+        <ibm-tile [ngClass]="{'bx--tile_fail': getPerformanceStatus() == 'INCOMPLETE', 'bx--tile': getPerformanceStatus() != 'INCOMPLETE' }">
           <p class="head"><svg icon ibmIconIdea32></svg></p>
           <p class="head">
             Generate model
@@ -143,6 +152,9 @@
             </div>
             <div *ngIf="getPerformanceStatus() == 'PENDING' ">
               <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)"></ibm-inline-loading>
+            </div>
+            <div *ngIf="getPerformanceStatus() == 'INCOMPLETE' ">
+              <svg class="svgRed" icon ibmIconCloseFilled16></svg>
             </div>
             &nbsp;
             <p style="color: black;">{{getPerformanceStatus()}}</p>

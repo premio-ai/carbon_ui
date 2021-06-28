@@ -15,7 +15,7 @@
           <p style="font-size: 20px;">{{model?.modelName}}</p>
           <span class="phase2">{{getPhasesCount(model?.phaseId)}}</span>
         </div>
-        <div *ngIf="model?.modelStatus.status == 'UPLOADING' ">
+        <div *ngIf="model?.modelStatus.status == 'UPLOADING' || model?.modelStatus.status == '' ">
           <div style="margin-left: auto;align-items: center;display: flex; width: 100px;">
             <!-- <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)"></ibm-inline-loading>&nbsp;
             <p class="discription" style="width: 165px">Uploading model to data</p> -->
@@ -46,7 +46,7 @@
             <span (click)="readLess()" style="color: cadetblue; font-size: x-small; cursor: pointer;">Read Less</span>
           </p>
         </div>
-        <div class="custom-class-example" *ngIf="model?.modelStatus.score > 0">
+        <div class="custom-class-example" *ngIf="model?.modelStatus.score != null">
           <div class="sideicon">
             <p class="modelscrename">{{model?.modelStatus.score}}</p>
           </div>
@@ -59,18 +59,24 @@
         <div class="custom-class-example" *ngIf="showNextBtn(model?.phaseId)">
           <button class="view" [ibmButton]="ibmButton" [size]="'sm'">Enter phase 2</button>
         </div>
-        <div class="custom-class-example" *ngIf="model?.modelStatus.status == 'RESULT' ">
+        <div class="custom-class-example" *ngIf="model?.modelStatus.status == 'RESULT' || model?.modelStatus.status == 'FAILED' ">
           <button class="model" [ibmButton]="ibmButton" [size]="'sm'" (click)="seePerformance(model?._id)">See
             performance</button>
         </div>
-        <div class="viewmodel" *ngIf="model?.modelStatus.status == 'UPLOADING' ">
+        <div class="viewmodel" *ngIf="model?.modelStatus.status == 'UPLOADING' || model?.modelStatus.status == '' ">
           <button class="model" [ibmButton]="ibmButton" [size]="'sm'" (click)="viewModel(model?._id)">View
             Model</button>
         </div>
       </div>
     </ibm-tile>
-    <p class="downlogo">Download Trained Model <svg icon ibmIconDownload16
-        (click)="downloadFile(model.modelUploadedPath)"></svg></p>
+    <div *ngIf="model?.modelStatus.status == 'RESULT' ">
+      <p class="downlogo">Download Trained Model
+        <svg icon ibmIconDownload16 class="downlogoPointer"
+          (click)="downloadFile(model.modelUploadedPath)"></svg></p>
+    </div>
+    <div *ngIf="model?.modelStatus.status != 'RESULT' ">
+      <p class="downlogo">Download Trained Model<svg icon ibmIconDownload16></svg></p>
+    </div>
   </div>&nbsp;&nbsp;
 
 </div>

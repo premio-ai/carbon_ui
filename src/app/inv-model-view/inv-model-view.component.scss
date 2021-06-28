@@ -19,15 +19,30 @@
 	position: relative;
 	border-top: 4px solid #40ba61;
 	box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 8px;
+	padding: 1rem;
+	outline: 2px solid transparent;
+	outline-offset: -2px;
+}
 
+.bx--tile_fail {
+	display: block;
+	min-width: 8rem;
+	min-height: 4rem;
+	background-color: #f4f4f4;
+	position: relative;
+	border-top: 4px solid #ff0000;
+	box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 8px;
 	padding: 1rem;
 	outline: 2px solid transparent;
 	outline-offset: -2px;
 }
 
 .btnBlueGreen {
-	background: white;
-	
+	background: white;	
+}
+
+.svgRed{
+    fill: #ff0000;
 }
 
 a.button {
