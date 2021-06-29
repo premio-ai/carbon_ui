@@ -60,16 +60,17 @@
             <br />
             to data
           </p>
-          <p class="discrip">
-            Estimated time remaining
-            <br />
-            5 min
-          </p>
-
-          <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
-            <!-- <svg class="svg" icon ibmIconCheckmarkOutline20></svg> -->
+          <div *ngIf="getUploadStatus() == 'PENDING' ">
+            <p class="discrip">
+              Estimated time remaining
+              <br />
+              5 min
+            </p>
+          </div>
+          <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()" [ngClass]="{'btnAlign': getUploadStatus() != 'PENDING' }" >
             <div *ngIf="getUploadStatus() == 'PENDING' ">
-              <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)"></ibm-inline-loading>
+              <ibm-inline-loading [loadingText]="loadingText" [successText]="successText"
+                (onSuccess)="onSuccess($event)"></ibm-inline-loading>
             </div>
             <div *ngIf="getUploadStatus() == 'SUCCESS' ">
               <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
@@ -81,22 +82,25 @@
             <p style="color: black;">{{getUploadStatus()}}</p>
           </h6>
         </ibm-tile>
-        <ibm-tile [ngClass]="{'bx--tile_fail': getTrainingStatus() == 'FAILED' }" >
+        <ibm-tile
+          [ngClass]="{'bx--tile_fail': getTrainingStatus() == 'FAILED', 'bx--tile_run': getTrainingStatus() == 'RUNNING' }">
           <p class="head"><svg icon ibmIconConcept32></svg></p>
           <p class="head">
             Train model
             <br />
             on data
           </p>
-          <p class="discrip">
-            Estimated time remaining
-            <br />
-            5 min
-          </p>
-          <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
-            <!-- <svg class="svg" icon ibmIconCheckmarkOutline20></svg> -->
+          <div *ngIf="getTrainingStatus() == 'RUNNING' ">
+            <p class="discrip">
+              Estimated time remaining
+              <br />
+              5 min
+            </p>
+          </div>
+          <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()" [ngClass]="{'btnAlign': getTrainingStatus() != 'RUNNING' }">
             <div *ngIf="getTrainingStatus() == 'RUNNING' ">
-              <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)"></ibm-inline-loading>
+              <ibm-inline-loading [loadingText]="loadingText" [successText]="successText"
+                (onSuccess)="onSuccess($event)"></ibm-inline-loading>
             </div>
             <div *ngIf="getTrainingStatus() == 'SUCCESS' ">
               <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
@@ -108,21 +112,25 @@
             <p style="color: black;">{{getTrainingStatus()}}</p>
           </h6>
         </ibm-tile>
-        <ibm-tile [ngClass]="{'bx--tile_fail': getTestingStatus() == 'FAILED' }">
+        <ibm-tile
+          [ngClass]="{'bx--tile_fail': getTestingStatus() == 'FAILED', 'bx--tile_run': getTestingStatus() == 'RUNNING' }">
           <p class="head"><svg icon ibmIconChemistry32></svg></p>
           <p class="head">
             Test model
             <br />
             on data
           </p>
-          <p class="discrip">
-            Estimated time remaining
-            <br />
-            5 min
-          </p>
-          <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
+          <div *ngIf="getTestingStatus() == 'RUNNING' ">
+            <p class="discrip">
+              Estimated time remaining
+              <br />
+              5 min
+            </p>
+          </div>
+          <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()" [ngClass]="{'btnAlign': getTestingStatus() != 'RUNNING' }">
             <div *ngIf="getTestingStatus() == 'RUNNING' ">
-              <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)"></ibm-inline-loading>
+              <ibm-inline-loading [loadingText]="loadingText" [successText]="successText"
+                (onSuccess)="onSuccess($event)"></ibm-inline-loading>
             </div>
             <div *ngIf="getTestingStatus() == 'SUCCESS' ">
               <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
@@ -134,27 +142,28 @@
             <p style="color: black;">{{getTestingStatus()}}</p>
           </h6>
         </ibm-tile>
-        <ibm-tile [ngClass]="{'bx--tile_fail': getPerformanceStatus() == 'INCOMPLETE', 'bx--tile': getPerformanceStatus() != 'INCOMPLETE' }">
+        <ibm-tile
+          [ngClass]="{'bx--tile_run': getPerformanceStatus() == 'INCOMPLETE', 'bx--tile': getPerformanceStatus() != 'INCOMPLETE' }">
           <p class="head"><svg icon ibmIconIdea32></svg></p>
           <p class="head">
             Generate model
             <br />
             performance score
           </p>
-          <p class="discrip">
-            Estimated time remaining
-            <br />
-            5 min
-          </p>
-          <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
+          <div *ngIf="getPerformanceStatus() == 'PENDING' ">
+            <p class="discrip">
+              Estimated time remaining
+              <br />
+              5 min
+            </p>
+          </div>
+          <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()" [ngClass]="{'btnAlign': getPerformanceStatus() != 'PENDING' }">
             <div *ngIf="getPerformanceStatus() == 'COMPLETE' ">
               <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
             </div>
             <div *ngIf="getPerformanceStatus() == 'PENDING' ">
-              <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)"></ibm-inline-loading>
-            </div>
-            <div *ngIf="getPerformanceStatus() == 'INCOMPLETE' ">
-              <svg class="svgRed" icon ibmIconCloseFilled16></svg>
+              <ibm-inline-loading [loadingText]="loadingText" [successText]="successText"
+                (onSuccess)="onSuccess($event)"></ibm-inline-loading>
             </div>
             &nbsp;
             <p style="color: black;">{{getPerformanceStatus()}}</p>
@@ -162,7 +171,7 @@
         </ibm-tile>
       </div>
       <br /> <br />
-      <div class="border-div" *ngIf="showCongratDiv">
+      <div class="border-div" *ngIf="getPerformanceStatus() == 'COMPLETE' ">
         &nbsp;&nbsp;
         <h5 style="margin-left: 8px;">Congratuations!</h5>
         &nbsp;&nbsp;
@@ -178,7 +187,8 @@
         <br />
         &nbsp;
         <div *ngIf="modelDetails?.score>60 && submissionIndex<allSubmitOfChallenge.length">
-          <button [ibmButton]="ibmButton" [size]="size" style="width: 225px; margin-left: 7px;" (click)="enterNextPhase()">
+          <button [ibmButton]="ibmButton" [size]="size" style="width: 225px; margin-left: 7px;"
+            (click)="enterNextPhase()">
             Enter phase {{submissionIndex+1}}<svg class="bx--btn__icon" ibmIconArrowRight20 size="20"></svg>
           </button>
         </div>
@@ -235,8 +245,9 @@
             Phase {{submissionIndex+1}}.
           </p>
         </ibm-accordion-item>
-        <div *ngIf="submissionIndex<allSubmitOfChallenge.length" >
-          <ibm-accordion-item title="Next phase ({{submissionIndex+1}} to {{allSubmitOfChallenge.length}})" (selected)="selected($event)">
+        <div *ngIf="submissionIndex<allSubmitOfChallenge.length">
+          <ibm-accordion-item title="Next phase ({{submissionIndex+1}} to {{allSubmitOfChallenge.length}})"
+            (selected)="selected($event)">
             <h5>Requirment</h5>
             <p>{{ challengeDetails?.Objective }}</p>
             <br />
@@ -258,7 +269,7 @@
             <br />
             <h5>Model</h5>
             <p>{{ modelDetails?.modelDescription }}</p>
-  
+
             <fieldset class="bx--fieldset">
               <div class="bx--form-item">
                 <div class="bx--radio-button-group bx--radio-button-group--vertical">
@@ -285,7 +296,8 @@
                 </div>
               </div>
             </fieldset>
-            <button [ibmButton]="ibmButton" [size]="size" (click)="enterNextPhase()" [disabled]="submissionIndex==allSubmitOfChallenge.length-1" >
+            <button [ibmButton]="ibmButton" [size]="size" (click)="enterNextPhase()"
+              [disabled]="submissionIndex==allSubmitOfChallenge.length-1">
               Enter phase {{submissionIndex+1}}<svg class="bx--btn__icon" ibmIconAdd size="20"></svg>
             </button>
           </ibm-accordion-item>

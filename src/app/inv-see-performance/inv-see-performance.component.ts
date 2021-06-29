@@ -63,6 +63,7 @@ export class InvSeePerformanceComponent implements OnInit {
 		let url = 'submissionAllChallenge/' + id;
 		this.requestService.get(url, null).toPromise().then(data => {
 			this.modelDetails = data[0];
+			console.log(this.modelDetails, "---this.modelDetails---66")
 			this.challengeId = data[0].challengeId;
 			this.phaseId = data[0].phaseId;
 			this.innovatorId = data[0].innovatorId._id;
@@ -130,6 +131,22 @@ export class InvSeePerformanceComponent implements OnInit {
 			localStorage.clear();
 			this.router.navigateByUrl('login')
 		})
+	}
+
+	checkDisplay() {
+		let showMsg = false
+		if (this.challengeDetails) {
+			let passMark = 0
+			this.challengeDetails.phases.map( res => {
+				if (res.phaseId == this.phaseId) {
+					passMark = res.passingScore
+				}
+			})
+			if (this.accuracyScore >= passMark) {
+				showMsg = true
+			}
+		}
+		return showMsg;
 	}
 
 	navigateBack() {

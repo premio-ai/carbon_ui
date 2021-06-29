@@ -25,7 +25,6 @@ export class InvModelViewComponent implements OnInit {
   innovatorId: any;
   phaseId: any;
   challengeDetails: any;
-  showCongratDiv: boolean;
   isEdit: boolean;
   set_new_modelName: String;
   allSubmitOfChallenge: any[] = [];
@@ -47,10 +46,6 @@ export class InvModelViewComponent implements OnInit {
         }
       });
   
-      setTimeout(() => {
-        this.showCongratDiv = true;
-      }, 10000)
-  
       this.isEdit = false;
       this.set_new_modelName = '';
     } else {
@@ -62,7 +57,7 @@ export class InvModelViewComponent implements OnInit {
     let url = 'submissionAllChallenge/allSubmitOfChallenge/' + challengeId;
     this.requestService.get(url, null).toPromise().then( data => {
       this.allSubmitOfChallenge = data
-      this.submissionIndex = data.findIndex( dt => dt._id == this.modelId)
+      // this.submissionIndex = data.findIndex( dt => dt._id == this.modelId)
     }).catch(err => {
 			localStorage.clear();
 			this.router.navigateByUrl('login')
@@ -181,6 +176,7 @@ export class InvModelViewComponent implements OnInit {
     let url = 'challenge/' + id;
     this.requestService.get(url, null).toPromise().then(data => {
       this.challengeDetails = data;
+      this.submissionIndex = data.phases.findIndex( dt => { return dt.phaseId == this.phaseId })
       this.displayImage();
     }).catch(err => {
 			localStorage.clear();

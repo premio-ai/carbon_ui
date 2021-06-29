@@ -37,6 +37,23 @@
 	outline-offset: -2px;
 }
 
+.bx--tile_run {
+	display: block;
+	min-width: 8rem;
+	min-height: 4rem;
+	background-color: #f4f4f4;
+	position: relative;
+	border-top: 4px solid #696969;
+	box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 8px;
+	padding: 1rem;
+	outline: 2px solid transparent;
+	outline-offset: -2px;
+}
+
+.btnAlign {
+	margin-top: 25px;
+}
+
 .btnBlueGreen {
 	background: white;	
 }
