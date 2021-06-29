@@ -87,36 +87,6 @@
 				<br />
 			</div>
 			<ibm-tabs [followFocus]="true" [isNavigation]="false" [cacheActive]="true" style="width: 50%;">
-				
-				<ibm-tab heading="Your Submission" >
-					<br />
-					<div ibmGrid [condensed]="gridCondensed">
-						<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
-							[condensed]="rowCondensed">
-							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }"
-								*ngIf="current!=3">
-								<ibm-progress-indicator orientation="vertical" [steps]="steps" [current]="current"
-									(stepSelected)="stepSelected($event)">
-								</ibm-progress-indicator>
-							</div>
-							<div ibmCol class="custom-class-example1" [columnNumbers]="{ md: 6, sm: 12 }">
-								<app-submission-step-one [challengeDetails]="challengeDetails" *ngIf="current == 0" (cancelSubmit)=cancelSubmit($event)
-									(goNext)=nextStepOne($event) [challengeSubmissionData]="challengeSubmissionData" >
-								</app-submission-step-one>
-								<app-submission-step-two *ngIf="current == 1" (goPrevious)="previousStepTwo()"
-									(goNext)="nextStepTwo($event)"></app-submission-step-two>
-								<app-submission-step-three *ngIf="current == 2" (goPrevious)="previousStepThree()"
-									(goNext)="nextStepThree($event)"></app-submission-step-three>
-								<app-submission-step-four *ngIf="current == 3" (goPrevious)="previousStepFour()"
-									(goToStepOne)="goToStepOne()" (goNext)="nextStepFour($event)"
-									[isChallengeAccepted]='isChallengeAccepted' [challengeDetails]="challengeDetails"
-									[challengeSubmissionData]="challengeSubmissionData"
-									[phasesSubmissionComplete]="phasesSubmissionComplete"></app-submission-step-four>
-							</div>
-						</div>
-					</div>
-				</ibm-tab>
-				
 				<ibm-tab heading="Overview" style="max-width: 95px;">
 					<br />
 					<div ibmGrid [condensed]="gridCondensed">
