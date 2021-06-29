@@ -31,32 +31,32 @@
 
         <div *ngIf="model?.modelStatus.status == 'RUNNING' ">
           <div style="margin-left: auto;align-items: center;display: flex; width: 100px;">
-            <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)"></ibm-inline-loading>
+            <ibm-inline-loading (onSuccess)="onSuccess($event)"></ibm-inline-loading>
             &nbsp;&nbsp;
-            <p style="margin-top: 0px; font-size: 10px;line-height: 18px;">In Progress</p>
+            <p class="description">In Progress</p>
           </div>
         </div>
 
         <div *ngIf="model?.modelStatus.status == 'FAILED' ">
           <div style="margin-left: auto;align-items: center;display: flex;">
             <svg class="svgRed" icon ibmIconCloseFilled16></svg>&nbsp;
-            <p class="discription">Failed</p>
+            <p class="description">Failed</p>
           </div>
         </div>
         <div *ngIf="model?.modelStatus.status == 'RESULT' ">
           <div style="margin-left: auto;align-items: center;display: flex;">
             <svg class="svg" icon ibmIconCheckmarkFilled16></svg>&nbsp;
-            <p class="discription">Results</p>
+            <p class="description">Results</p>
           </div>
         </div>
       </div>
       <div style="display: grid;grid-template-columns: 80% 20%;padding: 1rem;margin-top: -32px;">
         <div class="custom-class-example">
-          <p *ngIf="showLess" class="discription">{{ showLessStr(model?.modelDescription) }}
+          <p *ngIf="showLess" class="description">{{ showLessStr(model?.modelDescription) }}
             <span *ngIf="model?.modelDescription.length>100" (click)="readMore()"
               style="color: cadetblue; font-size: x-small; cursor: pointer;">...Read More</span>
           </p>
-          <p *ngIf="!showLess" class="discription">{{ model?.modelDescription }}
+          <p *ngIf="!showLess" class="description">{{ model?.modelDescription }}
             <span (click)="readLess()" style="color: cadetblue; font-size: x-small; cursor: pointer;">Read Less</span>
           </p>
         </div>

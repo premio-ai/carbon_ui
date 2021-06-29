@@ -60,14 +60,24 @@
             <br />
             to data
           </p>
+          <div *ngIf="getUploadStatus() == 'SUCCESS' ">
+            <p class="discrip">
+              Finished
+              <br />
+              successfully
+            </p>
+          </div>
           <div *ngIf="getUploadStatus() == 'PENDING' ">
             <p class="discrip">
               Estimated time remaining
               <br />
-              5 min
+              unknown
             </p>
           </div>
-          <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()" [ngClass]="{'btnAlign': getUploadStatus() != 'PENDING' }" >
+          <div *ngIf="getUploadStatus() == 'FAILED' ">
+            <p class="discrip">Job failed</p><br/>
+          </div>
+          <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
             <div *ngIf="getUploadStatus() == 'PENDING' ">
               <ibm-inline-loading [loadingText]="loadingText" [successText]="successText"
                 (onSuccess)="onSuccess($event)"></ibm-inline-loading>
@@ -90,14 +100,24 @@
             <br />
             on data
           </p>
+          <div *ngIf="getTrainingStatus() == 'SUCCESS' ">
+            <p class="discrip">
+              Finished
+              <br />
+              successfully
+            </p>
+          </div>
           <div *ngIf="getTrainingStatus() == 'RUNNING' ">
             <p class="discrip">
               Estimated time remaining
               <br />
-              5 min
+              unknown
             </p>
           </div>
-          <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()" [ngClass]="{'btnAlign': getTrainingStatus() != 'RUNNING' }">
+          <div *ngIf="getTrainingStatus() == 'FAILED' ">
+            <p class="discrip">Job failed</p><br/>
+          </div>
+          <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
             <div *ngIf="getTrainingStatus() == 'RUNNING' ">
               <ibm-inline-loading [loadingText]="loadingText" [successText]="successText"
                 (onSuccess)="onSuccess($event)"></ibm-inline-loading>
@@ -120,14 +140,24 @@
             <br />
             on data
           </p>
+          <div *ngIf="getTestingStatus() == 'SUCCESS' ">
+            <p class="discrip">
+              Finished
+              <br />
+              successfully
+            </p>
+          </div>
           <div *ngIf="getTestingStatus() == 'RUNNING' ">
             <p class="discrip">
               Estimated time remaining
               <br />
-              5 min
+              unknown
             </p>
           </div>
-          <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()" [ngClass]="{'btnAlign': getTestingStatus() != 'RUNNING' }">
+          <div *ngIf="getTestingStatus() == 'FAILED' ">
+            <p class="discrip">Job Failed</p><br/>
+          </div>
+          <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
             <div *ngIf="getTestingStatus() == 'RUNNING' ">
               <ibm-inline-loading [loadingText]="loadingText" [successText]="successText"
                 (onSuccess)="onSuccess($event)"></ibm-inline-loading>
@@ -150,14 +180,21 @@
             <br />
             performance score
           </p>
-          <div *ngIf="getPerformanceStatus() == 'PENDING' ">
+          <div *ngIf="getPerformanceStatus() == 'COMPLETE' ">
+            <p class="discrip">
+              Finished
+              <br />
+              successfully
+            </p>
+          </div>
+          <div *ngIf="getPerformanceStatus() == 'PENDING' || getPerformanceStatus() == 'INCOMPLETE' ">
             <p class="discrip">
               Estimated time remaining
               <br />
-              5 min
+              unknown
             </p>
           </div>
-          <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()" [ngClass]="{'btnAlign': getPerformanceStatus() != 'PENDING' }">
+          <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
             <div *ngIf="getPerformanceStatus() == 'COMPLETE' ">
               <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
             </div>
