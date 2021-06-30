@@ -33,6 +33,7 @@ export class InvModelViewComponent implements OnInit {
   submissionStatus: any
   modelSummary: any
   imageUrlArr: string
+  sampleFileArr: any[] = []
 
   ngOnInit() {
     let userDetails = JSON.parse(localStorage.getItem('userDetails'))
@@ -178,10 +179,21 @@ export class InvModelViewComponent implements OnInit {
       this.challengeDetails = data;
       this.submissionIndex = data.phases.findIndex( dt => { return dt.phaseId == this.phaseId })
       this.displayImage();
+      this.getSampleFileArr();
     }).catch(err => {
 			localStorage.clear();
 			this.router.navigateByUrl('login')
 		})
+  }
+
+  getSampleFileArr() {
+    if (this.challengeDetails) {
+      this.challengeDetails.phases.filter( dt => {
+        if (dt.phaseId == this.phaseId) {
+          this.sampleFileArr = dt.sampleDataFile
+        }
+      })
+    }
   }
 
   navigateBack() {
@@ -194,21 +206,34 @@ export class InvModelViewComponent implements OnInit {
 
       let payload = {
 				filePath: docName
-			}
+      }
 			this.requestService.post('upload/downloadObject', payload).toPromise().then(data => {
-				var a = document.createElement("a");
+        var blob = this.dataURItoBlob(data.blob)
+        var a = document.createElement("a");
 				document.body.appendChild(a);
-				const url = URL.createObjectURL(new Blob([data.blob], { type: 'text/plain' }));
+				var url = window.URL.createObjectURL(blob);
 
-				a.href = url;
-				a.download = "File";
-				a.click();
-				window.URL.revokeObjectURL(url);
+        a.href = url;
+        a.download = "File.csv";
+        a.click();
+        window.URL.revokeObjectURL(url);
 			}).catch(err => {
         localStorage.clear();
         this.router.navigateByUrl('login')
       })
     }
+  }
+
+  dataURItoBlob(dataURI) {
+    var byteString = atob(dataURI.split(',')[1]);
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+    var ab = new ArrayBuffer(byteString.length);
+    var ia = new Uint8Array(ab);
+    for (var i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    var blob = new Blob([ab], { type: mimeString });
+    return blob;
   }
 
   seePerformance() {

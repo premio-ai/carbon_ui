@@ -283,8 +283,7 @@
           </p>
         </ibm-accordion-item>
         <div *ngIf="submissionIndex<allSubmitOfChallenge.length">
-          <ibm-accordion-item title="Next phase ({{submissionIndex+1}} to {{allSubmitOfChallenge.length}})"
-            (selected)="selected($event)">
+          <ibm-accordion-item title="Next phase ({{submissionIndex+1}} to {{allSubmitOfChallenge.length}})">
             <h5>Requirment</h5>
             <p>{{ challengeDetails?.Objective }}</p>
             <br />
@@ -296,12 +295,10 @@
             <img style="height: 125px; width: 300px;" src="{{imageUrlArr}}" />
             <br />
             <h6>Sample Data Set</h6>
-            <p *ngFor="
-                let data of (challengeDetails?.phases)[0]?.sampleDataFile;
-                index as i
-              ">
+            <!-- let data of (challengeDetails?.phases)[0]?.sampleDataFile; -->
+            <p *ngFor="let data of sampleFileArr; index as i">
               Download Dataset {{ i + 1 }}
-              <svg icon ibmIconDownload16 (click)="downloadFile(data[i])"></svg>
+              <svg icon ibmIconDownload16 (click)="downloadFile(data.path)"></svg>
             </p>
             <br />
             <h5>Model</h5>
