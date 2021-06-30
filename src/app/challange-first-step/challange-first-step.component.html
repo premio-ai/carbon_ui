@@ -73,7 +73,7 @@
                 <input type='date' min="{{minDate()}}" ibmTextArea style="width: 165px" [(ngModel)]="stepOne.endDate" />
                 </ibm-label>
             <div *ngIf="endDateError">
-                <p><span style="font-size: x-small; color: red">Expiration date is required in DD/MM/YYYY format</span></p>
+                <p><span style="font-size: x-small; color: red">Expiration date should be later than today in DD/MM/YYYY format</span></p>
             </div>
         </div>
 

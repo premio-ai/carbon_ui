@@ -113,7 +113,7 @@ export class ChallangeFirstStepComponent implements OnInit {
     } else {
       this.categoryTypeError = false
     }
-    if (this.stepOne.endDate.length == 0 && !(date_regex.test(this.stepOne.endDate))) {
+    if (this.stepOne.endDate.length == 0 || !(date_regex.test(this.stepOne.endDate)) || moment(this.stepOne.endDate).isAfter(moment(new Date()).format('YYYY-MM-DD')) ) {
       this.endDateError = true
     } else {
       this.endDateError = false

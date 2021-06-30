@@ -116,7 +116,11 @@ export class HeaderComponent implements OnInit {
 	}
 
 	clearNotification() {
-		this.showNotification = false
+		this.notificationLoading = true
+		this.requestService.put('userNotification/notification/clearAll', this.notifications).toPromise().then( dt => {
+			this.notificationLoading = false
+			this.getNotifications();
+		})
 	}
 
 	logoRoute() {
