@@ -8,6 +8,7 @@ import { RequestService } from '../request.service';
   styleUrls: ['./submission-step-one.component.scss']
 })
 export class SubmissionStepOneComponent implements OnInit {
+  @Input() isChallengeAccepted: any;
   @Input() challengeDetails: any;
   @Input() challengeSubmissionData: any;
   @Output() public goNext: EventEmitter<any> = new EventEmitter();

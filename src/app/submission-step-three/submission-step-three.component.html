@@ -1,22 +1,27 @@
+<div *ngIf="!isChallengeAccepted">
+	<p style="color: red">Accept this challenge first to submit a model.</p>
+</div>
 
-<br />
-<p class="step_5">your challenge will be uploaded for innovators...</p>
-<br />
-<p class="step_5">
-	In a short moment you'll be able to see which innovator have accepted your
-	challenges and keep track of their progress along the phases.
-</p>
-<br />
-<p class="step_5">
-	In a short moment you'll be able to see which innovator have accepted your
-	challenges and keep track of their progress along the phases.which innovator
-	have accepted your challenges and keep track of their progress along the
-	phases.
-</p>
+<div *ngIf="isChallengeAccepted">
+	<br />
+	<p class="step_5">your challenge will be uploaded for innovators...</p>
+	<br />
+	<p class="step_5">
+		In a short moment you'll be able to see which innovator have accepted your
+		challenges and keep track of their progress along the phases.
+	</p>
+	<br />
+	<p class="step_5">
+		In a short moment you'll be able to see which innovator have accepted your
+		challenges and keep track of their progress along the phases.which innovator
+		have accepted your challenges and keep track of their progress along the
+		phases.
+	</p>
 
-<div style="margin-left: auto; display: flex; justify-content: flex-end">
-    <button class="bx--btn bx--btn--secondary" type="button" (click)="previous()" >Back</button>
+	<div style="margin-left: auto; display: flex; justify-content: flex-end">
+		<button class="bx--btn bx--btn--secondary" type="button" (click)="previous()">Back</button>
 
-    &nbsp;
-	<button [ibmButton]="ibmButton" [size]="size" (click)="next()">Submit</button>
+		&nbsp;
+		<button [ibmButton]="ibmButton" [size]="size" (click)="next()">Submit</button>
+	</div>
 </div>

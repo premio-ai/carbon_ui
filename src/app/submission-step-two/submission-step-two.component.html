@@ -1,72 +1,78 @@
-<ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-  Model Name
-  <p class="challTitle" >
-    {{stepTwo.modelName.length || 0}}/25
-  </p>
+<div *ngIf="!isChallengeAccepted">
+	<p style="color: red">Accept this challenge first to submit a model.</p>
+</div>
 
-  <textarea style="width: 100%; margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.modelName"
-    [theme]="theme" [rows]="1" [cols]="cols" maxlength="25" aria-label="textarea"></textarea>
-</ibm-label>
-<div *ngIf="modelNameError">
-  <p>
-    <span style="font-size: x-small; color: red;">Model Name is required</span>
-  </p>
-</div>
-<br />
-<ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-  Description
-  <p class="challTitle">
-    {{stepTwo.description.length || 0}}/10000
-  </p>
-
-  <textarea style="width: 100%; margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.description"
-    [theme]="theme" [rows]="7" [cols]="cols" maxlength="10000" aria-label="textarea"></textarea>
-</ibm-label>
-<div *ngIf="descriptionError">
-  <p>
-    <span style="font-size: x-small; color: red;">
-      Data Description for this model is required
-    </span>
-  </p>
-</div>
-<br />
-<ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
-  Approach Taken
-  <p class="challTitle">
-    {{stepTwo.approach.length || 0}}/10000
-  </p>
-
-  <textarea style="width: 100%; margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.approach"
-    [theme]="theme" [rows]="7" [cols]="cols" maxlength="10000" aria-label="textarea"></textarea>
-</ibm-label>
-<div *ngIf="approachError">
-  <p>
-    <span style="font-size: x-small; color: red;">
-      Approach taken for this model is required
-    </span>
-  </p>
-</div>
-<br />
-<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-  <ibm-label>Language</ibm-label>
-  <ibm-dropdown [label]="Min" [helperText]="helperText" [size]="size" [invalid]="invalid" [invalidText]="invalidText"
-    [theme]="theme" placeholder="Search Language" [disabled]="disabled" (selected)="selected($event)">
-    <ibm-dropdown-list [items]="language"></ibm-dropdown-list>
-  </ibm-dropdown>
-</div>
-<div *ngIf="languageError">
-  <p>
-    <span style="font-size: x-small; color: red;">
-      Programming language for this model is required
-    </span>
-  </p>
-</div>
-<br />
-<br />
-<div style="margin-left: auto; display: flex; justify-content: flex-end;">
-  <button class="bx--btn bx--btn--secondary" type="button" (click)="previous()">
-    Back
-  </button>
-  &nbsp;
-  <button [ibmButton]="ibmButton" [size]="size" (click)="next()">Next</button>
+<div *ngIf="isChallengeAccepted">
+  <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
+    Model Name
+    <p class="challTitle" >
+      {{stepTwo.modelName.length || 0}}/25
+    </p>
+  
+    <textarea style="width: 100%; margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.modelName"
+      [theme]="theme" [rows]="1" [cols]="cols" maxlength="25" aria-label="textarea"></textarea>
+  </ibm-label>
+  <div *ngIf="modelNameError">
+    <p>
+      <span style="font-size: x-small; color: red;">Model Name is required</span>
+    </p>
+  </div>
+  <br />
+  <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
+    Description
+    <p class="challTitle">
+      {{stepTwo.description.length || 0}}/10000
+    </p>
+  
+    <textarea style="width: 100%; margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.description"
+      [theme]="theme" [rows]="7" [cols]="cols" maxlength="10000" aria-label="textarea"></textarea>
+  </ibm-label>
+  <div *ngIf="descriptionError">
+    <p>
+      <span style="font-size: x-small; color: red;">
+        Data Description for this model is required
+      </span>
+    </p>
+  </div>
+  <br />
+  <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
+    Approach Taken
+    <p class="challTitle">
+      {{stepTwo.approach.length || 0}}/10000
+    </p>
+  
+    <textarea style="width: 100%; margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.approach"
+      [theme]="theme" [rows]="7" [cols]="cols" maxlength="10000" aria-label="textarea"></textarea>
+  </ibm-label>
+  <div *ngIf="approachError">
+    <p>
+      <span style="font-size: x-small; color: red;">
+        Approach taken for this model is required
+      </span>
+    </p>
+  </div>
+  <br />
+  <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
+    <ibm-label>Language</ibm-label>
+    <ibm-dropdown [label]="Min" [helperText]="helperText" [size]="size" [invalid]="invalid" [invalidText]="invalidText"
+      [theme]="theme" placeholder="Search Language" [disabled]="disabled" (selected)="selected($event)">
+      <ibm-dropdown-list [items]="language"></ibm-dropdown-list>
+    </ibm-dropdown>
+  </div>
+  <div *ngIf="languageError">
+    <p>
+      <span style="font-size: x-small; color: red;">
+        Programming language for this model is required
+      </span>
+    </p>
+  </div>
+  <br />
+  <br />
+  <div style="margin-left: auto; display: flex; justify-content: flex-end;">
+    <button class="bx--btn bx--btn--secondary" type="button" (click)="previous()">
+      Back
+    </button>
+    &nbsp;
+    <button [ibmButton]="ibmButton" [size]="size" (click)="next()">Next</button>
+  </div>
 </div>

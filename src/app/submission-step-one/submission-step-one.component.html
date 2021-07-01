@@ -1,51 +1,57 @@
-<div style="margin-top: 20px; margin-bottom: 15px;">
-	<ibm-label><span style="font-size: medium; color: black;">Select Phase for submission</span></ibm-label>
-	<div ibmCol class="custom-class-example" [columnNumbers]="{'md': 6, 'sm': 12}" style="width: 320px;">
-		<ibm-dropdown [label]="Min" placeholder="Select" (selected)="selectPhase($event)">
-			<ibm-dropdown-list [items]="phasesList"></ibm-dropdown-list>
-		</ibm-dropdown>
+<div *ngIf="!isChallengeAccepted">
+	<p style="color: red">Accept this challenge first to submit a model.</p>
+</div>
+
+<div *ngIf="isChallengeAccepted">
+	<div style="margin-top: 20px; margin-bottom: 15px;">
+		<ibm-label><span style="font-size: medium; color: black;">Select Phase for submission</span></ibm-label>
+		<div ibmCol class="custom-class-example" [columnNumbers]="{'md': 6, 'sm': 12}" style="width: 320px;">
+			<ibm-dropdown [label]="Min" placeholder="Select" (selected)="selectPhase($event)">
+				<ibm-dropdown-list [items]="phasesList"></ibm-dropdown-list>
+			</ibm-dropdown>
+		</div>
 	</div>
-</div>
-
-<p>
-	Don't forget to check out the sample data sets before you submit a model.
-	These data sets will help you get started in creating your models.
-</p>
-<br />
-
-<p *ngFor='let data of challengeDetails?.phases[phaseIndex]?.sampleDataFile; index as i'>Download Dataset {{i+1}}
-	<svg icon ibmIconDownload16 (click)="downloadFile(phaseIndex, i)" style="cursor: pointer;"></svg>
-</p>
-<div *ngIf="docError">
-	<p><span style="font-size: x-small; color: red">Document not available for download</span></p>
-</div>
-
-<br />
-<br />
-<br />
-<p>Once you've built your model you can <strong>upload it here</strong> to submit it for Phase 1 of training and
-	testing.
-</p>
-<h6>Model</h6>
-<p>Please upload your model in (.format) formats. (fileSize) MB max file size.
-</p>
-
-<app-drop-zip-uploader (goNext)="setModel($event)" (uploadFile)="uploadDataVisual()"
-	(filesChange)="onImageSelect($event.target.files)"></app-drop-zip-uploader>
-<div *ngIf="isFileUploading">
-	<h6>
-		<ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)">
-		</ibm-inline-loading>
-	</h6>
-</div>
-<div *ngIf="stepOne.modelUploadedPath.length>0">
-	<div class="fileBox">
-		<p style="margin: 8px; font-size: small;">{{getFileName(stepOne.modelUploadedPath)}}</p>
-		<p style="margin-top: 8px; margin-left: 75px; cursor: pointer;" (click)="removeUploadedFile()">x</p>
+	
+	<p>
+		Don't forget to check out the sample data sets before you submit a model.
+		These data sets will help you get started in creating your models.
+	</p>
+	<br />
+	
+	<p *ngFor='let data of challengeDetails?.phases[phaseIndex]?.sampleDataFile; index as i'>Download Dataset {{i+1}}
+		<svg icon ibmIconDownload16 (click)="downloadFile(phaseIndex, i)" style="cursor: pointer;"></svg>
+	</p>
+	<div *ngIf="docError">
+		<p><span style="font-size: x-small; color: red">Document not available for download</span></p>
 	</div>
-</div>
-<div style="margin-left: auto; display: flex; justify-content: flex-end">
-	<button class="bx--btn bx--btn--secondary" type="button" (click)="cancel()">Cancel</button>
-	&nbsp;
-	<button [ibmButton]="ibmButton" class="btn" [disabled]="isBtnDisabled" (click)="nextStep()"> Next</button>
+	
+	<br />
+	<br />
+	<br />
+	<p>Once you've built your model you can <strong>upload it here</strong> to submit it for Phase 1 of training and
+		testing.
+	</p>
+	<h6>Model</h6>
+	<p>Please upload your model in (.format) formats. (fileSize) MB max file size.
+	</p>
+	
+	<app-drop-zip-uploader (goNext)="setModel($event)" (uploadFile)="uploadDataVisual()"
+		(filesChange)="onImageSelect($event.target.files)"></app-drop-zip-uploader>
+	<div *ngIf="isFileUploading">
+		<h6>
+			<ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)">
+			</ibm-inline-loading>
+		</h6>
+	</div>
+	<div *ngIf="stepOne.modelUploadedPath.length>0">
+		<div class="fileBox">
+			<p style="margin: 8px; font-size: small;">{{getFileName(stepOne.modelUploadedPath)}}</p>
+			<p style="margin-top: 8px; margin-left: 75px; cursor: pointer;" (click)="removeUploadedFile()">x</p>
+		</div>
+	</div>
+	<div style="margin-left: auto; display: flex; justify-content: flex-end">
+		<button class="bx--btn bx--btn--secondary" type="button" (click)="cancel()">Cancel</button>
+		&nbsp;
+		<button [ibmButton]="ibmButton" class="btn" [disabled]="isBtnDisabled" (click)="nextStep()"> Next</button>
+	</div>
 </div>

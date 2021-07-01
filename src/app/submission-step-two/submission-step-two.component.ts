@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-submission-step-two',
@@ -6,6 +6,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./submission-step-two.component.scss']
 })
 export class SubmissionStepTwoComponent implements OnInit {
+  @Input() isChallengeAccepted: boolean;
 	@Output() public goPrevious: EventEmitter<any> = new EventEmitter();
 	@Output() public goNext: EventEmitter<any> = new EventEmitter();
 
