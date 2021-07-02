@@ -18,23 +18,23 @@
 		<div class="bx--col-md-7" style="margin-left: -8%;">
 			<h1> {{ challengeDetails?.title }} </h1>
 			<ibm-tabs [followFocus]="true" (click)="checkClick($event)" [isNavigation]="false" [cacheActive]="true">			
-				<ibm-tab heading="Overview">
+				<ibm-tab heading="Overview" name='overview_tab'>
 					<app-overview [submissionChallengeDetails]="submissionChallengeDetails"
 						[challengeDetails]="challengeDetails"></app-overview>
 				</ibm-tab>
-				<ibm-tab heading="Data">
+				<ibm-tab heading="Data" name='data_tab'>
 					<app-data [challengeDetails]="challengeDetails"></app-data>
 				</ibm-tab>
-				<ibm-tab heading="Activity">
+				<ibm-tab heading="Activity" name='activity_tab'>
 					<app-activity [submissionChallengeDetails]="submissionChallengeDetails" [routePhase]="routePhase"
 						[challengeDetails]="challengeDetails"></app-activity>
 				</ibm-tab>
-				<ibm-tab heading="Discussion">
+				<ibm-tab heading="Discussion" name='discussion_tab'>
 					<div id="disqus_thread"></div>
 					<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments
 							powered by Disqus.</a></noscript>
 				</ibm-tab>
-				<ibm-tab heading="Models">
+				<ibm-tab heading="Models" name='model_tab'>
 					<app-model [challengeDetails]="challengeDetails" [routePhase]="routePhase"
 						[submissionChallengeDetails]="submissionChallengeDetails"></app-model>
 				</ibm-tab>

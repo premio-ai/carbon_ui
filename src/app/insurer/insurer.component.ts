@@ -97,103 +97,112 @@ export class InsurerComponent implements OnInit {
     switch (e.target.outerText) {
       case 'Overview':
         //Heading
-        document.getElementsByClassName('bx--tabs__nav-item')[0].classList.add('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[1].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[2].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[3].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[4].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[0].classList.add('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[1].classList.remove('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[2].classList.remove('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[3].classList.remove('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[4].classList.remove('bx--tabs--scrollable__nav-item--selected')
         //Content
-        document.getElementById(overviewId).setAttribute('style', ``);
-        document.getElementById(dataId).setAttribute('style', `display:none;`);
-        document.getElementById(activityId).setAttribute('style', `display:none;`);
-        document.getElementById(discussionId).setAttribute('style', `display:none;`);
-        document.getElementById(modelId).setAttribute('style', `display:none;`);
+        document.getElementsByName('overview_tab')[0].setAttribute('style', ``);
+        document.getElementsByName('data_tab')[0].setAttribute('style', `display:none;`);
+        document.getElementsByName('activity_tab')[0].setAttribute('style', `display:none;`);
+        document.getElementsByName('discussion_tab')[0].setAttribute('style', `display:none;`);
+        document.getElementsByName('model_tab')[0].setAttribute('style', `display:none;`);
+
         break;
       case 'Data':
         //Heading
-        document.getElementsByClassName('bx--tabs__nav-item')[0].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[1].classList.add('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[2].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[3].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[4].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[0].classList.remove('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[1].classList.add('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[2].classList.remove('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[3].classList.remove('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[4].classList.remove('bx--tabs--scrollable__nav-item--selected')
         //Content
-        document.getElementById(dataId).setAttribute('style', ``);
-        document.getElementById(overviewId).setAttribute('style', `display:none;`);
-        document.getElementById(activityId).setAttribute('style', `display:none;`);
-        document.getElementById(discussionId).setAttribute('style', `display:none;`);
-        document.getElementById(modelId).setAttribute('style', `display:none;`);
+        document.getElementsByName('data_tab')[0].setAttribute('style', ``);
+        document.getElementsByName('overview_tab')[0].setAttribute('style', `display:none;`);
+        document.getElementsByName('activity_tab')[0].setAttribute('style', `display:none;`);
+        document.getElementsByName('discussion_tab')[0].setAttribute('style', `display:none;`);
+        document.getElementsByName('model_tab')[0].setAttribute('style', `display:none;`);
+
         break;
       case 'View Activity':
         //Heading
-        document.getElementsByClassName('bx--tabs__nav-item')[0].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[1].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[2].classList.add('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[3].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[4].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[0].classList.remove('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[1].classList.remove('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[2].classList.add('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[3].classList.remove('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[4].classList.remove('bx--tabs--scrollable__nav-item--selected')
         //Content
-        document.getElementById(activityId).setAttribute('style', ``);
-        document.getElementById(activityId).getElementsByTagName('div')[0].style.display = '';
-        document.getElementById(overviewId).setAttribute('style', `display:none;`);
-        document.getElementById(dataId).setAttribute('style', `display:none;`);
-        document.getElementById(discussionId).setAttribute('style', `display:none;`);
-        document.getElementById(modelId).setAttribute('style', `display:none;`);
+        document.getElementsByName('activity_tab')[0].setAttribute('style', ``);
+        document.getElementsByName('activity_tab')[0].getElementsByTagName('div')[0].style.display = '';
+        document.getElementsByName('overview_tab')[0].setAttribute('style', `display:none;`);
+        document.getElementsByName('data_tab')[0].setAttribute('style', `display:none;`);
+        document.getElementsByName('discussion_tab')[0].setAttribute('style', `display:none;`);
+        document.getElementsByName('model_tab')[0].setAttribute('style', `display:none;`);
+
         break;
       case 'Activity':
         //Heading
-        document.getElementsByClassName('bx--tabs__nav-item')[0].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[1].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[2].classList.add('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[3].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[4].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[0].classList.remove('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[1].classList.remove('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[2].classList.add('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[3].classList.remove('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[4].classList.remove('bx--tabs--scrollable__nav-item--selected')
         //Content
-        document.getElementById(activityId).setAttribute('style', ``);
-        document.getElementById(overviewId).setAttribute('style', `display:none;`);
-        document.getElementById(dataId).setAttribute('style', `display:none;`);
-        document.getElementById(discussionId).setAttribute('style', `display:none;`);
-        document.getElementById(modelId).setAttribute('style', `display:none;`);
+        document.getElementsByName('activity_tab')[0].setAttribute('style', ``);
+        document.getElementsByName('activity_tab')[0].getElementsByTagName('div')[0].style.display = '';
+        document.getElementsByName('overview_tab')[0].setAttribute('style', `display:none;`);
+        document.getElementsByName('data_tab')[0].setAttribute('style', `display:none;`);
+        document.getElementsByName('discussion_tab')[0].setAttribute('style', `display:none;`);
+        document.getElementsByName('model_tab')[0].setAttribute('style', `display:none;`);
+
         break;
       case 'Discussion':
         //Heading
-        document.getElementsByClassName('bx--tabs__nav-item')[0].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[1].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[2].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[3].classList.add('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[4].classList.remove('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[0].classList.remove('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[1].classList.remove('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[2].classList.remove('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[3].classList.add('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[4].classList.remove('bx--tabs--scrollable__nav-item--selected')
         //Content
-        document.getElementById(discussionId).setAttribute('style', ``);
-        document.getElementById(overviewId).setAttribute('style', `display:none;`);
-        document.getElementById(dataId).setAttribute('style', `display:none;`);
-        document.getElementById(activityId).setAttribute('style', `display:none;`);
-        document.getElementById(modelId).setAttribute('style', `display:none;`);
+        document.getElementsByName('discussion_tab')[0].setAttribute('style', ``);
+        document.getElementsByName('overview_tab')[0].setAttribute('style', `display:none;`);
+        document.getElementsByName('activity_tab')[0].setAttribute('style', `display:none;`);
+        document.getElementsByName('data_tab')[0].setAttribute('style', `display:none;`);
+        document.getElementsByName('model_tab')[0].setAttribute('style', `display:none;`);
+
         break;
       case 'View Model':
         //Heading
-        document.getElementsByClassName('bx--tabs__nav-item')[0].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[1].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[2].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[3].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[4].classList.add('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[0].classList.remove('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[1].classList.remove('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[2].classList.remove('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[3].classList.remove('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[4].classList.add('bx--tabs--scrollable__nav-item--selected')
         //Content
-        document.getElementById(modelId).setAttribute('style', ``);
-        document.getElementById(modelId).getElementsByTagName('div')[0].style.display = '';
-        document.getElementById(overviewId).setAttribute('style', `display:none;`);
-        document.getElementById(dataId).setAttribute('style', `display:none;`);
-        document.getElementById(activityId).setAttribute('style', `display:none;`);
-        document.getElementById(discussionId).setAttribute('style', `display:none;`);
+        document.getElementsByName('model_tab')[0].setAttribute('style', ``);
+        document.getElementsByName('model_tab')[0].getElementsByTagName('div')[0].style.display = '';
+        document.getElementsByName('overview_tab')[0].setAttribute('style', `display:none;`);
+        document.getElementsByName('data_tab')[0].setAttribute('style', `display:none;`);
+        document.getElementsByName('discussion_tab')[0].setAttribute('style', `display:none;`);
+        document.getElementsByName('activity_tab')[0].setAttribute('style', `display:none;`);
+
         break;
       case 'Models':
         //Heading
-        document.getElementsByClassName('bx--tabs__nav-item')[0].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[1].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[2].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[3].classList.remove('bx--tabs__nav-item--selected')
-        document.getElementsByClassName('bx--tabs__nav-item')[4].classList.add('bx--tabs__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[0].classList.remove('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[1].classList.remove('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[2].classList.remove('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[3].classList.remove('bx--tabs--scrollable__nav-item--selected')
+        document.getElementsByClassName('bx--tabs--scrollable__nav-item')[4].classList.add('bx--tabs--scrollable__nav-item--selected')
         //Content
-        document.getElementById(modelId).setAttribute('style', ``);
-        document.getElementById(overviewId).setAttribute('style', `display:none;`);
-        document.getElementById(dataId).setAttribute('style', `display:none;`);
-        document.getElementById(activityId).setAttribute('style', `display:none;`);
-        document.getElementById(discussionId).setAttribute('style', `display:none;`);
+        document.getElementsByName('model_tab')[0].setAttribute('style', ``);
+        document.getElementsByName('model_tab')[0].getElementsByTagName('div')[0].style.display = '';
+        document.getElementsByName('overview_tab')[0].setAttribute('style', `display:none;`);
+        document.getElementsByName('data_tab')[0].setAttribute('style', `display:none;`);
+        document.getElementsByName('discussion_tab')[0].setAttribute('style', `display:none;`);
+        document.getElementsByName('activity_tab')[0].setAttribute('style', `display:none;`);
+
         break;
       default:
         break;
