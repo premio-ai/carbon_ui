@@ -298,7 +298,7 @@
             <!-- let data of (challengeDetails?.phases)[0]?.sampleDataFile; -->
             <p *ngFor="let data of sampleFileArr; index as i">
               Download Dataset {{ i + 1 }}
-              <svg icon ibmIconDownload16 (click)="downloadFile(data.path)"></svg>
+              <svg icon ibmIconDownload16 class="downlogoPointer" (click)="downloadFile(data.path)"></svg>
             </p>
             <br />
             <h5>Model</h5>

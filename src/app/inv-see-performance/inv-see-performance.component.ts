@@ -208,6 +208,7 @@ export class InvSeePerformanceComponent implements OnInit {
 			title: 'Accuracy Score',
 			animations: true,
 			donut: {
+				alignments: 'center',
 				center: {
 					label: `${this.accuracyScoreData[0].value}` + '%'
 				}
@@ -218,7 +219,7 @@ export class InvSeePerformanceComponent implements OnInit {
 					return 'blue'
 				}
 				if (group == '') {
-					return 'white'
+					return 'rgb(244, 244, 244)'
 				}
 			}
 		};

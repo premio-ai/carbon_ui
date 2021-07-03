@@ -65,30 +65,34 @@
         <div class="bx--col-md-1" style="padding-left: 2%; white-space: nowrap;">
           <br />
           <p class="para">Download Trained Model
-            <svg icon ibmIconDownload16 (click)="downloadFile(modelDetails?.modelUploadedPath)"></svg>
+            <svg icon ibmIconDownload16 class="downlogoPointer" (click)="downloadFile(modelDetails?.modelUploadedPath)"></svg>
           </p>
         </div>
       </div>
       <br />
       <br />
 
-      <div style="display: flex; gap: 10px;">
-        <ibm-tile style="flex-grow: 1;">
+      <div style="display: flex; gap: 10px; width: 850px">
+        <ibm-tile style="flex-grow: 1; margin-left: 40px;">
           <ibm-donut-chart [data]="accuracyScoreData" [options]="accuracyOptions"
             style="background-color: #f4f4f4 !important;align-items: center;"></ibm-donut-chart>
+            <p>Accuracy</p>
         </ibm-tile>
-        <ibm-tile style="flex-grow: 1;">
+        <ibm-tile style="flex-grow: 1; margin-left: 40px;">
           <ibm-donut-chart [data]="precisionScoreData" [options]="precisionOptions"
             style="background-color: #f4f4f4 !important;"></ibm-donut-chart>
         </ibm-tile>
-        <ibm-tile style="flex-grow: 1;">
+        <ibm-tile style="flex-grow: 1; margin-left: 40px;">
           <ibm-donut-chart [data]="recallScoreData" [options]="recallOptions"
             style="background-color: #f4f4f4 !important;"></ibm-donut-chart>
         </ibm-tile>
       </div>
       <br />
+      
+    <!-- // Performance graph disabled for static data
       <ibm-line-chart [data]="data1" [options]="options1" style="background-color: #f4f4f4 !important;"
-        class="chartline"></ibm-line-chart>
-    </div>
+        class="chartline"></ibm-line-chart> -->
+    
+      </div>
   </div>
 </div>

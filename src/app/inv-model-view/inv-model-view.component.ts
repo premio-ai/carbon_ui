@@ -37,7 +37,7 @@ export class InvModelViewComponent implements OnInit {
 
   ngOnInit() {
     let userDetails = JSON.parse(localStorage.getItem('userDetails'))
-    if (userDetails && userDetails._id) {      
+    if (userDetails && userDetails._id) {
       this.appUrl = APP_URL
       this.activatedRoute.params.subscribe((params: Params) => {
         if (params) {
@@ -46,23 +46,23 @@ export class InvModelViewComponent implements OnInit {
           this.getModelSummary(this.modelId)
         }
       });
-  
+
       this.isEdit = false;
       this.set_new_modelName = '';
     } else {
-			this.router.navigateByUrl('login')
-		}
+      this.router.navigateByUrl('login')
+    }
   }
 
   getAllSubmitOfChallenge(challengeId) {
     let url = 'submissionAllChallenge/allSubmitOfChallenge/' + challengeId;
-    this.requestService.get(url, null).toPromise().then( data => {
+    this.requestService.get(url, null).toPromise().then(data => {
       this.allSubmitOfChallenge = data
       // this.submissionIndex = data.findIndex( dt => dt._id == this.modelId)
     }).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+      localStorage.clear();
+      this.router.navigateByUrl('login')
+    })
   }
 
   editModelName() {
@@ -78,13 +78,13 @@ export class InvModelViewComponent implements OnInit {
       this.isEdit = false;
       this.getSubmission(this.modelId)
     }).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+      localStorage.clear();
+      this.router.navigateByUrl('login')
+    })
   }
 
   enterNextPhase() {
-    let nextModelId = this.allSubmitOfChallenge[this.submissionIndex+1]._id;
+    let nextModelId = this.allSubmitOfChallenge[this.submissionIndex + 1]._id;
     this.router.navigateByUrl('invmodel-view/' + nextModelId)
   }
 
@@ -105,44 +105,55 @@ export class InvModelViewComponent implements OnInit {
       this.getChallengeDetails(this.challengeId);
       this.getAllSubmitOfChallenge(this.challengeId);
     }).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+      localStorage.clear();
+      this.router.navigateByUrl('login')
+    })
   }
 
   getModelSummary(id) {
     let url = 'submissionAllChallenge/modelSummary/' + id;
-    this.requestService.get(url, null).toPromise().then( data => {
+    this.requestService.get(url, null).toPromise().then(data => {
       this.modelSummary = data
-    }).catch( err => {
+    }).catch(err => {
       localStorage.clear();
-			this.router.navigateByUrl('login')
+      this.router.navigateByUrl('login')
     })
   }
 
   getUploadStatus() {
     if (this.modelSummary) {
-      return this.modelSummary.summary.upload_status
+      return this.modelSummary.metricsStatus.upload
+      // return this.modelSummary.summary.upload_status
     }
   }
 
   getTrainingStatus() {
     if (this.modelSummary) {
-      return this.modelSummary.summary.training_status
+      return this.modelSummary.metricsStatus.training
+      // if (this.modelSummary.summary.training_status == null) {
+      //   return 'FAILED'
+      // } else {
+      //   return this.modelSummary.summary.training_status
+      // }
     }
   }
 
   getTestingStatus() {
     if (this.modelSummary) {
-      return this.modelSummary.summary.test_status
+      return this.modelSummary.metricsStatus.test_status
+      // if (this.modelSummary.summary.testing_status == null) {
+      //   return 'FAILED'
+      // } else {
+      //   return this.modelSummary.summary.test_status
+      // }
     }
   }
-  
+
   async displayImage() {
     let payload = {
       filePath: ''
     }
-    this.challengeDetails.phases.map( dt => {
+    this.challengeDetails.phases.map(dt => {
       if (dt.phaseId == this.modelDetails.phaseId) {
         payload.filePath = dt.dataVisualFile
       }
@@ -156,20 +167,23 @@ export class InvModelViewComponent implements OnInit {
       localStorage.clear();
       this.router.navigateByUrl('login')
     })
-    
+
   }
 
   getPerformanceStatus() {
     if (this.modelSummary) {
-      if (this.modelSummary.metricsStatus == 'RUNNING') {
-        return 'PENDING'
-      } else if (this.modelSummary.metricsStatus.training == 'COMPLETE' && this.modelSummary.metricsStatus.testing == 'COMPLETE') {
-        return 'COMPLETE'
-      } else if (this.modelSummary.metricsStatus.training == 'COMPLETE' && this.modelSummary.metricsStatus.testing == 'INCOMPLETE') {
-        return 'INCOMPLETE'
-      } else if (this.modelSummary.metricsStatus == 'INCOMPLETE') {
-        return 'INCOMPLETE'
-      }
+      return this.modelSummary.metricsStatus.scoreStatus
+      // if (this.modelSummary.metricsStatus == 'RUNNING') {
+      //   return 'PENDING'
+      // } else if (this.modelSummary.metricsStatus.training == 'COMPLETE' && this.modelSummary.metricsStatus.testing == 'COMPLETE') {
+      //   return 'COMPLETE'
+      // } else if (this.modelSummary.metricsStatus.training == 'COMPLETE' && this.modelSummary.metricsStatus.testing == 'INCOMPLETE') {
+      //   return 'INCOMPLETE'
+      // } else if (this.modelSummary.metricsStatus.training == 'INCOMPLETE' && this.modelSummary.metricsStatus.testing == 'INCOMPLETE') {
+      //   return 'INCOMPLETE'
+      // } else if (this.modelSummary.metricsStatus == 'INCOMPLETE') {
+      //   return 'INCOMPLETE'
+      // }
     }
   }
 
@@ -177,18 +191,18 @@ export class InvModelViewComponent implements OnInit {
     let url = 'challenge/' + id;
     this.requestService.get(url, null).toPromise().then(data => {
       this.challengeDetails = data;
-      this.submissionIndex = data.phases.findIndex( dt => { return dt.phaseId == this.phaseId })
+      this.submissionIndex = data.phases.findIndex(dt => { return dt.phaseId == this.phaseId })
       this.displayImage();
       this.getSampleFileArr();
     }).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+      localStorage.clear();
+      this.router.navigateByUrl('login')
+    })
   }
 
   getSampleFileArr() {
     if (this.challengeDetails) {
-      this.challengeDetails.phases.filter( dt => {
+      this.challengeDetails.phases.filter(dt => {
         if (dt.phaseId == this.phaseId) {
           this.sampleFileArr = dt.sampleDataFile
         }
@@ -205,19 +219,19 @@ export class InvModelViewComponent implements OnInit {
       let docName = filePath
 
       let payload = {
-				filePath: docName
+        filePath: docName
       }
-			this.requestService.post('upload/downloadObject', payload).toPromise().then(data => {
+      this.requestService.post('upload/downloadObject', payload).toPromise().then(data => {
         var blob = this.dataURItoBlob(data.blob)
         var a = document.createElement("a");
-				document.body.appendChild(a);
-				var url = window.URL.createObjectURL(blob);
+        document.body.appendChild(a);
+        var url = window.URL.createObjectURL(blob);
 
         a.href = url;
         a.download = "File.csv";
         a.click();
         window.URL.revokeObjectURL(url);
-			}).catch(err => {
+      }).catch(err => {
         localStorage.clear();
         this.router.navigateByUrl('login')
       })

@@ -147,7 +147,7 @@
 								<h4 class="sampleheaddata">Sample Data Sets</h4>
 								<p  *ngFor='let data of phase.sampleDataFile; index as j' class="samplename">Download Dataset
 									{{j+1}}
-									<svg icon ibmIconDownload16 style="cursor: pointer;"  class="svg" height="12" width="12"
+									<svg icon ibmIconDownload16 class="svg" height="12" width="12"
 										(click)="downloadFile(i, j)"></svg>
 								</p>
 							</div>
