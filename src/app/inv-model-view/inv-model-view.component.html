@@ -207,6 +207,18 @@
           </h6>
         </ibm-tile>
       </div>
+
+      <!-- <div *ngIf="getTrainingStatus() == 'FAILED' || getTestingStatus == 'FAILED' ">
+        <div class="border-div_fail" style="margin-top: 25px;" >
+          &nbsp;&nbsp;
+          <h5 style="margin-left: 8px;">Error!</h5>
+          &nbsp;&nbsp;
+          <br/>
+          &nbsp;
+    			<ibm-code-snippet display="multi" style="margin-left: 10px; width: 65%;" >{{getFailureMsg()}}</ibm-code-snippet>
+        </div>
+      </div> -->
+
       <br /> <br />
       <div class="border-div" *ngIf="getPerformanceStatus() == 'COMPLETE' ">
         &nbsp;&nbsp;

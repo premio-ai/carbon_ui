@@ -79,11 +79,17 @@ export class SignUpComponent implements OnInit {
   validate() {
     let emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     let isAlphaNum = /^[a-z0-9]+$/i
-    if (this.signupDetails.fullName.length > 3 && this.signupDetails.email.match(emailReg) && this.signupDetails.password.length > 0
+    if (this.signupDetails.fullName.length > 3 && this.signupDetails.fullName.match(isAlphaNum) && this.signupDetails.email.match(emailReg) && this.signupDetails.password.length > 0
       && this.signupDetails.role.length>0 && this.signupDetails.bio.length>0 && this.signupDetails.experience.length>0) {
-        this.signUp();
+        this.fullNameError = false;
+        this.emailError = false;
+        this.passwordError = false;
+        this.roleError = false;
+        this.bioError = false;
+        this.experienceError = false;
+        // this.signUp();
     } else {
-      if (this.signupDetails.fullName.length > 3 && this.signupDetails.fullName.match(isAlphaNum)) {
+      if (this.signupDetails.fullName.length > 2 && this.signupDetails.fullName.match(isAlphaNum)) {
         this.fullNameError = false
       } else {
         this.fullNameError = true

@@ -120,6 +120,12 @@ export class InvModelViewComponent implements OnInit {
     })
   }
 
+  getFailureMsg() {
+    if (this.modelSummary) {
+      return this.modelSummary.summary.review_fn_message
+    }
+  }
+
   getUploadStatus() {
     if (this.modelSummary) {
       return this.modelSummary.metricsStatus.upload

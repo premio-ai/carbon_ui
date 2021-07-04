@@ -54,9 +54,25 @@ export class InvSeePerformanceComponent implements OnInit {
 			});
 			this.getSubmission(modelId)
 			this.getModelPerformance(modelId)
+			if (true) {
+				document.getElementsByClassName('bx--cc--legend')[0].setAttribute('style', `display:none;`)
+			}
 		} else {
 			this.router.navigateByUrl('login')
 		}
+	}
+
+	ngOnChanges() {
+		if (this.modelPerformance) {
+			document.getElementsByClassName('bx--cc--legend')[0].setAttribute('style', `display:none;`)
+		}
+		if (document.getElementsByClassName('bx--cc--legend').length>0) {
+			document.getElementsByClassName('bx--cc--legend')[0].setAttribute('style', `display:none;`)
+		}
+	}
+
+	ngAfterInitView() {
+		document.getElementsByClassName('bx--cc--legend')[0].setAttribute('style', `display:none;`)
 	}
 
 	getSubmission(id) {
@@ -122,6 +138,12 @@ export class InvSeePerformanceComponent implements OnInit {
 		})
 	}
 
+	removeElement() {
+		if (document.getElementsByClassName('bx--cc--legend').length>0) {
+			document.getElementsByClassName('bx--cc--legend')[0].setAttribute('style', `display:none;`)
+		}
+	}
+
 	getChallengeDetails(id) {
 		let url = 'challenge/' + id;
 		this.requestService.get(url, null).toPromise().then(data => {
@@ -145,6 +167,7 @@ export class InvSeePerformanceComponent implements OnInit {
 				showMsg = true
 			}
 		}
+		// this.removeElement()
 		return showMsg;
 	}
 

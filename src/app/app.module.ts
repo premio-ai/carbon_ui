@@ -41,6 +41,7 @@ import {
 	BreadcrumbModule,
 	ButtonModule,
 	CheckboxModule,
+	CodeSnippetModule,
 	ContentSwitcherModule,
 	DatePickerModule,
 	// DocumentationModule,
@@ -212,7 +213,7 @@ import {Code24Module } from "@carbon/icons-angular/lib/code/24";
 		TableModule,
 		NotificationModule,
 		SearchModule,
-
+		CodeSnippetModule,
 		Time16Module,
 		EdtLoop16Module,
 		UserMultiple16Module,

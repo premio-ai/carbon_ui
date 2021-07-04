@@ -130,7 +130,6 @@ export class InvAcceptedComponent implements OnInit {
 	getConfig() {
 		let _self = this;
 		return function () {
-			// this.page.url = window.location.href;
 			this.page.url = APP_URL + 'challenge/' + _self.challengeId;
 			this.page.identifier = _self.challengeId;
 			this.language = 'en';
