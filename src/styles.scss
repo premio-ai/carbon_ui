@@ -2,12 +2,6 @@ $feature-flags: (
 	grid-columns-16: true,
 );
 
-// To change the theme uncomment the below import and which ever carbon theme you want to use
-// @import '~carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/themes/theme-maps';
-// $carbon--theme: $carbon--theme--g100;
-// $carbon--theme: $carbon--theme--g90;
-// $carbon--theme: $carbon--theme--g10;
-
 @import "~carbon-components/scss/globals/scss/styles";
 
 @import './assets/scss/carbon-overrides.scss';
@@ -17,16 +11,6 @@ $feature-flags: (
 .bx--tabs__nav-item{
 	max-width: 114px;
 }
-
-// text.pie-label{
-// 	display: none;
-// }
-// text.dounet-title{
-// 	display: none;
-// }
-// text.pie-label{
-// 	display: none;
-// }
 
 svg.chart-grid-backdrop{
 	fill: #f4f4f4;
@@ -58,18 +42,10 @@ text.donut-figure{
     height: 1.7rem !important;
 }
 
-// .bx--cc--legend {
-//     display: none !important;
-// }
-
-// .layout-child.legend.bx--cc--legend {
-//     display: none !important;
-// }
-
-// .legend-items {
-//     display: none;
-// }
-
+svg.bx--cc--legend.layout-child.legend {
+    user-select: none;
+    pointer-events: none;
+}
 
 text.title{
 font-weight: 600;

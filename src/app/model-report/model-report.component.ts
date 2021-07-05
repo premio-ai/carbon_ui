@@ -125,6 +125,7 @@ export class ModelReportComponent implements OnInit {
 
 		this.requestService.get(url, null).toPromise().then(data => {
 			this.challengeSubmission = data
+			console.log(this.challengeSubmission, "---this.challengeSubmission---128")
 		}).catch(err => {
 			localStorage.clear();
 			this.router.navigateByUrl('login')
@@ -180,6 +181,9 @@ export class ModelReportComponent implements OnInit {
 				if (group == '') {
 					return 'white'
 				}
+			},
+			legend: {
+				alignment: 'center'
 			}
 		};
 	}
@@ -215,6 +219,9 @@ export class ModelReportComponent implements OnInit {
 				if (group == '') {
 					return 'white'
 				}
+			},
+			legend: {
+				alignment: 'center'
 			}
 		};
 	}
@@ -250,6 +257,9 @@ export class ModelReportComponent implements OnInit {
 				if (group == '') {
 					return 'white'
 				}
+			},
+			legend: {
+				alignment: 'center'
 			}
 		};
 	}
@@ -285,6 +295,9 @@ export class ModelReportComponent implements OnInit {
 				if (group == '') {
 					return 'white'
 				}
+			},
+			legend: {
+				alignment: 'center'
 			}
 		};
 	}

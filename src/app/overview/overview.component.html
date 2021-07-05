@@ -58,6 +58,7 @@
 								<svg icon ibmIconCheckmarkOutline20></svg>&nbsp;
 								<p>Models passed Scoring</p>
 							</div>
+							<p class="numbers">{{ modelPassed(phase.phaseId) }}</p>
 							<br />
 							<br />
 							<div class="icon_align">
@@ -150,7 +151,7 @@
 										<td>{{ model.score }}</td>
 										<td>{{ model.score }}</td>
 										<td>{{ model.score }}</td>
-										<td><a (click)="viewModel(data._id)" style="cursor: pointer;" >View Model</a></td>
+										<td><a (click)="viewModel(model?._id)" style="cursor: pointer;" >View Model</a></td>
 									</tr>
 									<tr *ngIf="leaderboardData?.length == 0">
 										<p >No records found</p>

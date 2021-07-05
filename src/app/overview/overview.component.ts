@@ -79,8 +79,8 @@ export class OverviewComponent implements OnInit {
           count += 1
         }
       })
-      return count;
     }
+    return count;
   }
 
   trainingModels(phaseId) {
@@ -91,20 +91,20 @@ export class OverviewComponent implements OnInit {
           count += 1
         }
       })
-      return count;
     }
+    return count;
   }
 
   modelPassed(phaseId) {
     let count = 0;
     if (this.submissionChallengeDetails) {
-      this.submissionChallengeDetails.find(dt => {
-        if (dt.phaseId == phaseId && dt.score >= this.challengeDetails.phases[this.phaseNo].passingScore) {
+      this.submissionChallengeDetails.find((dt, i) => {
+        if (dt.phaseId == phaseId && dt.score >= this.challengeDetails.phases[i].passingScore) {
           count += 1
         }
       })
-      return count;
     }
+    return count;
   }
 
   showLeaderboard() {
@@ -115,11 +115,16 @@ export class OverviewComponent implements OnInit {
       }
     })
 
+    tempData.sort((a, b) => {
+      return b.score - a.score
+    })
+
     this.leaderboardData = tempData
   }
 
   viewModel(id) {
-    this.router.navigateByUrl('invmodel-view/' + id)
+    console.log(id, "---id---126")
+    this.router.navigateByUrl('modelReport/' + id)
   }
 
   switchWithPhase(phaseId) {

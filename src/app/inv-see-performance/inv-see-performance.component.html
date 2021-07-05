@@ -73,16 +73,15 @@
       <br />
 
       <div style="display: flex; gap: 10px; width: 850px">
-        <ibm-tile style="flex-grow: 1; margin-left: 40px;">
-          <ibm-donut-chart [data]="accuracyScoreData" [options]="accuracyOptions"
+        <ibm-tile style="flex-grow: 1; margin-right: 50px;">
+          <ibm-donut-chart class="donutChart" [data]="accuracyScoreData" [options]="accuracyOptions"
             style="background-color: #f4f4f4 !important;align-items: center;"></ibm-donut-chart>
-            <p>Accuracy</p>
         </ibm-tile>
-        <ibm-tile style="flex-grow: 1; margin-left: 40px;">
+        <ibm-tile style="flex-grow: 1; margin-right: 50px;">
           <ibm-donut-chart [data]="precisionScoreData" [options]="precisionOptions"
             style="background-color: #f4f4f4 !important;"></ibm-donut-chart>
         </ibm-tile>
-        <ibm-tile style="flex-grow: 1; margin-left: 40px;">
+        <ibm-tile style="flex-grow: 1; margin-right: 50px;">
           <ibm-donut-chart [data]="recallScoreData" [options]="recallOptions"
             style="background-color: #f4f4f4 !important;"></ibm-donut-chart>
         </ibm-tile>
