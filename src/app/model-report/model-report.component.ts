@@ -53,7 +53,6 @@ export class ModelReportComponent implements OnInit {
 	ngOnInit() {
 		let userDetails = JSON.parse(localStorage.getItem('userDetails'))
 		if (userDetails && userDetails._id) {
-			showClose: true
 			this.toasterMsg = false
 			this.activatedRoute.params.subscribe((params: Params) => {
 				if (params) {
@@ -125,7 +124,6 @@ export class ModelReportComponent implements OnInit {
 
 		this.requestService.get(url, null).toPromise().then(data => {
 			this.challengeSubmission = data
-			console.log(this.challengeSubmission, "---this.challengeSubmission---128")
 		}).catch(err => {
 			localStorage.clear();
 			this.router.navigateByUrl('login')

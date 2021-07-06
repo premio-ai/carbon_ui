@@ -5,26 +5,32 @@
 <div *ngIf="isChallengeAccepted">
 	<div style="margin-top: 20px; margin-bottom: 15px;">
 		<ibm-label><span style="font-size: medium; color: black;">Select Phase for submission</span></ibm-label>
-		<div ibmCol class="custom-class-example" [columnNumbers]="{'md': 6, 'sm': 12}" style="width: 320px;">
-			<ibm-dropdown [label]="Min" placeholder="Select" (selected)="selectPhase($event)">
+		<!-- <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 6, 'sm': 12}" style="width: 320px;">
+			<ibm-dropdown [label]="Min" placeholder="Select" (selected)="selectPhase($event)" >
 				<ibm-dropdown-list [items]="phasesList"></ibm-dropdown-list>
 			</ibm-dropdown>
-		</div>
+		</div> -->
+
+		<ibm-select ariaLabel='ngModel select'>
+			<option *ngFor="let phase of phasesList; index as i" [value]="phase.id" 
+				[attr.selected]="phase.id==enterPhaseId ? true : null">{{phase.content}}</option>
+		</ibm-select>
+
 	</div>
-	
+
 	<p>
 		Don't forget to check out the sample data sets before you submit a model.
 		These data sets will help you get started in creating your models.
 	</p>
 	<br />
-	
+
 	<p *ngFor='let data of challengeDetails?.phases[phaseIndex]?.sampleDataFile; index as i'>Download Dataset {{i+1}}
 		<svg icon ibmIconDownload16 (click)="downloadFile(phaseIndex, i)" class="svg"></svg>
 	</p>
 	<div *ngIf="docError">
 		<p><span style="font-size: x-small; color: red">Document not available for download</span></p>
 	</div>
-	
+
 	<br />
 	<br />
 	<br />
@@ -34,7 +40,7 @@
 	<h6>Model</h6>
 	<p>Please upload your model in .zip formats. 1MB max file size.
 	</p>
-	
+
 	<app-drop-zip-uploader (goNext)="setModel($event)" (uploadFile)="uploadDataVisual()"
 		(filesChange)="onImageSelect($event.target.files)"></app-drop-zip-uploader>
 	<div *ngIf="isFileUploading">

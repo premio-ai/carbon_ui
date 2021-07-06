@@ -54,12 +54,14 @@ export class InvAcceptedComponent implements OnInit {
 	totalPage: number;
 	appUrl: String;
 	imageUrlArr: any[] = [];
-	submissionCount: number
-
+	submissionCount: number;
+	enterPhaseId: string;
+	
 	ngOnInit() {
 		let userDetails = JSON.parse(localStorage.getItem('userDetails'))
 		if (userDetails && userDetails._id) {
-			this.appUrl = APP_URL
+			this.appUrl = APP_URL;
+			this.enterPhaseId = '';
 			this.pageOffset = 0;
 			this.totalPage = 1;
 			this.pageNo = 1;
@@ -192,6 +194,11 @@ export class InvAcceptedComponent implements OnInit {
 			localStorage.clear();
 			this.router.navigateByUrl('login')
 		})
+	}
+
+	enterPhase(phaseId) {
+		this.current = 0
+		this.enterPhaseId = phaseId
 	}
 
 	// download config.ini file

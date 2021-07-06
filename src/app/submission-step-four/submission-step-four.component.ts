@@ -16,6 +16,7 @@ export class SubmissionStepFourComponent implements OnInit {
   @Output() public goPrevious: EventEmitter<any> = new EventEmitter();
   @Output() public goNext: EventEmitter<any> = new EventEmitter();
   @Output() public goToStepOne: EventEmitter<any> = new EventEmitter();
+  @Output() public enterPhase: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private router: Router,
@@ -40,25 +41,29 @@ export class SubmissionStepFourComponent implements OnInit {
 
   getPhasesCount(phaseId) {
     let index = this.challengeDetails.phases.findIndex( dt => { return dt.phaseId == phaseId})
-    return `Phase ${index+1} of ${this.totalPhases} `
+    return index;
+    // return `Phase ${index+1} of ${this.totalPhases} `
   }
 
   showNextBtn(phaseId) {
-    let phasePassing = ''
-    this.challengeDetails.phases.map( dt => {
+    let phaseIndex;
+    phaseIndex = this.challengeDetails.phases.findIndex( dt => {
       if (dt.phaseId == phaseId) {
-        phasePassing = dt.passingScore
+        return true
       }
     })
 
     let displayBtn = false
-    this.challengeSubmissionData.map( dt => {
-      if (dt.modelStatus.score > phasePassing) {
+      if (phaseIndex < (this.challengeDetails.phases.length - 1) ) {
         displayBtn = true
       }
-    })
-
     return displayBtn;
+  }
+
+  enterPhaseBtn(phaseId) {
+    let index = this.challengeDetails.phases.findIndex( dt => { return dt.phaseId == phaseId})
+let newPhaseId = this.challengeDetails.phases[index+1].phaseId
+    this.enterPhase.emit(newPhaseId)
   }
 
   viewModel(modelId) {

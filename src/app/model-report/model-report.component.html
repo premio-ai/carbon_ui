@@ -36,7 +36,135 @@
     </div>
   </div>
 
+  <!-- <div class="bx--row line-padding" style="margin-top: 25px; margin-bottom: 40px;">
+    <div class="bx--col-md-1"></div>
+    <div class="bx--col-md-7">
+      <ibm-content-switcher (selected)="checkSelected(modelReport?.phaseId)">
+        <div class="content-switcher" *ngFor="let phases of challengeDetails?.phases; index as i">
+          <button ibmContentOption (click)="switchSubmit(submit._id)" style="width: 160px;">
+            <div>
+              <p class="phase0"> Phase {{i}}</p>
+              <p class="switchpara"><span style="margin-bottom: -3px;"><svg class="svg" icon
+                    ibmIconCheckmarkOutline20></svg></span>
+                <span style="font-size: 12px;">Report available</span></p>
+            </div>
+          </button>
+        </div>
+      </ibm-content-switcher>
+    </div>
+  </div>
+
   <div class="bx--row line-padding">
+    <div class="bx--col-md-1"></div>
+    <div class="bx--col-md-7">
+  <ibm-accordion>
+    <div *ngFor="let submission of challengeSubmission; index as i">
+      <ibm-accordion-item title="{{submission?.modelName}}" (selected)="selected($event)" [expanded]="i==0">
+        <div class="bx--row line-padding" style="margin-top: 20px; margin-bottom: -20px;">
+          <div class="bx--col-md-1"></div>
+          <div class="bx--col-md-4">
+            <br />
+            <br />
+            <h1>{{submission?.modelName}}
+              <span><svg icon ibmIconNotification20 (click)="bell()"></svg></span>
+            </h1>
+          </div>
+        </div>
+        <br />
+  
+        <div class="bx--row line-padding">
+          <div class="bx--col-md-0"></div>
+          <div class="bx--col-md-6">
+            <br /> <br />
+            <h3 style="margin-top:12px;">Model details </h3>
+            <p class="paragraph">Model Submitted: {{getDate(submission?.createdAt)}}</p>
+            <br /> <br />
+            <h5>Description</h5>
+            <p class="paragraph">{{submission?.modelDescription}}</p>
+            <br /> <br /> <br /> <br />
+            <h5>Approach taken</h5>
+            <p class="paragraph">{{submission?.approch}}</p>
+            <br /> <br />
+            <p style="display: flex;"><svg icon ibmIconCode24></svg>&nbsp;&nbsp;Python</p>
+          </div>
+          <div class="bx--col-md-1">
+            <ibm-tile style="margin-top: 85px">
+              <div ibmGrid [condensed]="gridCondensed">
+                <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
+                  [condensed]="rowCondensed">
+                  <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 2, 'sm': 12}">
+                    <img class="portrait mr-3"
+                      src="https://www.angularjswiki.com/author/admin/avatar_hufa038520d36dafb78f39a62f91de8258_77813_250x250_fill_q90_lanczos_center.jpg"
+                      itemprop="image" alt="Avatar">
+                  </div>
+                  <div ibmCol class="custom-class-example" style="margin-top: -12px;"
+                    [columnNumbers]="{'md': 1, 'sm': 12}">
+                    <h4 class="userName" style="margin-left: 50px;">{{submission?.innovatorId?.fullName}}</h4>
+                    <p class="userhead">Data Scientist,</p>
+                    <p class="userhead">Innovator Gold</p>
+                  </div>
+                </div>
+                <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" ibmRow [gutter]="gutter" [leftGutter]="leftGutter"
+                  ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
+                  [condensed]="rowCondensed">
+                  <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 3, 'sm': 12}">
+                    <p class="userName">Marketspace Statistic</p>
+                    <p class="userdetail">460 points</p>
+                    <p class="userdetail">Active challange: {{challengeCounts?.activeChallengeCount}}</p>
+                    <p class="userdetail">Challenges Won:2</p>
+                    <p class="userName">Bio</p>
+                    <p class="bio">{{submission?.innovatorId?.bio}}</p>
+                    <br />
+                    <a class="link" href="#" ibmLink>View full profile</a>
+                  </div>
+                </div>
+              </div>
+            </ibm-tile>
+            <br />
+            <div class="bio" style="display: flex;align-items: center;">
+              <span>
+                <svg class="svg" icon ibmIconSend20></svg>
+              </span>
+            </div>
+          </div>
+        </div>
+        <br />
+        <div class="bx--row line-padding" style="background-color:#F3F3F3; width: 960px;">
+          <div class="bx--col-md-0"></div>
+          <div class="bx--col-md-8">
+            <h3>Model performance </h3>
+            <br />
+            <div style="display: flex; gap: 10px;">
+              <ibm-tile style="flex-grow: 1;background-color: #ffffff !important">
+                <ibm-donut-chart [data]="overallScoreData" [options]="overallOptions" style="align-items: center;">
+                </ibm-donut-chart>
+              </ibm-tile>
+              <ibm-tile style="flex-grow: 1;background-color: #ffffff !important">
+                <ibm-donut-chart [data]="accuracyScoreData" [options]="accuracyOptions"
+                  style="background-color: #ffffff !important;align-items: center;"></ibm-donut-chart>
+              </ibm-tile>
+              <ibm-tile style="flex-grow: 1;background-color: #ffffff !important">
+                <ibm-donut-chart [data]="precisionScoreData" [options]="precisionOptions"
+                  style="background-color: #ffffff !important;"></ibm-donut-chart>
+              </ibm-tile>
+              <ibm-tile style="flex-grow: 1;background-color: #ffffff !important">
+                <ibm-donut-chart [data]="recallScoreData" [options]="recallOptions"
+                  style="background-color: #ffffff !important;"></ibm-donut-chart>
+              </ibm-tile>
+            </div>
+            <br />
+          </div>
+        </div>
+      </ibm-accordion-item>
+    </div>
+  </ibm-accordion>
+  </div>
+  </div> -->
+
+
+
+
+  <div class="bx--row line-padding" style="margin-top: 20px; margin-bottom: -20px;">
     <div class="bx--col-md-1"></div>
     <div class="bx--col-md-4">
       <br />
@@ -76,7 +204,7 @@
       <p style="display: flex;"><svg icon ibmIconCode24></svg>&nbsp;&nbsp;Python</p>
     </div>
     <div class="bx--col-md-2">
-      <ibm-tile style="margin-top: 85px" >
+      <ibm-tile style="margin-top: 85px">
         <div ibmGrid [condensed]="gridCondensed">
           <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
             [condensed]="rowCondensed">
@@ -149,4 +277,5 @@
       </div> -->
     </div>
   </div>
+
 </div>

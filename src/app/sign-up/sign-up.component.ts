@@ -87,8 +87,7 @@ export class SignUpComponent implements OnInit {
         this.roleError = false;
         this.bioError = false;
         this.experienceError = false;
-        // this.signUp();
-    } else {
+        this.signUp();
       if (this.signupDetails.fullName.length > 2 && this.signupDetails.fullName.match(isAlphaNum)) {
         this.fullNameError = false
       } else {

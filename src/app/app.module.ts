@@ -63,7 +63,8 @@ import {
 	UIShellModule,
 	StructuredListModule,
 	InlineLoadingModule,
-	RadioModule
+	RadioModule,
+	SelectModule
 } from "carbon-components-angular";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -192,6 +193,7 @@ import {Code24Module } from "@carbon/icons-angular/lib/code/24";
 		AddModule,
 		CopyModule,
 		GridModule,
+		SelectModule,
 		TilesModule,
 		TagModule,
 		HttpClientModule,

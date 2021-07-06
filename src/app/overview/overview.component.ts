@@ -19,34 +19,23 @@ export class OverviewComponent implements OnInit {
   leaderboardData: any[] = []
   modelUnderTraining: number;
   passedModelsCount: number;
-  selectedPhaseId: string
+  selectedPhaseId: string;
+  topList: any
 
   ngOnInit() {
     this.modelUnderTraining = 0
     this.passedModelsCount = 0
-
-    // $(document.getElementsByClassName('bx--tabs__nav-item')[0].click())
   }
-
-  // ngAfterViewInit() {
-  //     // active
-  //     document.getElementById('n-tab-2').setAttribute('style', `display:none;`);
-
-  //     document.getElementsByClassName('bx--tabs__nav-item')[0].classList.remove('bx--tabs__nav-item--selected')
-  //     document.getElementsByClassName('bx--tabs__nav-item')[2].classList.add('bx--tabs__nav-item--selected')
-
-  //     //Inactive
-  //     document.getElementById('n-tab-0').setAttribute('style', '');
-  //     // document.getElementById('n-tab-1').setAttribute('style', `display:none;`);
-  //     // document.getElementById('n-tab-3').setAttribute('style', `display:none;`);
-  //     // document.getElementById('n-tab-4').setAttribute('style', `display:none;`);
-    
-  // }
 
   ngOnChanges() {
     if (this.challengeDetails && this.submissionChallengeDetails) {
       this.phaseOneSubmission = this.submissionChallengeDetails.length
       this.initialPhase();
+
+      this.topList = this.submissionChallengeDetails
+      this.topList.sort((a, b) => {
+        return b.score - a.score
+      })
     }
   }
 
@@ -98,8 +87,13 @@ export class OverviewComponent implements OnInit {
   modelPassed(phaseId) {
     let count = 0;
     if (this.submissionChallengeDetails) {
+      let phaseIndex = this.challengeDetails.phases.findIndex( dt => {
+        if (dt.phaseId == phaseId) {
+          return true
+        }
+      })
       this.submissionChallengeDetails.find((dt, i) => {
-        if (dt.phaseId == phaseId && dt.score >= this.challengeDetails.phases[i].passingScore) {
+        if (dt.phaseId == phaseId && dt.score >= this.challengeDetails.phases[phaseIndex].passingScore) {
           count += 1
         }
       })
@@ -118,12 +112,11 @@ export class OverviewComponent implements OnInit {
     tempData.sort((a, b) => {
       return b.score - a.score
     })
-
+    
     this.leaderboardData = tempData
   }
 
   viewModel(id) {
-    console.log(id, "---id---126")
     this.router.navigateByUrl('modelReport/' + id)
   }
 

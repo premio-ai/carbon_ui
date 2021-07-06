@@ -106,6 +106,8 @@ ibm-tab > div{
 
     .bx--content-switcher {
         display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
         width: 100%;
         height: 2.5rem;
         justify-content: flex-start;

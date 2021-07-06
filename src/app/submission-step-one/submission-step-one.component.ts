@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { IconNameNotFoundError } from 'carbon-components-angular';
 import { RequestService } from '../request.service';
 
 @Component({
@@ -11,6 +12,7 @@ export class SubmissionStepOneComponent implements OnInit {
   @Input() isChallengeAccepted: any;
   @Input() challengeDetails: any;
   @Input() challengeSubmissionData: any;
+  @Input() enterPhaseId: string;
   @Output() public goNext: EventEmitter<any> = new EventEmitter();
   @Output() public cancelSubmit: EventEmitter<any> = new EventEmitter();
 
@@ -23,20 +25,37 @@ export class SubmissionStepOneComponent implements OnInit {
   stepOne: {
     modelUploadedPath: string,
     phaseId: string
-  }
+  } = {
+  modelUploadedPath: '',
+  phaseId: ''
+};
   bucketName: String
   isBtnDisabled: boolean
   isFileUploading: boolean
   phasesList: any[] = []
+  testlist: any;
 
   ngOnInit() {
     this.isBtnDisabled = true
     this.isFileUploading = false
     this.createTempBucket();
-    this.stepOne = {
-      modelUploadedPath: '',
-      phaseId: ''
-    };
+
+    // if (this.enterPhaseId.length>0) {
+    //   // this.stepOne = {
+    //   //   modelUploadedPath: '',
+    //   //   phaseId: this.enterPhaseId
+    //   // }
+    //   this.selectPhase(this.enterPhaseId)
+    // } else {
+    //   this.stepOne = {
+    //     modelUploadedPath: '',
+    //     phaseId: ''
+    //   };
+    // }
+    // this.stepOne = {
+    //   modelUploadedPath: '',
+    //   phaseId: ''
+    // };
   }
 
   ngOnChanges() {
@@ -50,6 +69,9 @@ export class SubmissionStepOneComponent implements OnInit {
       })
 
       this.phasesList = temp
+    }
+    if (this.enterPhaseId && this.enterPhaseId.length > 0) {
+      this.selectPhase(this.enterPhaseId)
     }
   }
 
@@ -70,9 +92,16 @@ export class SubmissionStepOneComponent implements OnInit {
   }
 
   selectPhase(type) {
-    this.stepOne.phaseId = type.item.id
+    if (type.length > 0) {
+      this.stepOne.phaseId = type
+      this.phaseIndex = this.challengeDetails.phases.findIndex(dt => { return dt.phaseId == type })
+    } else {
+      this.stepOne.phaseId = type.item.id
+      this.phaseIndex = this.challengeDetails.phases.findIndex(dt => { return dt.phaseId == type.item.id })
+    }
 
-    this.phaseIndex = this.challengeDetails.phases.findIndex(dt => { return dt.phaseId == type.item.id })
+    // this.stepOne.phaseId = type.item.id
+    // this.phaseIndex = this.challengeDetails.phases.findIndex(dt => { return dt.phaseId == type.item.id })
   }
 
   setModel(acceptedFiles) {
