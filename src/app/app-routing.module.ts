@@ -12,6 +12,7 @@ import { InvModelViewComponent } from './inv-model-view/inv-model-view.component
 import { LoginComponent } from './login/login.component';
 import { InvSeePerformanceComponent } from './inv-see-performance/inv-see-performance.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { LandingComponent } from './landing/landingPage';
 
 const routes: Routes = [
 	// {
@@ -22,7 +23,8 @@ const routes: Routes = [
 		path: 'repos',
 		loadChildren: () => import('./repositories/repositories.module').then(m => m.RepositoriesModule)
 	},
-	{ path: '', component: DashboardComponent },
+	{ path: 'dashboard', component: DashboardComponent },
+	// { path: '', component: DashboardComponent },
 	{ path: 'invdash', component: InvDashboradComponent },
 	{ path: 'challenge', component: ChallangePageComponent },
 	{ path: 'challenge/:id', component: InsurerComponent },
@@ -37,6 +39,7 @@ const routes: Routes = [
 	{ path: 'login', component: LoginComponent },
 	{ path: 'signup', component: SignUpComponent },
 	{ path: 'see-performance/:id', component: InvSeePerformanceComponent },
+	{ path: '', component: LandingComponent },
 	{
 		path: '',
 		redirectTo: '',

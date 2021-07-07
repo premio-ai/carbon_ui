@@ -24,6 +24,7 @@ export class SignUpComponent implements OnInit {
     experience: String
   }
   showToasterMsg: boolean
+  showSuccessToasterMsg: boolean
   toasterMsg: String
   fullNameError: boolean
   emailError: boolean
@@ -63,7 +64,8 @@ export class SignUpComponent implements OnInit {
       this.requestService.signing('auth/signup', this.signupDetails).toPromise().then( data => {
         this.isApiLoading = false
         if (data.result == MESSAGES.REG_SUCCESS) {
-          this.router.navigateByUrl('login')
+          this.toasterMsg = MESSAGES.SUCCESSFUL_REGISTRATION
+          this.showSuccessToaster();
         } else if (data.result == MESSAGES.USER_REGISTERED) {
           this.toasterMsg = MESSAGES.EMAIL_REG
           this.showToaster()
@@ -120,6 +122,14 @@ export class SignUpComponent implements OnInit {
       }
     }
   }
+
+  showSuccessToaster = (() => {
+		this.showSuccessToasterMsg = true
+		setTimeout(() => {
+      this.router.navigateByUrl('login')
+      this.showToasterMsg = false;
+		}, 3000)
+	})
 
   showToaster = (() => {
 		this.showToasterMsg = true

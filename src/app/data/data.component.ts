@@ -85,13 +85,31 @@ export class DataComponent implements OnInit {
     })
   }
 
-  async downloadFile(phaseIndex, fileIndex) {
-    if (this.challengeDetails) {
-      let docName = this.challengeDetails.phases[phaseIndex].sampleDataFile[fileIndex].path || ''
+  getDownloadCount(phaseIndex) {
+    let count: number;
+			this.challengeDetails.phases[phaseIndex].sampleDataFile.find( dt => {
+				if (dt.path.endsWith('train.csv')) {
+					count = dt.downloadCount
+				}
+			})
+      return count;
+  }
 
-      let payload = {
-        filePath: docName
+  async downloadFile(phaseIndex) {
+    if (this.challengeDetails) {
+      let newDocName = ''
+      let fileIndex: number;
+			this.challengeDetails.phases[phaseIndex].sampleDataFile.find( (dt, i) => {
+				if (dt.path.endsWith('train.csv')) {
+          fileIndex = i
+					newDocName = dt.path
+				}
+			})
+
+			let payload = {
+				filePath: newDocName
       }
+      
       this.requestService.post('upload/downloadObject', payload).toPromise().then(data => {
         var blob = this.dataURItoBlob(data.blob)
         var a = document.createElement("a");
@@ -99,7 +117,7 @@ export class DataComponent implements OnInit {
         var url = window.URL.createObjectURL(blob);
 
         a.href = url;
-        a.download = "File.csv";
+        a.download = "train.csv";
         a.click();
         window.URL.revokeObjectURL(url);
       }).catch(err => {

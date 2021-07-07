@@ -92,7 +92,7 @@ export class ChallangePageComponent implements OnInit {
 				categoryType: ''
 			}
 		} else {
-			this.router.navigateByUrl('login')
+			this.router.navigateByUrl('')
 		}
 	}
 

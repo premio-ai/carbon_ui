@@ -42,7 +42,7 @@ export class InsurerComponent implements OnInit {
       s.setAttribute('data-timestamp', + new Date());
       (d.head || d.body).appendChild(s);
     } else {
-      this.router.navigateByUrl('login')
+      this.router.navigateByUrl('')
     }
   }
 

@@ -33,7 +33,7 @@ export class InvChallengeComponent implements OnInit {
     if (userDetails && userDetails._id) {
       this.getAllActiveChallanges(this.pageOffset);
     } else {
-      this.router.navigateByUrl('login')
+      this.router.navigateByUrl('')
     }
 
     this.sorting = [

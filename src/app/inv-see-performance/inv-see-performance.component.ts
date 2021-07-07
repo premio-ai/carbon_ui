@@ -20,9 +20,11 @@ export class InvSeePerformanceComponent implements OnInit {
 	) { }
 	modelDetails: any;
 	modelPerformance: any;
-	challengeId: any;
-	innovatorId: any;
-	phaseId: any;
+	challengeId: string;
+	innovatorId: string;
+	phaseId: string;
+	nextModelId: string;
+	nextPhaseIndex: number;
 	challengeDetails: any;
 	accuracyScore: any
 	precisionScore: any
@@ -42,6 +44,7 @@ export class InvSeePerformanceComponent implements OnInit {
 		value: number
 	}> = []
 	recallOptions: any = {}
+	showBtn: boolean;
 
 	ngOnInit() {
 		let userDetails = JSON.parse(localStorage.getItem('userDetails'))
@@ -55,7 +58,7 @@ export class InvSeePerformanceComponent implements OnInit {
 			this.getSubmission(modelId)
 			this.getModelPerformance(modelId)
 		} else {
-			this.router.navigateByUrl('login')
+			this.router.navigateByUrl('')
 		}
 	}
 
@@ -126,10 +129,37 @@ export class InvSeePerformanceComponent implements OnInit {
 		let url = 'challenge/' + id;
 		this.requestService.get(url, null).toPromise().then(data => {
 			this.challengeDetails = data;
+			this.getNextPhaseDetails();
 		}).catch(err => {
 			localStorage.clear();
 			this.router.navigateByUrl('login')
 		})
+	}
+
+	getNextPhaseDetails() {
+		let index = this.challengeDetails.phases.findIndex( dt => {
+			if (dt.phaseId == this.phaseId) {
+				return true
+			}
+		})
+		this.nextPhaseIndex = index + 1
+
+		if (this.nextPhaseIndex < this.challengeDetails.phases.length) {
+			let nextPhaseId = this.challengeDetails.phases[this.nextPhaseIndex].phaseId
+		
+			let url = 'submissionAllChallenge/getLatestSubmitByPhase/' + nextPhaseId
+			this.requestService.get(url, null).toPromise().then( data => {
+				this.nextModelId = data[0]._id
+				this.showBtn = true
+			}).catch( err => {
+				localStorage.clear();
+				this.router.navigateByUrl('login')
+			})
+		}
+	}
+
+	enterNextPhase() {
+		this.router.navigateByUrl('invmodel-view/' + this.nextModelId)
 	}
 
 	checkDisplay() {

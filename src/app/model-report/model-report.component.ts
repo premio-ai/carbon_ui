@@ -61,7 +61,7 @@ export class ModelReportComponent implements OnInit {
 				}
 			});
 		} else {
-			this.router.navigateByUrl('login')
+			this.router.navigateByUrl('')
 		}
 	}
 
@@ -78,6 +78,7 @@ export class ModelReportComponent implements OnInit {
 			this.modelReport = data[0];
 
 			this.getChallengeDetails(this.modelReport.challengeId)
+			this.getInnovatorChallengeCounts();
 
 			this.accuracyScore = this.modelReport.score
 			this.precisionScore = this.modelReport.precisionScore
@@ -96,6 +97,20 @@ export class ModelReportComponent implements OnInit {
 
 	switchSubmit(submitId) {
 		this.router.navigateByUrl('modelReport/' + submitId)
+	}
+
+	getPhaseIndex() {
+		if (this.modelReport && this.challengeDetails) {
+			let phaseId = this.modelReport.phaseId;
+	
+			let index = this.challengeDetails.phases.findIndex( dt => {
+				if (dt.phaseId == phaseId) {
+					return true
+				}
+			})
+	
+			return index;
+		}
 	}
 
 	checkSelected(phaseId) {
@@ -131,7 +146,8 @@ export class ModelReportComponent implements OnInit {
 	}
 
 	getInnovatorChallengeCounts() {
-		this.requestService.get('submissionAllChallenge/innovatorCounts/innovator', null).toPromise().then(data => {
+		let innovatorId = this.modelReport.innovatorId._id
+		this.requestService.get('submissionAllChallenge/innovatorCounts/' + innovatorId, null).toPromise().then(data => {
 			this.challengeCounts = data
 		}).catch(err => {
 			localStorage.clear();

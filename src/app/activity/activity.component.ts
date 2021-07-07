@@ -122,7 +122,7 @@ export class ActivityComponent implements OnInit {
   }
 
   viewModel(id) {
-    this.router.navigateByUrl('invmodel-view/' + id)
+    this.router.navigateByUrl('modelReport/' + id)
   }
 
   exportexcel() {

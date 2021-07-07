@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
 			this.getActiveChallanges();
 			this.getpastChallanges();
 		} else {
-			this.router.navigateByUrl('login')
+			this.router.navigateByUrl('')
 		}
 
 		this.sorting = [

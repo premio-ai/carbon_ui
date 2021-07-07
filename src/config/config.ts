@@ -4,6 +4,7 @@ export const MESSAGES = {
     NEW_CHALLENGE_POST: 'New Challenge Posted',
     NEW_MODEL_SUBMITTED: 'New Model Submitted',
     REG_SUCCESS: 'User added successfully',
+    SUCCESSFUL_REGISTRATION: 'User has been registered successfully, please try login.',
     USER_REGISTERED: 'User already registered',
     WRONG: 'Something went wrong. Please try again later.',
     EMAIL_REG: 'This email is already registered. Please enter valid email-id'

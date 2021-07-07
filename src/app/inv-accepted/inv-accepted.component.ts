@@ -124,7 +124,7 @@ export class InvAcceptedComponent implements OnInit {
 				(d.head || d.body).appendChild(s);
 			}, 1000)
 		} else {
-			this.router.navigateByUrl('login')
+			this.router.navigateByUrl('')
 		}
 
 	}
@@ -309,12 +309,19 @@ export class InvAcceptedComponent implements OnInit {
 		})
 	}
 
-	async downloadFile(phaseIndex, fileIndex) {
+	async downloadFile(phaseIndex) {
 		if (this.challengeDetails) {
-			let docName = this.challengeDetails.phases[phaseIndex].sampleDataFile[fileIndex].path || ''
+			let newDocName = ''
+			let fileIndex: number;
+			this.challengeDetails.phases[phaseIndex].sampleDataFile.find( (dt, i) => {
+				if (dt.path.endsWith('train.csv')) {
+					newDocName = dt.path
+					fileIndex = i
+				}
+			})
 
 			let payload = {
-				filePath: docName
+				filePath: newDocName
 			}
 			this.requestService.post('upload/downloadObject', payload).toPromise().then(data => {
 				var blob = this.dataURItoBlob(data.blob)
@@ -323,7 +330,7 @@ export class InvAcceptedComponent implements OnInit {
 				var url = window.URL.createObjectURL(blob);
 
 				a.href = url;
-				a.download = "File.csv";
+				a.download = "train.csv";
 				a.click();
 				window.URL.revokeObjectURL(url);
 			}).catch(err => {

@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { IconNameNotFoundError } from 'carbon-components-angular';
 import { RequestService } from '../request.service';
 
 @Component({
@@ -26,9 +25,9 @@ export class SubmissionStepOneComponent implements OnInit {
     modelUploadedPath: string,
     phaseId: string
   } = {
-  modelUploadedPath: '',
-  phaseId: ''
-};
+      modelUploadedPath: '',
+      phaseId: ''
+    };
   bucketName: String
   isBtnDisabled: boolean
   isFileUploading: boolean
@@ -39,23 +38,6 @@ export class SubmissionStepOneComponent implements OnInit {
     this.isBtnDisabled = true
     this.isFileUploading = false
     this.createTempBucket();
-
-    // if (this.enterPhaseId.length>0) {
-    //   // this.stepOne = {
-    //   //   modelUploadedPath: '',
-    //   //   phaseId: this.enterPhaseId
-    //   // }
-    //   this.selectPhase(this.enterPhaseId)
-    // } else {
-    //   this.stepOne = {
-    //     modelUploadedPath: '',
-    //     phaseId: ''
-    //   };
-    // }
-    // this.stepOne = {
-    //   modelUploadedPath: '',
-    //   phaseId: ''
-    // };
   }
 
   ngOnChanges() {
@@ -73,11 +55,17 @@ export class SubmissionStepOneComponent implements OnInit {
     if (this.enterPhaseId && this.enterPhaseId.length > 0) {
       this.selectPhase(this.enterPhaseId)
     }
+    if (this.stepOne.phaseId.length > 0) {
+      this.selectPhase(this.stepOne.phaseId)
+    }
   }
 
   ngDoCheck() {
     if (this.stepOne.modelUploadedPath.length > 0 && this.stepOne.phaseId.length > 0) {
       this.isBtnDisabled = false
+    }
+    if (this.stepOne.phaseId.length > 0) {
+      this.selectPhase(this.stepOne.phaseId)
     }
   }
 
@@ -91,17 +79,11 @@ export class SubmissionStepOneComponent implements OnInit {
     })
   }
 
-  selectPhase(type) {
-    if (type.length > 0) {
-      this.stepOne.phaseId = type
-      this.phaseIndex = this.challengeDetails.phases.findIndex(dt => { return dt.phaseId == type })
-    } else {
-      this.stepOne.phaseId = type.item.id
-      this.phaseIndex = this.challengeDetails.phases.findIndex(dt => { return dt.phaseId == type.item.id })
+  selectPhase(phaseId) {
+    if (phaseId.length > 0) {
+      this.stepOne.phaseId = phaseId
+      this.phaseIndex = this.challengeDetails.phases.findIndex(dt => { return dt.phaseId == phaseId })
     }
-
-    // this.stepOne.phaseId = type.item.id
-    // this.phaseIndex = this.challengeDetails.phases.findIndex(dt => { return dt.phaseId == type.item.id })
   }
 
   setModel(acceptedFiles) {
@@ -143,13 +125,19 @@ export class SubmissionStepOneComponent implements OnInit {
     this.stepOne.modelUploadedPath = ''
   }
 
-  async downloadFile(phaseIndex, fileIndex) {
+  async downloadFile(phaseIndex) {
     if (this.challengeDetails) {
-      let docName = this.challengeDetails.phases[phaseIndex].sampleDataFile[fileIndex].path || ''
+      let newDocName = ''
+			this.challengeDetails.phases[phaseIndex].sampleDataFile.find( dt => {
+				if (dt.path.endsWith('train.csv')) {
+					newDocName = dt.path
+				}
+			})
 
-      let payload = {
-        filePath: docName
-      }
+			let payload = {
+				filePath: newDocName
+			}
+
       this.requestService.post('upload/downloadObject', payload).toPromise().then(data => {
         var blob = this.dataURItoBlob(data.blob)
         var a = document.createElement("a");
@@ -157,7 +145,7 @@ export class SubmissionStepOneComponent implements OnInit {
         var url = window.URL.createObjectURL(blob);
 
         a.href = url;
-        a.download = "File.csv";
+        a.download = "train.csv";
         a.click();
         window.URL.revokeObjectURL(url);
       }).catch(err => {

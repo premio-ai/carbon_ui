@@ -19,11 +19,13 @@ export class InvModelViewComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private location: Location
   ) { }
-  modelId: any;
+  modelId: string;
   modelDetails: any;
-  challengeId: any;
-  innovatorId: any;
-  phaseId: any;
+  challengeId: string;
+  innovatorId: string;
+  phaseId: string;
+  nextModelId: string;
+  nextPhaseIndex: number;
   challengeDetails: any;
   isEdit: boolean;
   set_new_modelName: String;
@@ -33,7 +35,9 @@ export class InvModelViewComponent implements OnInit {
   submissionStatus: any
   modelSummary: any
   imageUrlArr: string
-  sampleFileArr: any[] = []
+  sampleFileArr: any[] = [];
+  showBtn: boolean;
+  showAccordion: boolean;
 
   ngOnInit() {
     let userDetails = JSON.parse(localStorage.getItem('userDetails'))
@@ -47,10 +51,11 @@ export class InvModelViewComponent implements OnInit {
         }
       });
 
+      this.showBtn = false;
       this.isEdit = false;
       this.set_new_modelName = '';
     } else {
-      this.router.navigateByUrl('login')
+      this.router.navigateByUrl('')
     }
   }
 
@@ -58,7 +63,6 @@ export class InvModelViewComponent implements OnInit {
     let url = 'submissionAllChallenge/allSubmitOfChallenge/' + challengeId;
     this.requestService.get(url, null).toPromise().then(data => {
       this.allSubmitOfChallenge = data
-      // this.submissionIndex = data.findIndex( dt => dt._id == this.modelId)
     }).catch(err => {
       localStorage.clear();
       this.router.navigateByUrl('login')
@@ -83,11 +87,6 @@ export class InvModelViewComponent implements OnInit {
     })
   }
 
-  enterNextPhase() {
-    let nextModelId = this.allSubmitOfChallenge[this.submissionIndex + 1]._id;
-    this.router.navigateByUrl('invmodel-view/' + nextModelId)
-  }
-
   getDate(timeStamp) {
     let date = moment(moment(+timeStamp)).format("DD/MM/YYYY")
     return date;
@@ -100,7 +99,6 @@ export class InvModelViewComponent implements OnInit {
       this.challengeId = data[0].challengeId;
       this.phaseId = data[0].phaseId;
       this.innovatorId = data[0].innovatorId._id;
-      // this.submissionStatus = data.submissionStatus[0]
 
       this.getChallengeDetails(this.challengeId);
       this.getAllSubmitOfChallenge(this.challengeId);
@@ -121,37 +119,26 @@ export class InvModelViewComponent implements OnInit {
   }
 
   getFailureMsg() {
-    if (this.modelSummary) {
+    if (this.modelSummary && this.modelSummary.metricsStatus) {
       return this.modelSummary.summary.review_fn_message
     }
   }
 
   getUploadStatus() {
-    if (this.modelSummary) {
+    if (this.modelSummary && this.modelSummary.metricsStatus) {
       return this.modelSummary.metricsStatus.upload
-      // return this.modelSummary.summary.upload_status
     }
   }
 
   getTrainingStatus() {
-    if (this.modelSummary) {
+    if (this.modelSummary && this.modelSummary.metricsStatus) {
       return this.modelSummary.metricsStatus.training
-      // if (this.modelSummary.summary.training_status == null) {
-      //   return 'FAILED'
-      // } else {
-      //   return this.modelSummary.summary.training_status
-      // }
     }
   }
 
   getTestingStatus() {
-    if (this.modelSummary) {
+    if (this.modelSummary && this.modelSummary.metricsStatus) {
       return this.modelSummary.metricsStatus.test_status
-      // if (this.modelSummary.summary.testing_status == null) {
-      //   return 'FAILED'
-      // } else {
-      //   return this.modelSummary.summary.test_status
-      // }
     }
   }
 
@@ -177,19 +164,8 @@ export class InvModelViewComponent implements OnInit {
   }
 
   getPerformanceStatus() {
-    if (this.modelSummary) {
+    if (this.modelSummary && this.modelSummary.metricsStatus) {
       return this.modelSummary.metricsStatus.scoreStatus
-      // if (this.modelSummary.metricsStatus == 'RUNNING') {
-      //   return 'PENDING'
-      // } else if (this.modelSummary.metricsStatus.training == 'COMPLETE' && this.modelSummary.metricsStatus.testing == 'COMPLETE') {
-      //   return 'COMPLETE'
-      // } else if (this.modelSummary.metricsStatus.training == 'COMPLETE' && this.modelSummary.metricsStatus.testing == 'INCOMPLETE') {
-      //   return 'INCOMPLETE'
-      // } else if (this.modelSummary.metricsStatus.training == 'INCOMPLETE' && this.modelSummary.metricsStatus.testing == 'INCOMPLETE') {
-      //   return 'INCOMPLETE'
-      // } else if (this.modelSummary.metricsStatus == 'INCOMPLETE') {
-      //   return 'INCOMPLETE'
-      // }
     }
   }
 
@@ -200,10 +176,89 @@ export class InvModelViewComponent implements OnInit {
       this.submissionIndex = data.phases.findIndex(dt => { return dt.phaseId == this.phaseId })
       this.displayImage();
       this.getSampleFileArr();
+      this.getNextPhaseDetails();
     }).catch(err => {
       localStorage.clear();
       this.router.navigateByUrl('login')
     })
+  }
+
+  getPassAccuracy() {
+    if (this.challengeDetails) {
+      let score = this.challengeDetails.phases[this.nextPhaseIndex].passingScore
+      return score + '%';
+    }
+  }
+
+  showAccuracy() {
+    if (this.challengeDetails.phases[this.nextPhaseIndex] && this.challengeDetails.phases[this.nextPhaseIndex].passingScore) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  getNextPhaseDetails() {
+    let index = this.challengeDetails.phases.findIndex(dt => {
+      if (dt.phaseId == this.phaseId) {
+        return true
+      }
+    })
+    this.nextPhaseIndex = index + 1
+
+    if (this.nextPhaseIndex < this.challengeDetails.phases.length) {
+      let nextPhaseId = this.challengeDetails.phases[this.nextPhaseIndex].phaseId
+
+      let url = 'submissionAllChallenge/getLatestSubmitByPhase/' + nextPhaseId
+      this.requestService.get(url, null).toPromise().then(data => {
+        this.nextModelId = data[0]._id
+        this.showBtn = true
+      }).catch(err => {
+        localStorage.clear();
+        this.router.navigateByUrl('login')
+      })
+    } else {
+      this.showBtn = false;
+    }
+  }
+
+  enterNextPhase() {
+    this.router.navigateByUrl('invmodel-view/' + this.nextModelId)
+  }
+
+  getAccordionTitle() {
+    if (this.nextPhaseIndex) {
+      if (this.nextPhaseIndex < this.challengeDetails.phases.length) {
+        this.showAccordion = true
+        let indStr = (this.nextPhaseIndex+1).toString();
+
+        if (indStr[indStr.length-1] == '1') {
+          return `Next Phase ${indStr}st of ${this.challengeDetails.phases.length}`
+        } else if (indStr[indStr.length-1] == '2') {
+          return `Next Phase ${indStr}nd of ${this.challengeDetails.phases.length}`
+        } else if (indStr[indStr.length-1] == '3') {
+          return `Next Phase ${indStr}rd of ${this.challengeDetails.phases.length}`
+        } else {
+          return `Next Phase ${indStr}th of ${this.challengeDetails.phases.length}`
+        }
+      } else {
+        this.showAccordion = false
+      }
+    }
+  }
+
+  getEntryPhaseCount() {
+    let indStr = (this.nextPhaseIndex+1).toString();
+
+        if (indStr[indStr.length-1] == '1') {
+          return `Enter Phase ${indStr}st`
+        } else if (indStr[indStr.length-1] == '2') {
+          return `Enter Phase ${indStr}nd`
+        } else if (indStr[indStr.length-1] == '3') {
+          return `Enter Phase ${indStr}rd`
+        } else {
+          return `Enter Phase ${indStr}th`
+        }
   }
 
   getSampleFileArr() {
@@ -220,13 +275,18 @@ export class InvModelViewComponent implements OnInit {
     this.location.back()
   }
 
-  async downloadFile(filePath) {
+  async downloadFile() {
     if (this.challengeDetails) {
-      let docName = filePath
+      let newDocName = ''
+      this.sampleFileArr.find( dt => {
+				if (dt.path.endsWith('train.csv')) {
+					newDocName = dt.path
+				}
+			})
 
-      let payload = {
-        filePath: docName
-      }
+			let payload = {
+				filePath: newDocName
+			}
       this.requestService.post('upload/downloadObject', payload).toPromise().then(data => {
         var blob = this.dataURItoBlob(data.blob)
         var a = document.createElement("a");
@@ -234,7 +294,7 @@ export class InvModelViewComponent implements OnInit {
         var url = window.URL.createObjectURL(blob);
 
         a.href = url;
-        a.download = "File.csv";
+        a.download = "train.csv";
         a.click();
         window.URL.revokeObjectURL(url);
       }).catch(err => {

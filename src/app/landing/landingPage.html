@@ -1,0 +1,15 @@
+<ibm-header brand="">
+    <a> <img src="assets/logo.png" class="imglogo" /></a>
+
+    <ibm-header-global>
+          <p class="namefull" (click)="gotoLogin()" >Login</p>
+      </ibm-header-global>
+</ibm-header>
+
+<div ibmGrid [condensed]="gridCondensed" style="display: flex; justify-content: center;">
+    <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+        <div ibmCol class="custom-class-example">
+           <h1 style="margin-top: 200px;">Welcome to Market Space</h1>
+        </div>
+    </div>
+</div>

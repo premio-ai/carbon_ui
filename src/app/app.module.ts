@@ -109,6 +109,7 @@ import {Send20Module} from "@carbon/icons-angular/lib/send/20";
 import { ChartsModule } from "@carbon/charts-angular";
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { LandingComponent } from './landing/landingPage';
 import {Chat20Module} from "@carbon/icons-angular/lib/chat/20";
 import {Logout20Module} from "@carbon/icons-angular/lib/logout/20";
 // import { DonutChart } from "@carbon/charts";
@@ -168,6 +169,8 @@ import {Code24Module } from "@carbon/icons-angular/lib/code/24";
 		LoginComponent,
 
 		SignUpComponent,
+
+		LandingComponent
 
 	
 		

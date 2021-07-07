@@ -44,7 +44,7 @@ export class InvDashboradComponent implements OnInit {
 				{ content: 'End Date' }
 			];
 		} else {
-			this.router.navigateByUrl('login')
+			this.router.navigateByUrl('')
 		}
 	}
 

@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('userDetails', JSON.stringify(userDetails))
 
         if (userDetails.role == 'Insurer') {
-          this.router.navigateByUrl('/')
+          this.router.navigateByUrl('dashboard')
         } else if (userDetails.role == 'Innovator') {
           this.router.navigateByUrl('invdash')
         }

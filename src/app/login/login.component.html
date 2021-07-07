@@ -1,4 +1,8 @@
-<div ibmGrid [condensed]="gridCondensed">
+<ibm-header brand="">
+  <a> <img src="assets/logo.png" class="imglogo" /></a>
+</ibm-header>
+
+<div ibmGrid [condensed]="gridCondensed" style="display: flex; justify-content: center;" >
   <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
       
@@ -19,7 +23,7 @@
         </button>
       </div>
       
-      <div class="bx--form-item" style="margin-top: 20%;">
+      <div class="bx--form-item" style="margin-top: 50%;">
         <label for="text-input-3" class="bx--label">Username</label>
         <input id="text-input-3" type="text" class="bx--text-input" [(ngModel)]="username" placeholder="username@ibm.com" />
       </div>
@@ -41,7 +45,7 @@
         <button class="bx--btn bx--btn--primary" type="button" (click)="validate()">Sign In</button>
       </div>
       <div class="bx--form-item">
-        <p>Do not have an account. <a style="cursor: pointer;" (click)="signUp()">Sign Up</a></p>
+        <p style="font-size: 0.8rem;" >Do not have an account. <a style="cursor: pointer;" (click)="signUp()">Sign Up</a></p>
       </div>
     </div>
     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
