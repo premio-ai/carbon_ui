@@ -37,14 +37,22 @@
 					<svg icon ibmIconAdd></svg>
 				</button> -->
 				<br /><br />
-				<div ibmGrid [condensed]="false" style="padding-left:0rem">
+				
+				<div style="display: grid;grid-template-columns: repeat(3,minmax(0,1fr)) ;gap: 10px;">
+					<div class="custom-class-example" style="width: 100%;"
+						*ngFor="let pastChallenge of pastChallenges">
+						<app-challange-tile [challange]="pastChallenge"></app-challange-tile>
+					</div>
+				</div>
+
+				<!-- <div ibmGrid [condensed]="false" style="padding-left:0rem">
 					<div ibmRow [gutter]="true" [leftGutter]="true" [rightGutter]="true" [condensed]="false">
 						<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 3, sm: 12 }"
 							*ngFor="let pastChallenge of pastChallenges">
 							<app-challange-tile [challange]="pastChallenge"></app-challange-tile>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<br />
 			</ibm-tab>
 		</ibm-tabs>

@@ -150,12 +150,16 @@ export class ChallangePageComponent implements OnInit {
 
 	nextStepFour() {
 		this.requestService.post('challenge', this.challange).toPromise().then(res => {
-			this.router.navigateByUrl('/')
+			this.router.navigateByUrl('dashboard')
 		}).catch( err => {
 			localStorage.clear();
 			this.router.navigateByUrl('login')
 		  })
 		this.current++;
+	}
+
+	navigateToDashboard() {
+		this.router.navigateByUrl('dashboard')
 	}
 
 	navigateBack() {

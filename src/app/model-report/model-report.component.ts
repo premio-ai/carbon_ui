@@ -461,6 +461,10 @@ export class ModelReportComponent implements OnInit {
 		}
 	};
 
+	navigateToDashboard() {
+		this.router.navigateByUrl('dashboard')
+	}
+
 	viewChallenge(challengeId) {
 		this.router.navigateByUrl('challenge/' + challengeId)
 	}

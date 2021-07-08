@@ -229,6 +229,10 @@ export class InsurerComponent implements OnInit {
     })
   }
 
+  navigate() {
+    this.router.navigateByUrl('dashboard')
+  }
+  
   navigateBack() {
     this.location.back()
   }

@@ -43,10 +43,10 @@
                   <div>
                     <h3>{{ i + 1 }}. {{ data?.modelName }}</h3>
                   </div>
-                  <div style="margin-left: auto;" *ngIf="isBookmarked(data?._id) == false">
+                  <div style="margin-left: auto; cursor: pointer;" *ngIf="isBookmarked(data?._id) == false">
                     <svg icon ibmIconBookmark20 (click)="bookmark(data._id)"></svg>
                   </div>
-                  <div style="margin-left: auto;" *ngIf="isBookmarked(data?._id) == true">
+                  <div style="margin-left: auto; cursor: pointer;" *ngIf="isBookmarked(data?._id) == true">
                     <svg icon ibmIconBookmarkFilled20 (click)="unBookmark(data)"></svg>
                   </div>
                 </div>
@@ -69,10 +69,10 @@
                   <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
                     [condensed]="rowCondensed">
                     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-                      <p class="accu">Accuracy:<span class="score">&nbsp;{{ data?.recallScore }}</span></p>
+                      <p class="accu">Accuracy:<span class="score">&nbsp;{{ data?.score }}</span></p>
                     </div>
                     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-                      <p class="accu">Precesion:<span class="score">&nbsp;{{ data?.recallScore }}</span></p>
+                      <p class="accu">Precision:<span class="score">&nbsp;{{ data?.precisionScore }}</span></p>
                     </div>
                     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
                       <p class="accu">Recall:<span class="score">&nbsp;{{ data?.recallScore }}</span></p>
@@ -83,7 +83,7 @@
               </ibm-tile>
               <br />
               <br />
-              <ibm-checkbox [hideLabel]="hideLabel" (change)="onChange($event, data._id)" style="margin-left: 15px;">
+              <ibm-checkbox [checked]="checkSelected(data._id)" (change)="onChange($event, data._id)" style="margin-left: 15px;">
               </ibm-checkbox>
             </div>
           </div>
@@ -167,8 +167,9 @@
           <td>Model discription</td>
           <td *ngFor="let model of compareModelData[key]">
             <p *ngIf="showLess">
-              {{ showLessStr(model?.modelDescription) }}...
-              <span (click)="readMore()" style="color: cadetblue; font-size: x-small; cursor: pointer;">
+              {{ showLessStr(model?.modelDescription) }}
+              &nbsp;
+              <span *ngIf="model?.modelDescription.length>100" (click)="readMore()" style="color: cadetblue; font-size: x-small; cursor: pointer;">
                 Read More
               </span>
             </p>

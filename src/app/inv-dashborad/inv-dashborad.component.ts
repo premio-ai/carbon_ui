@@ -152,15 +152,15 @@ export class InvDashboradComponent implements OnInit {
 	getSubmissionPast() {
 		let url = "submissionAllChallenge";
 		this.requestService.get(url, null).toPromise().then(data => {
-			let tempData = []
+			let tempData = [];
 			this.pastChallenges.filter(dt => {
 				data.map(res => {
-					if (dt._id == res.challengeId && dt.isActive == false) {
+					if (dt._id == res.challengeId) {
 						tempData.push(dt)
 					}
 				})
 			})
-			this.submittedPastChallenges = tempData
+			this.submittedPastChallenges = uniqBy(tempData)
 		}).catch(err => {
 			localStorage.clear();
 			this.router.navigateByUrl('login')

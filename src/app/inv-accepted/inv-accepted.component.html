@@ -191,10 +191,10 @@
 							<div class="bx--pagination__right">
 								<label id="select-id-pagination-page-label" class="bx--pagination__text"
 									for="select-id-pagination-page">
-									pages {{pageNo+1}} of {{totalPage}}
+									pages {{pageNo}} of {{totalPage}}
 								</label>
 								<button class="bx--pagination__button bx--pagination__button--backward " tabindex="0"
-									data-page-backward aria-label="previous page" (click)="prevPage()">
+									data-page-backward aria-label="previous page" (click)="prevPage()" [disabled]="pageNo == 1">
 									<svg focusable="false" preserveAspectRatio="xMidYMid meet"
 										style="will-change: transform;" xmlns="http://www.w3.org/2000/svg"
 										class="bx--pagination__nav-arrow" width="20" height="20" viewBox="0 0 32 32"
@@ -203,7 +203,7 @@
 									</svg>
 								</button>
 								<button class="bx--pagination__button bx--pagination__button--forward " tabindex="0"
-									data-page-forward aria-label="next page" (click)="nextPage()">
+									data-page-forward aria-label="next page" (click)="nextPage()" [disabled]="pageNo == totalPage">
 									<svg focusable="false" preserveAspectRatio="xMidYMid meet"
 										style="will-change: transform;" xmlns="http://www.w3.org/2000/svg"
 										class="bx--pagination__nav-arrow" width="20" height="20" viewBox="0 0 32 32"

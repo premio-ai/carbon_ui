@@ -75,7 +75,7 @@
             </p>
           </div>
           <div *ngIf="getUploadStatus() == 'FAILED' ">
-            <p class="discrip">Job failed</p><br/>
+            <p class="discrip">Job failed</p><br />
           </div>
           <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
             <div *ngIf="getUploadStatus() == 'PENDING' ">
@@ -115,7 +115,7 @@
             </p>
           </div>
           <div *ngIf="getTrainingStatus() == 'FAILED' ">
-            <p class="discrip">Job failed</p><br/>
+            <p class="discrip">Job failed</p><br />
           </div>
           <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
             <div *ngIf="getTrainingStatus() == 'RUNNING' ">
@@ -155,7 +155,7 @@
             </p>
           </div>
           <div *ngIf="getTestingStatus() == 'FAILED' ">
-            <p class="discrip">Job Failed</p><br/>
+            <p class="discrip">Job Failed</p><br />
           </div>
           <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
             <div *ngIf="getTestingStatus() == 'RUNNING' ">
@@ -277,24 +277,49 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>rank</td>
-                  <td>{{ modelDetails?.innovatorId?.fullName }}</td>
+                <tr *ngFor="let data of leaderboardData; index as i">
+                  <td>{{data.rank}}</td>
+                  <td>{{data?.innovatorId?.fullName}}</td>
                   <td>Phase {{submissionIndex}}</td>
-                  <td>{{ modelDetails?.score }}</td>
-                  <td>{{ getDate(modelDetails?.createdAt) }}</td>
+                  <td>{{data?.score}}</td>
+                  <td>{{getDate(data?.createdAt)}}</td>
                 </tr>
               </tbody>
             </table>
+            <br />
+            <div class="bx--pagination" data-pagination>
+              <div class="bx--pagination__right">
+                <label id="select-id-pagination-page-label" class="bx--pagination__text"
+                  for="select-id-pagination-page">
+                  pages {{pageNo}} of {{totalPage}}
+                </label>
+                <button class="bx--pagination__button bx--pagination__button--backward " tabindex="0" data-page-backward
+                  aria-label="previous page" (click)="prevPage()" [disabled]="pageNo == 1">
+                  <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;"
+                    xmlns="http://www.w3.org/2000/svg" class="bx--pagination__nav-arrow" width="20" height="20"
+                    viewBox="0 0 32 32" aria-hidden="true">
+                    <path d="M19 23L11 16 19 9 19 23z"></path>
+                  </svg>
+                </button>
+                <button class="bx--pagination__button bx--pagination__button--forward " tabindex="0" data-page-forward
+                  aria-label="next page" (click)="nextPage()" [disabled]="pageNo == totalPage">
+                  <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;"
+                    xmlns="http://www.w3.org/2000/svg" class="bx--pagination__nav-arrow" width="20" height="20"
+                    viewBox="0 0 32 32" aria-hidden="true">
+                    <path d="M13 9L21 16 13 23 13 9z"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
           </ibm-table-container>
           <!-- <p>
             only model that have overall score of 80% above will be invited to
             Phase {{submissionIndex+1}}.
           </p> -->
         </ibm-accordion-item>
-        <div *ngIf="this.nextPhaseIndex < this.challengeDetails.phases.length">
+        <div *ngIf="this.nextPhaseIndex < this.challengeDetails?.phases.length">
           <ibm-accordion-item title="{{getAccordionTitle()}}">
-              <h5>Requirment</h5>
+            <h5>Requirment</h5>
             <p>{{ challengeDetails?.Objective }}</p>
             <br />
             <div *ngIf="showAccuracy()">
@@ -340,11 +365,11 @@
                 </div>
               </div>
             </fieldset>
-            
+
             <div *ngIf="showBtn">
-            <button [ibmButton]="ibmButton" [size]="size" (click)="enterNextPhase()">
-              {{getEntryPhaseCount()}}<svg class="bx--btn__icon" ibmIconArrowRight20 size="20"></svg>
-            </button>
+              <button [ibmButton]="ibmButton" [size]="size" (click)="enterNextPhase()">
+                {{getEntryPhaseCount()}}<svg class="bx--btn__icon" ibmIconArrowRight20 size="20"></svg>
+              </button>
             </div>
           </ibm-accordion-item>
         </div>

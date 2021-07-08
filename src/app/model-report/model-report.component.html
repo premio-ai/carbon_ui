@@ -9,16 +9,9 @@
     </div>
     <div class="bx--col-md-4" style="margin-top: 26px;">
       <ibm-breadcrumb [noTrailingSlash]="'noTrailingSlash'">
-        <ibm-breadcrumb-item href="/" class="navigation" style="cursor: pointer; color: blue;">
-          Activity Dashboard
-        </ibm-breadcrumb-item>
-        <ibm-breadcrumb-item (click)="viewChallenge(challengeDetails?._id)" class="navigation"
-          style="cursor: pointer; color: #0f62fe;">
-          {{challengeDetails?.title}}
-        </ibm-breadcrumb-item>
-        <ibm-breadcrumb-item class="navigation" style="cursor: pointer; color: #0f62fe;">
-          {{modelReport?.modelName}}
-        </ibm-breadcrumb-item>
+        <ibm-breadcrumb-item (click)="navigateToDashboard()" class="navigation">Activity Dashboard</ibm-breadcrumb-item>
+        <ibm-breadcrumb-item (click)="viewChallenge(challengeDetails?._id)" class="navigation">{{challengeDetails?.title}}</ibm-breadcrumb-item>
+        <ibm-breadcrumb-item class="navigation">{{modelReport?.modelName}}</ibm-breadcrumb-item>
       </ibm-breadcrumb>
     </div>
     <div data-notification class="bx--toast-notification bx--toast-notification--success" *ngIf="toasterMsg"
@@ -95,10 +88,10 @@
           <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" ibmRow [gutter]="gutter" [leftGutter]="leftGutter"
             ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
             <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 3, 'sm': 12}">
-              <p class="userName">Marketspace Statistic</p>
-              <p class="userdetail">460 points</p>
+              <p class="userName">Marketspace Statistics</p>
+              <!-- <p class="userdetail">460 points</p> -->
               <p class="userdetail">Active challange: {{challengeCounts?.activeChallengeCount}}</p>
-              <p class="userdetail">Challenges Won:2</p>
+              <!-- <p class="userdetail">Challenges Won:2</p> -->
               <p class="userName">Bio</p>
               <p class="bio">{{modelReport?.innovatorId?.bio}}</p>
             </div>

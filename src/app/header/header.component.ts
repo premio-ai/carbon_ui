@@ -123,18 +123,9 @@ export class HeaderComponent implements OnInit {
 		})
 	}
 
-	logoRoute() {
-		if (this.userDetails.role == 'Insurer') {
-			this.router.navigateByUrl('/')
-		}
-		if (this.userDetails.role == 'Innovator') {
-			this.router.navigateByUrl('invdash')
-		}
-	}
-
 	navigate() {
 		if (this.userDetails.role == 'Insurer') {
-			this.router.navigateByUrl('/')
+			this.router.navigateByUrl('dashboard')
 		}
 		if (this.userDetails.role == 'Innovator') {
 			this.router.navigateByUrl('invdash')

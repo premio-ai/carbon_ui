@@ -19,6 +19,9 @@ export class InvModelViewComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private location: Location
   ) { }
+  pageOffset: number;
+  totalPage: number;
+  pageNo: number;
   modelId: string;
   modelDetails: any;
   challengeId: string;
@@ -32,22 +35,26 @@ export class InvModelViewComponent implements OnInit {
   allSubmitOfChallenge: any[] = [];
   submissionIndex: number;
   appUrl: String;
-  submissionStatus: any
-  modelSummary: any
-  imageUrlArr: string
+  submissionStatus: any;
+  modelSummary: any;
+  imageUrlArr: string;
   sampleFileArr: any[] = [];
   showBtn: boolean;
   showAccordion: boolean;
+  leaderboardData: any[] = [];
 
   ngOnInit() {
-    let userDetails = JSON.parse(localStorage.getItem('userDetails'))
+    let userDetails = JSON.parse(localStorage.getItem('userDetails'));
     if (userDetails && userDetails._id) {
-      this.appUrl = APP_URL
+      this.pageNo = 1;
+      this.pageOffset = 0;
+      this.totalPage = 1;
+      this.appUrl = APP_URL;
       this.activatedRoute.params.subscribe((params: Params) => {
         if (params) {
-          this.modelId = params.id
-          this.getSubmission(this.modelId)
-          this.getModelSummary(this.modelId)
+          this.modelId = params.id;
+          this.getSubmission(this.modelId);
+          this.getModelSummary(this.modelId);
         }
       });
 
@@ -55,18 +62,49 @@ export class InvModelViewComponent implements OnInit {
       this.isEdit = false;
       this.set_new_modelName = '';
     } else {
-      this.router.navigateByUrl('')
+      this.router.navigateByUrl('');
     }
   }
 
   getAllSubmitOfChallenge(challengeId) {
     let url = 'submissionAllChallenge/allSubmitOfChallenge/' + challengeId;
     this.requestService.get(url, null).toPromise().then(data => {
-      this.allSubmitOfChallenge = data
+      this.allSubmitOfChallenge = data;
     }).catch(err => {
       localStorage.clear();
-      this.router.navigateByUrl('login')
+      this.router.navigateByUrl('login');
     })
+  }
+
+  getLeaderboardOfChallenge() {
+    let url = 'leaderboard/' + this.challengeId + '/' + this.phaseId;
+    let params = {
+      skip: this.pageOffset
+    }
+
+    this.requestService.get(url, params).toPromise().then(data => {
+      this.totalPage = Math.ceil(data.count / 10);
+      this.leaderboardData = data.list;
+    }).catch(err => {
+      localStorage.clear();
+      this.router.navigateByUrl('login');
+    })
+  }
+
+  prevPage() {
+    if (this.pageNo > 1) {
+      this.pageNo--;
+      this.pageOffset = (this.pageNo-1) * 10;
+      this.getLeaderboardOfChallenge();
+    }
+  }
+
+  nextPage() {
+    if (this.pageNo < (this.totalPage)) {
+      this.pageNo++;
+      this.pageOffset = (this.pageNo-1) * 10;
+      this.getLeaderboardOfChallenge();
+    }
   }
 
   editModelName() {
@@ -80,10 +118,10 @@ export class InvModelViewComponent implements OnInit {
     }
     this.requestService.put(url, payload).toPromise().then(data => {
       this.isEdit = false;
-      this.getSubmission(this.modelId)
+      this.getSubmission(this.modelId);
     }).catch(err => {
       localStorage.clear();
-      this.router.navigateByUrl('login')
+      this.router.navigateByUrl('login');
     })
   }
 
@@ -102,43 +140,44 @@ export class InvModelViewComponent implements OnInit {
 
       this.getChallengeDetails(this.challengeId);
       this.getAllSubmitOfChallenge(this.challengeId);
+      this.getLeaderboardOfChallenge();
     }).catch(err => {
       localStorage.clear();
-      this.router.navigateByUrl('login')
+      this.router.navigateByUrl('login');
     })
   }
 
   getModelSummary(id) {
     let url = 'submissionAllChallenge/modelSummary/' + id;
     this.requestService.get(url, null).toPromise().then(data => {
-      this.modelSummary = data
+      this.modelSummary = data;
     }).catch(err => {
       localStorage.clear();
-      this.router.navigateByUrl('login')
+      this.router.navigateByUrl('login');
     })
   }
 
   getFailureMsg() {
     if (this.modelSummary && this.modelSummary.metricsStatus) {
-      return this.modelSummary.summary.review_fn_message
+      return this.modelSummary.summary.review_fn_message;
     }
   }
 
   getUploadStatus() {
     if (this.modelSummary && this.modelSummary.metricsStatus) {
-      return this.modelSummary.metricsStatus.upload
+      return this.modelSummary.metricsStatus.upload;
     }
   }
 
   getTrainingStatus() {
     if (this.modelSummary && this.modelSummary.metricsStatus) {
-      return this.modelSummary.metricsStatus.training
+      return this.modelSummary.metricsStatus.training;
     }
   }
 
   getTestingStatus() {
     if (this.modelSummary && this.modelSummary.metricsStatus) {
-      return this.modelSummary.metricsStatus.test_status
+      return this.modelSummary.metricsStatus.test_status;
     }
   }
 
@@ -148,24 +187,23 @@ export class InvModelViewComponent implements OnInit {
     }
     this.challengeDetails.phases.map(dt => {
       if (dt.phaseId == this.modelDetails.phaseId) {
-        payload.filePath = dt.dataVisualFile
+        payload.filePath = dt.dataVisualFile;
       }
     })
 
     this.requestService.post('upload/getImage', payload).toPromise().then(data => {
       var a = document.createElement("a");
       document.body.appendChild(a);
-      this.imageUrlArr = data.blob
+      this.imageUrlArr = data.blob;
     }).catch(err => {
       localStorage.clear();
-      this.router.navigateByUrl('login')
+      this.router.navigateByUrl('login');
     })
-
   }
 
   getPerformanceStatus() {
     if (this.modelSummary && this.modelSummary.metricsStatus) {
-      return this.modelSummary.metricsStatus.scoreStatus
+      return this.modelSummary.metricsStatus.scoreStatus;
     }
   }
 
@@ -173,19 +211,19 @@ export class InvModelViewComponent implements OnInit {
     let url = 'challenge/' + id;
     this.requestService.get(url, null).toPromise().then(data => {
       this.challengeDetails = data;
-      this.submissionIndex = data.phases.findIndex(dt => { return dt.phaseId == this.phaseId })
+      this.submissionIndex = data.phases.findIndex(dt => { return dt.phaseId == this.phaseId });
       this.displayImage();
       this.getSampleFileArr();
       this.getNextPhaseDetails();
     }).catch(err => {
       localStorage.clear();
-      this.router.navigateByUrl('login')
+      this.router.navigateByUrl('login');
     })
   }
 
   getPassAccuracy() {
     if (this.challengeDetails) {
-      let score = this.challengeDetails.phases[this.nextPhaseIndex].passingScore
+      let score = this.challengeDetails.phases[this.nextPhaseIndex].passingScore;
       return score + '%';
     }
   }
@@ -201,21 +239,21 @@ export class InvModelViewComponent implements OnInit {
   getNextPhaseDetails() {
     let index = this.challengeDetails.phases.findIndex(dt => {
       if (dt.phaseId == this.phaseId) {
-        return true
+        return true;
       }
     })
-    this.nextPhaseIndex = index + 1
-
+    this.nextPhaseIndex = index + 1;
     if (this.nextPhaseIndex < this.challengeDetails.phases.length) {
-      let nextPhaseId = this.challengeDetails.phases[this.nextPhaseIndex].phaseId
-
-      let url = 'submissionAllChallenge/getLatestSubmitByPhase/' + nextPhaseId
+      let nextPhaseId = this.challengeDetails.phases[this.nextPhaseIndex].phaseId;
+      let url = 'submissionAllChallenge/getLatestSubmitByPhase/' + nextPhaseId;
       this.requestService.get(url, null).toPromise().then(data => {
-        this.nextModelId = data[0]._id
-        this.showBtn = true
+        if (data.length > 0) {
+          this.nextModelId = data[0]._id;
+          this.showBtn = true;
+        }
       }).catch(err => {
         localStorage.clear();
-        this.router.navigateByUrl('login')
+        this.router.navigateByUrl('login');
       })
     } else {
       this.showBtn = false;
@@ -223,72 +261,72 @@ export class InvModelViewComponent implements OnInit {
   }
 
   enterNextPhase() {
-    this.router.navigateByUrl('invmodel-view/' + this.nextModelId)
+    this.router.navigateByUrl('invmodel-view/' + this.nextModelId);
   }
 
   getAccordionTitle() {
     if (this.nextPhaseIndex) {
       if (this.nextPhaseIndex < this.challengeDetails.phases.length) {
-        this.showAccordion = true
-        let indStr = (this.nextPhaseIndex+1).toString();
+        this.showAccordion = true;
+        let indStr = (this.nextPhaseIndex + 1).toString();
 
-        if (indStr[indStr.length-1] == '1') {
-          return `Next Phase ${indStr}st of ${this.challengeDetails.phases.length}`
-        } else if (indStr[indStr.length-1] == '2') {
-          return `Next Phase ${indStr}nd of ${this.challengeDetails.phases.length}`
-        } else if (indStr[indStr.length-1] == '3') {
-          return `Next Phase ${indStr}rd of ${this.challengeDetails.phases.length}`
+        if (indStr[indStr.length - 1] == '1') {
+          return `Next Phase ${indStr}st of ${this.challengeDetails.phases.length}`;
+        } else if (indStr[indStr.length - 1] == '2') {
+          return `Next Phase ${indStr}nd of ${this.challengeDetails.phases.length}`;
+        } else if (indStr[indStr.length - 1] == '3') {
+          return `Next Phase ${indStr}rd of ${this.challengeDetails.phases.length}`;
         } else {
-          return `Next Phase ${indStr}th of ${this.challengeDetails.phases.length}`
+          return `Next Phase ${indStr}th of ${this.challengeDetails.phases.length}`;
         }
       } else {
-        this.showAccordion = false
+        this.showAccordion = false;
       }
     }
   }
 
   getEntryPhaseCount() {
-    let indStr = (this.nextPhaseIndex+1).toString();
+    let indStr = (this.nextPhaseIndex + 1).toString();
 
-        if (indStr[indStr.length-1] == '1') {
-          return `Enter Phase ${indStr}st`
-        } else if (indStr[indStr.length-1] == '2') {
-          return `Enter Phase ${indStr}nd`
-        } else if (indStr[indStr.length-1] == '3') {
-          return `Enter Phase ${indStr}rd`
-        } else {
-          return `Enter Phase ${indStr}th`
-        }
+    if (indStr[indStr.length - 1] == '1') {
+      return `Enter Phase ${indStr}st`;
+    } else if (indStr[indStr.length - 1] == '2') {
+      return `Enter Phase ${indStr}nd`;
+    } else if (indStr[indStr.length - 1] == '3') {
+      return `Enter Phase ${indStr}rd`;
+    } else {
+      return `Enter Phase ${indStr}th`;
+    }
   }
 
   getSampleFileArr() {
     if (this.challengeDetails) {
       this.challengeDetails.phases.filter(dt => {
         if (dt.phaseId == this.phaseId) {
-          this.sampleFileArr = dt.sampleDataFile
+          this.sampleFileArr = dt.sampleDataFile;
         }
       })
     }
   }
 
   navigateBack() {
-    this.location.back()
+    this.location.back();
   }
 
   async downloadFile() {
     if (this.challengeDetails) {
-      let newDocName = ''
-      this.sampleFileArr.find( dt => {
-				if (dt.path.endsWith('train.csv')) {
-					newDocName = dt.path
-				}
-			})
+      let newDocName = '';
+      this.sampleFileArr.find(dt => {
+        if (dt.path.endsWith('train.csv')) {
+          newDocName = dt.path;
+        }
+      })
 
-			let payload = {
-				filePath: newDocName
-			}
+      let payload = {
+        filePath: newDocName
+      }
       this.requestService.post('upload/downloadObject', payload).toPromise().then(data => {
-        var blob = this.dataURItoBlob(data.blob)
+        var blob = this.dataURItoBlob(data.blob);
         var a = document.createElement("a");
         document.body.appendChild(a);
         var url = window.URL.createObjectURL(blob);
@@ -299,7 +337,7 @@ export class InvModelViewComponent implements OnInit {
         window.URL.revokeObjectURL(url);
       }).catch(err => {
         localStorage.clear();
-        this.router.navigateByUrl('login')
+        this.router.navigateByUrl('login');
       })
     }
   }
@@ -317,19 +355,19 @@ export class InvModelViewComponent implements OnInit {
   }
 
   seePerformance() {
-    this.router.navigateByUrl('see-performance/' + this.modelId)
+    this.router.navigateByUrl('see-performance/' + this.modelId);
   }
 
   challengeTitle(challengeId) {
-    this.router.navigateByUrl('invaccepted/' + challengeId)
+    this.router.navigateByUrl('invaccepted/' + challengeId);
   }
 
   invChallenges() {
-    this.router.navigateByUrl('invchallenges')
+    this.router.navigateByUrl('invchallenges');
   }
 
   viewModel(modelId) {
-    this.router.navigateByUrl('invmodel-view/' + modelId)
+    this.router.navigateByUrl('invmodel-view/' + modelId);
   }
 
 }

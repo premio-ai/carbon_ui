@@ -147,8 +147,8 @@
 										<td>{{ i + 1 }}</td>
 										<td>{{ model?.innovatorId?.fullName }}</td>
 										<td>{{ model.score }}</td>
-										<td>{{ model.score }}</td>
-										<td>{{ model.score }}</td>
+										<td>{{ model.precisionScore }}</td>
+										<td>{{ model.recallScore }}</td>
 										<td><a (click)="viewModel(model?._id)" style="cursor: pointer;" >View Model</a></td>
 									</tr>
 									<tr *ngIf="leaderboardData?.length == 0">

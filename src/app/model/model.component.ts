@@ -152,8 +152,8 @@ export class ModelComponent {
   }
 
   isBookmarked(modelId) {
-    if (this.bookmarkedSubmissions.length > 0) {
-      let result = this.bookmarkedSubmissions.some(dt => {
+    if (this.bookmarkedSubmissionsByPhase.length > 0) {
+      let result = this.bookmarkedSubmissionsByPhase.some(dt => {
         if (dt._id == modelId) {
           return true;
         } else {
@@ -229,6 +229,20 @@ export class ModelComponent {
         return false
       }
     })
+
+  }
+
+  checkSelected(modelId) {
+    let isChecked = false;
+    if (this.compareModelData && this.compareModelData[this.selectedPhaseNo] && this.compareModelData[this.selectedPhaseNo].length>0) {      
+      this.compareModelData[this.selectedPhaseNo].map( dt => {
+        if (dt._id == modelId) {
+          isChecked = true;
+        }
+      })
+    }
+
+    return isChecked;
   }
 
   compareModels() {

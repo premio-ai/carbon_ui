@@ -19,10 +19,10 @@
           <ibm-tile *ngFor="let challenge of activeChallenges" style="margin-bottom: 15px;">
             <div style="display: flex;">
               <p style="font-size: 18px;">{{ challenge?.title }}</p>
-              <div style="margin-left: auto;" *ngIf="isBookmarked(challenge?._id) == false">
+              <div style="margin-left: auto; cursor: pointer;" *ngIf="isBookmarked(challenge?._id) == false">
                 <svg icon ibmIconBookmark20 (click)="bookmarkChallenge(challenge._id)"></svg>
               </div>
-              <div style="margin-left: auto;" *ngIf="isBookmarked(challenge?._id) == true">
+              <div style="margin-left: auto; cursor: pointer;" *ngIf="isBookmarked(challenge?._id) == true">
                 <svg icon ibmIconBookmarkFilled20 (click)="unBookmarkChallenge(challenge._id)"></svg>
               </div>
             </div>
