@@ -35,7 +35,7 @@
           </svg>
         </button>
       </div>
-      <div class="bx--form-item" style="margin-top: 10%;">
+      <div class="bx--form-item" style="margin-top: 8%;">
         <label for="text-input-3" class="bx--label">Username</label>
         <input id="text-input-3" type="text" class="bx--text-input" [(ngModel)]="signupDetails.fullName"
           placeholder="e.g. John Doe" />
@@ -78,7 +78,7 @@
       </div>
       <div class="bx--form-item">
         <label for="text-input-3" class="bx--label">Experience</label>
-        <input id="text-input-3" type="text" class="bx--text-input" [(ngModel)]="signupDetails.experience"
+        <input id="text-input-3" type="number" min='0' class="bx--text-input" [(ngModel)]="signupDetails.experience"
           placeholder="in years" />
       </div>
       <div *ngIf="experienceError">

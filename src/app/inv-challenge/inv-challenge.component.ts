@@ -23,11 +23,14 @@ export class InvChallengeComponent implements OnInit {
   pageOffset: number;
   totalPage: number;
   pageNo: number;
+  isApiLoading: boolean;
+  loadIndex: number;
 
   ngOnInit() {
     this.pageNo = 1;
     this.pageOffset = 0;
     this.totalPage = 1;
+    this.loadIndex = -1;
 
     let userDetails = JSON.parse(localStorage.getItem('userDetails'))
     if (userDetails && userDetails._id) {
@@ -175,12 +178,16 @@ export class InvChallengeComponent implements OnInit {
     this.router.navigateByUrl('invaccepted/' + challengeId)
   }
 
-  bookmarkChallenge(challengeId) {
+  bookmarkChallenge(challengeId, index) {
+    this.isApiLoading = true;
+    this.loadIndex = index
     let url = 'bookmarkChallenge'
     let data = {
       challengeId: challengeId
     }
     this.requestService.post(url, data).toPromise().then(data => {
+      this.isApiLoading = true;
+    this.loadIndex = -1;
       this.getBookmarkedChallenges()
     }).catch(err => {
 			localStorage.clear();
@@ -188,18 +195,29 @@ export class InvChallengeComponent implements OnInit {
 		})
   }
 
-  unBookmarkChallenge(challengeId) {
-
+  unBookmarkChallenge(challengeId, index) {
+    this.isApiLoading = true;
+    this.loadIndex = index
     let url = 'bookmarkChallenge'
     let data = {
       challengeId: challengeId
     }
     this.requestService.put(url, data).toPromise().then(data => {
+      this.isApiLoading = true;
+    this.loadIndex = -1;
       this.getBookmarkedChallenges()
     }).catch(err => {
 			localStorage.clear();
 			this.router.navigateByUrl('login')
 		})
+  }
+
+  checkLoading(i) {
+    if (this.loadIndex == i) {
+      return true
+    } else {
+      return false
+    }
   }
 
 }

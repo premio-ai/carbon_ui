@@ -26,11 +26,15 @@ export class ModelComponent {
   modelComparison: boolean
   showLess: boolean
   sorting: any[]
-  selectedPhaseNo: number
+  selectedPhaseNo: number;
+  columnIndex = {};
+  isApiLoading: boolean;
+  loadIndex: number;
   objectKeys = Object.keys;
 
   ngOnInit() {
     this.showLess = true;
+    this.loadIndex = -1;
     this.sorting = [
       { content: 'Most Popular' },
       { content: 'Least Popular' },
@@ -166,7 +170,9 @@ export class ModelComponent {
     }
   }
 
-  bookmark(modelId) {
+  bookmark(modelId, index) {
+this.isApiLoading = true
+this.loadIndex = index
     let payload = {}
     this.modelData.filter(dt => {
       if (dt._id == modelId) {
@@ -182,6 +188,8 @@ export class ModelComponent {
 
     let url = 'bookmarksubmission'
     this.requestService.post(url, payload).toPromise().then(data => {
+      this.loadIndex = -1;
+      this.isApiLoading = false;
       this.getBookmarkedSubmission()
     }).catch(err => {
       localStorage.clear();
@@ -189,7 +197,9 @@ export class ModelComponent {
     })
   }
 
-  unBookmark(model) {
+  unBookmark(model, index) {
+    this.isApiLoading = true;
+    this.loadIndex = index
     let url = 'bookmarksubmission'
     let data = {
       challengeId: model.challengeId,
@@ -199,11 +209,21 @@ export class ModelComponent {
       insurerId: ''
     }
     this.requestService.put(url, data).toPromise().then(data => {
+      this.loadIndex = -1;
+      this.isApiLoading = false;
       this.getBookmarkedSubmission()
     }).catch(err => {
       localStorage.clear();
       this.router.navigateByUrl('login')
     })
+  }
+
+  checkLoading(i) {
+    if (this.loadIndex == i) {
+      return true
+    } else {
+      return false
+    }
   }
 
   onChange(e, id) {
@@ -255,16 +275,20 @@ export class ModelComponent {
     this.router.navigateByUrl('modelReport/' + modelId)
   }
 
-  readMore() {
-    this.showLess = false
+  readMore(ind) {
+    this.columnIndex[ind] = true
   }
 
-  readLess() {
-    this.showLess = true
+  readLess(ind) {
+    this.columnIndex[ind] = false
   }
 
   showLessStr(str) {
     return str.substring(0, 100)
+  }
+
+  checkColumnIndex(ind) {
+    return this.columnIndex[ind]
   }
 
 }

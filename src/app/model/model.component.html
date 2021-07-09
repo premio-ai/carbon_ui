@@ -25,7 +25,8 @@
       <ibm-tab heading="All">
         <div ibmGrid [condensed]="gridCondensed" class="taggrid">
           <div ibmRow [gutter]="gutter" class="left-border" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
-            [condensed]="rowCondensed" *ngIf="compareModelData[selectedPhaseNo] && compareModelData[selectedPhaseNo]?.length>1">
+            [condensed]="rowCondensed"
+            *ngIf="compareModelData[selectedPhaseNo] && compareModelData[selectedPhaseNo]?.length>1">
             <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }" style="margin-left: 15px;">
               <h6>Model Comparison</h6>
               <p class="model-selected">{{compareModelData[selectedPhaseNo]?.length}} models selected</p>
@@ -43,12 +44,20 @@
                   <div>
                     <h3>{{ i + 1 }}. {{ data?.modelName }}</h3>
                   </div>
-                  <div style="margin-left: auto; cursor: pointer;" *ngIf="isBookmarked(data?._id) == false">
-                    <svg icon ibmIconBookmark20 (click)="bookmark(data._id)"></svg>
+                  <div style="margin-left: auto; cursor: pointer;"
+                    *ngIf="isBookmarked(data?._id) == false && !checkLoading(i)">
+                    <svg icon ibmIconBookmark20 (click)="bookmark(data._id, i)"></svg>
                   </div>
-                  <div style="margin-left: auto; cursor: pointer;" *ngIf="isBookmarked(data?._id) == true">
-                    <svg icon ibmIconBookmarkFilled20 (click)="unBookmark(data)"></svg>
+                  <div style="margin-left: auto; cursor: pointer;" *ngIf="loadIndex == i">
+                    <ibm-inline-loading [loadingText]="loadingText" [successText]="successText"
+                      (onSuccess)="onSuccess($event)">
+                    </ibm-inline-loading>
                   </div>
+                  <div style="margin-left: auto; cursor: pointer;"
+                    *ngIf="isBookmarked(data?._id) == true && !checkLoading(i)">
+                    <svg icon ibmIconBookmarkFilled20 (click)="unBookmark(data, i)"></svg>
+                  </div>
+
                 </div>
                 <div ibmGrid [condensed]="gridCondensed" class="gridmodel">
                   <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
@@ -79,11 +88,13 @@
                     </div>
                   </div>
                 </div>
-                <button class="btn" [ibmButton]="ibmButton" (click)="viewModelReport(data._id)">View Model Report</button>
+                <button class="btn" [ibmButton]="ibmButton" (click)="viewModelReport(data._id)">View Model
+                  Report</button>
               </ibm-tile>
               <br />
               <br />
-              <ibm-checkbox [checked]="checkSelected(data._id)" (change)="onChange($event, data._id)" style="margin-left: 15px;">
+              <ibm-checkbox [checked]="checkSelected(data._id)" (change)="onChange($event, data._id)"
+                style="margin-left: 15px;">
               </ibm-checkbox>
             </div>
           </div>
@@ -130,11 +141,11 @@
                     </div>
                   </div>
                 </div>
-                <button class="btn" [ibmButton]="ibmButton">View Model Report</button>
+                <button class="btn" [ibmButton]="ibmButton" (click)="viewModelReport(data._id)">View Model Report</button>
               </ibm-tile>
               <br />
               <br />
-              <ibm-checkbox [hideLabel]="hideLabel" (change)="onChange($event,   data._id)" style="margin-left: 15px;">
+              <ibm-checkbox [hideLabel]="hideLabel" (change)="onChange($event, data._id)" style="margin-left: 15px;">
               </ibm-checkbox>
             </div>
           </div>
@@ -146,7 +157,7 @@
     <h3>No Models have been submitted for this challenge till now.</h3>
   </div>
 
-  <div *ngFor='let key of objectKeys(compareModelData)' >
+  <div *ngFor='let key of objectKeys(compareModelData)'>
     <table *ngIf="modelComparison" class="bx--data-table">
       <thead>
         <tr>
@@ -165,17 +176,18 @@
         </tr>
         <tr>
           <td>Model discription</td>
-          <td *ngFor="let model of compareModelData[key]">
-            <p *ngIf="showLess">
+          <td *ngFor="let model of compareModelData[key]; index as i">
+            <p *ngIf="!checkColumnIndex(i)">
               {{ showLessStr(model?.modelDescription) }}
               &nbsp;
-              <span *ngIf="model?.modelDescription.length>100" (click)="readMore()" style="color: cadetblue; font-size: x-small; cursor: pointer;">
+              <span *ngIf="model?.modelDescription.length>100" (click)="readMore(i)"
+                style="color: cadetblue; font-size: x-small; cursor: pointer;">
                 Read More
               </span>
             </p>
-            <p *ngIf="!showLess">
+            <p *ngIf="checkColumnIndex(i)">
               {{ model?.modelDescription }}
-              <span (click)="readLess()" style="color: cadetblue; font-size: x-small; cursor: pointer;">
+              <span (click)="readLess(i)" style="color: cadetblue; font-size: x-small; cursor: pointer;">
                 Read Less
               </span>
             </p>

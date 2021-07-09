@@ -61,28 +61,34 @@
 							<p class="numbers">{{ modelPassed(phase.phaseId) }}</p>
 							<br />
 							<br />
-							<div class="icon_align">
-								<svg icon ibmIconTrophy20></svg>&nbsp;
-								<p>Top 5 performing models</p>
-							</div>
-							<p *ngIf="topList?.length == 0" style="margin-left: 25px;">No records found</p>
-								<div style="font-size: 14px; margin: auto;" ibmListItem *ngFor="let data of topList; index as i">
+							<div style="height: 145px;">
+								<div class="icon_align">
+									<svg icon ibmIconTrophy20></svg>&nbsp;
+									<p>Top 5 performing models</p>
+								</div>
+								<p *ngIf="getTopList(phase.phaseId)?.length == 0" style="margin-left: 25px;">No records found</p>
+								<div style="font-size: 14px; margin: auto;" ibmListItem
+									*ngFor="let data of getTopList(phase.phaseId); index as i">
 									<div style="display: flex;" *ngIf="i<5">
-										<span style="margin-right: 5px; margin-top: 5px; margin-left: 30px;">{{i+1}}. </span>
+										<span style="margin-right: 5px; margin-top: 5px; margin-left: 30px;">{{i+1}}.
+										</span>
 										<a style="margin-top: 5px;" ibmLink>{{ data?.innovatorId?.fullName }}</a>
 										<p style="margin-left: 30px;">{{data.score}}</p>
 									</div>
 								</div>
+							</div>
 							<div ibmGrid [condensed]="gridCondensed" class="button-left" style="margin-bottom: -17px;">
 								<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
 									[condensed]="rowCondensed">
 									<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
-										<button class="view" [ibmButton]="ibmButton" (click)="switchWithPhase(phase.phaseId)">
+										<button class="view" [ibmButton]="ibmButton"
+											(click)="switchWithPhase(phase.phaseId)">
 											View Activity
 										</button>
 									</div>
 									<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
-										<button class="model" [ibmButton]="ibmButton" (click)="switchWithPhase(phase.phaseId)">
+										<button class="model" [ibmButton]="ibmButton"
+											(click)="switchWithPhase(phase.phaseId)">
 											View Model
 										</button>
 									</div>
@@ -108,12 +114,12 @@
 										<div class="bx--radio-button-group ">
 											<div class="bx--radio-button-wrapper"
 												*ngFor="let phase of challengeDetails?.phases; index as i">
-											<ibm-radio-group>
-												<ibm-radio [checked]="checkSelected(phase.phaseId)"
-												(change)="selectPhase(phase.phaseId, i)">
-													Phase {{i}}
-												</ibm-radio>
-											</ibm-radio-group>
+												<ibm-radio-group>
+													<ibm-radio [checked]="checkSelected(phase.phaseId)"
+														(change)="selectPhase(phase.phaseId, i)">
+														Phase {{i}}
+													</ibm-radio>
+												</ibm-radio-group>
 											</div>
 										</div>
 									</div>
@@ -149,10 +155,11 @@
 										<td>{{ model.score }}</td>
 										<td>{{ model.precisionScore }}</td>
 										<td>{{ model.recallScore }}</td>
-										<td><a (click)="viewModel(model?._id)" style="cursor: pointer;" >View Model</a></td>
+										<td><a (click)="viewModel(model?._id)" style="cursor: pointer;">View Model</a>
+										</td>
 									</tr>
 									<tr *ngIf="leaderboardData?.length == 0">
-										<p >No records found</p>
+										<p>No records found</p>
 									</tr>
 								</tbody>
 							</table>

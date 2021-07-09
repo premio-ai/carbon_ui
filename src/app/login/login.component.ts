@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   toasterMsg: boolean;
   emailError: boolean;
   passwordError: boolean;
+  loginError: boolean;
 
   ngOnInit() {
     this.toasterMsg = false;
@@ -32,15 +33,17 @@ export class LoginComponent implements OnInit {
         password: this.password
       }
 
-      this.requestService.signing('auth/login', loginData).subscribe(data => {
-        const userDetails = data.userDetails;
-        localStorage.setItem('userDetails', JSON.stringify(userDetails))
-
-        if (userDetails.role == 'Insurer') {
-          this.router.navigateByUrl('dashboard')
-        } else if (userDetails.role == 'Innovator') {
-          this.router.navigateByUrl('invdash')
-        }
+      this.requestService.signing('auth/login', loginData).toPromise().then(data => {
+          const userDetails = data.userDetails;
+          localStorage.setItem('userDetails', JSON.stringify(userDetails))
+  
+          if (userDetails.role == 'Insurer') {
+            this.router.navigateByUrl('dashboard')
+          } else if (userDetails.role == 'Innovator') {
+            this.router.navigateByUrl('invdash')
+          }
+      }).catch( err => {
+        this.showErrorToaster();
       })
     } else {
       this.validate()
@@ -65,6 +68,13 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  showErrorToaster = (() => {
+    this.loginError = true;
+    setTimeout(() => {
+      this.loginError = false
+    }, 3000)
+  })
+
   showToaster = (() => {
     this.toasterMsg = true
     setTimeout(() => {
@@ -73,7 +83,8 @@ export class LoginComponent implements OnInit {
   })
 
   closeToaster() {
-    this.toasterMsg = false
+    this.toasterMsg = false;
+    this.loginError = false;
   }
 
   signUp() {

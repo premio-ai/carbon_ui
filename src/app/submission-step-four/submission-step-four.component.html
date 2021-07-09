@@ -13,8 +13,8 @@
       <div style="display: grid;grid-template-columns: 68% 28%;padding: 1rem;">
         <div>
           <p style="font-size: 20px;">{{model?.modelName}}</p>
+          <!-- <span class="phase2">{{getPhasesCountString(model?.phaseId)}} </span> -->
           <span class="phase2">Phase {{getPhasesCount(model?.phaseId) + 1}} of {{totalPhases}} </span>
-          <!-- <span class="phase2">{{getPhasesCount(model?.phaseId)}}</span> -->
         </div>
         <div *ngIf="model?.modelStatus.status == '' ">
           <div style="margin-left: auto;align-items: center;display: flex; width: 100px;">
@@ -73,6 +73,7 @@
       <div style="display: grid;grid-template-columns: 50% 50%;">
         <div class="custom-class-example" *ngIf="showNextBtn(model?.phaseId)">
           <button class="view" [ibmButton]="ibmButton" [size]="'sm'" (click)="enterPhaseBtn(model?.phaseId)" >Enter phase {{getPhasesCount(model?.phaseId) + 1}} </button>
+          <!-- <button class="view" [ibmButton]="ibmButton" [size]="'sm'" (click)="enterPhaseBtn(model?.phaseId)" >{{getPhasesCountBtn(model?.phaseId)}} </button> -->
         </div>
         <div class="custom-class-example" *ngIf="!showNextBtn(model?.phaseId)"></div>
         <div class="custom-class-example" *ngIf="model?.modelStatus.status == 'RESULT' ">

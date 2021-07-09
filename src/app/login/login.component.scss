@@ -1,3 +1,13 @@
 .imglogo {
     margin-left: -57px;height: 48px;
 }
+
+.bx--toast-notification--failure {
+    border-left: 3px solid #ff0000;
+    background: #393939;
+    top: -36px;
+    left: 32px;
+    position: absolute;
+    margin-top: 100px;
+    margin-left: 1000px;
+}

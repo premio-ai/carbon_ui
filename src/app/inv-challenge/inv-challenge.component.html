@@ -16,15 +16,23 @@
       <ibm-tabs [followFocus]="followFocus" [isNavigation]="isNavigation" [cacheActive]="cacheActive">
         <br /><br />
         <ibm-tab heading="All">
-          <ibm-tile *ngFor="let challenge of activeChallenges" style="margin-bottom: 15px;">
+          <ibm-tile *ngFor="let challenge of activeChallenges; index as i" style="margin-bottom: 15px;">
             <div style="display: flex;">
               <p style="font-size: 18px;">{{ challenge?.title }}</p>
-              <div style="margin-left: auto; cursor: pointer;" *ngIf="isBookmarked(challenge?._id) == false">
-                <svg icon ibmIconBookmark20 (click)="bookmarkChallenge(challenge._id)"></svg>
+              <div style="margin-left: auto; cursor: pointer;"
+                *ngIf="isBookmarked(challenge?._id) == false && !checkLoading(i)">
+                <svg icon ibmIconBookmark20 (click)="bookmarkChallenge(challenge._id, i)"></svg>
               </div>
-              <div style="margin-left: auto; cursor: pointer;" *ngIf="isBookmarked(challenge?._id) == true">
-                <svg icon ibmIconBookmarkFilled20 (click)="unBookmarkChallenge(challenge._id)"></svg>
+              <div style="margin-left: auto; cursor: pointer;" *ngIf="loadIndex == i">
+                <ibm-inline-loading [loadingText]="loadingText" [successText]="successText"
+                  (onSuccess)="onSuccess($event)">
+                </ibm-inline-loading>
               </div>
+              <div style="margin-left: auto; cursor: pointer;"
+                *ngIf="isBookmarked(challenge?._id) == true && !checkLoading(i)">
+                <svg icon ibmIconBookmarkFilled20 (click)="unBookmarkChallenge(challenge._id, i)"></svg>
+              </div>
+
             </div>
             <h6 class="ins-name">Issued by {{challenge?.insurerId.fullName}}</h6>
             <p style="font-size: 10px; margin-top: 8px;">on {{ getDate(challenge?.createdAt) }}</p>

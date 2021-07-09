@@ -101,6 +101,19 @@ export class OverviewComponent implements OnInit {
     return count;
   }
 
+  getTopList(phaseId) {
+    if (this.topList && this.topList.length>0) {
+      let list = this.topList.filter( dt => {
+        if (dt.phaseId == phaseId) {
+          return true;
+        }
+      })
+      return list;
+    } else {
+      return [];
+    }
+  }
+
   showLeaderboard() {
     let tempData = []
     this.submissionChallengeDetails.filter(dt => {

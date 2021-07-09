@@ -10,14 +10,8 @@
     </div>
   </ibm-header-navigation>
   <ibm-header-global>
-    <ibm-header-action #firstAction title="action">
-      <p class="namefull">
-        {{ userDetails.fullName }}
-      </p>
-    </ibm-header-action>
-    <ibm-header-action #firstAction title="action">
-      <svg icon ibmIconUserAvatar20></svg>
-    </ibm-header-action>
+    <p class="namefull">{{ userDetails.fullName }}</p>
+    <ibm-header-action #firstAction title="action"><svg icon ibmIconUserAvatar20></svg></ibm-header-action>
   </ibm-header-global>
 </ibm-header>
 
@@ -52,7 +46,7 @@
       <p class="userdetail">Challenges Won: {{challengesWon || 0}}</p>
     </div>
     <br />
-    <p class="userdetail">View profile</p>
+    <!-- <p class="userdetail">View profile</p> -->
   </div>
   <div class="bx--navigation-section">
     <p class="notify">
