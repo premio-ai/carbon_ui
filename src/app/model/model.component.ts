@@ -31,10 +31,12 @@ export class ModelComponent {
   isApiLoading: boolean;
   loadIndex: number;
   objectKeys = Object.keys;
+  errorToasterMsg: boolean;
 
   ngOnInit() {
     this.showLess = true;
     this.loadIndex = -1;
+    this.errorToasterMsg = false;
     this.sorting = [
       { content: 'Most Popular' },
       { content: 'Least Popular' },
@@ -149,10 +151,7 @@ export class ModelComponent {
         })
       })
       this.bookmarkedSubmissionsByPhase = tempData
-    }).catch(err => {
-      localStorage.clear();
-      this.router.navigateByUrl('login')
-    })
+    }).catch(err => { })
   }
 
   isBookmarked(modelId) {
@@ -192,11 +191,21 @@ this.loadIndex = index
       this.isApiLoading = false;
       this.getBookmarkedSubmission()
     }).catch(err => {
-      localStorage.clear();
-      this.router.navigateByUrl('login')
+      this.errorToaster();
     })
   }
 
+  errorToaster = (() => {
+		this.errorToasterMsg = true
+		setTimeout(() => {
+			this.errorToasterMsg = false
+		}, 3000)
+  })
+
+  closeToaster() {
+		this.errorToasterMsg = false
+	}
+  
   unBookmark(model, index) {
     this.isApiLoading = true;
     this.loadIndex = index
@@ -213,8 +222,7 @@ this.loadIndex = index
       this.isApiLoading = false;
       this.getBookmarkedSubmission()
     }).catch(err => {
-      localStorage.clear();
-      this.router.navigateByUrl('login')
+      this.errorToaster();
     })
   }
 

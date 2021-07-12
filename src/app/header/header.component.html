@@ -2,10 +2,16 @@
   <a (click)="navigate()" style="cursor: pointer;"> <img src="assets/logo.png" class="imglogo" /></a>
   <ibm-hamburger *ngIf="hasHamburger" [active]="active" (selected)="active = !active"></ibm-hamburger>
   <ibm-header-navigation>
-    <ibm-header-item (click)="navigate()" [routerLinkActive]="['is-active']">Activity
-    </ibm-header-item>
+    <div *ngIf="userDetails.role == 'Insurer'">
+      <ibm-header-item (click)="navigate()" [useRouter]="true" [route]="['/dashboard']">Activity
+      </ibm-header-item>
+    </div>
     <div *ngIf="userDetails.role == 'Innovator'">
-      <ibm-header-item [route]="['/invchallenges']" [routerLinkActive]="['is-active']">Challenges
+      <ibm-header-item (click)="navigate()" [useRouter]="true" [route]="['/invdash']">Activity
+      </ibm-header-item>
+    </div>
+    <div *ngIf="userDetails.role == 'Innovator'">
+      <ibm-header-item [route]="['/invchallenges']" [useRouter]="true">Challenges
       </ibm-header-item>
     </div>
   </ibm-header-navigation>
@@ -15,10 +21,27 @@
   </ibm-header-global>
 </ibm-header>
 
+<div *ngIf="errorToasterMsg" data-notification class="bx--toast-notification bx--toast-notification--failure"
+  role="alert">
+  <div class="bx--toast-notification__details">
+    <p class="bx--toast-notification__title">Somthing went wrong.</p>
+    <p class="bx--toast-notification__subtitle">Please contact administrator.</p>
+  </div>
+  <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button" type="button"
+    aria-label="close">
+    <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform"
+      xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__close-icon" width="20" height="20"
+      viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z">
+      </path>
+    </svg>
+  </button>
+</div>
+
 <ibm-panel [expanded]="firstAction.active">
   <div class="bx--navigation-section">
     <img class="portrait mr-3" itemprop="image" alt="Avatar" src="../../assets/user_avatar.jpeg" />
-      <svg icon ibmIconEdit20 (click)="editUserName()"></svg>
+    <svg icon ibmIconEdit20 (click)="editUserName()"></svg>
     <div *ngIf="!isEdit">
       <p class="userName">{{ userDetails.fullName }}</p>
     </div>
@@ -58,7 +81,8 @@
 
     <div *ngIf="notificationLoading">
       <h6>
-        <ibm-inline-loading [loadingText]="loadingText" style="margin-left: 45px;" [successText]="successText" (onSuccess)="onSuccess($event)">
+        <ibm-inline-loading [loadingText]="loadingText" style="margin-left: 45px;" [successText]="successText"
+          (onSuccess)="onSuccess($event)">
         </ibm-inline-loading>
       </h6>
     </div>

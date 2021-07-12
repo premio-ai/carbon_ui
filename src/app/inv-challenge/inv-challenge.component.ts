@@ -23,18 +23,27 @@ export class InvChallengeComponent implements OnInit {
   pageOffset: number;
   totalPage: number;
   pageNo: number;
+  pageOffsetBM: number;
+  totalPageBM: number;
+  pageNoBM: number;
   isApiLoading: boolean;
   loadIndex: number;
+  errorToasterMsg: boolean;
 
   ngOnInit() {
     this.pageNo = 1;
     this.pageOffset = 0;
     this.totalPage = 1;
+    this.pageNoBM = 1;
+    this.pageOffsetBM = 0;
+    this.totalPageBM = 1;
     this.loadIndex = -1;
+    this.errorToasterMsg = false;
 
     let userDetails = JSON.parse(localStorage.getItem('userDetails'))
     if (userDetails && userDetails._id) {
       this.getAllActiveChallanges(this.pageOffset);
+      this.getBookmarkedChallenges(this.pageOffsetBM, null);
     } else {
       this.router.navigateByUrl('')
     }
@@ -118,17 +127,13 @@ export class InvChallengeComponent implements OnInit {
     this.requestService.get(allActiveChallanegUrl, params).toPromise().then(data => {
       this.totalPage = Math.ceil(data.count / 10);
       this.activeChallenges = data.list;
-      this.getBookmarkedChallenges();
-    }).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+    }).catch(err => { })
   }
 
-  isBookmarked(challengeId) {
+  isBookmarked(challengeId) {    
     if (this.bookmarkedChallenges.length > 0) {
       let result = this.bookmarkedChallenges.some(dt => {
-        if (dt._id == challengeId) {
+        if (dt && dt._id == challengeId) {
           return true;
         } else {
           return false;
@@ -156,23 +161,47 @@ export class InvChallengeComponent implements OnInit {
     }
   }
 
-  getBookmarkedChallenges() {
-    let url = "bookmarkChallenge";
-    this.requestService.get(url, null).toPromise().then(data => {
-      let tempData = []
-      this.activeChallenges.filter(dt => {
-        data.map(res => {
-          if (dt._id == res.challengeId) {
-            tempData.push(dt)
-          }
-        })
-      })
-      this.bookmarkedChallenges = tempData;
+  prevPageBM() {
+    if (this.pageNoBM > 1) {
+      this.pageNoBM--;
+      this.pageOffsetBM = (this.pageNoBM-1) * 10;
+      this.getBookmarkedChallenges(this.pageOffsetBM, null)
+    }
+  }
+
+  nextPageBM() {
+    if (this.pageNoBM < (this.totalPage)) {
+      this.pageNoBM++;
+      this.pageOffsetBM = (this.pageNoBM-1) * 10;
+      this.getBookmarkedChallenges(this.pageOffsetBM, null)
+    }
+  }
+
+  getBookmarkedChallenges(pageOffsetBM, index) {
+    this.loadIndex = index
+    let url = "bookmarkChallenge/getBookMarkChallengeBrowse";
+    let params = {
+      skip: pageOffsetBM
+    }
+    this.requestService.get(url, params).toPromise().then(data => {
+      this.loadIndex = -1;
+      this.totalPageBM = Math.ceil(data.count / 10);
+      this.bookmarkedChallenges = data.list;
     }).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
+      this.errorToaster();
 		})
   }
+
+  errorToaster = (() => {
+		this.errorToasterMsg = true
+		setTimeout(() => {
+			this.errorToasterMsg = false
+		}, 3000)
+  })
+  
+  closeToaster() {
+		this.errorToasterMsg = false
+	}
 
   viewChallenge(challengeId) {
     this.router.navigateByUrl('invaccepted/' + challengeId)
@@ -187,12 +216,11 @@ export class InvChallengeComponent implements OnInit {
     }
     this.requestService.post(url, data).toPromise().then(data => {
       this.isApiLoading = true;
-    this.loadIndex = -1;
-      this.getBookmarkedChallenges()
+      this.loadIndex = -1;
+      this.getBookmarkedChallenges(this.pageOffsetBM, index);
     }).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+      this.errorToaster();
+    })
   }
 
   unBookmarkChallenge(challengeId, index) {
@@ -204,12 +232,11 @@ export class InvChallengeComponent implements OnInit {
     }
     this.requestService.put(url, data).toPromise().then(data => {
       this.isApiLoading = true;
-    this.loadIndex = -1;
-      this.getBookmarkedChallenges()
+      this.loadIndex = -1;
+      this.getBookmarkedChallenges(this.pageOffsetBM, index);
     }).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+      this.errorToaster();
+    })
   }
 
   checkLoading(i) {

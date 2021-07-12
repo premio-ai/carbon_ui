@@ -42,10 +42,12 @@ export class InvModelViewComponent implements OnInit {
   showBtn: boolean;
   showAccordion: boolean;
   leaderboardData: any[] = [];
+  errorToasterMsg: boolean;
 
   ngOnInit() {
     let userDetails = JSON.parse(localStorage.getItem('userDetails'));
     if (userDetails && userDetails._id) {
+      this.errorToasterMsg = false;
       this.pageNo = 1;
       this.pageOffset = 0;
       this.totalPage = 1;
@@ -70,10 +72,7 @@ export class InvModelViewComponent implements OnInit {
     let url = 'submissionAllChallenge/allSubmitOfChallenge/' + challengeId;
     this.requestService.get(url, null).toPromise().then(data => {
       this.allSubmitOfChallenge = data;
-    }).catch(err => {
-      localStorage.clear();
-      this.router.navigateByUrl('login');
-    })
+    }).catch(err => { })
   }
 
   getLeaderboardOfChallenge() {
@@ -85,10 +84,7 @@ export class InvModelViewComponent implements OnInit {
     this.requestService.get(url, params).toPromise().then(data => {
       this.totalPage = Math.ceil(data.count / 10);
       this.leaderboardData = data.list;
-    }).catch(err => {
-      localStorage.clear();
-      this.router.navigateByUrl('login');
-    })
+    }).catch(err => { })
   }
 
   prevPage() {
@@ -120,10 +116,20 @@ export class InvModelViewComponent implements OnInit {
       this.isEdit = false;
       this.getSubmission(this.modelId);
     }).catch(err => {
-      localStorage.clear();
-      this.router.navigateByUrl('login');
+      this.errorToaster();
     })
   }
+
+  errorToaster = (() => {
+		this.errorToasterMsg = true
+		setTimeout(() => {
+			this.errorToasterMsg = false
+		}, 3000)
+  })
+  
+  closeToaster() {
+		this.errorToasterMsg = false
+	}
 
   getDate(timeStamp) {
     let date = moment(moment(+timeStamp)).format("DD/MM/YYYY")
@@ -141,20 +147,14 @@ export class InvModelViewComponent implements OnInit {
       this.getChallengeDetails(this.challengeId);
       this.getAllSubmitOfChallenge(this.challengeId);
       this.getLeaderboardOfChallenge();
-    }).catch(err => {
-      localStorage.clear();
-      this.router.navigateByUrl('login');
-    })
+    }).catch(err => { })
   }
 
   getModelSummary(id) {
     let url = 'submissionAllChallenge/modelSummary/' + id;
     this.requestService.get(url, null).toPromise().then(data => {
       this.modelSummary = data;
-    }).catch(err => {
-      localStorage.clear();
-      this.router.navigateByUrl('login');
-    })
+    }).catch(err => { })
   }
 
   getFailureMsg() {
@@ -195,10 +195,7 @@ export class InvModelViewComponent implements OnInit {
       var a = document.createElement("a");
       document.body.appendChild(a);
       this.imageUrlArr = data.blob;
-    }).catch(err => {
-      localStorage.clear();
-      this.router.navigateByUrl('login');
-    })
+    }).catch(err => { })
   }
 
   getPerformanceStatus() {
@@ -215,10 +212,7 @@ export class InvModelViewComponent implements OnInit {
       this.displayImage();
       this.getSampleFileArr();
       this.getNextPhaseDetails();
-    }).catch(err => {
-      localStorage.clear();
-      this.router.navigateByUrl('login');
-    })
+    }).catch(err => { })
   }
 
   getPassAccuracy() {
@@ -251,10 +245,7 @@ export class InvModelViewComponent implements OnInit {
           this.nextModelId = data[0]._id;
           this.showBtn = true;
         }
-      }).catch(err => {
-        localStorage.clear();
-        this.router.navigateByUrl('login');
-      })
+      }).catch(err => { })
     } else {
       this.showBtn = false;
     }
@@ -336,8 +327,7 @@ export class InvModelViewComponent implements OnInit {
         a.click();
         window.URL.revokeObjectURL(url);
       }).catch(err => {
-        localStorage.clear();
-        this.router.navigateByUrl('login');
+        this.errorToaster();
       })
     }
   }

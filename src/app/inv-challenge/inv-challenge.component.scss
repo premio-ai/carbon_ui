@@ -11,6 +11,17 @@
     line-height: 1.5;
     margin-left: -16px;
 }
+
+.bx--toast-notification--failure {
+    border-left: 3px solid #ff0000;
+    background: #393939;
+    margin-left: 1000px;
+    margin-top: 100px;
+    position: absolute;
+    top: -36px;
+    left: 32px;
+}
+
 .btn{
     margin: auto;
     display: flex;

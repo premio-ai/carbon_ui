@@ -1,6 +1,24 @@
 <app-header></app-header>
 <br />
 <br />
+
+<div *ngIf="errorToasterMsg" data-notification class="bx--toast-notification bx--toast-notification--failure"
+  role="alert">
+  <div class="bx--toast-notification__details">
+    <p class="bx--toast-notification__title">Somthing went wrong.</p>
+    <p class="bx--toast-notification__subtitle">Please contact administrator.</p>
+  </div>
+  <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button" type="button"
+    aria-label="close">
+    <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform"
+      xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__close-icon" width="20" height="20"
+      viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z">
+      </path>
+    </svg>
+  </button>
+</div>
+
 <div class="bx--grid">
   <div class="bx--row line-padding">
     <div class="bx--col-md-1" style="padding-left: 8%; cursor: pointer;">
@@ -44,7 +62,8 @@
         </button>
         <div *ngIf="showBtn">
           <br />
-          <button [ibmButton]="ibmButton" [size]="size" style="width: 216px; margin-left: 7px;" (click)="enterNextPhase()" >
+          <button [ibmButton]="ibmButton" [size]="size" style="width: 216px; margin-left: 7px;"
+            (click)="enterNextPhase()">
             Enter phase {{nextPhaseIndex}}<svg class="bx--btn__icon" ibmIconArrowRight20 size="20"></svg>
           </button>
         </div>
@@ -67,7 +86,8 @@
         <div class="bx--col-md-1" style="padding-left: 2%; white-space: nowrap;">
           <br />
           <p class="para">Download Trained Model
-            <svg icon ibmIconDownload16 class="downlogoPointer" (click)="downloadFile(modelDetails?.modelUploadedPath)"></svg>
+            <svg icon ibmIconDownload16 class="downlogoPointer"
+              (click)="downloadFile(modelDetails?.modelUploadedPath)"></svg>
           </p>
         </div>
       </div>
@@ -89,11 +109,11 @@
         </ibm-tile>
       </div>
       <br />
-      
-    <!-- // Performance graph disabled for static data
+
+      <!-- // Performance graph disabled for static data
       <ibm-line-chart [data]="data1" [options]="options1" style="background-color: #f4f4f4 !important;"
         class="chartline"></ibm-line-chart> -->
-    
-      </div>
+
+    </div>
   </div>
 </div>

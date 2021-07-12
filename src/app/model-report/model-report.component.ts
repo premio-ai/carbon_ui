@@ -89,10 +89,7 @@ export class ModelReportComponent implements OnInit {
 			this.accuracy();
 			this.precision();
 			this.recall();
-		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+		}).catch(err => { })
 	}
 
 	switchSubmit(submitId) {
@@ -127,10 +124,7 @@ export class ModelReportComponent implements OnInit {
 		this.requestService.get(url, null).toPromise().then(data => {
 			this.challengeDetails = data
 			this.getChallengeSubmission(this.challengeDetails._id)
-		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+		}).catch(err => { })
 	}
 
 	getChallengeSubmission(challengeId) {
@@ -139,20 +133,14 @@ export class ModelReportComponent implements OnInit {
 
 		this.requestService.get(url, null).toPromise().then(data => {
 			this.challengeSubmission = data
-		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+		}).catch(err => { })
 	}
 
 	getInnovatorChallengeCounts() {
 		let innovatorId = this.modelReport.innovatorId._id
 		this.requestService.get('submissionAllChallenge/innovatorCounts/' + innovatorId, null).toPromise().then(data => {
 			this.challengeCounts = data
-		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+		}).catch(err => { })
 	}
 
 	getDate(timeStamp) {

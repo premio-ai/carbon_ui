@@ -5,9 +5,28 @@
 		<div class="bx--col-md-1" style="padding-left: -8%; cursor: pointer;">
 			<svg class="backarrow" icon ibmIconArrowLeft16 (click)="navigateBack()"></svg>
 		</div>
+
+		<div *ngIf="errorToasterMsg" data-notification class="bx--toast-notification bx--toast-notification--failure"
+			role="alert">
+			<div class="bx--toast-notification__details">
+				<p class="bx--toast-notification__title">Somthing went wrong.</p>
+				<p class="bx--toast-notification__subtitle">Please contact administrator.</p>
+			</div>
+			<button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button"
+				type="button" aria-label="close">
+				<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform"
+					xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__close-icon" width="20" height="20"
+					viewBox="0 0 32 32" aria-hidden="true">
+					<path
+						d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z">
+					</path>
+				</svg>
+			</button>
+		</div>
+
 		<div class="bx--col-md-4" style="margin-left: -8%;">
 			<ibm-breadcrumb [noTrailingSlash]="'noTrailingSlash'">
-				<ibm-breadcrumb-item (click)="invChallenges()" class="navigation" style="cursor: pointer; color: blue;" >
+				<ibm-breadcrumb-item (click)="invChallenges()" class="navigation" style="cursor: pointer; color: blue;">
 					Browse
 				</ibm-breadcrumb-item>
 				<ibm-breadcrumb-item (click)="viewChallenge(challengeDetails?._id)" class="navigation"
@@ -60,7 +79,8 @@
 				<p class="challengeTitle">{{challengeDetails.title}}</p>
 				<br /> <br />
 				<div *ngIf="acceptedChallenge?._id.length>0">
-					<button class="bx--btn bx--btn--tertiary" type="button" (click)="withdrawChallenge(challengeDetails._id)" >
+					<button class="bx--btn bx--btn--tertiary" type="button"
+						(click)="withdrawChallenge(challengeDetails._id)">
 						<span>Accepted</span>
 						<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;"
 							xmlns="http://www.w3.org/2000/svg" class="bx--btn__icon" width="16" height="16"
@@ -102,7 +122,8 @@
 								<h4>Reward</h4>
 								<br />
 								<div style="font-size: 14px; line-height: 1.5;align-items: center;display: flex;">
-									<svg icon ibmIconPartnership16></svg>&nbsp; <p class="oneoff">{{challengeDetails?.challengeType}}</p>
+									<svg icon ibmIconPartnership16></svg>&nbsp; <p class="oneoff">
+										{{challengeDetails?.challengeType}}</p>
 								</div>
 								<br />
 								<p class="para">
@@ -122,8 +143,9 @@
 				<ibm-tab heading="Data">
 					<br />
 					<div ibmGrid [condensed]="gridCondensed">
-						<div class="rowdiv" ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
-							[condensed]="rowCondensed" *ngFor="let phase of challengeDetails?.phases; index as i">
+						<div class="rowdiv" ibmRow [gutter]="gutter" [leftGutter]="leftGutter"
+							[rightGutter]="rightGutter" [condensed]="rowCondensed"
+							*ngFor="let phase of challengeDetails?.phases; index as i">
 							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }"
 								style="margin-right: 37px; margin-left: -14px">
 								<h4>Phase {{i}}</h4>
@@ -133,11 +155,11 @@
 							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 3, sm: 12 }">
 								<h4 style="margin-left: -12px;">Data Visual</h4>
 								<br />
-									<img class="dataimg" src='{{imageUrlArr[i]}}'>
-									<br />
+								<img class="dataimg" src='{{imageUrlArr[i]}}'>
+								<br />
 								<br />
 								<h4 class="sampleheaddata">Sample Data Sets</h4>
-								<p class="samplename">Download Dataset 1 
+								<p class="samplename">Download Dataset 1
 									<svg icon ibmIconDownload16 class="svg" height="12" width="12"
 										(click)="downloadFile(i)"></svg>
 								</p>
@@ -148,7 +170,7 @@
 				<ibm-tab heading="Discussion" style="max-width: 105px;">
 					<div id="disqus_thread"></div>
 					<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments
-						powered by Disqus.</a></noscript>
+							powered by Disqus.</a></noscript>
 				</ibm-tab>
 				<ibm-tab heading="Leaderboard" style="max-width: 105px;">
 					<ibm-table-container>
@@ -194,7 +216,8 @@
 									pages {{pageNo}} of {{totalPage}}
 								</label>
 								<button class="bx--pagination__button bx--pagination__button--backward " tabindex="0"
-									data-page-backward aria-label="previous page" (click)="prevPage()" [disabled]="pageNo == 1">
+									data-page-backward aria-label="previous page" (click)="prevPage()"
+									[disabled]="pageNo == 1">
 									<svg focusable="false" preserveAspectRatio="xMidYMid meet"
 										style="will-change: transform;" xmlns="http://www.w3.org/2000/svg"
 										class="bx--pagination__nav-arrow" width="20" height="20" viewBox="0 0 32 32"
@@ -203,7 +226,8 @@
 									</svg>
 								</button>
 								<button class="bx--pagination__button bx--pagination__button--forward " tabindex="0"
-									data-page-forward aria-label="next page" (click)="nextPage()" [disabled]="pageNo == totalPage">
+									data-page-forward aria-label="next page" (click)="nextPage()"
+									[disabled]="pageNo == totalPage">
 									<svg focusable="false" preserveAspectRatio="xMidYMid meet"
 										style="will-change: transform;" xmlns="http://www.w3.org/2000/svg"
 										class="bx--pagination__nav-arrow" width="20" height="20" viewBox="0 0 32 32"
@@ -215,7 +239,7 @@
 						</div>
 					</ibm-table-container>
 				</ibm-tab>
-				<ibm-tab heading="Your Submission" >
+				<ibm-tab heading="Your Submission">
 					<br />
 					<div ibmGrid [condensed]="gridCondensed">
 						<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
@@ -227,17 +251,21 @@
 								</ibm-progress-indicator>
 							</div>
 							<div ibmCol class="custom-class-example1" [columnNumbers]="{ md: 6, sm: 12 }">
-								<app-submission-step-one [challengeDetails]="challengeDetails" *ngIf="current == 0" (cancelSubmit)=cancelSubmit($event)
-									[enterPhaseId]="enterPhaseId" [isChallengeAccepted]='isChallengeAccepted'
-									(goNext)=nextStepOne($event) [challengeSubmissionData]="challengeSubmissionData" >
+								<app-submission-step-one [challengeDetails]="challengeDetails" *ngIf="current == 0"
+									(cancelSubmit)=cancelSubmit($event) [enterPhaseId]="enterPhaseId"
+									[isChallengeAccepted]='isChallengeAccepted' (goNext)=nextStepOne($event)
+									[challengeSubmissionData]="challengeSubmissionData">
 								</app-submission-step-one>
 								<app-submission-step-two *ngIf="current == 1" (goPrevious)="previousStepTwo()"
-									[isChallengeAccepted]='isChallengeAccepted' (goNext)="nextStepTwo($event)"></app-submission-step-two>
+									[isChallengeAccepted]='isChallengeAccepted' (goNext)="nextStepTwo($event)">
+								</app-submission-step-two>
 								<app-submission-step-three *ngIf="current == 2" (goPrevious)="previousStepThree()"
-									[isChallengeAccepted]='isChallengeAccepted'	(goNext)="nextStepThree($event)"></app-submission-step-three>
+									[isChallengeAccepted]='isChallengeAccepted' (goNext)="nextStepThree($event)">
+								</app-submission-step-three>
 								<app-submission-step-four *ngIf="current == 3" (goPrevious)="previousStepFour()"
-									(goToStepOne)="goToStepOne()" (goNext)="nextStepFour($event)" (enterPhase)="enterPhase($event)"
-									[isChallengeAccepted]='isChallengeAccepted' [challengeDetails]="challengeDetails"
+									(goToStepOne)="goToStepOne()" (goNext)="nextStepFour($event)"
+									(enterPhase)="enterPhase($event)" [isChallengeAccepted]='isChallengeAccepted'
+									[challengeDetails]="challengeDetails"
 									[challengeSubmissionData]="challengeSubmissionData"
 									[phasesSubmissionComplete]="phasesSubmissionComplete"></app-submission-step-four>
 							</div>

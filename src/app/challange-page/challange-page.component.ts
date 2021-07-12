@@ -17,6 +17,7 @@ export class ChallangePageComponent implements OnInit {
 	current: number;
 	steps: any[];
 	awardedTo = "60767631222df1253206ff74";
+	errorToasterMsg: boolean;
 
 	challange: {
 		title: string,
@@ -64,15 +65,11 @@ export class ChallangePageComponent implements OnInit {
 				{
 					text: "Step 4",
 					state: ["incomplete"],
-					optionalText: 'Preview'
-				},
-				{
-					text: "Step 5",
-					state: ["incomplete"],
 					disabled: true,
 					optionalText: 'Confirm'
 				},
 			];
+			this.errorToasterMsg = false;
 			this.current = 0;
 			this.challange = {
 				title: "",
@@ -152,10 +149,20 @@ export class ChallangePageComponent implements OnInit {
 		this.requestService.post('challenge', this.challange).toPromise().then(res => {
 			this.router.navigateByUrl('dashboard')
 		}).catch( err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
+			this.errorToaster();
 		  })
 		this.current++;
+	}
+
+	errorToaster = (() => {
+		this.errorToasterMsg = true
+		setTimeout(() => {
+			this.errorToasterMsg = false
+		}, 3000)
+	})
+
+	closeToaster() {
+		this.errorToasterMsg = false
 	}
 
 	navigateToDashboard() {

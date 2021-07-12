@@ -16,10 +16,12 @@ export class DashboardComponent implements OnInit {
 	activeChallenges: any[];
 	pastChallenges: any[];
 	sorting: any[];
+	errorToasterMsg: boolean;
 
 	ngOnInit() {
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
 		if (this.userDetails && this.userDetails._id) {
+			this.errorToasterMsg = false;
 			this.getActiveChallanges();
 			this.getpastChallanges();
 		} else {
@@ -42,9 +44,19 @@ export class DashboardComponent implements OnInit {
 		this.requestService.get(activeChallanegUrl, null).toPromise().then(data => {
 			this.activeChallenges = data;
 		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
+			this.errorToaster();
 		})
+	}
+
+	errorToaster = (() => {
+		this.errorToasterMsg = true
+		setTimeout(() => {
+			this.errorToasterMsg = false
+		}, 3000)
+	})
+
+	closeToaster() {
+		this.errorToasterMsg = false
 	}
 
 	getpastChallanges() {
@@ -52,8 +64,7 @@ export class DashboardComponent implements OnInit {
 		this.requestService.get(pastChallanegUrl, null).toPromise().then((data) => {
 			this.pastChallenges = data;
 		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
+			this.errorToaster();
 		})
 	}
 

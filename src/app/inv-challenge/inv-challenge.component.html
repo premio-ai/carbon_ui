@@ -8,6 +8,24 @@
     </div>
     <div class="bx--col-md-1"></div>
   </div>
+
+  <div *ngIf="errorToasterMsg" data-notification class="bx--toast-notification bx--toast-notification--failure"
+    role="alert">
+    <div class="bx--toast-notification__details">
+      <p class="bx--toast-notification__title">Somthing went wrong.</p>
+      <p class="bx--toast-notification__subtitle">Please contact administrator.</p>
+    </div>
+    <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button" type="button"
+      aria-label="close">
+      <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform"
+        xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__close-icon" width="20" height="20"
+        viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z">
+        </path>
+      </svg>
+    </button>
+  </div>
+
   <div class="bx--row line-padding" style="margin-top: 0px;">
     <div class="bx--col-md-1"></div>
     <div class="bx--col-md-4">
@@ -76,6 +94,29 @@
               View more and apply
             </button>
           </ibm-tile>
+          <div class="bx--pagination" data-pagination>
+            <div class="bx--pagination__right">
+              <label id="select-id-pagination-page-label" class="bx--pagination__text" for="select-id-pagination-page">
+                pages {{pageNo}} of {{totalPage}}
+              </label>
+              <button class="bx--pagination__button bx--pagination__button--backward " tabindex="0" data-page-backward
+                aria-label="previous page" (click)="prevPage()" [disabled]="pageNo == 1">
+                <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;"
+                  xmlns="http://www.w3.org/2000/svg" class="bx--pagination__nav-arrow" width="20" height="20"
+                  viewBox="0 0 32 32" aria-hidden="true">
+                  <path d="M19 23L11 16 19 9 19 23z"></path>
+                </svg>
+              </button>
+              <button class="bx--pagination__button bx--pagination__button--forward " tabindex="0" data-page-forward
+                aria-label="next page" (click)="nextPage()" [disabled]="pageNo == totalPage">
+                <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;"
+                  xmlns="http://www.w3.org/2000/svg" class="bx--pagination__nav-arrow" width="20" height="20"
+                  viewBox="0 0 32 32" aria-hidden="true">
+                  <path d="M13 9L21 16 13 23 13 9z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
         </ibm-tab>
         <ibm-tab heading="Bookmarked">
           <ibm-tile *ngFor="let challenge of bookmarkedChallenges" style="margin-bottom: 15px;">
@@ -118,31 +159,31 @@
               View more and apply
             </button>
           </ibm-tile>
+          <div class="bx--pagination" data-pagination>
+            <div class="bx--pagination__right">
+              <label id="select-id-pagination-page-label" class="bx--pagination__text" for="select-id-pagination-page">
+                pages {{pageNoBM}} of {{totalPageBM}}
+              </label>
+              <button class="bx--pagination__button bx--pagination__button--backward " tabindex="0" data-page-backward
+                aria-label="previous page" (click)="prevPageBM()" [disabled]="pageNoBM == 1">
+                <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;"
+                  xmlns="http://www.w3.org/2000/svg" class="bx--pagination__nav-arrow" width="20" height="20"
+                  viewBox="0 0 32 32" aria-hidden="true">
+                  <path d="M19 23L11 16 19 9 19 23z"></path>
+                </svg>
+              </button>
+              <button class="bx--pagination__button bx--pagination__button--forward " tabindex="0" data-page-forward
+                aria-label="next page" (click)="nextPageBM()" [disabled]="pageNoBM == totalPageBM">
+                <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;"
+                  xmlns="http://www.w3.org/2000/svg" class="bx--pagination__nav-arrow" width="20" height="20"
+                  viewBox="0 0 32 32" aria-hidden="true">
+                  <path d="M13 9L21 16 13 23 13 9z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
         </ibm-tab>
       </ibm-tabs>
-      <div class="bx--pagination" data-pagination>
-        <div class="bx--pagination__right">
-          <label id="select-id-pagination-page-label" class="bx--pagination__text" for="select-id-pagination-page">
-            pages {{pageNo}} of {{totalPage}}
-          </label>
-          <button class="bx--pagination__button bx--pagination__button--backward " tabindex="0" data-page-backward
-            aria-label="previous page" (click)="prevPage()" [disabled]="pageNo == 1">
-            <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;"
-              xmlns="http://www.w3.org/2000/svg" class="bx--pagination__nav-arrow" width="20" height="20"
-              viewBox="0 0 32 32" aria-hidden="true">
-              <path d="M19 23L11 16 19 9 19 23z"></path>
-            </svg>
-          </button>
-          <button class="bx--pagination__button bx--pagination__button--forward " tabindex="0" data-page-forward
-            aria-label="next page" (click)="nextPage()" [disabled]="pageNo == totalPage">
-            <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;"
-              xmlns="http://www.w3.org/2000/svg" class="bx--pagination__nav-arrow" width="20" height="20"
-              viewBox="0 0 32 32" aria-hidden="true">
-              <path d="M13 9L21 16 13 23 13 9z"></path>
-            </svg>
-          </button>
-        </div>
-      </div>
     </div>
     <div class="bx--col-md-1" style="margin-left: 52px;">
       <div style="width: 155px;">

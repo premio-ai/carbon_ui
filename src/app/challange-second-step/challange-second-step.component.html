@@ -1,4 +1,20 @@
 <div ibmGrid [condensed]="gridCondensed">
+  <div *ngIf="errorToasterMsg" data-notification class="bx--toast-notification bx--toast-notification--failure"
+    role="alert">
+    <div class="bx--toast-notification__details">
+      <p class="bx--toast-notification__title">Somthing went wrong.</p>
+      <p class="bx--toast-notification__subtitle">Please contact administrator.</p>
+    </div>
+    <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button" type="button"
+      aria-label="close">
+      <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform"
+        xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__close-icon" width="20" height="20"
+        viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z">
+        </path>
+      </svg>
+    </button>
+  </div>
   <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed"
     *ngFor="let phase of phases; index as i">
     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
@@ -58,7 +74,8 @@
             <div *ngFor="let sampleFile of phases[i].sampleDataFile; index as j">
               <div class="fileBox">
                 <p style="margin: 8px; font-size: small;">{{getSampleFileName(sampleFile.path)}}</p>
-                <p style="margin-top: 8px; margin-left: 50px; cursor: pointer;" (click)="removeSampleDataFile(i, j)">x</p>
+                <p style="margin-top: 8px; margin-left: 50px; cursor: pointer;" (click)="removeSampleDataFile(i, j)">x
+                </p>
               </div>
             </div>
           </div>
@@ -134,14 +151,16 @@
             <br />
             <div *ngIf="isDataVisualUploading">
               <h6>
-                <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)">
+                <ibm-inline-loading [loadingText]="loadingText" [successText]="successText"
+                  (onSuccess)="onSuccess($event)">
                 </ibm-inline-loading>
               </h6>
             </div>
             <div *ngIf="stepTwo.dataVisualFile.length>0">
               <div class="fileBox">
                 <p style="margin: 8px; font-size: small;">{{getFileName(stepTwo.dataVisualFile)}}</p>
-                <p style="margin-top: 8px; margin-left: 75px; cursor: pointer;" (click)="removeStepTwoDataVisual()">x</p>
+                <p style="margin-top: 8px; margin-left: 75px; cursor: pointer;" (click)="removeStepTwoDataVisual()">x
+                </p>
               </div>
             </div>
             <div *ngIf="dataVisualFileError">
@@ -151,13 +170,14 @@
           <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }" style="padding-left: 10px;">
             <h5>Sample Data</h5>
             <p class="drag">Anonymous, available to download for any innovator</p>
-            <app-drop-file-uploader (uploadFile)="uploadSampleData($event, i)" >
+            <app-drop-file-uploader (uploadFile)="uploadSampleData($event, i)">
             </app-drop-file-uploader>
             <!-- (getFile)="setSampleData($event)" -->
             <br />
             <div *ngIf="isSampleFileUploading">
               <h6>
-                <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)">
+                <ibm-inline-loading [loadingText]="loadingText" [successText]="successText"
+                  (onSuccess)="onSuccess($event)">
                 </ibm-inline-loading>
               </h6>
             </div>
@@ -165,7 +185,8 @@
               <div *ngFor="let sampleFile of stepTwo.sampleDataFile; index as j">
                 <div class="fileBox">
                   <p style="margin: 8px; font-size: small;">{{getSampleFileName(sampleFile.path)}}</p>
-                  <p style="margin-top: 8px; margin-left: 50px; cursor: pointer;" (click)="removeStepTwoSampleDataFile(j)">x
+                  <p style="margin-top: 8px; margin-left: 50px; cursor: pointer;"
+                    (click)="removeStepTwoSampleDataFile(j)">x
                   </p>
                 </div>
               </div>

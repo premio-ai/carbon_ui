@@ -45,11 +45,13 @@ export class InvSeePerformanceComponent implements OnInit {
 	}> = []
 	recallOptions: any = {}
 	showBtn: boolean;
+	errorToasterMsg: boolean;
 
 	ngOnInit() {
 		let userDetails = JSON.parse(localStorage.getItem('userDetails'))
 		if (userDetails && userDetails._id) {
 			let modelId = ''
+			this.errorToasterMsg = false
 			this.activatedRoute.params.subscribe((params: Params) => {
 				if (params) {
 					modelId = params.id
@@ -71,10 +73,7 @@ export class InvSeePerformanceComponent implements OnInit {
 			this.innovatorId = data[0].innovatorId._id;
 
 			this.getChallengeDetails(this.challengeId);
-		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+		}).catch(err => { })
 	}
 
 	getModelPerformance(id) {
@@ -119,10 +118,7 @@ export class InvSeePerformanceComponent implements OnInit {
 				this.precision();
 				this.recall();
 			}
-		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+		}).catch(err => { })
 	}
 
 	getChallengeDetails(id) {
@@ -130,10 +126,7 @@ export class InvSeePerformanceComponent implements OnInit {
 		this.requestService.get(url, null).toPromise().then(data => {
 			this.challengeDetails = data;
 			this.getNextPhaseDetails();
-		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+		}).catch(err => { })
 	}
 
 	getNextPhaseDetails() {
@@ -151,10 +144,7 @@ export class InvSeePerformanceComponent implements OnInit {
 			this.requestService.get(url, null).toPromise().then( data => {
 				this.nextModelId = data[0]._id
 				this.showBtn = true
-			}).catch( err => {
-				localStorage.clear();
-				this.router.navigateByUrl('login')
-			})
+			}).catch( err => { })
 		}
 	}
 
@@ -201,12 +191,22 @@ export class InvSeePerformanceComponent implements OnInit {
 				window.URL.revokeObjectURL(url);
 				a.remove();
 			}).catch(err => {
-				localStorage.clear();
-				this.router.navigateByUrl('login')
+				this.errorToaster();
 			})
 		}
 	}
 
+	errorToaster = (() => {
+		this.errorToasterMsg = true
+		setTimeout(() => {
+			this.errorToasterMsg = false
+		}, 3000)
+	})
+
+	closeToaster() {
+		this.errorToasterMsg = false
+	}
+	
 	dataURItoBlob(dataURI) {
 		var byteString = atob(dataURI.split(',')[1]);
 		var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]

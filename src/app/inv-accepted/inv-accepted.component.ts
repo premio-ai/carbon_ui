@@ -56,6 +56,7 @@ export class InvAcceptedComponent implements OnInit {
 	imageUrlArr: any[] = [];
 	submissionCount: number;
 	enterPhaseId: string;
+	errorToasterMsg: boolean;
 	
 	ngOnInit() {
 		let userDetails = JSON.parse(localStorage.getItem('userDetails'))
@@ -144,10 +145,7 @@ export class InvAcceptedComponent implements OnInit {
 			this.challengeDetails = data;
 			this.getSubmissionByChallengeId(this.challengeId);
 			this.displayImage()
-		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+		}).catch(err => { })
 	}
 
 	getChallengeAcceptance(challengeId) {
@@ -159,10 +157,7 @@ export class InvAcceptedComponent implements OnInit {
 			} else {
 				this.isChallengeAccepted = false;
 			}
-		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+		}).catch(err => { })
 	}
 
 	getLeaderboard(challengeId, pageOffset) {
@@ -173,10 +168,7 @@ export class InvAcceptedComponent implements OnInit {
 		this.requestService.get(url, params).toPromise().then(data => {
 			this.totalPage = Math.ceil(data.count / 10);
 			this.leaderboard = data.list;
-		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+		}).catch(err => { })
 	}
 
 	getSubmissionByChallengeId(challengeId) {
@@ -191,10 +183,16 @@ export class InvAcceptedComponent implements OnInit {
 				this.phasesSubmissionComplete = true
 			}
 		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
+			this.errorToaster()
 		})
 	}
+
+	errorToaster = (() => {
+		this.errorToasterMsg = true
+		setTimeout(() => {
+			this.errorToasterMsg = false
+		}, 3000)
+	})
 
 	enterPhase(phaseId) {
 		this.current = 0
@@ -235,8 +233,7 @@ export class InvAcceptedComponent implements OnInit {
 			this.getChallengeAcceptance(challengeId)
 			this.showToaster()
 		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
+			this.errorToaster();
 		})
 	}
 
@@ -249,8 +246,7 @@ export class InvAcceptedComponent implements OnInit {
 			this.getChallengeAcceptance(challengeId)
 			this.showWithdrawToaster()
 		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
+			this.errorToaster();
 		})
 	}
 
@@ -269,8 +265,9 @@ export class InvAcceptedComponent implements OnInit {
 	})
 
 	closeToaster() {
-		this.toasterMsg = false
-		this.withdrawToasterMsg = false
+		this.toasterMsg = false;
+		this.withdrawToasterMsg = false;
+		this.errorToasterMsg = false;
 	}
 
 	navigateBack() {
@@ -302,10 +299,7 @@ export class InvAcceptedComponent implements OnInit {
 				var a = document.createElement("a");
 				document.body.appendChild(a);
 				this.imageUrlArr.push(data.blob)
-			}).catch(err => {
-				localStorage.clear();
-				this.router.navigateByUrl('login')
-			})
+			}).catch(err => { })
 		})
 	}
 
@@ -334,8 +328,7 @@ export class InvAcceptedComponent implements OnInit {
 				a.click();
 				window.URL.revokeObjectURL(url);
 			}).catch(err => {
-				localStorage.clear();
-				this.router.navigateByUrl('login')
+				this.errorToaster();
 			})
 
 			let downloadUrl = 'challenge/fileDownloadsCount/' + this.challengeDetails._id;
@@ -430,8 +423,7 @@ export class InvAcceptedComponent implements OnInit {
 			this.getLeaderboard(this.challengeId, this.pageOffset)
 			this.current++;
 		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
+			this.errorToaster();
 		})
 	}
 

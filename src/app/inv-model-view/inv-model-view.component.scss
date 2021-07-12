@@ -99,6 +99,16 @@ a:visited {
 	z-index: 0;
 }
 
+.bx--toast-notification--failure {
+	border-left: 3px solid #ff0000;
+	background: #393939;
+	margin-left: 1000px;
+	margin-top: 100px;
+	position: absolute;
+	top: -36px;
+	left: 32px;
+}
+
 .border-div {
 	border-left: 5px solid #4162fd;
 }

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { RequestService } from '../request.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-submission-step-four',
@@ -29,9 +30,11 @@ export class SubmissionStepFourComponent implements OnInit {
   }
   totalPhases: number
   showLess: boolean
+  errorToasterMsg: boolean;
 
   ngOnInit() {
     this.showLess = true
+    this.errorToasterMsg = false;
     this.totalPhases = this.challengeDetails.phases.length
   }
 
@@ -42,7 +45,6 @@ export class SubmissionStepFourComponent implements OnInit {
   getPhasesCount(phaseId) {
     let index = this.challengeDetails.phases.findIndex(dt => { return dt.phaseId == phaseId })
     return index;
-    // return `Phase ${index+1} of ${this.totalPhases} `
   }
 
   getPhasesCountString(phaseId) {
@@ -58,6 +60,14 @@ export class SubmissionStepFourComponent implements OnInit {
       return `Phase ${indStr}rd of ${this.challengeDetails.phases.length}`;
     } else {
       return `Phase ${indStr}th of ${this.challengeDetails.phases.length}`;
+    }
+  }
+
+  checkDisabled() {
+    if (!this.isChallengeAccepted || moment(moment(this.challengeDetails.expiryDate).format('DD-MM-YYYY')).isBefore(moment(new Date()).format('DD/MM/YYYY'))) {
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -125,11 +135,21 @@ export class SubmissionStepFourComponent implements OnInit {
         window.URL.revokeObjectURL(url);
         a.remove();
       }).catch(err => {
-        localStorage.clear();
-        this.router.navigateByUrl('login')
+        this.errorToaster();
       })
     }
   }
+
+  errorToaster = (() => {
+		this.errorToasterMsg = true
+		setTimeout(() => {
+			this.errorToasterMsg = false
+		}, 3000)
+  })
+  
+  closeToaster() {
+		this.errorToasterMsg = false
+	}
 
   dataURItoBlob(dataURI) {
     var byteString = atob(dataURI.split(',')[1]);

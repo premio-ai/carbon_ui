@@ -19,11 +19,13 @@ export class DataComponent implements OnInit {
   isEdit: Boolean;
   appUrl: String;
   imageUrl: String;
-  imageUrlArr: any[] = []
+  imageUrlArr: any[] = [];
+  errorToasterMsg: boolean;
 
   ngOnInit() {
-    this.appUrl = APP_URL
-    this.isEdit = false
+    this.appUrl = APP_URL;
+    this.isEdit = false;
+    this.errorToasterMsg = false;
     this.editedPhase = ''
   }
 
@@ -35,9 +37,7 @@ export class DataComponent implements OnInit {
 
   getDownloadsCount() {
     let url = 'challenge/' + this.challengeDetails._id;
-    this.requestService.get(url, null).subscribe(data => {
-      // this.downloadsCount = data.downloadsCount;
-    })
+    this.requestService.get(url, null).subscribe(data => {})
   }
 
   editPhase(index) {
@@ -45,6 +45,17 @@ export class DataComponent implements OnInit {
     this.editedPhase = this.challengeDetails.phases[index].description
   }
 
+  errorToaster = (() => {
+		this.errorToasterMsg = true
+		setTimeout(() => {
+			this.errorToasterMsg = false
+		}, 3000)
+	})
+
+  closeToaster() {
+		this.errorToasterMsg = false
+  }
+  
   savePhase(phaseId) {
     let url = 'challenge/updatePhase/' + this.challengeDetails._id;
     let payload = {
@@ -55,8 +66,7 @@ export class DataComponent implements OnInit {
       this.isEdit = false;
       this.getChallengeDetails(this.challengeDetails._id)
     }).catch(err => {
-      localStorage.clear();
-      this.router.navigateByUrl('login')
+      this.errorToaster();
     })
   }
 
@@ -64,8 +74,7 @@ export class DataComponent implements OnInit {
     this.requestService.get("/" + challengeId, null).toPromise().then(data => {
       this.challengeDetails = data
     }).catch(err => {
-      localStorage.clear();
-      this.router.navigateByUrl('login')
+      this.errorToaster();
     })
   }
 
@@ -79,8 +88,7 @@ export class DataComponent implements OnInit {
         document.body.appendChild(a);
         this.imageUrlArr.push(data.blob)
       }).catch(err => {
-        localStorage.clear();
-        this.router.navigateByUrl('login')
+        this.errorToaster();
       })
     })
   }
@@ -121,8 +129,7 @@ export class DataComponent implements OnInit {
         a.click();
         window.URL.revokeObjectURL(url);
       }).catch(err => {
-        localStorage.clear();
-        this.router.navigateByUrl('login')
+        this.errorToaster();
       })
 
       let downloadUrl = 'challenge/fileDownloadsCount/' + this.challengeDetails._id;

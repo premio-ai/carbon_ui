@@ -36,7 +36,8 @@ export class ChallangeSecondStepComponent implements OnInit {
   isBtnDisabled: boolean;
   isSampleFileUploading: boolean;
   isDataVisualUploading: boolean;
-  fileNameError: boolean
+  fileNameError: boolean;
+  errorToasterMsg: boolean;
 
   ngOnInit() {
     this.isBtnDisabled = true;
@@ -58,10 +59,16 @@ export class ChallangeSecondStepComponent implements OnInit {
     this.requestService.post(url, null).toPromise().then(data => {
       this.bucketName = data.bucketName
     }).catch(err => {
-      localStorage.clear();
-      this.router.navigateByUrl('login')
+      this.errorToaster();
     })
   }
+
+  errorToaster = (() => {
+		this.errorToasterMsg = true
+		setTimeout(() => {
+			this.errorToasterMsg = false
+		}, 3000)
+	})
 
   ngDoCheck() {
     if (this.stepTwo.description.length > 0 && this.stepTwo.guidance.length > 0 && this.stepTwo.passingScore && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 0) {

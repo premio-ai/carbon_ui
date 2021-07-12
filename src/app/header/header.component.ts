@@ -24,12 +24,14 @@ export class HeaderComponent implements OnInit {
 	bookmarkedChallenges: any[] = []
 	showNotification: boolean;
 	isEdit: boolean;
-	set_new_userName: string
+	set_new_userName: string;
+	errorToasterMsg: boolean;
 
 	ngOnInit() {
 		this.notificationLoading = true;
 		this.showNotification = true;
 		this.challengeCounts = 0;
+		this.errorToasterMsg = false;
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
 		if (this.userDetails) {
 			this.set_new_userName = this.userDetails.fullName
@@ -50,10 +52,7 @@ export class HeaderComponent implements OnInit {
 			this.activeChallenges = data.list;
 			this.getSubmission();
 			this.getBookmarkedChallenges();
-		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+		}).catch(err => { })
 	}
 
 	getBookmarkedChallenges() {
@@ -68,10 +67,7 @@ export class HeaderComponent implements OnInit {
 				})
 			})
 			this.bookmarkedChallenges = tempData;
-		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+		}).catch(err => { })
 	}
 
 	getSubmission() {
@@ -86,19 +82,13 @@ export class HeaderComponent implements OnInit {
 				})
 			})
 			this.submittedActiveChallenges = tempData
-		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+		}).catch(err => { })
 	}
 
 	getChallengeCounts() {
 		this.requestService.get('challenge/counts', null).toPromise().then(data => {
 			this.challengeCounts = data
-		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+		}).catch(err => { })
 	}
 
 	getNotifications() {
@@ -106,10 +96,7 @@ export class HeaderComponent implements OnInit {
 		this.requestService.get(url, null).toPromise().then(data => {
 			this.notifications = data;
 			this.notificationLoading = false
-		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+		}).catch(err => { })
 		setTimeout(() => {
 			this.getNotifications();
 		}, Number((60 + Math.random() * 10).toFixed(0)) * 1000);
@@ -138,21 +125,28 @@ export class HeaderComponent implements OnInit {
 				isSeen: true
 			}).toPromise().then(data => {
 				this.router.navigateByUrl('invaccepted/' + notify.elementId)
-			}).catch(err => {
-				localStorage.clear();
-				this.router.navigateByUrl('login')
-			})
+			}).catch(err => { })
 		}
 		if (notify.title == MESSAGES.NEW_MODEL_SUBMITTED) {
 			this.requestService.put('userNotification/' + notify._id, {
 				isSeen: true
 			}).toPromise().then(data => {
 				this.router.navigateByUrl('invmodel-view/' + notify.elementId)
-			}).catch(err => {
-				localStorage.clear();
-				this.router.navigateByUrl('login')
-			})
+			}).catch(err => { })
 		}
+	}
+
+	checkActiveRoute() {
+		let activeRoute = window.location.href;
+
+		if ( activeRoute.includes('invdash') || activeRoute.includes('dashboard') ) {
+			return 'activeRouteActivity';
+		} else if ( activeRoute.includes('invchallenges') ) {
+			return 'activeRouteChallenge';
+		} else {
+			return '';
+		}
+
 	}
 
 	editUserName() {
@@ -173,9 +167,19 @@ export class HeaderComponent implements OnInit {
 				this.userDetails.fullName = this.set_new_userName
 			}
 		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
+			this.errorToaster();
 		})
+	}
+
+	errorToaster = (() => {
+		this.errorToasterMsg = true
+		setTimeout(() => {
+			this.errorToasterMsg = false
+		}, 3000)
+	})
+
+	closeToaster() {
+		this.errorToasterMsg = false
 	}
 
 	logout() {

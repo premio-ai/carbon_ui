@@ -1,4 +1,22 @@
-<br/><br/>
+<br /><br />
+
+<div *ngIf="errorToasterMsg" data-notification class="bx--toast-notification bx--toast-notification--failure"
+  role="alert">
+  <div class="bx--toast-notification__details">
+    <p class="bx--toast-notification__title">Somthing went wrong.</p>
+    <p class="bx--toast-notification__subtitle">Please contact administrator.</p>
+  </div>
+  <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button" type="button"
+    aria-label="close">
+    <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform"
+      xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__close-icon" width="20" height="20"
+      viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z">
+      </path>
+    </svg>
+  </button>
+</div>
+
 <ibm-accordion>
   <div *ngFor="let phase of challengeDetails?.phases; index as i">
     <ibm-accordion-item title="Phase {{i}}" (selected)="selected($event)" [expanded]="i==0">
@@ -7,9 +25,7 @@
         <div>
           <p>{{ phase.description }}</p>
         </div>
-        <div style="margin-top: 10px; margin-left: 8px;">
-          <!-- <svg icon ibmIconEdit20 (click)="editPhase(i)"></svg> -->
-        </div>
+        <div style="margin-top: 10px; margin-left: 8px;"></div>
       </div>
 
       <div style="display: flex;" *ngIf="isEdit">
@@ -28,14 +44,11 @@
       <br />
       <br />
       <br />
-      <!-- <div *ngFor='let data of phase.sampleDataFile; index as j' style="display: flex;">
-        <p style="font-size:13px">Download Dataset {{j+1}} <svg class="SVG" icon ibmIconDownload16 (click)="downloadFile(i, j)"></svg>
-        <span class="dataspan">Downloaded {{data.downloadCount}} times</span></p>
-      </div> -->
 
       <div style="display: flex;">
-        <p style="font-size:13px">Download Dataset 1 <svg class="SVG" icon ibmIconDownload16 (click)="downloadFile(i)"></svg>
-        <span class="dataspan">Downloaded {{getDownloadCount(i)}} times</span></p>
+        <p style="font-size:13px">Download Dataset 1 <svg class="SVG" icon ibmIconDownload16
+            (click)="downloadFile(i)"></svg>
+          <span class="dataspan">Downloaded {{getDownloadCount(i)}} times</span></p>
       </div>
 
       <br />

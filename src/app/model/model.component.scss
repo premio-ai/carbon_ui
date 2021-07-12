@@ -24,6 +24,16 @@
 
 }
 
+.bx--toast-notification--failure {
+    border-left: 3px solid #ff0000;
+    background: #393939;
+    margin-left: 1000px;
+    margin-top: 100px;
+    position: absolute;
+    top: -36px;
+    left: 32px;
+}
+
 .bold{
     font-weight: 600;
     font-size: 14px;

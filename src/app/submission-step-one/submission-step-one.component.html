@@ -2,15 +2,35 @@
 	<p style="color: red">Accept this challenge first to submit a model.</p>
 </div>
 
+<div *ngIf="isApiLoading">
+	<div class="app-loading">
+		<div class="logo"></div>
+		<svg class="spinner" viewBox="25 25 50 50">
+			<circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+		</svg>
+	</div>
+</div>
+
+<div *ngIf="errorToasterMsg" data-notification class="bx--toast-notification bx--toast-notification--failure"
+	role="alert">
+	<div class="bx--toast-notification__details">
+		<p class="bx--toast-notification__title">Somthing went wrong.</p>
+		<p class="bx--toast-notification__subtitle">Please contact administrator.</p>
+	</div>
+	<button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button" type="button"
+		aria-label="close">
+		<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform"
+			xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__close-icon" width="20" height="20"
+			viewBox="0 0 32 32" aria-hidden="true">
+			<path d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z">
+			</path>
+		</svg>
+	</button>
+</div>
+
 <div *ngIf="isChallengeAccepted">
 	<div style="margin-top: 20px; margin-bottom: 15px;">
 		<ibm-label><span style="font-size: medium; color: black;">Select Phase for submission</span></ibm-label>
-		<!-- <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 6, 'sm': 12}" style="width: 320px;">
-			<ibm-dropdown [label]="Min" placeholder="Select" (selected)="selectPhase($event)" >
-				<ibm-dropdown-list [items]="phasesList"></ibm-dropdown-list>
-			</ibm-dropdown>
-		</div> -->
-
 		<ibm-select ariaLabel='ngModel select' aria-placeholder="Select" [(ngModel)]="this.stepOne.phaseId">
 			<option *ngFor="let phase of phasesList; index as i" [value]="phase.id"
 				[attr.selected]="phase.id==enterPhaseId ? true : null">{{phase.content}}</option>

@@ -33,10 +33,13 @@ export class SubmissionStepOneComponent implements OnInit {
   isFileUploading: boolean
   phasesList: any[] = []
   testlist: any;
+  isApiLoading: boolean;
+  errorToasterMsg: boolean;
 
   ngOnInit() {
     this.isBtnDisabled = true
     this.isFileUploading = false
+    this.errorToasterMsg = false
     this.createTempBucket();
   }
 
@@ -70,15 +73,28 @@ export class SubmissionStepOneComponent implements OnInit {
   }
 
   createTempBucket() {
+    this.isApiLoading = true;
     let url = 'upload/createTempBucket'
     this.requestService.post(url, null).toPromise().then(data => {
+      this.isApiLoading = false;
       this.bucketName = data.bucketName
     }).catch(err => {
-      localStorage.clear();
-      this.router.navigateByUrl('login')
+      this.isApiLoading = false;
+      this.errorToaster();
     })
   }
 
+  errorToaster = (() => {
+		this.errorToasterMsg = true
+		setTimeout(() => {
+			this.errorToasterMsg = false
+		}, 3000)
+  })
+
+  closeToaster() {
+		this.errorToasterMsg = false
+	}
+  
   selectPhase(phaseId) {
     if (phaseId.length > 0) {
       this.stepOne.phaseId = phaseId
@@ -107,8 +123,7 @@ export class SubmissionStepOneComponent implements OnInit {
       this.isFileUploading = false
       this.stepOne.modelUploadedPath = data.filePath
     }).catch(err => {
-      localStorage.clear();
-      this.router.navigateByUrl('login')
+      this.errorToaster();
     })
   }
 
@@ -149,8 +164,7 @@ export class SubmissionStepOneComponent implements OnInit {
         a.click();
         window.URL.revokeObjectURL(url);
       }).catch(err => {
-        localStorage.clear();
-        this.router.navigateByUrl('login')
+        this.errorToaster();
       })
     }
   }

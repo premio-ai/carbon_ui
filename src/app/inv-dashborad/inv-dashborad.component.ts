@@ -52,10 +52,7 @@ export class InvDashboradComponent implements OnInit {
 		let url = "submissionAllChallenge/submissions/rank";
 		this.requestService.get(url, null).toPromise().then(data => {
 			this.submissionRanking = data
-		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+		}).catch(err => { })
 	}
 
 	getModelPerformance() {
@@ -63,10 +60,7 @@ export class InvDashboradComponent implements OnInit {
 
 		this.requestService.get(url, null).toPromise().then( data => {
 			this.submissionPerformance = data
-		}).catch( err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+		}).catch( err => { })
 
 	}
 
@@ -74,10 +68,7 @@ export class InvDashboradComponent implements OnInit {
 		let url = 'submissionAllChallenge'
 		this.requestService.get(url, null).toPromise().then(data => {
 		  this.submittedChallenges = data
-		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+		}).catch(err => { })
 	  }
 
 	getBookmarkedChallenges() {
@@ -92,10 +83,7 @@ export class InvDashboradComponent implements OnInit {
 				})
 			})
 			this.bookmarkedChallenges = tempData;
-		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+		}).catch(err => { })
 	}
 
 	getAllActiveChallanges() {
@@ -109,10 +97,7 @@ export class InvDashboradComponent implements OnInit {
 			this.activeChallenges = data.list;
 			this.getBookmarkedChallenges();
 			this.getSubmission();
-		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+		}).catch(err => { })
 	}
 
 	getSubmission() {
@@ -127,10 +112,7 @@ export class InvDashboradComponent implements OnInit {
 				})
 			})
 			this.submittedActiveChallenges = uniqBy(tempData)
-		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+		}).catch(err => { })
 	}
 
 	getAllPastChallanges() {
@@ -143,10 +125,7 @@ export class InvDashboradComponent implements OnInit {
 		this.requestService.get(url, params).toPromise().then(data => {
 			this.pastChallenges = data.list;
 			this.getSubmissionPast();
-		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+		}).catch(err => { })
 	}
 
 	getSubmissionPast() {
@@ -161,10 +140,7 @@ export class InvDashboradComponent implements OnInit {
 				})
 			})
 			this.submittedPastChallenges = uniqBy(tempData)
-		}).catch(err => {
-			localStorage.clear();
-			this.router.navigateByUrl('login')
-		})
+		}).catch(err => { })
 	}
 
 	sortSelect(sort) {
