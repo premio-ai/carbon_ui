@@ -19,7 +19,7 @@
 
 <ibm-accordion>
   <div *ngFor="let phase of challengeDetails?.phases; index as i">
-    <ibm-accordion-item title="Phase {{i}}" (selected)="selected($event)" [expanded]="i==0">
+    <ibm-accordion-item title="Phase {{i}}" [expanded]="i==0">
 
       <div style="display: flex;" *ngIf="!isEdit">
         <div>
