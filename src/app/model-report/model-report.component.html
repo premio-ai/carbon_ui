@@ -10,7 +10,8 @@
     <div class="bx--col-md-4" style="margin-top: 26px;">
       <ibm-breadcrumb [noTrailingSlash]="'noTrailingSlash'">
         <ibm-breadcrumb-item (click)="navigateToDashboard()" class="navigation">Activity Dashboard</ibm-breadcrumb-item>
-        <ibm-breadcrumb-item (click)="viewChallenge(challengeDetails?._id)" class="navigation">{{challengeDetails?.title}}</ibm-breadcrumb-item>
+        <ibm-breadcrumb-item (click)="viewChallenge(challengeDetails?._id)" class="navigation">
+          {{challengeDetails?.title}}</ibm-breadcrumb-item>
         <ibm-breadcrumb-item class="navigation">{{modelReport?.modelName}}</ibm-breadcrumb-item>
       </ibm-breadcrumb>
     </div>
@@ -29,6 +30,13 @@
           </path>
         </svg>
       </button>
+    </div>
+  </div>
+
+  <div *ngIf="routeAuthError" data-notification class="bx--toast-notification bx--toast-notification--failure"
+    role="alert">
+    <div class="bx--toast-notification__details">
+      <p class="bx--toast-notification__title">You are not authorized to view this page.</p>
     </div>
   </div>
 

@@ -19,28 +19,36 @@ export class InsurerComponent implements OnInit {
   challengeDetails: any;
   submissionChallengeDetails: any[];
   routePhase: any;
+  userSessionExpired: boolean;
+  routeAuthError: boolean;
 
 
   ngOnInit() {
     let userDetails = JSON.parse(localStorage.getItem('userDetails'))
+    this.routeAuthError = false;
     if (userDetails && userDetails._id) {
-      let challengeId = ''
-      this.activatedRoute.params.subscribe((params: Params) => {
-        if (params) {
-          challengeId = params.id
-          this.challengeId = params.id
-        }
-      });
+      if (userDetails.role == 'Insurer') {
+        let challengeId = ''
+        this.userSessionExpired = false;
+        this.activatedRoute.params.subscribe((params: Params) => {
+          if (params) {
+            challengeId = params.id
+            this.challengeId = params.id
+          }
+        });
 
-      this.getChallengeDetails(challengeId);
-      this.getSubmissionChallenge(challengeId);
+        this.getChallengeDetails(challengeId);
+        this.getSubmissionChallenge(challengeId);
 
-      (<any>window).disqus_config = this.getConfig();
+        (<any>window).disqus_config = this.getConfig();
 
-      var d = document, s: any = d.createElement('script');
-      s.src = 'https://meanapp.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', + new Date());
-      (d.head || d.body).appendChild(s);
+        var d = document, s: any = d.createElement('script');
+        s.src = 'https://meanapp.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+      } else {
+        this.routeAuthError = true;
+      }
     } else {
       this.router.navigateByUrl('')
     }
@@ -50,18 +58,18 @@ export class InsurerComponent implements OnInit {
     let activePhaseId = ''
     this.activatedRoute.queryParams.subscribe(params => {
       activePhaseId = params.activePhaseId
-    if (activePhaseId) {
-      let phaseNo = this.challengeDetails.phases.findIndex(dt => {
-        if (dt.phaseId == activePhaseId) {
-          return true
-        }
-      })
+      if (activePhaseId) {
+        let phaseNo = this.challengeDetails.phases.findIndex(dt => {
+          if (dt.phaseId == activePhaseId) {
+            return true
+          }
+        })
 
-      this.routePhase = {
-        phaseId: activePhaseId,
-        phaseNo: phaseNo
+        this.routePhase = {
+          phaseId: activePhaseId,
+          phaseNo: phaseNo
+        }
       }
-    }
     })
   }
 
@@ -213,22 +221,35 @@ export class InsurerComponent implements OnInit {
     let url = 'challenge/' + id;
     this.requestService.get(url, null).toPromise().then(data => {
       this.challengeDetails = data;
-    }).catch(err => { })
+    }).catch(err => {
+      if (err.status == 500) {
+        this.userSessionExpired = true
+      }
+    })
   }
 
   getSubmissionChallenge(id) {
     let url = 'submissionAllChallenge/challenge/' + id;
     this.requestService.get(url, null).toPromise().then(data => {
       this.submissionChallengeDetails = data;
-    }).catch(err => { })
+    }).catch(err => {
+      if (err.status == 500) {
+        this.userSessionExpired = true
+      }
+    })
   }
 
   navigate() {
     this.router.navigateByUrl('dashboard')
   }
-  
+
   navigateBack() {
     this.location.back()
+  }
+
+  reLogin() {
+    localStorage.clear();
+    this.router.navigateByUrl('login')
   }
 
 }

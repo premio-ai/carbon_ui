@@ -28,6 +28,14 @@
 	</button>
 </div>
 
+<div *ngIf="userSessionExpired" data-notification class="bx--toast-notification bx--toast-notification--failure"
+	role="alert">
+	<div class="bx--toast-notification__details">
+		<p class="bx--toast-notification__title">User session expired.</p>
+		<a class="bx--toast-notification__subtitle" style="cursor: pointer;" (click)="reLogin()">Login again.</a>
+	</div>
+</div>
+
 <div *ngIf="isChallengeAccepted">
 	<div style="margin-top: 20px; margin-bottom: 15px;">
 		<ibm-label><span style="font-size: medium; color: black;">Select Phase for submission</span></ibm-label>
@@ -35,7 +43,6 @@
 			<option *ngFor="let phase of phasesList; index as i" [value]="phase.id"
 				[attr.selected]="phase.id==enterPhaseId ? true : null">{{phase.content}}</option>
 		</ibm-select>
-
 	</div>
 
 	<p>

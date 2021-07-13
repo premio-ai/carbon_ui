@@ -43,26 +43,35 @@ export class InvModelViewComponent implements OnInit {
   showAccordion: boolean;
   leaderboardData: any[] = [];
   errorToasterMsg: boolean;
+  userSessionExpired: boolean;
+  routeAuthError: boolean;
 
   ngOnInit() {
     let userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    this.routeAuthError = false;
     if (userDetails && userDetails._id) {
-      this.errorToasterMsg = false;
-      this.pageNo = 1;
-      this.pageOffset = 0;
-      this.totalPage = 1;
-      this.appUrl = APP_URL;
-      this.activatedRoute.params.subscribe((params: Params) => {
-        if (params) {
-          this.modelId = params.id;
-          this.getSubmission(this.modelId);
-          this.getModelSummary(this.modelId);
-        }
-      });
+      if (userDetails.role == 'Innovator') {
+        this.errorToasterMsg = false;
+        this.userSessionExpired = false;
+        this.pageNo = 1;
+        this.pageOffset = 0;
+        this.totalPage = 1;
+        this.appUrl = APP_URL;
+        this.activatedRoute.params.subscribe((params: Params) => {
+          if (params) {
+            this.modelId = params.id;
+            this.getSubmission(this.modelId);
+            this.getModelSummary(this.modelId);
+          }
+        });
 
-      this.showBtn = false;
-      this.isEdit = false;
-      this.set_new_modelName = '';
+        this.showBtn = false;
+        this.isEdit = false;
+        this.set_new_modelName = '';
+      } else {
+        console.log("---else---marked")
+        this.routeAuthError = true;
+      }
     } else {
       this.router.navigateByUrl('');
     }
@@ -72,7 +81,11 @@ export class InvModelViewComponent implements OnInit {
     let url = 'submissionAllChallenge/allSubmitOfChallenge/' + challengeId;
     this.requestService.get(url, null).toPromise().then(data => {
       this.allSubmitOfChallenge = data;
-    }).catch(err => { })
+    }).catch(err => {
+      if (err.status == 500) {
+        this.userSessionExpired = true
+      }
+    })
   }
 
   getLeaderboardOfChallenge() {
@@ -84,13 +97,17 @@ export class InvModelViewComponent implements OnInit {
     this.requestService.get(url, params).toPromise().then(data => {
       this.totalPage = Math.ceil(data.count / 10);
       this.leaderboardData = data.list;
-    }).catch(err => { })
+    }).catch(err => {
+      if (err.status == 500) {
+        this.userSessionExpired = true
+      }
+    })
   }
 
   prevPage() {
     if (this.pageNo > 1) {
       this.pageNo--;
-      this.pageOffset = (this.pageNo-1) * 10;
+      this.pageOffset = (this.pageNo - 1) * 10;
       this.getLeaderboardOfChallenge();
     }
   }
@@ -98,7 +115,7 @@ export class InvModelViewComponent implements OnInit {
   nextPage() {
     if (this.pageNo < (this.totalPage)) {
       this.pageNo++;
-      this.pageOffset = (this.pageNo-1) * 10;
+      this.pageOffset = (this.pageNo - 1) * 10;
       this.getLeaderboardOfChallenge();
     }
   }
@@ -117,19 +134,22 @@ export class InvModelViewComponent implements OnInit {
       this.getSubmission(this.modelId);
     }).catch(err => {
       this.errorToaster();
+      if (err.status == 500) {
+        this.userSessionExpired = true
+      }
     })
   }
 
   errorToaster = (() => {
-		this.errorToasterMsg = true
-		setTimeout(() => {
-			this.errorToasterMsg = false
-		}, 3000)
+    this.errorToasterMsg = true
+    setTimeout(() => {
+      this.errorToasterMsg = false
+    }, 3000)
   })
-  
+
   closeToaster() {
-		this.errorToasterMsg = false
-	}
+    this.errorToasterMsg = false
+  }
 
   getDate(timeStamp) {
     let date = moment(moment(+timeStamp)).format("DD/MM/YYYY")
@@ -147,14 +167,22 @@ export class InvModelViewComponent implements OnInit {
       this.getChallengeDetails(this.challengeId);
       this.getAllSubmitOfChallenge(this.challengeId);
       this.getLeaderboardOfChallenge();
-    }).catch(err => { })
+    }).catch(err => {
+      if (err.status == 500) {
+        this.userSessionExpired = true
+      }
+    })
   }
 
   getModelSummary(id) {
     let url = 'submissionAllChallenge/modelSummary/' + id;
     this.requestService.get(url, null).toPromise().then(data => {
       this.modelSummary = data;
-    }).catch(err => { })
+    }).catch(err => {
+      if (err.status == 500) {
+        this.userSessionExpired = true
+      }
+    })
   }
 
   getFailureMsg() {
@@ -195,7 +223,11 @@ export class InvModelViewComponent implements OnInit {
       var a = document.createElement("a");
       document.body.appendChild(a);
       this.imageUrlArr = data.blob;
-    }).catch(err => { })
+    }).catch(err => {
+      if (err.status == 500) {
+        this.userSessionExpired = true
+      }
+    })
   }
 
   getPerformanceStatus() {
@@ -212,7 +244,11 @@ export class InvModelViewComponent implements OnInit {
       this.displayImage();
       this.getSampleFileArr();
       this.getNextPhaseDetails();
-    }).catch(err => { })
+    }).catch(err => {
+      if (err.status == 500) {
+        this.userSessionExpired = true
+      }
+    })
   }
 
   getPassAccuracy() {
@@ -245,7 +281,11 @@ export class InvModelViewComponent implements OnInit {
           this.nextModelId = data[0]._id;
           this.showBtn = true;
         }
-      }).catch(err => { })
+      }).catch(err => {
+        if (err.status == 500) {
+          this.userSessionExpired = true
+        }
+      })
     } else {
       this.showBtn = false;
     }
@@ -328,6 +368,9 @@ export class InvModelViewComponent implements OnInit {
         window.URL.revokeObjectURL(url);
       }).catch(err => {
         this.errorToaster();
+        if (err.status == 500) {
+          this.userSessionExpired = true
+        }
       })
     }
   }
@@ -358,6 +401,11 @@ export class InvModelViewComponent implements OnInit {
 
   viewModel(modelId) {
     this.router.navigateByUrl('invmodel-view/' + modelId);
+  }
+
+  reLogin() {
+    localStorage.clear();
+    this.router.navigateByUrl('login')
   }
 
 }

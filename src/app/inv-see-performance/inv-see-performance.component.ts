@@ -46,19 +46,26 @@ export class InvSeePerformanceComponent implements OnInit {
 	recallOptions: any = {}
 	showBtn: boolean;
 	errorToasterMsg: boolean;
+	userSessionExpired: boolean;
+	routeAuthError: boolean;
 
 	ngOnInit() {
 		let userDetails = JSON.parse(localStorage.getItem('userDetails'))
 		if (userDetails && userDetails._id) {
-			let modelId = ''
-			this.errorToasterMsg = false
-			this.activatedRoute.params.subscribe((params: Params) => {
-				if (params) {
-					modelId = params.id
-				}
-			});
-			this.getSubmission(modelId)
-			this.getModelPerformance(modelId)
+			if (userDetails.role == 'Innovator') {
+				let modelId = ''
+				this.errorToasterMsg = false;
+				this.userSessionExpired = false;
+				this.activatedRoute.params.subscribe((params: Params) => {
+					if (params) {
+						modelId = params.id
+					}
+				});
+				this.getSubmission(modelId)
+				this.getModelPerformance(modelId)
+			} else {
+				this.routeAuthError = true;
+			}
 		} else {
 			this.router.navigateByUrl('')
 		}
@@ -73,7 +80,11 @@ export class InvSeePerformanceComponent implements OnInit {
 			this.innovatorId = data[0].innovatorId._id;
 
 			this.getChallengeDetails(this.challengeId);
-		}).catch(err => { })
+		}).catch(err => {
+			if (err.status == 500) {
+				this.userSessionExpired = true
+			}
+		})
 	}
 
 	getModelPerformance(id) {
@@ -118,7 +129,11 @@ export class InvSeePerformanceComponent implements OnInit {
 				this.precision();
 				this.recall();
 			}
-		}).catch(err => { })
+		}).catch(err => {
+			if (err.status == 500) {
+				this.userSessionExpired = true
+			}
+		})
 	}
 
 	getChallengeDetails(id) {
@@ -126,11 +141,15 @@ export class InvSeePerformanceComponent implements OnInit {
 		this.requestService.get(url, null).toPromise().then(data => {
 			this.challengeDetails = data;
 			this.getNextPhaseDetails();
-		}).catch(err => { })
+		}).catch(err => {
+			if (err.status == 500) {
+				this.userSessionExpired = true
+			}
+		})
 	}
 
 	getNextPhaseDetails() {
-		let index = this.challengeDetails.phases.findIndex( dt => {
+		let index = this.challengeDetails.phases.findIndex(dt => {
 			if (dt.phaseId == this.phaseId) {
 				return true
 			}
@@ -139,12 +158,12 @@ export class InvSeePerformanceComponent implements OnInit {
 
 		if (this.nextPhaseIndex < this.challengeDetails.phases.length) {
 			let nextPhaseId = this.challengeDetails.phases[this.nextPhaseIndex].phaseId
-		
+
 			let url = 'submissionAllChallenge/getLatestSubmitByPhase/' + nextPhaseId
-			this.requestService.get(url, null).toPromise().then( data => {
+			this.requestService.get(url, null).toPromise().then(data => {
 				this.nextModelId = data[0]._id
 				this.showBtn = true
-			}).catch( err => { })
+			}).catch(err => { })
 		}
 	}
 
@@ -156,7 +175,7 @@ export class InvSeePerformanceComponent implements OnInit {
 		let showMsg = false
 		if (this.challengeDetails) {
 			let passMark = 0
-			this.challengeDetails.phases.map( res => {
+			this.challengeDetails.phases.map(res => {
 				if (res.phaseId == this.phaseId) {
 					passMark = res.passingScore
 				}
@@ -192,6 +211,9 @@ export class InvSeePerformanceComponent implements OnInit {
 				a.remove();
 			}).catch(err => {
 				this.errorToaster();
+				if (err.status == 500) {
+					this.userSessionExpired = true
+				}
 			})
 		}
 	}
@@ -206,7 +228,7 @@ export class InvSeePerformanceComponent implements OnInit {
 	closeToaster() {
 		this.errorToasterMsg = false
 	}
-	
+
 	dataURItoBlob(dataURI) {
 		var byteString = atob(dataURI.split(',')[1]);
 		var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
@@ -494,6 +516,11 @@ export class InvSeePerformanceComponent implements OnInit {
 
 	challengeTitle(challengeId) {
 		this.router.navigateByUrl('invaccepted/' + challengeId)
+	}
+
+	reLogin() {
+		localStorage.clear();
+		this.router.navigateByUrl('login')
 	}
 
 }

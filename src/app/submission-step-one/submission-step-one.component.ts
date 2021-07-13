@@ -35,11 +35,13 @@ export class SubmissionStepOneComponent implements OnInit {
   testlist: any;
   isApiLoading: boolean;
   errorToasterMsg: boolean;
+  userSessionExpired: boolean;
 
   ngOnInit() {
-    this.isBtnDisabled = true
-    this.isFileUploading = false
-    this.errorToasterMsg = false
+    this.isBtnDisabled = true;
+    this.isFileUploading = false;
+    this.errorToasterMsg = false;
+    this.userSessionExpired = false;
     this.createTempBucket();
   }
 
@@ -81,20 +83,23 @@ export class SubmissionStepOneComponent implements OnInit {
     }).catch(err => {
       this.isApiLoading = false;
       this.errorToaster();
+      if (err.status == 500) {
+        this.userSessionExpired = true
+      }
     })
   }
 
   errorToaster = (() => {
-		this.errorToasterMsg = true
-		setTimeout(() => {
-			this.errorToasterMsg = false
-		}, 3000)
+    this.errorToasterMsg = true
+    setTimeout(() => {
+      this.errorToasterMsg = false
+    }, 3000)
   })
 
   closeToaster() {
-		this.errorToasterMsg = false
-	}
-  
+    this.errorToasterMsg = false
+  }
+
   selectPhase(phaseId) {
     if (phaseId.length > 0) {
       this.stepOne.phaseId = phaseId
@@ -124,6 +129,9 @@ export class SubmissionStepOneComponent implements OnInit {
       this.stepOne.modelUploadedPath = data.filePath
     }).catch(err => {
       this.errorToaster();
+      if (err.status == 500) {
+        this.userSessionExpired = true
+      }
     })
   }
 
@@ -143,15 +151,15 @@ export class SubmissionStepOneComponent implements OnInit {
   async downloadFile(phaseIndex) {
     if (this.challengeDetails) {
       let newDocName = ''
-			this.challengeDetails.phases[phaseIndex].sampleDataFile.find( dt => {
-				if (dt.path.endsWith('train.csv')) {
-					newDocName = dt.path
-				}
-			})
+      this.challengeDetails.phases[phaseIndex].sampleDataFile.find(dt => {
+        if (dt.path.endsWith('train.csv')) {
+          newDocName = dt.path
+        }
+      })
 
-			let payload = {
-				filePath: newDocName
-			}
+      let payload = {
+        filePath: newDocName
+      }
 
       this.requestService.post('upload/downloadObject', payload).toPromise().then(data => {
         var blob = this.dataURItoBlob(data.blob)
@@ -165,6 +173,9 @@ export class SubmissionStepOneComponent implements OnInit {
         window.URL.revokeObjectURL(url);
       }).catch(err => {
         this.errorToaster();
+        if (err.status == 500) {
+          this.userSessionExpired = true
+        }
       })
     }
   }
@@ -187,6 +198,11 @@ export class SubmissionStepOneComponent implements OnInit {
 
   cancel() {
     this.cancelSubmit.emit()
+  }
+
+  reLogin() {
+    localStorage.clear();
+    this.router.navigateByUrl('login')
   }
 
 }

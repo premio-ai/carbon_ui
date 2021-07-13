@@ -29,6 +29,14 @@
   </button>
 </div>
 
+<div *ngIf="userSessionExpired" data-notification class="bx--toast-notification bx--toast-notification--failure"
+	role="alert">
+	<div class="bx--toast-notification__details">
+		<p class="bx--toast-notification__title">User session expired.</p>
+		<a class="bx--toast-notification__subtitle" style="cursor: pointer;" (click)="reLogin()">Login again.</a>
+	</div>
+</div>
+
 <div ibmGrid [condensed]="gridCondensed" class="gridchange">
   <div class="parentdiv" *ngIf="!modelComparison">
     <ibm-dropdown [label]="'Sort by'" placeholder="Newest" (selected)="sortSelect($event)">

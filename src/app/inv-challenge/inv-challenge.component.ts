@@ -29,6 +29,8 @@ export class InvChallengeComponent implements OnInit {
   isApiLoading: boolean;
   loadIndex: number;
   errorToasterMsg: boolean;
+  userSessionExpired: boolean;
+  routeAuthError: boolean;
 
   ngOnInit() {
     this.pageNo = 1;
@@ -39,11 +41,17 @@ export class InvChallengeComponent implements OnInit {
     this.totalPageBM = 1;
     this.loadIndex = -1;
     this.errorToasterMsg = false;
+    this.userSessionExpired = false;
+    this.routeAuthError = false;
 
     let userDetails = JSON.parse(localStorage.getItem('userDetails'))
     if (userDetails && userDetails._id) {
-      this.getAllActiveChallanges(this.pageOffset);
-      this.getBookmarkedChallenges(this.pageOffsetBM, null);
+      if (userDetails.role == 'Innovator') {
+        this.getAllActiveChallanges(this.pageOffset);
+        this.getBookmarkedChallenges(this.pageOffsetBM, null);
+      } else {
+        this.routeAuthError = true;
+      }
     } else {
       this.router.navigateByUrl('')
     }
@@ -127,10 +135,14 @@ export class InvChallengeComponent implements OnInit {
     this.requestService.get(allActiveChallanegUrl, params).toPromise().then(data => {
       this.totalPage = Math.ceil(data.count / 10);
       this.activeChallenges = data.list;
-    }).catch(err => { })
+    }).catch(err => {
+      if (err.status == 500) {
+        this.userSessionExpired = true
+      }
+    })
   }
 
-  isBookmarked(challengeId) {    
+  isBookmarked(challengeId) {
     if (this.bookmarkedChallenges.length > 0) {
       let result = this.bookmarkedChallenges.some(dt => {
         if (dt && dt._id == challengeId) {
@@ -148,7 +160,7 @@ export class InvChallengeComponent implements OnInit {
   prevPage() {
     if (this.pageNo > 1) {
       this.pageNo--;
-      this.pageOffset = (this.pageNo-1) * 10;
+      this.pageOffset = (this.pageNo - 1) * 10;
       this.getAllActiveChallanges(this.pageOffset)
     }
   }
@@ -156,7 +168,7 @@ export class InvChallengeComponent implements OnInit {
   nextPage() {
     if (this.pageNo < (this.totalPage)) {
       this.pageNo++;
-      this.pageOffset = (this.pageNo-1) * 10;
+      this.pageOffset = (this.pageNo - 1) * 10;
       this.getAllActiveChallanges(this.pageOffset)
     }
   }
@@ -164,7 +176,7 @@ export class InvChallengeComponent implements OnInit {
   prevPageBM() {
     if (this.pageNoBM > 1) {
       this.pageNoBM--;
-      this.pageOffsetBM = (this.pageNoBM-1) * 10;
+      this.pageOffsetBM = (this.pageNoBM - 1) * 10;
       this.getBookmarkedChallenges(this.pageOffsetBM, null)
     }
   }
@@ -172,7 +184,7 @@ export class InvChallengeComponent implements OnInit {
   nextPageBM() {
     if (this.pageNoBM < (this.totalPage)) {
       this.pageNoBM++;
-      this.pageOffsetBM = (this.pageNoBM-1) * 10;
+      this.pageOffsetBM = (this.pageNoBM - 1) * 10;
       this.getBookmarkedChallenges(this.pageOffsetBM, null)
     }
   }
@@ -189,19 +201,22 @@ export class InvChallengeComponent implements OnInit {
       this.bookmarkedChallenges = data.list;
     }).catch(err => {
       this.errorToaster();
-		})
+      if (err.status == 500) {
+        this.userSessionExpired = true
+      }
+    })
   }
 
   errorToaster = (() => {
-		this.errorToasterMsg = true
-		setTimeout(() => {
-			this.errorToasterMsg = false
-		}, 3000)
+    this.errorToasterMsg = true
+    setTimeout(() => {
+      this.errorToasterMsg = false
+    }, 3000)
   })
-  
+
   closeToaster() {
-		this.errorToasterMsg = false
-	}
+    this.errorToasterMsg = false
+  }
 
   viewChallenge(challengeId) {
     this.router.navigateByUrl('invaccepted/' + challengeId)
@@ -220,6 +235,9 @@ export class InvChallengeComponent implements OnInit {
       this.getBookmarkedChallenges(this.pageOffsetBM, index);
     }).catch(err => {
       this.errorToaster();
+      if (err.status == 500) {
+        this.userSessionExpired = true
+      }
     })
   }
 
@@ -236,6 +254,9 @@ export class InvChallengeComponent implements OnInit {
       this.getBookmarkedChallenges(this.pageOffsetBM, index);
     }).catch(err => {
       this.errorToaster();
+      if (err.status == 500) {
+        this.userSessionExpired = true
+      }
     })
   }
 
@@ -245,6 +266,11 @@ export class InvChallengeComponent implements OnInit {
     } else {
       return false
     }
+  }
+
+  reLogin() {
+    localStorage.clear();
+    this.router.navigateByUrl('login')
   }
 
 }

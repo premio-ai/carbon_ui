@@ -31,10 +31,12 @@ export class SubmissionStepFourComponent implements OnInit {
   totalPhases: number
   showLess: boolean
   errorToasterMsg: boolean;
+  userSessionExpired: boolean;
 
   ngOnInit() {
     this.showLess = true
     this.errorToasterMsg = false;
+    this.userSessionExpired = false;
     this.totalPhases = this.challengeDetails.phases.length
   }
 
@@ -136,20 +138,23 @@ export class SubmissionStepFourComponent implements OnInit {
         a.remove();
       }).catch(err => {
         this.errorToaster();
+        if (err.status == 500) {
+          this.userSessionExpired = true
+        }
       })
     }
   }
 
   errorToaster = (() => {
-		this.errorToasterMsg = true
-		setTimeout(() => {
-			this.errorToasterMsg = false
-		}, 3000)
+    this.errorToasterMsg = true
+    setTimeout(() => {
+      this.errorToasterMsg = false
+    }, 3000)
   })
-  
+
   closeToaster() {
-		this.errorToasterMsg = false
-	}
+    this.errorToasterMsg = false
+  }
 
   dataURItoBlob(dataURI) {
     var byteString = atob(dataURI.split(',')[1]);
@@ -173,6 +178,11 @@ export class SubmissionStepFourComponent implements OnInit {
 
   showLessStr(str) {
     return str.substring(0, 100)
+  }
+
+  reLogin() {
+    localStorage.clear();
+    this.router.navigateByUrl('login')
   }
 
 }

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError, } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,17 +12,33 @@ export class RequestService {
   // baseUrl: string = "http://localhost:3500/api/";
   // baseUrl: string = "https://challengeclient.eu-gb.cf.appdomain.cloud/api/"                  //ChallengeApp IBM
   baseUrl: string = "https://challengeapp.eu-gb.cf.appdomain.cloud/api/"                  //ChallengeApp IBM
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   get(uri, params): Observable<any> {
     const userDetails = JSON.parse(localStorage.getItem('userDetails'))
     if (userDetails && userDetails.access_token) {
-      return this.http.get(this.baseUrl + uri, {
+      let res = this.http.get<any>(this.baseUrl + uri, {
         headers: {
           token: userDetails.access_token
         },
-        params: params
-      })
+        params: params,
+        observe: 'response',
+        responseType: 'json'
+      }).pipe(map(resp => {
+        let refresh_token = resp.headers.get('refresh-token')
+        if (refresh_token && refresh_token.length>0) {          
+          let updateUserDetails = userDetails
+          updateUserDetails.access_token = refresh_token
+          localStorage.setItem('userDetails', JSON.stringify(updateUserDetails))
+        }
+        return resp.body;
+      }),
+        catchError(error => {
+          return throwError(error);
+        })
+      )
+
+      return res;
     }
   }
 
@@ -31,22 +49,47 @@ export class RequestService {
   post(uri, payload): Observable<any> {
     const userDetails = JSON.parse(localStorage.getItem('userDetails'))
     if (userDetails && userDetails.access_token) {
-      return this.http.post(this.baseUrl + uri, payload, {
+      let res = this.http.post<any>(this.baseUrl + uri, payload, {
         headers: {
           token: userDetails.access_token
-        }
-      });
+        },
+        observe: 'response',
+        responseType: 'json'
+      }).pipe(map(resp => {
+        let updateUserDetails = userDetails
+        updateUserDetails.access_token = resp.headers.get('refresh-token')
+        localStorage.setItem('userDetails', JSON.stringify(updateUserDetails))
+        return resp.body;
+      }),
+        catchError(error => {
+          return throwError(error);
+        })
+      )
+
+      return res;
     }
   }
 
   put(uri, payload): Observable<any> {
     const userDetails = JSON.parse(localStorage.getItem('userDetails'))
     if (userDetails && userDetails.access_token) {
-      return this.http.put(this.baseUrl + uri, payload, {
+      let res = this.http.put(this.baseUrl + uri, payload, {
         headers: {
           token: userDetails.access_token
-        }
-      });
+        },
+        observe: 'response',
+        responseType: 'json'
+      }).pipe(map(resp => {
+        let updateUserDetails = userDetails
+        updateUserDetails.access_token = resp.headers.get('refresh-token')
+        localStorage.setItem('userDetails', JSON.stringify(updateUserDetails))
+        return resp.body;
+      }),
+        catchError(error => {
+          return throwError(error);
+        })
+      )
+      return res;
     }
   }
 

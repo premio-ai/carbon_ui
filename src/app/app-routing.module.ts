@@ -15,40 +15,23 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { LandingComponent } from './landing/landingPage';
 
 const routes: Routes = [
-	// {
-	// 	path: '',
-	// 	loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
-	// },
 	{
 		path: 'repos',
 		loadChildren: () => import('./repositories/repositories.module').then(m => m.RepositoriesModule)
 	},
 	{ path: 'dashboard', component: DashboardComponent },
-	// { path: '', component: DashboardComponent },
 	{ path: 'invdash', component: InvDashboradComponent },
 	{ path: 'challenge', component: ChallangePageComponent },
 	{ path: 'challenge/:id', component: InsurerComponent },
-	//  { path: 'Insurer', component: InsurerComponent },
 	{ path: 'modelReport/:id', component: ModelReportComponent },
 	{ path: 'Previewpage', component: PreviewComponent },
 	{ path: 'invchallenges', component: InvChallengeComponent },
-	// { path: 'invaccepted', component: InvAcceptedComponent },
 	{ path: 'invaccepted/:id', component: InvAcceptedComponent },
 	{ path: 'invmodel-view/:id', component: InvModelViewComponent },
-	{ path: 'see-performance', component: InvSeePerformanceComponent },
 	{ path: 'login', component: LoginComponent },
 	{ path: 'signup', component: SignUpComponent },
 	{ path: 'see-performance/:id', component: InvSeePerformanceComponent },
 	{ path: '', component: LandingComponent },
-	{
-		path: '',
-		redirectTo: '',
-		pathMatch: 'full'
-	},
-	
-	// { path: 'dashboard', component: DashboardComponent },
-	// { path: '', component: LoginComponent },
-
 	
 ];
 

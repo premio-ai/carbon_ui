@@ -17,13 +17,21 @@ export class DashboardComponent implements OnInit {
 	pastChallenges: any[];
 	sorting: any[];
 	errorToasterMsg: boolean;
+	userSessionExpired: boolean;
+	routeAuthError: boolean;
 
 	ngOnInit() {
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
+		this.routeAuthError = false;
 		if (this.userDetails && this.userDetails._id) {
-			this.errorToasterMsg = false;
-			this.getActiveChallanges();
-			this.getpastChallanges();
+			if (this.userDetails.role == 'Insurer') {				
+				this.errorToasterMsg = false;
+				this.userSessionExpired = false;
+				this.getActiveChallanges();
+				this.getpastChallanges();
+			} else {
+				this.routeAuthError = true
+			}
 		} else {
 			this.router.navigateByUrl('')
 		}
@@ -45,6 +53,9 @@ export class DashboardComponent implements OnInit {
 			this.activeChallenges = data;
 		}).catch(err => {
 			this.errorToaster();
+			if (err.status == 500) {
+				this.userSessionExpired = true
+			}
 		})
 	}
 
@@ -65,6 +76,9 @@ export class DashboardComponent implements OnInit {
 			this.pastChallenges = data;
 		}).catch(err => {
 			this.errorToaster();
+			if (err.status == 500) {
+				this.userSessionExpired = true
+			}
 		})
 	}
 
@@ -120,6 +134,11 @@ export class DashboardComponent implements OnInit {
 			})
 		}
 
+	}
+
+	reLogin() {
+		localStorage.clear();
+		this.router.navigateByUrl('login')
 	}
 
 }

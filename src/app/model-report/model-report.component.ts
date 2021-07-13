@@ -49,17 +49,23 @@ export class ModelReportComponent implements OnInit {
 		value: number
 	}> = []
 	recallOptions: any = {}
+	routeAuthError: boolean;
 
 	ngOnInit() {
 		let userDetails = JSON.parse(localStorage.getItem('userDetails'))
+		this.routeAuthError = false;
 		if (userDetails && userDetails._id) {
-			this.toasterMsg = false
-			this.activatedRoute.params.subscribe((params: Params) => {
-				if (params) {
-					this.modelId = params.id
-					this.getModelReport(this.modelId);
-				}
-			});
+			if (userDetails.role == 'Insurer') {
+				this.toasterMsg = false
+				this.activatedRoute.params.subscribe((params: Params) => {
+					if (params) {
+						this.modelId = params.id
+						this.getModelReport(this.modelId);
+					}
+				});
+			} else {
+				this.routeAuthError = false;
+			}
 		} else {
 			this.router.navigateByUrl('')
 		}
@@ -99,13 +105,13 @@ export class ModelReportComponent implements OnInit {
 	getPhaseIndex() {
 		if (this.modelReport && this.challengeDetails) {
 			let phaseId = this.modelReport.phaseId;
-	
-			let index = this.challengeDetails.phases.findIndex( dt => {
+
+			let index = this.challengeDetails.phases.findIndex(dt => {
 				if (dt.phaseId == phaseId) {
 					return true
 				}
 			})
-	
+
 			return index;
 		}
 	}

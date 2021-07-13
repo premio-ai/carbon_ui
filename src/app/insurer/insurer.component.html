@@ -11,13 +11,29 @@
 			</ibm-breadcrumb>
 		</div>
 	</div>
+
+	<div *ngIf="routeAuthError" data-notification class="bx--toast-notification bx--toast-notification--failure"
+		role="alert">
+		<div class="bx--toast-notification__details">
+			<p class="bx--toast-notification__title">You are not authorized to view this page.</p>
+		</div>
+	</div>
+	
+	<div *ngIf="userSessionExpired" data-notification class="bx--toast-notification bx--toast-notification--failure"
+		role="alert">
+		<div class="bx--toast-notification__details">
+			<p class="bx--toast-notification__title">User session expired.</p>
+			<a class="bx--toast-notification__subtitle" style="cursor: pointer;" (click)="reLogin()">Login again.</a>
+		</div>
+	</div>
+
 	<br />
 	<div class="bx--row line-padding">
 		<div class="bx--col-md-1">
 		</div>
 		<div class="bx--col-md-7" style="margin-left: -8%;">
 			<h1> {{ challengeDetails?.title }} </h1>
-			<ibm-tabs [followFocus]="true" (click)="checkClick($event)" [isNavigation]="false" [cacheActive]="true">			
+			<ibm-tabs [followFocus]="true" (click)="checkClick($event)" [isNavigation]="false" [cacheActive]="true">
 				<ibm-tab heading="Overview" name='overview_tab'>
 					<app-overview [submissionChallengeDetails]="submissionChallengeDetails"
 						[challengeDetails]="challengeDetails"></app-overview>

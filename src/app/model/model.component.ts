@@ -32,11 +32,13 @@ export class ModelComponent {
   loadIndex: number;
   objectKeys = Object.keys;
   errorToasterMsg: boolean;
+  userSessionExpired: boolean;
 
   ngOnInit() {
     this.showLess = true;
     this.loadIndex = -1;
     this.errorToasterMsg = false;
+    this.userSessionExpired = false;
     this.sorting = [
       { content: 'Most Popular' },
       { content: 'Least Popular' },
@@ -151,7 +153,11 @@ export class ModelComponent {
         })
       })
       this.bookmarkedSubmissionsByPhase = tempData
-    }).catch(err => { })
+    }).catch(err => {
+      if (err.status == 500) {
+        this.userSessionExpired = true
+      }
+    })
   }
 
   isBookmarked(modelId) {
@@ -170,8 +176,8 @@ export class ModelComponent {
   }
 
   bookmark(modelId, index) {
-this.isApiLoading = true
-this.loadIndex = index
+    this.isApiLoading = true
+    this.loadIndex = index
     let payload = {}
     this.modelData.filter(dt => {
       if (dt._id == modelId) {
@@ -192,20 +198,23 @@ this.loadIndex = index
       this.getBookmarkedSubmission()
     }).catch(err => {
       this.errorToaster();
+      if (err.status == 500) {
+        this.userSessionExpired = true
+      }
     })
   }
 
   errorToaster = (() => {
-		this.errorToasterMsg = true
-		setTimeout(() => {
-			this.errorToasterMsg = false
-		}, 3000)
+    this.errorToasterMsg = true
+    setTimeout(() => {
+      this.errorToasterMsg = false
+    }, 3000)
   })
 
   closeToaster() {
-		this.errorToasterMsg = false
-	}
-  
+    this.errorToasterMsg = false
+  }
+
   unBookmark(model, index) {
     this.isApiLoading = true;
     this.loadIndex = index
@@ -223,6 +232,9 @@ this.loadIndex = index
       this.getBookmarkedSubmission()
     }).catch(err => {
       this.errorToaster();
+      if (err.status == 500) {
+        this.userSessionExpired = true
+      }
     })
   }
 
@@ -262,8 +274,8 @@ this.loadIndex = index
 
   checkSelected(modelId) {
     let isChecked = false;
-    if (this.compareModelData && this.compareModelData[this.selectedPhaseNo] && this.compareModelData[this.selectedPhaseNo].length>0) {      
-      this.compareModelData[this.selectedPhaseNo].map( dt => {
+    if (this.compareModelData && this.compareModelData[this.selectedPhaseNo] && this.compareModelData[this.selectedPhaseNo].length > 0) {
+      this.compareModelData[this.selectedPhaseNo].map(dt => {
         if (dt._id == modelId) {
           isChecked = true;
         }
@@ -297,6 +309,11 @@ this.loadIndex = index
 
   checkColumnIndex(ind) {
     return this.columnIndex[ind]
+  }
+
+  reLogin() {
+    localStorage.clear();
+    this.router.navigateByUrl('login')
   }
 
 }

@@ -57,73 +57,82 @@ export class InvAcceptedComponent implements OnInit {
 	submissionCount: number;
 	enterPhaseId: string;
 	errorToasterMsg: boolean;
-	
+	userSessionExpired: boolean;
+	isApiLoading: boolean;
+	routeAuthError: boolean;
+
 	ngOnInit() {
 		let userDetails = JSON.parse(localStorage.getItem('userDetails'))
 		if (userDetails && userDetails._id) {
-			this.appUrl = APP_URL;
-			this.enterPhaseId = '';
-			this.pageOffset = 0;
-			this.totalPage = 1;
-			this.pageNo = 1;
-			this.isChallengeAccepted = false;
-			this.phasesSubmissionComplete = false;
-			this.submissionCount = 0;
-			this.activatedRoute.params.subscribe((params: Params) => {
-				if (params) {
-					this.challengeId = params.id
-				}
-			});
+			if (userDetails.role == 'Innovator') {
+				this.isApiLoading = false;
+				this.appUrl = APP_URL;
+				this.enterPhaseId = '';
+				this.pageOffset = 0;
+				this.totalPage = 1;
+				this.pageNo = 1;
+				this.isChallengeAccepted = false;
+				this.phasesSubmissionComplete = false;
+				this.submissionCount = 0;
+				this.userSessionExpired = false;
+				this.activatedRoute.params.subscribe((params: Params) => {
+					if (params) {
+						this.challengeId = params.id
+					}
+				});
 
-			this.getChallengeDetails(this.challengeId);
-			this.getChallengeAcceptance(this.challengeId);
-			this.getLeaderboard(this.challengeId, this.pageOffset);
+				this.getChallengeDetails(this.challengeId);
+				this.getChallengeAcceptance(this.challengeId);
+				this.getLeaderboard(this.challengeId, this.pageOffset);
 
-			this.steps = [
-				{
-					text: "Step 1 ",
-					state: ["incomplete"],
-					optionalText: 'Upload'
-				},
-				{
-					text: "Step 2",
-					state: ["incomplete"],
-					optionalText: 'Details'
-				},
-				{
-					text: "Step 3",
-					state: ["incomplete"],
-					optionalText: 'Confirm'
-				}
-			];
-			this.current = 3;
-			this.submissionData = {
-				challengeId: {},
-				phaseId: [],
-				mlFlowId: "",
-				modelName: '',
-				appliedAsCompany: true,
-				modelDescription: "",
-				modelUploadedPath: "",
-				modelType: "",
-				approch: "",
-				language: '',
-				score: 0,
-				precisionScore: 0,
-				recallScore: 0,
-				contractAcceptedAt: "",
-				trainedAt: "",
-				testedAt: ""
-			};
+				this.steps = [
+					{
+						text: "Step 1 ",
+						state: ["incomplete"],
+						optionalText: 'Upload'
+					},
+					{
+						text: "Step 2",
+						state: ["incomplete"],
+						optionalText: 'Details'
+					},
+					{
+						text: "Step 3",
+						state: ["incomplete"],
+						optionalText: 'Confirm'
+					}
+				];
+				this.current = 3;
+				this.submissionData = {
+					challengeId: {},
+					phaseId: [],
+					mlFlowId: "",
+					modelName: '',
+					appliedAsCompany: true,
+					modelDescription: "",
+					modelUploadedPath: "",
+					modelType: "",
+					approch: "",
+					language: '',
+					score: 0,
+					precisionScore: 0,
+					recallScore: 0,
+					contractAcceptedAt: "",
+					trainedAt: "",
+					testedAt: ""
+				};
 
-			setTimeout(() => {
-				(<any>window).disqus_config = this.getConfig();
+				setTimeout(() => {
+					(<any>window).disqus_config = this.getConfig();
 
-				var d = document, s: any = d.createElement('script');
-				s.src = 'https://meanapp.disqus.com/embed.js';
-				s.setAttribute('data-timestamp', + new Date());
-				(d.head || d.body).appendChild(s);
-			}, 1000)
+					var d = document, s: any = d.createElement('script');
+					s.src = 'https://meanapp.disqus.com/embed.js';
+					s.setAttribute('data-timestamp', + new Date());
+					(d.head || d.body).appendChild(s);
+				}, 1000)
+			} else {
+				this.routeAuthError = true;
+			}
 		} else {
 			this.router.navigateByUrl('')
 		}
@@ -145,7 +154,11 @@ export class InvAcceptedComponent implements OnInit {
 			this.challengeDetails = data;
 			this.getSubmissionByChallengeId(this.challengeId);
 			this.displayImage()
-		}).catch(err => { })
+		}).catch(err => {
+			if (err.status == 500) {
+				this.userSessionExpired = true
+			}
+		})
 	}
 
 	getChallengeAcceptance(challengeId) {
@@ -157,7 +170,11 @@ export class InvAcceptedComponent implements OnInit {
 			} else {
 				this.isChallengeAccepted = false;
 			}
-		}).catch(err => { })
+		}).catch(err => {
+			if (err.status == 500) {
+				this.userSessionExpired = true
+			}
+		})
 	}
 
 	getLeaderboard(challengeId, pageOffset) {
@@ -168,7 +185,11 @@ export class InvAcceptedComponent implements OnInit {
 		this.requestService.get(url, params).toPromise().then(data => {
 			this.totalPage = Math.ceil(data.count / 10);
 			this.leaderboard = data.list;
-		}).catch(err => { })
+		}).catch(err => {
+			if (err.status == 500) {
+				this.userSessionExpired = true
+			}
+		})
 	}
 
 	getSubmissionByChallengeId(challengeId) {
@@ -183,7 +204,10 @@ export class InvAcceptedComponent implements OnInit {
 				this.phasesSubmissionComplete = true
 			}
 		}).catch(err => {
-			this.errorToaster()
+			this.errorToaster();
+			if (err.status == 500) {
+				this.userSessionExpired = true
+			}
 		})
 	}
 
@@ -234,6 +258,9 @@ export class InvAcceptedComponent implements OnInit {
 			this.showToaster()
 		}).catch(err => {
 			this.errorToaster();
+			if (err.status == 500) {
+				this.userSessionExpired = true
+			}
 		})
 	}
 
@@ -247,6 +274,9 @@ export class InvAcceptedComponent implements OnInit {
 			this.showWithdrawToaster()
 		}).catch(err => {
 			this.errorToaster();
+			if (err.status == 500) {
+				this.userSessionExpired = true
+			}
 		})
 	}
 
@@ -299,7 +329,11 @@ export class InvAcceptedComponent implements OnInit {
 				var a = document.createElement("a");
 				document.body.appendChild(a);
 				this.imageUrlArr.push(data.blob)
-			}).catch(err => { })
+			}).catch(err => {
+				if (err.status == 500) {
+					this.userSessionExpired = true
+				}
+			})
 		})
 	}
 
@@ -307,7 +341,7 @@ export class InvAcceptedComponent implements OnInit {
 		if (this.challengeDetails) {
 			let newDocName = ''
 			let fileIndex: number;
-			this.challengeDetails.phases[phaseIndex].sampleDataFile.find( (dt, i) => {
+			this.challengeDetails.phases[phaseIndex].sampleDataFile.find((dt, i) => {
 				if (dt.path.endsWith('train.csv')) {
 					newDocName = dt.path
 					fileIndex = i
@@ -328,6 +362,9 @@ export class InvAcceptedComponent implements OnInit {
 				a.click();
 				window.URL.revokeObjectURL(url);
 			}).catch(err => {
+				if (err.status == 500) {
+					this.userSessionExpired = true
+				}
 				this.errorToaster();
 			})
 
@@ -371,7 +408,6 @@ export class InvAcceptedComponent implements OnInit {
 
 	nextStepOne(stepOne) {
 		this.submissionData.challengeId = this.challengeId;
-		// this.submissionData.phaseId = this.getPhaseId();
 		this.submissionData.phaseId = stepOne.phaseId
 		this.submissionData.modelType = 'MODIFIED_TRAINED_MODEL';
 		this.submissionData.modelUploadedPath = stepOne.modelUploadedPath;
@@ -383,7 +419,7 @@ export class InvAcceptedComponent implements OnInit {
 
 	getSubmissionCount(phaseId) {
 		let count = 0
-		this.challengeSubmissionData.map( dt => {
+		this.challengeSubmissionData.map(dt => {
 			if (dt.phaseId == phaseId) {
 				count += 1
 			}
@@ -413,17 +449,23 @@ export class InvAcceptedComponent implements OnInit {
 	}
 
 	nextStepThree() {
+		this.isApiLoading = true;
 		let url = 'submissionAllChallenge';
 		let payload = {
 			submissionCount: this.submissionCount,
 			data: this.submissionData
 		}
 		this.requestService.post(url, payload).toPromise().then(data => {
+			this.isApiLoading = false;
 			this.getSubmissionByChallengeId(this.challengeId);
 			this.getLeaderboard(this.challengeId, this.pageOffset)
 			this.current++;
 		}).catch(err => {
+			this.isApiLoading = false;
 			this.errorToaster();
+			if (err.status == 500) {
+				this.userSessionExpired = true
+			}
 		})
 	}
 
@@ -437,6 +479,11 @@ export class InvAcceptedComponent implements OnInit {
 
 	viewChallenge(challengeId) {
 		this.router.navigateByUrl('invaccepted/' + challengeId)
+	}
+
+	reLogin() {
+		localStorage.clear();
+		this.router.navigateByUrl('login')
 	}
 
 }

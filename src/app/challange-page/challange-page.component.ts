@@ -18,7 +18,9 @@ export class ChallangePageComponent implements OnInit {
 	steps: any[];
 	awardedTo = "60767631222df1253206ff74";
 	errorToasterMsg: boolean;
-
+	userSessionExpired: boolean;
+	isApiLoading: boolean;
+	routeAuthError: boolean;
 	challange: {
 		title: string,
 		description: string,
@@ -41,52 +43,57 @@ export class ChallangePageComponent implements OnInit {
 		categoryType: string
 	}
 
-
 	ngOnInit() {
 		let userDetails = JSON.parse(localStorage.getItem('userDetails'))
+		this.routeAuthError = false;
 		if (userDetails && userDetails._id) {
-
-			this.steps = [
-				{
-					text: "Step 1",
-					state: ["current"],
-					optionalText: 'Overview'
-				},
-				{
-					text: "Step 2",
-					state: ["incomplete"],
-					optionalText: 'Data & Testing'
-				},
-				{
-					text: "Step 3",
-					state: ["incomplete"],
-					optionalText: 'Visibility'
-				},
-				{
-					text: "Step 4",
-					state: ["incomplete"],
-					disabled: true,
-					optionalText: 'Confirm'
-				},
-			];
-			this.errorToasterMsg = false;
-			this.current = 0;
-			this.challange = {
-				title: "",
-				description: "",
-				Objective: "",
-				expiryDate: "",
-				visulizationImageFilePath: [""],
-				sampleDataFilePath: [""],
-				submissionsCount: 0,
-				acceptedUsersCount: 0,
-				challengeType: "",
-				phases: [],
-				visibiltiy: {},
-				isActive: true,
-				witholdCompanyName: false,
-				witholdCompanyDescription: false,
-				categoryType: ''
+			if (userDetails.role == 'Insurer') {
+				this.userSessionExpired = false;
+				this.isApiLoading = false;
+				this.steps = [
+					{
+						text: "Step 1",
+						state: ["current"],
+						optionalText: 'Overview'
+					},
+					{
+						text: "Step 2",
+						state: ["incomplete"],
+						optionalText: 'Data & Testing'
+					},
+					{
+						text: "Step 3",
+						state: ["incomplete"],
+						optionalText: 'Visibility'
+					},
+					{
+						text: "Step 4",
+						state: ["incomplete"],
+						disabled: true,
+						optionalText: 'Confirm'
+					},
+				];
+				this.errorToasterMsg = false;
+				this.current = 0;
+				this.challange = {
+					title: "",
+					description: "",
+					Objective: "",
+					expiryDate: "",
+					visulizationImageFilePath: [""],
+					sampleDataFilePath: [""],
+					submissionsCount: 0,
+					acceptedUsersCount: 0,
+					challengeType: "",
+					phases: [],
+					visibiltiy: {},
+					isActive: true,
+					witholdCompanyName: false,
+					witholdCompanyDescription: false,
+					categoryType: ''
+				}
+			} else {
+				this.routeAuthError = true;
 			}
 		} else {
 			this.router.navigateByUrl('')
@@ -146,11 +153,17 @@ export class ChallangePageComponent implements OnInit {
 	}
 
 	nextStepFour() {
+		this.isApiLoading = true;
 		this.requestService.post('challenge', this.challange).toPromise().then(res => {
+			this.isApiLoading = false;
 			this.router.navigateByUrl('dashboard')
-		}).catch( err => {
+		}).catch(err => {
+			this.isApiLoading = false;
 			this.errorToaster();
-		  })
+			if (err.status == 500) {
+				this.userSessionExpired = true
+			}
+		})
 		this.current++;
 	}
 
@@ -171,6 +184,11 @@ export class ChallangePageComponent implements OnInit {
 
 	navigateBack() {
 		this.location.back()
+	}
+
+	reLogin() {
+		localStorage.clear();
+		this.router.navigateByUrl('login')
 	}
 
 }

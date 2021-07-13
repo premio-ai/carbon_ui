@@ -4,7 +4,6 @@ import { Router } from "@angular/router";
 import { uniqBy } from 'lodash';
 
 
-
 @Component({
 	selector: 'app-inv-dashborad',
 	templateUrl: './inv-dashborad.component.html',
@@ -25,24 +24,32 @@ export class InvDashboradComponent implements OnInit {
 	submissionRanking: any[] = [];
 	sorting: any[];
 	submittedChallenges: any[] = [];
-	submissionPerformance: any[] = []
+	submissionPerformance: any[] = [];
+	userSessionExpired: boolean;
+	routeAuthError: boolean;
 
 	ngOnInit() {
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
-		if (this.userDetails && this.userDetails._id) {			
-			this.getAllActiveChallanges();
-			this.getAllPastChallanges();
-			this.getChallengeSubmissionRanking();
-			this.getSubmittedChallenge();
-			this.getModelPerformance();
-
-			this.sorting = [
-				{ content: 'Most Popular' },
-				{ content: 'Least Popular' },
-				{ content: 'Newest' },
-				{ content: 'Oldest' },
-				{ content: 'End Date' }
-			];
+		this.routeAuthError = false;
+		if (this.userDetails && this.userDetails._id) {
+			if (this.userDetails.role == 'Innovator') {				
+				this.userSessionExpired = false;
+				this.getAllActiveChallanges();
+				this.getAllPastChallanges();
+				this.getChallengeSubmissionRanking();
+				this.getSubmittedChallenge();
+				this.getModelPerformance();
+	
+				this.sorting = [
+					{ content: 'Most Popular' },
+					{ content: 'Least Popular' },
+					{ content: 'Newest' },
+					{ content: 'Oldest' },
+					{ content: 'End Date' }
+				];
+			} else {
+				this.routeAuthError = true
+			}
 		} else {
 			this.router.navigateByUrl('')
 		}
@@ -52,7 +59,11 @@ export class InvDashboradComponent implements OnInit {
 		let url = "submissionAllChallenge/submissions/rank";
 		this.requestService.get(url, null).toPromise().then(data => {
 			this.submissionRanking = data
-		}).catch(err => { })
+		}).catch(err => {
+			if (err.status == 500) {
+				this.userSessionExpired = true
+		  	}
+		})
 	}
 
 	getModelPerformance() {
@@ -60,7 +71,11 @@ export class InvDashboradComponent implements OnInit {
 
 		this.requestService.get(url, null).toPromise().then( data => {
 			this.submissionPerformance = data
-		}).catch( err => { })
+		}).catch( err => {
+			if (err.status == 500) {
+				this.userSessionExpired = true
+		  	}
+		})
 
 	}
 
@@ -68,7 +83,11 @@ export class InvDashboradComponent implements OnInit {
 		let url = 'submissionAllChallenge'
 		this.requestService.get(url, null).toPromise().then(data => {
 		  this.submittedChallenges = data
-		}).catch(err => { })
+		}).catch(err => {
+			if (err.status == 500) {
+				this.userSessionExpired = true
+		  	}
+		})
 	  }
 
 	getBookmarkedChallenges() {
@@ -83,7 +102,11 @@ export class InvDashboradComponent implements OnInit {
 				})
 			})
 			this.bookmarkedChallenges = tempData;
-		}).catch(err => { })
+		}).catch(err => {
+			if (err.status == 500) {
+				this.userSessionExpired = true
+		  	}
+		})
 	}
 
 	getAllActiveChallanges() {
@@ -97,7 +120,11 @@ export class InvDashboradComponent implements OnInit {
 			this.activeChallenges = data.list;
 			this.getBookmarkedChallenges();
 			this.getSubmission();
-		}).catch(err => { })
+		}).catch(err => {
+			if (err.status == 500) {
+				this.userSessionExpired = true
+		  	}
+		})
 	}
 
 	getSubmission() {
@@ -112,7 +139,11 @@ export class InvDashboradComponent implements OnInit {
 				})
 			})
 			this.submittedActiveChallenges = uniqBy(tempData)
-		}).catch(err => { })
+		}).catch(err => {
+			if (err.status == 500) {
+				this.userSessionExpired = true
+		  	}
+		})
 	}
 
 	getAllPastChallanges() {
@@ -125,7 +156,11 @@ export class InvDashboradComponent implements OnInit {
 		this.requestService.get(url, params).toPromise().then(data => {
 			this.pastChallenges = data.list;
 			this.getSubmissionPast();
-		}).catch(err => { })
+		}).catch(err => {
+			if (err.status == 500) {
+				this.userSessionExpired = true
+		  	}
+		})
 	}
 
 	getSubmissionPast() {
@@ -140,7 +175,11 @@ export class InvDashboradComponent implements OnInit {
 				})
 			})
 			this.submittedPastChallenges = uniqBy(tempData)
-		}).catch(err => { })
+		}).catch(err => {
+			if (err.status == 500) {
+				this.userSessionExpired = true
+		  	}
+		})
 	}
 
 	sortSelect(sort) {
@@ -200,6 +239,11 @@ export class InvDashboradComponent implements OnInit {
 				return a.acceptedUsersCount - b.acceptedUsersCount
 			})
 		}
+	}
+
+	reLogin() {
+		localStorage.clear();
+		this.router.navigateByUrl('login')
 	}
 
 }

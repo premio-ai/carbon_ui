@@ -38,8 +38,11 @@ export class ChallangeSecondStepComponent implements OnInit {
   isDataVisualUploading: boolean;
   fileNameError: boolean;
   errorToasterMsg: boolean;
+  userSessionExpired: boolean;
+  isApiLoading: boolean;
 
   ngOnInit() {
+    this.isApiLoading = false;
     this.isBtnDisabled = true;
     this.isSampleFileUploading = false;
     this.isDataVisualUploading = false;
@@ -55,11 +58,17 @@ export class ChallangeSecondStepComponent implements OnInit {
   }
 
   createTempBucket() {
+    this.isApiLoading = true;
     let url = 'upload/createTempBucket'
     this.requestService.post(url, null).toPromise().then(data => {
+      this.isApiLoading = false;
       this.bucketName = data.bucketName
     }).catch(err => {
+      this.isApiLoading = true;
       this.errorToaster();
+      if (err.status == 500) {
+				this.userSessionExpired = true
+		  	}
     })
   }
 
@@ -289,6 +298,11 @@ export class ChallangeSecondStepComponent implements OnInit {
         this.validateData();
       }
     }
+  }
+
+  reLogin() {
+    localStorage.clear();
+    this.router.navigateByUrl('login')
   }
 
 }

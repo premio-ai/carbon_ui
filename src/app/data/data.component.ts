@@ -21,11 +21,13 @@ export class DataComponent implements OnInit {
   imageUrl: String;
   imageUrlArr: any[] = [];
   errorToasterMsg: boolean;
+  userSessionExpired: boolean;
 
   ngOnInit() {
     this.appUrl = APP_URL;
     this.isEdit = false;
     this.errorToasterMsg = false;
+    this.userSessionExpired = false;
     this.editedPhase = ''
   }
 
@@ -37,7 +39,7 @@ export class DataComponent implements OnInit {
 
   getDownloadsCount() {
     let url = 'challenge/' + this.challengeDetails._id;
-    this.requestService.get(url, null).subscribe(data => {})
+    this.requestService.get(url, null).subscribe(data => { })
   }
 
   editPhase(index) {
@@ -46,16 +48,16 @@ export class DataComponent implements OnInit {
   }
 
   errorToaster = (() => {
-		this.errorToasterMsg = true
-		setTimeout(() => {
-			this.errorToasterMsg = false
-		}, 3000)
-	})
+    this.errorToasterMsg = true
+    setTimeout(() => {
+      this.errorToasterMsg = false
+    }, 3000)
+  })
 
   closeToaster() {
-		this.errorToasterMsg = false
+    this.errorToasterMsg = false
   }
-  
+
   savePhase(phaseId) {
     let url = 'challenge/updatePhase/' + this.challengeDetails._id;
     let payload = {
@@ -67,6 +69,9 @@ export class DataComponent implements OnInit {
       this.getChallengeDetails(this.challengeDetails._id)
     }).catch(err => {
       this.errorToaster();
+      if (err.status == 500) {
+        this.userSessionExpired = true
+      }
     })
   }
 
@@ -75,6 +80,9 @@ export class DataComponent implements OnInit {
       this.challengeDetails = data
     }).catch(err => {
       this.errorToaster();
+      if (err.status == 500) {
+        this.userSessionExpired = true
+      }
     })
   }
 
@@ -89,35 +97,38 @@ export class DataComponent implements OnInit {
         this.imageUrlArr.push(data.blob)
       }).catch(err => {
         this.errorToaster();
+        if (err.status == 500) {
+          this.userSessionExpired = true
+        }
       })
     })
   }
 
   getDownloadCount(phaseIndex) {
     let count: number;
-			this.challengeDetails.phases[phaseIndex].sampleDataFile.find( dt => {
-				if (dt.path.endsWith('train.csv')) {
-					count = dt.downloadCount
-				}
-			})
-      return count;
+    this.challengeDetails.phases[phaseIndex].sampleDataFile.find(dt => {
+      if (dt.path.endsWith('train.csv')) {
+        count = dt.downloadCount
+      }
+    })
+    return count;
   }
 
   async downloadFile(phaseIndex) {
     if (this.challengeDetails) {
       let newDocName = ''
       let fileIndex: number;
-			this.challengeDetails.phases[phaseIndex].sampleDataFile.find( (dt, i) => {
-				if (dt.path.endsWith('train.csv')) {
+      this.challengeDetails.phases[phaseIndex].sampleDataFile.find((dt, i) => {
+        if (dt.path.endsWith('train.csv')) {
           fileIndex = i
-					newDocName = dt.path
-				}
-			})
+          newDocName = dt.path
+        }
+      })
 
-			let payload = {
-				filePath: newDocName
+      let payload = {
+        filePath: newDocName
       }
-      
+
       this.requestService.post('upload/downloadObject', payload).toPromise().then(data => {
         var blob = this.dataURItoBlob(data.blob)
         var a = document.createElement("a");
@@ -130,6 +141,9 @@ export class DataComponent implements OnInit {
         window.URL.revokeObjectURL(url);
       }).catch(err => {
         this.errorToaster();
+        if (err.status == 500) {
+          this.userSessionExpired = true
+        }
       })
 
       let downloadUrl = 'challenge/fileDownloadsCount/' + this.challengeDetails._id;
@@ -152,6 +166,11 @@ export class DataComponent implements OnInit {
     }
     var blob = new Blob([ab], { type: mimeString });
     return blob;
+  }
+
+  reLogin() {
+    localStorage.clear();
+    this.router.navigateByUrl('login')
   }
 
 }

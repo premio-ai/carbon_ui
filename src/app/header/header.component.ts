@@ -26,12 +26,14 @@ export class HeaderComponent implements OnInit {
 	isEdit: boolean;
 	set_new_userName: string;
 	errorToasterMsg: boolean;
+	userSessionExpired: boolean;
 
 	ngOnInit() {
 		this.notificationLoading = true;
 		this.showNotification = true;
 		this.challengeCounts = 0;
 		this.errorToasterMsg = false;
+		this.userSessionExpired = false;
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
 		if (this.userDetails) {
 			this.set_new_userName = this.userDetails.fullName
@@ -52,22 +54,32 @@ export class HeaderComponent implements OnInit {
 			this.activeChallenges = data.list;
 			this.getSubmission();
 			this.getBookmarkedChallenges();
-		}).catch(err => { })
+		}).catch(err => {
+			if (err.status == 500) {
+				this.userSessionExpired = true
+			}
+		})
 	}
 
 	getBookmarkedChallenges() {
-		let url = "bookmarkChallenge";
-		this.requestService.get(url, null).toPromise().then(data => {
-			let tempData = []
-			this.activeChallenges.filter(dt => {
-				data.map(res => {
-					if (dt._id == res.challengeId) {
-						tempData.push(dt)
-					}
+		if (this.userDetails.role == 'Innovator') {			
+			let url = "bookmarkChallenge";
+			this.requestService.get(url, null).toPromise().then(data => {
+				let tempData = []
+				this.activeChallenges.filter(dt => {
+					data.map(res => {
+						if (dt._id == res.challengeId) {
+							tempData.push(dt)
+						}
+					})
 				})
+				this.bookmarkedChallenges = tempData;
+			}).catch(err => {
+				if (err.status == 500) {
+					this.userSessionExpired = true
+				}
 			})
-			this.bookmarkedChallenges = tempData;
-		}).catch(err => { })
+		}
 	}
 
 	getSubmission() {
@@ -82,21 +94,33 @@ export class HeaderComponent implements OnInit {
 				})
 			})
 			this.submittedActiveChallenges = tempData
-		}).catch(err => { })
+		}).catch(err => {
+			if (err.status == 500) {
+				this.userSessionExpired = true
+			}
+		})
 	}
 
 	getChallengeCounts() {
 		this.requestService.get('challenge/counts', null).toPromise().then(data => {
 			this.challengeCounts = data
-		}).catch(err => { })
+		}).catch(err => {
+			if (err.status == 500) {
+				this.userSessionExpired = true
+			}
+		})
 	}
 
 	getNotifications() {
-		let url = 'userNotification'
+		let url = 'userNotification/' + this.userDetails._id
 		this.requestService.get(url, null).toPromise().then(data => {
 			this.notifications = data;
 			this.notificationLoading = false
-		}).catch(err => { })
+		}).catch(err => {
+			if (err.status == 500) {
+				this.userSessionExpired = true
+			}
+		})
 		setTimeout(() => {
 			this.getNotifications();
 		}, Number((60 + Math.random() * 10).toFixed(0)) * 1000);
@@ -125,14 +149,22 @@ export class HeaderComponent implements OnInit {
 				isSeen: true
 			}).toPromise().then(data => {
 				this.router.navigateByUrl('invaccepted/' + notify.elementId)
-			}).catch(err => { })
+			}).catch(err => {
+				if (err.status == 500) {
+					this.userSessionExpired = true
+				}
+			})
 		}
 		if (notify.title == MESSAGES.NEW_MODEL_SUBMITTED) {
 			this.requestService.put('userNotification/' + notify._id, {
 				isSeen: true
 			}).toPromise().then(data => {
 				this.router.navigateByUrl('invmodel-view/' + notify.elementId)
-			}).catch(err => { })
+			}).catch(err => {
+				if (err.status == 500) {
+					this.userSessionExpired = true
+				}
+			})
 		}
 	}
 
@@ -168,6 +200,9 @@ export class HeaderComponent implements OnInit {
 			}
 		}).catch(err => {
 			this.errorToaster();
+			if (err.status == 500) {
+				this.userSessionExpired = true
+			}
 		})
 	}
 
@@ -180,6 +215,11 @@ export class HeaderComponent implements OnInit {
 
 	closeToaster() {
 		this.errorToasterMsg = false
+	}
+
+	reLogin() {
+		localStorage.clear();
+		this.router.navigateByUrl('login')
 	}
 
 	logout() {
