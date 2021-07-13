@@ -2,23 +2,23 @@
 <br />
 <br />
 
-<div *ngIf="true" data-notification class="bx--toast-notification bx--toast-notification--failure"
-        role="alert">
-        <div class="bx--toast-notification__details">
-          <p class="bx--toast-notification__title">Somthing went wrong.</p>
-          <p class="bx--toast-notification__subtitle">Please contact administrator.</p>
-        </div>
-        <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button"
-          type="button" aria-label="close">
-          <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform"
-            xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__close-icon" width="20" height="20"
-            viewBox="0 0 32 32" aria-hidden="true">
-            <path d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z">
-            </path>
-          </svg>
-        </button>
-      </div>
-      
+<div *ngIf="errorToasterMsg" data-notification class="bx--toast-notification bx--toast-notification--failure"
+  role="alert">
+  <div class="bx--toast-notification__details">
+    <p class="bx--toast-notification__title">Somthing went wrong.</p>
+    <p class="bx--toast-notification__subtitle">Please contact administrator.</p>
+  </div>
+  <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button" type="button"
+    aria-label="close">
+    <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform"
+      xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__close-icon" width="20" height="20"
+      viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z">
+      </path>
+    </svg>
+  </button>
+</div>
+
 <div class="bx--grid">
   <div class="bx--row line-padding">
     <div class="bx--col-md-1" style="padding-left: 8%; cursor: pointer;">
