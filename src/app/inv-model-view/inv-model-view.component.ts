@@ -69,7 +69,6 @@ export class InvModelViewComponent implements OnInit {
         this.isEdit = false;
         this.set_new_modelName = '';
       } else {
-        console.log("---else---marked")
         this.routeAuthError = true;
       }
     } else {

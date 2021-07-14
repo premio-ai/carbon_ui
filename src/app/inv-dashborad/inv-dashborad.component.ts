@@ -27,6 +27,7 @@ export class InvDashboradComponent implements OnInit {
 	submissionPerformance: any[] = [];
 	userSessionExpired: boolean;
 	routeAuthError: boolean;
+	totalSubmittedChallenges: any
 
 	ngOnInit() {
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
@@ -130,6 +131,7 @@ export class InvDashboradComponent implements OnInit {
 	getSubmission() {
 		let url = "submissionAllChallenge";
 		this.requestService.get(url, null).toPromise().then(data => {
+			// this.totalSubmittedChallenges = data
 			let tempData = []
 			this.activeChallenges.filter(dt => {
 				data.map(res => {
@@ -139,6 +141,7 @@ export class InvDashboradComponent implements OnInit {
 				})
 			})
 			this.submittedActiveChallenges = uniqBy(tempData)
+			// this.getAllPastChallanges();
 		}).catch(err => {
 			if (err.status == 500) {
 				this.userSessionExpired = true
@@ -180,6 +183,16 @@ export class InvDashboradComponent implements OnInit {
 				this.userSessionExpired = true
 		  	}
 		})
+
+		// let tempData = []
+		// 			this.pastChallenges.filter(dt => {
+		// 		this.totalSubmittedChallenges.map(res => {
+		// 			if (dt._id == res.challengeId) {
+		// 				tempData.push(dt)
+		// 			}
+		// 		})
+		// 	})
+		// 	this.submittedPastChallenges = uniqBy(tempData)
 	}
 
 	sortSelect(sort) {

@@ -80,13 +80,13 @@ export class ChallangeSecondStepComponent implements OnInit {
 	})
 
   ngDoCheck() {
-    if (this.stepTwo.description.length > 0 && this.stepTwo.guidance.length > 0 && this.stepTwo.passingScore && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 0) {
+    if (this.stepTwo.description.length > 0 && this.stepTwo.guidance.length > 0 && this.stepTwo.passingScore && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 1) {
       this.isBtnDisabled = false
     }
   }
 
   addPhase() {
-    if (this.stepTwo.description.length > 0 && this.stepTwo.guidance.length > 0 && this.stepTwo.passingScore && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 0) {
+    if (this.stepTwo.description.length > 0 && this.stepTwo.guidance.length > 0 && this.stepTwo.passingScore && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 1) {
       this.isBtnDisabled = true
       let tempData = {
         description: this.stepTwo.description,
@@ -130,7 +130,7 @@ export class ChallangeSecondStepComponent implements OnInit {
     } else {
       this.dataVisualFileError = false
     }
-    if (this.stepTwo.sampleDataFile.length == 0) {
+    if (this.stepTwo.sampleDataFile.length < 2) {
       this.sampleDataFileError = true
     } else {
       this.sampleDataFileError = false
@@ -270,7 +270,7 @@ export class ChallangeSecondStepComponent implements OnInit {
   next() {
     this.bucketName = '';
     if (this.phases.length > 0) {
-      if (this.stepTwo.description.length > 0 && this.stepTwo.guidance.length > 0 && this.stepTwo.passingScore && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 0) {
+      if (this.stepTwo.description.length > 0 && this.stepTwo.guidance.length > 0 && this.stepTwo.passingScore && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 1) {
         let tempData = {
           description: this.stepTwo.description,
           guidance: this.stepTwo.guidance,
@@ -284,7 +284,7 @@ export class ChallangeSecondStepComponent implements OnInit {
         this.validateData();
       }
     } else {
-      if (this.stepTwo.description.length > 0 && this.stepTwo.guidance.length > 0 && this.stepTwo.passingScore && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 0) {
+      if (this.stepTwo.description.length > 0 && this.stepTwo.guidance.length > 0 && this.stepTwo.passingScore && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 1) {
         let tempData = {
           description: this.stepTwo.description,
           guidance: this.stepTwo.guidance,

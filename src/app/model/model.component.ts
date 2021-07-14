@@ -33,18 +33,25 @@ export class ModelComponent {
   objectKeys = Object.keys;
   errorToasterMsg: boolean;
   userSessionExpired: boolean;
+  pageNo: number;
+  pageOffset: number;
+  totalPage: number;
+  displayModelData: any;
 
   ngOnInit() {
+    this.pageNo = 1;
+    this.pageOffset = 0;
+    this.totalPage = 1;
     this.showLess = true;
     this.loadIndex = -1;
     this.errorToasterMsg = false;
     this.userSessionExpired = false;
     this.sorting = [
-      { content: 'Most Popular' },
-      { content: 'Least Popular' },
       { content: 'Newest' },
       { content: 'Oldest' },
-      { content: 'End Date' }
+      { content: 'Innovator Name (A-Z)' },
+      { content: 'Model Score' },
+      { content: 'Accuracy' }
     ];
   }
 
@@ -74,6 +81,27 @@ export class ModelComponent {
       })
     })
     this.modelData = data
+    this.totalPage = Math.ceil((this.modelData.length)/10)
+    this.getDisplayModelData();
+  }
+  
+  getDisplayModelData() {
+    this.pageOffset = (this.pageNo - 1) * 10;
+    this.displayModelData = this.modelData.slice(this.pageOffset, this.pageOffset+10)
+  }
+
+  prevPage() {
+    if (this.pageNo > 1) {
+      this.pageNo--;
+      this.getDisplayModelData();
+    }
+  }
+
+  nextPage() {
+    if (this.pageNo < (this.totalPage)) {
+      this.pageNo++;
+      this.getDisplayModelData();
+    }
   }
 
   makeInitialModelData() {
@@ -100,6 +128,9 @@ export class ModelComponent {
       })
     })
     this.modelData = data
+
+    this.totalPage = Math.ceil((this.modelData.length)/10)
+    this.getDisplayModelData();
   }
 
   handlePhaseClick(id) {
@@ -111,32 +142,46 @@ export class ModelComponent {
     this.getBookmarkedSubmission()
   }
 
+  getPhaseAvgScore(modelId) {
+    let score = 0;
+    if (this.modelData) {
+      this.modelData.filter( dt => {
+        if (dt._id == modelId) {
+          score = Math.ceil( (dt.score + dt.precisionScore + dt.recallScore) / 3)
+        }
+      })
+    }
+    return score;
+  }
+
   sortSelect(sort) {
     let criteria = sort.item.content;
 
     if (criteria == 'Newest') {
-      this.modelData.sort((a, b) => {
+      this.displayModelData.sort((a, b) => {
         return b.createdAt - a.createdAt
       })
     }
     if (criteria == 'Oldest') {
-      this.modelData.sort((a, b) => {
+      this.displayModelData.sort((a, b) => {
         return a.createdAt - b.createdAt
       })
     }
-    if (criteria == 'End Date') {
-      this.modelData.sort((a, b) => {
-        return new Date(b.expiryDate).getTime() - new Date(a.expiryDate).getTime()
+    if (criteria == 'Innovator Name (A-Z)') {
+      this.displayModelData.sort((a, b) => {
+        return a.innovatorId.fullName - b.innovatorId.fullName
       })
     }
-    if (criteria == 'Most Popular') {
-      this.modelData.sort((a, b) => {
-        return b.acceptedUsersCount - a.acceptedUsersCount
+    if (criteria == 'Model Score') {
+      this.displayModelData.sort((a, b) => {
+        let aScore = this.getPhaseAvgScore(a._id);
+        let bScore = this.getPhaseAvgScore(b._id);
+        return bScore - aScore
       })
     }
-    if (criteria == 'Least Popular') {
-      this.modelData.sort((a, b) => {
-        return a.acceptedUsersCount - b.acceptedUsersCount
+    if (criteria == 'Accuracy') {
+      this.displayModelData.sort((a, b) => {
+        return b.score - a.score
       })
     }
   }

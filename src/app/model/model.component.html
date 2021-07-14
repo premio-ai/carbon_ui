@@ -45,7 +45,7 @@
   </div>
   <br />
   <br />
-  <div *ngIf="!modelComparison && modelData" style="margin-top: -40px;">
+  <div *ngIf="!modelComparison && displayModelData" style="margin-top: -40px;">
     <ibm-tabs [followFocus]="followFocus" [isNavigation]="isNavigation" [cacheActive]="cacheActive">
       <br /><br />
       <ibm-tab heading="All">
@@ -64,11 +64,11 @@
           <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
             [condensed]="rowCondensed">
             <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 8, sm: 12 }"
-              style="display: flex; margin-bottom: 15px;" *ngFor="let data of modelData; index as i">
+              style="display: flex; margin-bottom: 15px;" *ngFor="let data of displayModelData; index as i">
               <ibm-tile>
                 <div style="display: flex;">
                   <div>
-                    <h3>{{ i + 1 }}. {{ data?.modelName }}</h3>
+                    <h3>{{ i + 1 + pageOffset }}. {{ data?.modelName }}</h3>
                   </div>
                   <div style="margin-left: auto; cursor: pointer;"
                     *ngIf="isBookmarked(data?._id) == false && !checkLoading(i)">
@@ -100,6 +100,12 @@
                     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 6, sm: 12 }">
                       <p class="para">{{ data?.modelDescription }}</p>
                     </div>
+                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
+                      <div class="content" style="margin-left: 220px; margin-top: -15px; margin-bottom: 20px">
+                        <p class="unbold">Phase {{selectedPhaseNo}}</p>
+                        <p class="nobold">{{getPhaseAvgScore(data?._id)}}</p>
+                      </div>
+                    </div>
                   </div>
                   <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
                     [condensed]="rowCondensed">
@@ -123,6 +129,29 @@
                 style="margin-left: 15px;">
               </ibm-checkbox>
             </div>
+          </div>
+        </div>
+        <div class="bx--pagination" data-pagination>
+          <div class="bx--pagination__right">
+            <label id="select-id-pagination-page-label" class="bx--pagination__text" for="select-id-pagination-page">
+              pages {{pageNo}} of {{totalPage}}
+            </label>
+            <button class="bx--pagination__button bx--pagination__button--backward " tabindex="0" data-page-backward
+              aria-label="previous page" (click)="prevPage()" [disabled]="pageNo == 1">
+              <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;"
+                xmlns="http://www.w3.org/2000/svg" class="bx--pagination__nav-arrow" width="20" height="20"
+                viewBox="0 0 32 32" aria-hidden="true">
+                <path d="M19 23L11 16 19 9 19 23z"></path>
+              </svg>
+            </button>
+            <button class="bx--pagination__button bx--pagination__button--forward " tabindex="0" data-page-forward
+              aria-label="next page" (click)="nextPage()" [disabled]="pageNo == totalPage">
+              <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;"
+                xmlns="http://www.w3.org/2000/svg" class="bx--pagination__nav-arrow" width="20" height="20"
+                viewBox="0 0 32 32" aria-hidden="true">
+                <path d="M13 9L21 16 13 23 13 9z"></path>
+              </svg>
+            </button>
           </div>
         </div>
       </ibm-tab>

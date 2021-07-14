@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { RequestService } from '../request.service';
 
 @Component({
   selector: 'app-overview',
@@ -11,7 +12,8 @@ export class OverviewComponent implements OnInit {
   @Input() challengeDetails: any;
   @Input() submissionChallengeDetails: any
   constructor(
-    private router: Router
+    private router: Router,
+    private requestService: RequestService
   ) { }
   phaseOneSubmission: any
   phaseNo: number;
@@ -20,11 +22,20 @@ export class OverviewComponent implements OnInit {
   modelUnderTraining: number;
   passedModelsCount: number;
   selectedPhaseId: string;
-  topList: any
+  topList: any;
+  pageNo: number;
+  pageOffset: number;
+  totalPage: number;
+  displayLeaderboardData: any;
+  userSessionExpired: boolean;
 
   ngOnInit() {
-    this.modelUnderTraining = 0
-    this.passedModelsCount = 0
+    this.userSessionExpired = false;
+    this.modelUnderTraining = 0;
+    this.passedModelsCount = 0;
+    this.pageNo = 1;
+    this.pageOffset = 0;
+    this.totalPage = 1;
   }
 
   ngOnChanges() {
@@ -41,13 +52,13 @@ export class OverviewComponent implements OnInit {
 
   initialPhase() {
     this.selectedPhaseId = this.challengeDetails.phases[0].phaseId
-    this.showLeaderboard()
+    this.getLeaderboard(this.challengeDetails._id, this.selectedPhaseId, this.pageOffset);
   }
 
   selectPhase(phaseId, phaseNo) {
     this.phaseNo = phaseNo
     this.selectedPhaseId = phaseId
-    this.showLeaderboard()
+    this.getLeaderboard(this.challengeDetails._id, this.selectedPhaseId, this.pageOffset)
   }
 
   checkSelected(phaseId) {
@@ -114,19 +125,35 @@ export class OverviewComponent implements OnInit {
     }
   }
 
-  showLeaderboard() {
-    let tempData = []
-    this.submissionChallengeDetails.filter(dt => {
-      if (dt.phaseId == this.selectedPhaseId) {
-        tempData.push(dt)
-      }
-    })
+  getLeaderboard(challengeId, phaseId, pageOffset) {
+		let url = 'leaderboard/' + challengeId + '/' + phaseId;
+		let params = {
+			skip: pageOffset
+		}
+		this.requestService.get(url, params).toPromise().then(data => {
+			this.totalPage = Math.ceil(data.count / 10);
+			this.leaderboardData = data.list;
+		}).catch(err => {
+			if (err.status == 500) {
+				this.userSessionExpired = true
+			}
+		})
+	}
 
-    tempData.sort((a, b) => {
-      return b.score - a.score
-    })
-    
-    this.leaderboardData = tempData
+  prevPage() {
+		if (this.pageNo > 1) {
+			this.pageNo--;
+			this.pageOffset = (this.pageNo - 1) * 10;
+			this.getLeaderboard(this.challengeDetails._id, this.selectedPhaseId, this.pageOffset)
+		}
+	}
+
+	nextPage() {
+		if (this.pageNo < (this.totalPage)) {
+			this.pageNo++;
+			this.pageOffset = (this.pageNo - 1) * 10;
+			this.getLeaderboard(this.challengeDetails._id, this.selectedPhaseId, this.pageOffset)
+		}
   }
 
   viewModel(id) {

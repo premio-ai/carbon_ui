@@ -62,7 +62,7 @@ export class HeaderComponent implements OnInit {
 	}
 
 	getBookmarkedChallenges() {
-		if (this.userDetails.role == 'Innovator') {			
+		if (this.userDetails.role == 'Innovator') {
 			let url = "bookmarkChallenge";
 			this.requestService.get(url, null).toPromise().then(data => {
 				let tempData = []
@@ -128,7 +128,7 @@ export class HeaderComponent implements OnInit {
 
 	clearNotification() {
 		this.notificationLoading = true
-		this.requestService.put('userNotification/notification/clearAll', this.notifications).toPromise().then( dt => {
+		this.requestService.put('userNotification/notification/clearAll', this.notifications).toPromise().then(dt => {
 			this.notificationLoading = false
 			this.getNotifications();
 		})
@@ -159,26 +159,13 @@ export class HeaderComponent implements OnInit {
 			this.requestService.put('userNotification/' + notify._id, {
 				isSeen: true
 			}).toPromise().then(data => {
-				this.router.navigateByUrl('invmodel-view/' + notify.elementId)
+				this.router.navigateByUrl('modelReport/' + notify.elementId)
 			}).catch(err => {
 				if (err.status == 500) {
 					this.userSessionExpired = true
 				}
 			})
 		}
-	}
-
-	checkActiveRoute() {
-		let activeRoute = window.location.href;
-
-		if ( activeRoute.includes('invdash') || activeRoute.includes('dashboard') ) {
-			return 'activeRouteActivity';
-		} else if ( activeRoute.includes('invchallenges') ) {
-			return 'activeRouteChallenge';
-		} else {
-			return '';
-		}
-
 	}
 
 	editUserName() {

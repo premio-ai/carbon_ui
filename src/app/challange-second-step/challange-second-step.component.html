@@ -40,18 +40,14 @@
       <br />
       <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
         <p class="headingtop">Data Description</p>
-        <p class="challTitle">
-          {{phases[i].description.length || 0}}/100
-        </p>
+        <p class="challTitle">{{phases[i].description.length || 0}}/100</p>
         <textarea style="width: 90%; margin-top: 10px;" ibmTextArea [invalid]="invalid"
           [(ngModel)]="phases[i].description" [theme]="theme" [rows]="5" [cols]="cols" aria-label="textarea"></textarea>
       </ibm-label>
       <br />
       <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
         <p class="headingtop">Data Usage Guidance</p>
-        <p class="challTitle">
-          {{phases[i].guidance.length || 0}}/100
-        </p>
+        <p class="challTitle">{{phases[i].guidance.length || 0}}/100</p>
         <textarea style="width: 90%; margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="phases[i].guidance"
           [theme]="theme" [rows]="3" [cols]="cols" aria-label="textarea"></textarea>
       </ibm-label>
@@ -92,8 +88,7 @@
             <div *ngFor="let sampleFile of phases[i].sampleDataFile; index as j">
               <div class="fileBox">
                 <p style="margin: 8px; font-size: small;">{{getSampleFileName(sampleFile.path)}}</p>
-                <p style="margin-top: 8px; margin-left: 50px; cursor: pointer;" (click)="removeSampleDataFile(i, j)">x
-                </p>
+                <!-- <p style="margin-top: 8px; margin-left: 50px; cursor: pointer;" (click)="removeSampleDataFile(i, j)">x</p> -->
               </div>
             </div>
           </div>
@@ -203,9 +198,9 @@
               <div *ngFor="let sampleFile of stepTwo.sampleDataFile; index as j">
                 <div class="fileBox">
                   <p style="margin: 8px; font-size: small;">{{getSampleFileName(sampleFile.path)}}</p>
-                  <p style="margin-top: 8px; margin-left: 50px; cursor: pointer;"
+                  <!-- <p style="margin-top: 8px; margin-left: 50px; cursor: pointer;"
                     (click)="removeStepTwoSampleDataFile(j)">x
-                  </p>
+                  </p> -->
                 </div>
               </div>
             </div>
