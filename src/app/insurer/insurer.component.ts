@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../request.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
+import { MESSAGES } from '../../config/config';
 
 @Component({
   selector: 'app-insurer',
@@ -222,8 +223,11 @@ export class InsurerComponent implements OnInit {
     this.requestService.get(url, null).toPromise().then(data => {
       this.challengeDetails = data;
     }).catch(err => {
-      if (err.status == 500) {
+      if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
         this.userSessionExpired = true
+        setTimeout(() => {
+          this.reLogin();
+        }, 3000)
       }
     })
   }
@@ -233,8 +237,11 @@ export class InsurerComponent implements OnInit {
     this.requestService.get(url, null).toPromise().then(data => {
       this.submissionChallengeDetails = data;
     }).catch(err => {
-      if (err.status == 500) {
+      if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
         this.userSessionExpired = true
+        setTimeout(() => {
+          this.reLogin();
+        }, 3000)
       }
     })
   }

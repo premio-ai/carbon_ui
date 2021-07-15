@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { MESSAGES } from '../../config/config';
 import { RequestService } from '../request.service';
 
 @Component({
@@ -83,8 +84,11 @@ export class SubmissionStepOneComponent implements OnInit {
     }).catch(err => {
       this.isApiLoading = false;
       this.errorToaster();
-      if (err.status == 500) {
+      if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
         this.userSessionExpired = true
+        setTimeout(() => {
+          this.reLogin();
+        }, 3000)
       }
     })
   }
@@ -129,8 +133,11 @@ export class SubmissionStepOneComponent implements OnInit {
       this.stepOne.modelUploadedPath = data.filePath
     }).catch(err => {
       this.errorToaster();
-      if (err.status == 500) {
+      if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
         this.userSessionExpired = true
+        setTimeout(() => {
+          this.reLogin();
+        }, 3000)
       }
     })
   }
@@ -173,8 +180,11 @@ export class SubmissionStepOneComponent implements OnInit {
         window.URL.revokeObjectURL(url);
       }).catch(err => {
         this.errorToaster();
-        if (err.status == 500) {
+        if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
           this.userSessionExpired = true
+          setTimeout(() => {
+            this.reLogin();
+          }, 3000)
         }
       })
     }

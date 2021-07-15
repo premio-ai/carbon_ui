@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { RequestService } from '../request.service';
 import * as moment from 'moment';
+import { MESSAGES } from '../../config/config';
 
 @Component({
   selector: 'app-submission-step-four',
@@ -66,7 +67,7 @@ export class SubmissionStepFourComponent implements OnInit {
   }
 
   checkDisabled() {
-    if (!this.isChallengeAccepted || moment(moment(this.challengeDetails.expiryDate).format('DD-MM-YYYY')).isBefore(moment(new Date()).format('DD/MM/YYYY'))) {
+    if (!this.isChallengeAccepted || moment(moment(this.challengeDetails.expiryDate).format('YYYY-MM-DD')).isBefore(moment(new Date()).format('YYYY-MM-DD'))) {
       return true;
     } else {
       return false;
@@ -138,8 +139,11 @@ export class SubmissionStepFourComponent implements OnInit {
         a.remove();
       }).catch(err => {
         this.errorToaster();
-        if (err.status == 500) {
+        if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
           this.userSessionExpired = true
+          setTimeout(() => {
+						this.reLogin();
+					}, 3000)
         }
       })
     }

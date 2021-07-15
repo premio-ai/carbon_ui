@@ -2,6 +2,7 @@ import { Component, OnInit, } from "@angular/core";
 import { RequestService } from "../request.service";
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { MESSAGES } from '../../config/config';
 
 @Component({
 	selector: "app-challange-page",
@@ -160,8 +161,11 @@ export class ChallangePageComponent implements OnInit {
 		}).catch(err => {
 			this.isApiLoading = false;
 			this.errorToaster();
-			if (err.status == 500) {
+			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 				this.userSessionExpired = true
+				setTimeout(() => {
+					this.reLogin();
+				}, 3000)
 			}
 		})
 		this.current++;

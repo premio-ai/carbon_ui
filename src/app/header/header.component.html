@@ -60,18 +60,13 @@
       </div>
     </div>
     <br />
-    <div *ngIf="userDetails.role == 'Insurer'">
-      <p class="userdetail">Active challenge: {{challengeCounts.activeChallengeCount}}</p>
-    </div>
-    <div *ngIf="userDetails.role == 'Innovator'">
-      <p class="userdetail">Active challenge: {{submittedActiveChallenges.length}}</p>
-    </div>
+    <p class="userdetail">Active challenge: {{challengeCounts.activeChallengeCount}}</p>
     <p class="userdetail">Past challenge: {{challengeCounts.pastChallengeCount}}</p>
     <div *ngIf="userDetails.role == 'Insurer'">
       <p class="userdetail">Model Watching: {{challengeCounts.modelsWatching}}</p>
     </div>
     <div *ngIf="userDetails.role == 'Innovator'">
-      <p class="userdetail">Bookmark Challenges: {{bookmarkedChallenges.length}}</p>
+      <p class="userdetail">Bookmark Challenges: {{challengeCounts.bookmarkChallengeCount}}</p>
     </div>
     <div *ngIf="userDetails.role == 'Innovator'">
       <p class="userdetail">Challenges Won: {{challengesWon || 0}}</p>

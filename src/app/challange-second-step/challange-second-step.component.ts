@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { RequestService } from '../request.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { MESSAGES } from '../../config/config';
 
 @Component({
   selector: 'app-challange-second-step',
@@ -66,18 +67,21 @@ export class ChallangeSecondStepComponent implements OnInit {
     }).catch(err => {
       this.isApiLoading = true;
       this.errorToaster();
-      if (err.status == 500) {
-				this.userSessionExpired = true
-		  	}
+      if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
+        this.userSessionExpired = true
+        setTimeout(() => {
+          this.reLogin();
+        }, 3000)
+      }
     })
   }
 
   errorToaster = (() => {
-		this.errorToasterMsg = true
-		setTimeout(() => {
-			this.errorToasterMsg = false
-		}, 3000)
-	})
+    this.errorToasterMsg = true
+    setTimeout(() => {
+      this.errorToasterMsg = false
+    }, 3000)
+  })
 
   ngDoCheck() {
     if (this.stepTwo.description.length > 0 && this.stepTwo.guidance.length > 0 && this.stepTwo.passingScore && this.stepTwo.dataVisualFile.length > 0 && this.stepTwo.sampleDataFile.length > 1) {
@@ -236,7 +240,7 @@ export class ChallangeSecondStepComponent implements OnInit {
       if (formData) {
         this.subject = this.requestService.post('upload', formData).subscribe(data => {
           this.isSampleFileUploading = false
-          if (data && data.filePath.length>0) {          
+          if (data && data.filePath.length > 0) {
             let fileObj = {
               path: data.filePath,
               downloadCount: 0

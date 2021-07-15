@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MESSAGES } from '../../config/config';
 import { RequestService } from '../request.service';
 
 @Component({
@@ -134,8 +135,11 @@ export class OverviewComponent implements OnInit {
 			this.totalPage = Math.ceil(data.count / 10);
 			this.leaderboardData = data.list;
 		}).catch(err => {
-			if (err.status == 500) {
-				this.userSessionExpired = true
+			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
+        this.userSessionExpired = true
+        setTimeout(() => {
+          this.reLogin();
+        }, 3000)
 			}
 		})
 	}
@@ -162,6 +166,11 @@ export class OverviewComponent implements OnInit {
 
   switchWithPhase(phaseId) {
     this.router.navigateByUrl('challenge/' + this.challengeDetails._id + '?activePhaseId=' + phaseId)
+  }
+
+  reLogin() {
+    localStorage.clear();
+    this.router.navigateByUrl('login')
   }
 
 }

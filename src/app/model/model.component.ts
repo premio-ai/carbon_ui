@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { RequestService } from '../request.service';
 import * as moment from 'moment';
+import { MESSAGES } from '../../config/config';
 
 @Component({
   selector: 'app-model',
@@ -199,8 +200,11 @@ export class ModelComponent {
       })
       this.bookmarkedSubmissionsByPhase = tempData
     }).catch(err => {
-      if (err.status == 500) {
+      if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
         this.userSessionExpired = true
+        setTimeout(() => {
+          this.reLogin();
+        }, 3000)
       }
     })
   }
@@ -243,8 +247,11 @@ export class ModelComponent {
       this.getBookmarkedSubmission()
     }).catch(err => {
       this.errorToaster();
-      if (err.status == 500) {
+      if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
         this.userSessionExpired = true
+        setTimeout(() => {
+          this.reLogin();
+        }, 3000)
       }
     })
   }
@@ -277,8 +284,11 @@ export class ModelComponent {
       this.getBookmarkedSubmission()
     }).catch(err => {
       this.errorToaster();
-      if (err.status == 500) {
+      if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
         this.userSessionExpired = true
+        setTimeout(() => {
+          this.reLogin();
+        }, 3000)
       }
     })
   }

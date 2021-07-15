@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ThisSideUpDirective } from '@carbon/icons-angular';
 import * as moment from 'moment';
+import { MESSAGES } from '../../config/config';
 import { RequestService } from "../request.service";
 
 @Component({
@@ -136,8 +136,11 @@ export class InvChallengeComponent implements OnInit {
       this.totalPage = Math.ceil(data.count / 10);
       this.activeChallenges = data.list;
     }).catch(err => {
-      if (err.status == 500) {
+      if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
         this.userSessionExpired = true
+        setTimeout(() => {
+          this.reLogin();
+        }, 3000)
       }
     })
   }
@@ -201,8 +204,11 @@ export class InvChallengeComponent implements OnInit {
       this.bookmarkedChallenges = data.list;
     }).catch(err => {
       this.errorToaster();
-      if (err.status == 500) {
+      if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
         this.userSessionExpired = true
+        setTimeout(() => {
+          this.reLogin();
+        }, 3000)
       }
     })
   }
@@ -235,8 +241,11 @@ export class InvChallengeComponent implements OnInit {
       this.getBookmarkedChallenges(this.pageOffsetBM, index);
     }).catch(err => {
       this.errorToaster();
-      if (err.status == 500) {
+      if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
         this.userSessionExpired = true
+        setTimeout(() => {
+          this.reLogin();
+        }, 3000)
       }
     })
   }
@@ -254,8 +263,11 @@ export class InvChallengeComponent implements OnInit {
       this.getBookmarkedChallenges(this.pageOffsetBM, index);
     }).catch(err => {
       this.errorToaster();
-      if (err.status == 500) {
+      if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
         this.userSessionExpired = true
+        setTimeout(() => {
+          this.reLogin();
+        }, 3000)
       }
     })
   }

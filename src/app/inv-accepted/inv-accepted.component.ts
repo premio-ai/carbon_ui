@@ -3,7 +3,7 @@ import { RequestService } from "../request.service";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
-import { APP_URL } from '../../config/config';
+import { APP_URL, MESSAGES } from '../../config/config';
 
 @Component({
 	selector: 'app-inv-accepted',
@@ -155,8 +155,11 @@ export class InvAcceptedComponent implements OnInit {
 			this.getSubmissionByChallengeId(this.challengeId);
 			this.displayImage()
 		}).catch(err => {
-			if (err.status == 500) {
+			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 				this.userSessionExpired = true
+				setTimeout(() => {
+					this.reLogin();
+				}, 3000)
 			}
 		})
 	}
@@ -171,8 +174,11 @@ export class InvAcceptedComponent implements OnInit {
 				this.isChallengeAccepted = false;
 			}
 		}).catch(err => {
-			if (err.status == 500) {
+			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 				this.userSessionExpired = true
+				setTimeout(() => {
+					this.reLogin();
+				}, 3000)
 			}
 		})
 	}
@@ -186,8 +192,11 @@ export class InvAcceptedComponent implements OnInit {
 			this.totalPage = Math.ceil(data.count / 10);
 			this.leaderboard = data.list;
 		}).catch(err => {
-			if (err.status == 500) {
+			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 				this.userSessionExpired = true
+				setTimeout(() => {
+					this.reLogin();
+				}, 3000)
 			}
 		})
 	}
@@ -205,8 +214,11 @@ export class InvAcceptedComponent implements OnInit {
 			}
 		}).catch(err => {
 			this.errorToaster();
-			if (err.status == 500) {
+			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 				this.userSessionExpired = true
+				setTimeout(() => {
+					this.reLogin();
+				}, 3000)
 			}
 		})
 	}
@@ -258,8 +270,11 @@ export class InvAcceptedComponent implements OnInit {
 			this.showToaster()
 		}).catch(err => {
 			this.errorToaster();
-			if (err.status == 500) {
+			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 				this.userSessionExpired = true
+				setTimeout(() => {
+					this.reLogin();
+				}, 3000)
 			}
 		})
 	}
@@ -274,8 +289,11 @@ export class InvAcceptedComponent implements OnInit {
 			this.showWithdrawToaster()
 		}).catch(err => {
 			this.errorToaster();
-			if (err.status == 500) {
+			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 				this.userSessionExpired = true
+				setTimeout(() => {
+					this.reLogin();
+				}, 3000)
 			}
 		})
 	}
@@ -330,8 +348,11 @@ export class InvAcceptedComponent implements OnInit {
 				document.body.appendChild(a);
 				this.imageUrlArr.push(data.blob)
 			}).catch(err => {
-				if (err.status == 500) {
+				if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 					this.userSessionExpired = true
+					setTimeout(() => {
+						this.reLogin();
+					}, 3000)
 				}
 			})
 		})
@@ -362,8 +383,11 @@ export class InvAcceptedComponent implements OnInit {
 				a.click();
 				window.URL.revokeObjectURL(url);
 			}).catch(err => {
-				if (err.status == 500) {
+				if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 					this.userSessionExpired = true
+					setTimeout(() => {
+						this.reLogin();
+					}, 3000)
 				}
 				this.errorToaster();
 			})
@@ -463,8 +487,11 @@ export class InvAcceptedComponent implements OnInit {
 		}).catch(err => {
 			this.isApiLoading = false;
 			this.errorToaster();
-			if (err.status == 500) {
+			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 				this.userSessionExpired = true
+				setTimeout(() => {
+					this.reLogin();
+				}, 3000)
 			}
 		})
 	}

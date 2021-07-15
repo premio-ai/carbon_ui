@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RequestService } from "../request.service";
 import { Router } from "@angular/router";
 import { uniqBy } from 'lodash';
+import { MESSAGES } from '../../config/config';
 
 
 @Component({
@@ -33,14 +34,14 @@ export class InvDashboradComponent implements OnInit {
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
 		this.routeAuthError = false;
 		if (this.userDetails && this.userDetails._id) {
-			if (this.userDetails.role == 'Innovator') {				
+			if (this.userDetails.role == 'Innovator') {
 				this.userSessionExpired = false;
 				this.getAllActiveChallanges();
-				this.getAllPastChallanges();
+				// this.getAllPastChallanges();
 				this.getChallengeSubmissionRanking();
 				this.getSubmittedChallenge();
 				this.getModelPerformance();
-	
+
 				this.sorting = [
 					{ content: 'Most Popular' },
 					{ content: 'Least Popular' },
@@ -61,21 +62,26 @@ export class InvDashboradComponent implements OnInit {
 		this.requestService.get(url, null).toPromise().then(data => {
 			this.submissionRanking = data
 		}).catch(err => {
-			if (err.status == 500) {
+			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 				this.userSessionExpired = true
-		  	}
+				setTimeout(() => {
+					this.reLogin();
+				}, 3000)
+			}
 		})
 	}
 
 	getModelPerformance() {
 		let url = "submissionAllChallenge/submissions/modelPerformance"
-
-		this.requestService.get(url, null).toPromise().then( data => {
+		this.requestService.get(url, null).toPromise().then(data => {
 			this.submissionPerformance = data
-		}).catch( err => {
-			if (err.status == 500) {
+		}).catch(err => {
+			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 				this.userSessionExpired = true
-		  	}
+				setTimeout(() => {
+					this.reLogin();
+				}, 3000)
+			}
 		})
 
 	}
@@ -83,13 +89,16 @@ export class InvDashboradComponent implements OnInit {
 	getSubmittedChallenge() {
 		let url = 'submissionAllChallenge'
 		this.requestService.get(url, null).toPromise().then(data => {
-		  this.submittedChallenges = data
+			this.submittedChallenges = data
 		}).catch(err => {
-			if (err.status == 500) {
+			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 				this.userSessionExpired = true
-		  	}
+				setTimeout(() => {
+					this.reLogin();
+				}, 3000)
+			}
 		})
-	  }
+	}
 
 	getBookmarkedChallenges() {
 		let url = "bookmarkChallenge";
@@ -104,9 +113,12 @@ export class InvDashboradComponent implements OnInit {
 			})
 			this.bookmarkedChallenges = tempData;
 		}).catch(err => {
-			if (err.status == 500) {
+			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 				this.userSessionExpired = true
-		  	}
+				setTimeout(() => {
+					this.reLogin();
+				}, 3000)
+			}
 		})
 	}
 
@@ -122,16 +134,19 @@ export class InvDashboradComponent implements OnInit {
 			this.getBookmarkedChallenges();
 			this.getSubmission();
 		}).catch(err => {
-			if (err.status == 500) {
+			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 				this.userSessionExpired = true
-		  	}
+				setTimeout(() => {
+					this.reLogin();
+				}, 3000)
+			}
 		})
 	}
 
 	getSubmission() {
 		let url = "submissionAllChallenge";
 		this.requestService.get(url, null).toPromise().then(data => {
-			// this.totalSubmittedChallenges = data
+			this.totalSubmittedChallenges = data;
 			let tempData = []
 			this.activeChallenges.filter(dt => {
 				data.map(res => {
@@ -141,11 +156,14 @@ export class InvDashboradComponent implements OnInit {
 				})
 			})
 			this.submittedActiveChallenges = uniqBy(tempData)
-			// this.getAllPastChallanges();
+			this.getAllPastChallanges();
 		}).catch(err => {
-			if (err.status == 500) {
+			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 				this.userSessionExpired = true
-		  	}
+				setTimeout(() => {
+					this.reLogin();
+				}, 3000)
+			}
 		})
 	}
 
@@ -160,39 +178,45 @@ export class InvDashboradComponent implements OnInit {
 			this.pastChallenges = data.list;
 			this.getSubmissionPast();
 		}).catch(err => {
-			if (err.status == 500) {
+			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 				this.userSessionExpired = true
-		  	}
+				setTimeout(() => {
+					this.reLogin();
+				}, 3000)
+			}
 		})
 	}
 
 	getSubmissionPast() {
-		let url = "submissionAllChallenge";
-		this.requestService.get(url, null).toPromise().then(data => {
-			let tempData = [];
-			this.pastChallenges.filter(dt => {
-				data.map(res => {
-					if (dt._id == res.challengeId) {
-						tempData.push(dt)
-					}
-				})
-			})
-			this.submittedPastChallenges = uniqBy(tempData)
-		}).catch(err => {
-			if (err.status == 500) {
-				this.userSessionExpired = true
-		  	}
-		})
-
-		// let tempData = []
-		// 			this.pastChallenges.filter(dt => {
-		// 		this.totalSubmittedChallenges.map(res => {
+		// let url = "submissionAllChallenge";
+		// this.requestService.get(url, null).toPromise().then(data => {
+		// 	let tempData = [];
+		// 	this.pastChallenges.filter(dt => {
+		// 		data.map(res => {
 		// 			if (dt._id == res.challengeId) {
 		// 				tempData.push(dt)
 		// 			}
 		// 		})
 		// 	})
 		// 	this.submittedPastChallenges = uniqBy(tempData)
+		// }).catch(err => {
+		// 	if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
+		// 		this.userSessionExpired = true
+		// 		setTimeout(() => {
+		// 			this.reLogin();
+		// 		}, 3000)
+		// 	}
+		// })
+
+		let tempData = []
+		this.pastChallenges.filter(dt => {
+			this.totalSubmittedChallenges.map(res => {
+				if (dt._id == res.challengeId) {
+					tempData.push(dt)
+				}
+			})
+		})
+		this.submittedPastChallenges = uniqBy(tempData)
 	}
 
 	sortSelect(sort) {

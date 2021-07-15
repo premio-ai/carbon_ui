@@ -3,7 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RequestService } from '../request.service';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
-import { APP_URL } from '../../config/config';
+import { APP_URL, MESSAGES } from '../../config/config';
 
 @Component({
   selector: 'app-inv-model-view',
@@ -81,8 +81,11 @@ export class InvModelViewComponent implements OnInit {
     this.requestService.get(url, null).toPromise().then(data => {
       this.allSubmitOfChallenge = data;
     }).catch(err => {
-      if (err.status == 500) {
+      if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
         this.userSessionExpired = true
+        setTimeout(() => {
+          this.reLogin();
+        }, 3000)
       }
     })
   }
@@ -97,8 +100,11 @@ export class InvModelViewComponent implements OnInit {
       this.totalPage = Math.ceil(data.count / 10);
       this.leaderboardData = data.list;
     }).catch(err => {
-      if (err.status == 500) {
+      if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
         this.userSessionExpired = true
+        setTimeout(() => {
+          this.reLogin();
+        }, 3000)
       }
     })
   }
@@ -133,8 +139,11 @@ export class InvModelViewComponent implements OnInit {
       this.getSubmission(this.modelId);
     }).catch(err => {
       this.errorToaster();
-      if (err.status == 500) {
+      if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
         this.userSessionExpired = true
+        setTimeout(() => {
+          this.reLogin();
+        }, 3000)
       }
     })
   }
@@ -167,8 +176,11 @@ export class InvModelViewComponent implements OnInit {
       this.getAllSubmitOfChallenge(this.challengeId);
       this.getLeaderboardOfChallenge();
     }).catch(err => {
-      if (err.status == 500) {
+      if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
         this.userSessionExpired = true
+        setTimeout(() => {
+          this.reLogin();
+        }, 3000)
       }
     })
   }
@@ -178,8 +190,11 @@ export class InvModelViewComponent implements OnInit {
     this.requestService.get(url, null).toPromise().then(data => {
       this.modelSummary = data;
     }).catch(err => {
-      if (err.status == 500) {
+      if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
         this.userSessionExpired = true
+        setTimeout(() => {
+          this.reLogin();
+        }, 3000)
       }
     })
   }
@@ -223,8 +238,11 @@ export class InvModelViewComponent implements OnInit {
       document.body.appendChild(a);
       this.imageUrlArr = data.blob;
     }).catch(err => {
-      if (err.status == 500) {
+      if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
         this.userSessionExpired = true
+        setTimeout(() => {
+          this.reLogin();
+        }, 3000)
       }
     })
   }
@@ -244,8 +262,11 @@ export class InvModelViewComponent implements OnInit {
       this.getSampleFileArr();
       this.getNextPhaseDetails();
     }).catch(err => {
-      if (err.status == 500) {
+      if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
         this.userSessionExpired = true
+        setTimeout(() => {
+          this.reLogin();
+        }, 3000)
       }
     })
   }
@@ -281,8 +302,11 @@ export class InvModelViewComponent implements OnInit {
           this.showBtn = true;
         }
       }).catch(err => {
-        if (err.status == 500) {
+        if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
           this.userSessionExpired = true
+          setTimeout(() => {
+            this.reLogin();
+          }, 3000)
         }
       })
     } else {
@@ -367,8 +391,11 @@ export class InvModelViewComponent implements OnInit {
         window.URL.revokeObjectURL(url);
       }).catch(err => {
         this.errorToaster();
-        if (err.status == 500) {
+        if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
           this.userSessionExpired = true
+          setTimeout(() => {
+            this.reLogin();
+          }, 3000)
         }
       })
     }

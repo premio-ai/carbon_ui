@@ -7,7 +7,8 @@ export const MESSAGES = {
     SUCCESSFUL_REGISTRATION: 'User has been registered successfully, please try login.',
     USER_REGISTERED: 'User already registered',
     WRONG: 'Something went wrong. Please try again later.',
-    EMAIL_REG: 'This email is already registered. Please enter valid email-id'
+    EMAIL_REG: 'This email is already registered. Please enter valid email-id',
+    SESSION_EXPIRED: "User session expired!"
 };
 
 // export const APP_URL = 'https://meanapp-comedic-kangaroo-ha.eu-gb.mybluemix.net/'        //MeanApp IBM

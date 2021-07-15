@@ -42,7 +42,7 @@
 					<div class="custom-class-example" style="width: 32%;"
 						*ngFor="let pastChallenge of submittedPastChallenges">
 						<app-inv-challenge-tile [challenge]="pastChallenge" [submissionRanking]="submissionRanking"
-							[submittedChallenges]="submittedChallenges"></app-inv-challenge-tile>
+							[submittedChallenges]="submittedChallenges" [submissionPerformance]="submissionPerformance"></app-inv-challenge-tile>
 					</div>
 				</div>
 			</ibm-tab>
@@ -50,7 +50,7 @@
 				<div style="display: flex;flex-wrap: wrap;gap: 10px;">
 					<div class="custom-class-example" style="width: 32%;"
 						*ngFor="let bookmarkedChallenge of bookmarkedChallenges">
-						<app-inv-challenge-tile [challenge]="bookmarkedChallenge"
+						<app-inv-challenge-tile [challenge]="bookmarkedChallenge" [submissionPerformance]="submissionPerformance"
 							[submissionRanking]="submissionRanking" [submittedChallenges]="submittedChallenges">
 						</app-inv-challenge-tile>
 					</div>

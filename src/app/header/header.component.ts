@@ -19,9 +19,6 @@ export class HeaderComponent implements OnInit {
 	notifications: any;
 	challengeCounts: any;
 	notificationLoading: boolean;
-	activeChallenges: any[];
-	submittedActiveChallenges: any[] = [];
-	bookmarkedChallenges: any[] = []
 	showNotification: boolean;
 	isEdit: boolean;
 	set_new_userName: string;
@@ -38,75 +35,38 @@ export class HeaderComponent implements OnInit {
 		if (this.userDetails) {
 			this.set_new_userName = this.userDetails.fullName
 			this.getNotifications();
-			this.getChallengeCounts();
-			this.getInnovatorChallangeCount();
+			if (this.userDetails.role == 'Insurer') {
+				this.getInsurerChallengeCounts();
+			}
+			if (this.userDetails.role == 'Innovator') {
+				this.getInnovatorChallangeCount();
+			}
 		}
 	}
 
 	getInnovatorChallangeCount() {
-		let allActiveChallanegUrl = "challenge/all";
-		let params = {
-			skip: 0,
-			offset: 0
-		}
-
-		this.requestService.get(allActiveChallanegUrl, params).toPromise().then(data => {
-			this.activeChallenges = data.list;
-			this.getSubmission();
-			this.getBookmarkedChallenges();
-		}).catch(err => {
-			if (err.status == 500) {
-				this.userSessionExpired = true
-			}
-		})
-	}
-
-	getBookmarkedChallenges() {
-		if (this.userDetails.role == 'Innovator') {
-			let url = "bookmarkChallenge";
-			this.requestService.get(url, null).toPromise().then(data => {
-				let tempData = []
-				this.activeChallenges.filter(dt => {
-					data.map(res => {
-						if (dt._id == res.challengeId) {
-							tempData.push(dt)
-						}
-					})
-				})
-				this.bookmarkedChallenges = tempData;
-			}).catch(err => {
-				if (err.status == 500) {
-					this.userSessionExpired = true
-				}
-			})
-		}
-	}
-
-	getSubmission() {
-		let url = "submissionAllChallenge";
-		this.requestService.get(url, null).toPromise().then(data => {
-			let tempData = []
-			this.activeChallenges.filter(dt => {
-				data.map(res => {
-					if (dt._id == res.challengeId) {
-						tempData.push(dt)
-					}
-				})
-			})
-			this.submittedActiveChallenges = tempData
-		}).catch(err => {
-			if (err.status == 500) {
-				this.userSessionExpired = true
-			}
-		})
-	}
-
-	getChallengeCounts() {
-		this.requestService.get('challenge/counts', null).toPromise().then(data => {
+		let allActiveChallanegUrl = "challenge/innovatorCounts";
+		this.requestService.get(allActiveChallanegUrl, null).toPromise().then(data => {
 			this.challengeCounts = data
 		}).catch(err => {
-			if (err.status == 500) {
+			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 				this.userSessionExpired = true
+				setTimeout(() => {
+					this.reLogin();
+				}, 3000)
+			}
+		})
+	}
+
+	getInsurerChallengeCounts() {
+		this.requestService.get('challenge/insurerCounts', null).toPromise().then(data => {
+			this.challengeCounts = data
+		}).catch(err => {
+			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
+				this.userSessionExpired = true
+				setTimeout(() => {
+					this.reLogin();
+				}, 3000)
 			}
 		})
 	}
@@ -117,8 +77,11 @@ export class HeaderComponent implements OnInit {
 			this.notifications = data;
 			this.notificationLoading = false
 		}).catch(err => {
-			if (err.status == 500) {
+			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 				this.userSessionExpired = true
+				setTimeout(() => {
+					this.reLogin();
+				}, 3000)
 			}
 		})
 		setTimeout(() => {
@@ -150,8 +113,11 @@ export class HeaderComponent implements OnInit {
 			}).toPromise().then(data => {
 				this.router.navigateByUrl('invaccepted/' + notify.elementId)
 			}).catch(err => {
-				if (err.status == 500) {
+				if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 					this.userSessionExpired = true
+					setTimeout(() => {
+						this.reLogin();
+					}, 3000)
 				}
 			})
 		}
@@ -161,8 +127,11 @@ export class HeaderComponent implements OnInit {
 			}).toPromise().then(data => {
 				this.router.navigateByUrl('modelReport/' + notify.elementId)
 			}).catch(err => {
-				if (err.status == 500) {
+				if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 					this.userSessionExpired = true
+					setTimeout(() => {
+						this.reLogin();
+					}, 3000)
 				}
 			})
 		}
@@ -187,8 +156,11 @@ export class HeaderComponent implements OnInit {
 			}
 		}).catch(err => {
 			this.errorToaster();
-			if (err.status == 500) {
+			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 				this.userSessionExpired = true
+				setTimeout(() => {
+					this.reLogin();
+				}, 3000)
 			}
 		})
 	}

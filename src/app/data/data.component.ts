@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { APP_URL } from '../../config/config';
+import { APP_URL, MESSAGES } from '../../config/config';
 import { RequestService } from '../request.service';
 
 @Component({
@@ -69,8 +69,11 @@ export class DataComponent implements OnInit {
       this.getChallengeDetails(this.challengeDetails._id)
     }).catch(err => {
       this.errorToaster();
-      if (err.status == 500) {
+      if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
         this.userSessionExpired = true
+        setTimeout(() => {
+          this.reLogin();
+        }, 3000)
       }
     })
   }
@@ -80,8 +83,11 @@ export class DataComponent implements OnInit {
       this.challengeDetails = data
     }).catch(err => {
       this.errorToaster();
-      if (err.status == 500) {
+      if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
         this.userSessionExpired = true
+        setTimeout(() => {
+          this.reLogin();
+        }, 3000)
       }
     })
   }
@@ -97,8 +103,11 @@ export class DataComponent implements OnInit {
         this.imageUrlArr.push(data.blob)
       }).catch(err => {
         this.errorToaster();
-        if (err.status == 500) {
+        if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
           this.userSessionExpired = true
+          setTimeout(() => {
+            this.reLogin();
+          }, 3000)
         }
       })
     })
@@ -141,8 +150,11 @@ export class DataComponent implements OnInit {
         window.URL.revokeObjectURL(url);
       }).catch(err => {
         this.errorToaster();
-        if (err.status == 500) {
+        if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
           this.userSessionExpired = true
+          setTimeout(() => {
+            this.reLogin();
+          }, 3000)
         }
       })
 

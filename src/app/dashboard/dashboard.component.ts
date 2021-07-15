@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { RequestService } from "../request.service";
 import { Router } from "@angular/router";
+import { MESSAGES } from '../../config/config';
 
 @Component({
 	selector: "app-dashboard",
@@ -24,7 +25,7 @@ export class DashboardComponent implements OnInit {
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
 		this.routeAuthError = false;
 		if (this.userDetails && this.userDetails._id) {
-			if (this.userDetails.role == 'Insurer') {				
+			if (this.userDetails.role == 'Insurer') {
 				this.errorToasterMsg = false;
 				this.userSessionExpired = false;
 				this.getActiveChallanges();
@@ -53,8 +54,11 @@ export class DashboardComponent implements OnInit {
 			this.activeChallenges = data;
 		}).catch(err => {
 			this.errorToaster();
-			if (err.status == 500) {
+			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 				this.userSessionExpired = true
+				setTimeout(() => {
+					this.reLogin();
+				}, 3000)
 			}
 		})
 	}
@@ -76,8 +80,11 @@ export class DashboardComponent implements OnInit {
 			this.pastChallenges = data;
 		}).catch(err => {
 			this.errorToaster();
-			if (err.status == 500) {
+			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 				this.userSessionExpired = true
+				setTimeout(() => {
+					this.reLogin();
+				}, 3000)
 			}
 		})
 	}

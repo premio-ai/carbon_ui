@@ -3,6 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RequestService } from '../request.service';
 import { Location } from '@angular/common';
 import "@carbon/charts/styles.css";
+import { MESSAGES } from '../../config/config';
 
 @Component({
 	selector: 'app-inv-see-performance',
@@ -81,8 +82,11 @@ export class InvSeePerformanceComponent implements OnInit {
 
 			this.getChallengeDetails(this.challengeId);
 		}).catch(err => {
-			if (err.status == 500) {
+			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 				this.userSessionExpired = true
+				setTimeout(() => {
+					this.reLogin();
+				}, 3000)
 			}
 		})
 	}
@@ -130,8 +134,11 @@ export class InvSeePerformanceComponent implements OnInit {
 				this.recall();
 			}
 		}).catch(err => {
-			if (err.status == 500) {
+			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 				this.userSessionExpired = true
+				setTimeout(() => {
+					this.reLogin();
+				}, 3000)
 			}
 		})
 	}
@@ -142,8 +149,11 @@ export class InvSeePerformanceComponent implements OnInit {
 			this.challengeDetails = data;
 			this.getNextPhaseDetails();
 		}).catch(err => {
-			if (err.status == 500) {
+			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 				this.userSessionExpired = true
+				setTimeout(() => {
+					this.reLogin();
+				}, 3000)
 			}
 		})
 	}
@@ -211,8 +221,11 @@ export class InvSeePerformanceComponent implements OnInit {
 				a.remove();
 			}).catch(err => {
 				this.errorToaster();
-				if (err.status == 500) {
+				if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 					this.userSessionExpired = true
+					setTimeout(() => {
+						this.reLogin();
+					}, 3000)
 				}
 			})
 		}
