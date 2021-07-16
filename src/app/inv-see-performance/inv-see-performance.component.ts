@@ -3,7 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RequestService } from '../request.service';
 import { Location } from '@angular/common';
 import "@carbon/charts/styles.css";
-import { MESSAGES } from '../../config/config';
+import { MESSAGES, ROLE } from '../../config/config';
 
 @Component({
 	selector: 'app-inv-see-performance',
@@ -53,7 +53,7 @@ export class InvSeePerformanceComponent implements OnInit {
 	ngOnInit() {
 		let userDetails = JSON.parse(localStorage.getItem('userDetails'))
 		if (userDetails && userDetails._id) {
-			if (userDetails.role == 'Innovator') {
+			if (userDetails.role == ROLE.INNOVATOR) {
 				let modelId = ''
 				this.errorToasterMsg = false;
 				this.userSessionExpired = false;
@@ -532,6 +532,8 @@ export class InvSeePerformanceComponent implements OnInit {
 	}
 
 	reLogin() {
+		let id = JSON.parse(localStorage.getItem('timeoutId'))
+		clearTimeout(id);
 		localStorage.clear();
 		this.router.navigateByUrl('login')
 	}

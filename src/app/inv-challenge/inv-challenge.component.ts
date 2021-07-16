@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
-import { MESSAGES } from '../../config/config';
+import { MESSAGES, ROLE } from '../../config/config';
 import { RequestService } from "../request.service";
 
 @Component({
@@ -46,7 +46,7 @@ export class InvChallengeComponent implements OnInit {
 
     let userDetails = JSON.parse(localStorage.getItem('userDetails'))
     if (userDetails && userDetails._id) {
-      if (userDetails.role == 'Innovator') {
+      if (userDetails.role == ROLE.INNOVATOR) {
         this.getAllActiveChallanges(this.pageOffset);
         this.getBookmarkedChallenges(this.pageOffsetBM, null);
       } else {
@@ -281,6 +281,8 @@ export class InvChallengeComponent implements OnInit {
   }
 
   reLogin() {
+    let id = JSON.parse(localStorage.getItem('timeoutId'))
+		clearTimeout(id);
     localStorage.clear();
     this.router.navigateByUrl('login')
   }

@@ -11,6 +11,11 @@ export const MESSAGES = {
     SESSION_EXPIRED: "User session expired!"
 };
 
+export const ROLE = {
+    INSURER: 'Insurer',
+    INNOVATOR: 'Innovator'
+}
+
 // export const APP_URL = 'https://meanapp-comedic-kangaroo-ha.eu-gb.mybluemix.net/'        //MeanApp IBM
 export const APP_URL = 'https://challengeapp.eu-gb.cf.appdomain.cloud/'                 //ChallengeApp IBM
 // export const APP_URL = 'http://localhost:3500'

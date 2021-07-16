@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RequestService } from "../request.service";
 import { Router } from "@angular/router";
 import { uniqBy } from 'lodash';
-import { MESSAGES } from '../../config/config';
+import { MESSAGES, ROLE } from '../../config/config';
 
 
 @Component({
@@ -34,7 +34,7 @@ export class InvDashboradComponent implements OnInit {
 		this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
 		this.routeAuthError = false;
 		if (this.userDetails && this.userDetails._id) {
-			if (this.userDetails.role == 'Innovator') {
+			if (this.userDetails.role == ROLE.INNOVATOR) {
 				this.userSessionExpired = false;
 				this.getAllActiveChallanges();
 				// this.getAllPastChallanges();
@@ -279,6 +279,8 @@ export class InvDashboradComponent implements OnInit {
 	}
 
 	reLogin() {
+		let id = JSON.parse(localStorage.getItem('timeoutId'))
+		clearTimeout(id);
 		localStorage.clear();
 		this.router.navigateByUrl('login')
 	}

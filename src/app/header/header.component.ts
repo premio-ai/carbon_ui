@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../request.service';
 import { Router } from '@angular/router';
-import { MESSAGES } from '../../config/config';
+import { MESSAGES, ROLE } from '../../config/config';
 
 @Component({
 	selector: 'app-header',
@@ -35,10 +35,10 @@ export class HeaderComponent implements OnInit {
 		if (this.userDetails) {
 			this.set_new_userName = this.userDetails.fullName
 			this.getNotifications();
-			if (this.userDetails.role == 'Insurer') {
+			if (this.userDetails.role == ROLE.INSURER) {
 				this.getInsurerChallengeCounts();
 			}
-			if (this.userDetails.role == 'Innovator') {
+			if (this.userDetails.role == ROLE.INNOVATOR) {
 				this.getInnovatorChallangeCount();
 			}
 		}
@@ -84,9 +84,10 @@ export class HeaderComponent implements OnInit {
 				}, 3000)
 			}
 		})
-		setTimeout(() => {
+		var timeoutId = setTimeout(() => {
 			this.getNotifications();
 		}, Number((60 + Math.random() * 10).toFixed(0)) * 1000);
+		localStorage.setItem('timeoutId', JSON.stringify(timeoutId));
 	}
 
 	clearNotification() {
@@ -98,10 +99,10 @@ export class HeaderComponent implements OnInit {
 	}
 
 	navigate() {
-		if (this.userDetails.role == 'Insurer') {
+		if (this.userDetails.role == ROLE.INSURER) {
 			this.router.navigateByUrl('dashboard')
 		}
-		if (this.userDetails.role == 'Innovator') {
+		if (this.userDetails.role == ROLE.INNOVATOR) {
 			this.router.navigateByUrl('invdash')
 		}
 	}
@@ -177,11 +178,15 @@ export class HeaderComponent implements OnInit {
 	}
 
 	reLogin() {
+		let id = JSON.parse(localStorage.getItem('timeoutId'))
+		clearTimeout(id);
 		localStorage.clear();
 		this.router.navigateByUrl('login')
 	}
 
 	logout() {
+		let id = JSON.parse(localStorage.getItem('timeoutId'))
+		clearTimeout(id);
 		localStorage.clear();
 		this.router.navigateByUrl('login')
 	}

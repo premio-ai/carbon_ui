@@ -181,6 +181,8 @@ export class DataComponent implements OnInit {
   }
 
   reLogin() {
+    let id = JSON.parse(localStorage.getItem('timeoutId'))
+		clearTimeout(id);
     localStorage.clear();
     this.router.navigateByUrl('login')
   }

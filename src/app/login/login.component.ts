@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ROLE } from '../../config/config';
 import { RequestService } from '../request.service';
 
 @Component({
@@ -37,9 +38,9 @@ export class LoginComponent implements OnInit {
           const userDetails = data.userDetails;
           localStorage.setItem('userDetails', JSON.stringify(userDetails))
   
-          if (userDetails.role == 'Insurer') {
+          if (userDetails.role == ROLE.INSURER) {
             this.router.navigateByUrl('dashboard')
-          } else if (userDetails.role == 'Innovator') {
+          } else if (userDetails.role == ROLE.INNOVATOR) {
             this.router.navigateByUrl('invdash')
           }
       }).catch( err => {

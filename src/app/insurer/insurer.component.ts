@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../request.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { MESSAGES } from '../../config/config';
+import { MESSAGES, ROLE } from '../../config/config';
 
 @Component({
   selector: 'app-insurer',
@@ -28,7 +28,7 @@ export class InsurerComponent implements OnInit {
     let userDetails = JSON.parse(localStorage.getItem('userDetails'))
     this.routeAuthError = false;
     if (userDetails && userDetails._id) {
-      if (userDetails.role == 'Insurer') {
+      if (userDetails.role == ROLE.INSURER) {
         let challengeId = ''
         this.userSessionExpired = false;
         this.activatedRoute.params.subscribe((params: Params) => {
@@ -255,6 +255,8 @@ export class InsurerComponent implements OnInit {
   }
 
   reLogin() {
+    let id = JSON.parse(localStorage.getItem('timeoutId'))
+		clearTimeout(id);
     localStorage.clear();
     this.router.navigateByUrl('login')
   }

@@ -86,6 +86,10 @@ export class InvChallengeTileComponent implements OnInit {
     }
   }
 
+  getDescriptionStr(descStr) {
+    return descStr.substring(0, 250)
+  }
+
   getExpiryDate(dt) {
     let date = moment(dt).format('DD/MM/YYYY')
     return date;

@@ -4,6 +4,7 @@ import { RequestService } from '../request.service';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
 import "@carbon/charts/styles.css";
+import { ROLE } from '../../config/config';
 
 @Component({
 	selector: 'app-model-report',
@@ -55,7 +56,7 @@ export class ModelReportComponent implements OnInit {
 		let userDetails = JSON.parse(localStorage.getItem('userDetails'))
 		this.routeAuthError = false;
 		if (userDetails && userDetails._id) {
-			if (userDetails.role == 'Insurer') {
+			if (userDetails.role == ROLE.INSURER) {
 				this.toasterMsg = false
 				this.activatedRoute.params.subscribe((params: Params) => {
 					if (params) {

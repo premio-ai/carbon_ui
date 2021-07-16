@@ -3,7 +3,7 @@ import { RequestService } from "../request.service";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
-import { APP_URL, MESSAGES } from '../../config/config';
+import { APP_URL, MESSAGES, ROLE } from '../../config/config';
 
 @Component({
 	selector: 'app-inv-accepted',
@@ -64,7 +64,7 @@ export class InvAcceptedComponent implements OnInit {
 	ngOnInit() {
 		let userDetails = JSON.parse(localStorage.getItem('userDetails'))
 		if (userDetails && userDetails._id) {
-			if (userDetails.role == 'Innovator') {
+			if (userDetails.role == ROLE.INNOVATOR) {
 				this.isApiLoading = false;
 				this.appUrl = APP_URL;
 				this.enterPhaseId = '';
@@ -509,6 +509,8 @@ export class InvAcceptedComponent implements OnInit {
 	}
 
 	reLogin() {
+		let id = JSON.parse(localStorage.getItem('timeoutId'))
+		clearTimeout(id);
 		localStorage.clear();
 		this.router.navigateByUrl('login')
 	}

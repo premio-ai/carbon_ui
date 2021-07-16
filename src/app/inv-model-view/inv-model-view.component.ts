@@ -3,7 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RequestService } from '../request.service';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
-import { APP_URL, MESSAGES } from '../../config/config';
+import { APP_URL, MESSAGES, ROLE } from '../../config/config';
 
 @Component({
   selector: 'app-inv-model-view',
@@ -50,7 +50,7 @@ export class InvModelViewComponent implements OnInit {
     let userDetails = JSON.parse(localStorage.getItem('userDetails'));
     this.routeAuthError = false;
     if (userDetails && userDetails._id) {
-      if (userDetails.role == 'Innovator') {
+      if (userDetails.role == ROLE.INNOVATOR) {
         this.errorToasterMsg = false;
         this.userSessionExpired = false;
         this.pageNo = 1;
@@ -430,6 +430,8 @@ export class InvModelViewComponent implements OnInit {
   }
 
   reLogin() {
+    let id = JSON.parse(localStorage.getItem('timeoutId'))
+		clearTimeout(id);
     localStorage.clear();
     this.router.navigateByUrl('login')
   }

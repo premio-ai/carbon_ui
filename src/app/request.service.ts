@@ -9,9 +9,8 @@ import { Router } from '@angular/router';
 })
 
 export class RequestService {
-  // baseUrl: string = "http://localhost:3500/api/";
-  // baseUrl: string = "https://challengeclient.eu-gb.cf.appdomain.cloud/api/"                  //ChallengeApp IBM
-  baseUrl: string = "https://challengeapp.eu-gb.cf.appdomain.cloud/api/"                  //ChallengeApp IBM
+  // baseUrl: string = "http://localhost:3500/api/";                                          // Local URL
+  baseUrl: string = "https://challengeapp.eu-gb.cf.appdomain.cloud/api/"                     //ChallengeApp IBM
   constructor(private http: HttpClient) {}
 
   get(uri, params): Observable<any> {
@@ -25,12 +24,12 @@ export class RequestService {
         observe: 'response',
         responseType: 'json'
       }).pipe(map(resp => {
-        let refresh_token = resp.headers.get('refresh-token')
-        if (refresh_token && refresh_token.length>0) {          
-          let updateUserDetails = userDetails
-          updateUserDetails.access_token = refresh_token
-          localStorage.setItem('userDetails', JSON.stringify(updateUserDetails))
-        }
+        // let refresh_token = resp.headers.get('refresh-token')
+        // if (refresh_token && refresh_token.length>0) {          
+        //   let updateUserDetails = userDetails
+        //   updateUserDetails.access_token = refresh_token
+        //   localStorage.setItem('userDetails', JSON.stringify(updateUserDetails))
+        // }
         return resp.body;
       }),
         catchError(error => {
@@ -56,9 +55,12 @@ export class RequestService {
         observe: 'response',
         responseType: 'json'
       }).pipe(map(resp => {
-        let updateUserDetails = userDetails
-        updateUserDetails.access_token = resp.headers.get('refresh-token')
-        localStorage.setItem('userDetails', JSON.stringify(updateUserDetails))
+        // let refresh_token = resp.headers.get('refresh-token')
+        // if (refresh_token && refresh_token.length>0) {          
+        //   let updateUserDetails = userDetails
+        //   updateUserDetails.access_token = refresh_token
+        //   localStorage.setItem('userDetails', JSON.stringify(updateUserDetails))
+        // }
         return resp.body;
       }),
         catchError(error => {
@@ -80,9 +82,12 @@ export class RequestService {
         observe: 'response',
         responseType: 'json'
       }).pipe(map(resp => {
-        let updateUserDetails = userDetails
-        updateUserDetails.access_token = resp.headers.get('refresh-token')
-        localStorage.setItem('userDetails', JSON.stringify(updateUserDetails))
+        // let refresh_token = resp.headers.get('refresh-token')
+        // if (refresh_token && refresh_token.length>0) {          
+        //   let updateUserDetails = userDetails
+        //   updateUserDetails.access_token = refresh_token
+        //   localStorage.setItem('userDetails', JSON.stringify(updateUserDetails))
+        // }
         return resp.body;
       }),
         catchError(error => {

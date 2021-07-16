@@ -55,7 +55,7 @@ export class ChallangeSecondStepComponent implements OnInit {
       sampleDataFile: []
     }
 
-    this.createTempBucket();
+    // this.createTempBucket();
   }
 
   createTempBucket() {
@@ -260,7 +260,9 @@ export class ChallangeSecondStepComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.subject.unsubscribe()
+    if (this.subject) {
+      this.subject.unsubscribe();
+    }
   }
 
   setSampleData(data) {
@@ -305,6 +307,8 @@ export class ChallangeSecondStepComponent implements OnInit {
   }
 
   reLogin() {
+    let id = JSON.parse(localStorage.getItem('timeoutId'))
+		clearTimeout(id);
     localStorage.clear();
     this.router.navigateByUrl('login')
   }
