@@ -41,9 +41,11 @@ export class DragAndDropStory {
 
 	onDropped(event) {
 		let transferredFiles = Array.from(event);
-
 		if (transferredFiles.length > 0) {
-			this.setSampleData(transferredFiles[transferredFiles.length - 1])
+			// this.setSampleData(transferredFiles[transferredFiles.length - 1])
+			transferredFiles.map( dt => {
+				this.setSampleData(dt)
+			})
 		}
 	}
 

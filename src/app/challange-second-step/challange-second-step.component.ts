@@ -37,12 +37,16 @@ export class ChallangeSecondStepComponent implements OnInit {
   isBtnDisabled: boolean;
   isSampleFileUploading: boolean;
   isDataVisualUploading: boolean;
+  isTrainUploaded: boolean;
+  isTestUploaded: boolean;
   fileNameError: boolean;
   errorToasterMsg: boolean;
   userSessionExpired: boolean;
   isApiLoading: boolean;
 
   ngOnInit() {
+    this.isTestUploaded = false;
+    this.isTrainUploaded = false;
     this.isApiLoading = false;
     this.isBtnDisabled = true;
     this.isSampleFileUploading = false;
@@ -55,7 +59,7 @@ export class ChallangeSecondStepComponent implements OnInit {
       sampleDataFile: []
     }
 
-    // this.createTempBucket();
+    this.createTempBucket();
   }
 
   createTempBucket() {
@@ -172,6 +176,14 @@ export class ChallangeSecondStepComponent implements OnInit {
   }
 
   removeStepTwoSampleDataFile(index) {
+
+    // if (this.stepTwo.sampleDataFile[index].path.includes('train.csv') ) {
+    //   this.isTrainUploaded = false;
+    // }
+    // if (this.stepTwo.sampleDataFile[index].path.includes('test.csv') ) {
+    //   this.isTestUploaded = false;
+    // }
+
     this.stepTwo.sampleDataFile.splice(index, 1)
   }
 
@@ -222,6 +234,7 @@ export class ChallangeSecondStepComponent implements OnInit {
         ind = 0
       }
     }
+
     if (file.name == 'test.csv' || file.name == 'train.csv') {
       this.isSampleFileUploading = true
       this.fileNameError = false
@@ -239,6 +252,12 @@ export class ChallangeSecondStepComponent implements OnInit {
       this.fileArray = []
       if (formData) {
         this.subject = this.requestService.post('upload', formData).subscribe(data => {
+          if (data.filePath.includes('test.csv')) {
+            this.isTestUploaded = true;
+          }
+          if (data.filePath.includes('train.csv')) {
+            this.isTrainUploaded = true;
+          }
           this.isSampleFileUploading = false
           if (data && data.filePath.length > 0) {
             let fileObj = {
@@ -255,6 +274,124 @@ export class ChallangeSecondStepComponent implements OnInit {
       }
     } else {
       this.fileNameError = true
+    }
+
+    // if (this.stepTwo.sampleDataFile.length>0) {
+    //   this.stepTwo.sampleDataFile.map( dt => {
+    //     console.log(dt.path, "---dt.path---239")
+    //     if (file.name == 'train.csv') {
+    //       if (dt.path.includes(file.name) ) {
+    //         this.isTrainUploaded = true
+    //       }
+    //     }
+    //     if (file.name == 'test.csv') {
+    //       if (dt.path.includes(file.name) ) {
+    //         this.isTestUploaded = true
+    //       }
+    //     }
+    //   })
+
+    //   if (this.isTrainUploaded == false || this.isTestUploaded == false) {
+    //     this.checkUpload(file, ind, index)
+    //   } else {
+    //     console.log("---already uploaded---246");
+    //   }
+    // } else {
+    //   if (file.name == 'test.csv' || file.name == 'train.csv') {
+    //     this.isSampleFileUploading = true
+    //     this.fileNameError = false
+    //     this.fileData = new FormData();
+    //     this.fileData.append('files', file);
+
+    //     let payload = {
+    //       tempBucketName: this.bucketName,
+    //       phaseNo: ind,
+    //       fileType: 'sampleDataFile'
+    //     }
+    //     this.fileData.append('uploadInfo', JSON.stringify(payload))
+    //     const formData = this.fileData;
+    //     this.fileData.delete('FormData');
+    //     this.fileArray = []
+    //     if (formData) {
+    //       this.subject = this.requestService.post('upload', formData).subscribe(data => {
+    //         if (data.filePath.includes('test.csv')) {
+    //           this.isTestUploaded = true;
+    //         }
+    //         if (data.filePath.includes('train.csv')) {
+    //           this.isTrainUploaded = true;
+    //         }
+    //         this.isSampleFileUploading = false
+    //         if (data && data.filePath.length > 0) {
+    //           let fileObj = {
+    //             path: data.filePath,
+    //             downloadCount: 0
+    //           }
+    //           if (index >= 0) {
+    //             this.phases[ind].sampleDataFile.push(fileObj)
+    //           } else {
+    //             this.stepTwo.sampleDataFile.push(fileObj)
+    //             console.log(this.stepTwo.sampleDataFile, "---this.stepTwo.sampleDataFile---260")
+    //           }
+    //         }
+    //       })
+    //     }
+    //   } else {
+    //     this.fileNameError = true
+    //   }
+    // }
+
+  }
+
+  checkUpload(file, ind, index) {
+    for (let i = 0; i < this.stepTwo.sampleDataFile.length; i++) {
+      const element = this.stepTwo.sampleDataFile[i];
+
+      if (!element.path.includes(file.name)) {
+        if (file.name == 'test.csv' || file.name == 'train.csv') {
+          this.isSampleFileUploading = true
+          this.fileNameError = false
+          this.fileData = new FormData();
+          this.fileData.append('files', file);
+
+          let payload = {
+            tempBucketName: this.bucketName,
+            phaseNo: ind,
+            fileType: 'sampleDataFile'
+          }
+          this.fileData.append('uploadInfo', JSON.stringify(payload))
+          const formData = this.fileData;
+          this.fileData.delete('FormData');
+          this.fileArray = []
+          if (formData) {
+            this.subject = this.requestService.post('upload', formData).subscribe(async data => {
+              if (data.filePath.includes('test.csv')) {
+                this.isTestUploaded = true;
+              }
+              if (data.filePath.includes('train.csv')) {
+                this.isTrainUploaded = true;
+              }
+              this.isSampleFileUploading = false
+              if (await data && data.filePath.length > 0) {
+                let fileObj = {
+                  path: data.filePath,
+                  downloadCount: 0
+                }
+                if (index >= 0) {
+                  this.phases[ind].sampleDataFile.push(fileObj)
+                } else {
+                  this.stepTwo.sampleDataFile.map(dt => {
+                    if (!dt.path.includes(file.name)) {
+                      this.stepTwo.sampleDataFile.push(fileObj)
+                    }
+                  })
+                }
+              }
+            })
+          }
+        } else {
+          this.fileNameError = true
+        }
+      }
     }
 
   }
@@ -308,7 +445,7 @@ export class ChallangeSecondStepComponent implements OnInit {
 
   reLogin() {
     let id = JSON.parse(localStorage.getItem('timeoutId'))
-		clearTimeout(id);
+    clearTimeout(id);
     localStorage.clear();
     this.router.navigateByUrl('login')
   }
