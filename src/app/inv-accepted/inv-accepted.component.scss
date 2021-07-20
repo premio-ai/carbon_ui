@@ -112,8 +112,9 @@
 .bx--toast-notification--success {
   border-left: 3px solid #42be65;
   background: #393939;
-  margin-left: auto;
-  position: relative;
+  margin-left: 1000px;
+  margin-top: 100px;
+  position: absolute;
   top: -36px;
   left: 32px;
 }
@@ -149,11 +150,11 @@
 }
 
 .app-loading .spinner .path {
-  stroke-dasharray: 1, 200;
+  stroke-dasharray: 2, 200;
   stroke-dashoffset: 0;
   animation: dash 1.5s ease-in-out infinite;
   stroke-linecap: round;
-  stroke: #ff0000;
+  stroke: #0066ff;
 }
 
 .bx--toast-notification--failure {

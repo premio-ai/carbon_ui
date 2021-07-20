@@ -96,35 +96,47 @@ export class InvSeePerformanceComponent implements OnInit {
 		this.requestService.get(url, null).toPromise().then(data => {
 			this.modelPerformance = data
 			if (this.modelPerformance.length > 0) {
-				this.modelPerformance.map(dt => {
+				let testScores = [];
+				let trainScore = [];
+				this.modelPerformance.filter(dt => {
 					if (dt.key.startsWith('test_')) {
-						if (dt.key == "test_accuracy") {
-							this.accuracyScore = (dt.value * 100).toFixed(0)
-						}
-						if (dt.key == "test_macro_avg_precision") {
-							this.precisionScore = (dt.value * 100).toFixed(0)
-						}
-						if (dt.key == "test_macro_avg_recall") {
-							this.recallScore = (dt.value * 100).toFixed(0)
-						}
-						this.accuracy();
-						this.precision();
-						this.recall();
+						testScores.push(dt)
 					} else if (dt.key.startsWith('training_')) {
-						if (dt.key == "training_accuracy_score") {
-							this.accuracyScore = (dt.value * 100).toFixed(0)
-						}
-						if (dt.key == "training_precision_score") {
-							this.precisionScore = (dt.value * 100).toFixed(0)
-						}
-						if (dt.key == "training_recall_score") {
-							this.recallScore = (dt.value * 100).toFixed(0)
-						}
-						this.accuracy();
-						this.precision();
-						this.recall();
+						trainScore.push(dt)
 					}
 				})
+
+				if (testScores.length > 0) {
+					testScores.map(dt => {
+						if (dt.key == 'test_accuracy') {
+							this.accuracyScore = parseInt((dt.value * 100).toFixed(0))
+						}
+						if (dt.key == 'test_macro_avg_precision') {
+							this.precisionScore = parseInt((dt.value * 100).toFixed(0))
+						}
+						if (dt.key == 'test_macro_avg_recall') {
+							this.recallScore = parseInt((dt.value * 100).toFixed(0))
+						}
+					})
+					this.accuracy();
+					this.precision();
+					this.recall();
+				} else if (trainScore.length > 0) {
+					trainScore.map(dt => {
+						if (dt.key == 'training_score') {
+							this.accuracyScore = parseInt((dt.value * 100).toFixed(0))
+						}
+						if (dt.key == 'training_precision_score') {
+							this.precisionScore = parseInt((dt.value * 100).toFixed(0))
+						}
+						if (dt.key == 'training_recall_score') {
+							this.recallScore = parseInt((dt.value * 100).toFixed(0))
+						}
+					})
+					this.accuracy();
+					this.precision();
+					this.recall();
+				}
 			} else {
 				this.accuracyScore = 0
 				this.precisionScore = 0

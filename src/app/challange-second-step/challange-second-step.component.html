@@ -85,10 +85,17 @@
             <app-drop-file-uploader (uploadFile)="uploadSampleData($event, i)" (getFile)="setSampleData($event)">
             </app-drop-file-uploader>
             <br />
+            <div *ngIf="isSampleFileUploading">
+              <h6>
+                <ibm-inline-loading [loadingText]="loadingText" [successText]="successText"
+                  (onSuccess)="onSuccess($event)">
+                </ibm-inline-loading>
+              </h6>
+            </div>
             <div *ngFor="let sampleFile of phases[i].sampleDataFile; index as j">
               <div class="fileBox">
                 <p style="margin: 8px; font-size: small;">{{getSampleFileName(sampleFile.path)}}</p>
-                <!-- <p style="margin-top: 8px; margin-left: 50px; cursor: pointer;" (click)="removeSampleDataFile(i, j)">x</p> -->
+                <p style="margin-top: 8px; margin-left: 50px; cursor: pointer;" (click)="removeSampleDataFile(i, j)">x</p>
               </div>
             </div>
           </div>
@@ -96,6 +103,7 @@
       </div>
     </div>
   </div>
+
   <!-- TODO : adding new phase -->
   <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
@@ -119,9 +127,7 @@
       <br />
       <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
         <p class="headingtop">Data Usage Guidance</p>
-        <p class="challTitle">
-          {{stepTwo.guidance.length || 0}}/100
-        </p>
+        <p class="challTitle">{{stepTwo.guidance.length || 0}}/100</p>
         <textarea style="width: 90%; margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="stepTwo.guidance"
           [theme]="theme" [rows]="3" [cols]="cols" aria-label="textarea" maxlength="100"></textarea>
       </ibm-label>
