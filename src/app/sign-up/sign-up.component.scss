@@ -19,5 +19,30 @@
 }
 
 .imglogo {
-    margin-left: -57px;height: 48px;
+    // margin-left: -57px;
+    // height: 48px;
+}
+
+.logoimg{
+    display: flex;
+    width: 62.5%;
+    margin: 0 auto;
+}
+
+.images{
+    display: flex;
+    align-items: center;
+}
+
+.box{
+    border: 1px solid lightgrey;
+    padding: 10px;
+    margin: 0 auto;
+    width: 55%;
+    border-radius: 5px;
+}
+
+.heading{
+    margin-left: 150px;
+    margin-top: 21px;
 }
