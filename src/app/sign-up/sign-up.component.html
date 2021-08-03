@@ -8,7 +8,7 @@
   <div class="heading">
     <h4>Create your Market Space Account</h4>
   </div>
-  <div ibmGrid [condensed]="gridCondensed" style="display: flex; justify-content: center;">
+  <div ibmGrid [condensed]="gridCondensed">
     <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
       <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
         <div *ngIf="showSuccessToasterMsg" data-notification
@@ -43,7 +43,7 @@
             </svg>
           </button>
         </div>
-        <div class="bx--form-item" style="margin-top: 8%;">
+        <div class="bx--form-item" style="margin-top: 4%;">
           <label for="text-input-3" class="bx--label">Full Name</label>
           <input id="text-input-3" type="text" class="bx--text-input" [(ngModel)]="signupDetails.fullName"
             placeholder="e.g. John Doe" />
@@ -82,7 +82,7 @@
           <label for="text-input-3" class="bx--label">Bio and Company Info</label>
           <!-- <input id="text-input-3" type="text" class="bx--text-input" [(ngModel)]="signupDetails.bio"
           placeholder="I am a..." /> -->
-          <textarea style="width: 100% !important" ibmTextArea minlength="1" maxlength="500" [rows]="1" [cols]="cols"
+          <textarea style="width: 100% !important" ibmTextArea minlength="1" maxlength="500" [rows]="3" [cols]="cols"
             aria-label="textarea" [(ngModel)]="signupDetails.bio"></textarea>
         </div>
         <div *ngIf="bioError">
@@ -98,16 +98,16 @@
         </div>
         <br />
         <div class="bx--form-item">
-          <button class="bx--btn bx--btn--primary" type="button" (click)="validate()">Sign Up</button>
+          <button class="bx--btn bx--btn--primary button_style" type="button" (click)="validate()">Sign Up</button>
         </div>
-        <div class="bx--form-item">
+        <div class="bx--form-item" style="margin-top: 5px;">
           <p style="font-size: 0.8rem;">Already have an account. <a style="cursor: pointer;"
               (click)="login()">Sign-In</a>
             instead</p>
         </div>
       </div>
       <div ibmCol class="custom-class-example images" [columnNumbers]="{ md: 4, sm: 12 }">
-        <img src="assets/tab.png" width="275" height="275">
+        <img src="assets/tab.png" class="img">
       </div>
     </div>
   </div>
