@@ -1,186 +1,171 @@
 <div ibmGrid [condensed]="gridCondensed">
-	<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
-		<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 6, sm: 12 }">
-			<br />
-			<h3 style="margin-left: 16px;">Challenge Info</h3>
-			<p style="margin-left: 17px;font-size: 13px;">{{ challengeDetails?.description }}</p>
-			<br />
-		</div>
-	</div>
+    <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+        <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 6, sm: 12 }">
+            <br />
+            <h3 style="margin-left: 16px;">Challenge Info</h3>
+            <p style="margin-left: 17px;font-size: 13px;">{{ challengeDetails?.description }}</p>
+            <br />
+        </div>
+    </div>
 
-	<div *ngIf="userSessionExpired" data-notification class="bx--toast-notification bx--toast-notification--failure"
-		role="alert">
-		<div class="bx--toast-notification__details">
-			<p class="bx--toast-notification__title">User session expired.</p>
-			<a class="bx--toast-notification__subtitle" style="cursor: pointer;" (click)="reLogin()">Login again.</a>
-		</div>
-	</div>
+    <div *ngIf="userSessionExpired" data-notification class="bx--toast-notification bx--toast-notification--failure" role="alert">
+        <div class="bx--toast-notification__details">
+            <p class="bx--toast-notification__title">User session expired.</p>
+            <a class="bx--toast-notification__subtitle" style="cursor: pointer;" (click)="reLogin()">Login again.</a>
+        </div>
+    </div>
 
-	<div ibmGrid [condensed]="gridCondensed" class="gridchange">
-		<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
-			<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 7, sm: 12 }">
-				<ibm-tile>
-					<p style="font-size: 20px;">Phase 0</p>
-					<div ibmGrid [condensed]="gridCondensed" style="margin-left: -16px;"><br />
-						<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
-							[condensed]="rowCondensed" style="margin-left: 0px;">
-							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }"> <svg icon
-									ibmIconUserMultiple20></svg>&nbsp;Users accepted <br />
-								<p class="numbers" style="margin-top:6px;">{{challengeDetails?.acceptedUsersCount}}</p>
-							</div>
-							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }"><svg icon
-									ibmIconDownload20></svg>&nbsp;Data Set Download <br />
-								<p class="numbers" style="margin-top:6px;">
-									{{challengeDetails?.phases[0]?.sampleDataFile[0]?.downloadCount}}</p>
-							</div>
-						</div>
-					</div>
-					<button class="bx--btn bx--btn--primary bx--btn--sm" type="button"
-						(click)="switchWithPhase(challengeDetails.phases[0].phaseId)">View Activity</button>
-				</ibm-tile>
-				<br /><br />
-			</div>
-		</div>
+    <div ibmGrid [condensed]="gridCondensed" class="gridchange">
+        <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+            <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 7, sm: 12 }">
+                <ibm-tile>
+                    <p style="font-size: 20px;">Phase 1</p>
+                    <div ibmGrid [condensed]="gridCondensed" style="margin-left: -16px;"><br />
+                        <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed" style="margin-left: 0px;">
+                            <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }"> <svg icon ibmIconUserMultiple20></svg>&nbsp;Users accepted <br />
+                                <p class="numbers" style="margin-top:6px;">{{challengeDetails?.acceptedUsersCount}}</p>
+                            </div>
+                            <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }"><svg icon ibmIconDownload20></svg>&nbsp;Data Set Download <br />
+                                <p class="numbers" style="margin-top:6px;">
+                                    {{challengeDetails?.phases[0]?.sampleDataFile[0]?.downloadCount}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="bx--btn bx--btn--primary bx--btn--sm" type="button" (click)="switchWithPhase(challengeDetails.phases[0].phaseId)">View Activity</button>
+                </ibm-tile>
+                <br /><br />
+            </div>
+        </div>
 
-		<div style="display: flex; flex-wrap: wrap; gap: 46px;margin-left: -1px;">
-			<div class="custom-class-example" style="width: 32%; display: flex; flex-wrap: row;">
-				<div *ngFor="let phase of challengeDetails?.phases; index as i">
-					<div *ngIf="i > 0"
-						style="display: flex; flex-flow: row wrap; justify-content: space-around; margin-right: 10px;">
-						<ibm-tile class="tiles">
-							<p style="font-size: 20px;">Phase {{ i }}</p>
-							<br />
-							<div class="icon_align">
-								<svg icon ibmIconUpload20></svg>&nbsp;
-								<p>Models Uploaded</p>
-							</div>
-							<p class="numbers">{{ modelsUploaded(phase.phaseId) }}</p>
-							<br />
-							<div class="icon_align">
-								<svg icon ibmIconChemistry20></svg>&nbsp;
-								<p>Models trained & tested</p>
-							</div>
-							<p class="numbers">{{ trainingModels(phase.phaseId) }}</p>
-							<br />
-							<div class="icon_align">
-								<svg icon ibmIconCheckmarkOutline20></svg>&nbsp;
-								<p>Models passed Scoring</p>
-							</div>
-							<p class="numbers">{{ modelPassed(phase.phaseId) }}</p>
-							<br />
-							<br />
-							<div style="height: 145px;">
-								<div class="icon_align">
-									<svg icon ibmIconTrophy20></svg>&nbsp;
-									<p>Top 5 performing models</p>
-								</div>
-								<p *ngIf="getTopList(phase.phaseId)?.length == 0" style="margin-left: 25px;">No records found</p>
-								<div style="font-size: 14px; margin: auto;" ibmListItem
-									*ngFor="let data of getTopList(phase.phaseId); index as i">
-									<div style="display: flex;" *ngIf="i<5">
-										<span style="margin-right: 5px; margin-top: 5px; margin-left: 30px;">{{i+1}}.
+        <div style="display: flex; flex-wrap: wrap; gap: 46px;margin-left: -1px;">
+            <div class="custom-class-example" style="width: 32%; display: flex; flex-wrap: row;">
+                <div *ngFor="let phase of challengeDetails?.phases; index as i">
+                    <div *ngIf="i > 0" style="display: flex; flex-flow: row wrap; justify-content: space-around; margin-right: 10px;">
+                        <ibm-tile class="tiles">
+                            <p style="font-size: 20px;">Phase {{ i + 1 }}</p>
+                            <br />
+                            <div class="icon_align">
+                                <svg icon ibmIconUpload20></svg>&nbsp;
+                                <p>Models Uploaded</p>
+                            </div>
+                            <p class="numbers">{{ modelsUploaded(phase.phaseId) }}</p>
+                            <br />
+                            <div class="icon_align">
+                                <svg icon ibmIconChemistry20></svg>&nbsp;
+                                <p>Models trained & tested</p>
+                            </div>
+                            <p class="numbers">{{ trainingModels(phase.phaseId) }}</p>
+                            <br />
+                            <div class="icon_align">
+                                <svg icon ibmIconCheckmarkOutline20></svg>&nbsp;
+                                <p>Models passed Scoring</p>
+                            </div>
+                            <p class="numbers">{{ modelPassed(phase.phaseId) }}</p>
+                            <br />
+                            <br />
+                            <div style="height: 145px;">
+                                <div class="icon_align">
+                                    <svg icon ibmIconTrophy20></svg>&nbsp;
+                                    <p>Top 5 performing models</p>
+                                </div>
+                                <p *ngIf="getTopList(phase.phaseId)?.length == 0" style="margin-left: 25px;">No records found</p>
+                                <div style="font-size: 14px; margin: auto;" ibmListItem *ngFor="let data of getTopList(phase.phaseId); index as i">
+                                    <div style="display: flex;" *ngIf="i<5">
+                                        <span style="margin-right: 5px; margin-top: 5px; margin-left: 30px;">{{i+1}}.
 										</span>
-										<a style="margin-top: 5px;" ibmLink>{{ data?.innovatorId?.fullName }}</a>
-										<p style="margin-left: 30px;">{{data.score}}</p>
-									</div>
-								</div>
-							</div>
-							<div ibmGrid [condensed]="gridCondensed" class="button-left" style="margin-bottom: -17px;">
-								<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
-									[condensed]="rowCondensed">
-									<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
-										<button class="view" [ibmButton]="ibmButton"
-											(click)="switchWithPhase(phase.phaseId)">
+                                        <a style="margin-top: 5px;" ibmLink>{{ data?.innovatorId?.fullName }}</a>
+                                        <p style="margin-left: 30px;">{{data.score}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ibmGrid [condensed]="gridCondensed" class="button-left" style="margin-bottom: -17px;">
+                                <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+                                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
+                                        <button class="view" [ibmButton]="ibmButton" (click)="switchWithPhase(phase.phaseId)">
 											View Activity
 										</button>
-									</div>
-									<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
-										<button class="model" [ibmButton]="ibmButton"
-											(click)="switchWithPhase(phase.phaseId)">
+                                    </div>
+                                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
+                                        <button class="model" [ibmButton]="ibmButton" (click)="switchWithPhase(phase.phaseId)">
 											View Model
 										</button>
-									</div>
-								</div>
-							</div>
-						</ibm-tile>
-					</div>
-				</div>
-			</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ibm-tile>
+                    </div>
+                </div>
+            </div>
 
-			<div style="width: 100%;margin-left:-18px;" ibmGrid [condensed]="gridCondensed" class="gridchange">
-				<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
-					[condensed]="rowCondensed">
-					<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 8, sm: 12 }">
-						<ibm-table-container>
-							<br />
-							<h4 ibmTableHeaderTitle>Leaderboard</h4>
-							<ibm-table-header>
-								<p>Challenge Leaderboard</p>
-								<fieldset class="bx--fieldset">
-									<legend class="bx--label">Phases</legend>
-									<div class="bx--form-item">
-										<div class="bx--radio-button-group ">
-											<div class="bx--radio-button-wrapper"
-												*ngFor="let phase of challengeDetails?.phases; index as i">
-												<ibm-radio-group>
-													<ibm-radio [checked]="checkSelected(phase.phaseId)"
-														(change)="selectPhase(phase.phaseId, i)">
-														Phase {{i}}
-													</ibm-radio>
-												</ibm-radio-group>
-											</div>
-										</div>
-									</div>
-								</fieldset>
-							</ibm-table-header>
-							<table class="bx--data-table">
-								<thead>
-									<tr>
-										<th>
-											<span class="bx--table-header-label">Rank</span>
-										</th>
-										<th>
-											<span class="bx--table-header-label">Name</span>
-										</th>
-										<th>
-											<span class="bx--table-header-label">P1 Score</span>
-										</th>
-										<th>
-											<span class="bx--table-header-label">P2 Score</span>
-										</th>
-										<th>
-											<span class="bx--table-header-label">P3 Score</span>
-										</th>
-										<th>
-											<span class="bx--table-header-label"></span>
-										</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr *ngFor="let model of leaderboardData; index as i">
-										<td>{{model?.rank}}</td>
-										<td>{{model?.innovatorId?.fullName}}</td>
-										<td>{{model.score}}</td>
-										<td>{{model.precisionScore}}</td>
-										<td>{{model.recallScore}}</td>
-										<td><a (click)="viewModel(model?._id)" style="cursor: pointer;">View Model</a>
-										</td>
-									</tr>
-									<tr *ngIf="leaderboardData?.length == 0">
-										<p>No records found</p>
-									</tr>
-								</tbody>
-							</table>
-							<br />
+            <div style="width: 100%;margin-left:-18px;" ibmGrid [condensed]="gridCondensed" class="gridchange">
+                <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+                    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 8, sm: 12 }">
+                        <ibm-table-container>
+                            <br />
+                            <h4 ibmTableHeaderTitle>Leaderboard</h4>
+                            <ibm-table-header>
+                                <p>Challenge Leaderboard</p>
+                                <fieldset class="bx--fieldset">
+                                    <legend class="bx--label">Phases</legend>
+                                    <div class="bx--form-item">
+                                        <div class="bx--radio-button-group ">
+                                            <div class="bx--radio-button-wrapper" *ngFor="let phase of challengeDetails?.phases; index as i">
+                                                <ibm-radio-group>
+                                                    <ibm-radio [checked]="checkSelected(phase.phaseId)" (change)="selectPhase(phase.phaseId, i)">
+                                                        Phase {{i +1 }}
+                                                    </ibm-radio>
+                                                </ibm-radio-group>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </ibm-table-header>
+                            <table class="bx--data-table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <span class="bx--table-header-label">Rank</span>
+                                        </th>
+                                        <th>
+                                            <span class="bx--table-header-label">Name</span>
+                                        </th>
+                                        <th>
+                                            <span class="bx--table-header-label">P1 Score</span>
+                                        </th>
+                                        <th>
+                                            <span class="bx--table-header-label">P2 Score</span>
+                                        </th>
+                                        <th>
+                                            <span class="bx--table-header-label">P3 Score</span>
+                                        </th>
+                                        <th>
+                                            <span class="bx--table-header-label"></span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let model of leaderboardData; index as i">
+                                        <td>{{model?.rank}}</td>
+                                        <td>{{model?.innovatorId?.fullName}}</td>
+                                        <td>{{model.score}}</td>
+                                        <td>{{model.precisionScore}}</td>
+                                        <td>{{model.recallScore}}</td>
+                                        <td><a (click)="viewModel(model?._id)" style="cursor: pointer;">View Model</a>
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="leaderboardData?.length == 0">
+                                        <p>No records found</p>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br />
 
-							<div class="bx--pagination" data-pagination>
-								<div class="bx--pagination__right">
-									<label id="select-id-pagination-page-label" class="bx--pagination__text"
-										for="select-id-pagination-page">
+                            <div class="bx--pagination" data-pagination>
+                                <div class="bx--pagination__right">
+                                    <label id="select-id-pagination-page-label" class="bx--pagination__text" for="select-id-pagination-page">
 										pages {{pageNo}} of {{totalPage}}
 									</label>
-									<button class="bx--pagination__button bx--pagination__button--backward" tabindex="0"
-										data-page-backward aria-label="previous page" (click)="prevPage()" [disabled]="pageNo == 1">
+                                    <button class="bx--pagination__button bx--pagination__button--backward" tabindex="0" data-page-backward aria-label="previous page" (click)="prevPage()" [disabled]="pageNo == 1">
 										<svg focusable="false" preserveAspectRatio="xMidYMid meet"
 											style="will-change: transform;" xmlns="http://www.w3.org/2000/svg"
 											class="bx--pagination__nav-arrow" width="20" height="20" viewBox="0 0 32 32"
@@ -188,8 +173,7 @@
 											<path d="M19 23L11 16 19 9 19 23z"></path>
 										</svg>
 									</button>
-									<button class="bx--pagination__button bx--pagination__button--forward" tabindex="0"
-										data-page-forward aria-label="next page" (click)="nextPage()" [disabled]="pageNo == totalPage">
+                                    <button class="bx--pagination__button bx--pagination__button--forward" tabindex="0" data-page-forward aria-label="next page" (click)="nextPage()" [disabled]="pageNo == totalPage">
 										<svg focusable="false" preserveAspectRatio="xMidYMid meet"
 											style="will-change: transform;" xmlns="http://www.w3.org/2000/svg"
 											class="bx--pagination__nav-arrow" width="20" height="20" viewBox="0 0 32 32"
@@ -197,10 +181,10 @@
 											<path d="M13 9L21 16 13 23 13 9z"></path>
 										</svg>
 									</button>
-								</div>
-							</div>
-						</ibm-table-container>
-					</div>
-				</div>
-			</div>
-		</div>
+                                </div>
+                            </div>
+                        </ibm-table-container>
+                    </div>
+                </div>
+            </div>
+        </div>

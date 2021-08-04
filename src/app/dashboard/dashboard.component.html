@@ -1,42 +1,37 @@
 <app-header></app-header>
 
 <div style="margin-top: 80px;">
-	<div style="margin-left: 90px;margin-right: 90px;">
+    <div style="margin-left: 90px;margin-right: 90px;">
 
-		<p class="para">Welcome back, {{userDetails?.fullName}}</p>
+        <p class="para">Welcome back, {{userDetails?.fullName}}</p>
 
-		<div style="display: flex;">
-			<h1 class="heading">Activity Dashboard</h1>
-			<ibm-dropdown [label]="'Sort by'" placeholder="select" (selected)="sortSelect($event)"
-				style="width: 222px;margin-left: auto;position: relative;top: 51px; z-index: 99;">
-				<ibm-dropdown-list [items]="sorting"></ibm-dropdown-list>
-			</ibm-dropdown>
-		</div>
+        <div style="display: flex;">
+            <h1 class="heading">Activity Dashboard</h1>
+            <ibm-dropdown [label]="'Sort by'" placeholder="select" (selected)="sortSelect($event)" style="width: 222px;margin-left: auto;position: relative;top: 51px; z-index: 99;">
+                <ibm-dropdown-list [items]="sorting"></ibm-dropdown-list>
+            </ibm-dropdown>
+        </div>
 
-		<div *ngIf="userSessionExpired" data-notification class="bx--toast-notification bx--toast-notification--failure"
-			role="alert">
-			<div class="bx--toast-notification__details">
-				<p class="bx--toast-notification__title">User session expired.</p>
-				<a class="bx--toast-notification__subtitle" style="cursor: pointer;" (click)="reLogin()">Login
+        <div *ngIf="userSessionExpired" data-notification class="bx--toast-notification bx--toast-notification--failure" role="alert">
+            <div class="bx--toast-notification__details">
+                <p class="bx--toast-notification__title">User session expired.</p>
+                <a class="bx--toast-notification__subtitle" style="cursor: pointer;" (click)="reLogin()">Login
 					again.</a>
-			</div>
-		</div>
+            </div>
+        </div>
 
-		<div *ngIf="routeAuthError" data-notification class="bx--toast-notification bx--toast-notification--failure"
-			role="alert">
-			<div class="bx--toast-notification__details">
-				<p class="bx--toast-notification__title">You are not authorized to view this page.</p>
-			</div>
-		</div>
+        <div *ngIf="routeAuthError" data-notification class="bx--toast-notification bx--toast-notification--failure" role="alert">
+            <div class="bx--toast-notification__details">
+                <p class="bx--toast-notification__title">You are not authorized to view this page.</p>
+            </div>
+        </div>
 
-		<div *ngIf="errorToasterMsg" data-notification class="bx--toast-notification bx--toast-notification--failure"
-			role="alert">
-			<div class="bx--toast-notification__details">
-				<p class="bx--toast-notification__title">Somthing went wrong.</p>
-				<p class="bx--toast-notification__subtitle">Please contact administrator.</p>
-			</div>
-			<button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button"
-				type="button" aria-label="close">
+        <div *ngIf="errorToasterMsg" data-notification class="bx--toast-notification bx--toast-notification--failure" role="alert">
+            <div class="bx--toast-notification__details">
+                <p class="bx--toast-notification__title">Somthing went wrong.</p>
+                <p class="bx--toast-notification__subtitle">Please contact administrator.</p>
+            </div>
+            <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button" type="button" aria-label="close">
 				<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform"
 					xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__close-icon" width="20" height="20"
 					viewBox="0 0 32 32" aria-hidden="true">
@@ -45,36 +40,35 @@
 					</path>
 				</svg>
 			</button>
-		</div>
+        </div>
 
-		<ibm-tabs [followFocus]="true" [isNavigation]="false" [cacheActive]="true">
-			<ibm-tab heading="Active">
-				<br />
-				<button class="btn1" [ibmButton]="ibmButton" [size]="size" (click)="createChalange()">
+        <ibm-tabs [followFocus]="true" [isNavigation]="false" [cacheActive]="true">
+            <ibm-tab heading="Active">
+                <br />
+                <button class="btn1" [ibmButton]="ibmButton" [size]="size" (click)="createChalange()">
 					Create Challenge
 					<svg class="bx--btn__icon" ibmIconAdd size="20"></svg>
 				</button>
 
-				<br /><br />
-				<div style="display: grid;grid-template-columns: repeat(3,minmax(0,1fr)) ;gap: 10px;">
-					<div class="custom-class-example" style="width: 100%;"
-						*ngFor="let activeChallenge of activeChallenges">
-						<app-challange-tile [challange]="activeChallenge"></app-challange-tile>
-					</div>
-				</div>
-				<br />
-			</ibm-tab>
-			<ibm-tab heading="Past">
-				<br />
-				<br /><br />
+                <br /><br />
+                <div style="display: grid;grid-template-columns: repeat(3,minmax(0,1fr)) ;gap: 10px;">
+                    <div class="custom-class-example" style="width: 100%;" *ngFor="let activeChallenge of activeChallenges">
+                        <app-challange-tile [challange]="activeChallenge"></app-challange-tile>
+                    </div>
+                </div>
+                <br />
+            </ibm-tab>
+            <ibm-tab heading="Past">
+                <br />
+                <br /><br />
 
-				<div style="display: grid;grid-template-columns: repeat(3,minmax(0,1fr)) ;gap: 10px;">
-					<div class="custom-class-example" style="width: 100%;" *ngFor="let pastChallenge of pastChallenges">
-						<app-challange-tile [challange]="pastChallenge"></app-challange-tile>
-					</div>
-				</div>
-				<br />
-			</ibm-tab>
-		</ibm-tabs>
-	</div>
+                <div style="display: grid;grid-template-columns: repeat(3,minmax(0,1fr)) ;gap: 10px;">
+                    <div class="custom-class-example" style="width: 100%;" *ngFor="let pastChallenge of pastChallenges">
+                        <app-challange-tile [challange]="pastChallenge"></app-challange-tile>
+                    </div>
+                </div>
+                <br />
+            </ibm-tab>
+        </ibm-tabs>
+    </div>
 </div>

@@ -1,13 +1,11 @@
 <br /><br />
 
-<div *ngIf="errorToasterMsg" data-notification class="bx--toast-notification bx--toast-notification--failure"
-  role="alert">
-  <div class="bx--toast-notification__details">
-    <p class="bx--toast-notification__title">Somthing went wrong.</p>
-    <p class="bx--toast-notification__subtitle">Please contact administrator.</p>
-  </div>
-  <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button" type="button"
-    aria-label="close">
+<div *ngIf="errorToasterMsg" data-notification class="bx--toast-notification bx--toast-notification--failure" role="alert">
+    <div class="bx--toast-notification__details">
+        <p class="bx--toast-notification__title">Somthing went wrong.</p>
+        <p class="bx--toast-notification__subtitle">Please contact administrator.</p>
+    </div>
+    <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button" type="button" aria-label="close">
     <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform"
       xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__close-icon" width="20" height="20"
       viewBox="0 0 32 32" aria-hidden="true">
@@ -17,50 +15,47 @@
   </button>
 </div>
 
-<div *ngIf="userSessionExpired" data-notification class="bx--toast-notification bx--toast-notification--failure"
-  role="alert">
-  <div class="bx--toast-notification__details">
-    <p class="bx--toast-notification__title">User session expired.</p>
-    <a class="bx--toast-notification__subtitle" style="cursor: pointer;" (click)="reLogin()">Login again.</a>
-  </div>
+<div *ngIf="userSessionExpired" data-notification class="bx--toast-notification bx--toast-notification--failure" role="alert">
+    <div class="bx--toast-notification__details">
+        <p class="bx--toast-notification__title">User session expired.</p>
+        <a class="bx--toast-notification__subtitle" style="cursor: pointer;" (click)="reLogin()">Login again.</a>
+    </div>
 </div>
 
 <ibm-accordion>
-  <div *ngFor="let phase of challengeDetails?.phases; index as i">
-    <ibm-accordion-item title="Phase {{i}}" [expanded]="i==0">
+    <div *ngFor="let phase of challengeDetails?.phases; index as i">
+        <ibm-accordion-item title="Phase {{i + 1}}" [expanded]="i==0">
 
-      <div style="display: flex;" *ngIf="!isEdit">
-        <div>
-          <p>{{ phase.description }}</p>
-        </div>
-        <div style="margin-top: 10px; margin-left: 8px;"></div>
-      </div>
+            <div style="display: flex;" *ngIf="!isEdit">
+                <div>
+                    <p>{{ phase.description }}</p>
+                </div>
+                <div style="margin-top: 10px; margin-left: 8px;"></div>
+            </div>
 
-      <div style="display: flex;" *ngIf="isEdit">
-        <div>
-          <textarea style="width: 90%; margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="editedPhase"
-            [theme]="theme" [rows]="5" [cols]="cols" aria-label="textarea"></textarea>
-        </div>
-        <div style="margin-top: 10px; margin-left: 8px;">
-          <button (click)="savePhase(phase.phaseId)">Save</button>
-        </div>
-      </div>
+            <div style="display: flex;" *ngIf="isEdit">
+                <div>
+                    <textarea style="width: 90%; margin-top: 10px;" ibmTextArea [invalid]="invalid" [(ngModel)]="editedPhase" [theme]="theme" [rows]="5" [cols]="cols" aria-label="textarea"></textarea>
+                </div>
+                <div style="margin-top: 10px; margin-left: 8px;">
+                    <button (click)="savePhase(phase.phaseId)">Save</button>
+                </div>
+            </div>
 
-      <p style="font-size: 18px;font-weight: 600;">Data visuals</p>
-      <br /><br />
-      <img style="margin-left: 0px; height: 125px; width: 300px" src='{{imageUrlArr[i]}}'>
-      <br />
-      <br />
-      <br />
+            <p style="font-size: 18px;font-weight: 600;">Data visuals</p>
+            <br /><br />
+            <img style="margin-left: 0px; height: 125px; width: 300px" src='{{imageUrlArr[i]}}'>
+            <br />
+            <br />
+            <br />
 
-      <div style="display: flex;">
-        <p style="font-size:13px">Download Dataset 1 <svg class="SVG" icon ibmIconDownload16
-            (click)="downloadFile(i)"></svg>
-          <span class="dataspan">Downloaded {{getDownloadCount(i)}} times</span></p>
-      </div>
+            <div style="display: flex;">
+                <p style="font-size:13px">Download Dataset 1 <svg class="SVG" icon ibmIconDownload16 (click)="downloadFile(i)"></svg>
+                    <span class="dataspan">Downloaded {{getDownloadCount(i)}} times</span></p>
+            </div>
 
-      <br />
-      <br />
-    </ibm-accordion-item>
-  </div>
+            <br />
+            <br />
+        </ibm-accordion-item>
+    </div>
 </ibm-accordion>
