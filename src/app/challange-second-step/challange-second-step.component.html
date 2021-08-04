@@ -24,7 +24,7 @@
       </svg>
     </div>
   </div>
-  
+
   <div *ngIf="userSessionExpired" data-notification class="bx--toast-notification bx--toast-notification--failure"
     role="alert">
     <div class="bx--toast-notification__details">
@@ -95,7 +95,8 @@
             <div *ngFor="let sampleFile of phases[i].sampleDataFile; index as j">
               <div class="fileBox">
                 <p style="margin: 8px; font-size: small;">{{getSampleFileName(sampleFile.path)}}</p>
-                <p style="margin-top: 8px; margin-left: 50px; cursor: pointer;" (click)="removeSampleDataFile(i, j)">x</p>
+                <p style="margin-top: 8px; margin-left: 50px; cursor: pointer;" (click)="removeSampleDataFile(i, j)">x
+                </p>
               </div>
             </div>
           </div>
@@ -163,7 +164,7 @@
         <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
           <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
             <h5>Data Visualisation</h5>
-            <p class="drag">An image that represents your Sample data</p>
+            <p class="drag" style="margin-bottom: 37px;">An image that represents your Sample data</p>
             <app-drop-image-uploader (moveNext)="setDataVisual($event, i)" (uploadFile)="uploadDataVisual()"
               (filesChange)="onImageSelect($event.target.files)" (onDrop)="onImageSelect($event.target.files)">
             </app-drop-image-uploader>
@@ -218,15 +219,15 @@
             </div>
           </div>
         </div>
-        <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed"
-          style="margin-left: 82px;margin-top: 222px;">
-          <button class="Step2btn_pre" [ibmButton]="ibmButton" [size]="size" (click)="previous()">
-            Previous
-          </button>
-          <button class="Step2btn_next" [ibmButton]="ibmButton" [disabled]="isBtnDisabled" (click)="next()">
-            Next
-          </button>
-        </div>
+      </div>
+      <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed"
+        class="buttonstyling">
+        <button class="Step2btn_pre button_style" [ibmButton]="ibmButton" [size]="size" (click)="previous()">
+          Previous
+        </button>
+        <button class="Step2btn_next button_style" [ibmButton]="ibmButton" [disabled]="isBtnDisabled" (click)="next()">
+          Next
+        </button>
       </div>
     </div>
   </div>

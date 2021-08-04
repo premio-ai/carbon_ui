@@ -37,10 +37,10 @@
             <br />
             <div ibmGrid [condensed]="gridCondensed" style="padding-left: 15px;">
                 <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
-                    [condensed]="rowCondensed">
+                    [condensed]="rowCondensed" style="width: 100%;">
                     <ibm-label>
-                        Challenge Category</ibm-label>
-                    <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 6, 'sm': 12}">
+                        Challenge Category &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</ibm-label>
+                    <div class="custom-class-example" style="width: 100%;">
                         <ibm-dropdown [label]="Min" [size]="size" placeholder="Select Category"
                             (selected)="selectCategory($event)">
                             <ibm-dropdown-list [items]="category"></ibm-dropdown-list>
@@ -54,10 +54,10 @@
             <br />
             <div ibmGrid [condensed]="gridCondensed" style="padding-left: 15px;">
                 <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
-                    [condensed]="rowCondensed">
+                    [condensed]="rowCondensed" style="width: 100%;">
                     <ibm-label>
                         Challenge Contract Type</ibm-label>
-                    <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 6, 'sm': 12}">
+                    <div class="custom-class-example" style="width: 100%;">
                         <ibm-dropdown [label]="Min" [size]="size" placeholder="Select Challenge Type"
                             (selected)="selectContract($event)">
                             <ibm-dropdown-list [items]="contractType"></ibm-dropdown-list>
@@ -70,7 +70,7 @@
             </div>
             <br />
             <ibm-label>Challenge End Date
-                <input type='date' min="{{minDate()}}" ibmTextArea style="width: 165px" [(ngModel)]="stepOne.endDate" />
+                <input type='date' min="{{minDate()}}" ibmTextArea style="width: 91%" [(ngModel)]="stepOne.endDate" />
             </ibm-label>
             <div *ngIf="endDateError">
                 <p><span style="font-size: x-small; color: red">Expiration date should be later than today in DD/MM/YYYY
@@ -105,6 +105,7 @@
             <div *ngIf="companyDescriptionError">
                 <p><span style="font-size: x-small; color: red">This is required to be selected</span></p>
             </div>
-            <button [ibmButton]="ibmButton" class="btn" (click)="nextStep()"> Next</button>
         </div>
+        <button [ibmButton]="ibmButton" class="btn button_style" (click)="nextStep()"> Next</button>
     </div>
+</div>

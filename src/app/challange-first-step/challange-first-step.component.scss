@@ -1,34 +1,43 @@
 @import "../../styles.scss";
 
-.praa{
-    font-size:14px;
+.praa {
+    font-size: 14px;
 }
-.toggle_head{
+.toggle_head {
     font-size: 10px;
     color: gray;
 }
 
-.btn{
-    margin:auto;
+.btn {
+    margin: auto;
     margin-right: -30px;
     display: flex;
-    margin-top: 132px;
+    margin-bottom: 20px;
+    // margin-top: 132px;
+}
+.button_style {
+    padding: 1px 17px 1px 17px;
+    font-size: 15px;
 }
 
-
-.challTitle{
-    margin-left: 365px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;
-    @include aboveWidth(1440px){
-       
-        margin-left: 401px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;
-   
-}
+.challTitle {
+    margin-left: 365px;
+    font-size: 10px;
+    margin-top: -20px;
+    margin-bottom: -8px;
+    @include aboveWidth(1440px) {
+        margin-left: 401px;
+        font-size: 10px;
+        margin-top: -20px;
+        margin-bottom: -8px;
+    }
 }
 
 @media screen and (max-width: 1024px) {
-  
-	.challTitle{
-        margin-left: 273px;font-size: 10px;margin-top: -20px;margin-bottom: -8px;
+    .challTitle {
+        margin-left: 273px;
+        font-size: 10px;
+        margin-top: -20px;
+        margin-bottom: -8px;
     }
-    
-  }
+}
