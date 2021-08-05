@@ -173,7 +173,7 @@
 							*ngFor="let phase of challengeDetails?.phases; index as i">
 							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }"
 								style="margin-right: 37px; margin-left: -14px">
-								<h4>Phase {{i}}</h4>
+								<h4>Phase {{i+1}}</h4>
 								<br />
 								<p class="para">{{phase?.description}}</p>
 							</div>
@@ -194,7 +194,7 @@
 				</ibm-tab>
 				<ibm-tab heading="Discussion" style="max-width: 105px;">
 					<div id="disqus_thread"></div>
-					<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments
+					<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript/">comments
 							powered by Disqus.</a></noscript>
 				</ibm-tab>
 				<ibm-tab heading="Leaderboard" style="max-width: 105px;">

@@ -36,7 +36,7 @@
   <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed"
     *ngFor="let phase of phases; index as i">
     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
-      <h3>Illustrative Data: Phase {{ i }}</h3>
+      <h3>Illustrative Data: Phase {{ i+1 }}</h3>
       <br />
       <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
         <p class="headingtop">Data Description</p>
@@ -107,7 +107,7 @@
   <!-- TODO : adding new phase -->
   <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
     <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
-      <h3>Illustrative Data: Phase {{phases.length}} </h3>
+      <h3>Illustrative Data: Phase {{phases.length +1}} </h3>
       <br />
       <ibm-label [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText">
         <p class="headingtop">Data Description</p>

@@ -12,6 +12,7 @@ import { APP_URL, MESSAGES, ROLE } from '../../config/config';
 })
 
 export class InvAcceptedComponent implements OnInit {
+	innovatorId: string;
 
 	constructor(private requestService: RequestService,
 		private router: Router,
@@ -32,6 +33,7 @@ export class InvAcceptedComponent implements OnInit {
 	insurerId: string;
 	awardedTo: string;
 	submissionData: {
+		innovatorId:{}
 		challengeId: {},
 		phaseId: any,
 		mlFlowId: string,
@@ -84,6 +86,7 @@ export class InvAcceptedComponent implements OnInit {
 				this.getChallengeDetails(this.challengeId);
 				this.getChallengeAcceptance(this.challengeId);
 				this.getLeaderboard(this.challengeId, this.pageOffset);
+				
 
 				this.steps = [
 					{
@@ -104,6 +107,7 @@ export class InvAcceptedComponent implements OnInit {
 				];
 				this.current = 3;
 				this.submissionData = {
+					innovatorId:{},
 					challengeId: {},
 					phaseId: [],
 					mlFlowId: "",
@@ -124,7 +128,7 @@ export class InvAcceptedComponent implements OnInit {
 
 				setTimeout(() => {
 					(<any>window).disqus_config = this.getConfig();
-
+console.log(this.getConfig(), "---this.getConfig()---")
 					var d = document, s: any = d.createElement('script');
 					s.src = 'https://meanapp.disqus.com/embed.js';
 					s.setAttribute('data-timestamp', + new Date());
@@ -141,11 +145,27 @@ export class InvAcceptedComponent implements OnInit {
 
 	getConfig() {
 		let _self = this;
+		console.log(_self)
+		// return function () {
+		// 	// this.page.url = APP_URL + 'challenge/' + _self.challengeId;
+		// 	this.page.url = "http://localhost:4200/" + 'challenge/' + _self.challengeId;
+		// 	console.log(_self.innovatorId)
+		// 	this.page.identifier = _self.challengeId;
+		// 	console.log(_self.acceptedChallenge.innovatorId)
+		// 	this.language = 'en';
+		// };
+
 		return function () {
-			this.page.url = APP_URL + 'challenge/' + _self.challengeId;
-			this.page.identifier = _self.challengeId;
+			// this.page.url = APP_URL + 'challenge/' + _self.challengeId;
+		
+			//	this.page.url = 'http://localhost:4200/' + 'invaccepted/' +_self.challengeId;
+			this.page.url = APP_URL + 'invaccepted/' +_self.challengeId;
+			
+			this.page.identifier ='';
+			console.log(_self.acceptedChallenge.innovatorId)
 			this.language = 'en';
 		};
+
 	}
 
 	getChallengeDetails(id) {

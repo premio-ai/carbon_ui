@@ -80,8 +80,10 @@ export class ChallangeFirstStepComponent implements OnInit {
   nextStep() {
     if (this.stepOne.title.length>0 && this.stepOne.description.length>0 && this.stepOne.objective.length>0
       && this.stepOne.categoryType.length>0 && this.stepOne.challengeType.length>0 && this.stepOne.endDate.length>0
-      && moment(this.stepOne.endDate).isAfter(moment(new Date()).format('YYYY-MM-DD')) && this.stepOne.witholdCompanyName
-      && this.stepOne.witholdCompanyDescription) {
+      && moment(this.stepOne.endDate).isAfter(moment(new Date()).format('YYYY-MM-DD')) 
+      //&& this.stepOne.witholdCompanyName
+      //&& this.stepOne.witholdCompanyDescription
+      ) {
       this.goNext.emit(this.stepOne)
     } else {
       this.validateData();
@@ -121,16 +123,16 @@ export class ChallangeFirstStepComponent implements OnInit {
     } else {
       this.endDateError = false
     }
-    if (this.stepOne.witholdCompanyName) {
-      this.companyNameError = false
-    } else {
-      this.companyNameError = true
-    }
-    if (this.stepOne.witholdCompanyDescription) {
-      this.companyDescriptionError = false
-    } else {
-      this.companyDescriptionError = true
-    }
+    // if (this.stepOne.witholdCompanyName) {
+    //   this.companyNameError = false
+    // } else {
+    //   this.companyNameError = true
+    // }
+    // if (this.stepOne.witholdCompanyDescription) {
+    //   this.companyDescriptionError = false
+    // } else {
+    //   this.companyDescriptionError = true
+    // }
   }
 
 }
