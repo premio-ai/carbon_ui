@@ -2,14 +2,12 @@
 <br />
 <br />
 
-<div *ngIf="errorToasterMsg" data-notification class="bx--toast-notification bx--toast-notification--failure"
-  role="alert">
-  <div class="bx--toast-notification__details">
-    <p class="bx--toast-notification__title">Somthing went wrong.</p>
-    <p class="bx--toast-notification__subtitle">Please contact administrator.</p>
-  </div>
-  <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button" type="button"
-    aria-label="close">
+<div *ngIf="errorToasterMsg" data-notification class="bx--toast-notification bx--toast-notification--failure" role="alert">
+    <div class="bx--toast-notification__details">
+        <p class="bx--toast-notification__title">Somthing went wrong.</p>
+        <p class="bx--toast-notification__subtitle">Please contact administrator.</p>
+    </div>
+    <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button" type="button" aria-label="close">
     <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform"
       xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__close-icon" width="20" height="20"
       viewBox="0 0 32 32" aria-hidden="true">
@@ -20,237 +18,213 @@
 </div>
 
 <div *ngIf="isApiLoading">
-  <div class="app-loading">
-    <div class="logo"></div>
-    <svg class="spinner" viewBox="25 25 50 50">
+    <div class="app-loading">
+        <div class="logo"></div>
+        <svg class="spinner" viewBox="25 25 50 50">
       <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
     </svg>
-  </div>
+    </div>
 </div>
 
-<div *ngIf="routeAuthError" data-notification class="bx--toast-notification bx--toast-notification--failure"
-	role="alert">
-	<div class="bx--toast-notification__details">
-		<p class="bx--toast-notification__title">You are not authorized to view this page.</p>
-	</div>
+<div *ngIf="routeAuthError" data-notification class="bx--toast-notification bx--toast-notification--failure" role="alert">
+    <div class="bx--toast-notification__details">
+        <p class="bx--toast-notification__title">You are not authorized to view this page.</p>
+    </div>
 </div>
 
-<div *ngIf="userSessionExpired" data-notification class="bx--toast-notification bx--toast-notification--failure"
-  role="alert">
-  <div class="bx--toast-notification__details">
-    <p class="bx--toast-notification__title">User session expired.</p>
-    <a class="bx--toast-notification__subtitle" style="cursor: pointer;" (click)="reLogin()">Login again.</a>
-  </div>
+<div *ngIf="userSessionExpired" data-notification class="bx--toast-notification bx--toast-notification--failure" role="alert">
+    <div class="bx--toast-notification__details">
+        <p class="bx--toast-notification__title">User session expired.</p>
+        <a class="bx--toast-notification__subtitle" style="cursor: pointer;" (click)="reLogin()">Login again.</a>
+    </div>
 </div>
 
 <div class="bx--grid">
-  <div class="bx--row line-padding">
-    <div class="bx--col-md-1" style="padding-left: 8%; cursor: pointer;">
-      <svg class="backicon" icon ibmIconArrowLeft16 (click)="navigateBack()"></svg>
+    <div class="bx--row line-padding">
+        <div class="bx--col-md-1" style="padding-left: 8%; cursor: pointer;">
+            <svg class="backicon" icon ibmIconArrowLeft16 (click)="navigateBack()"></svg>
+        </div>
+        <div class="bx--col-md-4">
+            <ibm-breadcrumb [noTrailingSlash]="'noTrailingSlash'">
+                <ibm-breadcrumb-item (click)="invChallenges()" class="navigation" style="cursor: pointer; color: blue;">
+                    Browse
+                </ibm-breadcrumb-item>
+                <ibm-breadcrumb-item class="navigation" (click)="challengeTitle(challengeDetails?._id)" style="cursor: pointer; color: blue;">
+                    {{challengeDetails?.title}}
+                </ibm-breadcrumb-item>
+                <ibm-breadcrumb-item class="navigation" style="cursor: pointer; color: blue;" (click)="viewModel(modelDetails?._id)">
+                    {{modelDetails?.modelName}}
+                </ibm-breadcrumb-item>
+            </ibm-breadcrumb>
+        </div>
     </div>
-    <div class="bx--col-md-4">
-      <ibm-breadcrumb [noTrailingSlash]="'noTrailingSlash'">
-        <ibm-breadcrumb-item (click)="invChallenges()" class="navigation" style="cursor: pointer; color: blue;">
-          Browse
-        </ibm-breadcrumb-item>
-        <ibm-breadcrumb-item class="navigation" (click)="challengeTitle(challengeDetails?._id)"
-          style="cursor: pointer; color: blue;">
-          {{challengeDetails?.title}}
-        </ibm-breadcrumb-item>
-        <ibm-breadcrumb-item class="navigation" style="cursor: pointer; color: blue;"
-          (click)="viewModel(modelDetails?._id)">
-          {{modelDetails?.modelName}}
-        </ibm-breadcrumb-item>
-      </ibm-breadcrumb>
-    </div>
-  </div>
-  <br />
-  <br />
-  <div class="bx--row line-padding">
-    <div class="bx--col-md-1" style="padding-left: 8%;"></div>
-    <div class="bx--col-md-7">
-      <div style="display: flex;" *ngIf="!isEdit">
-        <div>
-          <p style="font-size: 40px; font-weight: 100;">
-            {{ modelDetails?.modelName }}
-          </p>
-        </div>
-        <div class="editicon">
-          <svg icon ibmIconEdit20 (click)="editModelName()"></svg>
-        </div>
-      </div>
+    <br />
+    <br />
+    <div class="bx--row line-padding">
+        <div class="bx--col-md-1" style="padding-left: 8%;"></div>
+        <div class="bx--col-md-7">
+            <div style="display: flex;" *ngIf="!isEdit">
+                <div>
+                    <p style="font-size: 40px; font-weight: 100;">
+                        {{ modelDetails?.modelName }}
+                    </p>
+                </div>
+                <div class="editicon">
+                    <svg icon ibmIconEdit20 (click)="editModelName()"></svg>
+                </div>
+            </div>
 
-      <div style="display: flex;" *ngIf="isEdit">
-        <div>
-          <input style="width: 100%; margin-top: 10px;" ibmTextArea [invalid]="invalid" (blur)="saveModelName()"
-            [(ngModel)]="set_new_modelName" [theme]="theme" aria-label="textarea" />
-        </div>
-      </div>
+            <div style="display: flex;" *ngIf="isEdit">
+                <div>
+                    <input style="width: 100%; margin-top: 10px;" ibmTextArea [invalid]="invalid" (blur)="saveModelName()" [(ngModel)]="set_new_modelName" [theme]="theme" aria-label="textarea" />
+                </div>
+            </div>
 
-      <br />
-      <br />
-      <p style="font-size: 16px; font-weight: 600;">
-        Phase {{submissionIndex}}: Current Status
-      </p>
-      <br />
+            <br />
+            <br />
+            <p style="font-size: 16px; font-weight: 600;">
+                Phase {{submissionIndex + 1}}: Current Status
+            </p>
+            <br />
 
-      <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-        <ibm-tile>
-          <p class="head"><svg icon ibmIconCloudUpload32></svg></p>
-          <p class="head">
-            Upload model
-            <br />
-            to data
-          </p>
-          <div *ngIf="getUploadStatus() == 'SUCCESS' ">
-            <p class="discrip">
-              Finished
-              <br />
-              successfully
-            </p>
-          </div>
-          <div *ngIf="getUploadStatus() == 'PENDING' ">
-            <p class="discrip">
-              Estimated time remaining
-              <br />
-              unknown
-            </p>
-          </div>
-          <div *ngIf="getUploadStatus() == 'FAILED' ">
-            <p class="discrip">Job failed</p><br />
-          </div>
-          <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
-            <div *ngIf="getUploadStatus() == 'PENDING' ">
-              <ibm-inline-loading [loadingText]="loadingText" [successText]="successText"
-                (onSuccess)="onSuccess($event)"></ibm-inline-loading>
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                <ibm-tile>
+                    <p class="head"><svg icon ibmIconCloudUpload32></svg></p>
+                    <p class="head">
+                        Upload model
+                        <br /> to data
+                    </p>
+                    <div *ngIf="getUploadStatus() == 'SUCCESS' ">
+                        <p class="discrip">
+                            Finished
+                            <br /> successfully
+                        </p>
+                    </div>
+                    <div *ngIf="getUploadStatus() == 'PENDING' ">
+                        <p class="discrip">
+                            Estimated time remaining
+                            <br /> unknown
+                        </p>
+                    </div>
+                    <div *ngIf="getUploadStatus() == 'FAILED' ">
+                        <p class="discrip">Job failed</p><br />
+                    </div>
+                    <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
+                        <div *ngIf="getUploadStatus() == 'PENDING' ">
+                            <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)"></ibm-inline-loading>
+                        </div>
+                        <div *ngIf="getUploadStatus() == 'SUCCESS' ">
+                            <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
+                        </div>
+                        <div *ngIf="getUploadStatus() == 'FAILED' ">
+                            <svg class="svgRed" icon ibmIconCloseFilled16></svg>
+                        </div>
+                        &nbsp;
+                        <p style="color: black;">{{getUploadStatus()}}</p>
+                    </h6>
+                </ibm-tile>
+                <ibm-tile [ngClass]="{'bx--tile_fail': getTrainingStatus() == 'FAILED', 'bx--tile_run': getTrainingStatus() == 'RUNNING' }">
+                    <p class="head"><svg icon ibmIconConcept32></svg></p>
+                    <p class="head">
+                        Train model
+                        <br /> on data
+                    </p>
+                    <div *ngIf="getTrainingStatus() == 'SUCCESS' ">
+                        <p class="discrip">
+                            Finished
+                            <br /> successfully
+                        </p>
+                    </div>
+                    <div *ngIf="getTrainingStatus() == 'RUNNING' ">
+                        <p class="discrip">
+                            Estimated time remaining
+                            <br /> unknown
+                        </p>
+                    </div>
+                    <div *ngIf="getTrainingStatus() == 'FAILED' ">
+                        <p class="discrip">Job failed</p><br />
+                    </div>
+                    <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
+                        <div *ngIf="getTrainingStatus() == 'RUNNING' ">
+                            <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)"></ibm-inline-loading>
+                        </div>
+                        <div *ngIf="getTrainingStatus() == 'SUCCESS' ">
+                            <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
+                        </div>
+                        <div *ngIf="getTrainingStatus() == 'FAILED' ">
+                            <svg class="svgRed" icon ibmIconCloseFilled16></svg>
+                        </div>
+                        &nbsp;
+                        <p style="color: black;">{{getTrainingStatus()}}</p>
+                    </h6>
+                </ibm-tile>
+                <ibm-tile [ngClass]="{'bx--tile_fail': getTestingStatus() == 'FAILED', 'bx--tile_run': getTestingStatus() == 'RUNNING' }">
+                    <p class="head"><svg icon ibmIconChemistry32></svg></p>
+                    <p class="head">
+                        Test model
+                        <br /> on data
+                    </p>
+                    <div *ngIf="getTestingStatus() == 'SUCCESS' ">
+                        <p class="discrip">
+                            Finished
+                            <br /> successfully
+                        </p>
+                    </div>
+                    <div *ngIf="getTestingStatus() == 'RUNNING' ">
+                        <p class="discrip">
+                            Estimated time remaining
+                            <br /> unknown
+                        </p>
+                    </div>
+                    <div *ngIf="getTestingStatus() == 'FAILED' ">
+                        <p class="discrip">Job Failed</p><br />
+                    </div>
+                    <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
+                        <div *ngIf="getTestingStatus() == 'RUNNING' ">
+                            <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)"></ibm-inline-loading>
+                        </div>
+                        <div *ngIf="getTestingStatus() == 'SUCCESS' ">
+                            <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
+                        </div>
+                        <div *ngIf="getTestingStatus() == 'FAILED' ">
+                            <svg class="svgRed" icon ibmIconCloseFilled16></svg>
+                        </div>
+                        &nbsp;
+                        <p style="color: black;">{{getTestingStatus()}}</p>
+                    </h6>
+                </ibm-tile>
+                <ibm-tile [ngClass]="{'bx--tile_run': getPerformanceStatus() == 'INCOMPLETE', 'bx--tile': getPerformanceStatus() != 'INCOMPLETE' }">
+                    <p class="head"><svg icon ibmIconIdea32></svg></p>
+                    <p class="head">
+                        Generate model
+                        <br /> performance score
+                    </p>
+                    <div *ngIf="getPerformanceStatus() == 'COMPLETE' ">
+                        <p class="discrip">
+                            Finished
+                            <br /> successfully
+                        </p>
+                    </div>
+                    <div *ngIf="getPerformanceStatus() == 'PENDING' || getPerformanceStatus() == 'INCOMPLETE' ">
+                        <p class="discrip">
+                            Estimated time remaining
+                            <br /> unknown
+                        </p>
+                    </div>
+                    <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
+                        <div *ngIf="getPerformanceStatus() == 'COMPLETE' ">
+                            <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
+                        </div>
+                        <div *ngIf="getPerformanceStatus() == 'PENDING' ">
+                            <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)"></ibm-inline-loading>
+                        </div>
+                        &nbsp;
+                        <p style="color: black;">{{getPerformanceStatus()}}</p>
+                    </h6>
+                </ibm-tile>
             </div>
-            <div *ngIf="getUploadStatus() == 'SUCCESS' ">
-              <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
-            </div>
-            <div *ngIf="getUploadStatus() == 'FAILED' ">
-              <svg class="svgRed" icon ibmIconCloseFilled16></svg>
-            </div>
-            &nbsp;
-            <p style="color: black;">{{getUploadStatus()}}</p>
-          </h6>
-        </ibm-tile>
-        <ibm-tile
-          [ngClass]="{'bx--tile_fail': getTrainingStatus() == 'FAILED', 'bx--tile_run': getTrainingStatus() == 'RUNNING' }">
-          <p class="head"><svg icon ibmIconConcept32></svg></p>
-          <p class="head">
-            Train model
-            <br />
-            on data
-          </p>
-          <div *ngIf="getTrainingStatus() == 'SUCCESS' ">
-            <p class="discrip">
-              Finished
-              <br />
-              successfully
-            </p>
-          </div>
-          <div *ngIf="getTrainingStatus() == 'RUNNING' ">
-            <p class="discrip">
-              Estimated time remaining
-              <br />
-              unknown
-            </p>
-          </div>
-          <div *ngIf="getTrainingStatus() == 'FAILED' ">
-            <p class="discrip">Job failed</p><br />
-          </div>
-          <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
-            <div *ngIf="getTrainingStatus() == 'RUNNING' ">
-              <ibm-inline-loading [loadingText]="loadingText" [successText]="successText"
-                (onSuccess)="onSuccess($event)"></ibm-inline-loading>
-            </div>
-            <div *ngIf="getTrainingStatus() == 'SUCCESS' ">
-              <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
-            </div>
-            <div *ngIf="getTrainingStatus() == 'FAILED' ">
-              <svg class="svgRed" icon ibmIconCloseFilled16></svg>
-            </div>
-            &nbsp;
-            <p style="color: black;">{{getTrainingStatus()}}</p>
-          </h6>
-        </ibm-tile>
-        <ibm-tile
-          [ngClass]="{'bx--tile_fail': getTestingStatus() == 'FAILED', 'bx--tile_run': getTestingStatus() == 'RUNNING' }">
-          <p class="head"><svg icon ibmIconChemistry32></svg></p>
-          <p class="head">
-            Test model
-            <br />
-            on data
-          </p>
-          <div *ngIf="getTestingStatus() == 'SUCCESS' ">
-            <p class="discrip">
-              Finished
-              <br />
-              successfully
-            </p>
-          </div>
-          <div *ngIf="getTestingStatus() == 'RUNNING' ">
-            <p class="discrip">
-              Estimated time remaining
-              <br />
-              unknown
-            </p>
-          </div>
-          <div *ngIf="getTestingStatus() == 'FAILED' ">
-            <p class="discrip">Job Failed</p><br />
-          </div>
-          <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
-            <div *ngIf="getTestingStatus() == 'RUNNING' ">
-              <ibm-inline-loading [loadingText]="loadingText" [successText]="successText"
-                (onSuccess)="onSuccess($event)"></ibm-inline-loading>
-            </div>
-            <div *ngIf="getTestingStatus() == 'SUCCESS' ">
-              <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
-            </div>
-            <div *ngIf="getTestingStatus() == 'FAILED' ">
-              <svg class="svgRed" icon ibmIconCloseFilled16></svg>
-            </div>
-            &nbsp;
-            <p style="color: black;">{{getTestingStatus()}}</p>
-          </h6>
-        </ibm-tile>
-        <ibm-tile
-          [ngClass]="{'bx--tile_run': getPerformanceStatus() == 'INCOMPLETE', 'bx--tile': getPerformanceStatus() != 'INCOMPLETE' }">
-          <p class="head"><svg icon ibmIconIdea32></svg></p>
-          <p class="head">
-            Generate model
-            <br />
-            performance score
-          </p>
-          <div *ngIf="getPerformanceStatus() == 'COMPLETE' ">
-            <p class="discrip">
-              Finished
-              <br />
-              successfully
-            </p>
-          </div>
-          <div *ngIf="getPerformanceStatus() == 'PENDING' || getPerformanceStatus() == 'INCOMPLETE' ">
-            <p class="discrip">
-              Estimated time remaining
-              <br />
-              unknown
-            </p>
-          </div>
-          <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
-            <div *ngIf="getPerformanceStatus() == 'COMPLETE' ">
-              <svg class="svg" icon ibmIconCheckmarkOutline20></svg>
-            </div>
-            <div *ngIf="getPerformanceStatus() == 'PENDING' ">
-              <ibm-inline-loading [loadingText]="loadingText" [successText]="successText"
-                (onSuccess)="onSuccess($event)"></ibm-inline-loading>
-            </div>
-            &nbsp;
-            <p style="color: black;">{{getPerformanceStatus()}}</p>
-          </h6>
-        </ibm-tile>
-      </div>
 
-      <!-- <div *ngIf="getTrainingStatus() == 'FAILED' || getTestingStatus == 'FAILED' ">
+            <!-- <div *ngIf="getTrainingStatus() == 'FAILED' || getTestingStatus == 'FAILED' ">
         <div class="border-div_fail" style="margin-top: 25px;" >
           &nbsp;&nbsp;
           <h5 style="margin-left: 8px;">Error!</h5>
@@ -261,161 +235,154 @@
         </div>
       </div> -->
 
-      <br /> <br />
-      <div class="border-div" *ngIf="getPerformanceStatus() == 'COMPLETE' ">
-        &nbsp;&nbsp;
-        <h5 style="margin-left: 8px;">Congratuations!</h5>
-        &nbsp;&nbsp;
-        <p style="margin-left: 8px;">
-          Your model has met the minimum performance score
-        </p>
-        <br />
-        &nbsp;
-        <button [ibmButton]="ibmButton" [size]="size" (click)="seePerformance()">
+            <br /> <br />
+            <div class="border-div" *ngIf="getPerformanceStatus() == 'COMPLETE' ">
+                &nbsp;&nbsp;
+                <h5 style="margin-left: 8px;">Congratuations!</h5>
+                &nbsp;&nbsp;
+                <p style="margin-left: 8px;">
+                    Your model has met the minimum performance score
+                </p>
+                <br /> &nbsp;
+                <button [ibmButton]="ibmButton" [size]="size" (click)="seePerformance()">
           View score breakdown<svg class="bx--btn__icon" ibmIconArrowRight20 size="20"></svg>
         </button>
-        <div *ngIf="showBtn">
-          <br />
-          <button [ibmButton]="ibmButton" [size]="size" style="width: 225px; margin-left: 7px;"
-            (click)="enterNextPhase()">
+                <div *ngIf="showBtn">
+                    <br />
+                    <button [ibmButton]="ibmButton" [size]="size" style="width: 225px; margin-left: 7px;" (click)="enterNextPhase()">
             {{getEntryPhaseCount()}}<svg class="bx--btn__icon" ibmIconArrowRight20 size="20"></svg>
           </button>
-        </div>
-      </div>
+                </div>
+            </div>
 
-      <br />
-      <br />
-      <ibm-accordion>
-        <ibm-accordion-item title="Phase {{submissionIndex}} Overview">
-          <h5>Description</h5>
-          <p>{{ modelDetails?.modelDescription }}</p>
-          <br />
-          <h5>Approach taken</h5>
-          <p>{{ modelDetails?.approch }}</p>
-          <br />
-          <ibm-table-container>
             <br />
-            <ibm-table-header>
-              <h4 ibmTableHeaderTitle>Leaderboard</h4>
-            </ibm-table-header>
-            <table class="bx--data-table">
-              <thead>
-                <tr>
-                  <th>
-                    <span class="bx--table-header-label">Rank</span>
-                  </th>
-                  <th>
-                    <span class="bx--table-header-label">Name</span>
-                  </th>
-                  <th>
-                    <span class="bx--table-header-label">Phase</span>
-                  </th>
-                  <th>
-                    <span class="bx--table-header-label">Score</span>
-                  </th>
-                  <th>
-                    <span class="bx--table-header-label">Date</span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let data of leaderboardData; index as i">
-                  <td>{{data.rank}}</td>
-                  <td>{{data?.innovatorId?.fullName}}</td>
-                  <td>Phase {{submissionIndex}}</td>
-                  <td>{{data?.score}}</td>
-                  <td>{{getDate(data?.createdAt)}}</td>
-                </tr>
-              </tbody>
-            </table>
             <br />
-            <div class="bx--pagination" data-pagination>
-              <div class="bx--pagination__right">
-                <label id="select-id-pagination-page-label" class="bx--pagination__text"
-                  for="select-id-pagination-page">
+            <ibm-accordion>
+                <ibm-accordion-item title="Phase {{submissionIndex + 1}} Overview">
+                    <h5>Description</h5>
+                    <p>{{ modelDetails?.modelDescription }}</p>
+                    <br />
+                    <h5>Approach taken</h5>
+                    <p>{{ modelDetails?.approch }}</p>
+                    <br />
+                    <ibm-table-container>
+                        <br />
+                        <ibm-table-header>
+                            <h4 ibmTableHeaderTitle>Leaderboard</h4>
+                        </ibm-table-header>
+                        <table class="bx--data-table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <span class="bx--table-header-label">Rank</span>
+                                    </th>
+                                    <th>
+                                        <span class="bx--table-header-label">Name</span>
+                                    </th>
+                                    <th>
+                                        <span class="bx--table-header-label">Phase</span>
+                                    </th>
+                                    <th>
+                                        <span class="bx--table-header-label">Score</span>
+                                    </th>
+                                    <th>
+                                        <span class="bx--table-header-label">Date</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of leaderboardData; index as i">
+                                    <td>{{data.rank}}</td>
+                                    <td>{{data?.innovatorId?.fullName}}</td>
+                                    <td>Phase {{submissionIndex}}</td>
+                                    <td>{{data?.score}}</td>
+                                    <td>{{getDate(data?.createdAt)}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br />
+                        <div class="bx--pagination" data-pagination>
+                            <div class="bx--pagination__right">
+                                <label id="select-id-pagination-page-label" class="bx--pagination__text" for="select-id-pagination-page">
                   pages {{pageNo}} of {{totalPage}}
                 </label>
-                <button class="bx--pagination__button bx--pagination__button--backward " tabindex="0" data-page-backward
-                  aria-label="previous page" (click)="prevPage()" [disabled]="pageNo == 1">
+                                <button class="bx--pagination__button bx--pagination__button--backward " tabindex="0" data-page-backward aria-label="previous page" (click)="prevPage()" [disabled]="pageNo == 1">
                   <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;"
                     xmlns="http://www.w3.org/2000/svg" class="bx--pagination__nav-arrow" width="20" height="20"
                     viewBox="0 0 32 32" aria-hidden="true">
                     <path d="M19 23L11 16 19 9 19 23z"></path>
                   </svg>
                 </button>
-                <button class="bx--pagination__button bx--pagination__button--forward " tabindex="0" data-page-forward
-                  aria-label="next page" (click)="nextPage()" [disabled]="pageNo == totalPage">
+                                <button class="bx--pagination__button bx--pagination__button--forward " tabindex="0" data-page-forward aria-label="next page" (click)="nextPage()" [disabled]="pageNo == totalPage">
                   <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;"
                     xmlns="http://www.w3.org/2000/svg" class="bx--pagination__nav-arrow" width="20" height="20"
                     viewBox="0 0 32 32" aria-hidden="true">
                     <path d="M13 9L21 16 13 23 13 9z"></path>
                   </svg>
                 </button>
-              </div>
-            </div>
-          </ibm-table-container>
-          <!-- <p>
+                            </div>
+                        </div>
+                    </ibm-table-container>
+                    <!-- <p>
             only model that have overall score of 80% above will be invited to
             Phase {{submissionIndex+1}}.
           </p> -->
-        </ibm-accordion-item>
-        <div *ngIf="this.nextPhaseIndex < this.challengeDetails?.phases.length">
-          <ibm-accordion-item title="{{getAccordionTitle()}}">
-            <h5>Requirment</h5>
-            <p>{{ challengeDetails?.Objective }}</p>
-            <br />
-            <div *ngIf="showAccuracy()">
-              <h5>Accuracy: {{getPassAccuracy()}}</h5>
-            </div>
-            <br /><br />
-            <h5>Data</h5>
-            Dataset size: 1000 records
-            <h6></h6>
-            <img style="height: 125px; width: 300px;" src="{{imageUrlArr}}" />
-            <br />
-            <h6>Sample Data Set</h6>
-            <p>Download Dataset 1
-              <svg icon ibmIconDownload16 class="downlogoPointer" (click)="downloadFile()"></svg>
-            </p>
-            <br />
-            <h5>Model</h5>
-            <p>{{ modelDetails?.modelDescription }}</p>
+                </ibm-accordion-item>
+                <div *ngIf="this.nextPhaseIndex < this.challengeDetails?.phases.length">
+                    <ibm-accordion-item title="{{getAccordionTitle()}}">
+                        <h5>Requirment</h5>
+                        <p>{{ challengeDetails?.Objective }}</p>
+                        <br />
+                        <div *ngIf="showAccuracy()">
+                            <h5>Accuracy: {{getPassAccuracy()}}</h5>
+                        </div>
+                        <br /><br />
+                        <h5>Data</h5>
+                        Dataset size: 1000 records
+                        <h6></h6>
+                        <img style="height: 125px; width: 300px;" src="{{imageUrlArr}}" />
+                        <br />
+                        <h6>Sample Data Set</h6>
+                        <p>Download Dataset 1
+                            <svg icon ibmIconDownload16 class="downlogoPointer" (click)="downloadFile()"></svg>
+                        </p>
+                        <br />
+                        <h5>Model</h5>
+                        <p>{{ modelDetails?.modelDescription }}</p>
 
-            <fieldset class="bx--fieldset">
-              <div class="bx--form-item">
-                <div class="bx--radio-button-group bx--radio-button-group--vertical">
-                  <div class="bx--radio-button-wrapper">
-                    <input id="radio-button-b4twcexavc-1" class="bx--radio-button" type="radio" value="red"
-                      name="radio-button--vertical" tabindex="0" checked />
-                    <label for="radio-button-b4twcexavc-1" class="bx--radio-button__label">
+                        <fieldset class="bx--fieldset">
+                            <div class="bx--form-item">
+                                <div class="bx--radio-button-group bx--radio-button-group--vertical">
+                                    <div class="bx--radio-button-wrapper">
+                                        <input id="radio-button-b4twcexavc-1" class="bx--radio-button" type="radio" value="red" name="radio-button--vertical" tabindex="0" checked />
+                                        <label for="radio-button-b4twcexavc-1" class="bx--radio-button__label">
                       <span class="bx--radio-button__appearance"></span>
                       <span class="bx--radio-button__label-text">
                         Trained model
                       </span>
                     </label>
-                  </div>
-                  <div class="bx--radio-button-wrapper">
-                    <input id="radio-button-b4twcexavc-2" class="bx--radio-button" type="radio" value="green"
-                      name="radio-button--vertical" tabindex="0" />
-                    <label for="radio-button-b4twcexavc-2" class="bx--radio-button__label">
+                                    </div>
+                                    <div class="bx--radio-button-wrapper">
+                                        <input id="radio-button-b4twcexavc-2" class="bx--radio-button" type="radio" value="green" name="radio-button--vertical" tabindex="0" />
+                                        <label for="radio-button-b4twcexavc-2" class="bx--radio-button__label">
                       <span class="bx--radio-button__appearance"></span>
                       <span class="bx--radio-button__label-text">
                         Upload Modified trained model
                       </span>
                     </label>
-                  </div>
-                </div>
-              </div>
-            </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
 
-            <div *ngIf="showBtn">
-              <button [ibmButton]="ibmButton" [size]="size" (click)="enterNextPhase()">
+                        <div *ngIf="showBtn">
+                            <button [ibmButton]="ibmButton" [size]="size" (click)="enterNextPhase()">
                 {{getEntryPhaseCount()}}<svg class="bx--btn__icon" ibmIconArrowRight20 size="20"></svg>
               </button>
-            </div>
-          </ibm-accordion-item>
+                        </div>
+                    </ibm-accordion-item>
+                </div>
+            </ibm-accordion>
         </div>
-      </ibm-accordion>
     </div>
-  </div>
 </div>
