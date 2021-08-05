@@ -1,20 +1,27 @@
-.to{
+.to {
     margin-top: 22px;
     margin-right: 13px;
     padding-left: 13px;
 }
 
-.headline{
+.headline {
     font-size: 12px;
 }
 
-.back_btn{
+.back_btn {
     background-color: #383838 !important;
     border: none;
 }
 
 .bx--number input {
-   
     min-width: 10.375rem !important;
-   
+}
+.button_style {
+    padding: 1px 17px 1px 17px;
+    font-size: 15px;
+}
+.buttonstyling {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
 }

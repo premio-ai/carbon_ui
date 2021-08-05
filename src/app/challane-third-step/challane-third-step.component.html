@@ -74,17 +74,15 @@
 		<div ibmCol class="custom-class-example" [columnNumbers]="{'md': 4, 'sm': 12}">
             <div ibmGrid [condensed]="gridCondensed">
 				<br/><br/><br/><br/>
-                <div ibmRow class="row_button" style="margin-left: auto;
-				left: 74px;
-				position: relative;" [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
+                <div ibmRow class="row_button buttonstyling"  [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
                     [condensed]="rowCondensed">
                     <div ibmCol class="custom-class-example" style="margin-top: 460px;" [columnNumbers]="{'md': 1, 'sm': 12}">
-                        <button class="back_btn" [ibmButton]="ibmButton" [size]="size" (click)="previous()" >Previous</button>
+                        <button class="back_btn button_style" [ibmButton]="ibmButton" [size]="size" (click)="previous()" >Previous</button>
                     </div>
-                    <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 1, 'sm': 12}" style="margin-left: 64px;">
+                    <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 1, 'sm': 12}">
                     </div>
                     <div ibmCol class="custom-class-example" style="margin-top: 460px;" [columnNumbers]="{'md': 1, 'sm': 12}">
-                        <button [ibmButton]="ibmButton" [size]="size" (click)="next()" > Next&nbsp;</button>
+                        <button [ibmButton]="ibmButton" [size]="size" (click)="next()" class="button_style"> Next&nbsp;</button>
                     </div>
                 </div>
             </div>
