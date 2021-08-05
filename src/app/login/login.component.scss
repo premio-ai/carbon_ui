@@ -44,15 +44,11 @@
     margin-top: 5px;
 }
 
-.button_style {
-    padding: 1px 17px 1px 17px;
-    font-size: 15px;
-}
 
 .design {
     padding-top: 100px;
 }
-@media only screen and (max-width: 1100px) and (min-width: 300px) {
+@media only screen and (max-width: 1100px) and (min-width: 200px) {
     .heading {
         margin-left: 2px;
     }

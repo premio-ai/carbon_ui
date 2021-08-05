@@ -1,168 +1,165 @@
 @import "../../styles.scss";
 
 .Step2btn_next {
-    // margin: auto;
-    // display: flex;
-    margin-left: 33px;
+	// margin: auto;
+	// display: flex;
+	margin-left: 33px;
 }
 .Step2btn_pre {
-    // margin: auto;
-    // display: flex;
-    // margin-right: 0px;
-    background-color: #383838;
-    border: none;
+	// margin: auto;
+	// display: flex;
+	// margin-right: 0px;
+	background-color: #383838;
+	border: none;
 }
 
 .app-loading {
-    position: fixed;
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    top: 0;
-    left: 0;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    background-color: #80808061;
+	position: fixed;
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	top: 0;
+	left: 0;
+	justify-content: center;
+	align-items: center;
+	z-index: 9999;
+	background-color: #80808061;
 
-    & > div {
-        width: auto !important;
-    }
+	& > div {
+		width: auto !important;
+	}
 }
 
 .app-loading .spinner {
-    height: 200px;
-    width: 200px;
-    animation: rotate 2s linear infinite;
-    transform-origin: center center;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
+	height: 200px;
+	width: 200px;
+	animation: rotate 2s linear infinite;
+	transform-origin: center center;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
 }
 
 .app-loading .spinner .path {
-    stroke-dasharray: 2, 200;
-    stroke-dashoffset: 0;
-    animation: dash 1.5s ease-in-out infinite;
-    stroke-linecap: round;
-    stroke: #0066ff;
+	stroke-dasharray: 2, 200;
+	stroke-dashoffset: 0;
+	animation: dash 1.5s ease-in-out infinite;
+	stroke-linecap: round;
+	stroke: #0066ff;
 }
 
 .bx--toast-notification--failure {
-    border-left: 3px solid #ff0000;
-    background: #393939;
-    margin-left: 1000px;
-    margin-top: 100px;
-    position: absolute;
-    top: -36px;
-    left: 32px;
+	border-left: 3px solid #ff0000;
+	background: #393939;
+	margin-left: 1000px;
+	margin-top: 100px;
+	position: absolute;
+	top: -36px;
+	left: 32px;
 }
 
 .fileBox {
-    display: flex;
-    /* border: 1px solid black; */
-    height: 40px;
-    background-color: #84828214;
+	display: flex;
+	/* border: 1px solid black; */
+	height: 40px;
+	background-color: #84828214;
 }
 
 .drag {
-    font-size: 14px;
-    color: gray;
-    margin-top: 10px;
+	font-size: 14px;
+	color: gray;
+	margin-top: 10px;
 }
 
 .buttonstyling {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-}
-
-.button_style {
-    padding: 1px 17px 1px 17px;
-    font-size: 15px;
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
 }
 
 .link {
-    color: #4263ff;
-    font-size: 16px;
-    margin-left: 15px;
+	color: #4263ff;
+	font-size: 16px;
+	margin-left: 15px;
 }
 
 .bx--number__controls {
-    position: absolute;
-    right: 0;
-    display: flex;
-    flex-direction: column !important;
-    justify-content: center;
-    align-items: center;
-    top: 50%;
-    transform: translateY(-50%);
+	position: absolute;
+	right: 0;
+	display: flex;
+	flex-direction: column !important;
+	justify-content: center;
+	align-items: center;
+	top: 50%;
+	transform: translateY(-50%);
 }
 
 .bx--number input {
-    font-size: 0.875rem;
-    font-weight: 400;
-    line-height: 1.29;
-    letter-spacing: 0.16px;
-    outline: 2px solid transparent;
-    outline-offset: -2px;
-    display: inline-flex;
-    width: 50% !important;
-    min-width: 9.375rem;
-    height: 2.5rem;
-    box-sizing: border-box;
-    padding-right: 8rem;
-    padding-left: 1rem;
-    border: 0;
-    border-bottom: 0.0625rem solid #8d8d8d;
-    -moz-appearance: textfield;
-    background-color: #f4f4f4;
-    border-radius: 0;
-    color: #161616;
-    font-family: "IBM Plex Mono", "Menlo", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", Courier, monospace;
-    font-weight: 300;
-    transition: background-color 70ms cubic-bezier(0.2, 0, 0.38, 0.9), outline 70ms cubic-bezier(0.2, 0, 0.38, 0.9);
+	font-size: 0.875rem;
+	font-weight: 400;
+	line-height: 1.29;
+	letter-spacing: 0.16px;
+	outline: 2px solid transparent;
+	outline-offset: -2px;
+	display: inline-flex;
+	width: 50% !important;
+	min-width: 9.375rem;
+	height: 2.5rem;
+	box-sizing: border-box;
+	padding-right: 8rem;
+	padding-left: 1rem;
+	border: 0;
+	border-bottom: 0.0625rem solid #8d8d8d;
+	-moz-appearance: textfield;
+	background-color: #f4f4f4;
+	border-radius: 0;
+	color: #161616;
+	font-family: "IBM Plex Mono", "Menlo", "DejaVu Sans Mono",
+		"Bitstream Vera Sans Mono", Courier, monospace;
+	font-weight: 300;
+	transition: background-color 70ms cubic-bezier(0.2, 0, 0.38, 0.9),
+		outline 70ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
 .headingtop {
-    color: gray;
-    font-size: 12px;
+	color: gray;
+	font-size: 12px;
 }
 @media (min-width: 42rem) {
-    .bx--grid {
-        padding-left: 0rem;
-        padding-right: 1rem;
-    }
+	.bx--grid {
+		padding-left: 0rem;
+		padding-right: 1rem;
+	}
 }
 
 .challTitle {
-    margin-left: 381px;
-    font-size: 10px;
-    margin-top: -20px;
-    margin-bottom: -8px;
-    @include aboveWidth(1440px) {
-        margin-left: 428px;
-        font-size: 10px;
-        margin-top: -20px;
-        margin-bottom: -8px;
-    }
+	margin-left: 381px;
+	font-size: 10px;
+	margin-top: -20px;
+	margin-bottom: -8px;
+	@include aboveWidth(1440px) {
+		margin-left: 428px;
+		font-size: 10px;
+		margin-top: -20px;
+		margin-bottom: -8px;
+	}
 }
 
 @media screen and (max-width: 1024px) {
-    .challTitle {
-        margin-left: 273px;
-        font-size: 10px;
-        margin-top: -20px;
-        margin-bottom: -8px;
-    }
+	.challTitle {
+		margin-left: 273px;
+		font-size: 10px;
+		margin-top: -20px;
+		margin-bottom: -8px;
+	}
 }
 
 .alignment {
-    margin-top: 51px;
+	margin-top: 51px;
 }
 
 .addphase {
-    font-size: 10px;
+	font-size: 10px;
 }

@@ -1,43 +1,59 @@
 @import "../../styles.scss";
 
 .praa {
-    font-size: 14px;
+	font-size: 14px;
 }
 .toggle_head {
-    font-size: 10px;
-    color: gray;
+	font-size: 10px;
+	color: gray;
 }
 
 .btn {
-    margin: auto;
-    margin-right: -30px;
-    display: flex;
-    margin-bottom: 20px;
-    // margin-top: 132px;
+	margin: auto;
+	margin-right: -30px;
+	display: flex;
+	margin-bottom: 20px;
+	// margin-top: 132px;
 }
-.button_style {
-    padding: 1px 17px 1px 17px;
-    font-size: 15px;
-}
+
 
 .challTitle {
-    margin-left: 365px;
-    font-size: 10px;
-    margin-top: -20px;
-    margin-bottom: -8px;
-    @include aboveWidth(1440px) {
-        margin-left: 401px;
-        font-size: 10px;
-        margin-top: -20px;
-        margin-bottom: -8px;
-    }
+	// margin-left: 365px;
+	font-size: 10px;
+	// margin-top: -20px;
+	// margin-bottom: -8px;
+	// @include aboveWidth(1440px) {
+	// 	margin-left: 401px;
+	// 	font-size: 10px;
+	// 	margin-top: -20px;
+	// 	margin-bottom: -8px;
+	// }
+}
+.labelstyle{
+	margin-right: -48px;
+}
+.challengeLabel {
+	label {
+		display: flex;
+		justify-content: space-between;
+		width: 90%;
+	}
 }
 
-@media screen and (max-width: 1024px) {
-    .challTitle {
-        margin-left: 273px;
-        font-size: 10px;
-        margin-top: -20px;
-        margin-bottom: -8px;
-    }
+// @media screen and (max-width: 1024px) and (min-width: "200px"){
+// 	.challTitle {
+// 		margin-left: 273px;
+// 		font-size: 10px;
+// 		margin-top: -20px;
+// 		margin-bottom: -8px;
+// 	}
+// }
+
+@media only screen and (max-width: "1020px") and (min-width: "200px") {
+	.btn {
+		margin-right: 0px;
+	}
+	.labelstyle{
+		margin-right: 0px;
+	}
 }

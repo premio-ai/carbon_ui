@@ -70,7 +70,7 @@
         </div>
         <div class="bx--form-item">
           <label for="text-input-3" class="bx--label">Register As</label>
-          <ibm-dropdown [label]="Min" style="width: 210px;" placeholder="Select User Role"
+          <ibm-dropdown [label]="Min" class="dropdownstyle" placeholder="Select User Role"
             (selected)="selected($event)">
             <ibm-dropdown-list [items]="registerAs"></ibm-dropdown-list>
           </ibm-dropdown>
@@ -82,7 +82,7 @@
           <label for="text-input-3" class="bx--label">Bio and Company Info</label>
           <!-- <input id="text-input-3" type="text" class="bx--text-input" [(ngModel)]="signupDetails.bio"
           placeholder="I am a..." /> -->
-          <textarea style="width: 100% !important" ibmTextArea minlength="1" maxlength="500" [rows]="3" [cols]="cols"
+          <textarea class="textareastyle" ibmTextArea minlength="1" maxlength="500" [rows]="3" [cols]="cols"
             aria-label="textarea" [(ngModel)]="signupDetails.bio"></textarea>
         </div>
         <div *ngIf="bioError">
@@ -98,7 +98,7 @@
         </div>
         <br />
         <div class="bx--form-item">
-          <button class="bx--btn bx--btn--primary button_style" type="button" (click)="validate()">Sign Up</button>
+          <button class="bx--btn bx--btn--primary" type="button" (click)="validate()">Sign Up</button>
         </div>
         <div class="bx--form-item" style="margin-top: 5px;">
           <p style="font-size: 0.8rem;">Already have an account. <a style="cursor: pointer;"
