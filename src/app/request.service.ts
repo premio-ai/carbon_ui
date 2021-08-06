@@ -8,8 +8,8 @@ import { map, catchError, } from 'rxjs/operators';
 })
 
 export class RequestService {
-  baseUrl: string = "http://localhost:3500/api/";                                          // Local URL
- // baseUrl: string = "https://challengeapp.eu-gb.cf.appdomain.cloud/api/"                     //ChallengeApp IBM
+  // baseUrl: string = "http://localhost:3500/api/";                                          // Local URL
+ baseUrl: string = "https://challengeapp.eu-gb.cf.appdomain.cloud/api/"                     //ChallengeApp IBM
   constructor(private http: HttpClient) {}
 
   get(uri, params): Observable<any> {

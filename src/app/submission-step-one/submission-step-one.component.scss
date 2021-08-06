@@ -1,63 +1,62 @@
 .bx--tag {
-   
-    border-radius: 0rem; 
+	border-radius: 0rem;
 }
 
-svg{
-    cursor: pointer;
+svg {
+	cursor: pointer;
 }
 
 .fileBox {
-    display: flex;
-    width: 220px;
-    height: 40px;
-    background-color: #84828214;
+	display: flex;
+	width: 220px;
+	height: 40px;
+	background-color: #84828214;
 }
 
 .app-loading {
-    position: fixed;
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    top: 0;
-    left: 0;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    background-color: #80808061;
+	position: fixed;
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	top: 0;
+	left: 0;
+	justify-content: center;
+	align-items: center;
+	z-index: 9999;
+	background-color: #80808061;
 
-    & > div {
-        width: auto !important;
-    }
-  }
-
-  .bx--toast-notification--failure {
-    border-left: 3px solid #ff0000;
-    background: #393939;
-    margin-left: 1000px;
-    margin-top: 100px;
-    position: absolute;
-    top: -36px;
-    left: 32px;
+	& > div {
+		width: auto !important;
+	}
 }
 
-  .app-loading .spinner {
-    height: 200px;
-    width: 200px;
-    animation: rotate 2s linear infinite;
-    transform-origin: center center;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-  }
+.bx--toast-notification--failure {
+	border-left: 3px solid #ff0000;
+	background: #393939;
+	margin-left: 1000px;
+	margin-top: 100px;
+	position: absolute;
+	top: -36px;
+	left: 32px;
+}
 
-  .app-loading .spinner .path {
-    stroke-dasharray: 2, 200;
-    stroke-dashoffset: 0;
-    animation: dash 1.5s ease-in-out infinite;
-    stroke-linecap: round;
-    stroke: #0066ff;
-  }
+.app-loading .spinner {
+	height: 200px;
+	width: 200px;
+	animation: rotate 2s linear infinite;
+	transform-origin: center center;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
+.app-loading .spinner .path {
+	stroke-dasharray: 2, 200;
+	stroke-dashoffset: 0;
+	animation: dash 1.5s ease-in-out infinite;
+	stroke-linecap: round;
+	stroke: #0066ff;
+}

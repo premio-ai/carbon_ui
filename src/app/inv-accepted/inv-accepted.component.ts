@@ -3,7 +3,7 @@ import { RequestService } from "../request.service";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
-import { App_uri_local, APP_URL, MESSAGES, ROLE } from '../../config/config';
+import { APP_URL, MESSAGES, ROLE } from '../../config/config';
 
 @Component({
 	selector: 'app-inv-accepted',

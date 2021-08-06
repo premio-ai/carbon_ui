@@ -1,24 +1,24 @@
 <ibm-header brand="">
-    <a (click)="navigate()" style="cursor: pointer;"> <img src="assets/logo.png" class="imglogo" /></a>
-    <ibm-hamburger *ngIf="hasHamburger" [active]="active" (selected)="active = !active"></ibm-hamburger>
-    <ibm-header-navigation>
-        <div *ngIf="userDetails.role == 'Insurer'">
-            <ibm-header-item (click)="navigate()" [useRouter]="true" [route]="['/dashboard']">Activity
-            </ibm-header-item>
-        </div>
-        <div *ngIf="userDetails.role == 'Innovator'">
-            <ibm-header-item (click)="navigate()" [useRouter]="true" [route]="['/invdash']">Activity
-            </ibm-header-item>
-        </div>
-        <div *ngIf="userDetails.role == 'Innovator'">
-            <ibm-header-item [route]="['/invchallenges']" [useRouter]="true">Challenges
-            </ibm-header-item>
-        </div>
-    </ibm-header-navigation>
-    <ibm-header-global>
-        <p class="namefull">{{ userDetails.fullName }}</p>
-        <ibm-header-action #firstAction title="action"><svg icon ibmIconUserAvatar20></svg></ibm-header-action>
-    </ibm-header-global>
+  <a (click)="navigate()" style="cursor: pointer;"> <img src="assets/logoimg.svg"  class="imglogo" /></a>
+  <ibm-hamburger *ngIf="hasHamburger" [active]="active" (selected)="active = !active"></ibm-hamburger>
+  <ibm-header-navigation>
+    <div *ngIf="userDetails.role == 'Insurer'">
+      <ibm-header-item (click)="navigate()" [useRouter]="true" [route]="['/dashboard']">Activity
+      </ibm-header-item>
+    </div>
+    <div *ngIf="userDetails.role == 'Innovator'">
+      <ibm-header-item (click)="navigate()" [useRouter]="true" [route]="['/invdash']">Activity
+      </ibm-header-item>
+    </div>
+    <div *ngIf="userDetails.role == 'Innovator'">
+      <ibm-header-item [route]="['/invchallenges']" [useRouter]="true">Challenges
+      </ibm-header-item>
+    </div>
+  </ibm-header-navigation>
+  <ibm-header-global>
+    <p class="namefull">{{ userDetails.fullName }}</p>
+    <ibm-header-action #firstAction title="action"><svg icon ibmIconUserAvatar20></svg></ibm-header-action>
+  </ibm-header-global>
 </ibm-header>
 
 <div *ngIf="userSessionExpired" data-notification class="bx--toast-notification bx--toast-notification--failure" role="alert">
