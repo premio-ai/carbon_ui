@@ -133,7 +133,6 @@ export class InvChallengeComponent implements OnInit {
     }
 
     this.requestService.get(allActiveChallanegUrl, params).toPromise().then(data => {
-     // console.log(data.count);
       this.totalPage = (Math.ceil(data.count / 10) == 0) ? 1 : Math.ceil(data.count / 10);
       this.activeChallenges = data.list;
     }).catch(err => {
@@ -201,7 +200,6 @@ export class InvChallengeComponent implements OnInit {
     }
     this.requestService.get(url, params).toPromise().then(data => {
       this.loadIndex = -1;
-      console.log(data.count);
       this.totalPageBM = (Math.ceil((data.count) / 10)==0) ?1 : Math.ceil((data.count) / 10);
       this.bookmarkedChallenges = data.list;
     }).catch(err => {

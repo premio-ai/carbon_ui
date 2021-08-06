@@ -63,7 +63,6 @@ export class OverviewComponent implements OnInit {
   }
 
   checkSelected(phaseId) {
-    //console.log(phaseId);
     let checked = false
     if (this.selectedPhaseId == phaseId) {
       checked = true
@@ -133,7 +132,6 @@ export class OverviewComponent implements OnInit {
 			skip: pageOffset
 		}
 		this.requestService.get(url, params).toPromise().then(data => {
-      console.log(data.count);
 			this.totalPage = (Math.ceil((data.count)/ 10) == 0) ? 1 : Math.ceil((data.count)/ 10);
 			this.leaderboardData = data.list;
 		}).catch(err => {
@@ -155,10 +153,8 @@ export class OverviewComponent implements OnInit {
 	}
 
 	nextPage() {
-     console.log('clicked next page');
 		if (this.pageNo < (this.totalPage)) {
 			this.pageNo++;
-     // console.log(this.pageNo);
 			this.pageOffset = (this.pageNo - 1) * 10;
 			this.getLeaderboard(this.challengeDetails._id, this.selectedPhaseId, this.pageOffset)
 		}

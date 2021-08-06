@@ -77,7 +77,6 @@ export class InvAcceptedComponent implements OnInit {
 				this.userSessionExpired = false;
 				this.activatedRoute.params.subscribe((params: Params) => {
 					if (params) {
-						//console.log(params.id);
 						this.challengeId = params.id
 					}
 				});
@@ -168,7 +167,6 @@ export class InvAcceptedComponent implements OnInit {
 	getChallengeAcceptance(challengeId) {
 		let url = 'userChallenge/accepted/' + challengeId;
 		this.requestService.get(url, null).toPromise().then(data => {
-			// console.log(data);
 			this.acceptedChallenge = data;
 			if (data._id.length > 0) {
 				this.isChallengeAccepted = true;
@@ -191,7 +189,6 @@ export class InvAcceptedComponent implements OnInit {
 			skip: pageOffset
 		}
 		this.requestService.get(url, params).toPromise().then(data => {
-			//console.log(data.count);
 			if(data.count){
 			this.totalPage = (Math.ceil((data.count) / 10) == 0) ? 1 : Math.ceil((data.count) / 10);
 		     }
@@ -290,7 +287,6 @@ export class InvAcceptedComponent implements OnInit {
 		}
 		let url = 'userChallenge';
 		this.requestService.put(url, data).toPromise().then(data => {
-			//console.log(data);
 			this.getChallengeAcceptance(challengeId)
 			this.showWithdrawToaster()
 		}).catch(err => {

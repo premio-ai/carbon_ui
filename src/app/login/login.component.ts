@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit {
 
       this.requestService.signing('auth/login', loginData).toPromise().then(data => {
           const userDetails = data.userDetails;
-           console.log(userDetails);
           localStorage.setItem('userDetails', JSON.stringify(userDetails))
           if (userDetails.role == ROLE.INSURER) {
             this.router.navigateByUrl('dashboard')
