@@ -3,14 +3,12 @@
 </button>
 <br />
 
-<div *ngIf="errorToasterMsg" data-notification class="bx--toast-notification bx--toast-notification--failure"
-  role="alert">
-  <div class="bx--toast-notification__details">
-    <p class="bx--toast-notification__title">Somthing went wrong.</p>
-    <p class="bx--toast-notification__subtitle">Please contact administrator.</p>
-  </div>
-  <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button" type="button"
-    aria-label="close">
+<div *ngIf="errorToasterMsg" data-notification class="bx--toast-notification bx--toast-notification--failure" role="alert">
+    <div class="bx--toast-notification__details">
+        <p class="bx--toast-notification__title">Somthing went wrong.</p>
+        <p class="bx--toast-notification__subtitle">Please contact administrator.</p>
+    </div>
+    <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button" type="button" aria-label="close">
     <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform"
       xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__close-icon" width="20" height="20"
       viewBox="0 0 32 32" aria-hidden="true">
@@ -20,105 +18,103 @@
   </button>
 </div>
 
-<div *ngIf="userSessionExpired" data-notification class="bx--toast-notification bx--toast-notification--failure"
-  role="alert">
-  <div class="bx--toast-notification__details">
-    <p class="bx--toast-notification__title">User session expired.</p>
-    <a class="bx--toast-notification__subtitle" style="cursor: pointer;" (click)="reLogin()">Login again.</a>
-  </div>
+<div *ngIf="userSessionExpired" data-notification class="bx--toast-notification bx--toast-notification--failure" role="alert">
+    <div class="bx--toast-notification__details">
+        <p class="bx--toast-notification__title">User session expired.</p>
+        <a class="bx--toast-notification__subtitle" style="cursor: pointer;" (click)="reLogin()">Login again.</a>
+    </div>
 </div>
 
 <div *ngIf="!isChallengeAccepted">
-  <p>Accept this challenge first to submit a model.</p>
+    <p>Accept this challenge first to submit a model.</p>
 </div>
 
 <div style="display: grid;grid-template-columns: repeat(2,minmax(0,1fr)) ;gap: 10px;">
-  <div *ngFor="let model of challengeSubmissionData; index as i" class="custom-class-example" style="margin-top: 25px;">
-    <ibm-tile class="tile">
-      <div style="display: grid;grid-template-columns: 68% 28%;padding: 1rem;">
-        <div>
-          <p style="font-size: 20px;">{{model?.modelName}}</p>
-          <span class="phase2">Phase {{getPhasesCount(model?.phaseId) + 1}} of {{totalPhases}} </span>
-        </div>
-        <div *ngIf="model?.modelStatus.status == '' ">
-          <div style="margin-left: auto;align-items: center;display: flex; width: 100px;">
-            <svg icon ibmIconWarningFilled16 class="fille"></svg>&nbsp;&nbsp;
-            <p style="margin-top: 0px; font-size: 10px;line-height: 18px;">Model Not<br />Uploaded</p>
-          </div>
-        </div>
-        <div *ngIf="model?.modelStatus.status == 'UPLOADING' ">
-          <div style="margin-left: auto;align-items: center;display: flex; width: 100px;">
-            <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)">
-            </ibm-inline-loading>
-            &nbsp;&nbsp;
-            <p style="margin-top: 0px; font-size: 10px;line-height: 18px;">Uploading<br />model to data</p>
-          </div>
-        </div>
+    <div *ngFor="let model of challengeSubmissionData; index as i" class="custom-class-example" style="margin-top: 25px;">
+        <ibm-tile class="tile">
+            <div style="display: grid;grid-template-columns: 68% 28%;padding: 1rem;">
+                <div>
+                    <p style="font-size: 20px;">{{model?.modelName}}</p>
+                    <span class="phase2">Phase {{getPhasesCount(model?.phaseId) + 1}} of {{totalPhases}} </span>
+                </div>
+                <div *ngIf="model?.modelStatus.status == '' ">
+                    <div style="margin-left: auto;align-items: center;display: flex; width: 100px;">
+                        <svg icon ibmIconWarningFilled16 class="fille"></svg>&nbsp;&nbsp;
+                        <p style="margin-top: 0px; font-size: 10px;line-height: 18px;">Model Not<br />Uploaded</p>
+                    </div>
+                </div>
+                <div *ngIf="model?.modelStatus.status == 'UPLOADING' ">
+                    <div style="margin-left: auto;align-items: center;display: flex; width: 100px;">
+                        <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)">
+                        </ibm-inline-loading>
+                        &nbsp;&nbsp;
+                        <p style="margin-top: 0px; font-size: 10px;line-height: 18px;">Uploading<br />model to data</p>
+                    </div>
+                </div>
 
-        <div *ngIf="model?.modelStatus.status == 'RUNNING' ">
-          <div style="margin-left: auto;align-items: center;display: flex; width: 100px;">
-            <ibm-inline-loading (onSuccess)="onSuccess($event)"></ibm-inline-loading>
-            &nbsp;&nbsp;
-            <p class="description">In Progress</p>
-          </div>
-        </div>
+                <div *ngIf="model?.modelStatus.status == 'RUNNING' ">
+                    <div style="margin-left: auto;align-items: center;display: flex; width: 100px;">
+                        <ibm-inline-loading (onSuccess)="onSuccess($event)"></ibm-inline-loading>
+                        &nbsp;&nbsp;
+                        <p class="description">In Progress</p>
+                    </div>
+                </div>
 
-        <div *ngIf="model?.modelStatus.status == 'FAILED' ">
-          <div style="margin-left: auto;align-items: center;display: flex;">
-            <svg class="svgRed" icon ibmIconCloseFilled16></svg>&nbsp;
-            <p class="description">Failed</p>
-          </div>
-        </div>
-        <div *ngIf="model?.modelStatus.status == 'RESULT' ">
-          <div style="margin-left: auto;align-items: center;display: flex;">
-            <svg class="svg" icon ibmIconCheckmarkFilled16></svg>&nbsp;
-            <p class="description">Results</p>
-          </div>
-        </div>
-      </div>
-      <div style="display: grid;grid-template-columns: 80% 20%;padding: 1rem;margin-top: -32px;">
-        <div class="custom-class-example">
-          <p *ngIf="showLess" class="description">{{ showLessStr(model?.modelDescription) }}
-            <span *ngIf="model?.modelDescription.length>100" (click)="readMore()"
-              style="color: cadetblue; font-size: x-small; cursor: pointer;">...Read More</span>
-          </p>
-          <p *ngIf="!showLess" class="description">{{ model?.modelDescription }}
-            <span (click)="readLess()" style="color: cadetblue; font-size: x-small; cursor: pointer;">Read Less</span>
-          </p>
-        </div>
-        <div class="custom-class-example" *ngIf="model?.modelStatus.score > 0">
-          <div class="sideicon">
-            <p class="modelscrename">{{model?.modelStatus.score}}</p>
-          </div>
-          <div class="sideicon">
-            <p class="score">Score</p>
-          </div>
-        </div>
-      </div>
-      <div style="display: grid;grid-template-columns: 50% 50%;">
-        <div class="custom-class-example" *ngIf="showNextBtn(model?.phaseId)">
-          <button class="view" [ibmButton]="ibmButton" [size]="'sm'" (click)="enterPhaseBtn(model?.phaseId)">Enter phase
-            {{getPhasesCount(model?.phaseId) + 1}} </button>
-          <!-- <button class="view" [ibmButton]="ibmButton" [size]="'sm'" (click)="enterPhaseBtn(model?.phaseId)" >{{getPhasesCountBtn(model?.phaseId)}} </button> -->
-        </div>
-        <div class="custom-class-example" *ngIf="!showNextBtn(model?.phaseId)"></div>
-        <div class="custom-class-example" *ngIf="model?.modelStatus.status == 'RESULT' ">
-          <button class="model" [ibmButton]="ibmButton" [size]="'sm'" (click)="seePerformance(model?._id)">See
+                <div *ngIf="model?.modelStatus.status == 'FAILED' ">
+                    <div style="margin-left: auto;align-items: center;display: flex;">
+                        <svg class="svgRed" icon ibmIconCloseFilled16></svg>&nbsp;
+                        <p class="description">Failed</p>
+                    </div>
+                </div>
+                <div *ngIf="model?.modelStatus.status == 'RESULT' ">
+                    <div style="margin-left: auto;align-items: center;display: flex;">
+                        <svg class="svg" icon ibmIconCheckmarkFilled16></svg>&nbsp;
+                        <p class="description">Results</p>
+                    </div>
+                </div>
+            </div>
+            <div style="display: grid;grid-template-columns: 80% 20%;padding: 1rem;margin-top: -32px;">
+                <div class="custom-class-example">
+                    <p *ngIf="showLess" class="description">{{ showLessStr(model?.modelDescription) }}
+                        <span *ngIf="model?.modelDescription.length>100" (click)="readMore()" style="color: cadetblue; font-size: x-small; cursor: pointer;">...Read More</span>
+                    </p>
+                    <p *ngIf="!showLess" class="description">{{ model?.modelDescription }}
+                        <span (click)="readLess()" style="color: cadetblue; font-size: x-small; cursor: pointer;">Read Less</span>
+                    </p>
+                </div>
+                <div class="custom-class-example" *ngIf="model?.modelStatus.score > 0">
+                    <div class="sideicon">
+                        <p class="modelscrename">{{model?.modelStatus.score}}</p>
+                    </div>
+                    <div class="sideicon">
+                        <p class="score">Score</p>
+                    </div>
+                </div>
+            </div>
+            <div style="display: grid;grid-template-columns: 50% 50%;">
+                <div class="custom-class-example" *ngIf="showNextBtn(model?.phaseId)">
+                    <button class="view" [ibmButton]="ibmButton" [size]="'sm'" (click)="enterPhaseBtn(model?.phaseId)">Enter phase
+            {{getPhasesCount(model?.phaseId) + 2}} </button>
+                    <!-- <button class="view" [ibmButton]="ibmButton" [size]="'sm'" (click)="enterPhaseBtn(model?.phaseId)" >{{getPhasesCountBtn(model?.phaseId)}} </button> -->
+                </div>
+                <div class="custom-class-example" *ngIf="!showNextBtn(model?.phaseId)"></div>
+                <div class="custom-class-example" *ngIf="model?.modelStatus.status == 'RESULT' ">
+                    <button class="model" [ibmButton]="ibmButton" [size]="'sm'" (click)="seePerformance(model?._id)">See
             Performance</button>
-        </div>
-        <div class="viewmodel" *ngIf="model?.modelStatus.status != 'RESULT' ">
-          <button class="model" [ibmButton]="ibmButton" [size]="'sm'" (click)="viewModel(model?._id)">View
+                </div>
+                <div class="viewmodel" *ngIf="model?.modelStatus.status != 'RESULT' ">
+                    <button class="model" [ibmButton]="ibmButton" [size]="'sm'" (click)="viewModel(model?._id)">View
             Model</button>
+                </div>
+            </div>
+        </ibm-tile>
+        <div *ngIf="model?.modelStatus.status == 'RESULT' ">
+            <p class="downlogo">Download Trained Model
+                <svg icon ibmIconDownload16 class="downlogoPointer" (click)="downloadFile(model.modelUploadedPath)"></svg></p>
         </div>
-      </div>
-    </ibm-tile>
-    <div *ngIf="model?.modelStatus.status == 'RESULT' ">
-      <p class="downlogo">Download Trained Model
-        <svg icon ibmIconDownload16 class="downlogoPointer" (click)="downloadFile(model.modelUploadedPath)"></svg></p>
-    </div>
-    <div *ngIf="model?.modelStatus.status != 'RESULT' ">
-      <p class="downlogo">Download Trained Model<svg icon ibmIconDownload16></svg></p>
-    </div>
-  </div>&nbsp;&nbsp;
+        <div *ngIf="model?.modelStatus.status != 'RESULT' ">
+            <p class="downlogo">Download Trained Model<svg icon ibmIconDownload16></svg></p>
+        </div>
+    </div>&nbsp;&nbsp;
 
 </div>

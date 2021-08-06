@@ -46,6 +46,7 @@ export class SubmissionStepFourComponent implements OnInit {
   }
 
   getPhasesCount(phaseId) {
+    //console.log(phaseId);
     let index = this.challengeDetails.phases.findIndex(dt => { return dt.phaseId == phaseId })
     return index;
   }
