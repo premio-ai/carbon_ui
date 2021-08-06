@@ -62,6 +62,7 @@
 }
 
 .fileBox {
+	margin-bottom: 5px;
 	display: flex;
 	/* border: 1px solid black; */
 	height: 40px;
@@ -135,26 +136,26 @@
 }
 
 .challTitle {
-	margin-left: 381px;
+	//margin-left: 381px;
 	font-size: 10px;
-	margin-top: -20px;
-	margin-bottom: -8px;
-	@include aboveWidth(1440px) {
-		margin-left: 428px;
-		font-size: 10px;
-		margin-top: -20px;
-		margin-bottom: -8px;
-	}
+	// margin-top: -20px;
+	// margin-bottom: -8px;
+	// @include aboveWidth(1440px) {
+	// 	margin-left: 428px;
+	// 	font-size: 10px;
+	// 	margin-top: -20px;
+	// 	margin-bottom: -8px;
+	// }
 }
 
-@media screen and (max-width: 1024px) {
-	.challTitle {
-		margin-left: 273px;
-		font-size: 10px;
-		margin-top: -20px;
-		margin-bottom: -8px;
-	}
-}
+// @media screen and (max-width: 1024px) {
+// 	.challTitle {
+// 		margin-left: 273px;
+// 		font-size: 10px;
+// 		margin-top: -20px;
+// 		margin-bottom: -8px;
+// 	}
+// }
 
 .alignment {
 	margin-top: 51px;
