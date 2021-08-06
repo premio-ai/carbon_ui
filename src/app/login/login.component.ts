@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+//import { Console } from 'console';
 import { ROLE } from '../../config/config';
 import { RequestService } from '../request.service';
+//import { Console } from 'console';
 
 @Component({
   selector: 'app-login',
@@ -37,7 +39,6 @@ export class LoginComponent implements OnInit {
       this.requestService.signing('auth/login', loginData).toPromise().then(data => {
           const userDetails = data.userDetails;
           localStorage.setItem('userDetails', JSON.stringify(userDetails))
-  
           if (userDetails.role == ROLE.INSURER) {
             this.router.navigateByUrl('dashboard')
           } else if (userDetails.role == ROLE.INNOVATOR) {

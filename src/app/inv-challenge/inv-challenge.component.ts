@@ -133,7 +133,7 @@ export class InvChallengeComponent implements OnInit {
     }
 
     this.requestService.get(allActiveChallanegUrl, params).toPromise().then(data => {
-      this.totalPage = Math.ceil(data.count / 10);
+      this.totalPage = (Math.ceil(data.count / 10) == 0) ? 1 : Math.ceil(data.count / 10);
       this.activeChallenges = data.list;
     }).catch(err => {
       if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
@@ -200,7 +200,7 @@ export class InvChallengeComponent implements OnInit {
     }
     this.requestService.get(url, params).toPromise().then(data => {
       this.loadIndex = -1;
-      this.totalPageBM = Math.ceil(data.count / 10);
+      this.totalPageBM = (Math.ceil((data.count) / 10)==0) ?1 : Math.ceil((data.count) / 10);
       this.bookmarkedChallenges = data.list;
     }).catch(err => {
       this.errorToaster();

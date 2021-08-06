@@ -49,9 +49,9 @@ export class SubmissionStepOneComponent implements OnInit {
   ngOnChanges() {
     if (this.challengeDetails && this.challengeSubmissionData) {
       let temp = []
-      this.challengeDetails.phases.map((dt, i) => {
+      this.challengeDetails.phases.map((dt, i:number) => {
         temp.push({
-          content: 'Phase' + i,
+          content: 'Phase' + ( i + 1),
           id: dt.phaseId
         })
       })

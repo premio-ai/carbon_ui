@@ -132,7 +132,7 @@ export class OverviewComponent implements OnInit {
 			skip: pageOffset
 		}
 		this.requestService.get(url, params).toPromise().then(data => {
-			this.totalPage = Math.ceil(data.count / 10);
+			this.totalPage = (Math.ceil((data.count)/ 10) == 0) ? 1 : Math.ceil((data.count)/ 10);
 			this.leaderboardData = data.list;
 		}).catch(err => {
 			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {

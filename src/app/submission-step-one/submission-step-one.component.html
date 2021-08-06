@@ -1,24 +1,21 @@
 <div *ngIf="!isChallengeAccepted">
-	<p style="color: red">Accept this challenge first to submit a model.</p>
+    <p style="color: red">Accept this challenge first to submit a model.</p>
 </div>
 
 <div *ngIf="isApiLoading">
-	<div class="app-loading">
-		<div class="logo"></div>
-		<svg class="spinner" viewBox="25 25 50 50">
+    <div class="app-loading">
+        <div class="logo"></div>
+        <svg class="spinner" viewBox="25 25 50 50">
 			<circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
 		</svg>
-	</div>
+    </div>
 </div>
-
-<div *ngIf="errorToasterMsg" data-notification class="bx--toast-notification bx--toast-notification--failure"
-	role="alert">
-	<div class="bx--toast-notification__details">
-		<p class="bx--toast-notification__title">Somthing went wrong.</p>
-		<p class="bx--toast-notification__subtitle">Please contact administrator.</p>
-	</div>
-	<button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button" type="button"
-		aria-label="close">
+<div *ngIf="errorToasterMsg" data-notification class="bx--toast-notification bx--toast-notification--failure" role="alert">
+    <div class="bx--toast-notification__details">
+        <p class="bx--toast-notification__title">Somthing went wrong.</p>
+        <p class="bx--toast-notification__subtitle">Please contact administrator.</p>
+    </div>
+    <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button" type="button" aria-label="close">
 		<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform"
 			xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__close-icon" width="20" height="20"
 			viewBox="0 0 32 32" aria-hidden="true">
@@ -28,66 +25,60 @@
 	</button>
 </div>
 
-<div *ngIf="userSessionExpired" data-notification class="bx--toast-notification bx--toast-notification--failure"
-	role="alert">
-	<div class="bx--toast-notification__details">
-		<p class="bx--toast-notification__title">User session expired.</p>
-		<a class="bx--toast-notification__subtitle" style="cursor: pointer;" (click)="reLogin()">Login again.</a>
-	</div>
+<div *ngIf="userSessionExpired" data-notification class="bx--toast-notification bx--toast-notification--failure" role="alert">
+    <div class="bx--toast-notification__details">
+        <p class="bx--toast-notification__title">User session expired.</p>
+        <a class="bx--toast-notification__subtitle" style="cursor: pointer;" (click)="reLogin()">Login again.</a>
+    </div>
 </div>
 
 <div *ngIf="isChallengeAccepted">
-	<div style="margin-top: 20px; margin-bottom: 15px;">
-		<ibm-label><span style="font-size: medium; color: black;">Select Phase for submission</span></ibm-label>
-		<ibm-select ariaLabel='ngModel select' aria-placeholder="Select" [(ngModel)]="this.stepOne.phaseId">
-			<option *ngFor="let phase of phasesList; index as i" [value]="phase.id"
-				[attr.selected]="phase.id==enterPhaseId ? true : null">{{phase.content}}</option>
-		</ibm-select>
-	</div>
+    <div style="margin-top: 20px; margin-bottom: 15px;">
+        <ibm-label><span style="font-size: medium; color: black;">Select Phase for submission</span></ibm-label>
+        <ibm-select ariaLabel='ngModel select' aria-placeholder="Select" [(ngModel)]="this.stepOne.phaseId">
+            <option *ngFor="let phase of phasesList; index as i" [value]="phase.id" [attr.selected]="phase.id==enterPhaseId ? true : null">{{phase.content}}</option>
+        </ibm-select>
+    </div>
 
-	<p>
-		Don't forget to check out the sample data sets before you submit a model.
-		These data sets will help you get started in creating your models.
-	</p>
-	<br />
+    <p>
+        Don't forget to check out the sample data sets before you submit a model. These data sets will help you get started in creating your models.
+    </p>
+    <br />
 
-	<p>Download Dataset 1
-		<svg icon ibmIconDownload16 (click)="downloadFile(phaseIndex)" class="svg"></svg>
-	</p>
-	<!-- <p *ngFor='let data of challengeDetails?.phases[phaseIndex]?.sampleDataFile; index as i'>Download Dataset {{i+1}}
+    <p>Download Dataset 1
+        <svg icon ibmIconDownload16 (click)="downloadFile(phaseIndex)" class="svg"></svg>
+    </p>
+    <!-- <p *ngFor='let data of challengeDetails?.phases[phaseIndex]?.sampleDataFile; index as i'>Download Dataset {{i+1}}
 		<svg icon ibmIconDownload16 (click)="downloadFile(phaseIndex)" class="svg"></svg>
 	</p> -->
-	<div *ngIf="docError">
-		<p><span style="font-size: x-small; color: red">Document not available for download</span></p>
-	</div>
+    <div *ngIf="docError">
+        <p><span style="font-size: x-small; color: red">Document not available for download</span></p>
+    </div>
 
-	<br />
-	<br />
-	<br />
-	<p>Once you've built your model you can <strong>upload it here</strong> to submit it for Phase 1 of training and
-		testing.
-	</p>
-	<h6>Model</h6>
-	<p>Please upload your model in .zip formats. 1MB max file size.
-	</p>
+    <br />
+    <br />
+    <br />
+    <p>Once you've built your model you can <strong>upload it here</strong> to submit it for Phase 1 of training and testing.
+    </p>
+    <h6>Model</h6>
+    <p>Please upload your model in .zip formats. 1MB max file size.
+    </p>
 
-	<app-drop-zip-uploader (goNext)="setModel($event)" (uploadFile)="uploadDataVisual()"
-		(filesChange)="onImageSelect($event.target.files)"></app-drop-zip-uploader>
-	<div *ngIf="isFileUploading">
-		<h6>
-			<ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)">
-			</ibm-inline-loading>
-		</h6>
-	</div>
-	<div *ngIf="stepOne.modelUploadedPath.length>0">
-		<div class="fileBox">
-			<p style="margin: 8px; font-size: small;">{{getFileName(stepOne.modelUploadedPath)}}</p>
-			<p style="margin-top: 8px; margin-left: 75px; cursor: pointer;" (click)="removeUploadedFile()">x</p>
-		</div>
-	</div>
-	<div style="margin-left: auto; display: flex; justify-content: flex-end">
-		<button class="bx--btn bx--btn--secondary" type="button" (click)="cancel()">Cancel</button>
-		&nbsp;
-		<button [ibmButton]="ibmButton" class="btn" [disabled]="isBtnDisabled" (click)="nextStep()"> Next</button>
-	</div>
+    <app-drop-zip-uploader (goNext)="setModel($event)" (uploadFile)="uploadDataVisual()" (filesChange)="onImageSelect($event.target.files)"></app-drop-zip-uploader>
+    <div *ngIf="isFileUploading">
+        <h6>
+            <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)">
+            </ibm-inline-loading>
+        </h6>
+    </div>
+    <div *ngIf="stepOne.modelUploadedPath.length>0">
+        <div class="fileBox">
+            <p style="margin: 8px; font-size: small;">{{getFileName(stepOne.modelUploadedPath)}}</p>
+            <p style="margin-top: 8px; margin-left: 75px; cursor: pointer;" (click)="removeUploadedFile()">x</p>
+        </div>
+    </div>
+    <div style="margin-left: auto; display: flex; justify-content: flex-end">
+        <button class="bx--btn bx--btn--secondary" type="button" (click)="cancel()">Cancel</button> &nbsp;
+        <button [ibmButton]="ibmButton" class="btn" [disabled]="isBtnDisabled" (click)="nextStep()"> Next</button>
+    </div>
 </div>

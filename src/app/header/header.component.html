@@ -1,42 +1,39 @@
 <ibm-header brand="">
-  <a (click)="navigate()" style="cursor: pointer;"> <img src="assets/logo.png" class="imglogo" /></a>
-  <ibm-hamburger *ngIf="hasHamburger" [active]="active" (selected)="active = !active"></ibm-hamburger>
-  <ibm-header-navigation>
-    <div *ngIf="userDetails.role == 'Insurer'">
-      <ibm-header-item (click)="navigate()" [useRouter]="true" [route]="['/dashboard']">Activity
-      </ibm-header-item>
-    </div>
-    <div *ngIf="userDetails.role == 'Innovator'">
-      <ibm-header-item (click)="navigate()" [useRouter]="true" [route]="['/invdash']">Activity
-      </ibm-header-item>
-    </div>
-    <div *ngIf="userDetails.role == 'Innovator'">
-      <ibm-header-item [route]="['/invchallenges']" [useRouter]="true">Challenges
-      </ibm-header-item>
-    </div>
-  </ibm-header-navigation>
-  <ibm-header-global>
-    <p class="namefull">{{ userDetails.fullName }}</p>
-    <ibm-header-action #firstAction title="action"><svg icon ibmIconUserAvatar20></svg></ibm-header-action>
-  </ibm-header-global>
+    <a (click)="navigate()" style="cursor: pointer;"> <img src="assets/logo.png" class="imglogo" /></a>
+    <ibm-hamburger *ngIf="hasHamburger" [active]="active" (selected)="active = !active"></ibm-hamburger>
+    <ibm-header-navigation>
+        <div *ngIf="userDetails.role == 'Insurer'">
+            <ibm-header-item (click)="navigate()" [useRouter]="true" [route]="['/dashboard']">Activity
+            </ibm-header-item>
+        </div>
+        <div *ngIf="userDetails.role == 'Innovator'">
+            <ibm-header-item (click)="navigate()" [useRouter]="true" [route]="['/invdash']">Activity
+            </ibm-header-item>
+        </div>
+        <div *ngIf="userDetails.role == 'Innovator'">
+            <ibm-header-item [route]="['/invchallenges']" [useRouter]="true">Challenges
+            </ibm-header-item>
+        </div>
+    </ibm-header-navigation>
+    <ibm-header-global>
+        <p class="namefull">{{ userDetails.fullName }}</p>
+        <ibm-header-action #firstAction title="action"><svg icon ibmIconUserAvatar20></svg></ibm-header-action>
+    </ibm-header-global>
 </ibm-header>
 
-<div *ngIf="userSessionExpired" data-notification class="bx--toast-notification bx--toast-notification--failure"
-	role="alert">
-	<div class="bx--toast-notification__details">
-		<p class="bx--toast-notification__title">User session expired.</p>
-		<a class="bx--toast-notification__subtitle" style="cursor: pointer;" (click)="reLogin()">Login again.</a>
-	</div>
+<div *ngIf="userSessionExpired" data-notification class="bx--toast-notification bx--toast-notification--failure" role="alert">
+    <div class="bx--toast-notification__details">
+        <p class="bx--toast-notification__title">User session expired.</p>
+        <a class="bx--toast-notification__subtitle" style="cursor: pointer;" (click)="reLogin()">Login again.</a>
+    </div>
 </div>
 
-<div *ngIf="errorToasterMsg" data-notification class="bx--toast-notification bx--toast-notification--failure"
-  role="alert">
-  <div class="bx--toast-notification__details">
-    <p class="bx--toast-notification__title">Somthing went wrong.</p>
-    <p class="bx--toast-notification__subtitle">Please contact administrator.</p>
-  </div>
-  <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button" type="button"
-    aria-label="close">
+<div *ngIf="errorToasterMsg" data-notification class="bx--toast-notification bx--toast-notification--failure" role="alert">
+    <div class="bx--toast-notification__details">
+        <p class="bx--toast-notification__title">Somthing went wrong.</p>
+        <p class="bx--toast-notification__subtitle">Please contact administrator.</p>
+    </div>
+    <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button" type="button" aria-label="close">
     <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform"
       xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__close-icon" width="20" height="20"
       viewBox="0 0 32 32" aria-hidden="true">
@@ -47,71 +44,67 @@
 </div>
 
 <ibm-panel [expanded]="firstAction.active">
-  <div class="bx--navigation-section">
-    <img class="portrait mr-3" itemprop="image" alt="Avatar" src="../../assets/user_avatar.jpeg" />
-    <svg icon ibmIconEdit20 (click)="editUserName()"></svg>
-    <div *ngIf="!isEdit">
-      <p class="userName">{{ userDetails.fullName }}</p>
+    <div class="bx--navigation-section">
+        <img class="portrait mr-3" itemprop="image" alt="Avatar" src="../../assets/user_avatar.jpeg" />
+        <svg icon ibmIconEdit20 (click)="editUserName()"></svg>
+        <div *ngIf="!isEdit">
+            <p class="userName">{{ userDetails.fullName }}</p>
+        </div>
+        <div style="display: flex;" *ngIf="isEdit">
+            <div>
+                <input style="width: 100%; margin-top: 10px; margin-left: 15px;" ibmTextArea (blur)="saveUserName()" [(ngModel)]="set_new_userName" aria-label="textarea" />
+            </div>
+        </div>
+        <br />
+        <p class="userdetail">Active challenge: {{challengeCounts.activeChallengeCount}}</p>
+        <p class="userdetail">Past challenge: {{challengeCounts.pastChallengeCount}}</p>
+        <div *ngIf="userDetails.role == 'Insurer'">
+            <p class="userdetail">Model Watching: {{challengeCounts.modelsWatching}}</p>
+        </div>
+        <div *ngIf="userDetails.role == 'Innovator'">
+            <p class="userdetail">Bookmark Challenges: {{challengeCounts.bookmarkChallengeCount}}</p>
+        </div>
+        <div *ngIf="userDetails.role == 'Innovator'">
+            <p class="userdetail">Challenges Won: {{challengesWon || 0}}</p>
+        </div>
+        <br />
+        <!-- <p class="userdetail">View profile</p> -->
     </div>
-    <div style="display: flex;" *ngIf="isEdit">
-      <div>
-        <input style="width: 100%; margin-top: 10px; margin-left: 15px;" ibmTextArea (blur)="saveUserName()"
-          [(ngModel)]="set_new_userName" aria-label="textarea" />
-      </div>
-    </div>
-    <br />
-    <p class="userdetail">Active challenge: {{challengeCounts.activeChallengeCount}}</p>
-    <p class="userdetail">Past challenge: {{challengeCounts.pastChallengeCount}}</p>
-    <div *ngIf="userDetails.role == 'Insurer'">
-      <p class="userdetail">Model Watching: {{challengeCounts.modelsWatching}}</p>
-    </div>
-    <div *ngIf="userDetails.role == 'Innovator'">
-      <p class="userdetail">Bookmark Challenges: {{challengeCounts.bookmarkChallengeCount}}</p>
-    </div>
-    <div *ngIf="userDetails.role == 'Innovator'">
-      <p class="userdetail">Challenges Won: {{challengesWon || 0}}</p>
-    </div>
-    <br />
-    <!-- <p class="userdetail">View profile</p> -->
-  </div>
-  <div class="bx--navigation-section">
-    <p class="notify">
-      <svg icon ibmIconNotification20></svg>
-      &nbsp; Notifications &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>
+    <div class="bx--navigation-section">
+        <p class="notify">
+            <svg icon ibmIconNotification20></svg> &nbsp; Notifications &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>
         <p style="font-size: 12px; cursor: pointer;" (click)="clearNotification()">Clear</p>
       </span>
-    </p>
+        </p>
 
-    <div *ngIf="notificationLoading">
-      <h6>
-        <ibm-inline-loading [loadingText]="loadingText" style="margin-left: 45px;" [successText]="successText"
-          (onSuccess)="onSuccess($event)">
-        </ibm-inline-loading>
-      </h6>
+        <div *ngIf="notificationLoading">
+            <h6>
+                <ibm-inline-loading [loadingText]="loadingText" style="margin-left: 45px;" [successText]="successText" (onSuccess)="onSuccess($event)">
+                </ibm-inline-loading>
+            </h6>
+        </div>
+        <div *ngIf="notifications?.length==0">
+            <p class="notifyItems">No New Notifications</p>
+        </div>
+        <div *ngIf="showNotification">
+            <div *ngFor="let notify of notifications; index as i" (click)="viewNotification(notify)">
+                <p class="notifyItems" style="cursor: pointer;">{{ notify?.body }}</p>
+            </div>
+        </div>
+        <br />
     </div>
-    <div *ngIf="notifications?.length==0">
-      <p class="notifyItems">No New Notifications</p>
-    </div>
-    <div *ngIf="showNotification">
-      <div *ngFor="let notify of notifications; index as i" (click)="viewNotification(notify)">
-        <p class="notifyItems" style="cursor: pointer;">{{ notify?.body }}</p>
-      </div>
-    </div>
-    <br />
-  </div>
 
-  <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
-    <svg icon ibmIconLogout20></svg>
-    &nbsp;Logout
-  </h6>
+    <h6 class="bx--btn bx--btn--ghost" type="button" (click)="logout()">
+        <svg icon ibmIconLogout20></svg> &nbsp;Logout
+    </h6>
 </ibm-panel>
 <ibm-panel [expanded]="secondAction">
-  <ibm-switcher-list>
-    <ibm-switcher-list-item active="true">
-      Switcher item one
-    </ibm-switcher-list-item>
-    <ibm-switcher-list-item>Switcher item two</ibm-switcher-list-item>
-    <ibm-switcher-list-item>Switcher item three</ibm-switcher-list-item>
-    <ibm-switcher-list-item>Switcher item four</ibm-switcher-list-item>
-  </ibm-switcher-list>
+    <ibm-switcher-list>
+        <ibm-switcher-list-item active="true">
+            Switcher item one
+        </ibm-switcher-list-item>
+        <ibm-switcher-list-item>Switcher item two</ibm-switcher-list-item>
+        <ibm-switcher-list-item>Switcher item three</ibm-switcher-list-item>
+        <ibm-switcher-list-item>Switcher item four</ibm-switcher-list-item>
+    </ibm-switcher-list>
 </ibm-panel>

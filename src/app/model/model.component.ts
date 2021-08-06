@@ -82,8 +82,7 @@ export class ModelComponent {
       })
     })
     this.modelData = data
-    this.totalPage = Math.ceil((this.modelData.length)/10)
-    this.getDisplayModelData();
+    this.totalPage = (Math.ceil((this.modelData.length)/10)==0) ? 1 : Math.ceil((this.modelData.length)/10);
   }
   
   getDisplayModelData() {
@@ -128,9 +127,9 @@ export class ModelComponent {
         }
       })
     })
-    this.modelData = data
+    this.modelData = data;
 
-    this.totalPage = Math.ceil((this.modelData.length)/10)
+    this.totalPage = (Math.ceil((this.modelData.length)/10)==0) ? 1 : Math.ceil((this.modelData.length)/10);
     this.getDisplayModelData();
   }
 

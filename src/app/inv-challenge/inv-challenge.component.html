@@ -1,22 +1,20 @@
 <app-header></app-header>
 <div class="bx--grid">
-  <br />
-  <div class="bx--row line-padding">
-    <div class="bx--col-md-1"></div>
-    <div class="bx--col-md-4">
-      <h1>Open Challenges</h1>
+    <br />
+    <div class="bx--row line-padding">
+        <div class="bx--col-md-1"></div>
+        <div class="bx--col-md-4">
+            <h1>Open Challenges</h1>
+        </div>
+        <div class="bx--col-md-1"></div>
     </div>
-    <div class="bx--col-md-1"></div>
-  </div>
 
-  <div *ngIf="errorToasterMsg" data-notification class="bx--toast-notification bx--toast-notification--failure"
-    role="alert">
-    <div class="bx--toast-notification__details">
-      <p class="bx--toast-notification__title">Somthing went wrong.</p>
-      <p class="bx--toast-notification__subtitle">Please contact administrator.</p>
-    </div>
-    <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button" type="button"
-      aria-label="close">
+    <div *ngIf="errorToasterMsg" data-notification class="bx--toast-notification bx--toast-notification--failure" role="alert">
+        <div class="bx--toast-notification__details">
+            <p class="bx--toast-notification__title">Somthing went wrong.</p>
+            <p class="bx--toast-notification__subtitle">Please contact administrator.</p>
+        </div>
+        <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button" type="button" aria-label="close">
       <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform"
         xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__close-icon" width="20" height="20"
         viewBox="0 0 32 32" aria-hidden="true">
@@ -24,189 +22,167 @@
         </path>
       </svg>
     </button>
-  </div>
-
-  <div *ngIf="routeAuthError" data-notification class="bx--toast-notification bx--toast-notification--failure"
-    role="alert">
-    <div class="bx--toast-notification__details">
-      <p class="bx--toast-notification__title">You are not authorized to view this page.</p>
     </div>
-  </div>
 
-  <div *ngIf="userSessionExpired" data-notification class="bx--toast-notification bx--toast-notification--failure"
-    role="alert">
-    <div class="bx--toast-notification__details">
-      <p class="bx--toast-notification__title">User session expired.</p>
-      <a class="bx--toast-notification__subtitle" style="cursor: pointer;" (click)="reLogin()">Login again.</a>
+    <div *ngIf="routeAuthError" data-notification class="bx--toast-notification bx--toast-notification--failure" role="alert">
+        <div class="bx--toast-notification__details">
+            <p class="bx--toast-notification__title">You are not authorized to view this page.</p>
+        </div>
     </div>
-  </div>
 
-  <div class="bx--row line-padding" style="margin-top: 0px;">
-    <div class="bx--col-md-1"></div>
-    <div class="bx--col-md-4">
-      <br />
-      <br />
-      <ibm-tabs [followFocus]="followFocus" [isNavigation]="isNavigation" [cacheActive]="cacheActive">
-        <br /><br />
-        <ibm-tab heading="All">
-          <ibm-tile *ngFor="let challenge of activeChallenges; index as i" style="margin-bottom: 15px;">
-            <div style="display: flex;">
-              <p style="font-size: 18px;">{{ challenge?.title }}</p>
-              <div style="margin-left: auto; cursor: pointer;"
-                *ngIf="isBookmarked(challenge?._id) == false && !checkLoading(i)">
-                <svg icon ibmIconBookmark20 (click)="bookmarkChallenge(challenge._id, i)"></svg>
-              </div>
-              <div style="margin-left: auto; cursor: pointer;" *ngIf="loadIndex == i">
-                <ibm-inline-loading [loadingText]="loadingText" [successText]="successText"
-                  (onSuccess)="onSuccess($event)">
-                </ibm-inline-loading>
-              </div>
-              <div style="margin-left: auto; cursor: pointer;"
-                *ngIf="isBookmarked(challenge?._id) == true && !checkLoading(i)">
-                <svg icon ibmIconBookmarkFilled20 (click)="unBookmarkChallenge(challenge._id, i)"></svg>
-              </div>
+    <div *ngIf="userSessionExpired" data-notification class="bx--toast-notification bx--toast-notification--failure" role="alert">
+        <div class="bx--toast-notification__details">
+            <p class="bx--toast-notification__title">User session expired.</p>
+            <a class="bx--toast-notification__subtitle" style="cursor: pointer;" (click)="reLogin()">Login again.</a>
+        </div>
+    </div>
 
-            </div>
-            <h6 class="ins-name">Issued by {{challenge?.insurerId.fullName}}</h6>
-            <p style="font-size: 10px; margin-top: 8px;">on {{ getDate(challenge?.createdAt) }}</p>
-            <div ibmGrid [condensed]="gridCondensed">
-              <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
-                [condensed]="rowCondensed">
-                <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 7, sm: 12 }">
-                  <p class="para">{{ challenge?.description }}</p>
-                </div>
-                <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }">
-                  <div class="content">
-                  </div>
-                </div>
-              </div>
-              <br />
-              <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
-                [condensed]="rowCondensed" style="margin-left: -59px;">
-                <div style="display: flex; margin-left: 27px;align-items: center;">
-                  <svg icon ibmIconEdtLoop16></svg>
-                  &nbsp;&nbsp;
-                  <p class="numbersicon">{{challenge?.acceptedUsersCount}}</p>
-                </div>
-                <div style="display: flex; margin-left: 27px;align-items: center;">
-                  <svg icon ibmIconUserMultiple16></svg>
-                  &nbsp;&nbsp;
-                  <p class="numbersicon">{{challenge?.submissionsCount}}</p>
-                </div>
-                <div style="display: flex; margin-left: 27px;align-items: center; white-space: nowrap;">
-                  <svg icon ibmIconPartnership16></svg>
-                  &nbsp;&nbsp;
-                  <p class="numbersicon">{{challenge?.challengeType}}</p>
-                </div>
-                <div style="display: flex; margin-left: 25px;align-items: center;">
-                  <svg icon ibmIconTime16></svg>
-                  &nbsp;&nbsp;
-                  <p class="numbersicon">{{getExpiryDate(challenge?.expiryDate)}}</p>
-                </div>
-              </div>
-            </div>
-            <button class="btn" [ibmButton]="ibmButton" [size]="size" (click)="viewChallenge(challenge._id)">
+    <div class="bx--row line-padding" style="margin-top: 0px;">
+        <div class="bx--col-md-1"></div>
+        <div class="bx--col-md-4">
+            <br />
+            <br />
+            <ibm-tabs [followFocus]="followFocus" [isNavigation]="isNavigation" [cacheActive]="cacheActive">
+                <br /><br />
+                <ibm-tab heading="All">
+                    <ibm-tile *ngFor="let challenge of activeChallenges; index as i" style="margin-bottom: 15px;">
+                        <div style="display: flex;">
+                            <p style="font-size: 18px;">{{ challenge?.title }}</p>
+                            <div style="margin-left: auto; cursor: pointer;" *ngIf="isBookmarked(challenge?._id) == false && !checkLoading(i)">
+                                <svg icon ibmIconBookmark20 (click)="bookmarkChallenge(challenge._id, i)"></svg>
+                            </div>
+                            <div style="margin-left: auto; cursor: pointer;" *ngIf="loadIndex == i">
+                                <ibm-inline-loading [loadingText]="loadingText" [successText]="successText" (onSuccess)="onSuccess($event)">
+                                </ibm-inline-loading>
+                            </div>
+                            <div style="margin-left: auto; cursor: pointer;" *ngIf="isBookmarked(challenge?._id) == true && !checkLoading(i)">
+                                <svg icon ibmIconBookmarkFilled20 (click)="unBookmarkChallenge(challenge._id, i)"></svg>
+                            </div>
+
+                        </div>
+                        <h6 class="ins-name">Issued by {{challenge?.insurerId.fullName}}</h6>
+                        <p style="font-size: 10px; margin-top: 8px;">on {{ getDate(challenge?.createdAt) }}</p>
+                        <div ibmGrid [condensed]="gridCondensed">
+                            <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+                                <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 7, sm: 12 }">
+                                    <p class="para">{{ challenge?.description }}</p>
+                                </div>
+                                <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 1, sm: 12 }">
+                                    <div class="content">
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed" style="margin-left: -59px;">
+                                <div style="display: flex; margin-left: 27px;align-items: center;">
+                                    <svg icon ibmIconEdtLoop16></svg> &nbsp;&nbsp;
+                                    <p class="numbersicon">{{challenge?.acceptedUsersCount}}</p>
+                                </div>
+                                <div style="display: flex; margin-left: 27px;align-items: center;">
+                                    <svg icon ibmIconUserMultiple16></svg> &nbsp;&nbsp;
+                                    <p class="numbersicon">{{challenge?.submissionsCount}}</p>
+                                </div>
+                                <div style="display: flex; margin-left: 27px;align-items: center; white-space: nowrap;">
+                                    <svg icon ibmIconPartnership16></svg> &nbsp;&nbsp;
+                                    <p class="numbersicon">{{challenge?.challengeType}}</p>
+                                </div>
+                                <div style="display: flex; margin-left: 25px;align-items: center;">
+                                    <svg icon ibmIconTime16></svg> &nbsp;&nbsp;
+                                    <p class="numbersicon">{{getExpiryDate(challenge?.expiryDate)}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn" [ibmButton]="ibmButton" [size]="size" (click)="viewChallenge(challenge._id)">
               View more and apply
             </button>
-          </ibm-tile>
-          <div class="bx--pagination" data-pagination>
-            <div class="bx--pagination__right">
-              <label id="select-id-pagination-page-label" class="bx--pagination__text" for="select-id-pagination-page">
+                    </ibm-tile>
+                    <div class="bx--pagination" data-pagination>
+                        <div class="bx--pagination__right">
+                            <label id="select-id-pagination-page-label" class="bx--pagination__text" for="select-id-pagination-page">
                 pages {{pageNo}} of {{totalPage}}
               </label>
-              <button class="bx--pagination__button bx--pagination__button--backward " tabindex="0" data-page-backward
-                aria-label="previous page" (click)="prevPage()" [disabled]="pageNo == 1">
+                            <button class="bx--pagination__button bx--pagination__button--backward " tabindex="0" data-page-backward aria-label="previous page" (click)="prevPage()" [disabled]="pageNo == 1">
                 <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;"
                   xmlns="http://www.w3.org/2000/svg" class="bx--pagination__nav-arrow" width="20" height="20"
                   viewBox="0 0 32 32" aria-hidden="true">
                   <path d="M19 23L11 16 19 9 19 23z"></path>
                 </svg>
               </button>
-              <button class="bx--pagination__button bx--pagination__button--forward " tabindex="0" data-page-forward
-                aria-label="next page" (click)="nextPage()" [disabled]="pageNo == totalPage">
+                            <button class="bx--pagination__button bx--pagination__button--forward " tabindex="0" data-page-forward aria-label="next page" (click)="nextPage()" [disabled]="pageNo == totalPage">
                 <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;"
                   xmlns="http://www.w3.org/2000/svg" class="bx--pagination__nav-arrow" width="20" height="20"
                   viewBox="0 0 32 32" aria-hidden="true">
                   <path d="M13 9L21 16 13 23 13 9z"></path>
                 </svg>
               </button>
-            </div>
-          </div>
-        </ibm-tab>
-        <ibm-tab heading="Bookmarked">
-          <ibm-tile *ngFor="let challenge of bookmarkedChallenges" style="margin-bottom: 15px;">
-            <p style="font-size: 18px;">{{ challenge?.title }}</p>
-            <h6 class="ins-name">Issued by {{challenge?.insurerId.fullName}}</h6>
-            <p style="font-size: 10px;">on {{ getDate(challenge?.createdAt) }}</p>
-            <div ibmGrid [condensed]="gridCondensed">
-              <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
-                [condensed]="rowCondensed">
-                <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 7, sm: 12 }">
-                  <p class="para">{{ challenge?.description }}</p>
-                </div>
-              </div>
-              <br />
-              <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
-                [condensed]="rowCondensed" style="margin-left: -59px;">
-                <div style="display: flex; margin-left: 27px;align-items: center;">
-                  <svg icon ibmIconEdtLoop16></svg>
-                  &nbsp;&nbsp;
-                  <p class="numbersicon">{{challenge?.acceptedUsersCount}}</p>
-                </div>
-                <div style="display: flex; margin-left: 27px;align-items: center;">
-                  <svg icon ibmIconUserMultiple16></svg>
-                  &nbsp;&nbsp;
-                  <p class="numbersicon">{{challenge?.submissionsCount}}</p>
-                </div>
-                <div style="display: flex; margin-left: 27px;align-items: center; white-space: nowrap;">
-                  <svg icon ibmIconPartnership16></svg>
-                  &nbsp;&nbsp;
-                  <p class="numbersicon">{{challenge?.challengeType}}</p>
-                </div>
-                <div style="display: flex; margin-left: 25px;align-items: center;">
-                  <svg icon ibmIconTime16></svg>
-                  &nbsp;&nbsp;
-                  <p class="numbersicon">{{getExpiryDate(challenge?.expiryDate)}}</p>
-                </div>
-              </div>
-            </div>
-            <button class="btn" [ibmButton]="ibmButton" [size]="size" (click)="viewChallenge(challenge._id)">
+                        </div>
+                    </div>
+                </ibm-tab>
+                <ibm-tab heading="Bookmarked">
+                    <ibm-tile *ngFor="let challenge of bookmarkedChallenges" style="margin-bottom: 15px;">
+                        <p style="font-size: 18px;">{{ challenge?.title }}</p>
+                        <h6 class="ins-name">Issued by {{challenge?.insurerId.fullName}}</h6>
+                        <p style="font-size: 10px;">on {{ getDate(challenge?.createdAt) }}</p>
+                        <div ibmGrid [condensed]="gridCondensed">
+                            <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+                                <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 7, sm: 12 }">
+                                    <p class="para">{{ challenge?.description }}</p>
+                                </div>
+                            </div>
+                            <br />
+                            <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed" style="margin-left: -59px;">
+                                <div style="display: flex; margin-left: 27px;align-items: center;">
+                                    <svg icon ibmIconEdtLoop16></svg> &nbsp;&nbsp;
+                                    <p class="numbersicon">{{challenge?.acceptedUsersCount}}</p>
+                                </div>
+                                <div style="display: flex; margin-left: 27px;align-items: center;">
+                                    <svg icon ibmIconUserMultiple16></svg> &nbsp;&nbsp;
+                                    <p class="numbersicon">{{challenge?.submissionsCount}}</p>
+                                </div>
+                                <div style="display: flex; margin-left: 27px;align-items: center; white-space: nowrap;">
+                                    <svg icon ibmIconPartnership16></svg> &nbsp;&nbsp;
+                                    <p class="numbersicon">{{challenge?.challengeType}}</p>
+                                </div>
+                                <div style="display: flex; margin-left: 25px;align-items: center;">
+                                    <svg icon ibmIconTime16></svg> &nbsp;&nbsp;
+                                    <p class="numbersicon">{{getExpiryDate(challenge?.expiryDate)}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn" [ibmButton]="ibmButton" [size]="size" (click)="viewChallenge(challenge._id)">
               View more and apply
             </button>
-          </ibm-tile>
-          <div class="bx--pagination" data-pagination>
-            <div class="bx--pagination__right">
-              <label id="select-id-pagination-page-label" class="bx--pagination__text" for="select-id-pagination-page">
+                    </ibm-tile>
+                    <div class="bx--pagination" data-pagination>
+                        <div class="bx--pagination__right">
+                            <label id="select-id-pagination-page-label" class="bx--pagination__text" for="select-id-pagination-page">
                 pages {{pageNoBM}} of {{totalPageBM}}
               </label>
-              <button class="bx--pagination__button bx--pagination__button--backward " tabindex="0" data-page-backward
-                aria-label="previous page" (click)="prevPageBM()" [disabled]="pageNoBM == 1">
+                            <button class="bx--pagination__button bx--pagination__button--backward " tabindex="0" data-page-backward aria-label="previous page" (click)="prevPageBM()" [disabled]="pageNoBM == 1">
                 <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;"
                   xmlns="http://www.w3.org/2000/svg" class="bx--pagination__nav-arrow" width="20" height="20"
                   viewBox="0 0 32 32" aria-hidden="true">
                   <path d="M19 23L11 16 19 9 19 23z"></path>
                 </svg>
               </button>
-              <button class="bx--pagination__button bx--pagination__button--forward " tabindex="0" data-page-forward
-                aria-label="next page" (click)="nextPageBM()" [disabled]="pageNoBM == totalPageBM">
+                            <button class="bx--pagination__button bx--pagination__button--forward " tabindex="0" data-page-forward aria-label="next page" (click)="nextPageBM()" [disabled]="pageNoBM == totalPageBM">
                 <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;"
                   xmlns="http://www.w3.org/2000/svg" class="bx--pagination__nav-arrow" width="20" height="20"
                   viewBox="0 0 32 32" aria-hidden="true">
                   <path d="M13 9L21 16 13 23 13 9z"></path>
                 </svg>
               </button>
+                        </div>
+                    </div>
+                </ibm-tab>
+            </ibm-tabs>
+        </div>
+        <div class="bx--col-md-1" style="margin-left: 52px;">
+            <div style="width: 155px;">
+                <ibm-dropdown [label]="'Sort by'" [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText" [theme]="theme" placeholder="select" [disabled]="disabled" (selected)="sortSelect($event)">
+                    <ibm-dropdown-list [items]="sorting"></ibm-dropdown-list>
+                </ibm-dropdown>
             </div>
-          </div>
-        </ibm-tab>
-      </ibm-tabs>
+        </div>
     </div>
-    <div class="bx--col-md-1" style="margin-left: 52px;">
-      <div style="width: 155px;">
-        <ibm-dropdown [label]="'Sort by'" [helperText]="helperText" [invalid]="invalid" [invalidText]="invalidText"
-          [theme]="theme" placeholder="select" [disabled]="disabled" (selected)="sortSelect($event)">
-          <ibm-dropdown-list [items]="sorting"></ibm-dropdown-list>
-        </ibm-dropdown>
-      </div>
-    </div>
-  </div>
 </div>

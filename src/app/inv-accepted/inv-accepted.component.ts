@@ -3,7 +3,7 @@ import { RequestService } from "../request.service";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
-import { APP_URL, MESSAGES, ROLE } from '../../config/config';
+import { App_uri_local, APP_URL, MESSAGES, ROLE } from '../../config/config';
 
 @Component({
 	selector: 'app-inv-accepted',
@@ -128,7 +128,6 @@ export class InvAcceptedComponent implements OnInit {
 
 				setTimeout(() => {
 					(<any>window).disqus_config = this.getConfig();
-console.log(this.getConfig(), "---this.getConfig()---")
 					var d = document, s: any = d.createElement('script');
 					s.src = 'https://meanapp.disqus.com/embed.js';
 					s.setAttribute('data-timestamp', + new Date());
@@ -145,24 +144,8 @@ console.log(this.getConfig(), "---this.getConfig()---")
 
 	getConfig() {
 		let _self = this;
-		console.log(_self)
-		// return function () {
-		// 	// this.page.url = APP_URL + 'challenge/' + _self.challengeId;
-		// 	this.page.url = "http://localhost:4200/" + 'challenge/' + _self.challengeId;
-		// 	console.log(_self.innovatorId)
-		// 	this.page.identifier = _self.challengeId;
-		// 	console.log(_self.acceptedChallenge.innovatorId)
-		// 	this.language = 'en';
-		// };
-
 		return function () {
-			// this.page.url = APP_URL + 'challenge/' + _self.challengeId;
-		
-			//	this.page.url = 'http://localhost:4200/' + 'invaccepted/' +_self.challengeId;
-			this.page.url = APP_URL + 'invaccepted/' +_self.challengeId;
-			
-			this.page.identifier ='';
-			console.log(_self.acceptedChallenge.innovatorId)
+			this.page.url = APP_URL+'invaccepted/'+_self.challengeId;
 			this.language = 'en';
 		};
 
@@ -209,7 +192,9 @@ console.log(this.getConfig(), "---this.getConfig()---")
 			skip: pageOffset
 		}
 		this.requestService.get(url, params).toPromise().then(data => {
-			this.totalPage = Math.ceil(data.count / 10);
+			if(data.count){
+			this.totalPage = (Math.ceil((data.count) / 10) == 0) ? 1 : Math.ceil((data.count) / 10);
+		     }
 			this.leaderboard = data.list;
 		}).catch(err => {
 			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {

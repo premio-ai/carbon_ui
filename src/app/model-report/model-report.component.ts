@@ -106,13 +106,11 @@ export class ModelReportComponent implements OnInit {
 	getPhaseIndex() {
 		if (this.modelReport && this.challengeDetails) {
 			let phaseId = this.modelReport.phaseId;
-
 			let index = this.challengeDetails.phases.findIndex(dt => {
 				if (dt.phaseId == phaseId) {
 					return true
 				}
 			})
-
 			return index;
 		}
 	}

@@ -1,104 +1,99 @@
 <br />
 <ibm-content-switcher (selected)="selected($event)">
-  <button ibmContentOption name="phase{{ i }}" *ngFor="let phase of challengeDetails?.phases; index as i"
-  [ngClass]="{'btnSelected': selectedPhaseId == phase.phaseId, 'btnNotSelected' : selectedPhaseId != phase.phaseId }"
-  (click)="selectPhase(phase.phaseId, i)" style="width: 11%;">
-    Phase {{ i }}
+    <button ibmContentOption name="phase{{ i }}" *ngFor="let phase of challengeDetails?.phases; index as i" [ngClass]="{'btnSelected': selectedPhaseId == phase.phaseId, 'btnNotSelected' : selectedPhaseId != phase.phaseId }" (click)="selectPhase(phase.phaseId, i)"
+        style="width: 11%;">
+    Phase {{ i + 1 }}
   </button>
 </ibm-content-switcher>
 <br />
 <br />
 
-  <h3>Phase {{ currentPhaseNo }}</h3>
-  <br />
-  <br />
-  <div ibmGrid [condensed]="gridCondensed">
+<h3>Phase {{ currentPhaseNo + 1}}</h3>
+<br />
+<br />
+<div ibmGrid [condensed]="gridCondensed">
     <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed" style="margin-left: -32px;">
-      <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-        <h6 class="date" style="display: flex; align-items: center;">
-          <svg icon ibmIconUserMultiple20></svg>
-          &nbsp;
-          <span>Users accepted</span>
-        </h6>
-        <p class="activitypara">{{challengeDetails?.acceptedUsersCount}}</p>
-      </div>
-      <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 3, sm: 12 }">
-        <h6 class="date" style="display: flex; align-items: center;">
-          <svg icon ibmIconDownload20></svg>
-          <span style="white-space: nowrap;">
+        <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
+            <h6 class="date" style="display: flex; align-items: center;">
+                <svg icon ibmIconUserMultiple20></svg> &nbsp;
+                <span>Users accepted</span>
+            </h6>
+            <p class="activitypara">{{challengeDetails?.acceptedUsersCount}}</p>
+        </div>
+        <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 3, sm: 12 }">
+            <h6 class="date" style="display: flex; align-items: center;">
+                <svg icon ibmIconDownload20></svg>
+                <span style="white-space: nowrap;">
             &nbsp;
             Models in Training & Testing
           </span>
-        </h6>
-        <p class="activitypara">{{ modelUnderTraining }}</p>
-      </div>
-      <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-        <h6 class="date" style="display: flex; align-items: center;">
-          <svg icon ibmIconCheckmarkOutline20></svg>
-          &nbsp;
-          <span>Models passed scoring</span>
-        </h6>
-        <p class="activitypara">
-          {{passedModelsCount}}
-        </p>
-      </div>
+            </h6>
+            <p class="activitypara">{{ modelUnderTraining }}</p>
+        </div>
+        <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
+            <h6 class="date" style="display: flex; align-items: center;">
+                <svg icon ibmIconCheckmarkOutline20></svg> &nbsp;
+                <span>Models passed scoring</span>
+            </h6>
+            <p class="activitypara">
+                {{passedModelsCount}}
+            </p>
+        </div>
     </div>
     <br/><br/>
-  </div>
+</div>
 
-  <ibm-table-container>
+<ibm-table-container>
     <ibm-table-header>
-      <p>Phase {{ currentPhaseNo }} Activity</p>
+        <p>Phase {{ currentPhaseNo + 1 }} Activity</p>
     </ibm-table-header>
-    <ibm-table-toolbar >
-      <ibm-table-toolbar-content >
-        &nbsp;
-        <div style="width: 150px;margin-top: -14px;z-index: 9999;">
-          <ibm-dropdown [label]="'Sort'" [helperText]="helperText" [size]="size" [invalid]="invalid"
-            [invalidText]="invalidText" [theme]="theme" placeholder="select" [disabled]="disabled"
-            (selected)="sortSelect($event)">
-            <ibm-dropdown-list [items]="sorting"></ibm-dropdown-list>
-          </ibm-dropdown>
-        </div>  &nbsp;&nbsp;  &nbsp;&nbsp;
-        <button ibmButton="primary" size="sm" (click)="exportexcel()" [disabled]="selectedPhase?.length==0">
+    <ibm-table-toolbar>
+        <ibm-table-toolbar-content>
+            &nbsp;
+            <div style="width: 150px;margin-top: -14px;z-index: 9999;">
+                <ibm-dropdown [label]="'Sort'" [helperText]="helperText" [size]="size" [invalid]="invalid" [invalidText]="invalidText" [theme]="theme" placeholder="select" [disabled]="disabled" (selected)="sortSelect($event)">
+                    <ibm-dropdown-list [items]="sorting"></ibm-dropdown-list>
+                </ibm-dropdown>
+            </div> &nbsp;&nbsp; &nbsp;&nbsp;
+            <button ibmButton="primary" size="sm" (click)="exportexcel()" [disabled]="selectedPhase?.length==0">
           Export Data
           <svg class="bx--btn__icon" icon ibmIconDocumentExport16></svg>
         </button>
-      </ibm-table-toolbar-content>
+        </ibm-table-toolbar-content>
     </ibm-table-toolbar>
-  </ibm-table-container>
+</ibm-table-container>
 
-  <table class="bx--data-table bx--data-table--compact" id="excel-table" >
+<table class="bx--data-table bx--data-table--compact" id="excel-table">
     <thead>
-      <tr>
-        <th>
-          <span class="bx--table-header-label" style="white-space: nowrap;">User Invited</span>
-        </th>
-        <th>
-          <span class="bx--table-header-label">Model Uploaded</span>
-        </th>
-        <th>
-          <span class="bx--table-header-label">Score</span>
-        </th>
-        <th>
-          <span class="bx--table-header-label">Model Name</span>
-        </th>
-        <th>
-          <span class="bx--table-header-label"></span>
-        </th>
-      </tr>
+        <tr>
+            <th>
+                <span class="bx--table-header-label" style="white-space: nowrap;">User Invited</span>
+            </th>
+            <th>
+                <span class="bx--table-header-label">Model Uploaded</span>
+            </th>
+            <th>
+                <span class="bx--table-header-label">Score</span>
+            </th>
+            <th>
+                <span class="bx--table-header-label">Model Name</span>
+            </th>
+            <th>
+                <span class="bx--table-header-label"></span>
+            </th>
+        </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let data of selectedPhase">
-        <td>{{ data.innovatorId.fullName }}</td>
-        <td>{{ getDate(data.createdAt) }}</td>
-        <td>{{ data.score }}</td>
-        <td>{{ data.modelName }}</td>
-        <td><a (click)="viewModel(data._id)" style="cursor: pointer;" >View Model</a></td>
-      </tr>
-      <tr *ngIf="submissionChallengeDetails && submissionChallengeDetails.length == 0">No records found</tr>
+        <tr *ngFor="let data of selectedPhase">
+            <td>{{ data.innovatorId.fullName }}</td>
+            <td>{{ getDate(data.createdAt) }}</td>
+            <td>{{ data.score }}</td>
+            <td>{{ data.modelName }}</td>
+            <td><a (click)="viewModel(data._id)" style="cursor: pointer;">View Model</a></td>
+        </tr>
+        <tr *ngIf="submissionChallengeDetails && submissionChallengeDetails.length == 0">No records found</tr>
     </tbody>
-  </table>
+</table>
 <!-- </div> -->
 
 

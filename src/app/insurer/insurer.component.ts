@@ -3,6 +3,7 @@ import { RequestService } from '../request.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { MESSAGES, ROLE } from '../../config/config';
+import { APP_URL } from '../../config/config';
 
 @Component({
   selector: 'app-insurer',
@@ -74,14 +75,23 @@ export class InsurerComponent implements OnInit {
     })
   }
 
+  // getConfig() {
+  //   let _self = this;
+  //   return function () {
+  //     this.page.url = window.location.href;
+  //     this.page.identifier = _self.challengeId;
+  //     this.language = 'en';
+  //   };
+  // }
+
   getConfig() {
-    let _self = this;
-    return function () {
-      this.page.url = window.location.href;
-      this.page.identifier = _self.challengeId;
-      this.language = 'en';
-    };
-  }
+		let _self = this;
+		return function () {
+			this.page.url = APP_URL+'invaccepted/'+_self.challengeId;
+			//this.page.identifier ='';
+			this.language = 'en';
+		};
+	}
 
   checkClick(e) {
     let overviewId = ''
