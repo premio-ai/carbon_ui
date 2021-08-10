@@ -1,70 +1,78 @@
-<ibm-header brand="">
+<!-- <ibm-header brand="">
   <a> <img src="assets/logo.png" class="imglogo" /></a>
-</ibm-header>
-
-<div ibmGrid [condensed]="gridCondensed" style="display: flex; justify-content: center;" >
-  <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
-    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-      <div *ngIf="toasterMsg" data-notification class="bx--toast-notification bx--toast-notification--failure"
-        role="alert">
-        <div class="bx--toast-notification__details">
-          <p class="bx--toast-notification__title">Something went wrong.</p>
-          <p class="bx--toast-notification__subtitle">Please try again later.</p>
+</ibm-header> -->
+<div class="design">
+    <div class="box">
+        <div class="logoimg">
+            <a> <img src="assets/logoimg.svg" class="imglogo" /></a>
         </div>
-        <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button"
-          type="button" aria-label="close">
-          <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform"
-            xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__close-icon" width="20" height="20"
-            viewBox="0 0 32 32" aria-hidden="true">
-            <path d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z">
-            </path>
-          </svg>
-        </button>
-      </div>
-      <div *ngIf="loginError" data-notification class="bx--toast-notification bx--toast-notification--failure"
-        role="alert">
-        <div class="bx--toast-notification__details">
-          <p class="bx--toast-notification__title" style="margin-top: 5px;" >Please enter valid emailId & password.</p>
+        <div class="heading">
+            <h4>Use your Market Space Account</h4>
         </div>
-        <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button"
-          type="button" aria-label="close">
-          <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform"
-            xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__close-icon" width="20" height="20"
-            viewBox="0 0 32 32" aria-hidden="true">
-            <path d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z">
-            </path>
-          </svg>
-        </button>
-      </div>
-      
-      <div class="bx--form-item" style="margin-top: 50%;">
-        <label for="text-input-3" class="bx--label">Username</label>
-        <input id="text-input-3" type="text" class="bx--text-input" [(ngModel)]="username" placeholder="username@ibm.com" />
-      </div>
-      <div *ngIf="emailError">
-        <p><span style="font-size: x-small; color: red">Please enter a valid registered email</span></p>
-    </div>
-      <br />
-      <br />
-      <div class="bx--form-item">
-        <label for="text-input-3" class="bx--label">Password</label>
-        <input id="text-input-3" type="password" class="bx--text-input" [(ngModel)]="password" placeholder="password" />
-      </div>
-      <div *ngIf="passwordError">
-        <p><span style="font-size: x-small; color: red">Please enter a valid password</span></p>
-      </div>
+        <div ibmGrid [condensed]="gridCondensed">
+            <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+                <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
+                    <div *ngIf="toasterMsg" data-notification class="bx--toast-notification bx--toast-notification--failure" role="alert">
+                        <div class="bx--toast-notification__details">
+                            <p class="bx--toast-notification__title">Something went wrong.</p>
+                            <p class="bx--toast-notification__subtitle">Please try again later.</p>
+                        </div>
+                        <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button" type="button" aria-label="close">
+              <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform"
+                xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__close-icon" width="20" height="20"
+                viewBox="0 0 32 32" aria-hidden="true">
+                <path
+                  d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z">
+                </path>
+              </svg>
+            </button>
+                    </div>
+                    <div *ngIf="loginError" data-notification class="bx--toast-notification bx--toast-notification--failure" role="alert">
+                        <div class="bx--toast-notification__details">
+                            <p class="bx--toast-notification__title" style="margin-top: 5px;">Please enter valid emailId & password.
+                            </p>
+                        </div>
+                        <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button" type="button" aria-label="close">
+              <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform"
+                xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__close-icon" width="20" height="20"
+                viewBox="0 0 32 32" aria-hidden="true">
+                <path
+                  d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z">
+                </path>
+              </svg>
+            </button>
+                    </div>
 
-      <br />
-      <div class="bx--form-item">
-        <button class="bx--btn bx--btn--primary" type="button" (click)="validate()">Sign In</button>
-      </div>
-      <div class="bx--form-item">
-        <p style="font-size: 0.8rem;" >Do not have an account. <a style="cursor: pointer;" (click)="signUp()">Sign Up</a></p>
-      </div>
-    </div>
-    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
-      <img src="assets/tab.png" height="500px">
-    </div>
+                    <div class="bx--form-item" style="margin-top: 4%;">
+                        <label for="text-input-3" class="bx--label">Full Name</label>
+                        <input id="text-input-3" type="text" class="bx--text-input" [(ngModel)]="username" placeholder="username@ibm.com" />
+                    </div>
+                    <div *ngIf="emailError">
+                        <p><span style="font-size: x-small; color: red">Please enter a valid registered email</span></p>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="bx--form-item">
+                        <label for="text-input-3" class="bx--label">Password</label>
+                        <input id="text-input-3" type="password" class="bx--text-input" [(ngModel)]="password" placeholder="password" />
+                    </div>
+                    <div *ngIf="passwordError">
+                        <p><span style="font-size: x-small; color: red">Please enter a valid password</span></p>
+                    </div>
 
-  </div>
+                    <br />
+                    <div class="bx--form-item">
+                        <button class="bx--btn bx--btn--primary" type="button" (click)="validate()">Sign In</button>
+                    </div>
+                    <div class="bx--form-item" style="margin-top: 5px;">
+                        <p style="font-size: 0.8rem;">Do not have an account. <a style="cursor: pointer;" (click)="signUp()">Sign
+                Up</a></p>
+                    </div>
+                </div>
+                <div ibmCol class="custom-class-example images" [columnNumbers]="{ md: 4, sm: 12 }">
+                    <img src="assets/tab.png" class="img">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

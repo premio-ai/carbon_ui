@@ -1,23 +1,80 @@
 .bx--toast-notification--success {
-    border-left: 3px solid #42be65;
-    background: #393939;
-    margin-left: 1000px;
-    margin-top: 100px;
-    position: absolute;
-    top: -36px;
-    left: 32px;
+	border-left: 3px solid #42be65;
+	background: #393939;
+	margin-left: 1000px;
+	margin-top: 100px;
+	position: absolute;
+	top: -36px;
+	left: 32px;
 }
 
 .bx--toast-notification--failure {
-    border-left: 3px solid #ff0000;
-    background: #393939;
-    margin-left: 1000px;
-    margin-top: 100px;
-    position: absolute;
-    top: -36px;
-    left: 32px;
+	border-left: 3px solid #ff0000;
+	background: #393939;
+	margin-left: 1000px;
+	margin-top: 100px;
+	position: absolute;
+	top: -36px;
+	left: 32px;
 }
 
 .imglogo {
-    margin-left: -57px;height: 48px;
+	// margin-left: -57px;
+	// height: 48px;
+}
+
+.logoimg {
+	display: flex;
+	width: 96.5%;
+	margin: 0 auto;
+}
+
+.images {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	top: -50px;
+}
+.img {
+	width: 275px;
+	height: 275px;
+}
+
+.box {
+	border: 1px solid #a9a9a987;
+	padding: 10px;
+	margin: 0 auto;
+	width: 55%;
+	border-radius: 10px;
+}
+
+.heading {
+	margin-left: 14px;
+	margin-top: 18px;
+}
+
+.dropdownstyle {
+	width: 100%;
+}
+
+.textareastyle {
+	width: 100 !important;
+}
+
+@media only screen and (max-width: 1100px) and (min-width: 200px) {
+	.heading {
+		margin-left: 2px;
+	}
+	.images {
+		position: relative;
+		top: 0px;
+	}
+	.img {
+		width: 179px;
+		height: 187px;
+	}
+	.box {
+		width: 90%;
+	}
 }

@@ -128,7 +128,6 @@ export class InvAcceptedComponent implements OnInit {
 
 				setTimeout(() => {
 					(<any>window).disqus_config = this.getConfig();
-console.log(this.getConfig(), "---this.getConfig()---")
 					var d = document, s: any = d.createElement('script');
 					s.src = 'https://meanapp.disqus.com/embed.js';
 					s.setAttribute('data-timestamp', + new Date());
@@ -145,13 +144,10 @@ console.log(this.getConfig(), "---this.getConfig()---")
 
 	getConfig() {
 		let _self = this;
-		console.log(_self)
 		// return function () {
 		// 	// this.page.url = APP_URL + 'challenge/' + _self.challengeId;
 		// 	this.page.url = "http://localhost:4200/" + 'challenge/' + _self.challengeId;
-		// 	console.log(_self.innovatorId)
 		// 	this.page.identifier = _self.challengeId;
-		// 	console.log(_self.acceptedChallenge.innovatorId)
 		// 	this.language = 'en';
 		// };
 
@@ -162,7 +158,6 @@ console.log(this.getConfig(), "---this.getConfig()---")
 			this.page.url = APP_URL + 'invaccepted/' +_self.challengeId;
 			
 			this.page.identifier ='';
-			console.log(_self.acceptedChallenge.innovatorId)
 			this.language = 'en';
 		};
 

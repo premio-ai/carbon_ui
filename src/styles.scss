@@ -4,171 +4,175 @@ $feature-flags: (
 
 @import "~carbon-components/scss/globals/scss/styles";
 
-@import './assets/scss/carbon-overrides.scss';
+@import "./assets/scss/carbon-overrides.scss";
 
 @import "https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap";
 
-.bx--tabs__nav-item{
+.bx--tabs__nav-item {
 	max-width: 114px;
 }
 
-svg.chart-grid-backdrop{
+svg.chart-grid-backdrop {
 	fill: #f4f4f4;
 }
 
-path.line{
+path.line {
 	fill: #f4f4f4;
-} 
+}
 
-text.pie-label{
+text.pie-label {
 	display: none;
 }
-text.donut-title{
+text.donut-title {
 	font-size: 15px !important;
 }
-text.pie-label{
+text.pie-label {
 	display: none;
 }
-text.donut-figure{
+text.donut-figure {
 	display: none;
 }
 
 .bx--file-container {
-    display: none;
+	display: none;
 }
 
 .bx--loading--small {
-    width: 1.7rem !important;
-    height: 1.7rem !important;
+	width: 1.7rem !important;
+	height: 1.7rem !important;
 }
 
 svg.bx--cc--legend.layout-child.legend {
-    user-select: none;
-    pointer-events: none;
+	user-select: none;
+	pointer-events: none;
 }
 
-text.title{
-font-weight: 600;
+text.title {
+	font-weight: 600;
 }
 
 p.bx--accordion__title {
-    font-size: 1.175rem;
-    font-weight: 500;
-    line-height: 1.25rem;
-    letter-spacing: 0.16px;
-    margin: 0 0 0 1rem;
-    width: 100%;
-    color: black;
-    text-align: left;
-    z-index: 0;
+	font-size: 1.175rem;
+	font-weight: 500;
+	line-height: 1.25rem;
+	letter-spacing: 0.16px;
+	margin: 0 0 0 1rem;
+	width: 100%;
+	color: black;
+	text-align: left;
+	z-index: 0;
 }
 
 .bx--content-switcher {
-    display: flex;
-    justify-content: end !important;
-    width: 38%;
-    height: 2.5rem;
-   
+	display: flex;
+	justify-content: end !important;
+	width: 38%;
+	height: 2.5rem;
 }
 
-
 .bx--table-toolbar {
-    background: #f4f4f4;
-    display: flex;
-    height: 3rem;
-    overflow: inherit;
-    position: relative;
-    width: 100%;
+	background: #f4f4f4;
+	display: flex;
+	height: 3rem;
+	overflow: inherit;
+	position: relative;
+	width: 100%;
 }
 
 .datapoint-tooltip {
 	display: none;
 }
 
-ibm-tab > div{
+ibm-tab > div {
 	border: none;
 	outline: none !important;
+}
+
+.bx--cc--chart-svg {
+	padding: 26px;
+}
+
+.slice fill-2-1-1 {
+	width: 128px;
+	height: 128px;
+}
+
+.custom-class-example {
+	font-size: 10px;
+	padding-bottom: 0px !important;
+}
+
+.bx--content-switcher {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	width: 100%;
+	height: 2.5rem;
+	justify-content: flex-start;
+}
+
+@media screen and (max-width: 1440px) {
+	.bx--tabs__nav-item {
+		max-width: 124px;
 	}
-
-	.bx--cc--chart-svg{
-		padding: 26px;
-	}
-
-	.slice fill-2-1-1{
-		width: 128px;
-		height: 128px;
-	}
-	
-	.custom-class-example{
-		font-size: 10px;
-		padding-bottom : 0px !important;
-	}
-
-    .bx--content-switcher {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        width: 100%;
-        height: 2.5rem;
-        justify-content: flex-start;
-    }
-
-	@media screen and (max-width: 1440px)  {
-		.bx--tabs__nav-item{
-			max-width: 124px;
-		}
-	  }
-
-
+}
 
 @mixin aboveWidth($point) {
-    // No media query for `xs` since this is the default
-    
-    @if $point == sm {
-    @media (min-width: 640px) {
-    @content;
-    }
-    } @else if $point == md {
-    @media (min-width: 768px) {
-    @content;
-    }
-    } @else if $point == lg {
-    @media (min-width: 1024px) {
-    @content;
-    }
-    } @else if $point == xl {
-    @media (min-width: 1280px) {
-    @content;
-    }
-    } @else {
-    @media (min-width: $point) {
-    @content;
-    }
-    }
-    }
-    
-    @mixin belowWidth($point) {
-    // No media query for `xs` since this is the default
-    
-    @if $point == sm {
-    @media (max-width: 640px) {
-    @content;
-    }
-    } @else if $point == md {
-    @media (max-width: 768px) {
-    @content;
-    }
-    } @else if $point == lg {
-    @media (max-width: 1024px) {
-    @content;
-    }
-    } @else if $point == xl {
-    @media (max-width: 1280px) {
-    @content;
-    }
-    } @else {
-    @media (max-width: $point) {
-    @content;
-    }
-    }
-    }
+	// No media query for `xs` since this is the default
+
+	@if $point == sm {
+		@media (min-width: 640px) {
+			@content;
+		}
+	} @else if $point == md {
+		@media (min-width: 768px) {
+			@content;
+		}
+	} @else if $point == lg {
+		@media (min-width: 1024px) {
+			@content;
+		}
+	} @else if $point == xl {
+		@media (min-width: 1280px) {
+			@content;
+		}
+	} @else {
+		@media (min-width: $point) {
+			@content;
+		}
+	}
+}
+
+@mixin belowWidth($point) {
+	// No media query for `xs` since this is the default
+
+	@if $point == sm {
+		@media (max-width: 640px) {
+			@content;
+		}
+	} @else if $point == md {
+		@media (max-width: 768px) {
+			@content;
+		}
+	} @else if $point == lg {
+		@media (max-width: 1024px) {
+			@content;
+		}
+	} @else if $point == xl {
+		@media (max-width: 1280px) {
+			@content;
+		}
+	} @else {
+		@media (max-width: $point) {
+			@content;
+		}
+	}
+}
+
+.challengeLabel {
+	label {
+		display: flex;
+		justify-content: space-between;
+		width: 90%;
+	}
+}
