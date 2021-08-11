@@ -30,8 +30,10 @@ export class ChallangeFirstStepComponent implements OnInit {
   companyDescriptionError: boolean
   category: any[]
   contractType: any[]
+  userDetails: any
 
   ngOnInit() {
+    this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
     this.stepOne = {
       title: "",
       description: "",

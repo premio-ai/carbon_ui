@@ -144,8 +144,10 @@ export class InvAcceptedComponent implements OnInit {
 
 	getConfig() {
 		let _self = this;
+
 		return function () {
-			this.page.url = APP_URL+'invaccepted/'+_self.challengeId;
+			this.page.url = APP_URL + 'invaccepted/' +_self.challengeId;
+			this.page.identifier ='';
 			this.language = 'en';
 		};
 

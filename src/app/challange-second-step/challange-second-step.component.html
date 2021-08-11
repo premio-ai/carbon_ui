@@ -1,23 +1,12 @@
 <div ibmGrid [condensed]="gridCondensed">
-	<div
-		*ngIf="errorToasterMsg"
-		data-notification
-		class="bx--toast-notification bx--toast-notification--failure"
-		role="alert"
-	>
-		<div class="bx--toast-notification__details">
-			<p class="bx--toast-notification__title">Somthing went wrong.</p>
-			<p class="bx--toast-notification__subtitle">
-				Please contact administrator.
-			</p>
-		</div>
-		<button
-			data-notification-btn
-			(click)="closeToaster()"
-			class="bx--toast-notification__close-button"
-			type="button"
-			aria-label="close"
-		>
+    <div *ngIf="errorToasterMsg" data-notification class="bx--toast-notification bx--toast-notification--failure" role="alert">
+        <div class="bx--toast-notification__details">
+            <p class="bx--toast-notification__title">Somthing went wrong.</p>
+            <p class="bx--toast-notification__subtitle">
+                Please contact administrator.
+            </p>
+        </div>
+        <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button" type="button" aria-label="close">
 			<svg
 				focusable="false"
 				preserveAspectRatio="xMidYMid meet"
@@ -34,12 +23,12 @@
 				></path>
 			</svg>
 		</button>
-	</div>
+    </div>
 
-	<div *ngIf="isApiLoading">
-		<div class="app-loading">
-			<div class="logo"></div>
-			<svg class="spinner" viewBox="25 25 50 50">
+    <div *ngIf="isApiLoading">
+        <div class="app-loading">
+            <div class="logo"></div>
+            <svg class="spinner" viewBox="25 25 50 50">
 				<circle
 					class="path"
 					cx="50"
@@ -50,22 +39,13 @@
 					stroke-miterlimit="10"
 				/>
 			</svg>
-		</div>
-	</div>
+        </div>
+    </div>
 
-	<div
-		*ngIf="userSessionExpired"
-		data-notification
-		class="bx--toast-notification bx--toast-notification--failure"
-		role="alert"
-	>
-		<div class="bx--toast-notification__details">
-			<p class="bx--toast-notification__title">User session expired.</p>
-			<a
-				class="bx--toast-notification__subtitle"
-				style="cursor: pointer"
-				(click)="reLogin()"
-				>Login again.</a
+    <div *ngIf="userSessionExpired" data-notification class="bx--toast-notification bx--toast-notification--failure" role="alert">
+        <div class="bx--toast-notification__details">
+            <p class="bx--toast-notification__title">User session expired.</p>
+            <a class="bx--toast-notification__subtitle" style="cursor: pointer" (click)="reLogin()">Login again.</a
 			>
 		</div>
 	</div>
@@ -83,7 +63,7 @@
 			class="custom-class-example"
 			[columnNumbers]="{ md: 4, sm: 12 }"
 		>
-			<h3>Illustrative Data: Phase {{ i + 1}}</h3>
+			<h3>Illustrative Data: Phase {{ i }}</h3>
 			<br />
 			<ibm-label
 		    	class="challengeLabel"
@@ -168,7 +148,7 @@
 						[columnNumbers]="{ md: 4, sm: 12 }"
 					>
 						<h5>Data Visualisation</h5>
-						<p class="drag">
+						<p class="drag" style="margin-bottom: 37px">
 							An image that represents your Sample data
 						</p>
 						<app-drop-image-uploader
@@ -262,7 +242,7 @@
 			class="custom-class-example"
 			[columnNumbers]="{ md: 4, sm: 12 }"
 		>
-			<h3>Illustrative Data: Phase {{ phases.length + 1}}</h3>
+			<h3>Illustrative Data: Phase {{ phases.length }}</h3>
 			<br />
 			<ibm-label
 			    class="challengeLabel"
@@ -378,7 +358,7 @@
 						[columnNumbers]="{ md: 4, sm: 12 }"
 					>
 						<h5>Data Visualisation</h5>
-						<p class="drag">
+						<p class="drag" style="margin-bottom: 37px">
 							An image that represents your Sample data
 						</p>
 						<app-drop-image-uploader

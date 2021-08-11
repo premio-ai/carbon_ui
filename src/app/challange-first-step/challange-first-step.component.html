@@ -1,38 +1,18 @@
 <div ibmGrid [condensed]="gridCondensed">
-	<div
-		ibmRow
-		[gutter]="gutter"
-		[leftGutter]="leftGutter"
-		[rightGutter]="rightGutter"
-		[condensed]="rowCondensed"
-	>
-		<div
-			ibmCol
-			class="custom-class-example"
-			[columnNumbers]="{ md: 4, sm: 12 }"
-		>
-			<h3>Challenge Overview</h3>
-			<br />
-			<ibm-label class="challengeLabel">
-				<ibm-label class="labelstyle">
-					<span>Challenge Title</span>
-					<p class="challTitle">{{ stepOne.title.length || 0 }}/50</p>
-				</ibm-label>
-				<textarea
-					style="width: 90%"
-					ibmTextArea
-					minlength="1"
-					maxlength="50"
-					[rows]="1"
-					[cols]="cols"
-					aria-label="textarea"
-					[(ngModel)]="stepOne.title"
-				></textarea>
-			</ibm-label>
-			<div *ngIf="titleError">
-				<p>
-					<span style="font-size: x-small; color: red"
-						>Challenge Title is required</span
+    <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+        <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
+            <h3>Challenge Overview</h3>
+            <br />
+            <ibm-label class="challengeLabel">
+                <ibm-label class="labelstyle">
+                    <span>Challenge Title</span>
+                    <p class="challTitle">{{ stepOne.title.length || 0 }}/50</p>
+                </ibm-label>
+                <textarea style="width: 90%" ibmTextArea minlength="1" maxlength="50" [rows]="1" [cols]="cols" aria-label="textarea" [(ngModel)]="stepOne.title"></textarea>
+            </ibm-label>
+            <div *ngIf="titleError">
+                <p>
+                    <span style="font-size: x-small; color: red">Challenge Title is required</span
 					>
 				</p>
 			</div>
@@ -44,27 +24,14 @@
 				[invalidText]="invalidText"
 			>
 				<span>Challenge Description</span>
-				<p class="challTitle">
-					{{ stepOne.description.length || 0 }}/500
-				</p>
-				<textarea
-					style="width: 90%; margin-top: 10px"
-					ibmTextArea
-					[invalid]="invalid"
-					minlength="1"
-					maxlength="500"
-					[disabled]="disabled"
-					[theme]="theme"
-					[rows]="5"
-					[cols]="cols"
-					aria-label="textarea"
-					[(ngModel)]="stepOne.description"
-				></textarea>
-			</ibm-label>
-			<div *ngIf="descriptionError">
-				<p>
-					<span style="font-size: x-small; color: red"
-						>Description is required</span
+                    <p class="challTitle">
+                        {{ stepOne.description.length || 0 }}/500
+                    </p>
+                    <textarea style="width: 90%; margin-top: 10px" ibmTextArea [invalid]="invalid" minlength="1" maxlength="500" [disabled]="disabled" [theme]="theme" [rows]="5" [cols]="cols" aria-label="textarea" [(ngModel)]="stepOne.description"></textarea>
+                    </ibm-label>
+                    <div *ngIf="descriptionError">
+                        <p>
+                            <span style="font-size: x-small; color: red">Description is required</span
 					>
 				</p>
 			</div>
@@ -76,27 +43,14 @@
 				[invalidText]="invalidText"
 			>
 				<span>Challenge Objectives</span>
-				<p class="challTitle">
-					{{ stepOne.objective.length || 0 }}/100
-				</p>
-				<textarea
-					style="width: 90%; margin-top: 10px"
-					ibmTextArea
-					[invalid]="invalid"
-					minlength="1"
-					maxlength="100"
-					[(ngModel)]="stepOne.objective"
-					[disabled]="disabled"
-					[theme]="theme"
-					[rows]="3"
-					[cols]="cols"
-					aria-label="textarea"
-				></textarea>
-			</ibm-label>
-			<div *ngIf="objectiveError">
-				<p>
-					<span style="font-size: x-small; color: red"
-						>Objective is required</span
+                            <p class="challTitle">
+                                {{ stepOne.objective.length || 0 }}/100
+                            </p>
+                            <textarea style="width: 90%; margin-top: 10px" ibmTextArea [invalid]="invalid" minlength="1" maxlength="100" [(ngModel)]="stepOne.objective" [disabled]="disabled" [theme]="theme" [rows]="3" [cols]="cols" aria-label="textarea"></textarea>
+                            </ibm-label>
+                            <div *ngIf="objectiveError">
+                                <p>
+                                    <span style="font-size: x-small; color: red">Objective is required</span
 					>
 				</p>
 			</div>
@@ -195,17 +149,7 @@
 		>
 			<h3>Company Info</h3>
 			<br />
-			<h5>Direct Line Insurance</h5>
-			<p class="praa">
-				Since we launched in 1985, our aim at Dircect line's has alwasy
-				been to put the customer first.
-			</p>
-			<br />
-			<p class="praa">
-				Lorem Ipsum is simply dummy text of the printing and typesetting
-				industry. Lorem Ipsum has been the industry's standard dummy
-				text ever since the 1500s
-			</p>
+			<p class="praa">{{userDetails.bio}}</p>
 			<br />
 			<p class="toggle_head">Withold Company Name</p>
 			<ibm-toggle
