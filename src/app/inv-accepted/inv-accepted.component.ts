@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
 import { App_uri_local, APP_URL, MESSAGES, ROLE } from '../../config/config';
+import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 
 @Component({
 	selector: 'app-inv-accepted',
@@ -19,6 +20,8 @@ export class InvAcceptedComponent implements OnInit {
 		private location: Location) { }
 
 	pageNo: number;
+	phaseObjectIndex:number;
+	leaderBoardPhaseId:any;
 	toasterMsg: boolean;
 	withdrawToasterMsg: boolean;
 	challengeId: any;
@@ -193,6 +196,16 @@ export class InvAcceptedComponent implements OnInit {
 			this.totalPage = (Math.ceil((data.count) / 10) == 0) ? 1 : Math.ceil((data.count) / 10);
 		     }
 			this.leaderboard = data.list;
+			 if(this.leaderboard && this.leaderboard.length > 0){
+				this.leaderboard.map(dt=>{
+					if(dt.phaseId){
+						if(this.challengeDetails && this.challengeDetails.phases && this.challengeDetails.phases.length > 0){
+						this.phaseObjectIndex = this.challengeDetails.phases.findIndex(res=> res.phaseId == dt.phaseId);
+						}
+					}
+				})
+			 }
+			
 		}).catch(err => {
 			if (err.error.statusCode == 401 && err.error.message == MESSAGES.SESSION_EXPIRED) {
 				this.userSessionExpired = true
