@@ -2,45 +2,45 @@
     <div class="mostparent">
         <div style="display: grid;grid-template-columns: 70% 30%;padding: 1rem;">
 
-            <p class="InsTitle">
+            <p class="InsTitle" style="overflow-wrap: break-word;">
                 {{ challange?.title }}
             </p>
 
-            <ibm-tag class="tags" type="cool-gray">{{challange?.categoryType}}</ibm-tag>
+            <ibm-tag class="tags " type="cool-gray ">{{challange?.categoryType}}</ibm-tag>
         </div>
 
-        <div style="display: grid;grid-template-columns: 70% 30%;padding: 1rem;padding-top: 0rem;">
+        <div style="display: grid;grid-template-columns: 70% 30%;padding: 1rem;padding-top: 0rem; ">
 
-            <div class="custom-class-example">
+            <div class="custom-class-example ">
                 {{ challange?.description }}
             </div>
 
-            <div class="icon2">
-                <div class="sideicon">
+            <div class="icon2 ">
+                <div class="sideicon ">
                     <svg icon ibmIconEdtLoop16></svg> &nbsp;&nbsp;
-                    <p class="numsize">{{challange?.submissionsCount}}</p>
+                    <p class="numsize ">{{challange?.submissionsCount}}</p>
                 </div>
-                <div class="sideicon">
+                <div class="sideicon ">
                     <svg icon ibmIconUserMultiple16></svg> &nbsp;&nbsp;
-                    <p class="numsize">{{challange?.acceptedUsersCount}}</p>
+                    <p class="numsize ">{{challange?.acceptedUsersCount}}</p>
                 </div>
-                <div class="sideicon">
+                <div class="sideicon ">
                     <svg icon ibmIconForum16></svg> &nbsp;&nbsp;
-                    <p class="numsize">{{challange?.discussions || '0'}}</p>
+                    <p class="numsize ">{{challange?.discussions || '0'}}</p>
                 </div>
             </div>
 
         </div>
-        <div style="display: grid;grid-template-columns: 68% 32%;padding: 0rem;">
-            <div style="padding-left: 1rem;">
-                <p class="date" style="display: flex; align-items: center;">
+        <div style="display: grid;grid-template-columns: 68% 32%;padding: 0rem; ">
+            <div style="padding-left: 1rem; ">
+                <p class="date " style="display: flex; align-items: center; ">
                     <svg icon ibmIconTime20></svg>&nbsp;
                     <span>{{ getExpiryDate(challange?.expiryDate) }}</span>
                 </p>
             </div>
             <div>
 
-                <button class="btn" [ibmButton]="primary" [size]="'sm'" (click)="viewChalange(challange?._id)" style="width: 100%;">
+                <button class="btn " [ibmButton]="primary " [size]=" 'sm' " (click)="viewChalange(challange?._id) " style="width: 100%; ">
       View
     </button>
             </div>
