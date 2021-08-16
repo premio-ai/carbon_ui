@@ -216,7 +216,7 @@
                                 <tr *ngFor="let data of leaderboard; index as i">
                                     <td>{{data?.rank}}</td>
                                     <td>{{data?.innovatorId?.fullName}}</td>
-                                    <td>Phase 1</td>
+                                    <td>phase {{ phaseObjectIndex + 1}}</td>
                                     <td>{{data.score}}</td>
                                     <td>{{getDate(data?.createdAt)}}</td>
                                 </tr>

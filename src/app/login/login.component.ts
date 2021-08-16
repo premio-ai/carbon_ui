@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
         username: this.username,
         password: this.password
       }
-
       this.requestService.signing('auth/login', loginData).toPromise().then(data => {
           const userDetails = data.userDetails;
           localStorage.setItem('userDetails', JSON.stringify(userDetails))
