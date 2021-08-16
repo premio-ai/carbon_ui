@@ -1,66 +1,65 @@
 .para {
-  margin-top: 40px;
-  overflow: hidden;
+	margin-top: 40px;
+	overflow: hidden;
 }
 .heading {
-  margin-top: 10px;
-  margin-bottom: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 a.bx--tabs__nav-link {
-  border-bottom: 3px solid #e0e0e0;
-  padding: 0.5rem 1rem;
-  width: 6rem !important;
-  margin: 0;
-  line-height: inherit;
+	border-bottom: 3px solid #e0e0e0;
+	padding: 0.5rem 1rem;
+	width: 6rem !important;
+	margin: 0;
+	line-height: inherit;
 }
 .bx--tabs__nav--hidden {
-  display: flex;
-  transition: inherit;
-  overflow: visible;
-  width: 6rem !important;
-  max-height: none;
+	display: flex;
+	transition: inherit;
+	overflow: visible;
+	width: 6rem !important;
+	max-height: none;
 }
 
 .bx--toast-notification--failure {
-  border-left: 3px solid #ff0000;
-  background: #393939;
-  margin-left: 1000px;
-  margin-top: 100px;
-  position: absolute;
-  top: -36px;
-  left: 32px;
+	border-left: 3px solid #ff0000;
+	background: #393939;
+	margin-left: 1000px;
+	margin-top: 100px;
+	position: absolute;
+	top: -36px;
+	left: 32px;
 }
 
 tabs {
-  width: 6rem;
+	width: 6rem;
 }
 
 .gridhead {
-  font-size: 13px;
+	font-size: 13px;
 }
 .custom-class-example {
-  font-size: 10px;
-  padding-bottom: 15px;
+	font-size: 10px;
+	padding-bottom: 15px;
 }
 
 .btn {
-  margin: auto;
-  display: flex;
-  margin-right: 0px;
+	margin: auto;
+	display: flex;
+	margin-right: 0px;
 }
 .date {
-  font-size: 10px;
+	font-size: 10px;
 }
 
-.dropdown{
-  
-    margin-right: 50px !important;
-    
-    margin: auto;
+.dropdown {
+	margin-right: 50px !important;
+
+	margin: auto;
 }
 
-.btn1{
-    width: 162px;
-    white-space: nowrap;
-    }
+.btn1 {
+	width: 162px;
+	white-space: nowrap;
+}

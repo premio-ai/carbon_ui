@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   emailError: boolean;
   passwordError: boolean;
   loginError: boolean;
+  bio: String;
 
   ngOnInit() {
     this.toasterMsg = false;
@@ -91,5 +92,7 @@ export class LoginComponent implements OnInit {
   signUp() {
     this.router.navigateByUrl('signup')
   }
+
+
 
 }

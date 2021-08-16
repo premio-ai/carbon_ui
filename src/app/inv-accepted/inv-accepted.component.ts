@@ -3,8 +3,7 @@ import { RequestService } from "../request.service";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
-import { App_uri_local, APP_URL, MESSAGES, ROLE } from '../../config/config';
-import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
+import { APP_URL, MESSAGES, ROLE } from '../../config/config';
 
 @Component({
 	selector: 'app-inv-accepted',
@@ -13,6 +12,7 @@ import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 })
 
 export class InvAcceptedComponent implements OnInit {
+	innovatorId: string;
 
 	constructor(private requestService: RequestService,
 		private router: Router,
@@ -35,6 +35,7 @@ export class InvAcceptedComponent implements OnInit {
 	insurerId: string;
 	awardedTo: string;
 	submissionData: {
+		innovatorId:{}
 		challengeId: {},
 		phaseId: any,
 		mlFlowId: string,
@@ -87,6 +88,7 @@ export class InvAcceptedComponent implements OnInit {
 				this.getChallengeDetails(this.challengeId);
 				this.getChallengeAcceptance(this.challengeId);
 				this.getLeaderboard(this.challengeId, this.pageOffset);
+				
 
 				this.steps = [
 					{
@@ -107,6 +109,7 @@ export class InvAcceptedComponent implements OnInit {
 				];
 				this.current = 3;
 				this.submissionData = {
+					innovatorId:{},
 					challengeId: {},
 					phaseId: [],
 					mlFlowId: "",
@@ -127,7 +130,6 @@ export class InvAcceptedComponent implements OnInit {
 
 				setTimeout(() => {
 					(<any>window).disqus_config = this.getConfig();
-
 					var d = document, s: any = d.createElement('script');
 					s.src = 'https://meanapp.disqus.com/embed.js';
 					s.setAttribute('data-timestamp', + new Date());
@@ -144,11 +146,13 @@ export class InvAcceptedComponent implements OnInit {
 
 	getConfig() {
 		let _self = this;
+
 		return function () {
-			this.page.url = APP_URL+'invaccepted/'+_self.challengeId;
-			//this.page.identifier =APP_URL+'challenge/'+_self.challengeId;
+			this.page.url = APP_URL + 'invaccepted/' +_self.challengeId;
+			this.page.identifier ='';
 			this.language = 'en';
 		};
+
 	}
 
 	getChallengeDetails(id) {

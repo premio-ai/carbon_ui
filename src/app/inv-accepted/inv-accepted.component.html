@@ -113,71 +113,77 @@
 							<path d="M9 7L9 3 7 3 7 7 3 7 3 9 7 9 7 13 9 13 9 9 13 9 13 7z"></path>
 						</svg>
 					</button>
-                </div>
-                <br />
-            </div>
-            <ibm-tabs [followFocus]="true" [isNavigation]="false" [cacheActive]="true" style="width: 50%;">
-                <ibm-tab heading="Overview" style="max-width: 95px;">
-                    <br />
-                    <div ibmGrid [condensed]="gridCondensed">
-                        <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
-                            <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }" style="margin-right: 37px; margin-left: -14px">
-                                <h4>Challenge Info</h4>
-                                <br />
-                                <p class="para">{{challengeDetails.description}}</p>
-                            </div>
-                            <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 3, sm: 12 }">
-                                <h4 style="text-transform: capitalize;">{{challengeDetails?.insurerId?.fullName}}</h4>
-                                <br />
-                                <p class="para">{{challengeDetails?.insurerId?.bio}}</p>
-                                <br /><br />
-                                <h4>Reward</h4>
-                                <br />
-                                <div style="font-size: 14px; line-height: 1.5;align-items: center;display: flex;">
-                                    <svg icon ibmIconPartnership16></svg>&nbsp;
-                                    <p class="oneoff">
-                                        {{challengeDetails?.challengeType}}</p>
-                                </div>
-                                <br />
-                                <p class="para">
-                                    This challenge is issued with the aim of finding and building long lasting relationships with an innovator.
-                                </p>
-                                <br />
-                                <p class="para">If selected, you will be offered a contract to collaborate with
-                                    <strong style="text-transform: capitalize;">{{challengeDetails.insurerId.fullName}}</strong>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </ibm-tab>
-                <ibm-tab heading="Data">
-                    <br />
-                    <div ibmGrid [condensed]="gridCondensed">
-                        <div class="rowdiv" ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed" *ngFor="let phase of challengeDetails?.phases; index as i">
-                            <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }" style="margin-right: 37px; margin-left: -14px">
-                                <h4>Phase {{i+1}}</h4>
-                                <br />
-                                <p class="para">{{phase?.description}}</p>
-                            </div>
-                            <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 3, sm: 12 }">
-                                <h4 style="margin-left: -12px;">Data Visual</h4>
-                                <br />
-                                <img class="dataimg" src='{{imageUrlArr[i]}}'>
-                                <br />
-                                <br />
-                                <h4 class="sampleheaddata">Sample Data Sets</h4>
-                                <p class="samplename">Download Dataset 1
-                                    <svg icon ibmIconDownload16 class="svg" height="12" width="12" (click)="downloadFile(i)"></svg>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </ibm-tab>
-                <ibm-tab heading="Discussion" style="max-width: 105px;">
-                    <div id="disqus_thread">
-
-                    </div>
-                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments
+				</div>
+				<br />
+			</div>
+			<ibm-tabs [followFocus]="true" [isNavigation]="false" [cacheActive]="true" style="width: 50%;">
+				<ibm-tab heading="Overview" style="max-width: 95px;">
+					<br />
+					<div ibmGrid [condensed]="gridCondensed">
+						<div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter"
+							[condensed]="rowCondensed">
+							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }"
+								style="margin-right: 37px; margin-left: -14px">
+								<h4>Challenge Info</h4>
+								<br />
+								<p class="para">{{challengeDetails.description}}</p>
+							</div>
+							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 3, sm: 12 }">
+								<h4 style="text-transform: capitalize;">{{challengeDetails?.insurerId?.fullName}}</h4>
+								<br />
+								<p class="para">{{challengeDetails?.insurerId?.bio}}</p>
+								<br /><br />
+								<h4>Reward</h4>
+								<br />
+								<div style="font-size: 14px; line-height: 1.5;align-items: center;display: flex;">
+									<svg icon ibmIconPartnership16></svg>&nbsp; <p class="oneoff">
+										{{challengeDetails?.challengeType}}</p>
+								</div>
+								<br />
+								<p class="para">
+									This challenge is issued with the aim of finding and building long lasting
+									relationships with an innovator.
+								</p>
+								<br />
+								<p class="para">If selected, you will be offered a contract
+									to collaborate with
+									<strong
+										style="text-transform: capitalize;">{{challengeDetails.insurerId.fullName}}</strong>
+								</p>
+							</div>
+						</div>
+					</div>
+				</ibm-tab>
+				<ibm-tab heading="Data">
+					<br />
+					<div ibmGrid [condensed]="gridCondensed">
+						<div class="rowdiv" ibmRow [gutter]="gutter" [leftGutter]="leftGutter"
+							[rightGutter]="rightGutter" [condensed]="rowCondensed"
+							*ngFor="let phase of challengeDetails?.phases; index as i">
+							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }"
+								style="margin-right: 37px; margin-left: -14px">
+								<h4>Phase {{i+1}}</h4>
+								<br />
+								<p class="para">{{phase?.description}}</p>
+							</div>
+							<div ibmCol class="custom-class-example" [columnNumbers]="{ md: 3, sm: 12 }">
+								<h4 style="margin-left: -12px;">Data Visual</h4>
+								<br />
+								<img class="dataimg" src='{{imageUrlArr[i]}}'>
+								<br />
+								<br />
+								<h4 class="sampleheaddata">Sample Data Sets</h4>
+								<p class="samplename">Download Dataset 1
+									<svg icon ibmIconDownload16 class="svg" height="12" width="12"
+										(click)="downloadFile(i)"></svg>
+								</p>
+							</div>
+						</div>
+					</div>
+				</ibm-tab>
+				<ibm-tab heading="Discussion" style="max-width: 105px;">
+					<div id="disqus_thread"></div>
+					<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript/">comments
 							powered by Disqus.</a></noscript>
                 </ibm-tab>
                 <ibm-tab heading="Leaderboard" style="max-width: 105px;">

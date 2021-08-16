@@ -1,87 +1,222 @@
 <div ibmGrid [condensed]="gridCondensed">
-    <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
-        <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
-            <h3>Visiblity (Optional)</h3>
-            <br />
-            <p class="headline">
-                This challenge will only be visible to innovators with these qualifications:
-            </p>
-            <br />
-            <h6>Points earned</h6>
-            <div style="display: flex;align-items: center;">
-                <div class="custom-class-example">
-                    <p style="color: gray;font-size: 12px;">Min</p>
-                    <ibm-number style="min-width: 10rem;" [label]="Min" [helperText]="[helperText]" [theme]="light" [min]="0" [max]="10" [(ngModel)]="stepThree.minEarnedPoint" [invalid]="false" [invalidText]="invalidText" [disabled]="false">
-                    </ibm-number>
-                </div>
-                <p class="to">to</p>
-                <div class="custom-class-example">
-                    <p style="color: gray;font-size: 12px;">Max</p>
-                    <ibm-number style="min-width: 10rem;" [label]="Max" [helperText]="[helperText]" [theme]="light" [min]="0" [max]="10" [(ngModel)]="stepThree.maxEarnedPoint" [invalid]="false" [invalidText]="invalidText" [disabled]="false">
-                    </ibm-number>
-                </div>
-            </div>
-            <div *ngIf="pointEarnedError">
-                <p><span style="font-size: x-small; color: red">Points Earned is required</span></p>
-            </div>
-            <div *ngIf="minPointError">
-                <p><span style="font-size: x-small; color: red">Maximum Point Earned must be greater than Minimum Point Earned</span></p>
-            </div>
-            <br />
-            <h6>Challenges invloved in</h6>
-            <div style="display: flex;align-items: center;">
-                <div class="custom-class-example">
-                    <p style="color: gray;font-size: 12px;">Min</p>
-                    <ibm-number style="min-width: 10rem;" [label]="Min" [helperText]="[helperText]" [theme]="light" [min]="0" [max]="10" [(ngModel)]="stepThree.minChallangeInvolved" [invalid]="false" [invalidText]="invalidText" [disabled]="false">
-                    </ibm-number>
-                </div>
-                <p class="to">to</p>
-                <div class="custom-class-example">
-                    <p style="color: gray;font-size: 12px;">Max</p>
-                    <ibm-number style="min-width: 10rem;" [label]="Max" [helperText]="[helperText]" [theme]="light" [min]="0" [max]="10" [(ngModel)]="stepThree.maxChallangeInvolved" [invalid]="false" [invalidText]="invalidText" [disabled]="false">
-                    </ibm-number>
-                </div>
-            </div>
-            <br />
-            <br />
-            <h6>Type of user account</h6>
-            <ibm-checkbox [hideLabel]="hideLabel" (change)="selectAccountType1($event)">Independent</ibm-checkbox>
-            <ibm-checkbox [hideLabel]="hideLabel" (change)="selectAccountType2($event)">Startup</ibm-checkbox>
-            <ibm-checkbox [hideLabel]="hideLabel" (change)="selectAccountType3($event)">Big Firm</ibm-checkbox>
-            <div *ngIf="typeOfUserError">
-                <p><span style="font-size: x-small; color: red">Type of User is required</span></p>
-            </div>
-            <br />
-            <div ibmGrid [condensed]="gridCondensed" style="padding-left: 15px;">
-                <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
-                    <h6>Accepted Programming languages</h6>
-                    <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 6, 'sm': 12}">
-                        <ibm-dropdown placeholder="Search Language" (selected)="selected($event)">
-                            <ibm-dropdown-list [items]="language"></ibm-dropdown-list>
-                        </ibm-dropdown>
-                        <div *ngIf="programmingLanguageError">
-                            <p><span style="font-size: x-small; color: red">Programming language is required</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 4, 'sm': 12}">
-            <div ibmGrid [condensed]="gridCondensed">
-                <br/><br/><br/><br/>
-                <div ibmRow class="row_button" style="margin-left: auto;
-				left: 74px;
-				position: relative;" [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
-                    <div ibmCol class="custom-class-example" style="margin-top: 460px;" [columnNumbers]="{'md': 1, 'sm': 12}">
-                        <button class="back_btn" [ibmButton]="ibmButton" [size]="size" (click)="previous()">Previous</button>
-                    </div>
-                    <div ibmCol class="custom-class-example" [columnNumbers]="{'md': 1, 'sm': 12}" style="margin-left: 64px;">
-                    </div>
-                    <div ibmCol class="custom-class-example" style="margin-top: 460px;" [columnNumbers]="{'md': 1, 'sm': 12}">
-                        <button [ibmButton]="ibmButton" [size]="size" (click)="next()"> Next&nbsp;</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div
+		ibmRow
+		[gutter]="gutter"
+		[leftGutter]="leftGutter"
+		[rightGutter]="rightGutter"
+		[condensed]="rowCondensed"
+	>
+		<div
+			ibmCol
+			class="custom-class-example"
+			[columnNumbers]="{ md: 4, sm: 12 }"
+		>
+			<h3>Visiblity (Optional)</h3>
+			<br />
+			<p class="headline">
+				This challenge will only be visible to innovators with these
+				qualifications:
+			</p>
+			<br />
+			<h6>Points earned</h6>
+			<div style="display: flex; align-items: center">
+				<div class="custom-class-example">
+					<p style="color: gray; font-size: 12px">Min</p>
+					<ibm-number
+						style="min-width: 10rem"
+						[label]="Min"
+						[helperText]="[helperText]"
+						[theme]="light"
+						[min]="0"
+						[max]="10"
+						[(ngModel)]="stepThree.minEarnedPoint"
+						[invalid]="false"
+						[invalidText]="invalidText"
+						[disabled]="false"
+					>
+					</ibm-number>
+				</div>
+				<p class="to">to</p>
+				<div class="custom-class-example">
+					<p style="color: gray; font-size: 12px">Max</p>
+					<ibm-number
+						style="min-width: 10rem"
+						[label]="Max"
+						[helperText]="[helperText]"
+						[theme]="light"
+						[min]="0"
+						[max]="10"
+						[(ngModel)]="stepThree.maxEarnedPoint"
+						[invalid]="false"
+						[invalidText]="invalidText"
+						[disabled]="false"
+					>
+					</ibm-number>
+				</div>
+			</div>
+			<div *ngIf="pointEarnedError">
+				<p>
+					<span style="font-size: x-small; color: red"
+						>Points Earned is required</span
+					>
+				</p>
+			</div>
+			<div *ngIf="minPointError">
+				<p>
+					<span style="font-size: x-small; color: red"
+						>Maximum Point Earned must be greater than Minimum Point
+						Earned</span
+					>
+				</p>
+			</div>
+			<br />
+			<h6>Challenges invloved in</h6>
+			<div style="display: flex; align-items: center">
+				<div class="custom-class-example">
+					<p style="color: gray; font-size: 12px">Min</p>
+					<ibm-number
+						style="min-width: 10rem"
+						[label]="Min"
+						[helperText]="[helperText]"
+						[theme]="light"
+						[min]="0"
+						[max]="10"
+						[(ngModel)]="stepThree.minChallangeInvolved"
+						[invalid]="false"
+						[invalidText]="invalidText"
+						[disabled]="false"
+					>
+					</ibm-number>
+				</div>
+				<p class="to">to</p>
+				<div class="custom-class-example">
+					<p style="color: gray; font-size: 12px">Max</p>
+					<ibm-number
+						style="min-width: 10rem"
+						[label]="Max"
+						[helperText]="[helperText]"
+						[theme]="light"
+						[min]="0"
+						[max]="10"
+						[(ngModel)]="stepThree.maxChallangeInvolved"
+						[invalid]="false"
+						[invalidText]="invalidText"
+						[disabled]="false"
+					>
+					</ibm-number>
+				</div>
+			</div>
+			<br />
+			<br />
+			<h6>Type of user account</h6>
+			<ibm-checkbox
+				[hideLabel]="hideLabel"
+				(change)="selectAccountType1($event)"
+				>Independent</ibm-checkbox
+			>
+			<ibm-checkbox
+				[hideLabel]="hideLabel"
+				(change)="selectAccountType2($event)"
+				>Startup</ibm-checkbox
+			>
+			<ibm-checkbox
+				[hideLabel]="hideLabel"
+				(change)="selectAccountType3($event)"
+				>Big Firm</ibm-checkbox
+			>
+			<div *ngIf="typeOfUserError">
+				<p>
+					<span style="font-size: x-small; color: red"
+						>Type of User is required</span
+					>
+				</p>
+			</div>
+			<br />
+			<div ibmGrid [condensed]="gridCondensed" style="padding-left: 15px">
+				<div
+					ibmRow
+					[gutter]="gutter"
+					[leftGutter]="leftGutter"
+					[rightGutter]="rightGutter"
+					[condensed]="rowCondensed"
+				>
+					<h6>Accepted Programming languages</h6>
+					<div
+						ibmCol
+						class="custom-class-example"
+						[columnNumbers]="{ md: 6, sm: 12 }"
+						style="margin-top: 7px"
+					>
+						<ibm-dropdown
+							placeholder="Search Language"
+							(selected)="selected($event)"
+						>
+							<ibm-dropdown-list
+								[items]="language"
+							></ibm-dropdown-list>
+						</ibm-dropdown>
+						<div *ngIf="programmingLanguageError">
+							<p>
+								<span style="font-size: x-small; color: red"
+									>Programming language is required</span
+								>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div
+			ibmCol
+			class="custom-class-example"
+			[columnNumbers]="{ md: 4, sm: 12 }"
+		>
+			<div ibmGrid [condensed]="gridCondensed">
+				<br /><br /><br /><br />
+				<div
+					ibmRow
+					class="row_button buttonstyling"
+					[gutter]="gutter"
+					[leftGutter]="leftGutter"
+					[rightGutter]="rightGutter"
+					[condensed]="rowCondensed"
+				>
+					<div
+						ibmCol
+						class="custom-class-example"
+						style="margin-top: 460px; margin-right: 44px"
+						[columnNumbers]="{ md: 1, sm: 12 }"
+					>
+						<button
+							class="back_btn"
+							[ibmButton]="ibmButton"
+							[size]="size"
+							(click)="previous()"
+						>
+							Previous
+						</button>
+					</div>
+					<div
+						ibmCol
+						class="custom-class-example"
+						[columnNumbers]="{ md: 1, sm: 12 }"
+					></div>
+					<div
+						ibmCol
+						class="custom-class-example"
+						style="margin-top: 460px"
+						[columnNumbers]="{ md: 1, sm: 12 }"
+					>
+						<button
+							[ibmButton]="ibmButton"
+							[size]="size"
+							(click)="next()"
+						>
+							Next&nbsp;
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

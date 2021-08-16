@@ -1,99 +1,114 @@
-<ibm-header brand="">
-  <a> <img src="assets/logo.png" class="imglogo" /></a>
-</ibm-header>
-
-<div ibmGrid [condensed]="gridCondensed" style="display: flex; justify-content: center;">
-  <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
-    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 2, sm: 12 }">
-      <div *ngIf="showSuccessToasterMsg" data-notification class="bx--toast-notification bx--toast-notification--success"
-        role="alert">
-        <div class="bx--toast-notification__details">
-          <p class="bx--toast-notification__title">{{toasterMsg}}</p>
+<!-- <ibm-header brand="">
+ 
+</ibm-header> -->
+<div class="box">
+  <div class="logoimg">
+    <a> <img src="assets/logoimg.svg" class="imglogo" /></a>
+  </div>
+  <div class="heading">
+    <h4>Create your Market Space Account</h4>
+  </div>
+  <div ibmGrid [condensed]="gridCondensed">
+    <div ibmRow [gutter]="gutter" [leftGutter]="leftGutter" [rightGutter]="rightGutter" [condensed]="rowCondensed">
+      <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
+        <div *ngIf="showSuccessToasterMsg" data-notification
+          class="bx--toast-notification bx--toast-notification--success" role="alert">
+          <div class="bx--toast-notification__details">
+            <p class="bx--toast-notification__title">{{toasterMsg}}</p>
+          </div>
+          <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button"
+            type="button" aria-label="close">
+            <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform"
+              xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__close-icon" width="20" height="20"
+              viewBox="0 0 32 32" aria-hidden="true">
+              <path
+                d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z">
+              </path>
+            </svg>
+          </button>
         </div>
-        <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button"
-          type="button" aria-label="close">
-          <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform"
-            xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__close-icon" width="20" height="20"
-            viewBox="0 0 32 32" aria-hidden="true">
-            <path d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z">
-            </path>
-          </svg>
-        </button>
-      </div>
-      <div *ngIf="showToasterMsg" data-notification class="bx--toast-notification bx--toast-notification--failure"
-        role="alert">
-        <div class="bx--toast-notification__details">
-          <p class="bx--toast-notification__title">{{toasterMsg}}</p>
+        <div *ngIf="showToasterMsg" data-notification class="bx--toast-notification bx--toast-notification--failure"
+          role="alert">
+          <div class="bx--toast-notification__details">
+            <p class="bx--toast-notification__title">{{toasterMsg}}</p>
+          </div>
+          <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button"
+            type="button" aria-label="close">
+            <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform"
+              xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__close-icon" width="20" height="20"
+              viewBox="0 0 32 32" aria-hidden="true">
+              <path
+                d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z">
+              </path>
+            </svg>
+          </button>
         </div>
-        <button data-notification-btn (click)="closeToaster()" class="bx--toast-notification__close-button"
-          type="button" aria-label="close">
-          <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform"
-            xmlns="http://www.w3.org/2000/svg" class="bx--toast-notification__close-icon" width="20" height="20"
-            viewBox="0 0 32 32" aria-hidden="true">
-            <path d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z">
-            </path>
-          </svg>
-        </button>
-      </div>
-      <div class="bx--form-item" style="margin-top: 8%;">
-        <label for="text-input-3" class="bx--label">Username</label>
-        <input id="text-input-3" type="text" class="bx--text-input" [(ngModel)]="signupDetails.fullName"
-          placeholder="e.g. John Doe" />
-      </div>
-      <div *ngIf="fullNameError">
-        <p><span style="font-size: x-small; color: red">Username should be at least 3 AlphaNumeric characters, special characters not allowed</span></p>
-      </div>
-      <div class="bx--form-item">
-        <label for="text-input-3" class="bx--label">Email</label>
-        <input id="text-input-3" type="text" class="bx--text-input" [(ngModel)]="signupDetails.email"
-          placeholder="e.g. username@ibm.com" />
-      </div>
-      <div *ngIf="emailError">
-        <p><span style="font-size: x-small; color: red">Please enter a valid email</span></p>
-      </div>
-      <div class="bx--form-item">
-        <label for="text-input-3" class="bx--label">Password</label>
-        <input id="text-input-3" type="password" class="bx--text-input" [(ngModel)]="signupDetails.password"
-          placeholder="********" />
-      </div>
-      <div *ngIf="passwordError">
-        <p><span style="font-size: x-small; color: red">Please enter a valid password</span></p>
-      </div>
-      <div class="bx--form-item">
-        <label for="text-input-3" class="bx--label">Register As</label>
-        <ibm-dropdown [label]="Min" style="width: 210px;" placeholder="Select User Role" (selected)="selected($event)">
-          <ibm-dropdown-list [items]="registerAs"></ibm-dropdown-list>
-        </ibm-dropdown>
-        <div *ngIf="roleError">
-          <p><span style="font-size: x-small; color: red">Please select a user role</span></p>
+        <div class="bx--form-item" style="margin-top: 4%;">
+          <label for="text-input-3" class="bx--label">Full Name</label>
+          <input id="text-input-3" type="text" class="bx--text-input" [(ngModel)]="signupDetails.fullName"
+            placeholder="e.g. John Doe" />
+        </div>
+        <div *ngIf="fullNameError">
+          <p><span style="font-size: x-small; color: red">Fullname should be at least 3 characters long, special
+              characters not allowed</span></p>
+        </div>
+        <div class="bx--form-item">
+          <label for="text-input-3" class="bx--label">Email</label>
+          <input id="text-input-3" type="text" class="bx--text-input" [(ngModel)]="signupDetails.email"
+            placeholder="e.g. username@ibm.com" />
+        </div>
+        <div *ngIf="emailError">
+          <p><span style="font-size: x-small; color: red">Please enter a valid email</span></p>
+        </div>
+        <div class="bx--form-item">
+          <label for="text-input-3" class="bx--label">Password</label>
+          <input id="text-input-3" type="password" class="bx--text-input" [(ngModel)]="signupDetails.password"
+            placeholder="********" />
+        </div>
+        <div *ngIf="passwordError">
+          <p><span style="font-size: x-small; color: red">Please enter a valid password</span></p>
+        </div>
+        <div class="bx--form-item">
+          <label for="text-input-3" class="bx--label">Register As</label>
+          <ibm-dropdown [label]="Min" class="dropdownstyle" placeholder="Select User Role"
+            (selected)="selected($event)">
+            <ibm-dropdown-list [items]="registerAs"></ibm-dropdown-list>
+          </ibm-dropdown>
+          <div *ngIf="roleError">
+            <p><span style="font-size: x-small; color: red">Please select a user role</span></p>
+          </div>
+        </div>
+        <div class="bx--form-item">
+          <label for="text-input-3" class="bx--label">Bio and Company Info</label>
+          <!-- <input id="text-input-3" type="text" class="bx--text-input" [(ngModel)]="signupDetails.bio"
+          placeholder="I am a..." /> -->
+          <textarea class="textareastyle" ibmTextArea minlength="1" maxlength="500" [rows]="3" [cols]="cols"
+            aria-label="textarea" [(ngModel)]="signupDetails.bio"></textarea>
+        </div>
+        <div *ngIf="bioError">
+          <p><span style="font-size: x-small; color: red">Please enter your bio</span></p>
+        </div>
+        <div class="bx--form-item">
+          <label for="text-input-3" class="bx--label">Experience</label>
+          <input id="text-input-3" type="number" min='0' class="bx--text-input" [(ngModel)]="signupDetails.experience"
+            placeholder="in years" />
+        </div>
+        <div *ngIf="experienceError">
+          <p><span style="font-size: x-small; color: red">Please enter a valid experience</span></p>
+        </div>
+        <br />
+        <div class="bx--form-item">
+          <button class="bx--btn bx--btn--primary" type="button" (click)="validate()">Sign Up</button>
+        </div>
+        <div class="bx--form-item" style="margin-top: 5px;">
+          <p style="font-size: 0.8rem;">Already have an account. <a style="cursor: pointer;"
+              (click)="login()">Sign-In</a>
+            instead</p>
         </div>
       </div>
-      <div class="bx--form-item">
-        <label for="text-input-3" class="bx--label">Bio</label>
-        <input id="text-input-3" type="text" class="bx--text-input" [(ngModel)]="signupDetails.bio"
-          placeholder="I am a..." />
+      <div ibmCol class="custom-class-example images" [columnNumbers]="{ md: 4, sm: 12 }">
+        <img src="assets/tab.png" class="img">
       </div>
-      <div *ngIf="bioError">
-        <p><span style="font-size: x-small; color: red">Please enter your bio</span></p>
-      </div>
-      <div class="bx--form-item">
-        <label for="text-input-3" class="bx--label">Experience</label>
-        <input id="text-input-3" type="number" min='0' class="bx--text-input" [(ngModel)]="signupDetails.experience"
-          placeholder="in years" />
-      </div>
-      <div *ngIf="experienceError">
-        <p><span style="font-size: x-small; color: red">Please enter a valid experience</span></p>
-      </div>
-      <br />
-      <div class="bx--form-item">
-        <button class="bx--btn bx--btn--primary" type="button" (click)="validate()">Sign Up</button>
-      </div>
-      <div class="bx--form-item">
-        <p style="font-size: 0.8rem;">Already have an account. <a style="cursor: pointer;" (click)="login()">Sign-In</a> instead</p>
-      </div>
-    </div>
-    <div ibmCol class="custom-class-example" [columnNumbers]="{ md: 4, sm: 12 }">
-      <img src="assets/tab.png" height="500px">
     </div>
   </div>
 </div>
