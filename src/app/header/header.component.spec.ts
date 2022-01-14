@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { HeaderModule } from 'carbon-components-angular/ui-shell/ui-shell.module';
+// import { HeaderModule } from 'carbon-components-angular/ui-shell/ui-shell.module';
 
 import { HeaderComponent } from './header.component';
 import { Notification20Module } from '@carbon/icons-angular/lib/notification/20';
@@ -14,7 +14,7 @@ describe('TutorialHeaderComponent', () => {
 		TestBed.configureTestingModule({
 			declarations: [ HeaderComponent ],
 			imports: [
-				HeaderModule,
+				// HeaderModule,
 				Notification20Module,
 				UserAvatar20Module,
 				AppSwitcher20Module

@@ -15,10 +15,10 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { LandingComponent } from './landing/landingPage';
 
 const routes: Routes = [
-	{
-		path: 'repos',
-		loadChildren: () => import('./repositories/repositories.module').then(m => m.RepositoriesModule)
-	},
+	// {
+	// 	path: 'repos',
+	// 	loadChildren: () => import('./repositories/repositories.module').then(m => m.RepositoriesModule)
+	// },
 	{ path: 'dashboard', component: DashboardComponent },
 	{ path: 'invdash', component: InvDashboradComponent },
 	{ path: 'challenge', component: ChallangePageComponent },
